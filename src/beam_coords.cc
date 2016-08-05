@@ -32,10 +32,11 @@ int main(int argc,char** argv)
 	double theta = 0.0305;
 	double sigma_x = 0.300;
 	double sigma_y = 0.030;
+    double target_z = 0.0;
 
 	int c;
 
-	while ((c = getopt(argc,argv,"hs:x:y:r:")) !=-1)
+	while ((c = getopt(argc,argv,"hs:x:y:r:z:")) !=-1)
 		switch (c)
 		{
 			case 'h':
@@ -44,6 +45,7 @@ int main(int argc,char** argv)
 				printf("-x: beam sigma_x in mm\n");
 				printf("-y: beam sigma_y in mm\n");
 				printf("-r: beam rotation in radians\n");
+				printf("-z: target Z in mm\n");
 				return(0);
 				break;
 			case 's':
@@ -57,6 +59,9 @@ int main(int argc,char** argv)
 				break;
 			case 'y':
 				sigma_y = atof(optarg);
+				break;
+			case 'z':
+				target_z = atof(optarg);
 				break;
 			case '?':
 				printf("Invalid option or missing option argument; -h to list options\n");
@@ -88,7 +93,7 @@ int main(int argc,char** argv)
 
 	open_write(argv[optind+1],ostream,n_events);
 
-	printf("Rotating by %f radians; beam size %f mm in X, %f mm in Y\n",theta, sigma_x, sigma_y);
+	printf("Rotating by %f radians; beam size %f mm in X, %f mm in Y, target at Z=%f mm\n",theta, sigma_x, sigma_y, target_z);
 
 	while (true) {
 		if (!read_next(istream)) {
@@ -103,6 +108,7 @@ int main(int argc,char** argv)
 		if (sigma_y>0) shift_y = sigma_y*gsl_ran_gaussian(r,sigma_y);
 
 		for (int i=0;i<new_event.size();i++) {
+			new_event[i].vhep[2]+=target_z;
 			rotate_entry(&(new_event[i]),theta);
 			new_event[i].vhep[0]+=shift_x;
 			new_event[i].vhep[1]+=shift_y;
