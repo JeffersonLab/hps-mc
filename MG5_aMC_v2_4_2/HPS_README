@@ -4,7 +4,6 @@
 \####################################################################################
 
 ## First HPS Madgraph5 in github.
-##### Baltzell, December 2016
 
 ### Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
 
@@ -17,7 +16,7 @@
   * `nevents = 10000`
   * `ebeam2 = 171.24`
 
-3. `*noExchange\*/Cards/param_card.dat`:
+3. `*noExchange*/Cards/param_card.dat`:
   * `13 5.110000e-04 # MM`
 
 4. `*/Cards/param_card.dat`:
