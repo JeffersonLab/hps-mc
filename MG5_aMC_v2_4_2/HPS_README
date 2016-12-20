@@ -16,6 +16,7 @@ Changes relative to tarballs from Annie:
 2. */Cards/run_card.dat:
 
    nevents = 10000
+
    ebeam2 = 171.24 
 
 3. \*noExchange\*/Cards/param_card.dat:
