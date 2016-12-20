@@ -1,0 +1,106 @@
+
+<head>
+    <title>Process results</title>
+    <script type="text/javascript" src="../sortable.js"></script>
+    <link rel=stylesheet href="../mgstyle.css" type="text/css">
+</head>
+<body>
+<script type="text/javascript">
+function UrlExists(url) {
+  var http = new XMLHttpRequest();
+  http.open('HEAD', url, false);
+  try{
+     http.send()
+     }
+  catch(err){
+   return 1==2;
+  }
+  return http.status!=404;
+}
+function check_link(url,alt, id){
+    var obj = document.getElementById(id);
+    if ( ! UrlExists(url)){
+        if ( ! UrlExists(alt)){
+         obj.href = alt;
+         return true;
+        }
+       obj.href = alt;
+       return false;
+    }
+    obj.href = url;
+    return 1==1;
+}
+</script>
+  
+
+ <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>s= 4.2224e+08 &#177 2.9e+06 (pb)</b><br><br>
+<table class="sortable" id='tablesort'>
+<tr><th>Graph</th>
+    <th> Cross-Section</th>
+    <th>Error</th>
+    <th>Events (K)</th>
+    <th>Unwgt</th>
+    <th>Luminosity</th>
+</tr>
+
+<tr><td align=right><a href=../../SubProcesses/P1_emn_emnepem/diagrams.html>P1_emn_emnepem</a></td>
+    <td align=right><a id="#P1_emn_emnepem" href=#P1_emn_emnepem onClick="check_link('#P1_emn_emnepem','#P1_emn_emnepem','#P1_emn_emnepem')"> 4.222e+08 </a> </td>
+    <td align=right>  2.9e+06</td>
+    <td align=right>  154.058</td>
+    <td align=right>  2665.0</td>
+    <td align=right>  0</td>
+</tr>
+
+<tr><td align=right>P1 sum</td>
+    <td align=right><a id="./results.html" href=./results.html onClick="check_link('./results.html','','./results.html')"> 422237000.0 </a> </td>
+    <td align=right>  </td>
+    <td align=right>  </td>
+    <td align=right>  </td>
+    <td align=right>  </td>
+</tr>
+
+</table>
+</center>
+<br><br><br>
+ <dl>  
+<dt><a  name=P1_emn_emnepem href=../../SubProcesses/P1_emn_emnepem/diagrams.html>P1_emn_emnepem</a></dt><dd>
+ <BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>s= 4.2224e+08 &#177 2.9e+06 (pb)</b><br><br>
+<table class="sortable" id='tablesort'>
+<tr><th>Graph</th>
+    <th> Cross-Section</th>
+    <th>Error</th>
+    <th>Events (K)</th>
+    <th>Unwgt</th>
+    <th>Luminosity</th>
+</tr>
+
+<tr><td align=right>G1</td>
+    <td align=right><a id="../../SubProcesses/P1_emn_emnepem/G1/test_1_log.txt" href=../../SubProcesses/P1_emn_emnepem/G1/test_1_log.txt onClick="check_link('../../SubProcesses/P1_emn_emnepem/G1/test_1_log.txt','../../SubProcesses/P1_emn_emnepem/G1/log.txt','../../SubProcesses/P1_emn_emnepem/G1/test_1_log.txt')"> 2.665e+08 </a> </td>
+    <td align=right>  2.48e+06</td>
+    <td align=right>  44.056</td>
+    <td align=right>  1405.0</td>
+    <td align=right>  5.27e-06</td>
+</tr>
+
+<tr><td align=right>G5</td>
+    <td align=right><a id="../../SubProcesses/P1_emn_emnepem/G5/test_1_log.txt" href=../../SubProcesses/P1_emn_emnepem/G5/test_1_log.txt onClick="check_link('../../SubProcesses/P1_emn_emnepem/G5/test_1_log.txt','../../SubProcesses/P1_emn_emnepem/G5/log.txt','../../SubProcesses/P1_emn_emnepem/G5/test_1_log.txt')"> 7.955e+07 </a> </td>
+    <td align=right>  8.18e+05</td>
+    <td align=right>  75.001</td>
+    <td align=right>  999.0</td>
+    <td align=right>  1.26e-05</td>
+</tr>
+
+<tr><td align=right>G6</td>
+    <td align=right><a id="../../SubProcesses/P1_emn_emnepem/G6/test_1_log.txt" href=../../SubProcesses/P1_emn_emnepem/G6/test_1_log.txt onClick="check_link('../../SubProcesses/P1_emn_emnepem/G6/test_1_log.txt','../../SubProcesses/P1_emn_emnepem/G6/log.txt','../../SubProcesses/P1_emn_emnepem/G6/test_1_log.txt')"> 7.615e+07 </a> </td>
+    <td align=right>  1.26e+06</td>
+    <td align=right>  35.001</td>
+    <td align=right>  261.0</td>
+    <td align=right>  3.43e-06</td>
+</tr>
+
+</table>
+</center>
+<br><br><br>
+ </dl></body>

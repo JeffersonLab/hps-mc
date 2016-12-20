@@ -1,0 +1,29 @@
+
+
+####################################################################################
+####################################################################################
+
+First HPS Madgraph5 in github.  Baltzell, December 2016
+
+Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
+I think I cleared out all the compiled stuff and output data before putting in repo.
+
+Changes relative to tarballs from Annie:
+
+1. dn_tri_run_card_test_6/Source/make_opts:
+   changed STDLIB=-lc++ (for OSX) to STDLIB=-lstdc++ (for Linux)
+
+2. */Cards/run_card.dat:
+   nevents = 10000
+   ebeam2 = 171.24 
+
+3. *noExchange*/Cards/param_card.dat:
+   13 5.110000e-04 # MM
+
+4. */Cards/param_card.dat
+   9000002 1.712400e+02 # MNul
+
+####################################################################################
+####################################################################################
+
+
