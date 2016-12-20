@@ -6,8 +6,12 @@
 First HPS Madgraph5 in github.  Baltzell, December 2016
 
 Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
-I think I cleared out all the compiled stuff and output data before putting in repo.
 
+I think I cleared out all the compiled stuff and output data before putting in repo.
+Still a rather large piece of software (500MB) for a git repo.  Not sure what is 
+really necessary.  This may annoy https://github.com/jeffersonlab/HPS-CODE users.
+
+        
 Changes relative to tarballs from Annie:
 
 1. dn_tri_run_card_test_6/Source/make_opts:
