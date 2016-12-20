@@ -3,34 +3,27 @@
 \####################################################################################
 \####################################################################################
 
-First HPS Madgraph5 in github.  Baltzell, December 2016
+# First HPS Madgraph5 in github.  Baltzell, December 2016
 
-Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
+## Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
 
-Changes relative to tarballs from Annie:
+## Changes relative to tarballs from Annie:
 
 1. dn_tri_run_card_test_6/Source/make_opts:
-
-   changed STDLIB=-lc++ (for OSX) to STDLIB=-lstdc++ (for Linux)
+..* changed STDLIB=-lc++ (for OSX) to STDLIB=-lstdc++ (for Linux)
 
 2. */Cards/run_card.dat:
-
-   nevents = 10000
-
-   ebeam2 = 171.24 
+..* nevents = 10000
+..* ebeam2 = 171.24 
 
 3. \*noExchange\*/Cards/param_card.dat:
-   
-   13 5.110000e-04 # MM
+..* 13 5.110000e-04 # MM
 
 4. */Cards/param_card.dat
-   
-   9000002 1.712400e+02 # MNul
+..* 9000002 1.712400e+02 # MNul
 
 5. */Events/.gitignore
-   
-   Added .gitignores (with *, so nothing in Events will be gitted,
-   so can just checkout and run (since run script doesn't mkdir Events).
+..* Added .gitignores (with *, so nothing in Events will be gitted), so can just checkout and run (since run script doesn't mkdir Events).
 
 \####################################################################################
 \####################################################################################
