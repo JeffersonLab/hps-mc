@@ -30,6 +30,11 @@ Changes relative to tarballs from Annie:
    
    9000002 1.712400e+02 # MNul
 
+5. */Events/.gitignore
+   
+   Added .gitignores (with *), so can just checkout and run.
+   Nothing in */Events will ever git repo'd.
+
 \####################################################################################
 \####################################################################################
 
