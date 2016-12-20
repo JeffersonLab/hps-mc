@@ -5,9 +5,9 @@
 
 ## First HPS Madgraph5 in github.
 
-### Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
+#### Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
 
-### Changes relative to tarballs from Annie:
+#### Changes relative to tarballs from Annie:
 
 1. `dn_tri_run_card_test_6/Source/make_opts`:
   * changed `STDLIB=-lc++` (for OSX) to `STDLIB=-lstdc++` (for Linux)
