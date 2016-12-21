@@ -22,8 +22,11 @@
 4. `*/Cards/param_card.dat`:
   * `9000002 1.712400e+02 # MNul`
 
-5. `*/Events/.gitignore`
-  * Added .gitignores (with *, so nothing in Events will be gitted), so can just checkout and run (since run script doesn't mkdir Events).
+5. `*/Events|HTML/.gitignore`
+  * Added .gitignores (with *, so nothing in Events|HTML will be gitted), so can just checkout and run (since run script doesn't mkdir Events|HTML).
+
+6. `.gitignore`
+  * Filtered out lots of generated stuff.
 
 \####################################################################################
 \####################################################################################
