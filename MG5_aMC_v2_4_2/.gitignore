@@ -1,5 +1,6 @@
 **/.DS_Store
 **/*.o
+**/*.log
 */RunWeb
 */HTML/**
 */HTML/*/**
@@ -12,7 +13,6 @@
 */Source/run_card.inc
 */SubProcesses/randinit
 */SubProcesses/results.dat
-*/*.log
 */crossx.html
 */index.html
 */ME5_debug
