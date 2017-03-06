@@ -594,8 +594,12 @@ class MultiCore(Cluster):
         self.fail_msg = None
 
         # starting the worker node
+        ii=0
         for _ in range(self.nb_core):
+            print 'Starting Thread #'+str(ii)
             self.start_demon()
+            ii+=1
+            if ii>5: break
 
         
     def start_demon(self):
