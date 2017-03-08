@@ -11,7 +11,7 @@ endif
 
 ifndef DEBUG
     DEBUG = none
-    DFLG =
+    DFLG = -fd-lines-as-comments
     SFX =
 else
     DFLG = $(DEBUG)
@@ -34,7 +34,7 @@ ifeq "$(UNAME)" "IRIX64"
 endif
 ifeq "$(UNAME)" "Linux"
     CC=gcc
-    F77=g77
+    F77=gfortran
     CFLAGS= $(DFLG) -I/usr/X11R6/include 
     FFLAGS= $(DFLG) -fno-second-underscore
     MXTLIBS = -L/usr/X11R6/lib -lXm -lX11 -lXt -lXp -lXext -lm

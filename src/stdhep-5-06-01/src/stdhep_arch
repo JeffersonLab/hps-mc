@@ -11,7 +11,7 @@ endif
 
 ifndef DEBUG
     DEBUG = none
-    DFLG =
+    DFLG = -fd-lines-as-comments
     SFX =
 else
     DFLG = $(DEBUG)
@@ -58,7 +58,7 @@ endif
 ifeq "$(UNAME)" "Linux"
     CC=gcc
     CPP=gcc -E
-    F77=g77
+    F77=gfortran
     CFLAGS= $(DFLG)
     CXFLAGS = -I/usr/X11R6/include
     FFLAGS= $(DFLG) -fno-second-underscore -fd-lines-as-comments
