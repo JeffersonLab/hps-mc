@@ -594,9 +594,25 @@ class MultiCore(Cluster):
         self.fail_msg = None
 
         # starting the worker node
+        #for _ in range(self.nb_core):
+        #    self.start_demon()
+
+        # This lets it run on ifarm without
+        # creating too many threads
+        #
+        # starting the worker node
+
+        ii=0
+
         for _ in range(self.nb_core):
+
+            print 'Starting Thread #'+str(ii)
+
             self.start_demon()
 
+            ii+=1
+
+            if ii>5: break
         
     def start_demon(self):
         import threading
