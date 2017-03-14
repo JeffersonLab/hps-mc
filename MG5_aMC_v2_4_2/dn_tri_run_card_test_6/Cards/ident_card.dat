@@ -1,0 +1,89 @@
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+c      written by the UFO converter
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+ckmblock 1 mdl_cabi
+
+sminputs 1 aEWM1
+
+sminputs 2 mdl_Gf
+
+sminputs 3 aS
+
+yukawa 1 mdl_ymdo
+
+yukawa 2 mdl_ymup
+
+yukawa 3 mdl_yms
+
+yukawa 4 mdl_ymc
+
+yukawa 5 mdl_ymb
+
+yukawa 6 mdl_ymt
+
+yukawa 11 mdl_yme
+
+yukawa 13 mdl_ymm
+
+yukawa 15 mdl_ymtau
+
+frblock 1 mdl_Ge
+
+frblock 2 mdl_GChi
+
+frblock 3 mdl_GAN
+
+frblock 4 mdl_GAPN
+
+frblock 5 mdl_Anuc
+
+frblock 6 mdl_Znuc
+
+frblock 7 mdl_inelastic1
+
+frblock 8 mdl_inelastic2
+
+frblock 9 mdl_aval
+
+frblock 10 mdl_dval
+
+frblock 11 mdl_apval
+
+mass 11 mdl_Me
+
+mass 13 mdl_MM
+
+mass 15 mdl_MTA
+
+mass 2 mdl_MU
+
+mass 4 mdl_MC
+
+mass 6 mdl_MT
+
+mass 1 mdl_MD
+
+mass 3 mdl_MS
+
+mass 5 mdl_MB
+
+mass 9000001 mdl_MChi
+
+mass 9000002 mdl_MNul
+
+mass 23 mdl_MZ
+
+mass 9000009 mdl_MAp
+
+mass 25 mdl_MH
+
+decay 6 mdl_WT
+
+decay 23 mdl_WZ
+
+decay 24 mdl_WW
+
+decay 9000009 mdl_WAp
+
+decay 25 mdl_WH

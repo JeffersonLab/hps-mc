@@ -1,0 +1,37 @@
+
+
+\####################################################################################
+\####################################################################################
+
+## First HPS Madgraph5 in github.
+
+#### Tested to compile and run on RHEL6 at jlab, using environment of user=hps.
+
+#### Changes relative to tarballs from Annie:
+
+1. `dn_tri_run_card_test_6/Source/make_opts`:
+  * changed `STDLIB=-lc++` (for OSX) to `STDLIB=-lstdc++` (for Linux)
+
+2. `*/Cards/run_card.dat`:
+  * `nevents = 10000`
+  * `ebeam2 = 171.24`
+
+3. `*noExchange*/Cards/param_card.dat`:
+  * `13 5.110000e-04 # MM`
+
+4. `*/Cards/param_card.dat`:
+  * `9000002 1.712400e+02 # MNul`
+
+5. `*/Events|HTML/.gitignore`
+  * Added .gitignores (with *, so nothing in Events|HTML will be gitted), so can just checkout and run (since run script doesn't mkdir Events|HTML).
+
+6. `.gitignore`
+  * Filtered out lots of generated stuff.
+
+7. Tungsten form factors from Takashi
+  * `*/Source/DHELAS/FF1P0_3.f`
+
+\####################################################################################
+\####################################################################################
+
+
