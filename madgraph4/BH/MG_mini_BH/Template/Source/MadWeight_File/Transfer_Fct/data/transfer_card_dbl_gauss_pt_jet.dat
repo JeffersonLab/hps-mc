@@ -1,0 +1,97 @@
+# Parameter for Matrix Element Run   
+# including transfert functions
+# Card Version 1.4.0
+# Transfert functions type : dbl_gauss_pt_jet
+# ****************************************************
+#
+# Transfert function for d u s c jet
+#
+Block TF_JET_E
+# double gaussian 
+#
+     1       1.5591d0    # biais first gaussian b1=#1+#2*sqrt(E)*#3*E
+     2       0.2933      # biais first gaussian 
+     3       0.0100d0    # biais first gaussian
+     4       0.9518d0    # sigma first gaussian s1=#4+#5*sqrt(E)+#6*E
+     5       0.5222d0    # sigma first gaussian
+     6       0.0191d0    # sigma first gaussian
+     7       0.1997d0    # relative weigth      r=#7+#8*sqrt(E)+#9*E
+     8       0d0         # relative weigth
+     9       0d0         # relative weigth
+     10      1.16352d1   # biais first gaussian b2=#10+#11*sqrt(E)*#12*E
+     11      -2.3937d0   # biais first gaussian
+     12      0.3156d0    # biais first gaussian
+     13      3.3218d0    # sigma first gaussian s1=#13+#14*sqrt(E)+#15*E
+     14      -0.0856d0   # sigma first gaussian
+     15      0.1375d0    # sigma first gaussian
+Block TF_JET_PHI
+Block TF_JET_THETA
+#
+# Transfert function for b jet
+#
+Block TF_BJET_E
+# double gaussian identical to jet
+#
+     1       1.5591d0    # biais first gaussian b1=#1+#2*sqrt(E)*#3*E
+     2       0.2933      # biais first gaussian 
+     3       0.0100d0    # biais first gaussian
+     4       0.9518d0    # sigma first gaussian s1=#4+#5*sqrt(E)+#6*E
+     5       0.5222d0    # sigma first gaussian
+     6       0.0191d0    # sigma first gaussian
+     7       0.1997d0    # relative weigth      r=#7+#8*sqrt(E)+#9*E
+     8       0d0         # relative weigth
+     9       0d0         # relative weigth
+     10      1.16352d1   # biais first gaussian b2=#10+#11*sqrt(E)*#12*E
+     11      -2.3937d0   # biais first gaussian
+     12      0.3156d0    # biais first gaussian
+     13      3.3218d0    # sigma first gaussian s1=#13+#14*sqrt(E)+#15*E
+     14      -0.0856d0   # sigma first gaussian
+     15      0.1375d0    # sigma first gaussian
+Block TF_BJET_PHI
+Block TF_BJET_THETA
+#
+# Transfert function for gluon jet
+#
+Block TF_GJET_E
+# double gaussian identical to jet
+#
+     1       1.5591d0    # biais first gaussian b1=#1+#2*sqrt(E)*#3*E
+     2       0.2933      # biais first gaussian 
+     3       0.0100d0    # biais first gaussian
+     4       0.9518d0    # sigma first gaussian s1=#4+#5*sqrt(E)+#6*E
+     5       0.5222d0    # sigma first gaussian
+     6       0.0191d0    # sigma first gaussian
+     7       0.1997d0    # relative weigth      r=#7+#8*sqrt(E)+#9*E
+     8       0d0         # relative weigth
+     9       0d0         # relative weigth
+     10      1.16352d1   # biais first gaussian b2=#10+#11*sqrt(E)*#12*E
+     11      -2.3937d0   # biais first gaussian
+     12      0.3156d0    # biais first gaussian
+     13      3.3218d0    # sigma first gaussian s1=#13+#14*sqrt(E)+#15*E
+     14      -0.0856d0   # sigma first gaussian
+     15      0.1375d0    # sigma first gaussian
+Block TF_GJET_PHI
+Block TF_GJET_THETA
+#
+# Transfert function for electron
+#
+Block TF_ELEC_E
+Block TF_ELEC_PHI
+Block TF_ELEC_THETA
+#
+# Transfert function for muon
+#
+Block TF_MUON_E
+Block TF_MUON_PHI
+Block TF_MUON_THETA
+#
+# Transfer functions for tau
+#
+Block TF_TAU_E
+Block TF_TAU_PHI
+Block TF_TAU_THETA
+#
+# transfer functions for x1,x2
+#
+Block TF_INIT_X1
+Block TF_INIT_X2

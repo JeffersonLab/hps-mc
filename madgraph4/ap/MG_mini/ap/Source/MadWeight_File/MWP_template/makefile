@@ -1,0 +1,38 @@
+F77   = f77
+FFLAGS= -O -ffixed-line-length-132
+#FFLAGS = -g -ffixed-line-length-132
+LIBDIR = ../../lib/
+BINDIR = ../../bin/
+PROG   = f77_madweight
+LINKLIBS =  -L../../lib/ -ldhelas3 -lmodel -lgeneric_mw -lpdf -lblocks -ltools -lTF -lMWPS
+LIBS = $(LIBDIR)libdhelas3.a $(LIBDIR)libgeneric_mw.a $(LIBDIR)libpdf.a $(LIBDIR)libmodel.a $(LIBDIR)libblocks.a $(LIBDIR)libtools.a $(LIBDIR)libTF.a $(LIBDIR)libMWPS.a
+
+PROCESS= driver.o auto_dsig_MW.o matrix.o MW_setcuts.o cuts_MW.o setscales.o MW_setrun.o setTF.o  
+MW_PS= main_code.o gen_propa.o gen_mom.o get_PS_point.o get_feynman_content.o
+
+
+$(PROG): $(PROCESS) $(MW_PS)  makefile $(LIBS) $(include_files)
+	$(F77) $(FFLAGS) -o $(PROG) $(PROCESS) $(MW_PS) $(LINKLIBS)
+
+transfer_card.inc:../../Cards/transfer_card.dat ../../Cards/MadWeight_card.dat
+	python ../../Source/MadWeight_File/Python/Cards.py
+madweight_card.inc:../../Cards/transfer_card.dat ../../Cards/MadWeight_card.dat
+	python ../../Source/MadWeight_File/Python/Cards.py
+cuts_MW.o:genps.inc coupl.inc run.inc madweight_card.inc
+driver.o: genps.inc nexternal.inc data.inc coupl.inc run.inc madweight_card.inc 
+MW_setrun.o:madweight_card.inc
+gen_mom.o:genps.inc data.inc
+auto_dsig_MW.o:genps.inc coupl.inc run.inc
+matrix.o:nexternal.inc coupl.inc
+MW_setcuts.o:genps.inc coupl.inc run.inc leshouche.inc pmass.inc 
+setscales.o:genps.inc coupl.inc run.inc leshouche.inc pmass.inc message.inc
+gen_propa.o:genps.inc data.inc coupl.inc props.inc
+get_PS_point.o:genps.inc data.inc 
+get_feynman_content.o:genps.inc leshouche.inc
+setTF.o:transfer_card.inc ../../Cards/transfer_card.dat
+MW_setrun.o:madweight_card.inc 
+
+%.o : %.f
+	$(F77) $(FFLAGS) -c $<
+
+

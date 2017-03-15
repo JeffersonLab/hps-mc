@@ -1,0 +1,96 @@
+##########################################################################
+##									##
+##									##
+##				MadWeight				##
+##				*********				##
+##									##
+##	Autor:	 Olivier Mattelaer 					##
+##		 Pierre Artoisenet					##
+##									##
+##	date:	August 08						##
+##									##
+##########################################################################
+##########################################################################
+##									##
+##  rule to modify ./bin/put_banner file from ME template		##
+##									##
+##									##
+## TAG:									##
+##	TO_SPECISA							##
+##									##
+##########################################################################
+##
+##
+##########################################################################
+$B$ TO_SPECISA $B$
+##************************************************************************
+      LOGICAL  IS_A_J(NEXTERNAL),IS_A_L(NEXTERNAL)
+      LOGICAL  IS_A_B(NEXTERNAL),IS_A_A(NEXTERNAL)
+      LOGICAL  IS_A_E(NEXTERNAL),IS_A_M(NEXTERNAL),IS_A_T(NEXTERNAL)
+      LOGICAL  IS_A_G(NEXTERNAL)
+      LOGICAL  IS_A_NU(NEXTERNAL),IS_HEAVY(NEXTERNAL),IS_A_ONIUM(NEXTERNAL)
+      COMMON/TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_B,IS_A_E,IS_A_M,IS_A_T,
+     + IS_A_G,IS_A_NU,IS_HEAVY,IS_A_ONIUM
+##************************************************************************
+$E$ TO_SPECISA $E$
+##########################################################################
+##
+##
+##########################################################################
+$B$ IDENTIFY_TYPE $B$
+
+      do i=nincoming+1,nexternal
+         do_cuts(i)=.true.
+         if(nincoming.eq.1) do_cuts(i)=.false.
+         is_a_j(i)=.false.
+         is_a_l(i)=.false.
+         is_a_b(i)=.false.
+         is_a_a(i)=.false.
+	 is_a_e(i)=.false.
+	 is_a_m(i)=.false.
+	 is_a_t(i)=.false.
+	 is_a_g(i)=.false.
+	 is_a_nu(i)=.false.
+
+c-do not apply cuts to these
+         if (pmass(i).gt.10d0)     do_cuts(i)=.false.  ! no cuts on top,W,Z,H
+         if (abs(idup(i,1)).eq.12) do_cuts(i)=.false.  ! no cuts on ve ve~
+         if (abs(idup(i,1)).eq.14) do_cuts(i)=.false.  ! no cuts on vm vm~
+         if (abs(idup(i,1)).eq.16) do_cuts(i)=.false.  ! no cuts on vt vt~
+
+c-flavor-jets
+         if (abs(idup(i,1)).le.min(maxjetflavor,5)) then
+              is_a_j(i)=.true.
+c              write(*,*)'jet:ithe pdg is ',abs(idup(i,1)),' maxflavor=',maxjetflavor
+         else if (abs(idup(i,1)).ge.maxjetflavor+1 .and. abs(idup(i,1)).le.5) then
+              is_a_b(i)=.true.
+c              write(*,*)'bjet:the pdg is ',abs(idup(i,1)),' maxflavor=',maxjetflavor
+         endif
+
+         if (abs(idup(i,1)).eq.21) then 
+			  is_a_j(i)=.true. ! gluon is a jet
+			  is_a_g(i)=.true.
+	 endif
+
+c-charged-leptons
+         if (abs(idup(i,1)).eq.11)  is_a_e(i)=.true. ! e+  e-
+         if (abs(idup(i,1)).eq.13)  is_a_m(i)=.true. ! mu+ mu-
+         if (abs(idup(i,1)).eq.15)  is_a_t(i)=.true. ! ta+ ta-
+
+	 if(is_a_e(i).or.is_a_m(i).or.is_a_t(i)) is_a_l(i)=.true. ! electron/muon are leptons
+
+c-b-quarks
+c         if (abs(idup(i,1)).eq.5)   is_a_b(i)=.true. ! b b~
+
+c-photon
+         if (idup(i,1).eq.22)   is_a_a(i)=.true. ! photon
+
+c-neutrino's for missing et
+         if (abs(idup(i,1)).eq.12) is_a_nu(i)=.true.  ! no cuts on ve ve~
+         if (abs(idup(i,1)).eq.14) is_a_nu(i)=.true.  ! no cuts on vm vm~
+         if (abs(idup(i,1)).eq.16) is_a_nu(i)=.true.  ! no cuts on vt vt~
+         if (pmass(i).gt.10d0)     is_heavy(i)=.true. ! heavy fs particle
+      enddo
+$E$ IDENTIFY_TYPE $E$
+##########################################################################
+

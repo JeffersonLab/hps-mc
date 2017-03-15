@@ -1,0 +1,531 @@
+ Process in group number            1
+ No PDF is used, alpha_s(MZ) from param_card is used
+ Value of alpha_s from param_card:   0.11799999999999999     
+ The default order of alpha_s running is fixed to            2
+ *****************************************************
+ *                    MadEvent                       *
+ *        --------------------------------           *
+ *          http://madgraph.hep.uiuc.edu             *
+ *          http://madgraph.phys.ucl.ac.be           *
+ *          http://madgraph.roma2.infn.it            *
+ *        --------------------------------           *
+ *                                                   *
+ *         INTEGRATION CHANNEL LOG FILE              *
+ *                                                   *
+ *****************************************************
+
+ *****************************************************
+ *          SUMMARY OF THE SM PARAMETERS             *
+ *****************************************************
+
+  EW Parameters:
+ ---------------
+
+  GF (10^-5*Ge    1.1660
+  1/alpha       127.9000
+  M_Z   (GeV)    91.5445
+
+
+ Boson masses and widths:
+ ------------------------
+
+      Z mass  =       91.545 GeV             Z width  =    2.4464 GeV  (calc @ LO)
+      W mass  =       80.267 GeV             W width  =    2.0354 GeV  (calc @ LO)
+      H mass  =      120.000 GeV             H width  =    0.0068 GeV  (calc @ LO)
+
+ Fermion masses and widths:
+ --------------------------
+
+ top    mass  =      174.300 GeV        top    width  =    1.5101 GeV  (calc @ LO)
+ bottom mass  =      4.200 GeV        bottom width  =    0.0000 GeV
+ charm  mass  =      1.400 GeV        charm  width  =    0.0000 GeV
+ tau    mass  =      1.777 GeV        tau    width  =    0.0000 GeV
+ all other quark and lepton masses set to zero
+
+ User Model couplings:
+ ---------------------
+
+   GAF(L)  =        0.31345      0.00000    GAF(R)  =        0.31345      0.00000
+   GAN(L)  =        0.00000      0.00000    GAN(R)  =        0.00000      0.00000
+  GEAP(L)  =        0.00031      0.00000   GEAP(R)  =        0.00031      0.00000
+
+ Boson couplings:
+ ----------------
+
+      gwwa  =       0.31345
+      gwwz  =       0.57159
+      gwwh  =      52.32566     0.00000
+      gzzh  =      68.06147     0.00000
+      ghhh  =    -175.42461     0.00000
+
+      gwwhh =       0.21248     0.00000
+      gzzhh =       0.27638     0.00000
+      ghhhh =      -0.71236     0.00000
+
+ FFV couplings:
+ --------------
+
+  gal(L)   =        0.31345      0.00000   gal(R)   =        0.31345      0.00000
+  gau(L)   =       -0.20897      0.00000   gau(R)   =       -0.20897      0.00000
+  gad(L)   =        0.10448      0.00000   gad(R)   =        0.10448      0.00000
+
+  gwf(L)   =       -0.46096      0.00000   gwf(R)   =        0.00000      0.00000
+
+  gzn(L)   =       -0.37174      0.00000   gzn(R)   =        0.00000      0.00000
+  gzl(L)   =        0.19985      0.00000   gzl(R)   =       -0.17189      0.00000
+  gzu(L)   =       -0.25714      0.00000   gzu(R)   =        0.11459      0.00000
+  gzd(L)   =        0.31444      0.00000   gzd(R)   =       -0.05730      0.00000
+
+ FFH couplings:
+ --------------
+
+  gHtop(L) =    -0.7077896   0.0000000 gHtop(R) =    -0.7077896   0.0000000
+  gHbot(L) =    -0.0170552   0.0000000 gHbot(R) =    -0.0170552   0.0000000
+  gHcha(L) =    -0.0050759   0.0000000 gHcha(R) =    -0.0050759   0.0000000
+  gHtau(L) =    -0.0072160   0.0000000 gHtau(R) =    -0.0072160   0.0000000
+
+ Strong couplings:
+ -----------------
+
+  gg(1)    =    -1.2177158   0.0000000 gg(2)    =    -1.2177158   0.0000000
+
+ User Model masses and widths:
+ -----------------------------
+
+      ELMASS  =        0.001 GeV           ELWIDTH    =    0.0000 GeV  (calc @ LO)
+      APMASS  =        0.030 GeV           APWIDTH    =    0.0000 GeV  (calc @ LO)
+      HPMASS  =      171.240 GeV           HPWIDTH    =    0.0000 GeV  (calc @ LO)
+
+ User Model Parameters:
+ ----------------------
+    epsilon   =        0.001 GeV        
+    Znuc      =       74.000 GeV        
+
+
+ Collider parameters:
+ --------------------
+
+ Running at e e   machine @    67.236418702961871       GeV
+ PDF set = none   
+ alpha_s(Mz)= 0.1180 running at 2 loops.
+ alpha_s(Mz)= 0.1180 running at 2 loops.
+ Renormalization scale set on event-by-event basis
+ Factorization   scale set on event-by-event basis
+
+
+ getting user params
+Enter number of events and iterations: 
+ Number of events and iterations         1000           4
+Enter desired fractional accuracy: 
+ Desired fractional accuracy:    0.0000000000000000     
+Enter 0 for fixed, 2 for adjustable grid: 
+Suppress amplitude (0 no, 1 yes)? 
+ Using suppressed amplitude.
+Exact helicity sum (0 yes, n = number/event)? 
+ Summing over           1  helicities/event
+Enter Configuration Number: 
+Running Configuration Number:    1
+ Using dconfig=           1
+ BW Setting            1           0           0           0
+ Attempting mappinvarients           1           6
+ Completed mapping           6
+ about to integrate            8        1000           4           8           1
+ Keeping grid fixed.
+  8 dimensions   1000 events  8 invarients  4 iterations  1 config(s),  (0.99)
+ Using h-tuple random number sequence.
+ Error opening grid
+ Using Uniform Grid!
+ Using uniform alpha   1.0000000000000000     
+ Grid defined OK
+ Mapping Graph           1  to config           1
+ myamp l312: xm(           3 )=   5.1109989000000002E-004
+ myamp l312: xm(           4 )=   5.1109989000000002E-004
+ myamp l312: xm(           5 )=   5.1109989000000002E-004
+ myamp l312: xm(           6 )=   171.24000000000001     
+ Setting BW          -1           1   2.9999999999999999E-002
+Setting grid   2    0.82709E-11   -0.82709E-11   1
+Setting grid   3    0.28496E-07   -0.00000E+00   1
+ Masses: 0.511E-03 0.171E+03 0.511E-03 0.511E-03 0.511E-03 0.171E+03
+   1   1   2   3   4   5   6   7   8
+Using random seed offsets     1 :      1
+  with seed          28
+ Ranmar initialization seeds        1831        9374
+  Particle       3       4       5       6
+      Et >     0.0     0.0     0.0     0.0
+       E >     0.0     0.0     0.0     0.0
+     Eta <100000.0100000.0100000.0100000.0
+d R # 3  >    -0.0     0.0     0.0     0.0
+d R # 4  >    -0.0    -0.0     0.0     0.0
+d R # 5  >    -0.0    -0.0    -0.0     0.0
+s min # 3>     0.0     0.0     0.0     0.0
+s min # 4>     0.0     0.0     0.0     0.0
+s min # 5>     0.0     0.0     0.0     0.0
+   xqcut:      0.0     0.0     0.0     0.0
+xqcutij # 3>     0.0     0.0     0.0     0.0
+xqcutij # 4>     0.0     0.0     0.0     0.0
+xqcutij # 5>     0.0     0.0     0.0     0.0
+ Requiring BW           -1           1
+ alpha_s for scale    0.0000000000000000       is   0.11799999999999999     
+ Iteration  1   Mean: 0.6694E+03   Fluctuation:  0.340E+03   0.280E+06    40.8%
+  1   0.6694E+03 +- 0.3403E+03     16.08
+ Writing out events  0.41048861021265598        16.077274411334646     
+ Iteration  2   Mean: 0.6224E+03   Fluctuation:  0.193E+03   0.199E+06    39.8%
+  2   0.6224E+03 +- 0.1929E+03     13.86
+ Found           48  events.
+ Wrote            9  events.
+ Correct xsec    0.0000000000000000     
+ Event xsec    0.0000000000000000     
+ Events wgts > 1:            0
+ % Cross section > 1:    0.0000000000000000                            NaN
+ Iteration  3   Mean: 0.8246E+03   Fluctuation:  0.233E+03   0.692E+06    39.2%
+  3   0.8246E+03 +- 0.2327E+03     17.85
+ No improvement in events           4           9
+ Iteration  4   Mean: 0.1270E+05   Fluctuation:  0.120E+05   0.963E+08    39.3%
+  4   0.1270E+05 +- 0.1204E+05     84.79
+ No improvement in events           1           9
+
+ -------------------------------------------------------------------------------
+ Accumulated results:   Integral =  0.1201E+04
+                        Std dev  =  0.2271E+03
+             Chi**2 per DoF.     =     35.4894
+ -------------------------------------------------------------------------------
+-----------------------------------------------------
+---------------------------
+ Results Last 3 iters:  Integral =   0.1286E+04
+                         Std dev =   0.2621E+03
+                 Chi**2 per DoF. =      8.3314
+-----------------------------------------------------
+---------------------------
+ Status   0.0000000000000000                5           4
+ No improvement in events           0           9
+ Process in group number            1
+ No PDF is used, alpha_s(MZ) from param_card is used
+ Value of alpha_s from param_card:   0.11799999999999999     
+ The default order of alpha_s running is fixed to            2
+ *****************************************************
+ *                    MadEvent                       *
+ *        --------------------------------           *
+ *          http://madgraph.hep.uiuc.edu             *
+ *          http://madgraph.phys.ucl.ac.be           *
+ *          http://madgraph.roma2.infn.it            *
+ *        --------------------------------           *
+ *                                                   *
+ *         INTEGRATION CHANNEL LOG FILE              *
+ *                                                   *
+ *****************************************************
+
+ *****************************************************
+ *          SUMMARY OF THE SM PARAMETERS             *
+ *****************************************************
+
+  EW Parameters:
+ ---------------
+
+  GF (10^-5*Ge    1.1660
+  1/alpha       127.9000
+  M_Z   (GeV)    91.5445
+
+
+ Boson masses and widths:
+ ------------------------
+
+      Z mass  =       91.545 GeV             Z width  =    2.4464 GeV  (calc @ LO)
+      W mass  =       80.267 GeV             W width  =    2.0354 GeV  (calc @ LO)
+      H mass  =      120.000 GeV             H width  =    0.0068 GeV  (calc @ LO)
+
+ Fermion masses and widths:
+ --------------------------
+
+ top    mass  =      174.300 GeV        top    width  =    1.5101 GeV  (calc @ LO)
+ bottom mass  =      4.200 GeV        bottom width  =    0.0000 GeV
+ charm  mass  =      1.400 GeV        charm  width  =    0.0000 GeV
+ tau    mass  =      1.777 GeV        tau    width  =    0.0000 GeV
+ all other quark and lepton masses set to zero
+
+ User Model couplings:
+ ---------------------
+
+   GAF(L)  =        0.31345      0.00000    GAF(R)  =        0.31345      0.00000
+   GAN(L)  =        0.00000      0.00000    GAN(R)  =        0.00000      0.00000
+  GEAP(L)  =        0.00031      0.00000   GEAP(R)  =        0.00031      0.00000
+
+ Boson couplings:
+ ----------------
+
+      gwwa  =       0.31345
+      gwwz  =       0.57159
+      gwwh  =      52.32566     0.00000
+      gzzh  =      68.06147     0.00000
+      ghhh  =    -175.42461     0.00000
+
+      gwwhh =       0.21248     0.00000
+      gzzhh =       0.27638     0.00000
+      ghhhh =      -0.71236     0.00000
+
+ FFV couplings:
+ --------------
+
+  gal(L)   =        0.31345      0.00000   gal(R)   =        0.31345      0.00000
+  gau(L)   =       -0.20897      0.00000   gau(R)   =       -0.20897      0.00000
+  gad(L)   =        0.10448      0.00000   gad(R)   =        0.10448      0.00000
+
+  gwf(L)   =       -0.46096      0.00000   gwf(R)   =        0.00000      0.00000
+
+  gzn(L)   =       -0.37174      0.00000   gzn(R)   =        0.00000      0.00000
+  gzl(L)   =        0.19985      0.00000   gzl(R)   =       -0.17189      0.00000
+  gzu(L)   =       -0.25714      0.00000   gzu(R)   =        0.11459      0.00000
+  gzd(L)   =        0.31444      0.00000   gzd(R)   =       -0.05730      0.00000
+
+ FFH couplings:
+ --------------
+
+  gHtop(L) =    -0.7077896   0.0000000 gHtop(R) =    -0.7077896   0.0000000
+  gHbot(L) =    -0.0170552   0.0000000 gHbot(R) =    -0.0170552   0.0000000
+  gHcha(L) =    -0.0050759   0.0000000 gHcha(R) =    -0.0050759   0.0000000
+  gHtau(L) =    -0.0072160   0.0000000 gHtau(R) =    -0.0072160   0.0000000
+
+ Strong couplings:
+ -----------------
+
+  gg(1)    =    -1.2177158   0.0000000 gg(2)    =    -1.2177158   0.0000000
+
+ User Model masses and widths:
+ -----------------------------
+
+      ELMASS  =        0.001 GeV           ELWIDTH    =    0.0000 GeV  (calc @ LO)
+      APMASS  =        0.030 GeV           APWIDTH    =    0.0000 GeV  (calc @ LO)
+      HPMASS  =      171.240 GeV           HPWIDTH    =    0.0000 GeV  (calc @ LO)
+
+ User Model Parameters:
+ ----------------------
+    epsilon   =        0.001 GeV        
+    Znuc      =       74.000 GeV        
+
+
+ Collider parameters:
+ --------------------
+
+ Running at e e   machine @    67.236418702961871       GeV
+ PDF set = none   
+ alpha_s(Mz)= 0.1180 running at 2 loops.
+ alpha_s(Mz)= 0.1180 running at 2 loops.
+ Renormalization scale set on event-by-event basis
+ Factorization   scale set on event-by-event basis
+
+
+ getting user params
+Enter number of events and iterations: 
+ Number of events and iterations         2000           9
+Enter desired fractional accuracy: 
+ Desired fractional accuracy:                  -Infinity
+Enter 0 for fixed, 2 for adjustable grid: 
+Suppress amplitude (0 no, 1 yes)? 
+ Using suppressed amplitude.
+Exact helicity sum (0 yes, n = number/event)? 
+ Summing over           1  helicities/event
+Enter Configuration Number: 
+Running Configuration Number:    1
+ Using dconfig=           1
+ BW Setting            1           0           0           0
+ Attempting mappinvarients           1           6
+ Completed mapping           6
+ about to integrate            8        2000           9           8           1
+ Using non-zero grid deformation.
+  8 dimensions   2000 events  8 invarients  9 iterations  1 config(s),  (0.99)
+ Using h-tuple random number sequence.
+ Error opening grid
+ Using Uniform Grid!
+ Using uniform alpha   1.0000000000000000     
+ Grid defined OK
+ Mapping Graph           1  to config           1
+ myamp l312: xm(           3 )=   5.1109989000000002E-004
+ myamp l312: xm(           4 )=   5.1109989000000002E-004
+ myamp l312: xm(           5 )=   5.1109989000000002E-004
+ myamp l312: xm(           6 )=   171.24000000000001     
+ Setting BW          -1           1   2.9999999999999999E-002
+Setting grid   2    0.82709E-11   -0.82709E-11   1
+Setting grid   3    0.28496E-07   -0.00000E+00   1
+ Masses: 0.511E-03 0.171E+03 0.511E-03 0.511E-03 0.511E-03 0.171E+03
+   1   1   2   3   4   5   6   7   8
+Using random seed offsets     1 :      1
+  with seed          28
+ Ranmar initialization seeds        1831        9374
+  Particle       3       4       5       6
+      Et >     0.0     0.0     0.0     0.0
+       E >     0.0     0.0     0.0     0.0
+     Eta <100000.0100000.0100000.0100000.0
+d R # 3  >    -0.0     0.0     0.0     0.0
+d R # 4  >    -0.0    -0.0     0.0     0.0
+d R # 5  >    -0.0    -0.0    -0.0     0.0
+s min # 3>     0.0     0.0     0.0     0.0
+s min # 4>     0.0     0.0     0.0     0.0
+s min # 5>     0.0     0.0     0.0     0.0
+   xqcut:      0.0     0.0     0.0     0.0
+xqcutij # 3>     0.0     0.0     0.0     0.0
+xqcutij # 4>     0.0     0.0     0.0     0.0
+xqcutij # 5>     0.0     0.0     0.0     0.0
+ Requiring BW           -1           1
+ alpha_s for scale    0.0000000000000000       is   0.11799999999999999     
+ Iteration  1   Mean: 0.5850E+03   Fluctuation:  0.205E+03   0.278E+06    40.5%
+  1   0.5850E+03 +- 0.2048E+03     15.66
+ Writing out events   8.0156437206754125E-002   15.657997433957615     
+ Iteration  2   Mean: 0.1531E+04   Fluctuation:  0.401E+03   0.131E+07    47.1%
+  2   0.1531E+04 +- 0.4013E+03     16.58
+ Found          207  events.
+ Wrote            6  events.
+ Correct xsec    0.0000000000000000     
+ Event xsec    0.0000000000000000     
+ Events wgts > 1:            0
+ % Cross section > 1:    0.0000000000000000                            NaN
+ Iteration  3   Mean: 0.2844E+04   Fluctuation:  0.113E+04   0.833E+07    42.4%
+  3   0.2844E+04 +- 0.1127E+04     35.42
+ No improvement in events           3           6
+ Checking number of events                 -Infinity           6
+ No improvement in events           1           6
+ Iteration  4   Mean: 0.3405E+04   Fluctuation:  0.489E+03   0.420E+07    42.6%
+  4   0.3405E+04 +- 0.4894E+03     18.18
+ Found          806  events.
+ Wrote           14  events.
+ Correct xsec    2960.4882229683658     
+ Event xsec    2960.4882229683667     
+ Events wgts > 1:            1
+ % Cross section > 1:    7.3179945445644989E-006   2.4718877406061863E-007
+ Checking number of events                 -Infinity          14
+ Found          806  events.
+ Wrote           17  events.
+ Correct xsec    2960.4882229683658     
+ Event xsec    2960.4882229683672     
+ Events wgts > 1:            1
+ % Cross section > 1:    6.0265837475981243E-006   2.0356722586639788E-007
+ Iteration  5   Mean: 0.5571E+04   Fluctuation:  0.614E+03   0.856E+07    33.8%
+  5   0.5571E+04 +- 0.6135E+03     19.70
+ Found         2146  events.
+ Wrote           29  events.
+ Correct xsec    4680.7397759653086     
+ Event xsec    4680.7397759653077     
+ Events wgts > 1:            3
+ % Cross section > 1:    19.244155609136385       0.41113491734685609     
+ Checking number of events                 -Infinity          29
+ No improvement in events          21          29
+ Iteration  6   Mean: 0.6062E+04   Fluctuation:  0.299E+03   0.111E+08    25.4%
+  6   0.6062E+04 +- 0.2992E+03     12.48
+ Found         5007  events.
+ Wrote           37  events.
+ Correct xsec    5749.7306932704942     
+ Event xsec    5749.7306932704987     
+ Events wgts > 1:            0
+ % Cross section > 1:    0.0000000000000000        0.0000000000000000     
+ Checking number of events                 -Infinity          37
+ No improvement in events          25          37
+ Iteration  7   Mean: 0.5861E+04   Fluctuation:  0.136E+03   0.700E+07    18.7%
+  7   0.5861E+04 +- 0.1362E+03      8.31
+ Found        11825  events.
+ Wrote          163  events.
+ Correct xsec    5885.9948280017761     
+ Event xsec    5885.9948280017898     
+ Events wgts > 1:            3
+ % Cross section > 1:    47.076958841563709       0.79981311939999888     
+ Checking number of events                 -Infinity         163
+ Found        11825  events.
+ Wrote          167  events.
+ Correct xsec    5885.9948280017761     
+ Event xsec    5885.9948280017879     
+ Events wgts > 1:            3
+ % Cross section > 1:    45.958171312031432       0.78080549941009003     
+ Iteration  8   Mean: 0.2448E+05   Fluctuation:  0.173E+05   0.442E+10    15.7%
+  8   0.2448E+05 +- 0.1727E+05    357.02
+ No improvement in events           2         167
+ Checking number of events                 -Infinity         167
+ No improvement in events           2         167
+ Iteration  9   Mean: 0.9999E+04   Fluctuation:  0.169E+04   0.477E+09    13.5%
+  9   0.9999E+04 +- 0.1691E+04    120.99
+ No improvement in events          13         167
+ Checking number of events                 -Infinity         167
+ No improvement in events          11         167
+
+ -------------------------------------------------------------------------------
+ Accumulated results:   Integral =  0.5860E+04
+                        Std dev  =  0.1182E+03
+             Chi**2 per DoF.     =      7.8949
+ -------------------------------------------------------------------------------
+-----------------------------------------------------
+---------------------------
+ Results Last 3 iters:  Integral =   0.5957E+04
+                         Std dev =   0.1371E+03
+                 Chi**2 per DoF. =      3.6827
+-----------------------------------------------------
+---------------------------
+ Status                 -Infinity          10           9
+ Trying w/ fresh grid
+ Starting w/ ncall =         8000
+ Using non-zero grid deformation.
+  8 dimensions   8000 events  8 invarients  8 iterations  1 config(s),  (0.99)
+ Using h-tuple random number sequence.
+ Error opening grid
+ Using Uniform Grid!
+ Using uniform alpha   1.0000000000000000     
+ Grid defined OK
+ No improvement in events          13         167
+ myamp l312: xm(           3 )=   5.1109989000000002E-004
+ myamp l312: xm(           4 )=   5.1109989000000002E-004
+ myamp l312: xm(           5 )=   5.1109989000000002E-004
+ myamp l312: xm(           6 )=   171.24000000000001     
+ Setting BW          -1           1   2.9999999999999999E-002
+Setting grid   2    0.82709E-11   -0.82709E-11   1
+Setting grid   3    0.28496E-07   -0.00000E+00   1
+ Iteration  1   Mean: 0.8113E+03   Fluctuation:  0.170E+03   0.650E+06    39.3%
+  1   0.8113E+03 +- 0.1697E+03     18.71
+ No improvement in events          12         167
+ Iteration  2   Mean: 0.2688E+04   Fluctuation:  0.939E+03   0.144E+08    38.2%
+  2   0.2688E+04 +- 0.9390E+03     44.19
+ No improvement in events           3         167
+ Iteration  3   Mean: 0.4583E+04   Fluctuation:  0.710E+03   0.150E+08    32.5%
+  3   0.4583E+04 +- 0.7099E+03     27.71
+ No improvement in events          11         167
+ Checking number of events                 -Infinity         167
+ No improvement in events          10         167
+ Iteration  4   Mean: 0.5336E+04   Fluctuation:  0.526E+03   0.264E+08    27.9%
+  4   0.5336E+04 +- 0.5255E+03     24.92
+ No improvement in events          17         167
+ Checking number of events                 -Infinity         167
+ No improvement in events          10         167
+ Iteration  5   Mean: 0.5986E+04   Fluctuation:  0.353E+03   0.371E+08    23.4%
+  5   0.5986E+04 +- 0.3527E+03     21.08
+ No improvement in events          21         167
+ Checking number of events                 -Infinity         167
+ No improvement in events          14         167
+ Fixing grid
+ Iteration  6   Mean: 0.6306E+04   Fluctuation:  0.356E+03   0.785E+08    18.5%
+  6   0.6306E+04 +- 0.3560E+03     28.56
+ No improvement in events          18         167
+ Checking number of events                 -Infinity         167
+ No improvement in events          18         167
+ Iteration  7   Mean: 0.5781E+04   Fluctuation:  0.884E+02   0.319E+08    18.5%
+  7   0.5781E+04 +- 0.8838E+02     10.94
+ Found        46890  events.
+ Wrote          303  events.
+ Correct xsec    5827.2096268187761     
+ Event xsec    5827.2096268187288     
+ Events wgts > 1:            3
+ % Cross section > 1:    40.817870095320686       0.70047025436434396     
+ Checking number of events                 -Infinity         303
+ No improvement in events         278         303
+ Iteration  8   Mean: 0.1538E+05   Fluctuation:  0.767E+04   0.776E+10    18.5%
+  8   0.1538E+05 +- 0.7667E+04    504.30
+ No improvement in events           3         303
+ Checking number of events                 -Infinity         303
+ No improvement in events           1         303
+
+ -------------------------------------------------------------------------------
+ Accumulated results:   Integral =  0.5787E+04
+                        Std dev  =  0.8134E+02
+             Chi**2 per DoF.     =      5.0875
+ -------------------------------------------------------------------------------
+-----------------------------------------------------
+---------------------------
+ Results Last 3 iters:  Integral =   0.5826E+04
+                         Std dev =   0.8592E+02
+                 Chi**2 per DoF. =      1.8107
+-----------------------------------------------------
+---------------------------
+ No improvement in events           0         303

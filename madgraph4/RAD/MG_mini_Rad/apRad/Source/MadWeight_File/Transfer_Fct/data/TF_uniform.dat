@@ -1,0 +1,323 @@
+##########################################################################
+##									##
+##                          Matrix Element                              ##
+##			    ==============                              ##
+##									##
+##		         Create Transfer Function			##
+##			 -------------------------                      ##
+##									##
+##									##
+##    Author: Mattelaer Olivier (UCL-CP3)				##
+##            Artoisenet Pierre (UCL-CP3)				##
+##									##
+##    Version:     1.3.1						##
+##    Last change: 22/09/08						##
+##									##
+##########################################################################
+##########################################################################
+##									##
+##									##
+##    Instructions:							##
+##									##
+##	- This program  create transfer functions in THETA/PHI/E        ##
+##	- Those functions must be defined in f77 standard		##
+##		remind that comment must start with !			##
+##	- Those definitions must be placed between the TAG LINE		##
+##		BEGIN ...						##
+##		END   ...						##
+##		DONT EDIT THOSE LINES!! THEY ARE TAGS			##
+##	- You can use all standard f77 functions. (All variables are	##
+##		in double precision format). 				##
+##	- You can not use any f77 reserved statement except the         ##
+##		IF ... THEN ...ELSEIF ... ELSE ... ENDIF statements     ##
+##	- The experimental event is  defined by the variable pexp(i) 	##
+##		i=0->4 (0->E,1->Px,2->Py,3->Pz)				##
+##	- The partonic event is defined by the variable p(i)		##
+##		i=0->4 (0->E,1->Px,2->Py,3->Pz)				##
+##		sigma can not depend on those variables			##
+##	- You can use 10 local variables				##
+##		(double precision):  prov1,prov2,...,prov10		##
+##	- You can call specific functions on p or pexp:			##
+##		-pt(p)   : transverse momenta 				##
+##		-eta(p)  : pseudo-rapidity				##
+##		-rap(p)  : rapidity					##
+##		-theta(p): polar angle					##
+##		-phi(p)	 : azimuthal angle				##
+##	- All LHCO information is available.                            ##
+##              -run_number,trigger					##
+##		-eta_init(N),phi_init(N),pt_init(N)			##
+##              -j_mass(N),ntrk(N),btag(N),had_em(N)			##
+##		-dummy1(N),dummy2(N)					##
+##	    N is the LHCO tag(first column)				##
+##		- current tag is n_lhco  				##
+##		- tag for missing ET is met_lhco			##
+##				  					##
+##	- You can incorporate parameters that will be passed through    ##
+##	        the transfert_card.dat. Those ones must have the        ##
+##		following syntax: #1,#2,#3,.. You can restart 		##
+##		the assignement for each different transfer function	##
+##	- In addition to each transfer function(tf_), you MUST add	##
+##		the largest sigma associate to your function (sigma_)	##
+##		It is needed for the phase space generator      	##
+##	- Do not change names of variable				##
+##	- For delta function put 0 in sigma and 1 in transfer function  ##
+##		AND NOTHING ELSE (no function/parameter equals to 0!)	##
+##									##
+##########################################################################
+##########################################################################
+
+
+
+##**********************************************************************##
+##                           ORDERING                                   ##
+##**********************************************************************##
+##             describe which impulsion is (or not) well reconstructed
+##             and order the typical width of Energy for type of particle
+##	 	: j=jet,b=bjet,g=gluon_jet,e=elec,m=muon,t=tau,a=photon
+
+BEGIN ORDER_THIN
+	m,e
+END ORDER_THIN
+
+BEGIN ORDER_LARGE
+        a,b,t,j,g
+END ORDER_LARGE
+
+
+##**********************************************************************##
+##                           TF JET					##
+##**********************************************************************##
+## 		transfer fct for u d s c
+
+
+#******************************** Energy
+BEGIN TF_E_J 			
+	tf_e_j=1	
+END TF_E_J			
+
+BEGIN SIGMA_E_J 				
+	sigma_e_j=#1
+END SIGMA_E_J
+
+
+#********************************  PHI
+BEGIN TF_PHI_J 			
+	tf_phi_j=1	
+END TF_PHI_J
+			
+BEGIN SIGMA_PHI_J 
+	sigma_phi_j=#1
+END SIGMA_PHI_J
+
+#******************************** THETA
+BEGIN TF_THETA_J 	 	
+	tf_theta_j=1	
+END TF_THETA_J
+
+BEGIN SIGMA_THETA_J 
+	sigma_theta_j=#1			
+END SIGMA_THETA_J
+
+
+##**********************************************************************##
+##                           TF B-JET					##
+##**********************************************************************##
+## 		       transfert fct for b jet
+
+#******************************** Energy
+
+BEGIN TF_E_B
+        tf_e_b=1
+END TF_E_B
+
+BEGIN SIGMA_E_B
+        sigma_e_b=#1
+END SIGMA_E_B
+
+
+#********************************  PHI
+BEGIN TF_PHI_B
+        tf_phi_b=1
+END TF_PHI_B
+
+BEGIN SIGMA_PHI_B
+        sigma_phi_b=#1
+END SIGMA_PHI_B
+
+#******************************** THETA 
+BEGIN TF_THETA_B
+        tf_theta_b=1
+END TF_THETA_B
+
+BEGIN SIGMA_THETA_B
+        sigma_theta_b=#1
+END SIGMA_THETA_B
+
+##**********************************************************************##
+##                           TF for gluon        			##
+##**********************************************************************##
+## 		       transfer fct for gluon
+
+#******************************** Energy
+BEGIN TF_E_G
+        tf_e_g=1
+END TF_E_G
+
+BEGIN SIGMA_E_G
+        sigma_e_g=#1
+END SIGMA_E_G
+
+#********************************  PHI
+BEGIN TF_PHI_G
+        tf_phi_g=1
+END TF_PHI_G
+
+BEGIN SIGMA_PHI_G
+        sigma_phi_g=#1
+END SIGMA_PHI_G
+
+#******************************** THETA 
+BEGIN TF_THETA_G
+        tf_theta_g=1
+END TF_THETA_G
+
+BEGIN SIGMA_THETA_G
+        sigma_theta_g=#1
+END SIGMA_THETA_G
+
+
+##**********************************************************************##
+##                           TF Electron				##
+##**********************************************************************##
+## 		      transfer fct for electron
+
+
+#******************************** Energy
+
+BEGIN TF_E_E
+        tf_e_e=1
+END TF_E_E
+
+BEGIN SIGMA_E_E
+        sigma_e_e=#1
+END SIGMA_E_E
+
+
+#********************************  PHI
+BEGIN TF_PHI_E
+        tf_phi_e=1
+END TF_PHI_E
+
+BEGIN SIGMA_PHI_E
+        sigma_phi_e=#1
+END SIGMA_PHI_E
+
+#******************************** THETA 
+BEGIN TF_THETA_E
+        tf_theta_e=1
+END TF_THETA_E
+
+BEGIN SIGMA_THETA_E
+        sigma_theta_e=#1
+END SIGMA_THETA_E
+
+##**********************************************************************##
+##                           TF Muon					##
+##**********************************************************************##
+## 		       transfer fct for muon
+
+
+#******************************** Energy
+
+BEGIN TF_E_M
+        tf_e_m=1
+END TF_E_M
+
+BEGIN SIGMA_E_M
+        sigma_e_m=#1
+END SIGMA_E_M
+
+
+#********************************  PHI
+BEGIN TF_PHI_M
+        tf_phi_m=1
+END TF_PHI_M
+
+BEGIN SIGMA_PHI_M
+        sigma_phi_m=#1
+END SIGMA_PHI_M
+
+#******************************** THETA 
+BEGIN TF_THETA_M
+        tf_theta_m=1
+END TF_THETA_M
+
+BEGIN SIGMA_THETA_M
+        sigma_theta_m=#1
+END SIGMA_THETA_M
+
+
+
+##**********************************************************************##
+##                           TF Muon					##
+##**********************************************************************##
+## 		       transfer fct for muon
+
+
+#******************************** Energy
+
+BEGIN TF_E_T
+        tf_e_t=1
+END TF_E_T
+
+BEGIN SIGMA_E_T
+        sigma_e_t=#1
+END SIGMA_E_T
+
+
+#********************************  PHI
+BEGIN TF_PHI_T
+        tf_phi_t=1
+END TF_PHI_T
+
+BEGIN SIGMA_PHI_T
+        sigma_phi_t=#1
+END SIGMA_PHI_T
+
+#******************************** THETA 
+BEGIN TF_THETA_T
+        tf_theta_t=1
+END TF_THETA_T
+
+BEGIN SIGMA_THETA_T
+        sigma_theta_t=#1
+END SIGMA_THETA_T
+
+
+
+##**********************************************************************##
+##                           TF on initial particle                   ##
+##**********************************************************************##
+##                  transfer fct on x1,x2,pt for the event
+##   supress those line if there are no constraint (up to pdf) on those
+##    values
+
+#******************************** X1
+# transfer function without PDF
+BEGIN TF_X1
+        tf_x1=1
+END TF_X1
+
+BEGIN SIGMA_X1
+      sigma_x1=#1
+END SIGMA_X1
+
+#******************************** X2
+# transfer function without PDF
+BEGIN TF_X2
+        tf_x2=1
+END TF_X2
+
+BEGIN SIGMA_X2
+      sigma_x2=#1
+END SIGMA_X2

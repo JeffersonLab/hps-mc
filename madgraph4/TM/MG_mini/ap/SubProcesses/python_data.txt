@@ -1,0 +1,8 @@
+*       1         1
+   -1    4    3  APMASS    APWIDTH   S       622
+   -2    1   -1  ELEMASS   ZERO      T        11
+   -3   -2    5  ZERO      AWIDTH    T        22
+*       2         2
+   -1    4    3  APMASS    APWIDTH   S       622
+   -2    5   -1  ELEMASS   ZERO      S        11
+   -3    1   -2  ZERO      AWIDTH    T        22

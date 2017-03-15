@@ -1,0 +1,55 @@
+##########################################################################
+##									##
+##									##
+##				MadWeight				##
+##				*********				##
+##									##
+##	Autor:	 Olivier Mattelaer 					##
+##		 Pierre Artoisenet					##
+##									##
+##	date:	November 08						##
+##									##
+##########################################################################
+##########################################################################
+##									##
+##  rule to activate/desctivate the cuts for ME/MW      		##
+##									##
+##									##
+## TAG:									##
+##      tag to desactivate $ $ S- option                                ##
+##	DESACTIVATE_CUT							##
+##	ACTIVATE_CUT							##
+##########################################################################
+$S-REGEXP_\$B\$\s*S-+$B-DIFF$S-+re.I$
+$S-REGEXP_\$E\$\s*S-+$E-DIFF$S-+re.I$
+##########################################################################
+$B$ DESACTIVATE_CUT $B$
+C $B-DIFF$ ACTIVATE_CUT $B-DIFF$ !tag to reactivate the cut
+
+C...Set strong couplings if event passed cuts
+      if(.not.fixed_ren_scale.or..not.fixed_couplings) then
+         if (.not.fixed_couplings)then
+            do i=0,3
+               do j=1,nexternal
+                  PP(i,j)=p(i,j)
+               enddo
+            enddo
+         endif
+         call setpara('param_card.dat',.false.)
+      endif
+
+      IF (FIRSTTIME2) THEN
+         FIRSTTIME2=.FALSE.
+         write(6,*) 'alpha_s for scale ',scale,' is ', G**2/(16d0*atan(1d0))
+      ENDIF
+      RETURN
+C $E-DIFF$ ACTIVATE_CUT $E-DIFF$ !tag to reactivate the cut
+$E$ DESACTIVATE_CUT $E$
+##########################################################################
+##
+##
+##########################################################################
+$B$ ACTIVATE_CUT $B$
+C $B-DIFF$ DESACTIVATE_CUT $E-DIFF$ !tag to desactivate the cut
+
+$E$ ACTIVATE_CUT $E$

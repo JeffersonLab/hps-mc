@@ -1,0 +1,264 @@
+##############################################################
+##                                                          ##
+##                   TwoMadGraph Project                    ##
+##                                                          ##
+## FILE : interactions_2hdm.dat                             ##
+##                                                          ##
+## DESCRIPTION : This file contains the interactions naming ##
+## convention of the Simple_2HDM extension of MadGraph.     ##
+##                                                          ##
+##############################################################
+
+
+##############################################################
+## STANDARD MADGRAPH PART (interactions_sm.dat)
+
+#
+#       File which contains allowed interactions. Must be named
+#       interactions.dat and reside in the current directory for MadGraph
+#       to see it.
+#
+#       3-particle vertices are entered as follows:
+#
+#       particle1 particle2  particle3 coupling_name model (QCD,QFD,QED,BRS)
+#
+#       Note: The ordering of particles is very important.
+#       For FFV interactions, must use particles, not anti_particles.
+#
+
+#
+# QCD interactions
+#
+
+d d g GG QCD
+u u g GG QCD
+s s g GG QCD
+c c g GG QCD
+b b g GG QCD
+t t g GG QCD
+
+g g g G  QCD
+
+#g g g g G G QCD QCD
+
+#
+# QED interactions
+#
+
+d d a GAD QED
+u u a GAU QED
+s s a GAD QED
+c c a GAU QED
+b b a GAD QED
+t t a GAU QED
+
+e-  e-  a GAL QED
+mu- mu- a GAL QED
+ta- ta- a GAL QED
+
+#
+# QFD Interactions
+#
+
+# FFV (qqZ)
+d d z GZD QED
+u u z GZU QED
+s s z GZD QED
+c c z GZU QED
+b b z GZD QED
+t t z GZU QED
+
+# FFV (llZ)
+e-  e-  z GZL QED
+mu- mu- z GZL QED
+ta- ta- z GZL QED
+ve  ve  z GZN QED
+vm  vm  z GZN QED
+vt  vt  z GZN QED
+
+# FFV (qq'W) - diagonal CKM
+d u w- GWFUD QED
+s c w- GWFCS QED
+b t w- GWFTB QED
+u d w+ GWFDU QED
+c s w+ GWFSC QED
+t b w+ GWFBT QED
+
+#FFV qq'W) - Off-diagonal terms
+
+d c w- GWFCD QED
+s u w- GWFUS QED
+u s w+ GWFSU QED
+c d w+ GWFDC QED
+
+# FFV (ll'W)
+ve  e-  w+ GWF QED
+vm  mu- w+ GWF QED
+vt  ta- w+ GWF QED
+e-  ve  w- GWF QED
+mu- vm  w- GWF QED
+ta- vt  w- GWF QED
+
+#
+# Boson 3-,4-pt
+#
+
+
+#   VVV
+w- w+ a  GWWA  QED
+w- w+ z  GWWZ  QED
+
+
+#   VVVV
+w- a  w+ a  GWWA  GWWA  QED QED
+w- z  w+ a  GWWZ  GWWA  QED QED
+w- z  w+ z  GWWZ  GWWZ  QED QED
+w- w+ w- w+ GWWZ  GWWA  QED QED
+
+
+##############################################################
+## NEW COUPLINGS IN 2HDM 
+
+# Neutral FFS 
+
+# Leptons
+mu- mu- h1 GH1MUMU QED
+mu- mu- h2 GH2MUMU QED
+mu- mu- h3 GH3MUMU QED
+ta- ta- h1 GH1TATA QED
+ta- ta- h2 GH2TATA QED
+ta- ta- h3 GH3TATA QED
+
+# U quark
+c   c   h1 GH1CC QED
+c   c   h2 GH2CC QED
+c   c   h3 GH3CC QED
+t   t   h1 GH1TT QED
+t   t   h2 GH2TT QED
+t   t   h3 GH3TT QED
+
+# D quark
+s   s   h1 GH1SS QED
+s   s   h2 GH2SS QED
+s   s   h3 GH3SS QED
+b   b   h1 GH1BB QED
+b   b   h2 GH2BB QED
+b   b   h3 GH3BB QED
+
+# Charged FFS 
+
+# QUARKS H-
+d   c   h- GHMDC QED
+s   u   h- GHMSU QED
+s   c   h- GHMSC QED
+b   t   h- GHMBT QED
+
+# QUARKS H+
+u   s   h+ GHPUS QED
+c   d   h+ GHPCD QED
+c   s   h+ GHPCS QED
+t   b   h+ GHPTB QED
+
+# LEPTONS H-
+mu-  vm  h- GHMMUVM QED
+ta-  vt  h- GHMTAVT QED
+
+# LEPTONS H+
+vm  mu-  h+ GHPVMMU QED
+vt  ta-  h+ GHPVTTA QED
+
+# VVS
+
+w- w+ h1 GWWH1  QED
+w- w+ h2 GWWH2  QED
+w- w+ h3 GWWH3  QED
+z  z  h1 GZZH1  QED
+z  z  h2 GZZH2  QED
+z  z  h3 GZZH3  QED
+
+# VSS 
+
+z  h3 h1 GZH1H3 QED
+z  h3 h2 GZH2H3 QED
+z  h2 h1 GZH1H2 QED
+
+a  h- h+ GAHCHC QED
+z  h- h+ GZHCHC QED
+
+w+ h- h1 GWHCH1 QED
+w- h1 h+ GWH1HC QED
+w+ h- h2 GWHCH2 QED
+w- h2 h+ GWH2HC QED
+w+ h- h3 GWHCH3 QED
+w- h3 h+ GWH3HC QED
+
+# SSS
+
+h1 h1 h1 GH111 QED
+h1 h1 h2 GH112 QED
+h1 h1 h3 GH113 QED
+h1 h2 h2 GH122 QED
+h1 h2 h3 GH123 QED
+h1 h3 h3 GH133 QED
+h2 h2 h2 GH222 QED
+h2 h2 h3 GH223 QED
+h2 h3 h3 GH233 QED
+h3 h3 h3 GH333 QED
+
+h1 h- h+ GH1HMHP QED
+h2 h- h+ GH2HMHP QED
+h3 h- h+ GH3HMHP QED
+
+################################################
+## 4-VERTICES
+
+# VVSS
+
+z  z  h1 h1 GZZH1H1 DUM QED QED
+z  z  h2 h2 GZZH2H2 DUM QED QED
+z  z  h3 h3 GZZH3H3 DUM QED QED
+z  z  h1 h2 GZZH1H2 DUM QED QED
+z  z  h1 h3 GZZH1H3 DUM QED QED
+z  z  h2 h3 GZZH2H3 DUM QED QED
+
+w- w+ h1 h1 GWWH1H1 DUM QED QED
+w- w+ h2 h2 GWWH2H2 DUM QED QED
+w- w+ h3 h3 GWWH3H3 DUM QED QED
+w- w+ h1 h2 GWWH1H2 DUM QED QED
+w- w+ h1 h3 GWWH1H3 DUM QED QED
+w- w+ h2 h3 GWWH2H3 DUM QED QED
+
+a  a  h- h+ GAAHCHC DUM QED QED
+a  z  h- h+ GAZHCHC DUM QED QED
+z  z  h- h+ GZZHCHC DUM QED QED
+w- w+ h- h+ GWWHCHC DUM QED QED
+
+w- a  h1 h+ GWAH1HC DUM QED QED
+w- a  h2 h+ GWAH2HC DUM QED QED
+w- a  h3 h+ GWAH3HC DUM QED QED
+w+ a  h- h1 GWAHCH1 DUM QED QED
+w+ a  h- h2 GWAHCH2 DUM QED QED
+w+ a  h- h3 GWAHCH3 DUM QED QED
+
+w- z  h1 h+ GWZH1HC DUM QED QED
+w- z  h2 h+ GWZH2HC DUM QED QED
+w- z  h3 h+ GWZH3HC DUM QED QED
+w+ z  h- h1 GWZHCH1 DUM QED QED
+w+ z  h- h2 GWZHCH2 DUM QED QED
+w+ z  h- h3 GWZHCH3 DUM QED QED
+
+#################################
+# HIGGS EFFECTIVE COUPLINGS   GGH
+g g h1 Gggh1 HIG H
+g g h2 Gggh2 HIG H
+g g h3 Gggh3 HIG H
+
+g g g h1 G Gggh1 QCD HIG
+g g g h2 G Gggh2 QCD HIG
+g g g h3 G Gggh3 QCD HIG
+
+tn tn h1 Gggh1 HIG a
+tn tn h2 Gggh2 HIG a
+tn tn h3 Gggh3 HIG a
+g g tn G QCD a
+

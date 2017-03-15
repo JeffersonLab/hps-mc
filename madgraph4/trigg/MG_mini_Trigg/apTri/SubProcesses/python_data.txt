@@ -1,0 +1,32 @@
+*       1         1
+   -1    1    6  ZERO      AWIDTH    T        22
+   -2   -1    5  ELEMASS   ZERO      T       -11
+   -3   -2    3  ZERO      AWIDTH    T        22
+*       2         2
+   -1    5    3  ZERO      AWIDTH    S        22
+   -2    1   -1  ELEMASS   ZERO      T        11
+   -3   -2    6  ZERO      AWIDTH    T        22
+*       3         3
+   -1    5    3  ZERO      AWIDTH    S        22
+   -2    6   -1  ELEMASS   ZERO      S        11
+   -3    1   -2  ZERO      AWIDTH    T        22
+*       4         4
+   -1    1    6  ZERO      AWIDTH    T        22
+   -2   -1    3  ELEMASS   ZERO      T        11
+   -3   -2    5  ZERO      AWIDTH    T        22
+*       5         5
+   -1    6    5  ZERO      AWIDTH    S        22
+   -2    1   -1  ELEMASS   ZERO      T       -11
+   -3   -2    3  ZERO      AWIDTH    T        22
+*       6         6
+   -1    6    5  ZERO      AWIDTH    S        22
+   -2   -1    3  ELEMASS   ZERO      S        11
+   -3    1   -2  ZERO      AWIDTH    T        22
+*       7         7
+   -1    1    3  ZERO      AWIDTH    T        22
+   -2   -1    6  ELEMASS   ZERO      T        11
+   -3   -2    5  ZERO      AWIDTH    T        22
+*       8         8
+   -1    1    3  ZERO      AWIDTH    T        22
+   -2   -1    5  ELEMASS   ZERO      T        11
+   -3   -2    6  ZERO      AWIDTH    T        22

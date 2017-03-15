@@ -1,0 +1,39 @@
+	Perhaps it would be useful if I provided a more detailed
+explaination of how MadGraphII works. Much of this is similar to
+MadGraph, however some changes were made to make it easier to add new
+theories. The underlying principle was to make the algorythms in
+MadGraphII as simple as possible, thereby making it as versitile as
+possible. In this description I will do my best to ignore details
+which are not informative, but provide you with enough information so
+you will understand the power/and limitation of the MadGraphII, and
+perhaps suggest enhancements/solutions to things like majarana
+fermions. 
+
+Topologies. The first thing Mgraph does is determine the number of
+external particles, and then generates all tree-level topologies,
+assuming only 3 and 4 particle vertices. You can check that you
+understand these by generating them on your own, and comparing the
+number you get to the following:
+  3 particles -> 1 topology     
+  4 particles -> 4 topologies  (s,t,u + 4 point)
+  5 particles -> 25 topologies.
+
+
+Next MGraph writes out all of the external wave functions.
+
+Then MGraph looks for a vertex which has at most one unknown
+wavefunction. It then calls a function which has as input all of the
+known particles. If there are no interactions which contain all of the
+known particles, the function returns 0, and the diagram is disgarded.
+If an interaction exists which contains all of the
+input particles, it returns a value for the unknown particle. It also
+writes out the corresponding HELAS call, and updates the color
+information for the interaction. 
+
+(Of course there may be several vertices for the input particles. In
+this case MGraph uses the first one, and then try's all
+possibilities.)
+
+
+This continues until either a vertice is reached which doesn't work,
+in which case the graph is 

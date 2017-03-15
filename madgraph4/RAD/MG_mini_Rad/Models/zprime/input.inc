@@ -1,0 +1,3 @@
+c      Input values....
+
+      common /USRPR/ param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11 

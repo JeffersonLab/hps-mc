@@ -1,0 +1,14 @@
+       DATA (IDUP(i,  1),i=1,  4)/ -2,       2,       6,      -6/
+       DATA (MOTHUP(1,i,  1),i=1,  4)/  0,       0,       1,       1/
+       DATA (MOTHUP(2,i,  1),i=1,  4)/  0,       0,       2,       2/
+       DATA (ICOLUP(1,i,  1),i=1,  4)/  0,     501,     501,       0/
+       DATA (ICOLUP(2,i,  1),i=1,  4)/502,       0,       0,     502/
+       DATA (IDUP(i,  2),i=1,  4)/ -1,       1,       6,      -6/
+       DATA (MOTHUP(1,i,  2),i=1,  4)/  0,       0,       1,       1/
+       DATA (MOTHUP(2,i,  2),i=1,  4)/  0,       0,       2,       2/
+       DATA (IDUP(i,  3),i=1,  4)/ -3,       3,       6,      -6/
+       DATA (MOTHUP(1,i,  3),i=1,  4)/  0,       0,       1,       1/
+       DATA (MOTHUP(2,i,  3),i=1,  4)/  0,       0,       2,       2/
+       DATA (IDUP(i,  4),i=1,  4)/ -4,       4,       6,      -6/
+       DATA (MOTHUP(1,i,  4),i=1,  4)/  0,       0,       1,       1/
+       DATA (MOTHUP(2,i,  4),i=1,  4)/  0,       0,       2,       2/

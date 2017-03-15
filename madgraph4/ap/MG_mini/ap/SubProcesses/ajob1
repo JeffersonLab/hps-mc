@@ -1,0 +1,31 @@
+#!/bin/bash
+#PBS -q madgraph            
+#PBS -o PBS.log
+#PBS -e PBS.err
+if [[ "$PBS_O_WORKDIR" != "" ]]; then
+    cd $PBS_O_WORKDIR
+fi
+k=run1_app.log
+script=ajob1                         
+rm -f wait.$script >& /dev/null
+touch run.$script
+echo $script
+for i in 1.001 2.001 ; do
+     echo $i
+     echo $i >& run.$script
+     j=G$i
+     if [[ ! -e $j ]]; then
+          mkdir $j
+     fi
+     cd $j
+     rm -f ftn25 ftn99
+     rm -f $k
+     cat ../input_app.txt >& input_app.txt
+     echo $i >> input_app.txt
+     time ../madevent > $k <input_app.txt
+     rm -f ftn25 ftn99
+     cp $k log.txt
+     cd ../
+done
+rm -f run.$script
+touch done.$script

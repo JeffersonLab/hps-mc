@@ -1,0 +1,48 @@
+# Parameters for Matrix Element Run
+# including transfert functions
+# Card Version 1.3.1
+$$name_TF 
+#If you want to change transfer functions, you must
+#run the script ./bin/change_tf.py from the main directory
+# ****************************************************
+#
+# Transfer functions for d u s c jets
+#
+Block TF_JET_E
+Block TF_JET_PHI
+Block TF_JET_THETA
+#
+# Transfer functions for b jets
+#
+Block TF_BJET_E
+Block TF_BJET_PHI
+Block TF_BJET_THETA
+#
+# Transfer functions for gluon jets
+#
+Block TF_GJET_E
+Block TF_GJET_PHI
+Block TF_GJET_THETA
+#
+# Transfer functions for electron
+#
+Block TF_ELEC_E
+Block TF_ELEC_PHI
+Block TF_ELEC_THETA
+#
+# Transfer functions for muon
+#
+Block TF_MUON_E
+Block TF_MUON_PHI
+Block TF_MUON_THETA
+#
+# Transfer functions for tau
+#
+Block TF_TAU_E
+Block TF_TAU_PHI
+Block TF_TAU_THETA
+#
+# transfer functions for x1,x2
+#
+Block TF_INIT_X1
+Block TF_INIT_X2

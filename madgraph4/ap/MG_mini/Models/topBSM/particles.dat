@@ -1,0 +1,69 @@
+#
+#      particles_0001_v1.dat
+#
+#This is a special data file which contains particles of the
+#Standard Model. The format for entering new particles is.
+#Particle codes taken from  http://pdg.lbl.gov /2000/ montecarlorpp.pdf
+#Name anti_Name  Spin    Linetype Mass Width Color Label Model
+#xxx   xxxx      SFV      WSDC     str  str  STO    str  PDG code
+
+#
+# Quarks
+#
+
+d       d~        F        S      ZERO  ZERO    T    d    1
+u       u~        F        S      ZERO  ZERO    T    u    2
+s       s~        F        S      ZERO  ZERO    T    s    3
+c       c~        F        S      ZERO  ZERO    T    c    4
+b       b~        F        S      BMASS ZERO    T    b    5
+t       t~        F        S      TMASS TWIDTH  T    t    6
+
+#
+# Leptons
+#
+
+e-       e+       F        S      ZERO  ZERO    S    e    11
+mu-      mu+      F        S      ZERO  ZERO    S    mu   13
+ta-      ta+      F        S      LMASS ZERO    S    ta   15
+ve       ve~      F        S      ZERO  ZERO    S    ve   12
+vm       vm~      F        S      ZERO  ZERO    S    vm   14
+vt       vt~      F        S      ZERO  ZERO    S    vt   16
+
+#
+# Bosons
+#
+
+g        g        V        C      ZERO  ZERO    O   _    21
+a        a        V        W      ZERO  AWIDTH  S   A    22
+z        z        V        W      ZMASS ZWIDTH  S   Z    23
+w-       w+       V        W      WMASS WWIDTH  S   W    -24
+h        h        S        D      HMASS HWIDTH  S   h    25
+
+#MODEL EXTENSION
+s0       s0       S        D      S0MASS S0WIDTH S   s0   6000045
+o0       o0       S        D      O0MASS O0WIDTH O   o0   6000046
+s1       s1       V        W      S1MASS S1WIDTH S   s1   6000047
+o1       o1       V        W      O1MASS O1WIDTH O   o1   6000048
+s2       s2       T        W      S2MASS S2WIDTH S   s2   6000049
+g1       g1       T        w      g1mass g1width s   g1   6000050
+g2       g2       T        w      g2mass g2width s   g2   6000051
+g3       g3       T        w      g3mass g3width s   g3   6000052
+g4       g4       T        w      g4mass g4width s   g4   6000053
+g5       g5       T        w      g5mass g5width s   g5   6000054
+g6       g6       T        w      g6mass g6width s   g6   6000055
+g7       g7       T        w      g7mass g7width s   g7   6000056
+g8       g8       T        w      g8mass g8width s   g8   6000057
+g9       g9       T        w      g9mass g9width s   g9   6000058
+g0       g0       T        w      g0mass g0width s   g0   6000059
+# END
+
+# Groups of particles to sum over. Note spaces are important
+# you can NOT have any spaces between particles to be summed over
+# The following line is a TAG and should not be modified:
+# MULTIPARTICLES
+P uu~dd~ss~cc~g
+J uu~dd~ss~cc~g
+L e+e-mu+mu-ta+ta-veve~
+
+
+

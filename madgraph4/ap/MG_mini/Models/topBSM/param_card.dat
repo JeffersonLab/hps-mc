@@ -1,0 +1,160 @@
+#*********************************************************************
+#                        MadGraph/MadEvent                           *
+#                   http://madgraph.hep.uiuc.edu                     *
+#                                                                    *
+#                         param_card.dat                             *
+#                                                                    *
+#   Les Houches friendly file for the SM parameters of MadGraph      *
+#        Spectrum and decay widths produced by SMCalc                *
+#                                                                    *
+#  Please note the following IMPORTANT issues:                       *
+#                                                                    *
+# 0. REFRAIN from editing this file by hand! Some of the parame-     *
+#    ters are not independent                                        *
+#    (such as G_Fermi, alpha_em, sin(theta_W),MZ,MW) and serious     *
+#    problems might be encountered (such as violation of unitarity   *
+#    or gauge invariance).  Always use a calculator.                 *
+#                                                                    *
+# 1. alpha_S(MZ) has been used in the calculation of the parameters  *
+#    but, for consistency, it will be reset by madgraph to the       *
+#    value expected IF the pdfs for collisions with hadrons are      *
+#    used. This value is KEPT by madgraph when no pdf are used       *
+#    lpp(i)=0 .                                                      *
+#                                                                    *
+#  2. Values of the charm and bottom kinematic (pole) masses are     *
+#     those used in the matrix elements and phase space UNLESS they  *
+#     are set to ZERO from the start in the model (particles.dat)    *
+#     This happens, for example,  when using 5-flavor QCD where      *
+#     charm and bottom are treated as partons in the initial state   *
+#     and a zero mass might be hardwired in the model definition.    *
+#                                                                    *
+##********************************************************************
+Block MODSEL # Select Model
+     0   1   #  0 1 = SM
+Block SMINPUTS      # Standard Model inputs
+     1         1.27900000E+02   # alpha_em(MZ)(-1) SM MSbar
+     2         1.16600000E-05   # G_Fermi
+     3         1.18000000E-01   # alpha_s(MZ) SM MSbar
+     4         9.15445065E+01   # Z mass (as input parameter)
+Block MGSMPARAM      # Standard Model parameters for MadGraph
+     1         2.31200000E-01   # sin(theta_W)^2
+     2         8.02673592E+01   # W mass (as input parameter)
+Block MGYUKAWA     # Yukawa masses m/v=y/sqrt(2)
+#    PDG          YMASS
+     5         4.20000000E+00   # mbottom for the Yukawa  y_b
+     4         1.25000000E+00   # mcharm  for the Yukawa  y_c
+     6         1.74300000E+02   # mtop    for the Yukawa  y_t
+    15         1.77700000E+00   # mtau    for the Yukawa  y_ta
+Block MGCKM     # CKM elements for MadGraph
+     1   1     9.75000000E-01   # Vud for Cabibbo matrix
+#===========================================================
+# QUANTUM NUMBERS OF NEW STATE(S) (NON SM PDG CODE) IF ANY
+# (see below for masses and decay tables)
+# These blocks are automatically created by the MadGraph
+# qnumbers.pl script from the particles.dat model file
+#===========================================================
+BLOCK QNUMBERS 6000047 # s1
+         1  0 # 3 times electric charge
+         2  3 # number of spin states (2S+1)
+         3  1 # colour rep (1: singlet, 3: triplet, 8: octet)
+         4  0 # Particle/Antiparticle distinction (0=own anti)
+BLOCK QNUMBERS 6000048 # o1
+         1  0 # 3 times electric charge
+         2  3 # number of spin states (2S+1)
+         3  8 # colour rep (1: singlet, 3: triplet, 8: octet)
+         4  0 # Particle/Antiparticle distinction (0=own anti)
+# END of QNUMBERS blocks
+#===========================================================
+Block MASS      #  Mass spectrum (kinematic masses)
+#       PDG       Mass
+         4     1.40000000E+00   # charm    pole mass
+         5     4.20000000E+00   # bottom   pole mass
+         6     1.74300000E+02   # top      pole mass
+        15     1.77700000E+00   # tau      mass
+        23     9.15445065E+01   # Z        mass
+        24     8.02673592E+01   # W        mass
+        25     1.00000000E+02   # H        mass
+   6000045     4.00000000e+02   # S0MASS
+   6000046     4.00000000e+02   # O0MASS
+   6000047     2.00000000e+03   # S1MASS
+   6000048     2.00000000e+03   # O1MASS
+   6000049     9.00000000e+02   # S2MASS !should be equal to mstring below
+   6000050     6.00000000e+02   # g1mass
+   6000051     1.00000000e+02   # g2mass !not used... Calculated in couplings.f
+   6000052     1.00000000e+02   # g3mass !not used... Calculated in couplings.f
+   6000053     1.00000000e+02   # g4mass !not used... Calculated in couplings.f
+   6000054     1.00000000e+02   # g5mass !not used... Calculated in couplings.f
+   6000055     1.00000000e+02   # g6mass !not used... Calculated in couplings.f
+   6000056     1.00000000e+02   # g7mass !not used... Calculated in couplings.f
+   6000057     1.00000000e+02   # g8mass !not used... Calculated in couplings.f
+   6000058     1.00000000e+02   # g9mass !not used... Calculated in couplings.f
+   6000059     1.00000000e+02   # g0mass !not used... Calculated in couplings.f
+#            PDG       Width
+DECAY   6000045     1.00000000e+00   # S0WIDTH !not used... Calculated in couplings.f
+DECAY   6000046     1.00000000e+00   # O0WIDTH !not used... Calculated in couplings.f
+DECAY   6000047     1.00000000e+00   # S1WIDTH
+DECAY   6000048     1.00000000e+00   # O1WIDTH
+DECAY   6000049     1.00000000e+00   # S2WIDTH !result is independent of this value
+DECAY   6000050     1.00000000e+00   # g1width !not used... Calculated in couplings.f
+DECAY   6000051     1.00000000e+00   # g2width !not used... Calculated in couplings.f
+DECAY   6000052     1.00000000e+00   # g3width !not used... Calculated in couplings.f
+DECAY   6000053     1.00000000e+00   # g4width !not used... Calculated in couplings.f
+DECAY   6000054     1.00000000e+00   # g5width !not used... Calculated in couplings.f
+DECAY   6000055     1.00000000e+00   # g6width !not used... Calculated in couplings.f
+DECAY   6000056     1.00000000e+00   # g7width !not used... Calculated in couplings.f
+DECAY   6000057     1.00000000e+00   # g8width !not used... Calculated in couplings.f
+DECAY   6000058     1.00000000e+00   # g9width !not used... Calculated in couplings.f
+DECAY   6000059     1.00000000e+00   # g0width !not used... Calculated in couplings.f
+DECAY         6     1.38104231E+00   # top width
+DECAY        23     2.44639985E+00   # Z   width
+DECAY        24     2.03535570E+00   # W   width
+DECAY        25     4.27608700E-03   # H   width#
+#        BR           NDA        ID1       ID2
+     7.18385415E-02    2           4        -4   # BR( H -> c  cbar  )
+     8.03404251E-01    2           5        -5   # BR( H -> b  bbar  )
+     0.00000000E+00    2           6        -6   # BR( H -> t  tbar  )
+     4.83591503E-02    2          15       -15   # BR( H -> tau- tau+)
+     2.69892403E-05    2          23        23   # BR( H -> Z   Z^(*))
+     3.67605190E-03    2          24       -24   # BR( H -> W   W^(*))
+     2.43358656E-02    2          21        21   # BR( H -> g   g    )
+BLOCK MGUSER
+         1     1.00000000e+00   # s0scalarf  ,spin-0 singlet scalar mult.fac.
+         2     0.00000000e+00   # s0axialf   ,spin-0 singlet pseudo-scalar mult.fac.
+         3     1.00000000e+00   # o0scalarf  ,spin-0 octet scalar mult.fac.
+         4     0.00000000e+00   # o0axialf   ,spin-0 octet pseudo-scalar mult.fac.
+         5     1.00000000e+00   # s1quleft   ,spin-1 singlet left  up quark mult.fac.
+         6     1.00000000e+00   # s1quright  ,spin-1 singlet right up quark mult.fac.
+         7     1.00000000e+00   # s1qdleft   ,spin-1 singlet left  down quark mult.fac.
+         8     1.00000000e+00   # s1qdright  ,spin-1 singlet right down quark mult.fac.
+         9     1.00000000e+00   # s1qcleft   ,spin-1 singlet left  charm quark mult.fac.
+        10     1.00000000e+00   # s1qcright  ,spin-1 singlet right charm quark mult.fac.
+        11     1.00000000e+00   # s1qsleft   ,spin-1 singlet left  strange quark mult.fac.
+        12     1.00000000e+00   # s1qsright  ,spin-1 singlet right strange quark mult.fac.
+        13     1.00000000e+00   # s1qtleft   ,spin-1 singlet left  top quark mult.fac.
+        14     1.00000000e+00   # s1qtright  ,spin-1 singlet right top quark mult.fac.
+        15     1.00000000e+00   # s1qbleft   ,spin-1 singlet left  bottom quark mult.fac.
+        16     1.00000000e+00   # s1qbright  ,spin-1 singlet right bottom quark mult.fac.
+        17     1.00000000e+00   # s1eleft    ,spin-1 singlet left  electron mult.fac.
+        18     1.00000000e+00   # s1eright   ,spin-1 singlet right electron mult.fac.
+        19     1.00000000e+00   # s1muleft   ,spin-1 singlet left  muon mult.fac.
+        20     1.00000000e+00   # s1muright  ,spin-1 singlet right muon mult.fac.
+        21     1.00000000e+00   # s1taleft   ,spin-1 singlet left  tau mult.fac.
+        22     1.00000000e+00   # s1taright  ,spin-1 singlet right tau mult.fac.
+        23     1.00000000e+00   # s1ne       ,spin-1 singlet electron-neutrino mult.fac.
+        24     1.00000000e+00   # s1nm       ,spin-1 singlet muon-neutrino mult.fac.
+        25     1.00000000e+00   # s1nt       ,spin-1 singlet tau-neutrino mult.fac.
+        26     1.00000000e+00   # o1quleft   ,spin-1 octet left  up quark mult.fac.
+        27     1.00000000e+00   # o1quright  ,spin-1 octet right up quark mult.fac.
+        28     1.00000000e+00   # o1qdleft   ,spin-1 octet left  down quark mult.fac.
+        29     1.00000000e+00   # o1qdright  ,spin-1 octet right down quark mult.fac.
+        30     1.00000000e+00   # o1qcleft   ,spin-1 octet left  charm quark mult.fac.
+        31     1.00000000e+00   # o1qcright  ,spin-1 octet right charm quark mult.fac.
+        32     1.00000000e+00   # o1qsleft   ,spin-1 octet left  strange quark mult.fac.
+        33     1.00000000e+00   # o1qsright  ,spin-1 octet right strange quark mult.fac.
+        34     1.00000000e+00   # o1qtleft   ,spin-1 octet left  top quark mult.fac.
+        35     1.00000000e+00   # o1qtright  ,spin-1 octet right top quark mult.fac.
+        36     1.00000000e+00   # o1qbleft   ,spin-1 octet left  bottom quark mult.fac.
+        37     1.00000000e+00   # o1qbright  ,spin-1 octet right bottom quark mult.fac.
+        38     0.07000000e+00   # kapMpl     ,spin-2 RS kappa/M_planck (reduced plack mass)
+        39     3.00000000e+00   # addn       ,spin-2 ADD # extra dim. (only addn=3 for now)
+        40     9.00000000e+02   # mstring    ,spin-2 ADD cut-off scale

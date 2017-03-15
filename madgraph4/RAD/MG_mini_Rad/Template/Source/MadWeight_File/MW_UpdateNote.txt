@@ -1,0 +1,97 @@
+##############################################################
+##                       MadWeight                          ##
+##############################################################
+##   author:                                                ##
+##       olivier.mattelaer@uclouvain.be                     ##
+##       pierre.artoisenet@uclouvain.be                     ##
+##############################################################
+## Update are in time inverse order                         ##
+##############################################################
+
+12/02/09:v2.1.12(OM)      - Add the possibility to add new param_card in existing run
+			  - Add the possibility to remove some param_card in future run
+			  - Add the possibility to add new events in a existing run
+			  - pass the directory gestion in Object oriented
+			  - Add file to have a simple way to define default in MadWeight_card.dat
+			  - New gestion on cvs
+			  mod_file: create_param.py MW_param.py create_run.py cluster.py 
+				    cluster_lib.py collect_result.py Cards.py plot.py
+			  add_file: MW_param_default.dat
+			  
+10/02/09:v2.1.11(OM) - Change the driver.f to have more stable computation of the weight
+
+22/01/09:v2.1.10(OM) - authorize generation with $ and \ character
+                     - Fix: wrong permutation between jet and bjet
+		     - add script in bin (with PassToMadWeight) to recover banner information
+		       mod_file: proc_info.py get_feynman_content.f create_run.py MW_pos
+		       add_file: splitbanner.py
+		       
+
+15/01/09:v2.1.9(OM)   work done in/for SLAC (Thanks to Johan) 
+			- add a file containing all the likelihood value
+			- add an hidden option to select only the best permutation for the weight
+			- authorize generation following mass differences
+			- authorize generation following any function (not compatible with diff mode) 
+			- Fix: supress corectly the old submission file even in any case (Thanks to Camille)
+			- new gestion of SGE cluster (second mode available) 
+			- Fix: create the cross section file even if all event failed
+			- Fix: refine works even for zero weight events
+			- change some log in order to use progress bar 
+			- Fix: correct routine making the link between the card and the param (failing if more than three param)
+			- Fix: correct plot routine: suceed even if some points are missing
+			- Bash cluster (bsub) available 
+			mod_file: plot.py collect_event.py create_param.py cluster_lib.py cluster.py create_run.py
+			add_file: progressbar.py (created by Nilton Volpato) bsub_schedullar
+
+26/12/08:v2.1.8 (OM)    - add security to avoid bug similar to those discover in MG. 
+                          the previous grid for ME is now suppress before and after any run
+
+04/12/08:v2.1.7 (OM)    - debug b-tagging selection of events+ add new option for that
+			  mod_file: verif_event.py
+		        - check in MW/driver if step 2 is needed or not
+			  mod_file: driver.f
+		        - introduce the new_tag refine
+		        - debug tau selection of events from the file input.lhco
+			- suppress the writing of events with madevent
+
+17/11/08:v2.1.6: (OM+PA) - introduce the new_tag refine
+                         - use the run_card value for the seed
+                          mod_file: vegas.f madweight.py MW_param.py collect_result.py 
+
+14/11/08:v2.1.5: (OM)    - add routine to check that the bypass is made properly
+		         - suppress the minor helas error in newprocess run (introduced in 2.1.2)
+		          mod_file: MW_pos (both) expand_madweight.py mod_P_make
+			            newprocess_MW create_run.py cluster.py cluster_lib.py
+				    change_tf.py mod_file.py mod_cuts
+
+11/11/08:v2.1.5: (OM+PA) - correct a bug in the definition of rapidity in MadWeight 
+                           (thanks to Arnaud Pin)
+                 (OM)    - add an option to bipass the cut-check.
+                         - minor fixes
+			 mod_file: expand_madweight.py mod_file.py mod_cuts cuts.f
+                                   MadWeight_Card.dat create_run.py Cards.py 
+				   (MWP/)makefile madweight.py
+		         new_file: suppress_cuts
+07/11/08:v2.1.4: (OM) - correct a series of minor bug (mainly in collect routine)
+		      mod_file: clean.py collect.py cluster.py
+
+28/10/08:v2.1.3: (OM) - new way to handle different cluster type
+		      - inclusion of SGE cluster
+		      - new way to control running/finished job
+		      - new driver
+		        mod_file: madweight.py,create_run.py,collect_run.py
+				  MW_param.py,collect_result.py
+		        new_file: cluster.py,cluster_lib.py,Tools/sge_schedular
+
+
+03/10/08:v2.1.2: (OM)- modification of transfer function module
+		 authorize full local redefinition of TF
+		 directory Transfer_Fct in MG_ME not use anymore
+		   mod_file: all Transfer_fct directory, MWP_template/MW_pos
+                   suppress_file: change_tf.py (move to Transfer_fct)
+                 (0M)- compatibility if symbolic file replace by real file
+		   mod_file: madweight.py
+		 
+
+22/09/08:v2.1.1:(OM) modification for transfer function v1.3
+                   mod_file: mod_cuts,mod_setcuts

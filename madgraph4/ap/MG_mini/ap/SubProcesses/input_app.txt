@@ -1,0 +1,5 @@
+        1000           4      !Number of events and iterations
+  0.0    !Accuracy
+  0       !Grid Adjustment 0=none
+  1       !Suppress Amplitude 1=yes
+           1        !Helicity Sum/event 0=exact

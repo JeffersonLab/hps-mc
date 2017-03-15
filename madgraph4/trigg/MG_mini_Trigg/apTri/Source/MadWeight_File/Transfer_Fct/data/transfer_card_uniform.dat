@@ -1,0 +1,68 @@
+# Parameters for Matrix Element Run
+# including transfert functions
+# Card Version 1.4.0
+# Transfert functions type : uniform
+#If you want to change transfer functions, you must
+#run the script ./bin/change_tf.py from the main directory
+# ****************************************************
+#
+# Transfer functions for d u s c jets
+#
+Block TF_JET_E
+     1       0.0    # width/5 of non nul function
+Block TF_JET_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_JET_THETA
+     1       0.0    # width/5 of non nul function
+#
+# Transfer functions for b jets
+#
+Block TF_BJET_E
+     1       0.0    # width/5 of non nul function
+Block TF_BJET_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_BJET_THETA
+     1       0.0    # width/5 of non nul function
+#
+# Transfer functions for gluon jets
+#
+Block TF_GJET_E
+     1       0.0    # width/5 of non nul function
+Block TF_GJET_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_GJET_THETA
+     1       0.0    # width/5 of non nul function
+#
+# Transfer functions for electron
+#
+Block TF_ELEC_E
+     1       0.0    # width/5 of non nul function
+Block TF_ELEC_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_ELEC_THETA
+     1       0.0    # width/5 of non nul function
+#
+# Transfer functions for muon
+#
+Block TF_MUON_E
+     1       0.0    # width/5 of non nul function
+Block TF_MUON_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_MUON_THETA
+     1       0.0    # width/5 of non nul function
+#
+# Transfer functions for muon
+#
+Block TF_TAU_E
+     1       0.0    # width/5 of non nul function
+Block TF_TAU_PHI
+     1       0.0    # width/5 of non nul function
+Block TF_TAU_THETA
+     1       0.0    # width/5 of non nul function
+#
+# transfer functions for x1,x2
+#
+Block TF_INIT_X1
+     1       0.0    # width/5 of non nul function
+Block TF_INIT_X2
+     1       0.0    # width/5 of non nul function

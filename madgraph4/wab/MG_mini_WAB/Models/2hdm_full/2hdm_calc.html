@@ -1,0 +1,468 @@
+<html> 
+<head> 
+<title>TwoHiggsCalc : The 2HDM parameters calculator</title>
+</head>
+
+
+<style type="text/css" media="screen">
+#ParamForm table {
+ background-color: #F9FBFD;
+ 
+ border: 1px solid #D7E5F2;
+ border-collapse: collapse;
+}
+#ParamForm table.normal {
+ background-color: #FFFFFF;
+ border-collapse: separate;
+}
+html,body {
+ background-color: #FFFFFF;
+ color: #103B61;
+}
+#ParamForm td {
+ border: 1px solid #D7E5F2;
+ padding-left: 4px;
+} 
+</style>
+
+<center>
+<h1>Web interface for TwoHiggsCalc</h1>
+</center>
+
+<H2> Upload a file</H2>
+<FORM ACTION="/cgi-bin/TwoHiggsCalc/upload.cgi" METHOD="post"  ENCTYPE="multipart/form-data">
+File to upload : <INPUT TYPE="file" NAME="file"> <input TYPE="submit" VALUE="Upload & Compute"> 
+<INPUT  TYPE=RADIO NAME=basis VALUE=higgs CHECKED>Higgs Basis</INPUT>
+<INPUT  TYPE=RADIO NAME=basis VALUE=generic >Generic Basis</INPUT>
+<INPUT TYPE=HIDDEN NAME=callfrom  VALUE="webgeneration">
+<INPUT TYPE=HIDDEN NAME=procname  VALUE="proc_name_here"> 
+</form>
+
+<H2>Write your own file </H2>
+<form name="ParamForm" id="ParamForm" method="post" action="/cgi-bin/TwoHiggsCalc/TwoHiggsCalc.cgi">
+
+<fieldset><legend>SM Parameters</legend>
+
+<fieldset><legend>Basic SM input ("SMINPUTS" block, SM MSbar)</legend>
+<table>
+   <tr>  
+     <td colspan="2"><label for="invalpha">Inverse value of alpha EM at the Z mass</label></td>
+     <td colspan="2"> <input type="text" name="invalpha" id="invalpha" value=127.934 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="G_Fermi">Fermi constant (*10^{-5})</label></td>
+     <td colspan="2"> <input type="text" name="G_Fermi" id="G_Fermi" value=1.16637 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="alpha_s">Stong coupling constant at the Z mass</label></td>
+     <td colspan="2"> <input type="text" name="alpha_s" id="alpha_s" value=0.1172 maxlength=10 size=10/></td>
+   </tr>
+   <tr>
+     <td colspan="2"><label for="ZMASS">Z pole mass (GeV)</label></td>
+     <td colspan="2"> <input type="text" name="ZMASS" id="ZMASS" value=91.1876 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+<fieldset><legend>"Pole" Masses</legend>
+<table>
+   <tr>  
+     <td colspan="2"><label for="MUMASS">Muon mass </label></td>
+     <td colspan="2"> <input type="text" name="MUMASS" id="MUMASS" value=0.106 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="TAMASS">Tau mass </label></td>
+     <td colspan="2"> <input type="text" name="TAMASS" id="TAMASS" value=1.777 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="SMASS">Strange mass </label></td>
+     <td colspan="2"> <input type="text" name="SMASS" id="SMASS" value=0.105 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="BMASS">Bottom mass </label></td>
+     <td colspan="2"> <input type="text" name="BMASS" id="BMASS" value=4.2 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="CMASS">Charm mass </label></td>
+     <td colspan="2"> <input type="text" name="CMASS" id="CMASS" value=1.25 maxlength=10 size=10/></td>
+   </tr>
+   <tr> 
+     <td colspan="2"><label for="TMASS">Top mass </label></td>
+     <td colspan="2"> <input type="text" name="TMASS" id="TMASS" value=174.3 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+<fieldset><legend>"Yukawa" Masses (used for Higgs couplings)</legend>
+<table>
+   <tr>  
+     <td colspan="2"><label for="MSMUMASS">Muon mass </label></td>
+     <td colspan="2"> <input type="text" name="MSMUMASS" id="MSMUMASS" value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="MSTAMASS">Tau mass </label></td>
+     <td colspan="2"> <input type="text" name="MSTAMASS" id="MSTAMASS" value=1.777 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="MSSMASS">Strange mass </label></td>
+     <td colspan="2"> <input type="text" name="MSSMASS" id="MSSMASS" value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="MSBMASS">Bottom mass </label></td>
+     <td colspan="2"> <input type="text" name="MSBMASS" id="MSBMASS" value=3.0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="MSCMASS">Charm mass </label></td>
+     <td colspan="2"> <input type="text" name="MSCMASS" id="MSCMASS" value=0.6 maxlength=10 size=10/></td>
+   </tr>
+   <tr> 
+     <td colspan="2"><label for="MSTMASS">Top mass </label></td>
+     <td colspan="2"> <input type="text" name="MSTMASS" id="MSTMASS" value=175 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+<fieldset><legend>Cabibbo angle</legend>
+<table>
+   <tr>  
+     <td ><label for="Vus">Vus = Vcd</label></td>
+     <td ><input type="text" name="Vus" id="Vus"  value=0.224 maxlength=10 size=10/></td>
+   </tr>
+</table>
+</fieldset>
+
+</fieldset>
+
+<br>
+
+<fieldset><legend>2HDM parameters</legend> 
+
+<fieldset><legend>Basis Choice</legend>
+<center>
+<INPUT  TYPE=RADIO NAME=basis VALUE=higgs CHECKED>Higgs Basis</INPUT>
+<INPUT  TYPE=RADIO NAME=basis VALUE=generic >Generic Basis</INPUT></legend>
+</center>
+</fieldset>
+
+<fieldset><legend>Potential parameters</legend>
+
+<table class="normal">
+<tr>
+<td colspan="2" valign="top">
+<fieldset><legend>Higgs Basis (<A HREF="/TwoHiggsCalc/info.html">more info</A>)</legend>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+V &=& \mu_1 H_1^\dag H_1 +\mu_2 H_2^\dag H_2-\left(\mu_3 H_1^\dag H_2+\mathrm{h.c.}\right)\\
+  & & \color{red}\lambda_1\normalcolor\left(H_1^\dag H_1\right)^2+\color{red}\lambda_2\normalcolor\left(H_2^\dag H_2\right)^2\\
+  & & +\color{red}\lambda_3\normalcolor\left(H_1^\dag H_1\right)\left(H_2^\dag H_2\right)+\color{red}\lambda_4\normalcolor\left(H_1^\dag H_2\right)\left(H_2^\dag H_1\right)\\
+  & & +\left[\left(\color{red}\lambda_5\normalcolor H_1^\dag H_2 +\color{red}\lambda_6\normalcolor H_1^\dag H_1+\color{red}\lambda_7\normalcolor H_2^\dag H_2\right)\left(H_1^\dag H_2\right)+\mathrm{h.c.}\right]
+\end{eqnarray*}
+ -->
+<IMG
+ WIDTH="422" HEIGHT="143" BORDER="0"
+ SRC="/TwoHiggsCalc/img1.png"
+ ALT="\begin{eqnarray*}
+V &amp;=&amp; \mu_1 H_1^\dag H_1 +\mu_2 H_2^\dag H_2-\left(\mu_3 H_1^\...
+..._2^\dag H_2\right)\left(H_1^\dag H_2\right)+\mathrm{h.c.}\right]
+\end{eqnarray*}"></DIV>
+
+
+<table>
+   <tr>  
+     <td colspan="2"><label for="lambda1">lambda1</label></td>
+     <td colspan="2"> <input type="text" name="lambda1" id="lambda1"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda2">lambda2</label></td>
+     <td colspan="2"> <input type="text" name="lambda2" id="lambda2"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda3">lambda3</label></td>
+     <td colspan="2"> <input type="text" name="lambda3" id="lambda3"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda4">lambda4</label></td>
+     <td colspan="2"> <input type="text" name="lambda4" id="lambda4"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda5">lambda5</label></td>
+     <td colspan="2"> <input type="text" name="lambda5" id="lambda5"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda6">Norm of lambda6</label></td>
+     <td colspan="2"> <input type="text" name="lambda6" id="lambda6"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="lambda7">Norm of lambda7</label></td>
+     <td colspan="2"> <input type="text" name="lambda7" id="lambda7"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="phase_l6">Phase of lambda6</label></td>
+     <td colspan="2"> <input type="text" name="phase_l6" id="phase_l6"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="phase_l7">Phase of lambda7</label></td>
+     <td colspan="2"> <input type="text" name="phase_l7" id="phase_l7"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="mHpm">Mass of Charged Higgs (GeV) </label></td>
+     <td colspan="2"> <input type="text" name="mHpm" id="mHpm"  value=300 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+
+</fieldset>
+</td>
+
+<td colspan="2">
+<fieldset><legend>Generic Basis (<A HREF="/TwoHiggsCalc/infosb.html">more info</A>)</legend>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+V &=& \mu_1 \phi_1^\dag\phi_1 +\mu_2 \phi_2^\dag\phi_2-\left(\mu_3 \phi_1^\dag\phi_2+\mathrm{h.c.}\right)\\
+  & & +\frac{1}{2}\color{red}\lambda_1\normalcolor\left(\phi_1^\dag\phi_1\right)^2+\frac{1}{2}\color{red}\lambda_2\normalcolor\left(\phi_2^\dag\phi_2\right)^2\\
+  & & +\color{red}\lambda_3\normalcolor\left(\phi_1^\dag\phi_1\right)\left(\phi_2^\dag\phi_2\right)+\color{red}\lambda_4\normalcolor\left(\phi_1^\dag\phi_2\right)\left(\phi_2^\dag\phi_1\right)\\
+  & & +\left[\left(\frac{1}{2}\color{red}\lambda_5\normalcolor \phi_1^\dag\phi_2 +\color{red}\lambda_6\normalcolor \phi_1^\dag\phi_1+\color{red}\lambda_7\normalcolor \phi_2^\dag\phi_2\right)\left(\phi_1^\dag\phi_2\right)+\mathrm{h.c.}\right]
+\end{eqnarray*}
+ -->
+<IMG
+ WIDTH="406" HEIGHT="153" BORDER="0"
+ SRC="/TwoHiggsCalc/img1sb.png"
+ ALT="\begin{eqnarray*}
+V &amp;=&amp; \mu_1 \phi_1^\dag\phi_1 +\mu_2 \phi_2^\dag\phi_2-\left(\...
+...\phi_2\right)\left(\phi_1^\dag\phi_2\right)+\mathrm{h.c.}\right]
+\end{eqnarray*}"></DIV>
+
+<table>
+   <tr>  
+     <td colspan="2"><label for="tanb">Tan(beta)=v2/v1</label></td>
+     <td colspan="2"> <input type="text" name="tanb" id="tanb"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="xi">Phase of v2</label></td>
+     <td colspan="2"> <input type="text" name="xi" id="xi"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="mu3">Norm of mu3</label></td>
+     <td colspan="2"> <input type="text" name="mu3" id="mu3"  value=0 maxlength=10 size=10/></td>
+   </tr>	
+   <tr>  
+     <td colspan="2"><label for="sblambda1">lambda1</label></td>
+     <td colspan="2"> <input type="text" name="sblambda1" id="sblambda1"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda2">lambda2</label></td>
+     <td colspan="2"> <input type="text" name="sblambda2" id="sblambda2"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda3">lambda3</label></td>
+     <td colspan="2"> <input type="text" name="sblambda3" id="sblambda3"  value=1 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda4">lambda4</label></td>
+     <td colspan="2"> <input type="text" name="sblambda4" id="sblambda4"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda5">Norm of lambda5</label></td>
+     <td colspan="2"> <input type="text" name="sblambda5" id="sblambda5"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda6">Norm of lambda6</label></td>
+     <td colspan="2"> <input type="text" name="sblambda6" id="sblambda6"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sblambda7">Norm of lambda7</label></td>
+     <td colspan="2"> <input type="text" name="sblambda7" id="sblambda7"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sbphase_l5">Phase of lambda5</label></td>
+     <td colspan="2"> <input type="text" name="sbphase_l5" id="sbphase_l5"  value=0 maxlength=10 size=10/></td>
+   </tr>	
+   <tr>  
+     <td colspan="2"><label for="sbphase_l6">Phase of lambda6</label></td>
+     <td colspan="2"> <input type="text" name="sbphase_l6" id="sbphase_l6"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td colspan="2"><label for="sbphase_l7">Phase of lambda7</label></td>
+     <td colspan="2"> <input type="text" name="sbphase_l7" id="sbphase_l7"  value=0 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+<br>
+</fieldset>
+</td>
+</tr>
+</table>
+</fieldset>
+
+<fieldset><legend>Yukawa parameters</legend>
+
+<table class="normal">
+<td colspan="2">
+<fieldset><legend>Higgs basis (<A HREF="/TwoHiggsCalc/info.html">more info</A>)</legend>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+\mathcal{L}_Y&=&\frac{\overline{Q_L}\sqrt{2}}{v}\left[(M_d H_1 + \color{red}Y_d\normalcolor H_2)d_R+(M_u \tilde{H}_1 + \color{red}Y_u\normalcolor \tilde{H}_2)u_R\right]\\
+& &+\frac{\overline{E_L}\sqrt{2}}{v}\left[(M_e H_1 + \color{red}Y_e\normalcolor H_2)e_R\left]
+\end{eqnarray*}
+ -->
+<IMG
+ WIDTH="411" HEIGHT="85" BORDER="0"
+ SRC="/TwoHiggsCalc/img2.png"
+ ALT="\begin{eqnarray*}
+\mathcal{L}_Y&amp;=&amp;\frac{\overline{Q_L}\sqrt{2}}{v}\left[(M_d H_1...
+...{2}}{v}\left[(M_e H_1 + \color{red}Y_e\normalcolor H_2)e_R\left]
+\end{eqnarray*}"></DIV>
+</fieldset>
+</td>
+
+<td colspan="2">
+<fieldset><legend>Generic Basis (<A HREF="/TwoHiggsCalc/infosb.html">more info</A>)</legend>
+<DIV ALIGN="CENTER" CLASS="mathdisplay">
+<!-- MATH
+ \begin{eqnarray*}
+\mathcal{L}_Y&=&\frac{\overline{Q_L}\sqrt{2}}{v}\left[(\Delta_d \phi_1 + \color{red}\Gamma_d\normalcolor \phi_2)d_R+(\Delta_u \tilde{\phi}_1 + \color{red}\Gamma_u\normalcolor \tilde{\phi}_2)u_R\right]\\
+& &+\frac{\overline{E_L}\sqrt{2}}{v}\left[(\Delta_e \phi_1 + \color{red}\Gamma_e\normalcolor \phi_2)e_R\left]
+\end{eqnarray*}
+ -->
+<IMG
+ WIDTH="393" HEIGHT="85" BORDER="0"
+ SRC="/TwoHiggsCalc/img2sb.png"
+ ALT="\begin{eqnarray*}
+\mathcal{L}_Y&amp;=&amp;\frac{\overline{Q_L}\sqrt{2}}{v}\left[(\Delta_...
+...elta_e \phi_1 + \color{red}\Gamma_e\normalcolor \phi_2)e_R\left]
+\end{eqnarray*}"></DIV>
+
+</fieldset>
+</td>
+
+</tr>
+</table>
+
+
+<fieldset><legend>Yukawa couplings to the second Higgs doublet of the down type quarks (norm and phase)</legend>
+<table>
+   <tr>  
+     <td ><label for="Y1D">Y1D/G1D </label></td>
+     <td ><input type="text" name="Y1D" id="Y1D"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1D" id="phase_Y1D"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1S">Y1S/G1S </label></td>
+     <td ><input type="text" name="Y1S" id="Y1S"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1S" id="phase_Y1S"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1B">Y1B/G1B </label></td>
+     <td ><input type="text" name="Y1B" id="Y1B"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1B" id="phase_Y1B"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y2D">Y2D/G2D </label></td>
+     <td ><input type="text" name="Y2D" id="Y2D"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2D" id="phase_Y2D"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2S">Y2S/G2S </label></td>
+     <td ><input type="text" name="Y2S" id="Y2S"  value=0 maxlength=10 size=10/></td>
+     <td><input type="text" name="phase_Y2S" id="phase_Y2S"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2B">Y2B/G2B </label></td>
+     <td ><input type="text" name="Y2B" id="Y2B"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2B" id="phase_Y2B"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y3D">Y3D/G3D </label></td>
+     <td ><input type="text" name="Y3D" id="Y3D"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3D" id="phase_Y3D"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3S">Y3S/G3S </label></td>
+     <td ><input type="text" name="Y3S" id="Y3S"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3S" id="phase_Y3S"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3B">Y3B/G3B </label></td>
+     <td ><input type="text" name="Y3B" id="Y3B"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3B" id="phase_Y3B"  value=0 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+<fieldset><legend>Yukawa couplings to the second Higgs doublet of the up type quarks (norm and phase)</legend>
+<table>
+   <tr>  
+     <td ><label for="Y1U">Y1U/G1U </label></td>
+     <td ><input type="text" name="Y1U" id="Y1U"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1U" id="phase_Y1U"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1C">Y1C/G1C </label></td>
+     <td ><input type="text" name="Y1C" id="Y1C"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1C" id="phase_Y1C"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1T">Y1T/G1T </label></td>
+     <td ><input type="text" name="Y1T" id="Y1T"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1T" id="phase_Y1T"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y2U">Y2U/G2U </label></td>
+     <td ><input type="text" name="Y2U" id="Y2U"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2U" id="phase_Y2U"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2C">Y2C/G2C </label></td>
+     <td ><input type="text" name="Y2C" id="Y2C"  value=0 maxlength=10 size=10/></td>
+     <td><input type="text" name="phase_Y2C" id="phase_Y2C"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2T">Y2T/G2T </label></td>
+     <td ><input type="text" name="Y2T" id="Y2T"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2T" id="phase_Y2T"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y3U">Y3U/G3U </label></td>
+     <td ><input type="text" name="Y3U" id="Y3U"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3U" id="phase_Y3U"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3C">Y3C/G3C </label></td>
+     <td ><input type="text" name="Y3C" id="Y3C"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3C" id="phase_Y3C"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3T">Y3T/G3T </label></td>
+     <td ><input type="text" name="Y3T" id="Y3T"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3T" id="phase_Y3T"  value=0 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+<fieldset><legend>Yukawa couplings to the second Higgs doublet of the charged leptons (norm and phase)</legend>
+<table>
+   <tr>  
+     <td ><label for="Y1E">Y1E/G1E </label></td>
+     <td ><input type="text" name="Y1E" id="Y1E"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1E" id="phase_Y1E"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1MU">Y1MU/G1MU </label></td>
+     <td ><input type="text" name="Y1MU" id="Y1MU"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1MU" id="phase_Y1MU"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y1TA">Y1TA/G1TA </label></td>
+     <td ><input type="text" name="Y1TA" id="Y1TA"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y1TA" id="phase_Y1TA"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y2E">Y2E/G2E </label></td>
+     <td ><input type="text" name="Y2E" id="Y2E"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2E" id="phase_Y2E"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2MU">Y2MU/G2MU </label></td>
+     <td ><input type="text" name="Y2MU" id="Y2MU"  value=0 maxlength=10 size=10/></td>
+     <td><input type="text" name="phase_Y2MU" id="phase_Y2MU"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y2TA">Y2TA/G2TA </label></td>
+     <td ><input type="text" name="Y2TA" id="Y2TA"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y2TA" id="phase_Y2TA"  value=0 maxlength=10 size=10/></td>
+   </tr>
+   <tr>  
+     <td ><label for="Y3E">Y3E/G3E </label></td>
+     <td ><input type="text" name="Y3E" id="Y3E"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3E" id="phase_Y3E"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3MU">Y3MU/G3MU </label></td>
+     <td ><input type="text" name="Y3MU" id="Y3MU"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3MU" id="phase_Y3MU"  value=0 maxlength=10 size=10/></td>
+     <td ><label for="Y3TA">Y3TA/G3TA </label></td>
+     <td ><input type="text" name="Y3TA" id="Y3TA"  value=0 maxlength=10 size=10/></td>
+     <td ><input type="text" name="phase_Y3TA" id="phase_Y3TA"  value=0 maxlength=10 size=10/></td>
+   </tr>
+ </table>
+</fieldset>
+
+</fieldset>
+</fieldset>
+
+<INPUT TYPE=HIDDEN NAME=callfrom  VALUE="webgeneration">
+<INPUT TYPE=HIDDEN NAME=procname  VALUE="proc_name_here"> 
+<INPUT TYPE="submit" VALUE="Compute!">
+<INPUT TYPE="reset" value="Reset Form">
+
+</form>
+
+</body>
+</html>

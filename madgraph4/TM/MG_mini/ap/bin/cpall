@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in P*_* ; do
+cp -p $1 $i/$1
+done

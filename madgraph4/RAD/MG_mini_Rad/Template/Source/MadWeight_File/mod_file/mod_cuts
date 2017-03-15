@@ -1,0 +1,52 @@
+##########################################################################
+##									##
+##									##
+##				MadWeight				##
+##				*********				##
+##									##
+##	Autor:	 Olivier Mattelaer 					##
+##		 Pierre Artoisenet					##
+##									##
+##	date:	November 08						##
+##									##
+##########################################################################
+##########################################################################
+##									##
+##  rule to modify ./bin/put_banner file from ME template		##
+##									##
+##									##
+## TAG:									##
+##	TO_SPECISA							##
+##      PASSCUTS                                                        ##
+##      S-REGEX_\brap(+rap2+re.I                                        ##
+##									##
+##########################################################################
+##
+## Transfrom all rap in rap2 in the file
+##
+$S-REGEXP_\brap\(+rap2(+re.I$
+##
+##
+##########################################################################
+$B$ TO_SPECISA $B$
+##************************************************************************
+      LOGICAL  IS_A_J(NEXTERNAL),IS_A_L(NEXTERNAL)
+      LOGICAL  IS_A_B(NEXTERNAL),IS_A_A(NEXTERNAL)
+      LOGICAL  IS_A_E(NEXTERNAL),IS_A_M(NEXTERNAL),IS_A_T(NEXTERNAL)
+      LOGICAL  IS_A_G(NEXTERNAL)
+      LOGICAL  IS_A_NU(NEXTERNAL),IS_HEAVY(NEXTERNAL),IS_A_ONIUM(NEXTERNAL)
+      COMMON/TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_T,IS_A_B,IS_A_E,IS_A_M,IS_A_G,
+     + IS_A_NU,IS_HEAVY,IS_A_ONIUM
+
+      double precision rap2
+##************************************************************************
+$E$ TO_SPECISA $E$
+##************************************************************************
+##
+##
+##########################################################################
+$B$ PASSCUTS $B$
+      LOGICAL FUNCTION PASSCUTS(P)
+$E$ PASSCUTS $E$
+##########################################################################
+

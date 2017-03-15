@@ -1,0 +1,123 @@
+******************************************
+*                                        *
+*  Linking file between value and name   *
+*    of mg variables used in LHA part    *
+*        of input-cards.dat              *
+*       S. de Visscher March 2006        *
+*                                        *
+******************************************
+SMINPUTS            1 alpha
+SMINPUTS            2 gfermi
+SMINPUTS            3 alphas
+SMINPUTS            4 zmass
+MGYUKAWA            1 msdmass
+MGYUKAWA            3 mssmass
+MGYUKAWA            5 msbmass
+MGYUKAWA            2 msumass
+MGYUKAWA            4 mscmass
+MGYUKAWA            6 mstmass
+MGYUKAWA            11 msemass
+MGYUKAWA            13 msmumass
+MGYUKAWA            15 mstamass
+MGCKM               1 1 Vud
+MGCKM               1 2 Vus
+MGCKM               1 3 Vub
+MGCKM               2 1 Vcd
+MGCKM               2 2 Vcs
+MGCKM               2 3 Vcb
+MGCKM               3 1 Vtd
+MGCKM               3 2 Vts
+MGCKM               3 3 Vtb
+MINPAR              1 1 lambda1
+MINPAR              2 1 lambda2
+MINPAR              3 1 lambda3
+MINPAR              4 1 lambda4
+MINPAR              5 1 lambda5
+MINPAR              6 1 Rlambda6
+MINPAR              6 2 Ilambda6
+MINPAR              7 1 Rlambda7
+MINPAR              7 2 Ilambda7
+YUKAWA2             1 1 1 Y1DR 
+YUKAWA2             1 1 2 Y1DI 
+YUKAWA2             1 2 1 Y2DR 
+YUKAWA2             1 2 2 Y2DI 
+YUKAWA2             1 3 1 Y3DR 
+YUKAWA2             1 3 2 Y3DI 
+YUKAWA2             2 1 1 Y1SR 
+YUKAWA2             2 1 2 Y1SI 
+YUKAWA2             2 2 1 Y2SR 
+YUKAWA2             2 2 2 Y2SI 
+YUKAWA2             2 3 1 Y3SR 
+YUKAWA2             2 3 2 Y3SI 
+YUKAWA2             3 1 1 Y1BR 
+YUKAWA2             3 1 2 Y1BI 
+YUKAWA2             3 2 1 Y2BR 
+YUKAWA2             3 2 2 Y2BI 
+YUKAWA2             3 3 1 Y3BR 
+YUKAWA2             3 3 2 Y3BI 
+YUKAWA2             4 1 1 Y1UR 
+YUKAWA2             4 1 2 Y1UI 
+YUKAWA2             4 2 1 Y2UR 
+YUKAWA2             4 2 2 Y2UI 
+YUKAWA2             4 3 1 Y3UR 
+YUKAWA2             4 3 2 Y3UI 
+YUKAWA2             5 1 1 Y1CR 
+YUKAWA2             5 1 2 Y1CI 
+YUKAWA2             5 2 1 Y2CR 
+YUKAWA2             5 2 2 Y2CI 
+YUKAWA2             5 3 1 Y3CR 
+YUKAWA2             5 3 2 Y3CI 
+YUKAWA2             6 1 1 Y1TR 
+YUKAWA2             6 1 2 Y1TI 
+YUKAWA2             6 2 1 Y2TR 
+YUKAWA2             6 2 2 Y2TI 
+YUKAWA2             6 3 1 Y3TR 
+YUKAWA2             6 3 2 Y3TI 
+YUKAWA2             7 1 1 Y1ER 
+YUKAWA2             7 1 2 Y1EI 
+YUKAWA2             7 2 1 Y2ER 
+YUKAWA2             7 2 2 Y2EI 
+YUKAWA2             7 3 1 Y3ER 
+YUKAWA2             7 3 2 Y3EI 
+YUKAWA2             8 1 1 Y1MUR 
+YUKAWA2             8 1 2 Y1MUI 
+YUKAWA2             8 2 1 Y2MUR 
+YUKAWA2             8 2 2 Y2MUI 
+YUKAWA2             8 3 1 Y3MUR 
+YUKAWA2             8 3 2 Y3MUI 
+YUKAWA2             9 1 1 Y1TAR 
+YUKAWA2             9 1 2 Y1TAI 
+YUKAWA2             9 2 1 Y2TAR 
+YUKAWA2             9 2 2 Y2TAI 
+YUKAWA2             9 3 1 Y3TAR 
+YUKAWA2             9 3 2 Y3TAI 
+MASS                1 dmass
+MASS                3 smass
+MASS                5 bmass
+MASS                2 umass
+MASS                4 cmass
+MASS                6 tmass
+MASS                11 emass
+MASS                13 mumass
+MASS                15 tamass
+MASS                24 wmass
+MASS                25 MH1
+MASS                35 MH2
+MASS                36 MH3
+MASS                37 MHC
+Tmix                1 1 TH1
+Tmix                1 2 TH2
+Tmix                1 3 TH3
+Tmix                2 1 TN1
+Tmix                2 2 TN2
+Tmix                2 3 TN3
+Tmix                3 1 TA1
+Tmix                3 2 TA2
+Tmix                3 3 TA3
+DECAY               25 WH1
+DECAY               35 WH2
+DECAY               36 WH3
+DECAY               37 WHC
+DECAY               6 TWIDTH
+DECAY               23 zwidth
+DECAY               24 wwidth

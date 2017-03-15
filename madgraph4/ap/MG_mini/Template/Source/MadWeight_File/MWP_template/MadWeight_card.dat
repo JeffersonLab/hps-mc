@@ -1,0 +1,85 @@
+##########################################################################
+##					 				##
+##                             MadWeigth                                ##
+##			     =============                              ##
+##									##
+##		              Run control              			##
+##			      -----------	                        ##
+##									##
+##									##
+##    Author: Mattelaer Olivier (UCL-CP3)				##
+##            Artoisenet Pierre (UCL-CP3)				##
+##									##
+##    Version:     1.1.4						##
+##    Last change: 24/06/08						##
+##									##
+##########################################################################
+##                                                                      ##
+##  This Card defines all specific parameters of Madweight               ## 
+##                                                                      ##
+##########################################################################
+#*************************************************************************
+##                      select run options                               ##  
+#*************************************************************************
+Block MW_Run 
+#   TAG      VALUE                    UTILITY
+     1         1            # cluster on/off  (0:single machine, 1: condor)
+     11   '(CMSFARM==true)' # condor requirements
+     2         10           # number of experimental events to consider
+     3         F            # controls the efficiency block by block
+     4         T            # normalizes weight  (1/sigma prefactor)
+     5       10000          # number of points in MadGraph integration (optional)
+     6       10000          # number of points in MadWeight integration (optional)
+     9         F            # use the cut defined in run_card.dat 
+#*************************************************************************
+##                  define the different param_card's                   ##  
+#*************************************************************************
+Block MW_parameter         
+#   TAG      VALUE                     UTILITY
+     1         1           #    type of input 
+                           #    0 : inputs are read from the cards: param_card_1.dat, param_card_2.dat,...
+	                   #    1 : redefines some values from param_card.dat according to the form below
+                           #    2 : same but the value for different parameters are modified simultaneously
+#                             
+#                             # first parameter #
+     11       mass          # Block of the parameter to change  
+     12       6             # id of the parameter to change 
+     13       180           # here you can enter the different values:
+     13       190           # 	add a new line with tag 13 to introduce a new value	
+#
+#                            #  second parameter #
+     21       MGCKM          # Block of the parameter to change  
+     22       1              # id of the paramter to change 
+     22       2              # id2 of the paramter to change
+     23       1.5E-02       # here you can enter the different values:
+     23       1.8E-02       #	add a new line with tag 23 to introduce a new value
+#
+#  use same syntax for parameters 3,4,...
+#*************************************************************************
+##                                Permutations                          ##  
+#*************************************************************************
+Block MW_perm
+#   TAG      VALUE                    UTILITY
+     1         T            # make permutation
+     2         T            # consider permutation between b-jets and light jets
+#*************************************************************************
+##   Option for the parametrisation of the PS  (advanced user only)     ##  
+#*************************************************************************
+Block MW_Gen
+#   TAG      VALUE                    UTILITY
+     1         1            # choose which propagator to allign in ECS:
+                                # 0: favours the  BW at the very end of the decay chain
+			        # 1: favours the thinest BW
+     2         1            # Same condition but for blobs
+     3         4            # maximal multiplicity for ECS sector 
+                            # Preference in blob generation (If more than one "True", we will
+                            #  test different topologies  and select the best solution)
+     4         T            #      maximizes  the number of aligned BW
+     5	       T	    #      choose all momenta as  variables of integration
+     6         T            #      mixed choice between the two above options
+     10        T            # Authorizes ECS A  (0 neut)
+     11        T            # Authorizes ECS B  (1 neut)
+     12        T            # Authorizes ECS C  (1neut+1 visible(m=0))
+     13        T            # Authorizes ECS D  (2 neut ttbar-like) 
+     14        T            # Authorizes ECS E  (2 neut HWW-like)
+     15        T            # Authorizes ECS F  (2 neut [WW in T-channel]-like)

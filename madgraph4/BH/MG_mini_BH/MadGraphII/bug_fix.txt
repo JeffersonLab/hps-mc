@@ -1,0 +1,99 @@
+Date		Bug			Fix
+
+11/16/00	Not rejecting wrong	vert4.f subroutine check4v 
+		order in coupling	implicit none
+					character*(10)  coup_name(max_coup)
+					integer		ncoups
+					common/to_couplings/ncoups,coup_name
+					
+12/12/00	ww->hh extra stuff	nvert3   AddSSS1  needed to inverse
+							particle for HVS
+					line 487 ipart2(3) = 1
+					line 488 ipart2(4) = inverse(ipart(3))
+
+1/15/01		g77 compiler troubles	remove ichar from parameter statements
+					change isubfile in params.inc from 
+					312 to 28
+
+1/31/01		Color Flow Comments	Added color flow comments to output
+					see  write_color_comment() in colors.f
+
+2/07/01		Majorona Fix		Particles.f made CC call for antipart
+					have the -1 needed. Still 2.4
+
+Version 2.42
+
+2/12/01		User specified		Modified readprocess and fields.f
+		intermediate particles
+
+		ps output for g77	drawfeyn.f '0 Fphoton' -> '  0 Fphoton
+
+2/13/01		More PS improvemets	Allows for xscale/yscale
+					avoids crossing lines
+		Increased known colors  Added T[i,j,a,b]+T[i,j,b,a]
+		Removed Majorona loop	if no majorona particles
+
+
+Version 2.45
+2/20/01		Color Factors for MSSM
+
+Version 2.46
+
+2/22/01		Require s_channel particles
+		Avoid crossed lines
+
+		Need to handle 3 external particles!!!!!
+
+4/23/01		Fixed color for CC process when color is T[i,j] not T[a,i,j]
+
+Version 2.49
+
+
+6/11/01		Drawfeyn.f gives div/0 for zero length line. 
+
+9/3/01          writeamp.f used used nexternal+1 instead of nexternal
+
+Versopm 2.xx
+
+11/15/01	Outputs configs.inc 
+                Fixed nvert4_new.f to avoid double comma in some routines
+
+Version 2.70
+03/10/02	Outputs in Les Houche Format
+
+Version 2.99    readproc.f and driver.f added cross_opt
+11/29/02        Disables crossing optimization when requiring s-channel particles
+
+5/21/03		tops.f, fixed initialization problem for 1->2 or 2->1
+		processes which put code in infinite loop
+
+5/27/03		tops.f fixed infinite loop in next_top() when had
+		only 3 external particles. Also initilized tid() in 
+		fields.f
+
+Version 3.00    Changed sumgluons to .false. to prevent fake color connections
+02/19/04        Added version information to output files
+
+03/10/04        Added delta_AB color configuration for ggh interaction
+
+Version 3.05
+1/29/04		Fixed problem with majorana VSS vertex. Now works for MSSM
+		Added ability to read multiple compound particles P,J,L etc
+
+Version 3.90    Fixed problem with SSS vertex, typeO for ipart(2)=1 case.
+8/26/05
+Version 3.91    Fixed problem with VVSS vertex, typeO for setting masses ipart(2).
+
+3/19/2006	Allow for process prefix character defined in readproc.f
+		also modify sort.f so different prefix not cross optimized
+
+3/20/2006	Changed order of color for 3 and 3bar in T_ij and delta_ij
+		Not causing any problems, though it was problem for VVS
+
+3/21/2006	Fix color factor switching for VVS and VVVS routines when
+		all are color octets. Requires swapping f^abc -> f^acb for
+		the JVS routine. Other routines were OK
+
+4/17/06         The file fermi4.f had the possibility of making a sign error for crossed
+                fermion lines. It took a special set of circumstances involving majorana
+                fermions to make this happen, so it got through most of our tests. 

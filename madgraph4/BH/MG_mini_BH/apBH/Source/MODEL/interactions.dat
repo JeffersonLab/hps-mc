@@ -1,0 +1,120 @@
+#     interactions_sm_v1.0.dat
+#
+#       File which contains allowed interactions. Must be named
+#       interactions.dat and reside in the current directory for MadGraph
+#       to see it.
+#
+#       3-particle vertices are entered as follows:
+#
+#       particle1 particle2  particle3 coupling_name model (QCD,QFD,QED,BRS)
+#
+#       Note: The ordering of particles is very important.
+#       For FFV interactions, must use particles, not anti_particles.
+#
+
+#
+# QCD interactions
+#
+
+d d g GG QCD
+u u g GG QCD
+s s g GG QCD
+c c g GG QCD
+b b g GG QCD
+t t g GG QCD
+
+g g g G  QCD
+
+g g g g G G QCD QCD
+
+#
+# QED interactions
+#
+
+d d a GAD QED
+u u a GAU QED
+s s a GAD QED
+c c a GAU QED
+b b a GAD QED
+t t a GAU QED
+
+e-  e-  a GAL QED
+mu- mu- a GAL QED
+ta- ta- a GAL QED
+
+#
+# QFD Interactions
+#
+
+# FFV (qqZ)
+d d z GZD QWD
+u u z GZU QWD
+s s z GZD QWD
+c c z GZU QWD
+b b z GZD QWD
+t t z GZU QWD
+
+# FFV (llZ)
+e-  e-  z GZL QWD
+mu- mu- z GZL QWD
+ta- ta- z GZL QWD
+ve  ve  z GZN QWD
+vm  vm  z GZN QWD
+vt  vt  z GZN QWD
+
+# FFV (qq'W) - diagonal CKM
+d u w- GWF QWD
+s c w- GWF QWD
+b t w- GWF QWD
+u d w+ GWF QWD
+c s w+ GWF QWD
+t b w+ GWF QWD
+
+# FFV (ll'W)
+ve  e-  w+ GWF QWD
+vm  mu- w+ GWF QWD
+vt  ta- w+ GWF QWD
+e-  ve  w- GWF QWD
+mu- vm  w- GWF QWD
+ta- vt  w- GWF QWD
+
+# FFS (Yukawa)
+ta- ta- h GHTAU QWD
+b   b   h GHBOT QWD
+t   t   h GHTOP QWD
+
+
+#
+# Boson 3-,4-pt
+#
+
+#   VVV
+w- w+ a  GWWA  QWD
+w- w+ z  GWWZ  QWD
+
+#   VVS
+w- w+ h  GWWH  QWD
+z  z  h  GZZH  QWD
+
+
+#   SSS
+h  h  h  GHHH  QWD
+
+#   VVVV
+w- a  w+ a  GWWA  GWWA  QWD QWD
+w- z  w+ a  GWWZ  GWWA  QWD QWD
+w- z  w+ z  GWWZ  GWWZ  QWD QWD
+w- w+ w- w+ GWWZ  GWWA  QWD QWD
+
+#   VVSS
+w- w+ h  h  GWWHH GWWHH QWD QWD
+z  z  h  h  GZZHH GZZHH QWD QWD
+
+
+#   USRVertex
+f-  f-  a   GAF  QFD
+N-  N-  a   GAN  QND
+
+f-  f-  x   GEAP QDS
+e-  e-  x   GEAP QDS
+ta- ta- x   GEAP QDS

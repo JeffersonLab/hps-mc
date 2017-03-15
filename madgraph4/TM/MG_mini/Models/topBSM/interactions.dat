@@ -1,0 +1,229 @@
+#     interactions_sm_v1.0.dat
+#
+#       File which contains allowed interactions. Must be named
+#       interactions.dat and reside in the current directory for MadGraph
+#       to see it.
+#
+#       3-particle vertices are entered as follows:
+#
+#       particle1 particle2  particle3 coupling_name model (QCD,QFD,QED,BRS)
+#
+#       Note: The ordering of particles is very important.
+#       For FFV interactions, must use particles, not anti_particles.
+#
+
+#
+# QCD interactions
+#
+
+d d g GG QCD
+u u g GG QCD
+s s g GG QCD
+c c g GG QCD
+b b g GG QCD
+t t g GG QCD
+
+g g g G  QCD
+
+g g g g G G QCD QCD
+
+#
+# QED interactions
+#
+
+d d a GAD QED
+u u a GAU QED
+s s a GAD QED
+c c a GAU QED
+b b a GAD QED
+t t a GAU QED
+
+e-  e-  a GAL QED
+mu- mu- a GAL QED
+ta- ta- a GAL QED
+
+#
+# QFD Interactions
+#
+
+# FFV (qqZ)
+d d z GZD QED
+u u z GZU QED
+s s z GZD QED
+c c z GZU QED
+b b z GZD QED
+t t z GZU QED
+
+# FFV (llZ)
+e-  e-  z GZL QED
+mu- mu- z GZL QED
+ta- ta- z GZL QED
+ve  ve  z GZN QED
+vm  vm  z GZN QED
+vt  vt  z GZN QED
+
+# FFV (qq'W) - diagonal CKM
+d u w- GWF QED
+s c w- GWF QED
+b t w- GWF QED
+u d w+ GWF QED
+c s w+ GWF QED
+t b w+ GWF QED
+
+# FFV (ll'W)
+ve  e-  w+ GWF QED
+vm  mu- w+ GWF QED
+vt  ta- w+ GWF QED
+e-  ve  w- GWF QED
+mu- vm  w- GWF QED
+ta- vt  w- GWF QED
+
+# FFS (Yukawa)
+ta- ta- h GHTAU QED
+b   b   h GHBOT QED
+t   t   h GHTOP QED
+
+
+#
+# Boson 3-,4-pt
+#
+
+#   VVV
+w- w+ a  GWWA  QED
+w- w+ z  GWWZ  QED
+
+#   VVS
+w- w+ h  GWWH  QED
+z  z  h  GZZH  QED
+
+
+#   SSS
+h  h  h  GHHH  QED
+
+#   VVVV
+w- a  w+ a  GWWA  GWWA  QED QED
+w- z  w+ a  GWWZ  GWWA  QED QED
+w- z  w+ z  GWWZ  GWWZ  QED QED
+w- w+ w- w+ GWWZ  GWWA  QED QED
+
+#   VVSS
+w- w+ h  h  GWWHH GWWHH QED QED
+z  z  h  h  GZZHH GZZHH QED QED
+
+
+#   USRVertex
+#   SPIN-0 (singlet)
+t   t   s0 Gs0t QS0
+g   g   s0 Gs0g QS0 h
+
+#   SPIN-0 (octet)
+t   t   o0 Go0t QS0
+#g   g   o0 Go0g QS0 h
+g   g   o0 Go0g QS0 ^dabc^ h
+
+#   SPIN-1 (singlet)
+d d s1 Gs1D QS1
+u u s1 Gs1U QS1
+s s s1 Gs1S QS1
+c c s1 Gs1C QS1
+b b s1 Gs1B QS1
+t t s1 Gs1T QS1
+
+e-  e-  s1 Gs1E QS1
+mu- mu- s1 Gs1Mu QS1
+ta- ta- s1 Gs1Ta QS1
+ve  ve  s1 Gs1Ne QS1
+vm  vm  s1 Gs1Nm QS1
+vt  vt  s1 Gs1Nt QS1
+
+#   SPIN-1 (octet)
+d d o1 Go1D QS1
+u u o1 Go1U QS1
+s s o1 Go1S QS1
+c c o1 Go1C QS1
+b b o1 Go1B QS1
+t t o1 Go1T QS1
+
+#   SPIN-2 (ADD model)
+u   u   s2 Gs2q  Qs2
+d   d   s2 Gs2q  Qs2
+s   s   s2 Gs2q  Qs2
+c   c   s2 Gs2q  Qs2
+b   b   s2 Gs2b  Qs2
+t   t   s2 Gs2t  Qs2
+
+g   g   s2 Gs2g  Qs2
+
+
+#   SPIN-2 (RS model)
+u   u   g1 Ggrq  Qs2
+u   u   g2 Ggrq  Qs2
+u   u   g3 Ggrq  Qs2
+u   u   g4 Ggrq  Qs2
+u   u   g5 Ggrq  Qs2
+u   u   g6 Ggrq  Qs2
+u   u   g7 Ggrq  Qs2
+u   u   g8 Ggrq  Qs2
+u   u   g9 Ggrq  Qs2
+u   u   g0 Ggrq  Qs2
+d   d   g1 Ggrq  Qs2
+d   d   g2 Ggrq  Qs2
+d   d   g3 Ggrq  Qs2
+d   d   g4 Ggrq  Qs2
+d   d   g5 Ggrq  Qs2
+d   d   g6 Ggrq  Qs2
+d   d   g7 Ggrq  Qs2
+d   d   g8 Ggrq  Qs2
+d   d   g9 Ggrq  Qs2
+d   d   g0 Ggrq  Qs2
+s   s   g1 Ggrq  Qs2
+s   s   g2 Ggrq  Qs2
+s   s   g3 Ggrq  Qs2
+s   s   g4 Ggrq  Qs2
+s   s   g5 Ggrq  Qs2
+s   s   g6 Ggrq  Qs2
+s   s   g7 Ggrq  Qs2
+s   s   g8 Ggrq  Qs2
+s   s   g9 Ggrq  Qs2
+s   s   g0 Ggrq  Qs2
+c   c   g1 Ggrq  Qs2
+c   c   g2 Ggrq  Qs2
+c   c   g3 Ggrq  Qs2
+c   c   g4 Ggrq  Qs2
+c   c   g5 Ggrq  Qs2
+c   c   g6 Ggrq  Qs2
+c   c   g7 Ggrq  Qs2
+c   c   g8 Ggrq  Qs2
+c   c   g9 Ggrq  Qs2
+c   c   g0 Ggrq  Qs2
+b   b   g1 Ggrb  Qs2
+b   b   g2 Ggrb  Qs2
+b   b   g3 Ggrb  Qs2
+b   b   g4 Ggrb  Qs2
+b   b   g5 Ggrb  Qs2
+b   b   g6 Ggrb  Qs2
+b   b   g7 Ggrb  Qs2
+b   b   g8 Ggrb  Qs2
+b   b   g9 Ggrb  Qs2
+b   b   g0 Ggrb  Qs2
+t   t   g1 Ggrt  Qs2
+t   t   g2 Ggrt  Qs2
+t   t   g3 Ggrt  Qs2
+t   t   g4 Ggrt  Qs2
+t   t   g5 Ggrt  Qs2
+t   t   g6 Ggrt  Qs2
+t   t   g7 Ggrt  Qs2
+t   t   g8 Ggrt  Qs2
+t   t   g9 Ggrt  Qs2
+t   t   g0 Ggrt  Qs2
+
+g g g1 Ggrgg Qs2
+g g g2 Ggrgg Qs2
+g g g3 Ggrgg Qs2
+g g g4 Ggrgg Qs2
+g g g5 Ggrgg Qs2
+g g g6 Ggrgg Qs2
+g g g7 Ggrgg Qs2
+g g g8 Ggrgg Qs2
+g g g9 Ggrgg Qs2
+g g g0 Ggrgg Qs2

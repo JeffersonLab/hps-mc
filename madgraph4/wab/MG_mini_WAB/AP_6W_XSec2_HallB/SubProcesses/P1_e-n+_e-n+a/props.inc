@@ -1,0 +1,12 @@
+      pmass( -1,   1) = abs(ELMASS  )
+      pwidth( -1,   1) = ZERO    
+      pow( -1,   1) = 1
+      pmass( -2,   1) = ZERO    
+      pwidth( -2,   1) = abs(AWIDTH  )
+      pow( -2,   1) = 2
+      pmass( -1,   2) = abs(ELMASS  )
+      pwidth( -1,   2) = ZERO    
+      pow( -1,   2) = 1
+      pmass( -2,   2) = ZERO    
+      pwidth( -2,   2) = abs(AWIDTH  )
+      pow( -2,   2) = 2

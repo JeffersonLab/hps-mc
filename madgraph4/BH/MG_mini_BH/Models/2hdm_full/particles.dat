@@ -1,0 +1,68 @@
+##############################################################
+##                                                          ##
+##                   TwoMadGraph Project                    ##
+##                                                          ##
+## FILE : particles_2hdm.dat                                ##
+## VERSION : 1.1                                            ##
+## DATE : 5 January 2005                                    ##
+## AUTHOR : M. Herquet (UCL-CP3)                            ##
+##                                                          ##
+## DESCRIPTION : This file contains the particle content of ##
+## the 2HDM extension of MadGraph.                          ##
+##                                                          ##
+##############################################################
+
+#This is a special data file which contains particles of the
+#Standard Model. The format for entering new particles is.
+#Particle codes taken from  http://pdg.lbl.gov /2000/ montecarlorpp.pdf
+#Name anti_Name  Spin    Linetype Mass Width Color Label Model
+#xxx   xxxx      SFV      WSDC     str  str  STO    str  PDG code
+
+#
+# Quarks
+#
+
+# WARNING 
+# WARNING SMASS, CMASS and MUMASS added, LMASS change to TAMASS
+# WARNING
+
+d       d~        F        S      ZERO  ZERO    T    d    1
+u       u~        F        S      ZERO  ZERO    T    u    2
+s       s~        F        S      SMASS  ZERO    T    s    3
+c       c~        F        S      CMASS  ZERO    T    c    4
+b       b~        F        S      BMASS ZERO    T    b    5
+t       t~        F        S      TMASS TWIDTH  T    t    6
+
+#
+# Leptons
+#
+
+e-       e+       F        S      ZERO  ZERO    S    e    11
+mu-      mu+      F        S      MUMASS  ZERO    S    mu   13
+ta-      ta+      F        S      TAMASS ZERO    S    ta   15
+ve       ve~      F        S      ZERO  ZERO    S    ve   12
+vm       vm~      F        S      ZERO  ZERO    S    vm   14
+vt       vt~      F        S      ZERO  ZERO    S    vt   16
+
+#
+# Bosons
+#
+
+g        g        V        C      ZERO  ZERO    O   _    21
+a        a        V        W      ZERO  AWIDTH  S   A    22
+z        z        V        W      ZMASS ZWIDTH  S   Z    23
+w-       w+       V        W      WMASS WWIDTH  S   W    -24
+
+
+
+# MODIFIED PART (new MC codes from PDG04)
+
+#
+# Scalar bosons
+#
+
+h1       h1       S        D      MH1    WH1    S    h1    25
+h2       h2       S        D      MH2    WH2    S    h2    35
+h3       h3       S        D      MH3    WH3    S    h3    36
+h-       h+       S        D      MHC    WHC    S    hc    37
+

@@ -1,0 +1,238 @@
+#!/bin/bash
+#
+#  First get to main level directory for this process
+#
+
+echo "Using Stand Dipole Subtraction version of MadGraphII"
+
+if [[  ! -d ./bin  ]]; then
+    cd ../
+    if [[ ! -d ./bin ]]; then
+	echo "Error: store must be executed from the main, or bin directory"
+	exit
+    fi
+fi
+
+#  Now let shell know where to find important executables
+
+main=`pwd`
+dirbin=$main/bin
+mgdir=$main/../MadGraphII
+mad2=$mgdir/mg2_sa
+dip2=$mgdir/mg2_dip
+helas=$main/../HELAS
+mgmedir=$main/..
+
+
+num_args=${#argv}
+n=0
+tag=''
+setup_model=$dirbin/setup_model-pl
+
+
+echo $$ > generating
+ 
+# Check that mg2 exists, otherwise compile
+if [[ ! -d $mgdir ]]; then
+  echo "Error: No MadGraphII directory found"
+  exit
+fi
+
+if [[ $tag == '' && ! -e $mad2 ]]; then
+  echo "No mg2 executable found. Running make."
+  cd $mgdir
+  make mg2_sa
+  cd $main
+fi
+
+if [[ $tag == '' && ! -e $dip2 ]]; then
+  echo "No dip2 executable found. Running make."
+  cd $mgdir
+  make mg2_dip
+  cd $main
+fi
+
+if [[ ! -e $mad2 ]]; then
+  echo "Error: No file $mad2"
+  exit
+fi
+if [[ ! -e $dip2 ]]; then
+  echo "Error: No file $dip2"
+  exit
+fi
+
+
+#	Clear out any old information/directories
+
+rm -f *.html >& /dev/null
+rm -f bin/plot_events >& /dev/null
+rm -f bin/scale_events >& /dev/null
+rm -f bin/sum_html >& /dev/null
+rm -f bin/select_events >& /dev/null
+if [[ ! -d lib ]]; then
+    echo "Error: lib directory not found"
+    exit
+fi
+rm -f lib/* >& /dev/null
+if [[ ! -d Source ]]; then
+    echo "Error: Source directory not found"
+    exit
+fi
+rm -f Source/*.o  >& /dev/null
+rm -f Source/MODEL/*.o >& /dev/null
+rm -f Source/PDF/*.o >& /dev/null
+rm -f Source/DECAY/*.o >& /dev/null
+
+# Clean the log file and check the proc_card is there
+
+if [[ -e proc_log.txt ]]; then rm -f proc_log.txt; fi
+
+if [[ ! -e Cards/proc_card.dat ]]; then
+    echo "proc_card.dat not present in directory Cards"
+    echo "Prepare a card (see examples on the web) and"
+    echo "copy it there."
+fi
+
+#   Copy version info
+cp -p $mgdir/MGVersion.txt SubProcesses/
+cp -p $mgmedir/MGMEVersion.txt .
+
+#   Set up the model 
+$setup_model $tag> proc_log.txt
+
+
+# Copy helas
+cp -p -r $helas/* Source/DHELAS/
+rm -rf Source/DHELAS/CVS >& /dev/null
+rm -rf Source/DHELAS/lib >& /dev/null
+cp -p Source/DHELAS/Makefile.template Source/DHELAS/Makefile >& /dev/null
+
+#   Now we need to get into the SubProcesses Directory
+
+if [[ ! -d SubProcesses ]]; then
+    echo "Error: SubProcesses directory not found"
+    exit
+fi
+cd SubProcesses
+
+
+#	Clear out any old information/directories
+
+rm -r P*_* >& /dev/null
+rm -f minput.mg  >& /dev/null
+rm -f dname.mg  >& /dev/null
+rm -f subproc.mg  >& /dev/null
+rm -f *.html >& /dev/null
+#
+#  Below are files which are different for each subprocess and copied
+#  into the subdirectory
+#
+mvfiles='dname.mg matrix.f matrix.ps configs.inc props.inc xinput.mg leshouche.inc pmass.inc nexternal.inc dipole.inc ngraphs.inc ncombs.inc dipol[[:digit:]][[:digit:]][[:digit:]].f dipol[[:digit:]][[:digit:]][[:digit:]].ps dipolsum.f'
+
+linkfiles='check_dip.f coupl.inc makefile transform.f dipolesub.f'
+
+echo "Started `date`"
+echo -n "Running..."
+echo " first pass " >& status
+echo "Normal MadGraph run:" >> ../proc_log.txt
+$mad2 < ../Cards/proc_card.dat >> ../proc_log.txt
+j=1
+if [[ -e matrix.ps  ]]; then    
+        touch xinput.mg
+        source dname.mg
+        if [[ ! -e $DIRNAME ]]; then
+           mkdir $DIRNAME
+        else
+           echo "Warning reusing directory " $DIRNAME
+        fi
+
+	echo "" >> ../proc_log.txt
+	echo "" >> ../proc_log.txt
+	echo "Dipol terms:" >> ../proc_log.txt
+	$dip2 < minputdipole.mg >> ../proc_log.txt
+	rm -f minputdipole.mg
+
+        mv -f $mvfiles $DIRNAME/
+	for i in $linkfiles ; do
+	    ln -sf ../$i $DIRNAME/$i
+	done
+        touch subproc.mg
+        echo $DIRNAME >> subproc.mg
+        pushd $DIRNAME >& /dev/null
+	echo $j >& iproc.dat
+        popd     >& /dev/null
+	echo -n "."
+	if [[ -e minput.mg ]]; then
+	    total=`cat minput.mg|wc -l`
+        else
+	    total=0
+	fi
+        echo " "
+else
+    rm -f status
+    echo "No Diagrams/Process " >& status
+    touch done
+    total=0
+    echo " "
+    echo "No diagrams for this process!"
+fi
+total=`expr $total - 1`
+total=`expr $total / 4`
+total=`expr $total + 1`
+remaining=0
+completed=1
+while [[ -e minput.mg ]]; do
+    j=`expr $j + 1`
+    mynum=`cat minput.mg | wc -l`
+    remaining=`expr $mynum - 1`
+    remaining=`expr $mynum / 4`
+    completed=`expr $total - $remaining`
+    completed=`expr $completed + 1`
+    echo " $completed / $total " >& status
+    mv minput.mg xinput.mg
+    echo "" >> ../proc_log.txt
+    echo "" >> ../proc_log.txt
+    echo "Normal MadGraph run:" >> ../proc_log.txt
+    $mad2 < xinput.mg >> ../proc_log.txt
+    if [[ -e dname.mg  ]]; then
+        source dname.mg
+        if [[ ! -e $DIRNAME ]]; then
+            mkdir $DIRNAME
+        else
+            echo "Warning reusing directory " $DIRNAME
+        fi
+
+	echo "" >> ../proc_log.txt
+	echo "" >> ../proc_log.txt
+	echo "Dipol terms:" >> ../proc_log.txt
+	$dip2 < minputdipole.mg >> ../proc_log.txt
+	rm -f minputdipole.mg
+
+        mv -f $mvfiles $DIRNAME/
+	for i in $linkfiles ; do
+	    ln -sf ../$i $DIRNAME/$i
+	done
+        echo $DIRNAME >> subproc.mg
+        pushd $DIRNAME >& /dev/null
+	echo $j >& iproc.dat
+        popd >& /dev/null
+	echo -n "."
+    fi
+done
+echo "Finished `date` "
+echo "`date` " >& ../CREATED
+if [[ -e auto_dsig.f ]]; then
+    rm -f auto_dsig.f
+    rm -f fort.*
+    rm -f subproc.*
+    rm -f xinput.mg
+    rm -f mg.sym
+    rm -f status
+fi
+# compile the stuff in Source
+echo "Compiling libraries in Source"
+cd ../Source
+make ../lib/libdhelas3.a
+make ../lib/libmodel.a
+cd $main
+

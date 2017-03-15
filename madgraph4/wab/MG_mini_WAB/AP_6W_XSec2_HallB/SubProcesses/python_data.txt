@@ -1,0 +1,6 @@
+*       1         1
+   -1    1    5  ELMASS    ZERO      T        11
+   -2   -1    3  ZERO      AWIDTH    T        22
+*       2         2
+   -1    5    3  ELMASS    ZERO      S        11
+   -2    1   -1  ZERO      AWIDTH    T        22

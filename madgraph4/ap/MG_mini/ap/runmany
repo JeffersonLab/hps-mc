@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -lt 2 ] ; then
+    echo "usage: runMany <numBH> <numRad> <label>"
+    exit
+fi
+
+imaxBH=$1
+label=$2
+
+i=0
+
+for x in 01 02 03 04 05 06 07 08 09 10 ; do
+    if [ $i -lt $imaxBH ]; then
+        ./bin/generate_events 0 ${label}_$x
+    fi
+    let i="$i+1"
+done

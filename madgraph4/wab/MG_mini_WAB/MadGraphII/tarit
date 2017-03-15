@@ -1,0 +1,8 @@
+#!/bin/csh 
+
+tar cfv  MadGraph_$1.tar makefile driver.f particles.f sort.f readproc.f tops.f fields.f create.f colors.f tsums.f fsums.f ftsums.f writeamp.f gencolor.f eigen_lapack.f lapack.f fermi4.f drawfeyn.f post.f permute.f vert3.f vert4.f qed.f qcd.f qfd.f readmodel.f nvert3.f  nvert4.f writedsig.f crossing.f write_configs.f params.inc leshouche.f bug_fix.txt details.txt interactions.dat particles.dat gen_proc_id.f utility.f tarit
+
+/usr/bin/gzip MadGraph_$1.tar
+
+
+ 

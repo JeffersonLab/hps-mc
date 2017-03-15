@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+
+for((i=1; i<3; i++))
+do
+  bsub -q xxl -R rhel50 ./subscript 0 W_5pt5eV_Ap200MeV_farm_$i
+done
+
+echo "Jobs submitted"

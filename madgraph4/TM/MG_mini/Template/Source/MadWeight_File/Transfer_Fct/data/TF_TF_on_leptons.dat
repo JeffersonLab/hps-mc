@@ -1,0 +1,318 @@
+##########################################################################
+##									##
+##                          Matrix Element                              ##
+##			    ==============                              ##
+##									##
+##		         Generate the transfer functions	        ##
+##			 -------------------------------                ##
+##									##
+##									##
+##    Authors: Mattelaer Olivier (UCL-CP3)				##
+##             Artoisenet Pierre (UCL-CP3)				##
+##									##
+##    Version:     1.3.1						##
+##    Last change: 31/07/08						##
+##									##
+##########################################################################
+##########################################################################
+##									##
+##									##
+##    Instructions:							##
+##									##
+##	- This program  creates transfer functions in THETA/PHI/E       ##
+##	- Those functions must be defined in f77 standard		##
+##	- Definitions must be placed between the TAG LINE		##
+##		BEGIN ...						##
+##		END   ...						##
+##		DON T EDIT THOSE LINES!! THEY ARE TAGS			##
+##	- You can use all standard f77 functions. (All variables are	##
+##		in double precision format). 				##
+##	- You can not use any f77 reserved statement except the         ##
+##		IF ... THEN ...ELSEIF ... ELSE ... ENDIF statements     ##
+##	- The experimental event is  defined by the variable pexp(i) 	##
+##		i=0->3 (0->E,1->Px,2->Py,3->Pz)				##
+##	- The partonic event is defined by the variable p(i)		##
+##		i=0->3 (0->E,1->Px,2->Py,3->Pz)				##
+##		sigma can not depend on those variables			##
+##	- You can use 10 local variables				##
+##		(double precision):  prov1,prov2,...,prov10		##
+##	- You can call specific functions on p or pexp:			##
+##		-pt(p)   : transverse momenta 				##
+##		-eta(p)  : pseudo-rapidity				##
+##		-rap(p)  : rapidity					##
+##		-theta(p): polar angle					##
+##		-phi(p)	 : azimuthal angle				##
+##	- The whole LHCO information is available.                      ##
+##              -run_number,trigger					##
+##		-eta_init(N),phi_init(N),pt_init(N)			##
+##              -j_mass(N),ntrk(N),btag(N),had_em(N)			##
+##		-dummy1(N),dummy2(N)					##
+##	    N is the LHCO tag(first column)				##
+##		- current tag is n_lhco  				##
+##		- tag for missing ET is met_lhco			##
+##				  					##
+##	- You can incorporate parameters that will be passed through    ##
+##	        the transfert_card.dat. Those ones must have the        ##
+##		following syntax: #1,#2,#3,.. You can restart 		##
+##		the assignement for each different transfer function	##
+##	- In addition to each transfer function(tf_), you MUST give	##
+##		the typical width associated to your function (sigma_)	##
+##		This is needed for the phase space generator      	##
+##	- Do not change names of variables				##
+##	- For delta function set sigma to 0                             ##
+##        and the transfer function to  1                               ##
+##									##
+##########################################################################
+##########################################################################
+
+##**********************************************************************##
+##                           ORDERING                                   ##
+##**********************************************************************##
+##             * mention which observable is well reconstructed
+##             * order the typical broadness in Energy 
+##               for each type of particle  (decreasing order)
+##              : j=jet,b=bjet,g=gluon_jet,e=elec,m=muon,t=tau,a=photon
+
+BEGIN ORDER_THIN
+        m,e
+END ORDER_THIN
+
+BEGIN ORDER_LARGE
+        a,b,t,j,g
+END ORDER_LARGE
+
+##**********************************************************************##
+##                           TF JET					##
+##**********************************************************************##
+## 		transfer fct for u d s c
+
+#******************************** THETA 
+BEGIN TF_THETA_J 	 	
+	tf_theta_j=1d0	
+END TF_THETA_J
+
+BEGIN SIGMA_THETA_J 
+	sigma_theta_j=0d0			
+END SIGMA_THETA_J
+#********************************  PHI
+BEGIN TF_PHI_J 			
+	tf_phi_j=1d0	
+END TF_PHI_J
+			
+BEGIN SIGMA_PHI_J 
+	sigma_phi_j=0d0
+END SIGMA_PHI_J
+#******************************** E
+
+BEGIN TF_E_J 
+
+	tf_e_j=1d0
+	
+END TF_E_J			
+
+BEGIN SIGMA_E_J 
+	sigma_e_j=0d0
+
+END SIGMA_E_J
+
+
+##**********************************************************************##
+##                           TF B-JET					##
+##**********************************************************************##
+## 		       transfert fct for b jet
+
+#******************************** THETA 
+BEGIN TF_THETA_B
+        tf_theta_b=1d0
+END TF_THETA_B
+
+BEGIN SIGMA_THETA_B
+        sigma_theta_b=0d0
+END SIGMA_THETA_B
+#********************************  PHI
+BEGIN TF_PHI_B
+        tf_phi_b=1d0
+END TF_PHI_B
+
+BEGIN SIGMA_PHI_B
+        sigma_phi_b=0d0
+END SIGMA_PHI_B
+#******************************** E
+
+BEGIN TF_E_B
+	tf_e_b=1d0	
+END TF_E_B
+
+BEGIN SIGMA_E_B
+        sigma_e_b=0d0
+END SIGMA_E_B
+
+
+##**********************************************************************##
+##                           TF for gluon        			##
+##**********************************************************************##
+## 		       transfer fct for gluon
+
+#******************************** THETA (rapidittheta)
+BEGIN TF_THETA_G
+        tf_theta_g=1d0
+END TF_THETA_G
+
+BEGIN SIGMA_THETA_G
+        sigma_theta_g=0d0
+END SIGMA_THETA_G
+#********************************  PHI
+BEGIN TF_PHI_G
+        tf_phi_g=1d0
+END TF_PHI_G
+
+BEGIN SIGMA_PHI_G
+        sigma_phi_g=0d0
+END SIGMA_PHI_G
+#******************************** E
+
+BEGIN TF_E_G
+	tf_e_g=1d0
+END TF_E_G
+
+BEGIN SIGMA_E_G
+        sigma_e_g=0d0	
+END SIGMA_E_G
+
+
+##**********************************************************************##
+##                           TF Electron				##
+##**********************************************************************##
+## 		      transfer fct for electron
+
+#******************************** THETA 
+BEGIN TF_THETA_E
+        tf_theta_e=1d0
+END TF_THETA_E
+
+BEGIN SIGMA_THETA_E
+        sigma_theta_e=0d0
+END SIGMA_THETA_E
+#********************************  PHI
+BEGIN TF_PHI_E
+        tf_phi_e=1d0
+END TF_PHI_E
+
+BEGIN SIGMA_PHI_E
+        sigma_phi_e=0d0
+END SIGMA_PHI_E
+#******************************** E
+
+BEGIN TF_E_E
+        prov1=(#1+#2*dsqrt(pexp(0))+#3*pexp(0))    !biais
+        prov2=(#4+#5*dsqrt(pexp(0))+#6*pexp(0))    !sigma
+c
+c       secondly we define the transfer function
+c
+        tf_e_e=1d0/dsqrt(2d0*pi)/prov2*exp(-(p(0)-pexp(0)-prov1)**2/2d0/prov2**2)         !first gaussian
+END TF_E_E
+
+BEGIN SIGMA_E_E
+        sigma_e_e=5d0*(#4+#5*dsqrt(pexp(0))+#6*pexp(0))
+END SIGMA_E_E
+
+##**********************************************************************##
+##                           TF Muon					##
+##**********************************************************************##
+## 		       transfer fct for muon
+
+#******************************** THETA 
+BEGIN TF_THETA_M
+        tf_theta_m=1d0
+END TF_THETA_M
+
+BEGIN SIGMA_THETA_M
+        sigma_theta_m=0d0
+END SIGMA_THETA_M
+#********************************  PHI
+BEGIN TF_PHI_M
+        tf_phi_m=1d0
+END TF_PHI_M
+
+BEGIN SIGMA_PHI_M
+        sigma_phi_m=0d0
+END SIGMA_PHI_M
+#******************************** E
+
+BEGIN TF_E_M
+        prov1=(#1+#2*dsqrt(pexp(0))+#3*pexp(0))    !biais
+        prov2=(#4+#5*dsqrt(pexp(0))+#6*pexp(0))    !sigma
+c
+c       secondly we define the transfer function
+c
+        tf_e_m=1d0/dsqrt(2d0*pi)/prov2*exp(-(p(0)-pexp(0)-prov1)**2/2d0/prov2**2)         !first gaussian
+END TF_E_M
+
+BEGIN SIGMA_E_M
+        sigma_e_m=(#4+#5*dsqrt(pexp(0))+#6*pexp(0))
+END SIGMA_E_M
+
+##**********************************************************************##
+##                           TF Tau					##
+##**********************************************************************##
+## 		       transfer fct for tau
+
+#******************************** THETA 
+BEGIN TF_THETA_T
+        tf_theta_t=1d0
+END TF_THETA_T
+
+BEGIN SIGMA_THETA_T
+        sigma_theta_t=0d0
+END SIGMA_THETA_T
+#********************************  PHI
+BEGIN TF_PHI_T
+        tf_phi_t=1d0
+END TF_PHI_T
+
+BEGIN SIGMA_PHI_T
+        sigma_phi_t=0d0
+END SIGMA_PHI_T
+#******************************** E
+
+BEGIN TF_E_T
+        prov1=(#1+#2*dsqrt(pexp(0))+#3*pexp(0))    !biais
+        prov2=(#4+#5*dsqrt(pexp(0))+#6*pexp(0))    !sigma
+c
+c       secondly we define the transfer function
+c
+        tf_e_t=1d0/dsqrt(2d0*pi)/prov2*exp(-(p(0)-pexp(0)-prov1)**2/2d0/prov2**2)         !first gaussian
+END TF_E_T
+
+BEGIN SIGMA_E_E
+        sigma_e_e=(#4+#5*dsqrt(pexp(0))+#6*pexp(0))
+END SIGMA_E_E
+
+
+##**********************************************************************##
+##                           TF on initial particles			##
+##**********************************************************************##
+## 		      transfer fcts on x1,x2,pt 
+##   suppress those lines if they are not measured 
+##   
+
+#******************************** X1
+# transfer function without PDF
+BEGIN TF_X1
+        tf_x1=1d0
+END TF_X1
+
+BEGIN SIGMA_X1 				
+	sigma_x1=-1d0
+END SIGMA_X1
+
+#******************************** X2
+# transfer function without PDF
+BEGIN TF_X2
+        tf_x2=1d0
+END TF_X2
+
+BEGIN SIGMA_X2 				
+	sigma_x2=-1
+END SIGMA_X2
+
