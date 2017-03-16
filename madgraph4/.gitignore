@@ -19,3 +19,12 @@
 */ME5_debug
 */bin/internal/combine_events
 */madevent.tar.gz
+**/SubProcesses/P*/ajob*
+**SubProcesses/P*/run.ajob*
+**/bin/gen_ximprove
+**/RunWeb
+**/myprocid
+**/status
+**/survey
+**/madevent
+**/madevent.tar
