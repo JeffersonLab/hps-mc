@@ -2,6 +2,7 @@
 
 $server = $ENV{'SERVER_NAME'};
 
+no warnings "uninitialized";
 
 
 &writeHtmlProcessPage;
