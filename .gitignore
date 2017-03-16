@@ -38,5 +38,9 @@
 *.out
 *.app
 
+# Random
+*.ajob1
+index.html
+
 *~
 
