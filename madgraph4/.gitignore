@@ -20,7 +20,7 @@
 */bin/internal/combine_events
 */madevent.tar.gz
 **/SubProcesses/P*/ajob*
-**SubProcesses/P*/run.ajob*
+**/SubProcesses/P*/run.ajob*
 **/bin/gen_ximprove
 **/RunWeb
 **/myprocid
@@ -29,3 +29,9 @@
 **/madevent
 **/madevent.tar
 **/madevent.tar.gz
+**/SubProcesses/randinit
+**/SubProcesses/P*/gensym
+**/*results.dat
+**/*results.html
+**/refine
+**/refine2
