@@ -1,0 +1,56 @@
+<Request>
+	<Variable name="ebeam" value="1pt1"/>
+	<Name name="tri_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="uemura@jlab.org" request="false" job="true" />
+	<Memory space="2000" unit="MB"/>
+	<OS name="centos62"/>
+	<Variable name="mg_dir" value="/u/group/hps/production/mc/MadGraph/trigg"/>
+	<Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+	<Variable name="log_dir" value="file:/u/group/hps/production/mc/logs/lhe/tri"/>
+	<Variable name="out_dir" value="mss:/mss/hallb/hps/production/lhe/tri"/>
+	<Variable name="out_file" value="triv2"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+			<Command><![CDATA[
+				echo "Job ID: $JOB_ID"
+				tar -xzf ${mg_dir}/MG_mini_Trigg.tar.gz
+				cd MG_mini_Trigg/apTri
+				cp ${mg_dir}/run_card_${ebeam}.dat Cards/run_card.dat
+				set iseed=${num}
+				set nevents=`grep nevent Cards/run_card.dat | awk '{print $1}'`
+				set dz = `${param_dir}/dz.csh ${ebeam}`
+				set ne = `${param_dir}/ne.csh ${ebeam}`
+				set nbunches = 0
+				while ( $nbunches < 600000 )
+					echo "Running $nevents events with seed $iseed"
+					sed -i "s/.*nevents/$nevents = nevents/" Cards/run_card.dat
+					sed -i "s/.*iseed/$iseed = iseed/" Cards/run_card.dat
+					set workdir="$PBS_O_WORKDIR"
+					setenv PBS_O_WORKDIR ""
+					./bin/generate_events 0 tri
+					setenv PBS_O_WORKDIR "$workdir"
+					set nbunches=`/u/group/hps/production/mc/MadGraph/nbunches.csh $dz $ne Events/tri_unweighted_events.lhe.gz`
+					echo "Enough tridents for $nbunches bunches"
+					if ( $nevents == 500000 ) then
+						@ iseed = $iseed + 1000000
+						if ( $iseed < 0 ) then
+							rm Events/*
+							exit 1
+						endif
+					else
+						@ nevents = 2 * $nevents
+						if ( $nevents > 500000 ) then
+							@ nevents = 500000
+						endif
+					endif
+				end
+				]]></Command>
+			<Output src="MG_mini_Trigg/apTri/Events/tri_unweighted_events.lhe.gz" dest="${out_dir}/${ebeam}/${out_file}_${num}.lhe.gz" />
+			<Stderr dest="${log_dir}/${ebeam}/${out_file}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${out_file}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>

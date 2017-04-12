@@ -1,0 +1,95 @@
+<!--Run with runjob.sh-->
+<Request>
+	<Variable name="ebeam" value="1pt05" />
+	<!--	<Variable name="apmass" value="50"/>-->
+    <!--<List name="apmass">15 20 30 40 50 60 70 80 90</List>-->
+    <!--<List name="apmass">15 16 17 18 19 20 22 24 26 28 30 35 40 50 60 70 80 90</List>-->
+        <List name="apmass">15 25 50 75 100 150 200 250</List>
+	<Name name="slic_aprimes_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+    <Memory space="3000" unit="MB"/>
+    <!--<TimeLimit time="12" unit="hours"/>-->
+	<OS name="centos7"/>
+	<Variable name="egs5_dir" value="/u/group/hps/hps_soft/egs5"/>
+	<Variable name="stdhep_dir" value="/u/group/hps/hps_soft/stdhep/bin"/>
+	<Variable name="slic_dir" value="/u/group/hps/hps_soft/slic/centos7-64/REL"/>
+	<Variable name="exe_dir" value="/u/group/hps/production/mc/egs5_gfortran"/>
+    <!--<Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.6-bin.jar"/>-->
+        <Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.10-20161019.172836-82-bin.jar"/>
+	<Variable name="det_dir" value="/u/group/hps/hps_soft/detector-data/detectors"/>
+	<!--<Variable name="detector" value="HPS-EngRun2015-Nominal-v5-0-fieldmap"/>-->
+        <!--<Variable name="detector" value="HPS-EngRun2015-Nominal-v5-0-fieldmap"/>-->
+        <Variable name="detector"  value="HPS-Proposal2017-Nominal-v2-2pt3-fieldmap"/>
+    <!--<Variable name="detector" value="HPS-EngRun2015-1_5mm-v5-0-fieldmap"/>-->
+	<Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+	<Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/Layer0Studies/logs/slic/ap"/>
+	<Variable name="dq_dir" value="file:/volatile/hallb/hps/logDump/Layer0Studies/data_quality/slic/ap"/>	
+	<Variable name="out_dir" value="mss:/mss/hallb/hps/production/Layer0Studies/slic/ap"/>
+	<!--<Variable name="out_dir" value="file:/work/hallb/hps/mc_production/slic/ap"/>-->
+	<Variable name="out_file" value="apsignalv2_10k"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+	    <ForEach list="apmass">
+		<Job>
+            <Input src="mss:/mss/hallb/hps/production/lhe/ap/${ebeam}/${apmass}/apsignalv2_tc_epsilon-3_${num}.stdhep" dest="ap_tc_${apmass}_${num}.stdhep"/>
+            <Input src="mss:/mss/hallb/hps/production/lhe/ap/${ebeam}/${apmass}/apsignalv2_displaced_1mm_epsilon-3_${num}.stdhep" dest="ap_displaced_${apmass}_${num}.stdhep"/>
+            <!--<Input src="mss:/mss/hallb/hps/production/lhe/ap/${ebeam}/${apmass}/apsignalv2_displaced_100mm_epsilon-6_${num}.stdhep" dest="ap_displaced_${apmass}_${num}.stdhep"/>-->
+            <!--<Input src="file:/work/hallb/hps/mc_production/lhe/ap/${ebeam}/${apmass}/apsignalv2_${num}.stdhep" dest="ap_tc_${apmass}_${num}.stdhep" />-->
+			<Command><![CDATA[
+				echo "Auger ID: $AUGER_ID"
+
+			    ln -s /u/group/hps/hps_soft/fieldmaps fieldmap 
+
+				set dz = `${param_dir}/dz.csh ${ebeam}`
+				set ne = `${param_dir}/ne.csh ${ebeam}`
+				set ebeam = `${param_dir}/ebeam.csh ${ebeam}`
+
+				ln -s ${egs5_dir}/data
+				ln -s ${exe_dir}/src/esa.inp pgs5job.pegs5inp
+
+				@ event_num = ( ${num} - 1 ) % 1000 + 1
+
+                source /u/group/hps/hps_soft/setup_dst.csh
+			
+                ${stdhep_dir}/beam_coords ap_tc_${apmass}_${num}.stdhep rot_ap_tc_${apmass}_${num}.stdhep -s 20${num} -z -5.0
+                ${stdhep_dir}/beam_coords ap_displaced_${apmass}_${num}.stdhep rot_ap_displaced_${apmass}_${num}.stdhep -s 21${num} -z -5.0
+
+                bash -c 'source ${slic_dir}/init_ilcsoft.sh; exec csh'
+                source ${slic_dir}/geant4/build-10.01.p03/geant4make.csh ${slic_dir}/geant4/build-10.01.p03
+                setenv GDML_SCHEMA_DIR "/u/group/hps/hps_soft/slic/schemas"
+                ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+
+				set seed = 22
+				set nevents = 0
+
+
+			#	cp /u/group/hps/hps_soft/slic/HEAD/slic/HEAD/data/particle.tbl /u/group/hps/hps_soft/slic/HEAD/slic/HEAD/data/particle_copy.tbl
+			#	sed -i 's/.*622 A^1.*/        622 A^1                     0      ${apmass}.0e-03        0.000000  0.00000E+00/' particle_copy.tbl
+
+            echo "${slic_dir}/slic/v05-00-01/bin/slic -P /u/group/hps/hps_soft/slic/REL/slic/v05-00-01/data/particle.tbl -i rot_ap_${apmass}_${num}.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out_ap_${apmass}_${num}.slcio -d$seed{${num}} -r5000000"
+
+            echo "Running the target-constrained A's..."
+
+            ${slic_dir}/slic/v05-00-01/bin/slic -P ${slic_dir}/slic/v05-00-01/data/particle.tbl -i rot_ap_tc_${apmass}_${num}.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out_ap_tc_${apmass}_${num}.slcio -d$seed{${num}} -r5000000|grep -vE '^$|^>>>> .+Event <[0-9]+>$| has [0-9]+ hits$'	
+
+            echo "Now running the displaced A's..."
+
+            ${slic_dir}/slic/v05-00-01/bin/slic -P ${slic_dir}/slic/v05-00-01/data/particle.tbl -i rot_ap_displaced_${apmass}_${num}.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out_ap_displaced_${apmass}_${num}.slcio -d$seed{${num}} -r5000000|grep -vE '^$|^>>>> .+Event <[0-9]+>$| has [0-9]+ hits$'
+
+				/apps/scicomp/java/jdk1.7/bin/java -Xmx100m -jar ${hps-java} -r /org/lcsim/hps/steering/DataQuality.lcsim -i out_ap_tc_${apmass}_${num}.slcio >! data_quality.txt
+                set nevents=`grep '^Read.*events$' data_quality.txt | cut -d' ' -f2`
+                echo "$nevents events in output"
+                @ seed = $seed + 1
+
+				]]></Command>
+                        <Output src="out_ap_tc_${apmass}_${num}.slcio" dest="${out_dir}/${ebeam}/${apmass}/${out_file}_tc_epsilon-3_${detector}_${num}.slcio"/>
+                        <Output src="out_ap_displaced_${apmass}_${num}.slcio" dest="${out_dir}/${ebeam}/${apmass}/${out_file}_displaced_1mm_epsilon-3_${detector}_${num}.slcio"/>
+			<!--<Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${apmass}/${out_file}_${num}.txt"/>-->
+			<Stderr dest="${log_dir}/${ebeam}/${apmass}/${out_file}_${detector}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${apmass}/${out_file}_${detector}_${num}.out" />
+		</Job>
+	    </ForEach>
+	</ForEach>
+</Request>

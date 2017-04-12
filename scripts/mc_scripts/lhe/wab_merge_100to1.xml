@@ -1,0 +1,28 @@
+<!--Run with runjob_100to1.sh-->
+<Request>
+	<Variable name="ebeam" value="1pt1"/>
+	<Name name="merge_wab_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+	<Memory space="1000" unit="MB"/>
+	<OS name="centos65"/>
+	<Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/lhe/wab_merge"/>
+	<Variable name="out_dir" value="mss:/mss/hallb/hps/production/lhe/wab_tar"/>
+	<Variable name="out_file" value="wabv3_spinFix"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+            <!--<Input src="file:/work/hallb/hps/mc_production/lhe/wab_unweighted/${ebeam}/wabv2_unweighted_${file1}.lhe.gz" dest="wab_${file1}.lhe.gz" />-->
+            <Input src="mss:/mss/hallb/hps/production/lhe/wab_spinFix/${ebeam}/wabv3_spinFix_${file1}.lhe.gz" dest="wab_${file1}.lhe.gz" />
+			<Command><![CDATA[
+				echo "Auger ID: $AUGER_ID"
+				tar -cf wab_all.tar wab_*.lhe.gz
+				ls -l
+				]]></Command>
+			<Output src="wab_all.tar" dest="${out_dir}/${ebeam}/${out_file}_${num}.tar" />
+			<Stderr dest="${log_dir}/${ebeam}/${out_file}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${out_file}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>

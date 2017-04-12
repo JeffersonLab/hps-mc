@@ -1,0 +1,26 @@
+/lcdd/url /u/group/hps/hps_soft/detector-data/detectors/HPS-EngRun2015-Nominal-v5-0/HPS-EngRun2015-Nominal-v5-0.lcdd #(-g flag)
+/physics/setPDGFile /u/group/hps/hps_soft/slic/REL/slic/v05-00-01/data/particle.tbl #(-P flag)
+/run/initialize
+/process/eLoss/fluct 0
+/process/inactivate msc
+/process/inactivate eBrem
+
+/generator/select gps
+/gps/particle e-
+/gps/position 0 0 0 cm
+/gps/energy 1.056 GeV
+/gps/ang/type iso
+/gps/ang/mintheta 163 deg
+/gps/ang/maxtheta 179 deg
+#/gps/ang/mintheta 1 deg
+#/gps/ang/maxtheta 179 deg
+/gps/ang/minphi 0 deg
+/gps/ang/maxphi 360 deg
+/random/seed 307
+
+/random/setSavingFlag true
+
+/lcio/fileExists delete
+/lcio/PDGFlag
+
+/run/beamOn 500000 #(-r flag)
