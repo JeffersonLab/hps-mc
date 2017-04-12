@@ -22,6 +22,8 @@ void rotate_entry(stdhep_entry *entry, double theta)
 }
 
 // takes input stdhep file, applies beam rotation and width, and writes to a new stdhep file
+// This version applies the translation before the rotation, so incorrectly applies a shift in x.
+// "beam_coords" corrects this, this file is the original, which already made a lot of stuff.
 int main(int argc,char** argv)
 {
 	int nevhep;             /* The event number */
@@ -108,8 +110,8 @@ int main(int argc,char** argv)
 		if (sigma_y>0) shift_y = sigma_y*gsl_ran_gaussian(r,sigma_y);
 
 		for (int i=0;i<new_event.size();i++) {
-                        rotate_entry(&(new_event[i]),theta);
 			new_event[i].vhep[2]+=target_z;
+			rotate_entry(&(new_event[i]),theta);
 			new_event[i].vhep[0]+=shift_x;
 			new_event[i].vhep[1]+=shift_y;
 		}

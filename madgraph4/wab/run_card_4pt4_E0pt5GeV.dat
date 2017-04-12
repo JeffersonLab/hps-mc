@@ -30,13 +30,13 @@
 # Number of events and rnd seed                                      *
 #*********************************************************************
    10000      = nevents ! Number of unweighted events requested 
-      0       = iseed   ! rnd seed (0=assigned automatically=default))
+       0      = iseed   ! rnd seed (0=assigned automatically=default))
 #*********************************************************************
 # Collider type and energy                                           *
 #*********************************************************************
         0     = lpp1  ! beam 1 type (0=NO PDF)
         0     = lpp2  ! beam 2 type (0=NO PDF)
-     2.3      = ebeam1  ! beam 1 energy in GeV
+     4.4      = ebeam1  ! beam 1 energy in GeV
     171.24    = ebeam2  ! beam 2 energy in GeV
     0.000511  = mbeam1  ! beam 1 energy in GeV
     171.24    = mbeam2  ! beam 2 energy in GeV
@@ -75,7 +75,7 @@
 # Fixed-Target Cuts
 #*******************                                                 
 #
- 0.05 = ef        ! minimum E for all f's (0.4 Ebeam)
+ 0.500 = ef        ! minimum E for all f's (0.4 Ebeam)
  100.0 = efmax     ! maximum E for all f's
  0.0 = thetafmin ! min angle for both f's
  100.0 = thetafmax ! max angle for both f's
@@ -85,7 +85,7 @@
  100.0 = thetayfmax ! max angle (y direction) for both f's 
  0.0 = xthetaxfmin ! min angle (x direction) for >=1 f's
  100.0 = xthetaxfmax ! max angle (x direction) for >=1 f's 
- 0.0 = xthetayfmin ! min angle (y direction) for >=1 f's
+ 0.0   = xthetayfmin ! min angle (y direction) for >=1 f's
  100.0 = xthetayfmax ! max angle (y direction) for >=1 f's 
  0.0 = mmff      ! min invariant mass of f+f- lepton pair
  100.0 = mmffmax  ! max invariant mass of f+f- lepton pair

@@ -75,7 +75,7 @@
 # Fixed-Target Cuts
 #*******************                                                 
 #
- 0.05 = ef        ! minimum E for all f's (0.4 Ebeam)
+ 0.05 = ef        ! minimum E for all f's
  100.0 = efmax     ! maximum E for all f's
  0.0 = thetafmin ! min angle for both f's
  100.0 = thetafmax ! max angle for both f's
