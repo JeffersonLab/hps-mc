@@ -1,0 +1,74 @@
+<!--Run with runjob.sh-->
+<Request>
+	<Variable name="ebeam" value="1pt1"/>
+	<Name name="electrons_noScat_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+    <Memory space="3000" unit="MB"/>
+	<OS name="centos65"/>
+	<Variable name="egs5_dir" value="/u/group/hps/hps_soft/egs5"/>
+	<Variable name="stdhep_dir" value="/u/group/hps/hps_soft/stdhep/bin"/>
+	<Variable name="slic_dir" value="/u/group/hps/hps_soft/slic/REL"/>
+	<Variable name="exe_dir" value="/u/group/hps/production/mc/egs5"/>
+	<Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.8-fix-bin.jar"/>
+	<Variable name="det_dir" value="/u/group/hps/hps_soft/detector-data/detectors"/>
+    <Variable name="detector"  value="HPS-EngRun2015-Nominal-v5-0"/>
+	<Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+	<Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/electronGun/logs/slic/scatFree_constBField"/>
+	<Variable name="dq_dir" value="file:/volatile/hallb/hps/logDump/electronGun/data_quality/slic/scatFree_constBField"/>
+	<!--<Variable name="out_dir" value="mss:/mss/hallb/hps/production/electronGunG4/scatFree_constBField/slic"/>-->
+        <Variable name="out_dir" value="file:/work/hallb/hps/mc_production/electronGunG4/scatFree_constBField/slic"/>
+	<Variable name="out_file" value="electrons500k_163to179deg_NoMscNoBrems"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+<!--			<Input src="mss:/mss/hallb/hps/production/lhe/tritrig/${ebeam}/tritrigv1_${num}.tar" dest="tritrig.tar" />   -->
+            <!--<Input src="file:/work/hallb/hps/mc_production/lhe/tritrig/${ebeam}/tritrigv1_${num}.tar" dest="tritrig.tar" />  -->
+			<Command><![CDATA[
+				echo "Auger ID: $AUGER_ID"
+				ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+				set dz = `${param_dir}/dz.csh ${ebeam}`
+				set ne = `${param_dir}/ne.csh ${ebeam}`
+				set ebeam = `${param_dir}/ebeam.csh ${ebeam}`
+                                
+              
+               # ln -s ${egs5_dir}/data
+               # rm pgs5job.pegs5inp
+               # rm seed.dat
+			#	ln -s ${exe_dir}/src/esa.inp pgs5job.pegs5inp
+
+			#	tar -xf tritrig.tar
+			#	ls -v tritrig_*.lhe.gz | xargs zcat >! egs5job.inp
+			#	echo "18${num} $dz $ebeam 200000" >! seed.dat 
+			#	${exe_dir}/lhe_v1.exe
+			#	cat egs5job.out
+
+			#	${stdhep_dir}/add_mother brems.stdhep tritrig.stdhep
+			#	${stdhep_dir}/beam_coords tritrig.stdhep rot_tritrig.stdhep -s 19${num}
+
+				bash -c 'source ${slic_dir}/init_ilcsoft.sh; exec csh'
+                source ${slic_dir}/geant4/build-10.01.p03/geant4make.csh ${slic_dir}/geant4/build-10.01.p03
+                setenv GDML_SCHEMA_DIR "/u/group/hps/hps_soft/slic/schemas"
+                ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+
+                set seed = 20
+                set number = ${num}
+				set nevents = 0
+
+                cp /u/group/hps/production/mc/EngRun2015Scripts/slic/electronGun.mac /u/group/hps/production/mc/EngRun2015Scripts/electronGun.mac
+                sed -i "s/307/$seed$number/g" /u/group/hps/production/mc/EngRun2015Scripts/electronGun.mac
+
+				echo "${slic_dir}/slic/REL/bin/slic -m /u/group/hps/production/mc/EngRun2015Scripts/electronGun.mac -o out.slcio -d$seed$number -r500000"
+                ${slic_dir}/slic/v05-00-01/bin/slic -m /u/group/hps/production/mc/EngRun2015Scripts/electronGun.mac
+				ls -ltrh
+
+				end
+				]]></Command>
+			<Output src="slicEvents.slcio" dest="${out_dir}/${ebeam}/${out_file}_${detector}_${num}.slcio"/>
+			<!--<Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${out_file}_${num}.txt"/>-->
+			<Stderr dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>

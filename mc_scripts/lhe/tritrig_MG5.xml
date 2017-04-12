@@ -1,0 +1,60 @@
+<!--Run with runjob.sh-->
+<Request>
+	<Variable name="ebeam" value="2pt2"/>
+	<Name name="tritrig_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+    <Memory space="3000" unit="MB"/>
+    <!--<TimeLimit time="36" unit="hours"/>-->
+	<OS name="centos7"/>
+	<Variable name="mg_dir" value="/u/group/hps/production/mc/MADGRAPH5/MG5_aMC_v2_4_2/dn_tri_run_card_test_6"/>
+	<Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+    <!--<Variable name="log_dir" value="file:/work/hallb/hps/mc_production/logs/lhe/RAD"/>-->
+        <Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/MG5/logs/tritrig"/>
+        <!--<Variable name="out_dir" value="file:/work/hallb/hps/mc_production/MG5/tritrig_test"/>-->
+        <Variable name="out_dir" value="mss:/mss/hallb/hps/production/MG5/tritrig"/>
+	<Variable name="out_file" value="tritrigv2_MG5_ESum2GeV"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+			<Command><![CDATA[
+				echo "Auger ID: $AUGER_ID"
+				#tar -xzf ${mg_dir}/MG_mini_Rad.tar.gz
+				cp -r ${mg_dir} tritrig
+				cd tritrig
+				cp ${mg_dir}/Cards/run_card_${ebeam}.dat Cards/run_card.dat
+
+                                set nevents_req=`grep nevent Cards/run_card.dat | awk '{print $1}'`
+                                set offset=1
+                                set nevents_tot=0
+                                while ( $nevents_tot < 10000 )
+                                        @ filenum = ( ${num} - 1 ) * 100 + $offset
+                                        @ offset = $offset + 1
+                                        set iseed=3$filenum
+                                        set nbunches=0
+                                        set nevents=$nevents_req
+                                        echo "Running $nevents events with seed $iseed"
+                                        sed -i "s/.*nevents/$nevents = nevents/" Cards/run_card.dat
+                                        sed -i "s/.*iseed/$iseed = iseed/" Cards/run_card.dat
+                                        set workdir="$PBS_O_WORKDIR"
+                                        setenv PBS_O_WORKDIR ""
+                                        source /u/group/hps/hps_soft/setup_dst.csh
+                                        ./bin/generate_events 0 tritrig
+                                        setenv PBS_O_WORKDIR "$workdir"
+                                        set nbunches=`/u/group/hps/production/mc/MadGraph/nevents.csh Events/tritrig/unweighted_events.lhe.gz`
+                                        echo "Enough tridents for $nbunches bunches."
+                                        @ nevents_tot = $nevents_tot + $nbunches
+                                        cp Events/tritrig/unweighted_events.lhe.gz ../tritrig.lhe.gz
+                                end
+                                cd ..
+                                #tar -zcf tritrig_all.tar tritrig_*.lhe.gz
+
+				]]></Command>
+			<!--<Output src="tritrig/Events/tritrig/unweighted_events.lhe.gz" dest="${out_dir}/${ebeam}/${out_file}_${num}.lhe.gz" />-->
+                        <Output src="tritrig.lhe.gz" dest="${out_dir}/${ebeam}/${out_file}_${num}.lhe.gz" />
+			<Stderr dest="${log_dir}/${ebeam}/${out_file}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${out_file}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>

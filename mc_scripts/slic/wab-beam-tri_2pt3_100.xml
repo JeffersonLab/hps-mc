@@ -1,0 +1,139 @@
+<!--Run with runjob_100.sh-->
+<Request>
+  <Variable name="ebeam" value="1pt05"/>
+  <Name name="slic_wab-beam-tri_${ebeam}"/>
+  <Project name="hps"/>
+  <!--<Track name="debug"/>-->
+  <Track name="simulation"/>
+  <Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+  <Memory space="3000" unit="MB"/>
+  <!--<TimeLimit time="10" unit="hours"/>-->
+  <OS name="centos7"/>
+  <Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.10-20160813.023712-51-bin.jar"/>
+  <Variable name="det_dir" value="/u/group/hps/hps_soft/detector-data/detectors"/>
+  <Variable name="egs5_dir" value="/u/group/hps/hps_soft/egs5"/>
+  <Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+  <Variable name="stdhep_dir" value="/u/group/hps/hps_soft/hps-mc/stdhep/bin"/>
+  <Variable name="slic_dir" value="/u/group/hps/hps_soft/slic/centos7-64/REL"/>
+  <Variable name="dq_dir" value="file:/volatile/hallb/hps/logDump/MG5/data_quality/slic/wab-beam-tri_noHad"/>
+  <Variable name="exe_dir" value="/u/group/hps/production/mc/egs5_gfortran"/>
+  <Variable name="out_dir" value="mss:/mss/hallb/hps/production/MG5/slic/wab-beam-tri_noHad"/>
+  <!--<Variable name="out_dir" value="file:/work/hallb/hps/mc_production/test/WBT_500k"/>-->
+  <Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/MG5/logs/slic/wab-beam-tri_noHad"/>
+  <!--<Variable name="out_file" value="wabv3SF5mr-egsv5-triv2MG5-g4v1"/>-->
+  <Variable name="out_file" value="wabv3SF_E0pt5GeV-egsv5-triv2MG5_ESum1GeV-noHad"/>
+  <!--<Variable name="detector" value="HPS-EngRun2015-Nominal-v5-0-fieldmap"/>-->
+  <Variable name="detector"  value="HPS-PhysicsRun2016-Nominal-v5-0-fieldmap"/>
+  <!--<Variable name="detector" value="HPS-EngRun2015-1_5mm-v4-4-fieldmap"/>-->
+  <!--<Variable name="detector" value="HPS-EngRun2015-2mm-v1"/>-->
+  <List name="num">1</List>
+  <Variable name="num100" value="1"/>
+  <ForEach list="num">
+    <Job>
+      <Input src="mss:/mss/hallb/hps/production/stdhep/beam/${ebeam}/egsv5_${num100}.stdhep" dest="beam.stdhep" />
+      <!--<Input src="mss:/mss/hallb/hps/production/lhe/tri/${ebeam}/triv2_${num100}.tar" dest="tri.tar" />-->
+      <Input src="mss:/mss/hallb/hps/production/MG5/tritrig/${ebeam}/tritrigv2_MG5_ESum1GeV_${num100}.lhe.gz" dest="tri.lhe.gz" />
+      <Input src="mss:/mss/hallb/hps/production/lhe/wab_E0pt5GeV/${ebeam}/wabv3_E0pt5GeV_${num100}.lhe.gz" dest="wab.lhe.gz" />     
+      <!--<Input src="mss:/mss/hallb/hps/production/stdhep/hadrons/${ebeam}/g4v1_${num100}.stdhep" dest="hadrons.stdhep" />-->
+      <Command><![CDATA[
+	      ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+	      echo "Auger ID: $AUGER_ID"
+
+		  set dz = `${param_dir}/dz.csh ${ebeam}`
+		  set ne = `${param_dir}/ne.csh ${ebeam}`
+		  set ebeam = `${param_dir}/ebeam.csh ${ebeam}`
+		  #tar -xf tri.tar
+		  #set mu=`/u/group/hps/production/mc/MadGraph/mu.csh $dz $ne tri_${num}.lhe.gz`   
+                  set mu=`/u/group/hps/production/mc/MadGraph/mu.csh $dz $ne tri.lhe.gz`
+
+		  echo "mu=$mu  dz=$dz ne=$ne ebeam=$ebeam"
+
+		  echo "Unpacking tridents"
+		  zcat tri.lhe.gz > egs5job.inp 
+		  ln -s ${egs5_dir}/data
+		  ln -s ${exe_dir}/src/esa.inp pgs5job.pegs5inp
+		  echo "11${num} $dz $ebeam 500000" > seed.dat 
+		  ${exe_dir}/lhe_v1.exe
+		  cat egs5job.out
+
+          source /u/group/hps/hps_soft/setup_dst.csh
+
+          echo "Rotating Tridents and offsetting target by -5mm" 
+          ${stdhep_dir}/add_mother brems.stdhep tri.stdhep
+          ${stdhep_dir}/beam_coords tri.stdhep rot_tridents.stdhep -s 12${num} -z -5.0
+		  echo "Poissonizing Tridents" 
+		  echo "${stdhep_dir}/merge_poisson -m"$mu" -N1 -n500000  rot_tridents.stdhep sampled_tridents -s 13${num}"
+		  ${stdhep_dir}/merge_poisson -m"$mu" -N1 -n500000  rot_tridents.stdhep sampled_tridents -s 13${num}
+
+	  rm egs5job.inp
+          rm seed.dat
+          rm brems.stdhep
+
+          #tar -xf wab.tar         
+          set mu=`/u/group/hps/production/mc/MadGraph/mu.csh $dz $ne wab.lhe.gz`
+		  echo "mu=$mu  dz=$dz ne=$ne ebeam=$ebeam"
+
+		  echo "Transmuting A's to photons..."
+		  gunzip -f wab.lhe.gz
+		  sed -i 's/\([:blank:]*\)622 /\1 22 /' wab.lhe
+		  gzip wab.lhe
+
+		  echo "Unpacking Wide-Angle Bremsstralung events"
+		  zcat wab.lhe.gz > egs5job.inp 
+		  ln -s ${egs5_dir}/data
+		  ln -s ${exe_dir}/src/esa.inp pgs5job.pegs5inp
+		  echo "11${num} $dz $ebeam 500000" > seed.dat 
+		  ${exe_dir}/lhe_v1.exe
+		  cat egs5job.out
+
+          source /u/group/hps/hps_soft/setup_dst.csh
+
+          echo "Rotating Wide-Angle Bremsstrahlung events and offsetting target" 
+		  ${stdhep_dir}/beam_coords brems.stdhep rot_wab.stdhep -s 22${num} -z -5.0
+		  echo "Poissonizing WAB" 
+		  echo "${stdhep_dir}/merge_poisson -m"$mu" -N1 -n500000  rot_wab.stdhep sampled_wab -s 23${num}"
+		  ${stdhep_dir}/merge_poisson -m"$mu" -N1 -n500000  rot_wab.stdhep sampled_wab -s 23${num}
+
+
+		  echo "Rotating Beam and offsetting target" 
+		  ${stdhep_dir}/beam_coords beam.stdhep rot_beam.stdhep -s 14${num} -z -5.0
+		  echo "Sampling Beam" 
+		  ${stdhep_dir}/random_sample rot_beam.stdhep sampled_beam -s 15${num}
+
+		  @ file_num = ( ${num} - 1 ) % 100 + 1
+
+          source /u/group/hps/hps_soft/setup_dst.csh
+
+		  #echo "Rotating Hadrons and offsetting target"
+		  #${stdhep_dir}/beam_coords hadrons.stdhep rot_hadrons.stdhep -s 16${num} -z -5.0
+		  #${stdhep_dir}/merge_poisson -m"-1.1" -N100 -O$file_num -n500000 rot_hadrons.stdhep sampled_hadrons -s 17${num}
+		  
+		  echo "Merging Files"
+          #${stdhep_dir}/merge_files sampled_beam_1.stdhep sampled_tridents_1.stdhep sampled_wab_1.stdhep  sampled_hadrons*.stdhep wab-beam-tri.stdhep
+          ${stdhep_dir}/merge_files sampled_beam_1.stdhep sampled_tridents_1.stdhep sampled_wab_1.stdhep wab-beam-tri.stdhep
+ 
+          setenv LD_LIBRARY_PATH
+    
+          bash -c 'source /u/group/hps/hps_soft/slic/REL/init_ilcsoft.sh; exec csh'          
+          source ${slic_dir}/geant4/build-10.01.p03/geant4make.csh ${slic_dir}/geant4/build-10.01.p03
+          setenv GDML_SCHEMA_DIR "/u/group/hps/hps_soft/slic/schemas"
+       
+          ln -s /u/group/hps/hps_soft/fieldmaps fieldmap 
+
+		  set seed = 18
+          echo "${slic_dir}/slic/v05-00-01/bin/slic -i wab-beam-tri.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out.slcio -d$seed{${num}} -r5000000"
+          ${slic_dir}/slic/v05-00-01/bin/slic -P ${slic_dir}/slic/v05-00-01/data/particle.tbl -i wab-beam-tri.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out.slcio -d$seed{${num}} -r5000000 |grep -vE '^$|^>>>> .+Event <[0-9]+>$| has [0-9]+ hits$'
+          ls -ltrh
+
+          /apps/scicomp/java/jdk1.7/bin/java -Xmx100m -jar ${hps-java} -r /org/hps/steering/production/DataQuality_Pass2.lcsim -i out.slcio >! data_quality.txt
+          set nevents=`grep '^Read.*events$' data_quality.txt | cut -d' ' -f2`
+          echo "$nevents events in output"
+          @ seed = $seed + 1
+      ]]></Command>
+      <Output src="out.slcio" dest="${out_dir}/${ebeam}/${out_file}_${detector}_${num}.slcio"/>
+      <Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${out_file}_${detector}_${num}.txt"/>
+      <Stderr dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.err" />
+      <Stdout dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.out" />
+    </Job>
+  </ForEach>
+</Request>

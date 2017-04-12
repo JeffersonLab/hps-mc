@@ -1,0 +1,35 @@
+<!--Run with runjob_100to1.sh-->
+<Request>
+	<Variable name="ebeam" value="1pt1"/>
+	<Name name="readout_beam-tri_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="uemura@jlab.org" request="false" job="true" />
+	<Memory space="1024" unit="MB"/>
+	<TimeLimit time="48" unit="hours"/>
+	<OS name="centos62"/>
+	<Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.0.2-20140522.190356-191-bin.jar"/>
+	<Variable name="log_dir" value="file:/work/hallb/hps/mc_production/logs/readout/beam-tri"/>
+	<Variable name="dq_dir" value="file:/work/hallb/hps/mc_production/data_quality/readout/beam-tri"/>
+	<Variable name="out_dir" value="mss:/mss/hallb/hps/production/readout/beam-tri"/>
+	<Variable name="out_file" value="egsv3-triv2-g4v1_s2d6-readout20140522"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+			<Input src="mss:/mss/hallb/hps/scratch/slic/beam-tri/${ebeam}/egsv3-triv2-g4v1_s2d6_${file1}.slcio" dest="in_${file1}.slcio" />
+			<Command><![CDATA[
+				set inputfiles=`ls -v *.slcio| awk '{printf " -i "$1}'`
+				echo "Auger ID: $AUGER_ID"
+				/usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -XX:+UseSerialGC -Xmx500m -jar ${hps-java} -r /org/hps/steering/readout/HPS2014ReadoutToLcio.lcsim $inputfiles -DoutputFile=out
+				/usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -XX:+UseSerialGC -Xmx500m -jar ${hps-java} -r /org/hps/steering/production/DataQuality.lcsim -i out.slcio > data_quality.txt
+				ls -ltr
+				]]></Command>
+			<Output src="out.slcio" dest="${out_dir}/${ebeam}/${out_file}_${num}.slcio"/>
+			<Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${out_file}_${num}.txt"/>
+			<Output src="out_triggerPlots.aida" dest="${dq_dir}/${ebeam}/${out_file}_${num}_triggerPlots.aida"/>
+			<Output src="out.triggers" dest="${dq_dir}/${ebeam}/${out_file}_${num}.triggers"/>
+			<Stderr dest="${log_dir}/${ebeam}/${out_file}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${out_file}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>
