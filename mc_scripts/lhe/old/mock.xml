@@ -1,0 +1,58 @@
+<!--Run with runmock.sh-->
+<Request>
+	<Variable name="ebeam" value="1"/>
+	<Name name="MadGraph_ap_mock${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+	<Email email="uemura@jlab.org" request="false" job="true" />
+	<Memory space="512" unit="MB"/>
+	<OS name="centos62"/>
+	<Variable name="mg_dir" value="/u/group/hps/production/mc/MadGraph/ap"/>
+	<Variable name="stdhep_dir" value="/u/group/hps/hps_soft/stdhep/bin"/>
+	<Variable name="log_dir" value="file:/work/hallb/hps/mc_production/logs/lhe/ap/2pt2"/>
+	<Variable name="out_dir" value="file:/work/hallb/hps/mc_production/lhe/ap/2pt2"/>
+	<Variable name="out_file" value="mocksignalv1"/>
+	<List name="num">1</List>
+	<ForEach list="num">
+		<Job>
+			<Command><![CDATA[
+				echo "Auger ID: $AUGER_ID"
+				tar -xzf ${mg_dir}/MG_mini.tar.gz
+				cd MG_mini/ap
+				cp ${mg_dir}/run_card_2pt2.dat Cards/run_card.dat
+				set apmass=`/u/group/hps/production/mc/mdc_secrets/mock${ebeam}.csh mass`
+				sed -i "s/.*APMASS/622 $apmass # APMASS/" Cards/param_card.dat
+				set nevents_req=`grep nevent Cards/run_card.dat | awk '{print $1}'`
+				set offset=1
+				set nevents_tot=0
+				while ( $nevents_tot < 1000 )
+					@ filenum = ( ${num} - 1 ) * 100 + $offset
+					@ offset = $offset + 1
+					set iseed=4$filenum
+					set nbunches=0
+					set nevents=$nevents_req
+					echo "Running $nevents events with seed $iseed"
+					sed -i "s/.*nevents/$nevents = nevents/" Cards/run_card.dat
+					sed -i "s/.*iseed/$iseed = iseed/" Cards/run_card.dat
+					sed -i "s/rdnseed = 0/rdnseed = $iseed/" bin/addvertex.pl
+					set workdir="$PBS_O_WORKDIR"
+					setenv PBS_O_WORKDIR ""
+					./bin/generate_events 0 ap
+					setenv PBS_O_WORKDIR "$workdir"
+					set nbunches=`/u/group/hps/production/mc/MadGraph/nevents.csh Events/ap_unweighted_events.lhe.gz`
+					echo "$nbunches tridents"
+					@ nevents_tot = $nevents_tot + $nbunches
+					mv Events/ap_unweighted_events.lhe.gz ../../ap_$filenum.lhe.gz
+				end
+
+				cd ../..
+				ls -v ap_*.lhe.gz | xargs zcat >! ap_all.lhe
+				set ct=`/u/group/hps/production/mc/mdc_secrets/mock${ebeam}.csh ct`
+				${stdhep_dir}/lhe_tridents ap_all.lhe ap.stdhep -s${ebeam}${num} -l$ct
+				]]></Command>
+			<Output src="ap.stdhep" dest="${out_dir}/mock${ebeam}/${out_file}_${num}.stdhep" />
+			<Stderr dest="${log_dir}/mock${ebeam}/${out_file}_${num}.err" />
+			<Stdout dest="${log_dir}/mock${ebeam}/${out_file}_${num}.out" />
+		</Job>
+	</ForEach>
+</Request>

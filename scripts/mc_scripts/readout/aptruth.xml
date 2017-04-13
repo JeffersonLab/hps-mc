@@ -1,0 +1,62 @@
+<!--Run with runjob.sh-->
+<Request>
+	<Variable name="ebeam" value="1pt05"/>
+    <List name="apmass">15 20 30 40 50 60 70 80 90</List>
+    <!--<List name="apmass">15 16 17 18 19 20 22 24 26 28 30 35 40 50 60 70 80 90</List>-->
+	<Name name="readout_ap_pairs1_${ebeam}"/>
+	<Project name="hps"/>
+	<Track name="simulation"/>
+    <Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+    <!--<TimeLimit time="10" unit="hours"/>-->
+    <Memory space="3000" unit="MB"/>
+    <!--<DiskSpace space="2" unit="GB"/>-->
+	<OS name="centos7"/>
+    <!--<Variable name="hps-java" value="/u/group/hps/hps_soft/svn/hps-java-trunk/distribution/target/hps-distribution-3.11-SNAPSHOT-bin.jar"/>-->
+    <Variable name="hps-java" value="/u/group/hps/production/mc/EngRun2015Scripts/hps-distribution-3.11-SNAPSHOT-2017Feb22-bin.jar"/>
+    <!--<Variable name="lcio" value="/u/group/hps/hps_soft/lcio/jarfiles/lcio-2.4.4-SNAPSHOT-bin.jar"/>-->
+    <Variable name="log_dir" value="file:/volatile/hallb/hps/logDump/Layer0Studies/logs/readout/ap"/>
+    <Variable name="dq_dir" value="file:/work/hallb/hps/mc_production/Layer0Studies/data_quality/readout/ap"/>
+	<Variable name="out_dir" value="mss:/mss/hallb/hps/production/Layer0Studies/readout/ap"/>
+	<Variable name="out_file" value="apsignalv2_10k"/>
+	<Variable name="steering" value="EngineeringRun2015TrigPairs1_Pass2.lcsim"/>
+    <!--<Variable name="detector"  value="HPS-EngRun2015-1_5mm-v3-4-fieldmap"/>-->
+    <!--<Variable name="detector" value="HPS-EngRun2015-Nominal-v5-0-fieldmap"/>-->
+        <Variable name="detector"  value="HPS-Proposal2017-Nominal-v2-1pt05-fieldmap"/>
+	<Variable name="tag" value="3.11-2017Feb22"/>
+	<Variable name="trigger" value="pairs1"/>
+	<List name="num">1</List>
+	<ForEach list="apmass">
+	  <ForEach list="num">
+		<Job> 
+          <!--<Input src="mss:/mss/hallb/hps/production/Layer0Studies/slic/ap/${ebeam}/${apmass}/apsignalv2_10k_tc_epsilon-6_${detector}_${num}.slcio" dest="apsignal_tc.slcio"/>-->
+            <Input src="mss:/mss/hallb/hps/production/Layer0Studies/slic/ap/${ebeam}/${apmass}/apsignalv2_10k_displaced_100mm_epsilon-6_${detector}_${num}.slcio" dest="apsignal_displaced.slcio"/>
+			<Command><![CDATA[
+			#	set inputfiles=`ls -v *.slcio| awk '{printf " "$1}'`
+				echo "Auger ID: $AUGER_ID"
+				ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+              
+              echo "Filtering prompt A's......."
+             #/usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -DdisableSvtAlignmentConstants -XX:+UseSerialGC -Xmx100m -cp ${hps-java} org.hps.users.meeg.FilterMCBunches -e250 apsignal_tc.slcio apsignal_tc_filt.slcio -d -E0.05 -w200000
+
+              echo "Filtering displaced A's......."
+             /usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -DdisableSvtAlignmentConstants -XX:+UseSerialGC -Xmx100m -cp ${hps-java} org.hps.users.meeg.FilterMCBunches -e250 apsignal_displaced.slcio apsignal_displaced_filt.slcio -d -E0.05 -w200000	
+         
+              echo "Reading out prompt A's......."
+              #/usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -DdisableSvtAlignmentConstants -XX:+UseSerialGC -Xmx500m -jar ${hps-java} -r /org/hps/steering/readout/${steering} -i apsignal_tc_filt.slcio -DoutputFile=out_tc -Ddetector=${detector} -Drun=1000000
+
+              echo "Reading out displaced A's......."
+             /usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -DdisableSvtAlignmentConstants -XX:+UseSerialGC -Xmx500m -jar ${hps-java} -r /org/hps/steering/readout/${steering} -i apsignal_displaced_filt.slcio -DoutputFile=out_displaced -Ddetector=${detector} -Drun=1000000
+
+                 /usr/bin/time /apps/scicomp/java/jdk1.7/bin/java -XX:+UseSerialGC -Xmx500m -jar ${hps-java} -r /org/hps/steering/production/DataQuality.lcsim -i out_tc.slcio > data_quality.txt
+				]]></Command>
+            <!--<Output src="out_tc.slcio" dest="${out_dir}/${ebeam}/${apmass}/${out_file}_tc_epsilon-6_${detector}_${tag}_${trigger}_${num}.slcio"/>-->
+            <Output src="out_displaced.slcio" dest="${out_dir}/${ebeam}/${tag}/${apmass}/${out_file}_displaced_100mm_epsilon-6_${detector}_${tag}_${trigger}_${num}.slcio"/>
+			<Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${tag}/${apmass}/${out_file}_${detector}_${tag}_${trigger}_${num}.txt"/>
+            <!--<Output src="out_triggerPlots.aida" dest="${dq_dir}/${ebeam}/${tag}/${apmass}/${out_file}_${detector}_${tag}_${trigger}_${num}_triggerPlots.aida"/>-->
+            <!--<Output src="out.triggers" dest="${dq_dir}/${ebeam}/${tag}/${apmass}/${out_file}_${detector}_${tag}_${trigger}_${num}.triggers"/>-->
+			<Stderr dest="${log_dir}/${ebeam}/${tag}/${apmass}/${out_file}_${detector}_${tag}_${trigger}_${num}.err" />
+			<Stdout dest="${log_dir}/${ebeam}/${tag}/${apmass}/${out_file}_${detector}_${tag}_${trigger}_${num}.out" />
+		</Job>
+	  </ForEach>
+	</ForEach>
+</Request>

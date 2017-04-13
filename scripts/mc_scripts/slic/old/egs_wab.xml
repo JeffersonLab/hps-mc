@@ -1,0 +1,64 @@
+<!--Run with runjob.sh-->
+<Request>
+  <Variable name="ebeam" value="1pt92"/>
+  <Name name="slic_wab-beam-tri_${ebeam}"/>
+  <Project name="hps"/>
+  <Track name="simulation"/>
+  <Email email="btu29@wildcats.unh.edu" request="false" job="true" />
+  <Memory space="5000" unit="MB"/>
+  <OS name="centos65"/>
+  <Variable name="hps-java" value="/u/group/hps/hps_soft/hps-java/hps-distribution-3.4.0-bin.jar"/>
+  <Variable name="det_dir" value="/u/group/hps/hps_soft/hps/detector-data/detectors"/>
+  <Variable name="egs5_dir" value="/u/group/hps/hps_soft/egs5"/>
+  <Variable name="param_dir" value="/u/group/hps/production/mc/run_params"/>
+  <Variable name="stdhep_dir" value="/u/group/hps/hps_soft/stdhep/bin"/>
+  <Variable name="slic_dir" value="/u/group/hps/hps_soft/slic/v00-02"/>
+  <Variable name="dq_dir" value="file:/work/hallb/hps/mc_production/RAFOWAB/data_quality"/>
+  <Variable name="exe_dir" value="/u/group/hps/production/mc/egs5"/>
+  <Variable name="out_dir" value="mss:/mss/hallb/hps/production/slic/wab"/>
+  <Variable name="log_dir" value="file:/work/hallb/hps/mc_production/RAFOWAB/logs"/>
+  <Variable name="out_file" value="PRESLIC_wabv1"/>
+  <Variable name="detector" value="HPS-EngRun2015-Nominal-v3-fieldmap"/>
+  <List name="num">101</List>
+  <ForEach list="num">
+    <Job>
+      <Input src="file:/work/hallb/hps/mc_production/lhe/wab/${ebeam}/wabv1_${num}.lhe.gz" dest="wab.lhe.gz" />     
+      <Command><![CDATA[
+	          
+	          ln -s /u/group/hps/hps_soft/fieldmaps fieldmap
+
+	          echo "Auger ID: $AUGER_ID"
+		  set dz = `${param_dir}/dz.csh ${ebeam}`
+		  set ne = `${param_dir}/ne.csh ${ebeam}`
+		  set ebeam = `${param_dir}/ebeam.csh ${ebeam}`
+		  set mu=`/u/group/hps/production/mc/MadGraph/mu.csh $dz $ne wab.lhe.gz`   
+		  	  
+		  echo "mu=$mu  dz=$dz ne=$ne ebeam=$ebeam"
+
+		  echo "Unpacking Wide-Angle Bremsstralung events"
+		  zcat wab.lhe.gz > egs5job.inp 
+		  ln -s ${egs5_dir}/data
+		  ln -s ${exe_dir}/src/esa.inp pgs5job.pegs5inp
+		  echo "11${num} $dz $ebeam 500000" > seed.dat 
+		  ${exe_dir}/lhe_v1.exe
+		  cat egs5job.out
+
+                  echo "Rotating Wide-Angle Bremsstrahlung events" 
+		  ${stdhep_dir}/beam_coords brems.stdhep rot_wab.stdhep -s 22${num}  
+		  
+#		  setenv LD_LIBRARY_PATH
+#		  source ${slic_dir}/init_ilcsoft.csh
+#                 source ${slic_dir}/geant4/build-9.6.p01/geant4make.csh ${slic_dir}/geant4/build-9.6.p01
+		  
+#		  set seed = 18
+#		  echo "slic -i rot_wab.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out.slcio -d$seed{${num}} -r5000000"
+#		  slic -i rot_wab.stdhep -g ${det_dir}/${detector}/${detector}.lcdd -o out.slcio -d$seed{${num}} -r5000000|grep -vE '^$|^>>>> .+Event <[0-9]+>$| has [0-9]+ hits$'
+#		  ls -ltrh
+		  ]]></Command>
+	  <Output src="rot_wab.stdhep" dest="/work/hallb/hps/mc_production/RAFOWAB/${out_file}_${detector}_${num}.stdhep"/>
+      <!--Output src="data_quality.txt" dest="${dq_dir}/${ebeam}/${out_file}_${detector}_${num}.txt"/-->
+      <Stderr dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.err" />
+      <Stdout dest="${log_dir}/${ebeam}/${out_file}_${detector}_${num}.out" />
+    </Job>
+  </ForEach>
+</Request>
