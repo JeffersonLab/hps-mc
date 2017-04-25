@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.0)
+
+project(stdhep-lib VERSION 5.6.1 LANGUAGES C)
+
+set(STDHEP_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
+
+add_custom_target(stdhep-lib ALL)
+
+set(STDHEP_BUILD_DIR ${CMAKE_BINARY_DIR}/stdhep-src)
+file(MAKE_DIRECTORY ${STDHEP_BUILD_DIR}/)
+
+add_custom_command(TARGET stdhep-lib PRE_BUILD COMMAND cp ARGS -R ${STDHEP_SOURCE_DIR}/* . WORKING_DIRECTORY ${STDHEP_BUILD_DIR})
+add_custom_command(TARGET stdhep-lib PRE_LINK COMMAND make WORKING_DIRECTORY ${STDHEP_BUILD_DIR})
+add_custom_command(TARGET stdhep-lib POST_BUILD COMMAND rm ARGS -f log.* WORKING_DIRECTORY ${STDHEP_BUILD_DIR})
+
+install(DIRECTORY ${STDHEP_BUILD_DIR}/lib/ DESTINATION lib FILES_MATCHING PATTERN "*.a")
+install(DIRECTORY ${STDHEP_BUILD_DIR}/src/inc/ DESTINATION include FILES_MATCHING PATTERN "*.h" PATTERN "*.inc")

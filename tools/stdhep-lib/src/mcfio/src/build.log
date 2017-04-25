@@ -1,0 +1,690 @@
+gfortran -c -o mcfio_FPrintDictionary.o -DUNIX -I. -fd-lines-as-comments -fno-second-underscore mcfio_FPrintDictionary.F
+gcc -c -o mcf_evt_xdr.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcf_evt_xdr.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+mcf_evt_xdr.c: In function 'xdr_mcfast_fileheader':
+mcf_evt_xdr.c:175:15: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+               mcftmp->nBlocks, sizeof(int), xdr_int) == FALSE) 
+               ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:218:15: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+               mcftmp->nBlocks, sizeof(int), xdr_int) == FALSE) 
+               ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_eventtable':
+mcf_evt_xdr.c:320:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dim, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:324:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dim, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:328:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dim, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:332:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dim, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:336:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dim, sizeof(int), xdr_u_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, u_int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_eventheader':
+mcf_evt_xdr.c:460:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimBlocks, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:464:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimBlocks, sizeof(u_int), xdr_u_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, u_int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:507:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimBlocks, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:511:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimBlocks, sizeof(u_int), xdr_u_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, u_int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:518:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimNTuples, sizeof(int), xdr_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:522:16: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                mcftmp->dimNTuples, sizeof(u_int), xdr_u_int) == FALSE) 
+                ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, u_int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_descrNTU':
+mcf_evt_xdr.c:644:7: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+       (char **) &(dNTu->subOffset), &nn, nn, sizeof(long), xdr_long) == FALSE) 
+       ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_varDescrNTU':
+mcf_evt_xdr.c:685:9: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+         (char **) &pdim, &nn, nn, sizeof(int), xdr_int)) == FALSE) 
+         ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_NTuple':
+mcf_evt_xdr.c:793:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:798:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:820:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:824:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:828:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:832:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:837:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:842:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:846:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:870:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:874:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:878:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:882:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:887:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:892:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:896:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:932:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:937:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:957:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:961:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:965:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:969:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:974:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:979:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:983:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_NTupleXDRPtr':
+mcf_evt_xdr.c:1081:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1086:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1109:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1113:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1117:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1121:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1126:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1131:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1135:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1160:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1164:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1168:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1172:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1177:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1182:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1186:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1226:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1231:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1253:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1257:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1261:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1265:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1270:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1275:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1279:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_NTupleVar':
+mcf_evt_xdr.c:1356:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1360:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1373:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1376:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1379:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1382:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1386:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1390:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1393:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_NTupleSubVar':
+mcf_evt_xdr.c:1437:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1441:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1454:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1457:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1460:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1463:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1467:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1471:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1474:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c: In function 'xdr_mcfast_NTupleSubStruct':
+mcf_evt_xdr.c:1522:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1527:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1542:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(short), xdr_short);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, short int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1546:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(int), xdr_int);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1550:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1554:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1559:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(float), xdr_float);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, float *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1564:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(double), xdr_double);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, double *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+mcf_evt_xdr.c:1568:26: warning: passing argument 6 of 'xdr_array' from incompatible pointer type [enabled by default]
+                          (char **) &pt, &nn, nn, sizeof(long), xdr_long);
+                          ^
+In file included from mcf_evt_xdr.c:29:0:
+/usr/include/rpc/xdr.h:308:15: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, long int *)'
+ extern bool_t xdr_array (XDR * _xdrs, caddr_t *__addrp, u_int *__sizep,
+               ^
+gcc -c -o mcfio_FBinding.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_FBinding.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcfio_Util1.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_Util1.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+mcfio_Util1.c: In function 'mcfioC_InfoBlockChar':
+mcfio_Util1.c:828:8: warning: passing argument 1 of 'xdr_free' from incompatible pointer type [enabled by default]
+        xdr_free(xdr_string, data); 
+        ^
+In file included from mcfio_Util1.c:30:0:
+/usr/include/rpc/xdr.h:373:13: note: expected 'xdrproc_t' but argument is of type 'bool_t (*)(struct XDR *, char **, u_int)'
+ extern void xdr_free (xdrproc_t __proc, char *__objp) __THROW;
+             ^
+gcc -c -o mcfio_Direct.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_Direct.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+mcfio_Direct.c: In function 'openReadDirect':
+mcfio_Direct.c:142:19: warning: comparison between pointer and integer [enabled by default]
+           if (iff < NULL) {
+                   ^
+gcc -c -o mcfio_SeqDummy.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_SeqDummy.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcfio_Block.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_Block.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcf_ntubldInit.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcf_ntubldInit.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcf_ntuBldDbinc.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcf_ntuBldDbinc.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcf_NTuIOFiles.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcf_NTuIOFiles.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcf_NTuIOUtils.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcf_NTuIOUtils.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+gcc -c -o mcfio_UserDictionary.o -fd-lines-as-comments -I/usr/X11R6/include  -I. mcfio_UserDictionary.c
+cc1: warning: command line option '-fd-lines-as-comments' is valid for Fortran but not for C [enabled by default]
+ar -urs ../../lib/libFmcfio.a mcfio_FPrintDictionary.o mcf_evt_xdr.o mcfio_FBinding.o mcfio_Util1.o mcfio_Direct.o mcfio_SeqDummy.o mcfio_Block.o mcf_ntubldInit.o mcf_ntuBldDbinc.o mcf_NTuIOFiles.o mcf_NTuIOUtils.o mcfio_UserDictionary.o 
