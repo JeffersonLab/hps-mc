@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(hps-mc VERSION 0.0.1)
 
+# FIXME: these should go in EGS5 cmake file
+set(EGS5_DATA_DIR ${PROJECT_SOURCE_DIR}/generators/egs5/data)
+set(EGS5_CONFIG_DIR ${PROJECT_SOURCE_DIR}/generators/egs5/config)
+
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
 
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)
