@@ -1,4 +1,8 @@
 !***********************************************************************
+! Save events if
+!  1) gamma or e+/e-
+!  2) at least two particles with E > 1 GeV
+!  3) Theta_x > 2mrad
 !------------------------------- main code -----------------------------
 
 !-----------------------------------------------------------------------
@@ -33,13 +37,13 @@
 
       real*8 rndm, dx, dy, sigma/0.01/
 
-      integer npart, moller, ngam, iadd(10), itrig
-      real qpart, ppart, vtxpart, am
-      common /tmpart/ npart,moller,qpart(10),ppart(4,10),vtxpart(3,10)
+      integer npart, ngam, iadd(10), itrig
+      real qpart, ppart, am
+      common /tmpart/ npart, qpart(100), ppart(4,100)
 
       real*8 zplane, elum, elumtot, elum30, elum35, elum40, elum45
       common /lumon/ zplane(205), elum(50)
-
+      
       real*8 w
 c 0.1 X0 
 c      real*8 w/0.035/
@@ -64,8 +68,9 @@ c      real*8 w/0.0000875d0/
 
 c need long integer to generate 10^9
       integer*8 ncases
-c      integer*16 ncases
       real*8 ebeam
+      common /myrun/ ebeam,ncases
+
       real*8 esum, elyr
       common/totals/esum(205), elyr(20,30)
 
@@ -78,10 +83,12 @@ c      integer*16 ncases
 
       real t0,t1,timecpu,tt              ! Local variables
       real etime
-      integer i,j,k,idinc,iqi,iri
+      integer i,j,k,idinc,iqi,iri,ne
       character*24 medarr(4)
 
+
       integer istream,lok
+      integer bunchsize
 
 c ==================
 
@@ -90,10 +97,10 @@ c ==================
 !     ----------
       open(UNIT= 6,FILE='egs5job.out',STATUS='unknown')
 
-      open(51,file='moller.dat',form='FORMATTED')
+      open(51,file='brems.dat',form='FORMATTED')
       open(52,file='seed.dat',form='FORMATTED')
 
-      call stdxwopen('moller.stdhep', ' ascii events ', 
+      call stdxwopen('brems.stdhep', ' ascii events ', 
      -     ncases, istream, lok)
       call stdxwrt(100, istream, lok)
 
@@ -157,16 +164,16 @@ c
       nreg=3
 
       do i=1,nreg
-        ecut(i)=10.       ! egs cut off energy for electrons
-        pcut(i)=10.      ! egs cut off energy for photons
+        ecut(i)=0.521       ! egs cut off energy for electrons
+        pcut(i)=0.001      ! egs cut off energy for photons
         iphter(i) = 0       ! Switches for PE-angle sampling
-        iedgfl(i) = 0       ! K & L-edge fluorescence
+        iedgfl(i) = 1       ! K & L-edge fluorescence
         iauger(i) = 0       ! K & L-Auger
         iraylr(i) = 1       ! Rayleigh scattering
         lpolar(i) = 0       ! Linearly-polarized photon scattering
         incohr(i) = 0       ! S/Z rejection
         iprofr(i) = 0       ! Doppler broadening
-        impacr(i) = 0       ! Electron impact ionization
+        impacr(i) = 1       ! Electron impact ionization
       end do
 
 !     --------------------------------------------------------
@@ -174,7 +181,7 @@ c
 !     ins (1- 2^31)
 !     --------------------------------------------------------
 c      inseed=1030701
-      read(52,*) inseed,w,ebeam,ncases
+      read(52,*) inseed,w,ebeam,bunchsize,ncases
  706  format(5x,i5)
       write(6,707) inseed
  707  format(2x,'seed=',i10)
@@ -188,11 +195,16 @@ c      inseed=1030701
 !-----------------------------------------------------------------------
 ! Step 4:  Determination-of-incident-particle-parameters
 !-----------------------------------------------------------------------
-c Moller flag
+c Brems flag
 c before electr
-c      iausfl(9) = 1
+c      iausfl(7) = 1
 c after electr
-      iausfl(10) = 1
+c      iausfl(8) = 1
+
+c pair
+c      iausfl(16) = 1
+c      iausfl(17) = 1
+c      iausfl(18) = 1
 
       iqi= -1
       xi=0.0
@@ -204,11 +216,6 @@ c after electr
       iri=2
       wti=1.0
       idinc=-1
-cx      ei=11000.0D0
-cx      ei=6600.0D0
-cx      ei=3300.0D0
-cx      ei=1056.0D0
-cx      ei=1100.0D0
       ei=ebeam
       ekin=ei+iqi*RM
 
@@ -284,18 +291,38 @@ cx      ei=1100.0D0
 190   format(/,' Shower Results:',///,7X,'e',14X,'z',14X,'w',10X,
      1   'iq',3X,'ir',2X,'iarg',/)
 
-      nevhep = 0
-
       do i=1,ncases
-         nhep = 0
-         moller = 0
 
-        call shower(iqi,ei,xi,yi,zi,ui,vi,wi,iri,wti)
+        nhep = 0
+        nevhep = i
+        
+        do ne=1, bunchsize
+        
+           call shower(iqi,ei,xi,yi,zi,ui,vi,wi,iri,wti)
 
-        if(moller.eq.1.and.nhep.ge.2) then
-           nevhep = nevhep + 1
-           call stdxwrt(  1, istream, lok)
+        end do
+
+        if(nhep.eq.0) then
+            nhep = 1
+            idhep(1) = 12
+            phep(1,1) = 0.
+            phep(2,1) = 0.
+            phep(3,1) = 0.1
+            phep(4,1) = 0.1
+            phep(5,1) = 0.
+            vhep(1,1) = 0.
+            vhep(2,1) = 0.
+            vhep(3,1) = zplane(2) * 10.
+            vhep(4,1) = 0.
+            isthep(1) = 1
+            jmohep(1,1) = 0
+            jmohep(2,1) = 0
+            jdahep(1,1) = 0
+            jdahep(2,1) = 0
         end if
+
+      call stdxwrt(  1, istream, lok)
+
       end do
 
  999  continue
@@ -372,34 +399,22 @@ cx      ei=1100.0D0
       real*8 zplane, elum
       common /lumon/ zplane(205), elum(50)
 
-      integer npart, moller
-      real qpart, ppart, vtxpart
-      common /tmpart/ npart,moller,qpart(10),ppart(4,10),vtxpart(3,10)
+      integer npart
+      real qpart, ppart
+      common /tmpart/ npart, qpart(100), ppart(4,100)
+
+      integer*8 ncases
+      real*8 ebeam
+      common /myrun/ ebeam,ncases
 
       integer lyr, ira, nin/0/
       real dr/0.25/, am/0.511/, p
-
-      real*8 cth, sth, et
 
       integer i, iarg, n, nphot, iout 
 
 !     ----------------------
 !     Add deposition energy
 !     ----------------------
-
-c brems before electr call
-c      if(iarg.eq.6) then
-c         write(52,777) iq(np),e(np),u(np),v(np),w(np)
-c 777     format(2x,i3,f10.3,3f10.6)
-c      end if
-c Moller after electr call
-      if(iarg.eq.9) then
-         moller = 1
-c         if(e(np).gt.10.0.and.e(np-1).gt.10.0)
-c     -     write(52,778) iq(np),e(np),u(np),v(np),w(np),
-c     -                 iq(np-1),e(np-1),u(np-1),v(np-1),w(np-1)
-c 778     format(2x,i3,f10.3,3f10.6,i3,f10.3,3f10.6)
-      end if
 
       if(iarg.ne.0.and.iarg.ne.3) return
 
@@ -412,49 +427,51 @@ cx         write(52,700) e(np),u(np),v(np),w(np)
 cx 700     format(1x,4e14.6)
 cx      end if
 
-      if(ir(np).eq.3.and.e(np).gt.10.0.and.
-     -   sqrt(u(np)**2+v(np)**2).gt.0.005) then
-         nhep = nhep + 1
-         p = sqrt(e(np)**2-am**2)*0.001
-         if (iq(np).eq.0) then
-                 idhep(nhep) = 22
-                 phep(5,nhep) = 0
-                 p = e(np)*0.001
-         else if (iq(np).eq.-1) then
-                 idhep(nhep) = 11
-                 phep(5,nhep) = am*0.001
-         else if (iq(np).eq.1) then
-                 idhep(nhep) = -11
-                 phep(5,nhep) = am*0.001
-         else
-                 stop
+      if(ir(np).eq.3) then
+         iout = 1
+         if(abs(v(np)).lt.0.010) iout = 0
+         if(iq(np).ne.0.and.e(np).lt.ebeam*0.005) iout = 0
+         if(iout.eq.1) then
+c            npart = npart + 1
+c            qpart(npart) = iq(np)
+c            p = e(np)
+c            if(iq(np).ne.0) p = sqrt(e(np)**2-am**2)
+c            ppart(1,npart) = p * u(np) * 0.001
+c            ppart(2,npart) = p * v(np) * 0.001
+c            ppart(3,npart) = p * w(np) * 0.001
+c            ppart(4,npart) = e(np) * 0.001
+
+            nhep = nhep + 1
+
+            p = sqrt(e(np)**2-am**2)*0.001
+            if (iq(np).eq.0) then
+                    idhep(nhep) = 22
+                    phep(5,nhep) = 0
+                    p = e(np)*0.001
+            else if (iq(np).eq.-1) then
+                    idhep(nhep) = 11
+                    phep(5,nhep) = am*0.001
+            else if (iq(np).eq.1) then
+                    idhep(nhep) = -11
+                    phep(5,nhep) = am*0.001
+            else
+                    stop
+            end if
+
+            phep(1,nhep) = p * u(np)
+            phep(2,nhep) = p * v(np)
+            phep(3,nhep) = p * w(np)
+            phep(4,nhep) = e(np) * 0.001
+            vhep(1,nhep) = x(np) * 10.
+            vhep(2,nhep) = y(np) * 10.
+            vhep(3,nhep) = z(np) * 10.
+            vhep(4,nhep) = 0.
+            isthep(nhep) = 1
+            jmohep(1,nhep) = 0
+            jmohep(2,nhep) = 0
+            jdahep(1,nhep) = 0
+            jdahep(2,nhep) = 0
          end if
-
-         phep(1,nhep) = p * u(np)
-         phep(2,nhep) = p * v(np)
-         phep(3,nhep) = p * w(np)
-         phep(4,nhep) = e(np) * 0.001
-         vhep(1,nhep) = x(np) * 10.
-         vhep(2,nhep) = y(np) * 10.
-         vhep(3,nhep) = z(np) * 10.
-         vhep(4,nhep) = 0.
-         isthep(nhep) = 1
-         jmohep(1,nhep) = 0
-         jmohep(2,nhep) = 0
-         jdahep(1,nhep) = 0
-         jdahep(2,nhep) = 0
-
-c         npart = npart + 1
-c         qpart(npart) = iq(np)
-c         p = e(np)
-c         if(iq(np).ne.0) p = sqrt(e(np)**2-am**2)
-c         ppart(1,npart) = p * u(np) * 0.001
-c         ppart(2,npart) = p * v(np) * 0.001
-c         ppart(3,npart) = p * w(np) * 0.001
-c         ppart(4,npart) = e(np) * 0.001
-c         vtxpart(1,npart) = x(np)
-c         vtxpart(2,npart) = y(np)
-c         vtxpart(3,npart) = 0.0
       end if
 !     ----------------------------------------------------------------
 !     Print out stack information (for limited number cases and lines)
@@ -996,6 +1013,143 @@ c 600    format(i8,2i3,f8.4,3f10.4,4f10.5)
       end
 
 !-----------------------last line of egs5_bhabha.f----------------------
+!---------------------------egs5_block_data.f---------------------------
+! Version: 060802-1335
+! Reference: SLAC-R-730/KEK-2005-8
+!-----------------------------------------------------------------------
+!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
+
+      block data
+
+      implicit none
+
+      include 'include/egs5_h.f'               ! Main EGS5 "header" file
+
+      include 'include/egs5_elecin.f'    ! COMMONs required by EGS5 code
+      include 'include/egs5_epcont.f'
+      include 'include/egs5_media.f'
+      include 'include/egs5_mults.f'
+      include 'include/egs5_thresh.f'
+      include 'include/egs5_uphiot.f'
+      include 'include/egs5_useful.f'
+      include 'include/randomm.f'
+
+      character*4 media1(24)                            ! Local variable
+      equivalence(media1(1),media(1,1))
+
+      data                                              ! common/ELECIN/
+     * ekelim/0./,
+     * icomp/1/
+
+      data                                              ! common/EPCONT/
+     * iausfl/5*1,MXAUSM5*0/,
+     * rhof/1.0/
+
+      data                                               ! common/MEDIA/
+     * nmed/1/,
+     * media1/'N','A','I',' ',' ',' ',' ',' ',' ',' ',' ',' ',
+     *        ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '/,
+     * charD/MXMED*0.d0/,
+     * iraylm/MXMED*0/,
+     * incohm/MXMED*0/,
+     * iprofm/MXMED*0/,
+     * impacm/MXMED*0/,
+     * useGSD/MXMED*0/
+
+      data                                               ! common/MULTS/
+     * NG21/  7/,B0G21/ 2.0000E+00/,B1G21/ 5.0000E+00/,
+     * G210( 1),G211( 1),G212( 1)/-9.9140E-04, 2.7672E+00,-1.1544E+00/,
+     * G210( 2),G211( 2),G212( 2)/-9.9140E-04, 2.7672E+00,-1.1544E+00/,
+     * G210( 3),G211( 3),G212( 3)/-7.1017E-02, 3.4941E+00,-3.0773E+00/,
+     * G210( 4),G211( 4),G212( 4)/-7.3556E-02, 3.5487E+00,-3.1989E+00/,
+     * G210( 5),G211( 5),G212( 5)/ 3.6658E-01, 2.1162E+00,-2.0311E+00/,
+     * G210( 6),G211( 6),G212( 6)/ 1.4498E+00,-5.9717E-01,-3.2951E-01/,
+     * G210( 7),G211( 7),G212( 7)/ 1.4498E+00,-5.9717E-01,-3.2951E-01/
+      data
+     * NG22/  8/,B0G22/ 2.0000E+00/,B1G22/ 6.0000E+00/,
+     * G220( 1),G221( 1),G222( 1)/-5.2593E-04, 1.4285E+00,-1.2670E+00/,
+     * G220( 2),G221( 2),G222( 2)/-5.2593E-04, 1.4285E+00,-1.2670E+00/,
+     * G220( 3),G221( 3),G222( 3)/-6.4819E-02, 2.2033E+00,-3.6399E+00/,
+     * G220( 4),G221( 4),G222( 4)/ 3.7427E-02, 1.6630E+00,-2.9362E+00/,
+     * G220( 5),G221( 5),G222( 5)/ 6.1955E-01,-6.2713E-01,-6.7859E-01/,
+     * G220( 6),G221( 6),G222( 6)/ 1.7584E+00,-4.0390E+00, 1.8810E+00/,
+     * G220( 7),G221( 7),G222( 7)/ 2.5694E+00,-6.0484E+00, 3.1256E+00/,
+     * G220( 8),G221( 8),G222( 8)/ 2.5694E+00,-6.0484E+00, 3.1256E+00/
+      data
+     * NG31/ 11/,B0G31/ 2.0000E+00/,B1G31/ 9.0000E+00/,
+     * G310( 1),G311( 1),G312( 1)/ 4.9437E-01, 1.9124E-02, 1.8375E+00/,
+     * G310( 2),G311( 2),G312( 2)/ 4.9437E-01, 1.9124E-02, 1.8375E+00/,
+     * G310( 3),G311( 3),G312( 3)/ 5.3251E-01,-6.1555E-01, 4.5595E+00/,
+     * G310( 4),G311( 4),G312( 4)/ 6.6810E-01,-2.2056E+00, 8.9293E+00/,
+     * G310( 5),G311( 5),G312( 5)/-3.8262E+00, 2.5528E+01,-3.3862E+01/,
+     * G310( 6),G311( 6),G312( 6)/ 4.2335E+00,-1.0604E+01, 6.6702E+00/,
+     * G310( 7),G311( 7),G312( 7)/ 5.0694E+00,-1.4208E+01, 1.0456E+01/,
+     * G310( 8),G311( 8),G312( 8)/ 1.4563E+00,-3.3275E+00, 2.2601E+00/,
+     * G310( 9),G311( 9),G312( 9)/-3.2852E-01, 1.2938E+00,-7.3254E-01/,
+     * G310(10),G311(10),G312(10)/-2.2489E-01, 1.0713E+00,-6.1358E-01/,
+     * G310(11),G311(11),G312(11)/-2.2489E-01, 1.0713E+00,-6.1358E-01/
+      data
+     * NG32/ 25/,B0G32/ 2.0000E+00/,B1G32/ 2.3000E+01/,
+     * G320( 1),G321( 1),G322( 1)/ 2.9907E-05, 4.7318E-01, 6.5921E-01/,
+     * G320( 2),G321( 2),G322( 2)/ 2.9907E-05, 4.7318E-01, 6.5921E-01/,
+     * G320( 3),G321( 3),G322( 3)/ 2.5820E-03, 3.5853E-01, 1.9776E+00/,
+     * G320( 4),G321( 4),G322( 4)/-5.3270E-03, 4.9418E-01, 1.4528E+00/,
+     * G320( 5),G321( 5),G322( 5)/-6.6341E-02, 1.4422E+00,-2.2407E+00/,
+     * G320( 6),G321( 6),G322( 6)/-3.6027E-01, 4.7190E+00,-1.1380E+01/,
+     * G320( 7),G321( 7),G322( 7)/-2.7953E+00, 2.6694E+01,-6.0986E+01/,
+     * G320( 8),G321( 8),G322( 8)/-3.6091E+00, 3.4125E+01,-7.7512E+01/,
+     * G320( 9),G321( 9),G322( 9)/ 1.2491E+01,-7.1103E+01, 9.4496E+01/,
+     * G320(10),G321(10),G322(10)/ 1.9637E+01,-1.1371E+02, 1.5794E+02/,
+     * G320(11),G321(11),G322(11)/ 2.1692E+00,-2.5019E+01, 4.5340E+01/,
+     * G320(12),G321(12),G322(12)/-1.6682E+01, 6.2067E+01,-5.5257E+01/,
+     * G320(13),G321(13),G322(13)/-2.1539E+01, 8.2651E+01,-7.7065E+01/,
+     * G320(14),G321(14),G322(14)/-1.4344E+01, 5.5193E+01,-5.0867E+01/,
+     * G320(15),G321(15),G322(15)/-5.4990E+00, 2.3874E+01,-2.3140E+01/,
+     * G320(16),G321(16),G322(16)/ 3.1029E+00,-4.4708E+00, 2.1318E-01/,
+     * G320(17),G321(17),G322(17)/ 6.0961E+00,-1.3670E+01, 7.2823E+00/,
+     * G320(18),G321(18),G322(18)/ 8.6179E+00,-2.0950E+01, 1.2536E+01/,
+     * G320(19),G321(19),G322(19)/ 7.5064E+00,-1.7956E+01, 1.0520E+01/,
+     * G320(20),G321(20),G322(20)/ 5.9838E+00,-1.4065E+01, 8.0342E+00/,
+     * G320(21),G321(21),G322(21)/ 4.4959E+00,-1.0456E+01, 5.8462E+00/,
+     * G320(22),G321(22),G322(22)/ 3.2847E+00,-7.6709E+00, 4.2445E+00/,
+     * G320(23),G321(23),G322(23)/ 1.9514E+00,-4.7505E+00, 2.6452E+00/,
+     * G320(24),G321(24),G322(24)/ 4.8808E-01,-1.6910E+00, 1.0459E+00/,
+     * G320(25),G321(25),G322(25)/ 4.8808E-01,-1.6910E+00, 1.0459E+00/
+      data
+     * NBGB/  8/,B0BGB/ 1.5714E+00/,B1BGB/ 2.1429E-01/,
+     * BGB0( 1),BGB1( 1),BGB2( 1)/-1.0724E+00, 2.8203E+00,-3.5669E-01/,
+     * BGB0( 2),BGB1( 2),BGB2( 2)/ 3.7136E-01, 1.4560E+00,-2.8072E-02/,
+     * BGB0( 3),BGB1( 3),BGB2( 3)/ 1.1396E+00, 1.1910E+00,-5.2070E-03/,
+     * BGB0( 4),BGB1( 4),BGB2( 4)/ 1.4908E+00, 1.1267E+00,-2.2565E-03/,
+     * BGB0( 5),BGB1( 5),BGB2( 5)/ 1.7342E+00, 1.0958E+00,-1.2705E-03/,
+     * BGB0( 6),BGB1( 6),BGB2( 6)/ 1.9233E+00, 1.0773E+00,-8.1806E-04/,
+     * BGB0( 7),BGB1( 7),BGB2( 7)/ 2.0791E+00, 1.0649E+00,-5.7197E-04/,
+     * BGB0( 8),BGB1( 8),BGB2( 8)/ 2.0791E+00, 1.0649E+00,-5.7197E-04/
+ 
+      data                                              ! common/THRESH/
+     * RMT2/1.021997804/            ! Two times electron rest mass (MeV)
+     * RMSQ/0.261119878/           ! Electron rest mass squared (MeV**2)
+
+      data                                              ! common/UPHIOT/
+     * PI/3.1415926535897932d0/,                                    ! Pi
+     * TWOPI/6.2831853071795864d0/,                         ! 2 times Pi
+     * PI5D2/7.853981634/                   ! Five times Pi divided by 2
+
+      data                                              ! common/USEFUL/
+     * RM/0.510998902/                        ! Electron rest mass (MeV)
+
+      data                                             ! common/RLUXDAT/
+     * twom24/1./,
+     * ndskip/0,24,73,199,365/,
+     * luxlev/1/,
+     * inseed/0/,
+     * kount/0/,
+     * mkount/0/,
+     * isdext/25*0/,
+     * rluxset/.false./
+
+      end
+!---------------------last line of egs5_block_data.f--------------------
 !------------------------egs5_block_data_atom.f-------------------------
 ! Version: 051219-1435
 !          060619-1800   Change expression in D-type
@@ -4910,143 +5064,6 @@ c 600    format(i8,2i3,f8.4,3f10.4,4f10.5)
       end
 
 !------------------last line of egs5_block_data_atom.f------------------
-!---------------------------egs5_block_data.f---------------------------
-! Version: 060802-1335
-! Reference: SLAC-R-730/KEK-2005-8
-!-----------------------------------------------------------------------
-!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
-
-      block data
-
-      implicit none
-
-      include 'include/egs5_h.f'               ! Main EGS5 "header" file
-
-      include 'include/egs5_elecin.f'    ! COMMONs required by EGS5 code
-      include 'include/egs5_epcont.f'
-      include 'include/egs5_media.f'
-      include 'include/egs5_mults.f'
-      include 'include/egs5_thresh.f'
-      include 'include/egs5_uphiot.f'
-      include 'include/egs5_useful.f'
-      include 'include/randomm.f'
-
-      character*4 media1(24)                            ! Local variable
-      equivalence(media1(1),media(1,1))
-
-      data                                              ! common/ELECIN/
-     * ekelim/0./,
-     * icomp/1/
-
-      data                                              ! common/EPCONT/
-     * iausfl/5*1,MXAUSM5*0/,
-     * rhof/1.0/
-
-      data                                               ! common/MEDIA/
-     * nmed/1/,
-     * media1/'N','A','I',' ',' ',' ',' ',' ',' ',' ',' ',' ',
-     *        ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '/,
-     * charD/MXMED*0.d0/,
-     * iraylm/MXMED*0/,
-     * incohm/MXMED*0/,
-     * iprofm/MXMED*0/,
-     * impacm/MXMED*0/,
-     * useGSD/MXMED*0/
-
-      data                                               ! common/MULTS/
-     * NG21/  7/,B0G21/ 2.0000E+00/,B1G21/ 5.0000E+00/,
-     * G210( 1),G211( 1),G212( 1)/-9.9140E-04, 2.7672E+00,-1.1544E+00/,
-     * G210( 2),G211( 2),G212( 2)/-9.9140E-04, 2.7672E+00,-1.1544E+00/,
-     * G210( 3),G211( 3),G212( 3)/-7.1017E-02, 3.4941E+00,-3.0773E+00/,
-     * G210( 4),G211( 4),G212( 4)/-7.3556E-02, 3.5487E+00,-3.1989E+00/,
-     * G210( 5),G211( 5),G212( 5)/ 3.6658E-01, 2.1162E+00,-2.0311E+00/,
-     * G210( 6),G211( 6),G212( 6)/ 1.4498E+00,-5.9717E-01,-3.2951E-01/,
-     * G210( 7),G211( 7),G212( 7)/ 1.4498E+00,-5.9717E-01,-3.2951E-01/
-      data
-     * NG22/  8/,B0G22/ 2.0000E+00/,B1G22/ 6.0000E+00/,
-     * G220( 1),G221( 1),G222( 1)/-5.2593E-04, 1.4285E+00,-1.2670E+00/,
-     * G220( 2),G221( 2),G222( 2)/-5.2593E-04, 1.4285E+00,-1.2670E+00/,
-     * G220( 3),G221( 3),G222( 3)/-6.4819E-02, 2.2033E+00,-3.6399E+00/,
-     * G220( 4),G221( 4),G222( 4)/ 3.7427E-02, 1.6630E+00,-2.9362E+00/,
-     * G220( 5),G221( 5),G222( 5)/ 6.1955E-01,-6.2713E-01,-6.7859E-01/,
-     * G220( 6),G221( 6),G222( 6)/ 1.7584E+00,-4.0390E+00, 1.8810E+00/,
-     * G220( 7),G221( 7),G222( 7)/ 2.5694E+00,-6.0484E+00, 3.1256E+00/,
-     * G220( 8),G221( 8),G222( 8)/ 2.5694E+00,-6.0484E+00, 3.1256E+00/
-      data
-     * NG31/ 11/,B0G31/ 2.0000E+00/,B1G31/ 9.0000E+00/,
-     * G310( 1),G311( 1),G312( 1)/ 4.9437E-01, 1.9124E-02, 1.8375E+00/,
-     * G310( 2),G311( 2),G312( 2)/ 4.9437E-01, 1.9124E-02, 1.8375E+00/,
-     * G310( 3),G311( 3),G312( 3)/ 5.3251E-01,-6.1555E-01, 4.5595E+00/,
-     * G310( 4),G311( 4),G312( 4)/ 6.6810E-01,-2.2056E+00, 8.9293E+00/,
-     * G310( 5),G311( 5),G312( 5)/-3.8262E+00, 2.5528E+01,-3.3862E+01/,
-     * G310( 6),G311( 6),G312( 6)/ 4.2335E+00,-1.0604E+01, 6.6702E+00/,
-     * G310( 7),G311( 7),G312( 7)/ 5.0694E+00,-1.4208E+01, 1.0456E+01/,
-     * G310( 8),G311( 8),G312( 8)/ 1.4563E+00,-3.3275E+00, 2.2601E+00/,
-     * G310( 9),G311( 9),G312( 9)/-3.2852E-01, 1.2938E+00,-7.3254E-01/,
-     * G310(10),G311(10),G312(10)/-2.2489E-01, 1.0713E+00,-6.1358E-01/,
-     * G310(11),G311(11),G312(11)/-2.2489E-01, 1.0713E+00,-6.1358E-01/
-      data
-     * NG32/ 25/,B0G32/ 2.0000E+00/,B1G32/ 2.3000E+01/,
-     * G320( 1),G321( 1),G322( 1)/ 2.9907E-05, 4.7318E-01, 6.5921E-01/,
-     * G320( 2),G321( 2),G322( 2)/ 2.9907E-05, 4.7318E-01, 6.5921E-01/,
-     * G320( 3),G321( 3),G322( 3)/ 2.5820E-03, 3.5853E-01, 1.9776E+00/,
-     * G320( 4),G321( 4),G322( 4)/-5.3270E-03, 4.9418E-01, 1.4528E+00/,
-     * G320( 5),G321( 5),G322( 5)/-6.6341E-02, 1.4422E+00,-2.2407E+00/,
-     * G320( 6),G321( 6),G322( 6)/-3.6027E-01, 4.7190E+00,-1.1380E+01/,
-     * G320( 7),G321( 7),G322( 7)/-2.7953E+00, 2.6694E+01,-6.0986E+01/,
-     * G320( 8),G321( 8),G322( 8)/-3.6091E+00, 3.4125E+01,-7.7512E+01/,
-     * G320( 9),G321( 9),G322( 9)/ 1.2491E+01,-7.1103E+01, 9.4496E+01/,
-     * G320(10),G321(10),G322(10)/ 1.9637E+01,-1.1371E+02, 1.5794E+02/,
-     * G320(11),G321(11),G322(11)/ 2.1692E+00,-2.5019E+01, 4.5340E+01/,
-     * G320(12),G321(12),G322(12)/-1.6682E+01, 6.2067E+01,-5.5257E+01/,
-     * G320(13),G321(13),G322(13)/-2.1539E+01, 8.2651E+01,-7.7065E+01/,
-     * G320(14),G321(14),G322(14)/-1.4344E+01, 5.5193E+01,-5.0867E+01/,
-     * G320(15),G321(15),G322(15)/-5.4990E+00, 2.3874E+01,-2.3140E+01/,
-     * G320(16),G321(16),G322(16)/ 3.1029E+00,-4.4708E+00, 2.1318E-01/,
-     * G320(17),G321(17),G322(17)/ 6.0961E+00,-1.3670E+01, 7.2823E+00/,
-     * G320(18),G321(18),G322(18)/ 8.6179E+00,-2.0950E+01, 1.2536E+01/,
-     * G320(19),G321(19),G322(19)/ 7.5064E+00,-1.7956E+01, 1.0520E+01/,
-     * G320(20),G321(20),G322(20)/ 5.9838E+00,-1.4065E+01, 8.0342E+00/,
-     * G320(21),G321(21),G322(21)/ 4.4959E+00,-1.0456E+01, 5.8462E+00/,
-     * G320(22),G321(22),G322(22)/ 3.2847E+00,-7.6709E+00, 4.2445E+00/,
-     * G320(23),G321(23),G322(23)/ 1.9514E+00,-4.7505E+00, 2.6452E+00/,
-     * G320(24),G321(24),G322(24)/ 4.8808E-01,-1.6910E+00, 1.0459E+00/,
-     * G320(25),G321(25),G322(25)/ 4.8808E-01,-1.6910E+00, 1.0459E+00/
-      data
-     * NBGB/  8/,B0BGB/ 1.5714E+00/,B1BGB/ 2.1429E-01/,
-     * BGB0( 1),BGB1( 1),BGB2( 1)/-1.0724E+00, 2.8203E+00,-3.5669E-01/,
-     * BGB0( 2),BGB1( 2),BGB2( 2)/ 3.7136E-01, 1.4560E+00,-2.8072E-02/,
-     * BGB0( 3),BGB1( 3),BGB2( 3)/ 1.1396E+00, 1.1910E+00,-5.2070E-03/,
-     * BGB0( 4),BGB1( 4),BGB2( 4)/ 1.4908E+00, 1.1267E+00,-2.2565E-03/,
-     * BGB0( 5),BGB1( 5),BGB2( 5)/ 1.7342E+00, 1.0958E+00,-1.2705E-03/,
-     * BGB0( 6),BGB1( 6),BGB2( 6)/ 1.9233E+00, 1.0773E+00,-8.1806E-04/,
-     * BGB0( 7),BGB1( 7),BGB2( 7)/ 2.0791E+00, 1.0649E+00,-5.7197E-04/,
-     * BGB0( 8),BGB1( 8),BGB2( 8)/ 2.0791E+00, 1.0649E+00,-5.7197E-04/
- 
-      data                                              ! common/THRESH/
-     * RMT2/1.021997804/            ! Two times electron rest mass (MeV)
-     * RMSQ/0.261119878/           ! Electron rest mass squared (MeV**2)
-
-      data                                              ! common/UPHIOT/
-     * PI/3.1415926535897932d0/,                                    ! Pi
-     * TWOPI/6.2831853071795864d0/,                         ! 2 times Pi
-     * PI5D2/7.853981634/                   ! Five times Pi divided by 2
-
-      data                                              ! common/USEFUL/
-     * RM/0.510998902/                        ! Electron rest mass (MeV)
-
-      data                                             ! common/RLUXDAT/
-     * twom24/1./,
-     * ndskip/0,24,73,199,365/,
-     * luxlev/1/,
-     * inseed/0/,
-     * kount/0/,
-     * mkount/0/,
-     * isdext/25*0/,
-     * rluxset/.false./
-
-      end
-!---------------------last line of egs5_block_data.f--------------------
 !----------------------------egs5_block_set.f---------------------------
 ! Version: 070117-1205
 ! Auxillary to BLOCK DATA to initial elements in commons which contain
@@ -15399,92 +15416,6 @@ c
       end
 
 !---------------------------last line of chgtr.f------------------------
-!-------------------------------cone21.f--------------------------------
-! Version: 051219-1435
-! Reference:
-!-----------------------------------------------------------------------
-!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
-
-! ----------------------------------------------------------------------
-! Auxiliary (geometry) subroutine for use with the EGS5 Code System
-! ----------------------------------------------------------------------
-! Subroutine cone21 is generally called from subroutine howfar whenever
-! a particle is in a region bounded outside two cones.
-! Both subroutines cone and chgtr are called by subroutine cone21.
-! ----------------------------------------------------------------------
-! Input arguments:
-! ----------------
-!   ncone1 = ID number assigned to cone including current position
-!   nrg1   = ID number assigned to region particle trajectory
-!            will lead into next
-!   ncone2 = ID number assigned to cone inside current position
-!   nrg2   = Same as above, but for second cone
-! ----------------------------------------------------------------------
-
-      subroutine cone21(ncone1,nrg1,ncone2,nrg2)
-
-      implicit none
-
-      real*8 tcone                                           ! Arguments
-      integer ncone1,nrg1,ncone2,nrg2,ihit
-
-      call cone(ncone1,0,ihit,tcone)
-      if (ihit .eq. 1) then                             ! Hits 1st cone
-        call chgtr(tcone,nrg1)
-      end if
-      call cone(ncone2,0,ihit,tcone)
-      if (ihit .eq. 1) then                             ! Hits 2nd cone
-        call chgtr(tcone,nrg2)
-      end if
-
-      return
-
-      end
-
-!-------------------------------cyl2.f--------------------------------
-!-------------------------------cone2.f--------------------------------
-! Version: 051219-1435
-! Reference:
-!-----------------------------------------------------------------------
-!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
-
-! ----------------------------------------------------------------------
-! Auxiliary (geometry) subroutine for use with the EGS5 Code System
-! ----------------------------------------------------------------------
-! Subroutine cone2 is generally called from subroutine howfar whenever
-! a particle is in a region bounded between two cones.
-! Both subroutines cone and chgtr are called by subroutine cone2.
-! ----------------------------------------------------------------------
-! Input arguments:
-! ----------------
-!   ncone1 = ID number assigned to cone including current position
-!   nrg1   = ID number assigned to region particle trajectory
-!            will lead into next
-!   ncone2 = ID number assigned to cone inside current position
-!   nrg2   = Same as above, but for second cone
-! ----------------------------------------------------------------------
-
-      subroutine cone2(ncone1,nrg1,ncone2,nrg2)
-
-      implicit none
-
-      real*8 tcone                                           ! Arguments
-      integer ncone1,nrg1,ncone2,nrg2,ihit
-
-      call cone(ncone1,0,ihit,tcone)
-      if (ihit .eq. 1) then                             ! Hits 1st cone
-        call chgtr(tcone,nrg1)
-      end if
-      call cone(ncone2,1,ihit,tcone)
-      if (ihit .eq. 1) then                             ! Hits 2nd cone
-        call chgtr(tcone,nrg2)
-      end if
-
-      return
-
-      end
-
-!-------------------------------cyl2.f--------------------------------
 !---------------------------------cone.f--------------------------------
 ! Version: 051219-1435
 !-----------------------------------------------------------------------
@@ -15635,6 +15566,92 @@ c
       end
 
 !---------------------------last line of cone.f-------------------------
+!-------------------------------cone2.f--------------------------------
+! Version: 051219-1435
+! Reference:
+!-----------------------------------------------------------------------
+!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
+
+! ----------------------------------------------------------------------
+! Auxiliary (geometry) subroutine for use with the EGS5 Code System
+! ----------------------------------------------------------------------
+! Subroutine cone2 is generally called from subroutine howfar whenever
+! a particle is in a region bounded between two cones.
+! Both subroutines cone and chgtr are called by subroutine cone2.
+! ----------------------------------------------------------------------
+! Input arguments:
+! ----------------
+!   ncone1 = ID number assigned to cone including current position
+!   nrg1   = ID number assigned to region particle trajectory
+!            will lead into next
+!   ncone2 = ID number assigned to cone inside current position
+!   nrg2   = Same as above, but for second cone
+! ----------------------------------------------------------------------
+
+      subroutine cone2(ncone1,nrg1,ncone2,nrg2)
+
+      implicit none
+
+      real*8 tcone                                           ! Arguments
+      integer ncone1,nrg1,ncone2,nrg2,ihit
+
+      call cone(ncone1,0,ihit,tcone)
+      if (ihit .eq. 1) then                             ! Hits 1st cone
+        call chgtr(tcone,nrg1)
+      end if
+      call cone(ncone2,1,ihit,tcone)
+      if (ihit .eq. 1) then                             ! Hits 2nd cone
+        call chgtr(tcone,nrg2)
+      end if
+
+      return
+
+      end
+
+!-------------------------------cyl2.f--------------------------------
+!-------------------------------cone21.f--------------------------------
+! Version: 051219-1435
+! Reference:
+!-----------------------------------------------------------------------
+!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
+
+! ----------------------------------------------------------------------
+! Auxiliary (geometry) subroutine for use with the EGS5 Code System
+! ----------------------------------------------------------------------
+! Subroutine cone21 is generally called from subroutine howfar whenever
+! a particle is in a region bounded outside two cones.
+! Both subroutines cone and chgtr are called by subroutine cone21.
+! ----------------------------------------------------------------------
+! Input arguments:
+! ----------------
+!   ncone1 = ID number assigned to cone including current position
+!   nrg1   = ID number assigned to region particle trajectory
+!            will lead into next
+!   ncone2 = ID number assigned to cone inside current position
+!   nrg2   = Same as above, but for second cone
+! ----------------------------------------------------------------------
+
+      subroutine cone21(ncone1,nrg1,ncone2,nrg2)
+
+      implicit none
+
+      real*8 tcone                                           ! Arguments
+      integer ncone1,nrg1,ncone2,nrg2,ihit
+
+      call cone(ncone1,0,ihit,tcone)
+      if (ihit .eq. 1) then                             ! Hits 1st cone
+        call chgtr(tcone,nrg1)
+      end if
+      call cone(ncone2,0,ihit,tcone)
+      if (ihit .eq. 1) then                             ! Hits 2nd cone
+        call chgtr(tcone,nrg2)
+      end if
+
+      return
+
+      end
+
+!-------------------------------cyl2.f--------------------------------
 !-------------------------------cyl2.f--------------------------------
 ! Version: 051219-1435
 ! Reference:
@@ -15777,42 +15794,6 @@ c
       end
 
 !--------------------------last line of cylndr.f------------------------
-!------------------------------decodeir.f-------------------------------
-! Version: 051219-1435
-! Reference:
-!-----------------------------------------------------------------------
-!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
-
-! Subroutine to determine the i,j,k indices, for standard cylinder-slab
-! geometry EGS User Codes (e.g., ucrtz.f), given the region.  The first 
-! parameter is the region number and next three are the decoded i,j,k
-! indices (requires /GEORTZ/ and region number must be greater than 1).
-! ----------------------------------------------------------------------
-
-      subroutine decodeir(irdum,idum,jdum,kdum)
-
-      implicit none
-
-      include 'auxcommons/geortz.f'             ! Auxiliary-code COMMONs
-
-      integer                                                ! Arguments
-     * irdum,idum,jdum,kdum
-
-      if (irdum .le. 1) then
-        write(6,*) '***** Program stopped because region is <= 1'
-        stop
-      end if
-
-      idum = mod(irdum-1,imax)
-      if (idum .eq. 0) idum = imax
-      kdum = 1 + (irdum - 1 - idum)/ijmax
-      jdum = 1 + (irdum - 1 - idum - (kdum - 1)*ijmax)/imax
-
-      return
-
-      end
-
-!-------------------------last line of decodeir.f-----------------------
 !------------------------------decod_xyz.f-----------------------------
 ! Version: 051219-1435
 ! Reference: 030823-1730 by H. Hirayama and Y. Namito
@@ -15851,6 +15832,42 @@ c
       end
 
 !---------------------------- end of decodir.f ------------------------
+!------------------------------decodeir.f-------------------------------
+! Version: 051219-1435
+! Reference:
+!-----------------------------------------------------------------------
+!23456789|123456789|123456789|123456789|123456789|123456789|123456789|12
+
+! Subroutine to determine the i,j,k indices, for standard cylinder-slab
+! geometry EGS User Codes (e.g., ucrtz.f), given the region.  The first 
+! parameter is the region number and next three are the decoded i,j,k
+! indices (requires /GEORTZ/ and region number must be greater than 1).
+! ----------------------------------------------------------------------
+
+      subroutine decodeir(irdum,idum,jdum,kdum)
+
+      implicit none
+
+      include 'auxcommons/geortz.f'             ! Auxiliary-code COMMONs
+
+      integer                                                ! Arguments
+     * irdum,idum,jdum,kdum
+
+      if (irdum .le. 1) then
+        write(6,*) '***** Program stopped because region is <= 1'
+        stop
+      end if
+
+      idum = mod(irdum-1,imax)
+      if (idum .eq. 0) idum = imax
+      kdum = 1 + (irdum - 1 - idum)/ijmax
+      jdum = 1 + (irdum - 1 - idum - (kdum - 1)*ijmax)/imax
+
+      return
+
+      end
+
+!-------------------------last line of decodeir.f-----------------------
 !-------------------------------ecnsv1.f--------------------------------
 ! Version: 060130-1415
 !          091105-0930  initialize gsum

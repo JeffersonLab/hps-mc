@@ -149,7 +149,7 @@ rm -f fort.*            2> /dev/null
 rm -f -r include           2> /dev/null
 rm -f -r pegscommons       2> /dev/null
 rm -f -r auxcommons        2> /dev/null
-rm -f -r data              2> /dev/null
+#rm -f -r data              2> /dev/null
 
 #--------------------------------------------
 # Jump out of script if "cl" option is chosen
@@ -235,7 +235,7 @@ echo ""
 echo "Your Compiler is $COMPILER"
 
 
-CFLAGS="$CFLAGS -fno-second-underscore -L$STDHEP/lib -I$STDHEP/src/inc"
+CFLAGS="$CFLAGS -fno-second-underscore -L$STDHEP/lib -I$STDHEP/include"
 LIBS="-lstdhep -lFmcfio"
 #-------------------------
 # Build the egs5job.f file 
@@ -374,7 +374,7 @@ fi
 #------------------------------------
 # Link data directory
 #------------------------------------
-ln -s $BASKET/data               data
+#ln -s $BASKET/data               data
 
 #------------------
 # Run the job
