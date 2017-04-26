@@ -46,8 +46,8 @@ index.html
 
 /build
 /install
-*/build
-*/install
+build
+install
 
 .cproject
 .project
