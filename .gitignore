@@ -48,3 +48,6 @@ index.html
 /install
 */build
 */install
+
+.cproject
+.project
