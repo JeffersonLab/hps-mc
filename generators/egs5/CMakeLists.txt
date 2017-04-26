@@ -26,5 +26,6 @@ foreach (egs_program_source ${egs_program_sources})
           COMMAND src/build.sh ARGS ${egs_program} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/config)
   add_custom_target(${egs_program} DEPENDS ${CMAKE_BINARY_DIR}/config/${egs_program}.exe)
   add_dependencies(egs5 ${egs_program})
-  install(FILES ${CMAKE_BINARY_DIR}/config/${egs_program}.exe DESTINATION bin RENAME egs5_${egs_program})
+  install(FILES ${CMAKE_BINARY_DIR}/config/${egs_program}.exe DESTINATION bin RENAME egs5_${egs_program}
+          PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_READ WORLD_WRITE)
 endforeach()
