@@ -65,7 +65,6 @@ class EGS5(EventGenerator):
         seed_file.write(seed_data)
         seed_file.close()
 
-# TODO: This needs to handle run cards.
 class MG4(EventGenerator):
 
     dir_map = {
@@ -77,7 +76,7 @@ class MG4(EventGenerator):
         "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
         "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
         
-    def __init__(self, gen_process, **kwargs):
+    def __init__(self, gen_process, run_card=None, **kwargs):
         EventGenerator.__init__(self, **kwargs)
         if gen_process not in MG4.dir_map:
             raise Exception("The gen process '" + gen_process + " is not valid.")
@@ -86,13 +85,12 @@ class MG4(EventGenerator):
         if self.output is None:
             self.output = gen_process + "_events"
         self.args = ["0", self.output]
-                
+        self.run_card = run_card      
+          
     def setup(self):
         
         EventGenerator.setup(self)
     
-        # TODO: add option to symlink to source code dir rather than copy
-        
         if not os.path.exists("mg4"):
             print "copying MG4 source tree from '" + self.mg4_dir + "' to work dir"
             shutil.copytree(self.mg4_dir, "mg4", symlinks=True)
@@ -101,6 +99,10 @@ class MG4(EventGenerator):
         
         self.executable = os.path.join(os.getcwd(), "mg4", MG4.dir_map[self.gen_process], "bin", "generate_events")
         print "MG4 executable is set to '" + self.executable + "'"
-        
+
+        if self.run_card is not None:       
+            shutil.copyfile(os.path.join(self.mg4_dir, self.gen_process, self.run_card), 
+                os.path.join(self.rundir, "mg4", MG4.dir_map[self.gen_process], "Cards", "run_card.dat")) 
+
         os.chdir(os.path.dirname(self.executable))
         
