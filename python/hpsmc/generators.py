@@ -1,4 +1,4 @@
-import os, subprocess
+import os, subprocess, shutil
 
 class EventGenerator:
 
@@ -13,6 +13,10 @@ class EventGenerator:
             self.rundir = kwargs["rundir"]
         else:        
             self.rundir = os.getcwd()
+        if "output" in kwargs:
+            self.output = kwargs["output"]
+        else:
+            self.output = None
         self.run_params = None
         self.job_num = 1
 
@@ -20,7 +24,7 @@ class EventGenerator:
         print "EventGenerator: running '" + self.executable + "' with args " + str(self.args)
         command = [self.executable]
         command.extend(self.args)
-        process = subprocess.Popen(command, shell=False)
+        proc = subprocess.Popen(command, shell=False)
         proc.communicate()
 
     def setup(self):
@@ -39,7 +43,7 @@ class EGS5(EventGenerator):
             self.bunches = 5e5
         else:
             self.bunches = kwargs["bunches"]        
-        self.executable = os.environ["EGS5_BIN_DIR"] + "/egs5_" + program_name
+        self.executable = os.path.join(os.environ["EGS5_BIN_DIR"], "egs5_" + program_name)
         
     def setup(self):
         EventGenerator.setup(self)
@@ -60,3 +64,43 @@ class EGS5(EventGenerator):
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
         seed_file.close()
+
+# TODO: This needs to handle run cards.
+class MG4(EventGenerator):
+
+    dir_map = {
+        "BH"      : "BH/MG_mini_BH/apBH",
+        "RAD"     : "RAD/MG_mini_Rad/apRad",
+        "TM"      : "TM/MG_mini/ap",
+        "ap"      : "ap/MG_mini/ap",
+        "trigg"   : "trigg/MG_mini_Trigg/apTri",
+        "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
+        "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
+        
+    def __init__(self, gen_process, **kwargs):
+        EventGenerator.__init__(self, **kwargs)
+        if gen_process not in MG4.dir_map:
+            raise Exception("The gen process '" + gen_process + " is not valid.")
+        self.mg4_dir = os.environ["MG4_DIR"]
+        self.gen_process = gen_process
+        if self.output is None:
+            self.output = gen_process + "_events"
+        self.args = ["0", self.output]
+                
+    def setup(self):
+        
+        EventGenerator.setup(self)
+    
+        # TODO: add option to symlink to source code dir rather than copy
+        
+        if not os.path.exists("mg4"):
+            print "copying MG4 source tree from '" + self.mg4_dir + "' to work dir"
+            shutil.copytree(self.mg4_dir, "mg4", symlinks=True)
+        else:
+            print "WARNING: Skipping copy of MG4 source tree.  It already exists here!"
+        
+        self.executable = os.path.join(os.getcwd(), "mg4", MG4.dir_map[self.gen_process], "bin", "generate_events")
+        print "MG4 executable is set to '" + self.executable + "'"
+        
+        os.chdir(os.path.dirname(self.executable))
+        
