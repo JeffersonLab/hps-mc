@@ -20,11 +20,8 @@ class EventGenerator:
         print "EventGenerator: running '" + self.executable + "' with args " + str(self.args)
         command = [self.executable]
         command.extend(self.args)
-        #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-        #process.wait()
         process = subprocess.Popen(command, shell=False)
         proc.communicate()
-        #print "return code: " + str(process.returncode)
 
     def setup(self):
         os.chdir(self.rundir)
@@ -47,15 +44,13 @@ class EGS5(EventGenerator):
     def setup(self):
         EventGenerator.setup(self)
         
-        try:
-            os.symlink(self.egs5_data_dir, "data")
-        except:
-            pass
+        if os.path.exists("data"):
+            os.unlink("data")
+        os.symlink(self.egs5_data_dir, "data")
         
-        try:
-            os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
-        except:
-            pass
+        if os.path.exists("pgs5job.pegs5inp"):
+            os.unlink("pgs5job.pegs5inp")
+        os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
                 
         target_z = self.run_params.get("target_z") 
         ebeam = self.run_params.get("beam_energy")
