@@ -18,12 +18,7 @@ num = 1
 
 rp = RunParameters(key=beam_energy)
 
-print "target_z = %d" % target_z
-print "num_electrons = %d" % num_electrons
-print "ebeam = %d" % ebeam
-print "num_electrons * bunches = %d" % total_electrons
-
-egs5 = EGS5()
+egs5 = EGS5("beam_v5")
 egs5.run_params = rp 
 egs5.setup()
 egs5.run()
