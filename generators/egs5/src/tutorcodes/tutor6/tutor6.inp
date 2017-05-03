@@ -1,0 +1,12 @@
+ELEM
+ &INP IRAYL=0,IBOUND=0,INCOH=0,ICPROF=0,IMPACT=0 &END
+TA                            TA               
+TA
+ENER
+ &INP AE=1.50,AP=0.10,UE=20.611,UP=20.0 &END
+TEST
+ &INP  &END
+PWLF
+ &INP  &END
+DECK
+ &INP  &END

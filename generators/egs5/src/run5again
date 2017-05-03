@@ -1,0 +1,194 @@
+#!/bin/sh
+#
+# set -x          # Remove comment to echo script progress, line by line
+#
+# **********************************************************************
+# *******************                                        KEK VERSION
+# *    run5again    *
+# *******************                                         1 JUL 2005
+# **********************************************************************
+# USAGE:  
+#     run5again     (execute previously compiled user code w/ new data)
+# **********************************************************************
+
+echo " "
+echo "============================"
+echo "run5again script has started"
+echo "============================"
+
+echo " "
+echo "working directory is $PWD"
+
+#------------------------------------
+# Make sure this is a valid directory
+#------------------------------------
+if test "$PWD" = "$BASKET"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/egs"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/egs -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/pegs"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/pegs -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/include"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/include -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/pegscommons"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/pegscommons -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/auxcode"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/auxcode -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/auxcommons"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/auxcommons -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/data"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/data -- aborting."
+  echo " "
+  exit 1
+elif test "$PWD" = "$BASKET/docs"
+  then
+  echo " "
+  echo "ERROR:  run5again can not be run from BASKET/docs -- aborting."
+  echo " "
+  exit 1
+fi
+
+#-----------------------------------
+# Remove old pegs and egs .inp files
+#-----------------------------------
+rm egs5job.inp        2> /dev/null
+rm pgs5job.pegs5inp   2> /dev/null
+
+#--------------------------------------------
+# Copy the UNIT=4 data as an egs5job.inp file
+#--------------------------------------------
+echo " "
+echo "------------------------------------------"
+echo "      Enter name of READ(4) data file     "
+echo "      (file extension must be '.data')    "
+echo "------------------------------------------"
+read d4file
+if test -f $d4file.data
+  then
+    cp $d4file.data   egs5job.inp
+    echo ""
+    echo "  --> d4file used, $d4file.data copied to egs5job.inp"
+else
+    touch egs5job.inp  #Create dummy data to avoid error message
+    echo ""
+    echo "  --> Empty file created as egs5job.inp"
+fi
+
+#-------------------------------------------------
+# Link the UNIT=25 data as a .inp file (for PEGS5)
+#-------------------------------------------------
+echo " "
+echo "------------------------------------------"
+echo "  Enter name of UNIT(25) (pegs input file)"
+echo "      (file extension must be '.inp')     "
+echo "   (<CR> for same file name as data file) "
+echo "------------------------------------------"
+read d25file
+if test -f $d25file.inp
+  then
+    ln -s $d25file.inp   pgs5job.pegs5inp
+    echo ""
+    echo "  --> d25file used, $d25file.inp linked to pgs5job.pegs5inp"
+elif test -f $d4file.inp
+  then
+    ln -s $d4file.inp   pgs5job.pegs5inp
+    echo ""
+    echo "  --> d4file used, $d4file.inp linked to pgs5job.pegs5inp"
+else
+    echo ""
+    echo " Script stopped - $d25file.inp file (required by PEGS) not found"
+    exit 1
+fi
+
+#----------------------------------------------
+# Get the executable, if other than egs5job.exe
+#----------------------------------------------
+echo " "
+echo "------------------------------------"
+echo "    Enter name of the executable    "
+echo "  (file extension must be '.exe')   "
+echo "     (<CR> to use egs5job.exe)      "
+echo "------------------------------------"
+read ucode
+if test "$ucode" = ""
+  then
+  if test -x egs5job.exe
+    then
+      EXECUTABLE=egs5job.exe
+  else
+      echo ""
+      echo " Script stopped - egs5job.exe not found or not executable"
+      exit 1
+  fi
+elif test -x $ucode.exe
+  then
+    EXECUTABLE=$ucode.exe
+else
+    echo ""
+    echo " Script stopped - $ucode.exe not found or not executable"
+    exit 1
+fi
+
+#---------------------------
+# Query about terminal input
+#---------------------------
+echo " "
+echo "-----------------------------------------------"
+echo "  Does this user code read from the terminal?  "
+echo "  (Enter 1 for yes, anything else for no)      "
+echo "-----------------------------------------------"
+read interactive
+
+#------------
+# Run the job
+#------------
+echo " " 
+echo "      *********************************************" 
+echo "      * Previously compiled user code is starting *" 
+echo "      *********************************************"
+if test "$interactive" = "1" 
+  then
+    echo " " 
+    echo " Ready for user input:"
+    echo " " 
+    time $PWD/$EXECUTABLE
+else
+    echo " " 
+    echo " Running $EXECUTABLE in background"
+    time $PWD/$EXECUTABLE 2>&1 > $PWD/egs5job.log &
+fi
+
+echo " "
+echo "=========================="
+echo "run5again script has ended"
+echo "=========================="

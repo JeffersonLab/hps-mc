@@ -44,3 +44,12 @@ index.html
 
 *~
 
+build
+install
+scratch
+
+.cproject
+.project
+.pydevproject
+
+*.pyc
