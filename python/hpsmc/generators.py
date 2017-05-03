@@ -1,37 +1,11 @@
 import os, subprocess, shutil
+from hpsmc.base import Component
 
-class EventGenerator:
+class EventGenerator(Component):
 
     def __init__(self, **kwargs):
-        if "executable" in kwargs:
-            self.executable = kwargs["executable"]
-        if "args" in kwargs:
-            self.args = kwargs["args"]
-        else:
-            self.args = []
-        if "rundir" in kwargs:
-            self.rundir = kwargs["rundir"]
-        else:        
-            self.rundir = os.getcwd()
-        if "output" in kwargs:
-            self.output = kwargs["output"]
-        else:
-            self.output = None
+        Component.__init__(self, **kwargs)
         self.run_params = None
-        self.job_num = 1
-
-    def run(self):
-        print "EventGenerator: running '" + self.executable + "' with args " + str(self.args)
-        command = [self.executable]
-        command.extend(self.args)
-        proc = subprocess.Popen(command, shell=False)
-        proc.communicate()
-
-    def setup(self):
-        os.chdir(self.rundir)
-
-    def cleanup(self):
-        pass
 
 class EGS5(EventGenerator):
 
@@ -47,7 +21,10 @@ class EGS5(EventGenerator):
         
     def setup(self):
         EventGenerator.setup(self)
-        
+       
+        if self.run_params is None:
+            raise Exception("ERROR: The EGS5 run_params were never set.")
+ 
         if os.path.exists("data"):
             os.unlink("data")
         os.symlink(self.egs5_data_dir, "data")
@@ -82,10 +59,10 @@ class MG4(EventGenerator):
             raise Exception("The gen process '" + gen_process + " is not valid.")
         self.mg4_dir = os.environ["MG4_DIR"]
         self.gen_process = gen_process
-        if self.output is None:
+        if not len(self.outputs):
             self.output = gen_process + "_events"
-        self.args = ["0", self.output]
-        self.run_card = run_card      
+        self.args = ["0", self.outputs[0]]
+        self.run_card = run_card
           
     def setup(self):
         
@@ -105,4 +82,3 @@ class MG4(EventGenerator):
                 os.path.join(self.rundir, "mg4", MG4.dir_map[self.gen_process], "Cards", "run_card.dat")) 
 
         os.chdir(os.path.dirname(self.executable))
-        
