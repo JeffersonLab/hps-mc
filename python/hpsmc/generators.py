@@ -26,7 +26,7 @@ class EGS5(EventGenerator):
             self.run_params = kwargs["run_params"]
         else:
             self.run_params = None
-        self.executable = "egs5_" + self.name
+        self.command = "egs5_" + self.name
         
     def setup(self):
         EventGenerator.setup(self)
@@ -93,11 +93,11 @@ class MG4(EventGenerator):
         else:
             print "WARNING: Skipping copy of MG4 source tree.  It already exists here!"
         
-        self.executable = os.path.join(os.getcwd(), "mg4", MG4.dir_map[self.gen_process], "bin", "generate_events")
-        print "MG4 executable is set to '" + self.executable + "'"
+        self.command = os.path.join(os.getcwd(), "mg4", MG4.dir_map[self.gen_process], "bin", "generate_events")
+        print "MG4 executable is set to '" + self.command + "'"
 
         if self.run_card is not None:       
             shutil.copyfile(os.path.join(self.mg4_dir, self.gen_process, self.run_card), 
                 os.path.join(self.rundir, "mg4", MG4.dir_map[self.gen_process], "Cards", "run_card.dat")) 
 
-        os.chdir(os.path.dirname(self.executable))
+        os.chdir(os.path.dirname(self.command))
