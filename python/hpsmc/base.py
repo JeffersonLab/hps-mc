@@ -27,10 +27,13 @@ class Component:
     def execute(self):
         print "Component: running executable '%s' with args %s" % (self.executable, self.args)
         command = [self.executable]
-        command.extend(self.args)
+        command.extend(self.cmd_args())
         proc = subprocess.Popen(command, shell=False)
         proc.communicate()
         return proc.returncode
+
+    def cmd_args(self):
+        return self.args
     
     def setup(self):
         pass 
