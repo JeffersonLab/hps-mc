@@ -36,7 +36,7 @@ string(STRIP "${HPSJAVA_PROJECT_VERSION}" HPSJAVA_PROJECT_VERSION)
 
 # build hps-java
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar 
-    COMMAND mvn ARGS -DskipTests
+    COMMAND mvn ARGS -DskipTests -q
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION})
 add_custom_target(hps_java_build ALL DEPENDS hps_java_download ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar)
 
