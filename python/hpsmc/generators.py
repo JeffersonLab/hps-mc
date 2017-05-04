@@ -22,13 +22,17 @@ class EGS5(EventGenerator):
             rand_seed = kwargs["rand_seed"]
         else:
             self.rand_seed = random.randint(1, 1000000)
-        self.executable = os.path.join(os.environ["EGS5_BIN_DIR"], "egs5_" + self.name)
+        if "run_params" in kwargs:
+            self.run_params = kwargs["run_params"]
+        else:
+            self.run_params = None
+        self.executable = "egs5_" + self.name
         
     def setup(self):
         EventGenerator.setup(self)
        
         if self.run_params is None:
-            raise Exception("The EGS5 run_params were never set.")
+            raise Exception("The EGS5 run params were never set.")
  
         if os.path.exists("data"):
             os.unlink("data")
@@ -53,7 +57,7 @@ class EGS5(EventGenerator):
         if not len(stdhep_files):
             raise Exception("No stdhep files produced by EGS5 execution.")
         if len(stdhep_files) > 1:
-            raise Exception("More than one stdhep file present in run dir.")
+            raise Exception("More than one stdhep file present in run dir after EGS5 execution.")
         self.outputs.append(stdhep_files[0])
 
 class MG4(EventGenerator):
