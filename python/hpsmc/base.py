@@ -3,10 +3,6 @@ import os, subprocess
 class Component:
 
     def __init__(self, **kwargs):
-        if "executable" in kwargs:
-            self.executable = kwargs["executable"]
-        else:
-            self.executable = None
         if "name" in kwargs:
             self.name = kwargs["name"]
         else:
@@ -25,12 +21,16 @@ class Component:
             self.inputs = []
 
     def execute(self):
-        print "Component: running executable '%s' with args %s" % (self.executable, self.args)
-        command = [self.executable]
+        command = [self.command]
         command.extend(self.cmd_args())
+        print "Component: running '%s' with command %s" % (self.name, command)
         proc = subprocess.Popen(command, shell=False)
         proc.communicate()
         return proc.returncode
+
+    def cmd_exists(self):
+        return subprocess.call("type " + self.command, shell=True, 
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
     def cmd_args(self):
         return self.args
@@ -66,17 +66,16 @@ class Job:
         print "Job: running job '%s'" % self.name
         for i in range(0, len(self.components)):
             c = self.components[i]
-            #if i and not len(c.inputs) and len(self.components[i - 1].outputs):
-            #    c.inputs.extend(self.components[i - 1].outputs)
-            print "Job: executing '%s' with inputs %s and outputs %s" % (c.executable, str(c.inputs), str(c.outputs))
+            print "Job: executing '%s' with inputs %s and outputs %s" % (c.command, str(c.inputs), str(c.outputs))
             c.execute()
 
     def setup(self):
         print "Job: switching to run dir '%s'" % self.rundir
         os.chdir(self.rundir)
-        for i in range(0, len(self.components)):
-            c = self.components[i]
+        for c in self.components:
             print "Job: setting up '%s'" % (c.name) 
+            if not c.cmd_exists():
+                raise Exception("Command %s does not exist for component %s." % (c.command, c.name))
             c.rundir = self.rundir
             c.setup()
 
