@@ -22,5 +22,11 @@ class SLIC(Component):
         self.name = "slic"
         self.executable = self.name
 
-    def execute(self):
-        Component.execute(self)
+class HPSJava(Component):
+
+    def __init__(self, **kwargs):
+        Component.__init__(self, **kwargs)
+        self.name = "hps-java"
+        self.executable = "java"
+        self.args.insert(0, os.environ["HPSJAVA_JAR"])
+        self.args.insert(0, "-jar")
