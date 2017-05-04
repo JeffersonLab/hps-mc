@@ -49,6 +49,20 @@ foreach (detector_file ${detector_files})
     install(FILES ${detector_file} DESTINATION share/detectors)
 endforeach()
 
+# download and install the field maps
+file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/)
+configure_file(${PROJECT_SOURCE_DIR}/scripts/install_fieldmaps.sh.in ${CMAKE_BINARY_DIR}/install_fieldmaps.sh)
+
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-fieldmaps/
+    COMMAND git clone https://github.com/JeffersonLab/hps-fieldmaps.git
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+add_custom_target(hps_fieldmaps_download ALL DEPENDS ${CMAKE_BINARY_DIR}/hps-fieldmaps/)
+
+add_custom_command(OUTPUT ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/BmapCorrected3D_13k_unfolded_scaled_1.15384615385.dat
+    COMMAND "${CMAKE_BINARY_DIR}/install_fieldmaps.sh"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-fieldmaps/)
+add_custom_target(hps_fieldmaps_install ALL DEPENDS hps_fieldmaps_download ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/BmapCorrected3D_13k_unfolded_scaled_1.15384615385.dat)
+
 # config and install env script
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)

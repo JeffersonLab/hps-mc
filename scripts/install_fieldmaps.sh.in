@@ -1,0 +1,1 @@
+for d in $(ls *.tar.gz); do tar -zxvf $d -C @CMAKE_INSTALL_PREFIX@/share/fieldmaps; done
