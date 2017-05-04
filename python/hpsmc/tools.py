@@ -40,8 +40,8 @@ class SLIC(Component):
         return self.args
 
     def setup(self):
-        if not os.path.exists("./fieldmaps"):
-            os.symlink(os.environ["HPSMC_FIELDMAPS_DIR"], "fieldmaps")
+        if not os.path.exists("./fieldmap"):
+            os.symlink(os.environ["HPSMC_FIELDMAPS_DIR"], "fieldmap")
 
 class HPSJava(Component):
 
