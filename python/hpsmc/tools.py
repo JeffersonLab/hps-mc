@@ -6,7 +6,7 @@ class StdHepTool(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)        
-        self.executable = os.path.join(os.environ["STDHEP_BIN_DIR"], "stdhep_" + self.name)
+        self.executable = "stdhep_" + self.name
 
     def execute(self):
         if len(self.outputs):
