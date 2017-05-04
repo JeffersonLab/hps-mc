@@ -7,6 +7,10 @@ class Component:
             self.executable = kwargs["executable"]
         else:
             self.executable = None
+        if "name" in kwargs:
+            self.name = kwargs["name"]
+        else:
+            self.name = None
         if "args" in kwargs:
             self.args = kwargs["args"]
         else:
@@ -19,13 +23,9 @@ class Component:
             self.inputs = kwargs["inputs"]
         else:
             self.inputs = []
-        if "job_num" in kwargs:
-            self.job_num = kwargs["job_num"]
-        else:
-            self.job_num = 1
 
     def execute(self):
-        print "Component: running executable '%s'" % self.executable
+        print "Component: running executable '%s' with args %s" % (self.executable, self.args)
         command = [self.executable]
         command.extend(self.args)
         proc = subprocess.Popen(command, shell=False)
@@ -45,7 +45,7 @@ class Job:
         if "name" in kwargs:
             self.name = kwargs["name"] 
         else:
-            self.name = ""
+            self.name = "MC Job"
         if "rundir" in kwargs:
             self.rundir = kwargs["rundir"]
         else:
@@ -56,15 +56,20 @@ class Job:
             self.components = []
 
     def run(self):
-        for c in self.components:
-            print "Job: Running '%s'" % c.executable 
+        for i in range(0, len(self.components)):
+            c = self.components[i]
+            #if i and not len(c.inputs) and len(self.components[i - 1].outputs):
+            #    c.inputs.extend(self.components[i - 1].outputs)
+            print "Job: executing '%s' with inputs %s and outputs %s" % (c.executable, str(c.inputs), str(c.outputs))
             c.execute()
 
     def setup(self):
         print "Job: switching to run dir '%s'" % self.rundir
         os.chdir(self.rundir)
-        for c in self.components:
-            print "Job: setting up component '%s'" % c.executable
+        for i in range(0, len(self.components)):
+            c = self.components[i]
+            print "Job: setting up '%s'" % (c.name) 
+            c.rundir = self.rundir
             c.setup()
 
     def cleanup(self):

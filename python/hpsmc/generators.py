@@ -1,4 +1,5 @@
-import os, subprocess, shutil
+import os, subprocess, shutil, random, glob
+
 from hpsmc.base import Component
 
 class EventGenerator(Component):
@@ -9,7 +10,7 @@ class EventGenerator(Component):
 
 class EGS5(EventGenerator):
 
-    def __init__(self, program_name, **kwargs): 
+    def __init__(self, **kwargs): 
         EventGenerator.__init__(self, **kwargs)
         self.egs5_data_dir = os.environ["EGS5_DATA_DIR"]
         self.egs5_config_dir = os.environ["EGS5_CONFIG_DIR"]
@@ -17,13 +18,17 @@ class EGS5(EventGenerator):
             self.bunches = 5e5
         else:
             self.bunches = kwargs["bunches"]        
-        self.executable = os.path.join(os.environ["EGS5_BIN_DIR"], "egs5_" + program_name)
+        if "rand_seed" in kwargs:
+            rand_seed = kwargs["rand_seed"]
+        else:
+            self.rand_seed = random.randint(1, 1000000)
+        self.executable = os.path.join(os.environ["EGS5_BIN_DIR"], "egs5_" + self.name)
         
     def setup(self):
         EventGenerator.setup(self)
        
         if self.run_params is None:
-            raise Exception("ERROR: The EGS5 run_params were never set.")
+            raise Exception("The EGS5 run_params were never set.")
  
         if os.path.exists("data"):
             os.unlink("data")
@@ -37,10 +42,19 @@ class EGS5(EventGenerator):
         ebeam = self.run_params.get("beam_energy")
         electrons = self.run_params.get("num_electrons") * self.bunches
                 
-        seed_data = "%d %f %f %d" % (self.job_num, target_z, ebeam, electrons)
+        seed_data = "%d %f %f %d" % (self.rand_seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
         seed_file.close()
+
+    def execute(self):
+        Component.execute(self)
+        stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
+        if not len(stdhep_files):
+            raise Exception("No stdhep files produced by EGS5 execution.")
+        if len(stdhep_files) > 1:
+            raise Exception("More than one stdhep file present in run dir.")
+        self.outputs.append(stdhep_files[0])
 
 class MG4(EventGenerator):
 
@@ -61,13 +75,14 @@ class MG4(EventGenerator):
         self.gen_process = gen_process
         if not len(self.outputs):
             self.output = gen_process + "_events"
-        self.args = ["0", self.outputs[0]]
         self.run_card = run_card
           
     def setup(self):
         
         EventGenerator.setup(self)
     
+        self.args = ["0", self.outputs[0]]
+
         if not os.path.exists("mg4"):
             print "copying MG4 source tree from '" + self.mg4_dir + "' to work dir"
             shutil.copytree(self.mg4_dir, "mg4", symlinks=True)
