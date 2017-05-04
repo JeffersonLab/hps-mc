@@ -43,6 +43,12 @@ add_custom_target(hps_java_build ALL DEPENDS hps_java_download ${CMAKE_BINARY_DI
 # install hps-java jar to lib dir
 install(FILES ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar DESTINATION lib)
 
+# install detectors to share dir
+file(GLOB_RECURSE detector_files "${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/detector-data/detectors/*.lcdd")
+foreach (detector_file ${detector_files})
+    install(FILES ${detector_file} DESTINATION share/detectors)
+endforeach()
+
 # config and install env script
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)
