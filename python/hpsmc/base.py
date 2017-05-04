@@ -54,8 +54,13 @@ class Job:
             self.components = kwargs["components"]
         else:
             self.components = []
+        if "job_num" in kwargs:
+            self.job_num = kwargs["job_num"]
+        else:
+            self.job_num = 1
 
     def run(self):
+        print "Job: running job '%s'" % self.name
         for i in range(0, len(self.components)):
             c = self.components[i]
             #if i and not len(c.inputs) and len(self.components[i - 1].outputs):
