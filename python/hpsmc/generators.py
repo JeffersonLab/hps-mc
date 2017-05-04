@@ -1,41 +1,16 @@
-import os, subprocess, shutil
+import os, subprocess, shutil, random, glob
 
-class EventGenerator:
+from hpsmc.base import Component
+
+class EventGenerator(Component):
 
     def __init__(self, **kwargs):
-        if "executable" in kwargs:
-            self.executable = kwargs["executable"]
-        if "args" in kwargs:
-            self.args = kwargs["args"]
-        else:
-            self.args = []
-        if "rundir" in kwargs:
-            self.rundir = kwargs["rundir"]
-        else:        
-            self.rundir = os.getcwd()
-        if "output" in kwargs:
-            self.output = kwargs["output"]
-        else:
-            self.output = None
+        Component.__init__(self, **kwargs)
         self.run_params = None
-        self.job_num = 1
-
-    def run(self):
-        print "EventGenerator: running '" + self.executable + "' with args " + str(self.args)
-        command = [self.executable]
-        command.extend(self.args)
-        proc = subprocess.Popen(command, shell=False)
-        proc.communicate()
-
-    def setup(self):
-        os.chdir(self.rundir)
-
-    def cleanup(self):
-        pass
 
 class EGS5(EventGenerator):
 
-    def __init__(self, program_name, **kwargs): 
+    def __init__(self, **kwargs): 
         EventGenerator.__init__(self, **kwargs)
         self.egs5_data_dir = os.environ["EGS5_DATA_DIR"]
         self.egs5_config_dir = os.environ["EGS5_CONFIG_DIR"]
@@ -43,11 +18,22 @@ class EGS5(EventGenerator):
             self.bunches = 5e5
         else:
             self.bunches = kwargs["bunches"]        
-        self.executable = os.path.join(os.environ["EGS5_BIN_DIR"], "egs5_" + program_name)
+        if "rand_seed" in kwargs:
+            rand_seed = kwargs["rand_seed"]
+        else:
+            self.rand_seed = random.randint(1, 1000000)
+        if "run_params" in kwargs:
+            self.run_params = kwargs["run_params"]
+        else:
+            self.run_params = None
+        self.executable = "egs5_" + self.name
         
     def setup(self):
         EventGenerator.setup(self)
-        
+       
+        if self.run_params is None:
+            raise Exception("The EGS5 run params were never set.")
+ 
         if os.path.exists("data"):
             os.unlink("data")
         os.symlink(self.egs5_data_dir, "data")
@@ -60,10 +46,19 @@ class EGS5(EventGenerator):
         ebeam = self.run_params.get("beam_energy")
         electrons = self.run_params.get("num_electrons") * self.bunches
                 
-        seed_data = "%d %f %f %d" % (self.job_num, target_z, ebeam, electrons)
+        seed_data = "%d %f %f %d" % (self.rand_seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
         seed_file.close()
+
+    def execute(self):
+        Component.execute(self)
+        stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
+        if not len(stdhep_files):
+            raise Exception("No stdhep files produced by EGS5 execution.")
+        if len(stdhep_files) > 1:
+            raise Exception("More than one stdhep file present in run dir after EGS5 execution.")
+        self.outputs.append(stdhep_files[0])
 
 class MG4(EventGenerator):
 
@@ -82,15 +77,16 @@ class MG4(EventGenerator):
             raise Exception("The gen process '" + gen_process + " is not valid.")
         self.mg4_dir = os.environ["MG4_DIR"]
         self.gen_process = gen_process
-        if self.output is None:
+        if not len(self.outputs):
             self.output = gen_process + "_events"
-        self.args = ["0", self.output]
-        self.run_card = run_card      
+        self.run_card = run_card
           
     def setup(self):
         
         EventGenerator.setup(self)
     
+        self.args = ["0", self.outputs[0]]
+
         if not os.path.exists("mg4"):
             print "copying MG4 source tree from '" + self.mg4_dir + "' to work dir"
             shutil.copytree(self.mg4_dir, "mg4", symlinks=True)
@@ -105,4 +101,3 @@ class MG4(EventGenerator):
                 os.path.join(self.rundir, "mg4", MG4.dir_map[self.gen_process], "Cards", "run_card.dat")) 
 
         os.chdir(os.path.dirname(self.executable))
-        
