@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(hps-mc VERSION 0.0.1)
 
+add_subdirectory(tools/stdhep-lib)
+add_subdirectory(tools/stdhep-tools)
+
 # FIXME: these should go in EGS5 cmake file
 set(EGS5_DATA_DIR ${PROJECT_SOURCE_DIR}/generators/egs5/data)
 set(EGS5_CONFIG_DIR ${PROJECT_SOURCE_DIR}/generators/egs5/config)
@@ -19,5 +22,4 @@ install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)
 
 #set(STDHEP_DIR ${PROJECT_SOURCE_DIR}/tools/stdhep-lib/src)
 
-#add_subdirectory(generators)
 #add_subdirectory(tools)
