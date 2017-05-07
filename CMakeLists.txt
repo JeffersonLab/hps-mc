@@ -32,7 +32,6 @@ execute_process(COMMAND ${CMAKE_SOURCE_DIR}/scripts/print_mvn_project_version.sh
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java
     OUTPUT_VARIABLE HPSJAVA_PROJECT_VERSION) 
 string(STRIP "${HPSJAVA_PROJECT_VERSION}" HPSJAVA_PROJECT_VERSION)
-#message("HPSJAVA_PROJECT_VERSION='${HPSJAVA_PROJECT_VERSION}'")
 
 # build hps-java
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar 
@@ -44,10 +43,10 @@ add_custom_target(hps_java_build ALL DEPENDS hps_java_download ${CMAKE_BINARY_DI
 install(FILES ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar DESTINATION lib)
 
 # install detectors to share dir
-file(GLOB_RECURSE detector_files "${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/detector-data/detectors/*.lcdd")
-foreach (detector_file ${detector_files})
-    install(FILES ${detector_file} DESTINATION share/detectors)
-endforeach()
+install(DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/detector-data/detectors/ DESTINATION share/detectors/ 
+    PATTERN "*.properties" EXCLUDE
+    PATTERN "*.xml" EXCLUDE
+    PATTERN "SampleFractions" EXCLUDE)
 
 # download and install the field maps
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/)

@@ -16,7 +16,7 @@ stdhep_print = StdHepTool(name="print_stdhep",
     inputs=["moller.stdhep"])
 
 # run stdhep file in slic
-slic = SLIC(geometry="HPS-EngRun2015-Nominal-v3-fieldmap", 
+slic = SLIC(detector="HPS-EngRun2015-Nominal-v3-fieldmap", 
     inputs=["moller.stdhep"], 
     outputs=["slic_events.slcio"], 
     nevents=10)

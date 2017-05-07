@@ -21,10 +21,10 @@ class SLIC(Component):
         Component.__init__(self, **kwargs)
         self.name = "slic"
         self.command = self.name
-        if "geometry" in kwargs:
-            self.geometry = kwargs["geometry"]
+        if "detector" in kwargs:
+            self.detector = kwargs["detector"]
         else:
-            raise Exception("Missing geometry for SLIC.")
+            raise Exception("Missing detector argument for SLIC.")
         if "nevents" in kwargs:
             self.nevents = kwargs["nevents"]
         else:
@@ -33,10 +33,10 @@ class SLIC(Component):
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs given for SLIC.")
-        geometry_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.geometry + ".lcdd")
+        detector_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.detector, self.detector + ".lcdd")
         if not len(self.outputs):
             outputs.append("slic_events.slcio")
-        self.args = ["-g", geometry_file, "-i", self.inputs[0], "-o", self.outputs[0], "-r", str(self.nevents)]
+        self.args = ["-g", detector_file, "-i", self.inputs[0], "-o", self.outputs[0], "-r", str(self.nevents)]
         return self.args
 
     def setup(self):
