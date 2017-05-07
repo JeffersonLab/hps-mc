@@ -25,7 +25,7 @@ file(GLOB egs_program_sources ${PROJECT_SOURCE_DIR}/config/src/*.f)
 list(REMOVE_ITEM egs_program_sources "${PROJECT_SOURCE_DIR}/config/src/singlePrecision_randomset.f")
 foreach (egs_program_source ${egs_program_sources})
   get_filename_component(egs_program ${egs_program_source} NAME_WE)
-  message("configuring EGS5 program: ${egs_program}")
+  message(STATUS "Configuring EGS5 program: ${egs_program}")
   add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/egs5/config/${egs_program}.exe PRE_BUILD 
           COMMAND src/build.sh ARGS ${egs_program} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/egs5/config)
   add_custom_target(${egs_program}_build ALL DEPENDS ${CMAKE_BINARY_DIR}/egs5/config/${egs_program}.exe)
