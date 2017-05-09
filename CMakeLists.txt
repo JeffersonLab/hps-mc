@@ -66,3 +66,5 @@ add_custom_target(hps_fieldmaps_install ALL DEPENDS hps_fieldmaps_download ${CMA
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)
 
+# install run params data
+install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
