@@ -6,7 +6,7 @@ class Component:
         if "name" in kwargs:
             self.name = kwargs["name"]
         else:
-            self.name = None
+            raise Exception("The name argument of Component is required.")
         if "args" in kwargs:
             self.args = kwargs["args"]
         else:
@@ -48,7 +48,7 @@ class Job:
         if "name" in kwargs:
             self.name = kwargs["name"] 
         else:
-            self.name = "MC Job"
+            self.name = "HPS MC Job"
         if "rundir" in kwargs:
             self.rundir = kwargs["rundir"]
         else:
@@ -63,9 +63,13 @@ class Job:
             self.job_num = 1
 
     def run(self):
-        print "Job: running job '%s'" % self.name
+        print "Job: running '%s'" % self.name
+        if not len(self.components):
+            raise Exception("Job has no components to run.")
         for i in range(0, len(self.components)):
             c = self.components[i]
+            if not c.cmd_exists():
+                raise Exception("Command '%s' does not exist for component '%s'." % (c.command, c.name))
             print "Job: executing '%s' with inputs %s and outputs %s" % (c.command, str(c.inputs), str(c.outputs))
             c.execute()
 
@@ -73,14 +77,13 @@ class Job:
         print "Job: switching to run dir '%s'" % self.rundir
         os.chdir(self.rundir)
         for c in self.components:
-            print "Job: setting up '%s'" % (c.name) 
-            if not c.cmd_exists():
-                raise Exception("Command %s does not exist for component %s." % (c.command, c.name))
+            print "Job: setting up component '%s'" % (c.name) 
             c.rundir = self.rundir
+            print "Job: set component '%s' rundir to '%s'" % (c.name, c.rundir)
             c.setup()
 
     def cleanup(self):
         for c in self.components:
-            print "Job: running cleanup for '%s'" % c.name
+            print "Job: running cleanup for component '%s'" % c.name
             c.cleanup()
 
