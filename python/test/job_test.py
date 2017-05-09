@@ -2,33 +2,34 @@ import os, sys
 
 from hpsmc.base import Job
 from hpsmc.run_params import RunParameters
-from hpsmc.generators import EGS5
-from hpsmc.tools import StdHepTool, SLIC, HPSJava
+from hpsmc.generators import MG4, StdHepConverter
+from hpsmc.tools import SLIC, HPSJava
 
-# generate stdhep file using EGS5
-egs5 = EGS5(name="moller_v3", 
-    bunches=5000, 
-    run_params=RunParameters(key="1pt05"))
+# generate tritrig in MG4
+mg4 = MG4(name="tritrig",
+    run_card="run_card_1pt05.dat",
+    outputs=["tritrig_events"])
 
-# print out stdhep data
-stdhep_print = StdHepTool(name="print_stdhep", 
-    args=["10"], 
-    inputs=["moller.stdhep"])
+# convert lhe output to stdhep
+stdhep_cnv = StdHepConverter(run_params=RunParameters(key="1pt05"),
+    inputs=["tritrig_events.lhe"], 
+    outputs=["tritrig_events.stdhep"])
 
-# run stdhep file in slic
+# generate events in slic
 slic = SLIC(detector="HPS-EngRun2015-Nominal-v3-fieldmap", 
-    inputs=["moller.stdhep"], 
-    outputs=["slic_events.slcio"], 
-    nevents=10)
+    inputs=["tritrig_events.stdhep"], 
+    outputs=["sim_events.slcio"], 
+    nevents=1000)
 
-# run simple hps-java job
-hps_java = HPSJava(inputs=["slic_events.slcio"], 
-    steering_resource="/org/hps/steering/EventMarker.lcsim")
+# run simulated events in readout to generate triggers
+readout = HPSJava(steering_resource="/org/hps/steering/readout/EngineeringRun2015TrigPairs1_Pass2.lcsim",
+    defs={"detector": "HPS-EngRun2015-Nominal-v3-fieldmap", "run": "5772"},
+    inputs=["sim_events.slcio"],
+    outputs=["readout_events"])
 
-# create job using defined component
-job = Job(name="EGS5 Test", 
-    components=[egs5, stdhep_print, slic, hps_java]) 
-
+# create new job with components from above
+job = Job(name="tritrig job test", components=[mg4, stdhep_cnv, slic, readout])
+ 
 # run the job
 job.setup()
 job.run()
