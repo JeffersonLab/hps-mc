@@ -68,8 +68,6 @@ class Job:
             raise Exception("Job has no components to run.")
         for i in range(0, len(self.components)):
             c = self.components[i]
-            if not c.cmd_exists():
-                raise Exception("Command '%s' does not exist for component '%s'." % (c.command, c.name))
             print "Job: executing '%s' with inputs %s and outputs %s" % (c.command, str(c.inputs), str(c.outputs))
             c.execute()
 
@@ -77,13 +75,14 @@ class Job:
         print "Job: switching to run dir '%s'" % self.rundir
         os.chdir(self.rundir)
         for c in self.components:
-            print "Job: setting up component '%s'" % (c.name) 
+            print "Job: setting up '%s'" % (c.name) 
             c.rundir = self.rundir
-            print "Job: set component '%s' rundir to '%s'" % (c.name, c.rundir)
             c.setup()
+            if not c.cmd_exists():
+                raise Exception("Command '%s' does not exist for component '%s'." % (c.command, c.name))
 
     def cleanup(self):
         for c in self.components:
-            print "Job: running cleanup for component '%s'" % c.name
+            print "Job: running cleanup for '%s'" % c.name
             c.cleanup()
 
