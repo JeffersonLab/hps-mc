@@ -56,6 +56,10 @@ class HPSJava(Component):
             self.steering_file = kwargs["steering_file"]
         else:
             raise Exception("A steering resource or file was not provided to hps-java.")
+        if "defs" in kwargs:
+            self.defs = kwargs["defs"]
+        else:
+            self.defs = {}
 
     def cmd_args(self):
         if not len(self.inputs):
@@ -63,6 +67,12 @@ class HPSJava(Component):
         self.args = ["-Xmx2g", "-jar", os.environ["HPSJAVA_JAR"]]
         self.args.append("-i")
         self.args.append(self.inputs[0])
+        if len(self.outputs):
+            self.args.append("-D")
+            self.args.append("outputFile="+self.outputs[0])
+        for k,v in self.defs.iteritems():
+            self.args.append("-D")
+            self.args.append(k+"="+v)
         if self.steering_resource is not None:
             self.args.append("-r")
             self.args.append(self.steering_resource)
