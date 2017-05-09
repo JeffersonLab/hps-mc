@@ -5,7 +5,7 @@ class Component:
     def __init__(self, **kwargs):
         if "name" in kwargs:
             self.name = kwargs["name"]
-        else:
+        elif self.name is None:
             raise Exception("The name argument of Component is required.")
         if "args" in kwargs:
             self.args = kwargs["args"]

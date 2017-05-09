@@ -18,6 +18,7 @@ class StdHepTool(Component):
 class SLIC(Component):
 
     def __init__(self, **kwargs):
+        self.name = "slic"
         Component.__init__(self, **kwargs)
         self.name = "slic"
         self.command = self.name
@@ -46,8 +47,8 @@ class SLIC(Component):
 class HPSJava(Component):
 
     def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)
         self.name = "hps-java"
+        Component.__init__(self, **kwargs)
         self.command = "java"
         if "steering_resource" in kwargs:
             self.steering_resource = kwargs["steering_resource"]
