@@ -24,7 +24,9 @@ class EGS5(EventGenerator):
             self.rand_seed = random.randint(1, 1000000)
         if "run_params" in kwargs:
             self.run_params = kwargs["run_params"]
+            print "EGS5: set run_params %s" % repr(self.run_params)
         else:
+            print "EGS5: run_params not set!!!"
             self.run_params = None
         self.command = "egs5_" + self.name
         
@@ -51,6 +53,7 @@ class EGS5(EventGenerator):
         seed_file.write(seed_data)
         seed_file.close()
 
+"""
     def execute(self):
         Component.execute(self)
         stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
@@ -59,6 +62,22 @@ class EGS5(EventGenerator):
         if len(stdhep_files) > 1:
             raise Exception("More than one stdhep file present in run dir after EGS5 execution.")
         self.outputs.append(stdhep_files[0])
+"""        
+
+class StdHepConverter(EGS5):
+
+    def __init__(self, **kwargs):
+        self.name = "lhe_v1"
+        EGS5.__init__(self, **kwargs)
+
+    def setup(self):
+        EGS5.setup(self)
+        if not len(self.inputs):
+            raise Exception("Missing required input LHE file.")
+        os.symlink(self.inputs[0], "egs5job.inp")
+
+    def execute(self):
+        EGS5.execute(self)
 
 class MG4(EventGenerator):
 
