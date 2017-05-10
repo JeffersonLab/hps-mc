@@ -6,8 +6,7 @@ class EventGenerator(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)
-        self.run_params = None
-
+ 
 class EGS5(EventGenerator):
 
     def __init__(self, **kwargs): 
@@ -25,14 +24,17 @@ class EGS5(EventGenerator):
         if "run_params" in kwargs:
             self.run_params = kwargs["run_params"]
         else:
-            self.run_params = None
+            raise Exception("Missing required run_params for EGS5.")
         self.command = "egs5_" + self.name
         
     def setup(self):
         EventGenerator.setup(self)
        
         if self.run_params is None:
-            raise Exception("The EGS5 run params were never set.")
+            raise Exception("The run_params were never set for EGS5.")
+        
+        if not len(self.outputs):
+            raise Exception("The outputs were never set for EGS5.")
  
         if os.path.exists("data"):
             os.unlink("data")
@@ -50,15 +52,30 @@ class EGS5(EventGenerator):
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
         seed_file.close()
+    
+    def execute(self):
+        EventGenerator.execute(self)
+        stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
+        if len(stdhep_files) > 1:
+            raise Exception("Multiple stdhep files present after running EGS5.")
+        stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
+        print "EGS5: moving '%s' to '%s'" % (stdhep_files[0], stdhep_output_path)
+        shutil.move(stdhep_files[0], stdhep_output_path)
+
+class StdHepConverter(EGS5):
+
+    def __init__(self, **kwargs):
+        self.name = "lhe_v1"
+        EGS5.__init__(self, **kwargs)
+
+    def setup(self):
+        EGS5.setup(self)
+        if not len(self.inputs):
+            raise Exception("Missing required input LHE file.")
+        os.symlink(self.inputs[0], "egs5job.inp")
 
     def execute(self):
-        Component.execute(self)
-        stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
-        if not len(stdhep_files):
-            raise Exception("No stdhep files produced by EGS5 execution.")
-        if len(stdhep_files) > 1:
-            raise Exception("More than one stdhep file present in run dir after EGS5 execution.")
-        self.outputs.append(stdhep_files[0])
+        EGS5.execute(self)
 
 class MG4(EventGenerator):
 
@@ -71,33 +88,47 @@ class MG4(EventGenerator):
         "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
         "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
         
-    def __init__(self, gen_process, run_card=None, **kwargs):
+    def __init__(self, **kwargs):
         EventGenerator.__init__(self, **kwargs)
-        if gen_process not in MG4.dir_map:
-            raise Exception("The gen process '" + gen_process + " is not valid.")
+        if self.name not in MG4.dir_map:
+            raise Exception("The name '" + self.name + " is not valid for MG4.")
         self.mg4_dir = os.environ["MG4_DIR"]
-        self.gen_process = gen_process
         if not len(self.outputs):
-            self.output = gen_process + "_events"
-        self.run_card = run_card
+            self.outputs.append(self.name + "_events")
+        if "run_card" in kwargs:
+            self.run_card = kwargs["run_card"]
+        else:
+            raise Exception("Missing required run_card argument to MG4.")
           
     def setup(self):
         
         EventGenerator.setup(self)
+        
+        if not len(self.outputs):
+            raise Exception("The ouputs were not set for MG4.")
     
         self.args = ["0", self.outputs[0]]
 
-        if not os.path.exists("mg4"):
-            print "copying MG4 source tree from '" + self.mg4_dir + "' to work dir"
-            shutil.copytree(self.mg4_dir, "mg4", symlinks=True)
-        else:
-            print "WARNING: Skipping copy of MG4 source tree.  It already exists here!"
+        proc_dirs = MG4.dir_map[self.name].split(os.sep)
+        src = os.path.join(self.mg4_dir, proc_dirs[0], proc_dirs[1])
+        dest = proc_dirs[1]
+        print "MG4: copying '%s' to '%s'" % (src, dest)
+        shutil.copytree(src, dest)
+
+        self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
+        print "MG4: command set to '%s'"  % self.command
+
+        shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card),
+            os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat"))
         
-        self.command = os.path.join(os.getcwd(), "mg4", MG4.dir_map[self.gen_process], "bin", "generate_events")
-        print "MG4 executable is set to '" + self.command + "'"
-
-        if self.run_card is not None:       
-            shutil.copyfile(os.path.join(self.mg4_dir, self.gen_process, self.run_card), 
-                os.path.join(self.rundir, "mg4", MG4.dir_map[self.gen_process], "Cards", "run_card.dat")) 
-
+        self.orig_output_path = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "SubProcesses", "events.lhe")
+            
+    def execute(self):
         os.chdir(os.path.dirname(self.command))
+        print "MG4: executing '%s' from '%s'" % (self.name, os.getcwd())
+        Component.execute(self)
+        os.chdir(self.rundir)
+        lhe_output = os.path.join(self.rundir, self.outputs[0] + ".lhe")
+        print "MG4: copying '%s' to '%s'" % (self.orig_output_path, lhe_output)
+        shutil.copyfile(self.orig_output_path, lhe_output)
+        
