@@ -6,7 +6,6 @@ class EventGenerator(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)
-        self.run_params = None
  
 class EGS5(EventGenerator):
 
@@ -24,10 +23,8 @@ class EGS5(EventGenerator):
             self.rand_seed = random.randint(1, 1000000)
         if "run_params" in kwargs:
             self.run_params = kwargs["run_params"]
-            print "EGS5: set run_params %s" % repr(self.run_params)
         else:
-            print "EGS5: run_params not set!!!"
-            self.run_params = None
+            raise Exception("Missing required run_params for EGS5.")
         self.command = "egs5_" + self.name
         
     def setup(self):
