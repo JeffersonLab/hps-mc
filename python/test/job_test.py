@@ -14,8 +14,8 @@ mg4 = MG4(description="Generate tritrig events using MG4",
 # convert LHE output to stdhep
 stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS5",
                              run_params=RunParameters(key="1pt05"),
-                             inputs=["tritrig.lhe"], 
-                             outputs=["tritrig.stdhep"],)
+                             inputs=["tritrig.lhe"],
+                             outputs=["tritrig.stdhep"])
 
 # generate events in slic
 slic = SLIC(description="Run detector simulation using SLIC",
@@ -76,7 +76,8 @@ output_files = ["tritrig.lhe",
 job = Job(name="tritrig job test",
     components=[mg4, stdhep_cnv, slic, filter_bunches, readout, recon, make_dst, make_tuples],
     output_dir="/tmp/tritrig_test",
-    output_files=output_files)
+    output_files=output_files,
+    job_num=1234)
  
 # setup each job component
 job.setup()
