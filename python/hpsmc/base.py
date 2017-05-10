@@ -129,6 +129,6 @@ class Job:
                     dest_file = dest
             if self.append_job_num:
                 base,ext = os.path.splitext(dest_file)
-                dest_file = base + "_" + self.job_num + ext
+                dest_file = base + "_" + str(self.job_num) + ext
             print "Job: copying '%s' to '%s'" % (src_file, dest_file)    
             shutil.copyfile(src_file, dest_file)            
