@@ -16,11 +16,7 @@ class EGS5(EventGenerator):
         if "bunches" not in kwargs:
             self.bunches = 5e5
         else:
-            self.bunches = kwargs["bunches"]        
-        if "rand_seed" in kwargs:
-            rand_seed = kwargs["rand_seed"]
-        else:
-            self.rand_seed = random.randint(1, 1000000)
+            self.bunches = kwargs["bunches"]                
         if "run_params" in kwargs:
             self.run_params = kwargs["run_params"]
         else:
@@ -110,15 +106,16 @@ class MG4(EventGenerator):
             raise Exception("Missing required run_card argument to MG4.")
 
     @staticmethod
-    def set_run_card_nevents(run_card, nevents):    
+    def set_run_card_params(run_card, nevents, rand_seed):    
         with open(run_card, 'r') as file:
             data = file.readlines()
         
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
                 data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested" + '\n'
-                break
-                    
+            if "= iseed" in data[i]:
+                data[i] = " " + str(rand_seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
+                                
         with open(run_card, 'w') as file:
             file.writelines(data)
           
@@ -147,7 +144,7 @@ class MG4(EventGenerator):
 
         shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card), run_card_dest)
         
-        MG4.set_run_card_nevents(run_card_dest, self.nevents)
+        MG4.set_run_card_params(run_card_dest, self.nevents, self.rand_seed)
                 
     def execute(self):
         os.chdir(os.path.dirname(self.command))
@@ -199,7 +196,7 @@ class MG5(EventGenerator):
         
         shutil.copyfile(run_card_src, run_card_dest)
         
-        MG4.set_run_card_nevents(run_card_dest, self.nevents)
+        MG4.set_run_card_params(run_card_dest, self.nevents, self.rand_seed)
         
     def execute(self):
         os.chdir(os.path.dirname(self.command))
