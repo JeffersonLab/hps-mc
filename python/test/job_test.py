@@ -1,20 +1,26 @@
-import os, sys
+import os, sys, random
 
 from hpsmc.base import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterMCBunches, DST
 
+job_rand_seed = random.randint(1, 1000000)
+
+print "Set job test rand seed to '%s'" % str(job_rand_seed)
+
 # generate tritrig in MG4
 mg4 = MG4(description="Generate tritrig events using MG4",
           name="tritrig",
           run_card="run_card_1pt05.dat",
           outputs=["tritrig"],
+          rand_seed=job_rand_seed,
           nevents=1000)
 
 # convert LHE output to stdhep
 stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS5",
                              run_params=RunParameters(key="1pt05"),
+                             rand_seed=job_rand_seed,
                              inputs=["tritrig_events.lhe.gz"],
                              outputs=["tritrig.stdhep"])
 
