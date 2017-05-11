@@ -6,7 +6,7 @@ class EventGenerator(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)
- 
+  
 class EGS5(EventGenerator):
 
     def __init__(self, **kwargs): 
@@ -99,6 +99,19 @@ class MG4(EventGenerator):
             self.run_card = kwargs["run_card"]
         else:
             raise Exception("Missing required run_card argument to MG4.")
+
+    @staticmethod
+    def set_run_card_nevents(run_card, nevents):    
+        with open(run_card, 'r') as file:
+            data = file.readlines()
+        
+        for i in range(0, len(data)):            
+            if "= nevents" in data[i]:
+                data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested"
+                break
+                    
+        with open(run_card, 'w') as file:
+            file.writelines(data)
           
     def setup(self):
         
@@ -122,16 +135,7 @@ class MG4(EventGenerator):
 
         shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card), run_card_dest)
         
-        with open(run_card_dest, 'r') as file:
-            run_card_data = file.readlines()
-            
-        for i in range(0, len(run_card_data)):            
-            if "= nevents" in run_card_data[i]:  
-                run_card_data[i] = " " + str(self.nevents) + " = nevents ! Number of unweighted events requested"
-                break
-        
-        with open(run_card_dest, 'w') as file:
-            file.writelines(run_card_data)
+        MG4.set_run_card_nevents(run_card_dest, self.nevents)
         
         self.orig_output_path = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "SubProcesses", "events.lhe")
             
