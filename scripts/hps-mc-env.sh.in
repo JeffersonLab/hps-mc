@@ -13,5 +13,7 @@ export EGS5_CONFIG_DIR=@EGS5_CONFIG_DIR@
 
 export MG4_DIR=@MG4_DIR@
 
+export MG5_DIR=@MG5_DIR@
+
 export HPSJAVA_JAR=@CMAKE_INSTALL_PREFIX@/lib/hps-distribution-@HPSJAVA_PROJECT_VERSION@-bin.jar
 
