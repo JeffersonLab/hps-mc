@@ -27,6 +27,10 @@ class Component:
             self.description = kwargs["description"]
         else:
             self.description = ""
+        if "rand_seed" in kwargs:
+            self.rand_seed = kwargs["rand_seed"]
+        else:
+            self.rand_seed = 1
 
     def execute(self):
         
