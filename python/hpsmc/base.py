@@ -121,7 +121,7 @@ class Job:
                 src_file = os.path.join(self.rundir, output_file)
                 dest_file = os.path.join(self.output_dir, output_file)
             elif isinstance(output_file, dict):
-                src, dest = output_file.itervalues().next()
+                src, dest = output_file.iteritems().next()
                 src_file = os.path.join(self.rundir, src)
                 if not os.path.isabs(dest):
                     dest_file = os.path.join(self.output_dir, dest)
