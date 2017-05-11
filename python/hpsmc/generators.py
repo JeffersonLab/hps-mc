@@ -1,4 +1,4 @@
-import os, subprocess, shutil, random, glob
+import os, subprocess, shutil, random, glob, gzip
 
 from hpsmc.base import Component
 
@@ -71,22 +71,31 @@ class StdHepConverter(EGS5):
     def setup(self):
         EGS5.setup(self)
         if not len(self.inputs):
-            raise Exception("Missing required input LHE file.")
-        os.symlink(self.inputs[0], "egs5job.inp")
+            raise Exception("Missing required input LHE file.")                    
 
     def execute(self):
+        input_file = self.inputs[0]
+        base,ext = os.path.splitext(input_file)
+        if ext == ".lhe":
+            os.symlink(input_file, "egs5job.inp")
+        elif ext == ".gz":
+            infile = open("egs5job.inp", 'w')
+            with gzip.open(self.inputs[0], 'r') as f:
+                for line in f:
+                    infile.write(line)
+        else:
+            raise Exception("Input file '%s' has an unknown extension." % self.inputs[0])
         EGS5.execute(self)
 
 class MG4(EventGenerator):
 
-    dir_map = {
-        "BH"      : "BH/MG_mini_BH/apBH",
-        "RAD"     : "RAD/MG_mini_Rad/apRad",
-        "TM"      : "TM/MG_mini/ap",
-        "ap"      : "ap/MG_mini/ap",
-        "trigg"   : "trigg/MG_mini_Trigg/apTri",
-        "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
-        "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
+    dir_map = {"BH"      : "BH/MG_mini_BH/apBH",
+               "RAD"     : "RAD/MG_mini_Rad/apRad",
+               "TM"      : "TM/MG_mini/ap",
+               "ap"      : "ap/MG_mini/ap",
+               "trigg"   : "trigg/MG_mini_Trigg/apTri",
+               "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
+               "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
         
     def __init__(self, **kwargs):
         EventGenerator.__init__(self, **kwargs)
@@ -105,9 +114,9 @@ class MG4(EventGenerator):
         with open(run_card, 'r') as file:
             data = file.readlines()
         
-        for i in range(0, len(data)):            
+        for i in range(0, len(data)):
             if "= nevents" in data[i]:
-                data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested"
+                data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested" + '\n'
                 break
                     
         with open(run_card, 'w') as file:
@@ -127,6 +136,9 @@ class MG4(EventGenerator):
         dest = proc_dirs[1]
         print "MG4: copying '%s' to '%s'" % (src, dest)
         shutil.copytree(src, dest)
+        
+        self.event_dir = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Events") 
+        os.makedirs(self.event_dir)
 
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
         print "MG4: command set to '%s'"  % self.command
@@ -136,15 +148,14 @@ class MG4(EventGenerator):
         shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card), run_card_dest)
         
         MG4.set_run_card_nevents(run_card_dest, self.nevents)
-        
-        self.orig_output_path = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "SubProcesses", "events.lhe")
-            
+                
     def execute(self):
         os.chdir(os.path.dirname(self.command))
         print "MG4: executing '%s' from '%s'" % (self.name, os.getcwd())
         Component.execute(self)
+        lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
+        for f in lhe_files:
+            print "MG4: copying '%s' to '%s'" % (f, self.rundir)
+            shutil.copy(f, self.rundir)
         os.chdir(self.rundir)
-        lhe_output = os.path.join(self.rundir, self.outputs[0] + ".lhe")
-        print "MG4: copying '%s' to '%s'" % (self.orig_output_path, lhe_output)
-        shutil.copyfile(self.orig_output_path, lhe_output)
-        
+    
