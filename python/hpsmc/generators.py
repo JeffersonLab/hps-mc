@@ -158,4 +158,58 @@ class MG4(EventGenerator):
             print "MG4: copying '%s' to '%s'" % (f, self.rundir)
             shutil.copy(f, self.rundir)
         os.chdir(self.rundir)
+                
+class MG5(EventGenerator):
     
+    dir_map = {"BH"      : "BH",
+               "RAD"     : "RAD",
+               "tritrig" : "tritrig"}
+
+    def __init__(self, **kwargs):
+        EventGenerator.__init__(self, **kwargs)
+        if self.name not in MG5.dir_map:
+            raise Exception("The name '" + self.name + " is not valid for MG4.")
+        self.mg5_dir = os.environ["MG5_DIR"]            
+        if "run_card" in kwargs:
+            self.run_card = kwargs["run_card"]
+        else:
+            raise Exception("Missing required run_card argument to MG4.")
+        
+    def setup(self):
+
+        if not len(self.outputs):
+            raise Exception("The ouputs were not set for MG4.")
+        
+        EventGenerator.setup(self)
+        
+        self.args = ["0", self.name]
+        
+        self.proc_dir = MG5.dir_map[self.name]
+        src = os.path.join(os.environ["MG5_DIR"], self.proc_dir)
+        dest = os.path.join(self.rundir, self.proc_dir)        
+        shutil.copytree(src, dest)
+        
+        self.command = os.path.join(dest, "bin", "generate_events")
+        print "MG5: command set to '%s'" % self.command
+        
+        run_card_src = os.path.join(src, "Cards", self.run_card)
+        run_card_dest = os.path.join(dest, "Cards", "run_card.dat")
+        
+        print "MG5: copying run card from '%s' to '%s'" % (run_card_src, run_card_dest)
+        
+        shutil.copyfile(run_card_src, run_card_dest)
+        
+        MG4.set_run_card_nevents(run_card_dest, self.nevents)
+        
+    def execute(self):
+        os.chdir(os.path.dirname(self.command))
+        print "MG5: executing '%s' from '%s'" % (self.name, os.getcwd())
+        Component.execute(self)
+        
+        lhe_files = glob.glob(os.path.join(self.rundir, self.proc_dir, "Events", self.name, "*.lhe.gz"))
+        for f in lhe_files:            
+            print "MG5: copying '%s' to '%s'" % (f, self.rundir)
+            shutil.copyfile(f, os.path.join(self.rundir, self.name + "_" + os.path.basename(f)))
+        
+        os.chdir(self.rundir)
+        

@@ -9,6 +9,7 @@ add_subdirectory(tools/stdhep-tools)
 # build generations
 add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
+add_subdirectory(generators/madgraph5)
 
 # set default hps-java version if not set from arg
 if (NOT HPSJAVA_VERSION)
