@@ -118,8 +118,20 @@ class MG4(EventGenerator):
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
         print "MG4: command set to '%s'"  % self.command
 
-        shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card),
-            os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat"))
+        run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
+
+        shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card), run_card_dest)
+        
+        with open(run_card_dest, 'r') as file:
+            run_card_data = file.readlines()
+            
+        for i in range(0, len(run_card_data)):            
+            if "= nevents" in run_card_data[i]:  
+                run_card_data[i] = " " + str(self.nevents) + " = nevents ! Number of unweighted events requested"
+                break
+        
+        with open(run_card_dest, 'w') as file:
+            file.writelines(run_card_data)
         
         self.orig_output_path = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "SubProcesses", "events.lhe")
             
