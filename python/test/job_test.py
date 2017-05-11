@@ -64,21 +64,16 @@ make_dst = DST(description="Create DST file",
                nevents=1000)
                         
 # set output files to copy
-output_files = ["tritrig.lhe", 
-                "tritrig.stdhep", 
-                "tritrig.slcio", 
-                "tritrig_filt.slcio", 
-                "tritrig_readout.slcio", 
-                "tritrig_recon.slcio", 
-                "dst.root",
-                {"tuple_fee.txt": "mytuple.txt"}]
+output_files = ["tritrig_recon.slcio", 
+                {"dst.root": "mydst.root"}]
                         
 # create new job with components from above definitions
 job = Job(name="tritrig job test",
-    components=[mg4, stdhep_cnv, slic, filter_bunches, readout, recon, make_dst, make_tuples],
-    output_dir="/tmp/tritrig_test",
-    output_files=output_files,
-    job_num=1234)
+          components=[mg4, stdhep_cnv, slic, filter_bunches, readout, recon, make_dst, make_tuples],
+          output_dir="/tmp/tritrig_test",
+          output_files=output_files,
+          job_num=1234,
+          append_job_num=True)
  
 # setup each job component
 job.setup()
