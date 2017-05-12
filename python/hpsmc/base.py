@@ -80,14 +80,19 @@ class Job:
             self.output_files = {}
         if "output_dir" in kwargs:
             self.output_dir = kwargs["output_dir"]
-            if not os.path.isabs(self.output_dir):
-                raise Exception("The output_dir should be absolute.")
+            if self.output_dir:
+                if not os.path.isabs(self.output_dir):
+                    raise Exception("The output_dir should be absolute.")
         else:
             self.output_dir = None
         if "append_job_num" in kwargs:
             self.append_job_num = kwargs["append_job_num"]
         else:
             self.append_job_num = False
+        if "ignore_return_codes" in kwargs:
+            self.ignore_return_codes = kwargs["ignore_return_codes"]
+        else:
+            self.ignore_return_codes = False
 
     def run(self):
         print "Job: running '%s'" % self.name
@@ -98,7 +103,7 @@ class Job:
             print "Job: executing '%s' with description '%s'" % (str(c.name), str(c.description))
             print "Job: command '%s' with inputs %s and outputs %s" % (c.command, str(c.inputs), str(c.outputs))
             retcode = c.execute()
-            if retcode:
+            if not self.ignore_return_codes and retcode:
                 raise Exception("Job: error code '%d' returned by '%s'" % (retcode, str(c.name)))
 
     def setup(self):
@@ -116,23 +121,29 @@ class Job:
             c.cleanup()
     
     def copy_output_files(self):
-        if not os.path.exists(self.output_dir):
-            print "Job: creating output dir '%s'" % self.output_dir
-            os.makedirs(self.output_dir, 0755)
-           
-        for output_file in self.output_files:
-            if isinstance(output_file, basestring):
-                src_file = os.path.join(self.rundir, output_file)
-                dest_file = os.path.join(self.output_dir, output_file)
-            elif isinstance(output_file, dict):
-                src, dest = output_file.iteritems().next()
-                src_file = os.path.join(self.rundir, src)
-                if not os.path.isabs(dest):
-                    dest_file = os.path.join(self.output_dir, dest)
-                else:
-                    dest_file = dest
-            if self.append_job_num:
-                base,ext = os.path.splitext(dest_file)
-                dest_file = base + "_" + str(self.job_num) + ext
-            print "Job: copying '%s' to '%s'" % (src_file, dest_file)    
-            shutil.copyfile(src_file, dest_file)            
+        
+        if self.output_dir:
+        
+            if not os.path.exists(self.output_dir):
+                print "Job: creating output dir '%s'" % self.output_dir
+                os.makedirs(self.output_dir, 0755)
+               
+            for output_file in self.output_files:
+                if isinstance(output_file, basestring):
+                    src_file = os.path.join(self.rundir, output_file)
+                    dest_file = os.path.join(self.output_dir, output_file)
+                elif isinstance(output_file, dict):
+                    src, dest = output_file.iteritems().next()
+                    src_file = os.path.join(self.rundir, src)
+                    if not os.path.isabs(dest):
+                        dest_file = os.path.join(self.output_dir, dest)
+                    else:
+                        dest_file = dest
+                if self.append_job_num:
+                    base,ext = os.path.splitext(dest_file)
+                    dest_file = base + "_" + str(self.job_num) + ext
+                print "Job: copying '%s' to '%s'" % (src_file, dest_file)    
+                shutil.copyfile(src_file, dest_file)      
+        else:
+            
+            print "Job: No output_dir was set so files will not be copied."
