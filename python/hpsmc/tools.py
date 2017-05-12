@@ -75,7 +75,7 @@ class JobManager(Component):
             self.args.append("outputFile="+self.outputs[0])
         for k,v in self.defs.iteritems():
             self.args.append("-D")
-            self.args.append(k+"="+v)
+            self.args.append(k+"="+str(v))
         if self.steering_resource is not None:
             self.args.append("-r")
             self.args.append(self.steering_resource)
