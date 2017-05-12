@@ -1,9 +1,13 @@
+"""
+Python script for generating 'tritrig' events in MG5 and running through simulation, readout and reconstruction. 
+"""
+
 import sys, random
 
 from hpsmc.base import Job, JobStandardArgs
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterMCBunches, DST
+from hpsmc.tools import SLIC, JobManager, FilterMCBunches, StdHepTool
 
 proc_name = "tritrig"
 
@@ -26,10 +30,16 @@ stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS
                              inputs=[proc_name + "_events.lhe.gz"],
                              outputs=[job_args.filename + ".stdhep"])
 
+# rotate events into beam coords
+rot = StdHepTool(description="Rotate events into beam coords",
+                 name="beam_coords",
+                 inputs=[job_args.filename + ".stdhep"],
+                 outputs=[job_args.filename + "_rot.stdhep"])
+
 # generate events in slic
 slic = SLIC(description="Run detector simulation using SLIC",
             detector=job_args.cond_detector,
-            inputs=[job_args.filename + ".stdhep"], 
+            inputs=[job_args.filename + "_rot.stdhep"], 
             outputs=[job_args.filename + ".slcio"], 
             nevents=job_args.nevents)
 
@@ -64,7 +74,7 @@ output_files = [job_args.filename + "_recon.slcio"]
                         
 # create new job with components from above definitions
 job = Job(name=proc_name + " job",
-          components=[mg, stdhep_cnv, slic, filter_bunches, readout, recon],
+          components=[mg, stdhep_cnv, rot, slic, filter_bunches, readout, recon],
           output_dir=job_args.output_dir,
           output_files=output_files,
           job_num=job_args.job_num,
