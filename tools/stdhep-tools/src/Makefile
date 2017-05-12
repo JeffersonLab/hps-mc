@@ -1,8 +1,3 @@
-ifdef ROOTSYS
-ROOTLIBS = `$(ROOTSYS)/bin/root-config --glibs`
-ROOTCFLAGS = `$(ROOTSYS)/bin/root-config --cflags`
-endif
-
 #BIN := ../bin
 #SRC_DIR := ../src
 #STDHEP_DIR := $(SRC_DIR)/stdhep-5-06-01
@@ -10,10 +5,10 @@ STDHEP_C := $(STDHEP_DIR)/lib/libstdhepC.a
 MCFIO := $(STDHEP_DIR)/lib/libFmcfio.a
 LOADLIBS=-L$(STDHEP_DIR)/lib
 #LOADLIBS=-L/usr/local/lib/stdhep -L/afs/slac.stanford.edu/package/cernlib/@sys/cern/2002/lib
-LDLIBS=-lstdhepC -lFmcfio $(ROOTLIBS) -lgsl -lgslcblas
+LDLIBS=-lstdhepC -lFmcfio -lgsl -lgslcblas
 INCFILES=-I$(STDHEP_DIR)/src/inc -I$(SRC_DIR)
 CPP=g++
-CPPFLAGS=$(LOADLIBS) $(LDLIBS) $(ROOTCFLAGS) -g
+CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g
 TARGETS := $(patsubst $(SRC_DIR)/%.cc,$(BIN)/%,$(wildcard $(SRC_DIR)/*.cc))
 UTIL_SRC := $(wildcard $(SRC_DIR)/*.cpp)
 UTIL_OBJ := $(UTIL_SRC:.cpp=.o)
