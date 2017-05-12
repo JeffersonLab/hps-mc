@@ -76,12 +76,14 @@ class StdHepConverter(EGS5):
             os.symlink(input_file, "egs5job.inp")
         elif ext == ".gz":
             infile = open("egs5job.inp", 'w')
-            with gzip.open(self.inputs[0], 'r') as f:
-                for line in f:
-                    infile.write(line)
+            f = gzip.open(self.inputs[0], 'r')
+            for line in f:
+                infile.write(line)
+            f.close()
+            infile.close()
         else:
             raise Exception("Input file '%s' has an unknown extension." % self.inputs[0])
-        EGS5.execute(self)
+        return EGS5.execute(self)
 
 class MG4(EventGenerator):
 
