@@ -1,4 +1,4 @@
-import os
+import os, socket
 
 from hpsmc.base import Component
 
@@ -61,6 +61,8 @@ class JobManager(Component):
             self.java_args = kwargs["java_args"]
         else:
             self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
+        if "slac.stanford.edu" in socket.getfqdn():
+            self.java_args.append("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
 
     def cmd_args(self):
         if not len(self.inputs):
@@ -75,7 +77,7 @@ class JobManager(Component):
             self.args.append("outputFile="+self.outputs[0])
         for k,v in self.defs.iteritems():
             self.args.append("-D")
-            self.args.append(k+"="+v)
+            self.args.append(k+"="+str(v))
         if self.steering_resource is not None:
             self.args.append("-r")
             self.args.append(self.steering_resource)

@@ -41,15 +41,15 @@
 #!  Default: use the shell default Editor
 #!           or try to find one available on the system
 #!  Be careful: Only shell based editor are allowed
-# text_editor = None
+text_editor = None
 
 #! Prefered WebBrower
 #! If None: try to find one available on the system
-# web_browser = None
+web_browser = None
 
 #! Prefered PS viewer
 #!  If None: try to find one available on the system
-# eps_viewer = None
+eps_viewer = None
 
 #! Time allowed to answer question (if no answer takes default value)
 #!  0: No time limit
