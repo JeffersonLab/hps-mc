@@ -192,3 +192,16 @@ class LCIODumpEvent(Component):
         self.args.append(self.inputs[0])
         self.args.append(str(self.event_num))
         return self.args
+
+class LCIOTool(Component):
+
+    def __init__(self, **kwargs):
+        self.command = "java"
+        Component.__init__(self, **kwargs)
+
+    def cmd_args(self):
+        orig_args = self.args
+        self.args = ["-jar", os.environ["LCIO_JAR"]]
+        self.args.append(self.name)
+        self.args.extend(orig_args)
+        return self.args
