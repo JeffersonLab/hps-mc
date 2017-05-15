@@ -1,4 +1,4 @@
-import os, subprocess, sys, shutil, argparse
+import os, subprocess, sys, shutil, argparse, getpass
 
 class Component:
 
@@ -62,10 +62,15 @@ class Job:
             self.name = kwargs["name"] 
         else:
             self.name = "HPS MC Job"
+        self.delete_rundir = False
         if "rundir" in kwargs:
             self.rundir = kwargs["rundir"]
         else:
-            self.rundir = os.getcwd()
+            if "LSB_JOBID" in os.environ:
+                self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
+                self.delete_rundir = True
+            else:
+                self.rundir = os.getcwd()
         if "components" in kwargs:
             self.components = kwargs["components"]
         else:
@@ -89,6 +94,10 @@ class Job:
             self.append_job_num = kwargs["append_job_num"]
         else:
             self.append_job_num = False
+        if "job_num_pad" in kwargs:
+            self.job_num_pad = kwargs["job_num_pad"]
+        else:
+            self.job_num_pad = 4
         if "ignore_return_codes" in kwargs:
             self.ignore_return_codes = kwargs["ignore_return_codes"]
         else:
@@ -107,6 +116,8 @@ class Job:
                 raise Exception("Job: error code '%d' returned by '%s'" % (retcode, str(c.name)))
 
     def setup(self):
+        if not os.path.exists(self.rundir):
+            os.makedirs(self.rundir)
         os.chdir(self.rundir)
         for c in self.components:
             print "Job: setting up '%s'" % (c.name)
@@ -119,6 +130,9 @@ class Job:
         for c in self.components:
             print "Job: running cleanup for '%s'" % str(c.name)
             c.cleanup()
+        if self.delete_rundir:
+            print "Job: deleting run dir '%s'" % self.rundir
+            shutil.rmtree(self.rundir)
     
     def copy_output_files(self):
         
@@ -141,7 +155,7 @@ class Job:
                         dest_file = dest
                 if self.append_job_num:
                     base,ext = os.path.splitext(dest_file)
-                    dest_file = base + "_" + str(self.job_num) + ext
+                    dest_file = base + "_" + (("%0" + str(self.job_num_pad) + "d") % self.job_num) + ext
                 print "Job: copying '%s' to '%s'" % (src_file, dest_file)    
                 shutil.copyfile(src_file, dest_file)      
         else:
