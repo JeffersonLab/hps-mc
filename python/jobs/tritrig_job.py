@@ -14,14 +14,14 @@ proc_name = "tritrig"
 job_args = JobStandardArgs(proc_name)
 job_args.parse_args()
 job_args.print_args()
-    
+
 # generate tritrig in MG4
 mg = MG5(description="Generate tritrig events using MG4",
-          name=proc_name,
-          run_card="run_card_" + job_args.run_param_key + ".dat",
-          outputs=[job_args.filename],
-          rand_seed=job_args.seed,
-          nevents=job_args.nevents)
+         name=proc_name,
+         run_card="run_card_" + job_args.run_param_key + ".dat",
+         outputs=[job_args.filename],
+         rand_seed=job_args.seed,
+         nevents=job_args.nevents)
 
 # convert LHE output to stdhep
 stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS5",
@@ -71,7 +71,7 @@ recon = JobManager(description="Run the MC recon",
                         
 # set output files to copy
 output_files = [job_args.filename + "_recon.slcio"]
-                        
+
 # create new job with components from above definitions
 job = Job(name=proc_name + " job",
           components=[mg, stdhep_cnv, rot, slic, filter_bunches, readout, recon],
