@@ -1,4 +1,4 @@
-import os
+import os, socket
 
 from hpsmc.base import Component
 
@@ -61,6 +61,8 @@ class JobManager(Component):
             self.java_args = kwargs["java_args"]
         else:
             self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
+        if "slac.stanford.edu" in socket.getfqdn():
+            self.java_args.append("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
 
     def cmd_args(self):
         if not len(self.inputs):
