@@ -3,7 +3,7 @@ import os, sys, random
 from hpsmc.base import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterMCBunches, DST
+from hpsmc.tools import SLIC, JobManager, FilterMCBunches, DST, LCIODumpEvent
 
 job_rand_seed = random.randint(1, 1000000)
 
@@ -57,6 +57,11 @@ recon = JobManager(description="Run the MC recon",
                    inputs=["tritrig_readout.slcio"],
                    outputs=["tritrig_recon"])
 
+# dump an LCIO event
+dumpevent = LCIODumpEvent(description="Dump LCIO recon events",
+                          inputs=["tritrig_readout.slcio"],
+                          event_num=1)
+
 # create recon tuples
 make_tuples = JobManager(description="Create tuples",
                          steering_resource="/org/hps/steering/analysis/MakeTuplesMC.lcsim",
@@ -75,7 +80,7 @@ output_files = ["tritrig_recon.slcio",
                         
 # create new job with components from above definitions
 job = Job(name="tritrig job test",
-          components=[mg4, stdhep_cnv, slic, filter_bunches, readout, recon, make_dst, make_tuples],
+          components=[mg4, stdhep_cnv, slic, filter_bunches, readout, recon, dumpevent, make_dst, make_tuples],
           output_dir="/tmp/tritrig_test",
           output_files=output_files,
           job_num=1234,

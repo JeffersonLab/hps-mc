@@ -174,3 +174,21 @@ class DST(Component):
             self.args.append(i)
         return self.args
                 
+class LCIODumpEvent(Component):
+
+    def __init__(self, **kwargs):
+        self.name = "LCIO dump event"
+        self.command = "lcio_dumpevent"
+        Component.__init__(self, **kwargs)
+        if "event_num" in kwargs:
+            self.event_num = kwargs["event_num"]
+        else:
+            self.event_num = 1
+
+    def cmd_args(self):
+        if not len(self.inputs):
+            raise Exception("Missing required inputs for LCIODumpEvent.")
+        self.args = []
+        self.args.append(self.inputs[0])
+        self.args.append(str(self.event_num))
+        return self.args
