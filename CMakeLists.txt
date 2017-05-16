@@ -91,16 +91,25 @@ add_custom_target(lcio_cpp_build ALL DEPENDS lcio_download ${CMAKE_BINARY_DIR}/L
 
 # install LCIO C++ tools
 install(FILES ${CMAKE_BINARY_DIR}/lcio-build/bin/dumpevent DESTINATION bin RENAME lcio_dumpevent
-          PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_READ WORLD_WRITE)
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # install LCIO jar to lib dir
-install(FILES ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar DESTINATION lib)
+install(FILES ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar DESTINATION lib
+    PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+
+# LCIO jar location for env
 set(LCIO_JAR ${CMAKE_INSTALL_PREFIX}/lib/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar)
 message( STATUS "LCIO jar will be installed to: ${LCIO_JAR}")
 
-# config and install env script
+# config and install bash env script
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# config and install csh env script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.csh.in ${CMAKE_BINARY_DIR}/hps-mc-env.csh)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.csh DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # install run params data
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
