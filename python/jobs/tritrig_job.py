@@ -15,8 +15,8 @@ job_args = JobStandardArgs(proc_name)
 job_args.parse_args()
 job_args.print_args()
 
-# generate tritrig in MG4
-mg = MG5(description="Generate tritrig events using MG4",
+# generate tritrig in MG5
+mg = MG5(description="Generate tritrig events using MG5",
          name=proc_name,
          run_card="run_card_" + job_args.run_param_key + ".dat",
          outputs=[job_args.filename],
