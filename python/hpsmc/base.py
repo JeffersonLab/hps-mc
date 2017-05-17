@@ -54,6 +54,26 @@ class Component:
 
     def cleanup(self):
         pass
+    
+class DummyComponent(Component):
+    
+    def __init__(self, **kwargs):
+        print "DummyComponent: init"  
+        Component.__init__(self, **kwargs)
+        self.command = "dummy"
+        
+    def execute(self):
+        print "DummyComponent: execute"
+        
+    def cmd_exists(self):
+        return True
+    
+    def setup(self):
+        print "DummyComponent: setup"
+        
+    def cleanup(self):
+        print "DummyComponent: cleanup"
+    
 
 class Job:
 
@@ -106,6 +126,10 @@ class Job:
             self.delete_existing = kwargs["delete_existing"]
         else:
             self.delete_existing = False
+        if "inputs" in kwargs:
+            self.inputs = kwargs["inputs"]
+        else:
+            self.inputs = {}
 
     def run(self):
         print "Job: running '%s'" % self.name
@@ -172,6 +196,15 @@ class Job:
         else:
             
             print "Job: No output_dir was set so files will not be copied."
+    
+    def copy_input_files(self):
+        for dest,src in self.inputs.iteritems():
+            if not os.path.isabs(src):
+                raise Exception("The input source file '%s' is not an absolute path." % src)
+            if os.path.dirname(dest):
+                raise Exception("The input file destination '%s' is not valid." % dest)
+            print "Job: copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest))
+            shutil.copyfile(src, os.path.join(self.rundir, dest))
             
             
 class JobStandardArgs:
