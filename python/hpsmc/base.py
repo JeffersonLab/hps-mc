@@ -102,6 +102,10 @@ class Job:
             self.ignore_return_codes = kwargs["ignore_return_codes"]
         else:
             self.ignore_return_codes = False
+        if "delete_existing" in kwargs:
+            self.delete_existing = kwargs["delete_existing"]
+        else:
+            self.delete_existing = False
 
     def run(self):
         print "Job: running '%s'" % self.name
@@ -156,7 +160,14 @@ class Job:
                 if self.append_job_num:
                     base,ext = os.path.splitext(dest_file)
                     dest_file = base + "_" + (("%0" + str(self.job_num_pad) + "d") % self.job_num) + ext
-                print "Job: copying '%s' to '%s'" % (src_file, dest_file)    
+                if os.path.isfile(dest_file):
+                    if self.delete_existing:
+                        print "Job: deleting existing file at '%s'" % dest_file
+                        os.remove(dest_file)
+                    else:
+                        raise Exception("Output file '%s' already exists." % dest_file)
+                
+                print "Job: copying '%s' to '%s'" % (src_file, dest_file)
                 shutil.copyfile(src_file, dest_file)      
         else:
             
