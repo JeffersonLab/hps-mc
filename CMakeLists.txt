@@ -6,7 +6,7 @@ project(hps-mc VERSION 0.0.1)
 add_subdirectory(tools/stdhep-lib)
 add_subdirectory(tools/stdhep-tools)
 
-# build generations
+# build generators
 add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
