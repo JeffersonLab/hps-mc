@@ -11,40 +11,48 @@ add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
 
-# set default hps-java version if not set from arg
-if (NOT HPSJAVA_VERSION)
-    set(HPSJAVA_VERSION "master")
+# set default hps-java git tag if not set from arg
+if (NOT HPSJAVA_TAG)
+    set(HPSJAVA_TAG "master")
 endif()
+message(STATUS "HPSJAVA_TAG='${HPSJAVA_TAG}'")
 
 # make hps-java work dir
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
 
-# download and untar hps-java
-add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/${HPSJAVA_VERSION}.tar.gz ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}
-    COMMAND wget ARGS -q --no-check-certificate https://github.com/JeffersonLab/hps-java/archive/${HPSJAVA_VERSION}.tar.gz
-    COMMAND tar ARGS -zxvf ${HPSJAVA_VERSION}.tar.gz
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
-add_custom_target(hps_java_download ALL DEPENDS ${CMAKE_BINARY_DIR}/hps-java/${HPSJAVA_VERSION}.tar.gz ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION})
+# set var for local Maven repo in build dir
+set(M2REPO ${CMAKE_BINARY_DIR}/m2repo)
 
 # figure out hps-java project version for jar name
-execute_process(COMMAND wget -q https://raw.githubusercontent.com/JeffersonLab/hps-java/${HPSJAVA_VERSION}/pom.xml -O pom-${HPSJAVA_VERSION}.xml
+execute_process(COMMAND wget --no-check-certificate -q https://raw.githubusercontent.com/JeffersonLab/hps-java/${HPSJAVA_TAG}/pom.xml -O pom-${HPSJAVA_TAG}.xml
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
-execute_process(COMMAND ${CMAKE_SOURCE_DIR}/scripts/print_mvn_project_version.sh pom-${HPSJAVA_VERSION}.xml
+execute_process(COMMAND ${CMAKE_SOURCE_DIR}/scripts/print_mvn_project_version.sh pom-${HPSJAVA_TAG}.xml
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java
-    OUTPUT_VARIABLE HPSJAVA_PROJECT_VERSION) 
+    OUTPUT_VARIABLE HPSJAVA_PROJECT_VERSION)
 string(STRIP "${HPSJAVA_PROJECT_VERSION}" HPSJAVA_PROJECT_VERSION)
+if (NOT HPSJAVA_PROJECT_VERSION OR HPSJAVA_PROJECT_VERSION STREQUAL "")
+    message(FATAL_ERROR "Unable to set HPSJAVA_PROJECT_VERSION.")
+endif()
+message(STATUS "HPSJAVA_PROJECT_VERSION='${HPSJAVA_PROJECT_VERSION}'")
+
+# download and untar hps-java
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/${HPSJAVA_TAG}.tar.gz ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}
+    COMMAND wget -q --no-check-certificate https://github.com/JeffersonLab/hps-java/archive/${HPSJAVA_TAG}.tar.gz
+    COMMAND tar ARGS -zxvf ${HPSJAVA_TAG}.tar.gz
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
+add_custom_target(hps_java_download ALL DEPENDS ${CMAKE_BINARY_DIR}/hps-java/${HPSJAVA_TAG}.tar.gz ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG})
 
 # build hps-java
-add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar 
-    COMMAND mvn ARGS -DskipTests -q
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION})
-add_custom_target(hps_java_build ALL DEPENDS hps_java_download ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar)
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar 
+    COMMAND mvn ARGS -Dmaven.repo.local=${M2REPO} -DskipTests -q
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG})
+add_custom_target(hps_java_build ALL DEPENDS hps_java_download ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar)
 
 # install hps-java jar to lib dir
-install(FILES ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar DESTINATION lib)
+install(FILES ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/distribution/target/hps-distribution-${HPSJAVA_PROJECT_VERSION}-bin.jar DESTINATION lib)
 
 # install detectors to share dir
-install(DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_VERSION}/detector-data/detectors/ DESTINATION share/detectors/ 
+install(DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/detector-data/detectors/ DESTINATION share/detectors/ 
     PATTERN "*.properties" EXCLUDE
     PATTERN "*.xml" EXCLUDE
     PATTERN "SampleFractions" EXCLUDE)
@@ -78,7 +86,7 @@ add_custom_target(lcio_download ALL DEPENDS ${CMAKE_BINARY_DIR}/LCIO)
 
 # build LCIO java lib
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar
-    COMMAND mvn ARGS -DskipTests -q
+    COMMAND mvn ARGS -Dmaven.repo.local=${M2REPO} -DskipTests -q
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/LCIO)
 add_custom_target(lcio_java_build ALL DEPENDS lcio_download ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar)
 
