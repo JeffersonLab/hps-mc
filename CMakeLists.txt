@@ -26,7 +26,7 @@ set(M2REPO ${CMAKE_BINARY_DIR}/m2repo)
 # figure out hps-java project version for jar name
 execute_process(COMMAND wget --no-check-certificate -q https://raw.githubusercontent.com/JeffersonLab/hps-java/${HPSJAVA_TAG}/pom.xml -O pom-${HPSJAVA_TAG}.xml
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
-execute_process(COMMAND ${CMAKE_SOURCE_DIR}/scripts/print_mvn_project_version.sh pom-${HPSJAVA_TAG}.xml
+execute_process(COMMAND ${CMAKE_SOURCE_DIR}/scripts/print_mvn_project_version.py pom-${HPSJAVA_TAG}.xml
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java
     OUTPUT_VARIABLE HPSJAVA_PROJECT_VERSION)
 string(STRIP "${HPSJAVA_PROJECT_VERSION}" HPSJAVA_PROJECT_VERSION)
