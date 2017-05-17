@@ -1,1 +1,1 @@
-# hps python package
+# hpsmc python package
