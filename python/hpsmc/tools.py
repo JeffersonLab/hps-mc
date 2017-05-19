@@ -1,4 +1,4 @@
-import os, socket
+import os, socket, gzip, shutil
 
 from hpsmc.base import Component
 
@@ -205,3 +205,23 @@ class LCIOTool(Component):
         self.args.append(self.name)
         self.args.extend(orig_args)
         return self.args
+    
+class Unzip(Component):
+
+    def __init__(self, **kwargs):
+        self.command = "gunzip"
+        self.name = "gunzip"
+        Component.__init__(self, **kwargs)
+        
+    def setup(self):
+        if not len(self.inputs):
+            raise Exception("Missing inputs.")
+        
+    def cmd_exists(self):
+        return True
+        
+    def execute(self):
+        zip_path = self.inputs[0]
+        with gzip.open(zip_path, 'rb') as in_file, open(os.path.splitext(zip_path)[0], 'wb') as out_file:
+            shutil.copyfileobj(in_file, out_file)
+    
