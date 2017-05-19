@@ -6,7 +6,7 @@
 # ----------------------------------------------------------------------------
 #this is a partial combinaison
 
-F77           = f77
+F77           = gfortran
 FFLAGS        = -O -ffixed-line-length-132
 LIBDIR        = ../../../lib/
 OBJS= get_point.o initialize.o

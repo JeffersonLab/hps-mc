@@ -6,15 +6,15 @@
 # ----------------------------------------------------------------------------
 
 
-F77           = f77
-G77	      = g77
+F77           = gfortran
+G77	      = gfortran
 FFLAGS        = -O -ffixed-line-length-132
 LIBDIR        = ../../../lib/
 PLOT= dbook.o topgraph.o
 OBJS= nexper_2.o next_perm.o eq_solver.o vegas.o stat.o htuple.o $(PLOT)
 
 
-.f.o: ; $(F77) $(FFLAGS) -c $*.f
+.f.o: ; $(G77) $(FFLAGS) -c $*.f
 
 all: $(LIBDIR)libtools.a
 

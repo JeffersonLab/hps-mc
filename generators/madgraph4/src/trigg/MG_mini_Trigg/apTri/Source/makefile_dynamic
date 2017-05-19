@@ -1,4 +1,4 @@
-F77   = f77
+F77   = gfortran
 FFLAGS= -O -fPIC -ffixed-line-length-132
 #FFLAGS= -O 
 LIBDIR= ../lib/
@@ -47,11 +47,11 @@ $(LIBDIR)libdhelas3.so: DHELAS
 	mv libdhelas3.so $(LIBDIR)
 
 $(LIBDIR)libdsample.so: $(DSAMPLE)
-	g77 -shared -o libdsample.so $(DSAMPLE)
+	gfortran -shared -o libdsample.so $(DSAMPLE)
 	mv libdsample.so $(LIBDIR)
 
 $(LIBDIR)libgeneric.so: $(GENERIC)
-	g77 -shared -o libgeneric.so $(GENERIC)
+	gfortran -shared -o libgeneric.so $(GENERIC)
 	mv libgeneric.so $(LIBDIR)
 
 
