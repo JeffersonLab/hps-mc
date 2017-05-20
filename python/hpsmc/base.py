@@ -8,14 +8,20 @@ class Component:
         elif self.name is None:
             raise Exception("The name of a Component is required.")
         if "args" in kwargs:
+            if not isinstance(kwargs["args"], list):
+                raise Exception("The args are not a list.")
             self.args = kwargs["args"]
         else:
             self.args = []
         if "outputs" in kwargs:
+            if not isinstance(kwargs["outputs"], list):
+                raise Exception("The outputs arg is not a list.")
             self.outputs = kwargs["outputs"]
         else:
             self.outputs = []
         if "inputs" in kwargs:
+            if not isinstance(kwargs["inputs"], list):
+                raise Exception("The inputs arg is not a list.")
             self.inputs = kwargs["inputs"]
         else:
             self.inputs = []
@@ -36,7 +42,8 @@ class Component:
         
         cl = [self.command]
         cl.extend(self.cmd_args())
-                                            
+                                  
+        print "Component: executing '%s' with command %s" % (self.name, cl)
         proc = subprocess.Popen(cl, shell=False)
         proc.communicate()
                             
