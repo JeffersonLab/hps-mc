@@ -11,8 +11,13 @@ class StdHepTool(Component):
     def cmd_args(self):
         if len(self.outputs):
             self.args.insert(0, self.outputs[0])
+        elif len(self.outputs) > 1:
+            raise Exception("Too many outputs specified for StdHepTool.")
         if len(self.inputs):
-            self.args.insert(0, self.inputs[0])
+            for i in self.inputs:
+                self.args.insert(0, i)
+        else:
+            raise Exception("Not enough inputs specified for StdHepTool.")
         return self.args
 
 class SLIC(Component):
