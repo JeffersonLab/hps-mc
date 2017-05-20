@@ -112,15 +112,23 @@ class MG4(EventGenerator):
             self.params = {}
 
     @staticmethod
-    def set_run_card_params(run_card, nevents, rand_seed):    
+    def set_run_card_params(run_card, nevents, rand_seed):
+        
+        print "MG4: setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, rand_seed)
+            
         with open(run_card, 'r') as file:
             data = file.readlines()
         
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
                 data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested" + '\n'
+                print "MG4: set n events param '%s'" % data[i]
             if "= iseed" in data[i]:
                 data[i] = " " + str(rand_seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
+                print "MG4: set iseed param '%s'" % data[i]
+                
+        with open(run_card, 'w') as file:
+            file.writelines(data)
                 
     @staticmethod
     def set_params(param_card, params):
@@ -157,9 +165,10 @@ class MG4(EventGenerator):
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
         print "MG4: command set to '%s'"  % self.command
 
+        run_card_src = os.path.join(self.mg4_dir, proc_dirs[0], self.run_card)
         run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
-
-        shutil.copyfile(os.path.join(self.mg4_dir, proc_dirs[0], self.run_card), run_card_dest)
+        print "MG4: copying run card from '%s' to '%s'" % (run_card_src, run_card_dest)
+        shutil.copyfile(run_card_src, run_card_dest)
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.rand_seed)
         
@@ -171,7 +180,7 @@ class MG4(EventGenerator):
             print "MG4: setting params %s on '%s'" % (repr(self.params), param_card_dest)
             MG4.set_params(param_card_dest, self.params)
         else:
-            print "MG4: no custom params set"
+            print "MG4: no user params set on param card"
                 
     def execute(self):
         os.chdir(os.path.dirname(self.command))
