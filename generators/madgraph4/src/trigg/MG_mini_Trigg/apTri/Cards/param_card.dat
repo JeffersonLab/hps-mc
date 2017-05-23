@@ -32,7 +32,7 @@
 Block MODSEL # Select Model
      0   1   #  0 1 = SM
 Block SMINPUTS      # Standard Model inputs
-     1         1.27900000E+02   # alpha_em(MZ)(-1) SM MSbar
+     1         1.37035999E+02   # alpha_em(MZ)(-1) SM MSbar
      2         1.16600000E-05   # G_Fermi
      3         1.18000000E-01   # alpha_s(MZ) SM MSbar
      4         9.15445065E+01   # Z mass (as input parameter)
