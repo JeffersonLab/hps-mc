@@ -21,7 +21,7 @@ displ = StdHepTool(name="lhe_tridents_displacetime",
                    args=["-s", str(rand_seed), "-l", str(z)])
 
 dump = StdHepTool(name="print_stdhep",
-                   inputs=["ap.stdhep"])
+                  inputs=["ap.stdhep"])
           
 job = Job(name="AP test",
     components=[ap, unzip, displ, dump])
