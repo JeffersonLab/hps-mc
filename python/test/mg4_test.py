@@ -8,8 +8,8 @@ ap = MG4(description="Generate A-prime events with APMASS param",
          run_card="run_card_1pt05.dat",
          params={"APMASS": 40.0},
          outputs=["ap"],
-         rand_seed=1234,
-         nevents=5000)
+         rand_seed=1,
+         nevents=500)
 
 unzip = Unzip(inputs=["ap_events.lhe.gz"])
 
@@ -24,7 +24,7 @@ dump = StdHepTool(name="print_stdhep",
                   inputs=["ap.stdhep"])
           
 job = Job(name="AP test",
-    components=[ap, unzip, displ, dump])
+          components=[ap, unzip, displ, dump])
 
 job.setup()
 job.run()
