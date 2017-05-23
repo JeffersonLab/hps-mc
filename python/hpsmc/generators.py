@@ -137,8 +137,7 @@ class MG4(EventGenerator):
 
         for i in range(0, len(data)):                        
             if "APMASS" in params and "APMASS" in data[i]:
-                data[i] = "       622     %.7fe-03   # APMASS" % (params["APMASS"])
-                print "MG4: set param '%s'" % data[i]
+                data[i] = "       622     %.7fe-03   # APMASS" % (params["APMASS"]) + '\n'
                                 
         with open(param_card, 'w') as file:
             file.writelines(data)
