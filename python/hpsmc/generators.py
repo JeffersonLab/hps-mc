@@ -6,7 +6,7 @@ class EventGenerator(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)
-  
+    
 class EGS5(EventGenerator):
 
     def __init__(self, **kwargs): 
@@ -122,10 +122,8 @@ class MG4(EventGenerator):
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
                 data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested" + '\n'
-                print "MG4: set n events param '%s'" % data[i]
             if "= iseed" in data[i]:
                 data[i] = " " + str(rand_seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
-                print "MG4: set iseed param '%s'" % data[i]
                 
         with open(run_card, 'w') as file:
             file.writelines(data)
