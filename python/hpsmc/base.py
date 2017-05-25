@@ -1,4 +1,4 @@
-import os, subprocess, sys, shutil, argparse, getpass
+import os, subprocess, sys, shutil, argparse, getpass, json
 
 class Component:
 
@@ -203,7 +203,7 @@ class Job:
         else:
             
             print "Job: No output_dir was set so files will not be copied."
-    
+            
     def copy_input_files(self):
         for dest,src in self.inputs.iteritems():
             if not os.path.isabs(src):
@@ -213,7 +213,25 @@ class Job:
             print "Job: copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest))
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             
-            
+class JobParameters:
+    
+    def __init__(self, filename):
+        self.load(filename)
+    
+    def load(self, filename):
+        rawdata = open(filename, 'r').read()
+        self.json_dict = json.loads(rawdata)
+
+    def __getattr__(self, attr):
+        if attr in self.json_dict:
+            return self.json_dict[attr]
+        else:
+            raise AttributeError("%r has no attribute '%s'" %
+                                 (self.__class__, attr))
+    
+    def __str__(self):
+        return str(self.json_dict)
+                    
 class JobStandardArgs:
     
     def __init__(self, job_name):
