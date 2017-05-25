@@ -37,9 +37,9 @@ displ = StdHepTool(name="lhe_tridents_displacetime",
 
 # rotate events into beam coordinates and move vertex by 5 mm
 rot = StdHepTool(name="beam_coords",
-                   inputs=[filename+".stdhep"],
-                   outputs=[filename+"_rot.stdhep"],
-                   args=["-s", str(seed), "-z", str(params.z)])
+                 inputs=[filename+".stdhep"],
+                 outputs=[filename+"_rot.stdhep"],
+                 args=["-s", str(seed), "-z", str(params.z)])
 
 # print rotated AP events
 dump = StdHepTool(name="print_stdhep",
