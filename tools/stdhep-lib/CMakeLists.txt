@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(stdhep-lib VERSION 5.6.1)
 
+message(STATUS "StdHep library version: ${stdhep-lib_VERSION}")
+
 file(COPY ${PROJECT_SOURCE_DIR}/src/ DESTINATION ${CMAKE_BINARY_DIR}/stdhep-src/)
 
 set(STDHEP_DIR ${CMAKE_BINARY_DIR}/stdhep-src)
