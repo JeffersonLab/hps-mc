@@ -11,11 +11,26 @@ add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
 
+# find Maven and make sure version is recent enough
+find_program(MAVEN mvn)
+if (MAVEN-NOTFOUND)
+    message(FATAL_ERROR "The 'mvn' command to run Maven was not found.")
+endif()
+execute_process(COMMAND mvn -version OUTPUT_VARIABLE MAVEN_VERSION)
+string(REGEX MATCH "Apache Maven ([0-9]+)\\.([0-9]+)\\.([0-9]+)" MAVEN_VERSION ${MAVEN_VERSION})
+string(REPLACE "Apache Maven " "" MAVEN_VERSION ${MAVEN_VERSION})
+message(STATUS "Found Maven with version: ${MAVEN_VERSION}")
+string(REPLACE "." ";" MAVEN_VERSION_LIST ${MAVEN_VERSION})
+list(GET MAVEN_VERSION_LIST 0 MAVEN_VERSION_MAJOR)
+if (MAVEN_VERSION_MAJOR LESS 3)
+    message(FATAL_ERROR "The Maven version '${MAVEN_VERSION_MAJOR}' is too old.") 
+endif()
+
 # set default hps-java git tag if not set from arg
 if (NOT HPSJAVA_TAG)
     set(HPSJAVA_TAG "master")
 endif()
-message(STATUS "HPSJAVA_TAG='${HPSJAVA_TAG}'")
+message(STATUS "hps-java git tag: ${HPSJAVA_TAG}")
 
 # make hps-java work dir
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/hps-java)
@@ -33,7 +48,7 @@ string(STRIP "${HPSJAVA_PROJECT_VERSION}" HPSJAVA_PROJECT_VERSION)
 if (NOT HPSJAVA_PROJECT_VERSION OR HPSJAVA_PROJECT_VERSION STREQUAL "")
     message(FATAL_ERROR "Unable to set HPSJAVA_PROJECT_VERSION.")
 endif()
-message(STATUS "HPSJAVA_PROJECT_VERSION='${HPSJAVA_PROJECT_VERSION}'")
+message(STATUS "hps-java project version: ${HPSJAVA_PROJECT_VERSION}")
 
 # download and untar hps-java
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-java/${HPSJAVA_TAG}.tar.gz ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}
@@ -78,6 +93,8 @@ add_custom_target(hps_fieldmaps_install ALL DEPENDS hps_fieldmaps_download ${CMA
 # clone LCIO from github
 set(LCIO_TAG v02-07-04)
 set(LCIO_VERSION 2.7.4)
+message(STATUS "LCIO git tag: ${LCIO_TAG}")
+message(STATUS "LCIO version: ${LCIO_VERSION}")
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/LCIO
     COMMAND git clone https://github.com/iLCSoft/LCIO.git
     COMMAND cd ${CMAKE_BINARY_DIR}/LCIO && git checkout ${LCIO_TAG}
@@ -107,7 +124,6 @@ install(FILES ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.
 
 # LCIO jar location for env
 set(LCIO_JAR ${CMAKE_INSTALL_PREFIX}/lib/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar)
-message( STATUS "LCIO jar will be installed to: ${LCIO_JAR}")
 
 # config and install bash env script
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
