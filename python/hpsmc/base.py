@@ -234,76 +234,21 @@ class JobParameters:
                     
 class JobStandardArgs:
     
-    def __init__(self, job_name):
-        self.job_name = job_name
-
     def create_parser(self):
-        parser = argparse.ArgumentParser(description="Run a " + self.job_name + " job")
-        parser.add_argument("-p", "--params", help="Run parameter key e.g. '1pt05'", required=False)
-        parser.add_argument("-d", "--detector", help="Detector name", required=True)
-        parser.add_argument("-n", "--nevents", help="Number of events", required=True)
-        parser.add_argument("-j", "--job",  help="Job number", required=False)
-        parser.add_argument("-s", "--seed", help="Random seed for all components", required=False)
-        parser.add_argument("-f", "--filename", help="Base file name (do not include an extension!)", required=False)
-        parser.add_argument("-o", "--output-dir", help="Job output dir", required=False)
-        parser.add_argument("-r", "--run", help="Run number for conditions system", required=True)
-        parser.add_argument("-R", "--recon-steering", help="Recon lcsim steering resource", required=False)
-        parser.add_argument("-O", "--readout-steering", help="Readout lcsim steering resource", required=False)
+
+        parser = argparse.ArgumentParser(description="Run an HPS MC job")
+        parser.add_argument("-j", "--job",  help="Job number", type=int, default=1)
+        parser.add_argument("-o", "--output-dir", help="Job output dir", default=os.getcwd())
+        parser.add_argument("-s", "--seed", help="Job random seed", type=int, default=1)
+        parser.add_argument("params", nargs=1, help="Job params in JSON format")
         return parser
-        
+
     def parse_args(self):
         
         parser = self.create_parser()
         cl = parser.parse_args()
 
-        if cl.job:
-            self.job_num = int(cl.job)
-        else:
-            self.job_num = 1
-    
-        self.nevents = int(cl.nevents)
-
-        if cl.seed:
-            self.seed = int(cl.seed)
-        else:
-            self.seed = self.job_num
-    
-        if cl.filename:
-            self.filename = cl.filename
-        else:
-            self.filename = self.job_name + "_events"
-    
-        self.run_param_key = cl.params
-
-        if cl.output_dir:
-            self.output_dir = cl.output_dir
-        else:
-            output_dir = None
-            
-        if cl.recon_steering:
-            self.recon_steering = cl.recon_steering
-        else:
-            self.recon_steering = None
-    
-        if cl.readout_steering:
-            self.readout_steering = cl.readout_steering
-        else:
-            self.readout_steering = None
-    
-        self.cond_run = int(cl.run)
-        self.cond_detector = cl.detector
-        
-    def print_args(self):    
-        print "---- Job Args ----"
-        print "job_num = %d" % self.job_num
-        print "nevents = %d" % self.nevents
-        print "seed = %d" % self.seed
-        print "filename = %s" % self.filename
-        print "run_param_key = %s" % self.run_param_key
-        print "output_dir = %s" % self.output_dir
-        print "cond_run = %d" % self.cond_run
-        print "cond_detector = %s" % self.cond_detector
-        print "readout_steering = %s" % self.readout_steering
-        print "recon_steering = %s" % self.recon_steering
-        print
-                    
+        self.job = cl.job
+        self.output_dir = cl.output_dir
+        self.params = cl.params[0]
+        self.seed = cl.seed

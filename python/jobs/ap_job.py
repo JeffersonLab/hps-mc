@@ -1,20 +1,17 @@
 import sys, os, argparse
 
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.base import Job, JobParameters
+from hpsmc.base import Job, JobParameters, JobStandardArgs
 from hpsmc.run_params import RunParameters
 from hpsmc.tools import Unzip, StdHepTool, SLIC, FilterMCBunches, JobManager, LCIOTool
 
-# TODO: These args should be encapsulated by JobStandardArgs.
-parser = argparse.ArgumentParser(description="Run an HPS MC job")
-parser.add_argument("-j", "--job",  help="Job number", type=int, default=1)
-parser.add_argument("-o", "--output-dir", help="Job output dir", default=os.getcwd())
-parser.add_argument("params", nargs=1, help="job params in JSON format")
-cl = parser.parse_args()
+cl = JobStandardArgs()
+cl.parse_args()
 
 job_num = cl.job
 output_dir = cl.output_dir
-params = JobParameters(cl.params[0])
+seed = cl.seed
+params = JobParameters(cl.params)
 
 print params
 
@@ -26,7 +23,7 @@ ap = MG4(name="ap",
          run_card="run_card_"+params.run_params+".dat",
          params={"APMASS": params.apmass},
          outputs=[filename],
-         seed=params.seed,
+         seed=seed,
          nevents=params.nevents)
 
 # unzip the LHE events to local file
@@ -36,13 +33,13 @@ unzip = Unzip(inputs=[filename+"_events.lhe.gz"])
 displ = StdHepTool(name="lhe_tridents_displacetime",
                    inputs=[filename+"_events.lhe"],
                    outputs=[filename+".stdhep"],
-                   args=["-s", str(params.seed), "-l", str(params.ctau)])
+                   args=["-s", str(seed), "-l", str(params.ctau)])
 
 # rotate events into beam coordinates and move vertex by 5 mm
 rot = StdHepTool(name="beam_coords",
-                   inputs=[filename+".stdhep"],
-                   outputs=[filename+"_rot.stdhep"],
-                   args=["-s", str(params.seed), "-z", str(params.z)])
+                 inputs=[filename+".stdhep"],
+                 outputs=[filename+"_rot.stdhep"],
+                 args=["-s", str(seed), "-z", str(params.z)])
 
 # print rotated AP events
 dump = StdHepTool(name="print_stdhep",
