@@ -84,7 +84,7 @@ class DummyComponent(Component):
 
 class Job:
 
-    def __init__(self, **kwargs):
+    def __init__(self, job_args = None, **kwargs):
         if "name" in kwargs:
             self.name = kwargs["name"] 
         else:
@@ -137,6 +137,13 @@ class Job:
             self.inputs = kwargs["inputs"]
         else:
             self.inputs = {}
+
+        if job_args:
+            self.job_num = job_args.job
+            self.output_dir = job_args.output_dir
+            self.params = job_args.params[0]
+            self.seed = job_args.seed 
+            self.inputs = job_args.input_files
 
     def run(self):
         print "Job: running '%s'" % self.name
@@ -240,6 +247,7 @@ class JobStandardArgs:
         parser.add_argument("-j", "--job",  help="Job number", type=int, default=1)
         parser.add_argument("-o", "--output-dir", help="Job output dir", default=os.getcwd())
         parser.add_argument("-s", "--seed", help="Job random seed", type=int, default=1)
+        parser.add_argument("-i", "--input-files", help="Input files in JSON format", required=False)
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         return parser
 
@@ -252,3 +260,9 @@ class JobStandardArgs:
         self.output_dir = cl.output_dir
         self.params = cl.params[0]
         self.seed = cl.seed
+       
+        if cl.input_files: 
+            rawdata = open(cl.input_files, 'r').read()
+            self.input_files = json.loads(rawdata)
+        else:
+            self.input_files = {}
