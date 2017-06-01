@@ -8,5 +8,6 @@ egs5 = EGS5(name="moller_v3",
     outputs=["events.stdhep"])
 
 job = Job(name="EGS5 Test", components=[egs5])
+job.params = {}
 
 job.run()

@@ -15,7 +15,6 @@ stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS
 
 job = Job(name="MG5 test",
     components=[mg5, stdhep_cnv])
+job.params = {}
 
-job.setup()
 job.run()
-job.cleanup()

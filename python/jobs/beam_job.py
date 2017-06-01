@@ -7,22 +7,26 @@ https://github.com/JeffersonLab/hps-mc/blob/master/scripts/mc_scripts/slic/beam.
 
 """
 
+import os
 from hpsmc.job import Job
 from hpsmc.tools import StdHepTool
 
 job = Job(name="beam job")
 job.parse_args()
 
-input_file = job.input_files["beam.stdhep"]
-input_basename = "beam"
+if len(job.input_files) > 1:
+    raise Exception("Too many input files (expected 1 but got %d)." % len(job.input_files))
+
+input_file = job.input_files.keys()[0]
+base,ext = os.path.splitext(input_file) 
 
 rot = StdHepTool(name="beam_coords",
                  inputs=[input_file],
-                 outputs=[input_basename+"_rot.stdhep"])
+                 outputs=[base+"_rot.stdhep"])
 
 sample = StdHepTool(name="random_sample",
-                    inputs=[input_basename+"_rot.stdhep"],
-                    outputs=[input_basename+"_sampled"])
+                    inputs=[base+"_rot.stdhep"],
+                    outputs=[base+"_sampled"])
 
 job.components = [rot, sample]
 

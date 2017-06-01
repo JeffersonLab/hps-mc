@@ -21,7 +21,12 @@ class Job:
                 self.delete_rundir = True
             else:
                 self.rundir = os.getcwd()
+        logger.info("run dir set to '%s'" % self.rundir)
                 
+        if not os.path.exists(self.rundir):
+            logger.info("creating run dir '%s'" % self.rundir)
+            os.makedirs(self.rundir)
+
         if "components" in kwargs:
             self.components = kwargs["components"]
         else:
@@ -41,12 +46,21 @@ class Job:
             self.set_component_seeds = kwargs["set_component_seeds"]
         else:
             self.set_component_seeds = True
-            
+
         self.params = None
         
         self.log_out = sys.stdout
         self.log_err = sys.stderr
-            
+        
+        self.input_files = {}
+        self.output_files = {}
+        
+        self.seed = 1
+        
+        self.output_dir = os.getcwd()
+        
+        self.job_num = 1
+                    
     def parse_args(self):
         
         parser = argparse.ArgumentParser(description=self.name)
@@ -61,12 +75,14 @@ class Job:
             logging.basicConfig(level=level)
         
         if cl.out:
-            logger.info("component stdout will be redirected to '%s'" % cl.out[0])
-            self.log_out = open(cl.out[0], "w")
+            log_out = os.path.join(self.rundir, cl.out[0])
+            logger.info("stdout will be redirected to '%s'" % log_out)
+            self.log_out = open(log_out, "w")
             
         if cl.err:
-            logger.info("component stderr will be redirected to '%s'" % cl.err[0])
-            self.log_err = open(cl.err[0], "w")
+            log_err = os.path.join(self.rundir, cl.err[0])
+            logger.info("stderr will be redirected to '%s'" % log_err)
+            self.log_err = open(log_err, "w")
         
         if cl.params:
             logger.info("loading job params from '%s'" % cl.params[0])
@@ -77,38 +93,33 @@ class Job:
             
         if hasattr(self.params, "input_files"):
             self.input_files = self.params.input_files
-        else:
-            self.input_files = {}
             
         if hasattr(self.params, "output_files"):
             self.output_files = self.params.output_files
-        else:
-            self.output_files = {}
             
         if hasattr(self.params, "seed"):
             self.seed = self.params.seed
-        else:
-            logger.info("random seed is set to default value '%d'" % (self.seed))
-            self.seed = 1
             
         if hasattr(self.params, "output_dir"):
             self.output_dir = self.params.output_dir
             if not os.path.isabs(self.output_dir):
                 self.output_dir= os.path.abspath(self.output_dir)
                 logger.info("changed output dir to abs path '%s'" % self.output_dir)
-        else:
-            self.output_dir = os.getcwd()
 
         if hasattr(self.params, "job_num"):
             self.job_num = self.params.job_num
-        else:
-            self.job_num = 1        
             
     def run(self): 
+        
         if not len(self.components):
             raise Exception("Job has no components.")
-        if not self.params:
+
+        if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
+
+
+        os.chdir(self.rundir)
+
         self.copy_input_files()
         self.setup()
         self.execute()
@@ -125,15 +136,13 @@ class Job:
             c.execute(self.log_out, self.log_err)
 
     def setup(self):
-        if not os.path.exists(self.rundir):
-            os.makedirs(self.rundir)
-        os.chdir(self.rundir)
         for c in self.components:
             logger.info("setting up '%s'" % (c.name))
             c.rundir = self.rundir
             if self.set_component_seeds:
-                logger.info("setting seed on '%s' to '%d'" % (c.name, self.seed))
+                logger.info("setting seed on '%s' to %d" % (c.name, self.seed))
                 c.seed = self.seed
+            #os.chdir(self.rundir)
             c.setup()
             if not c.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
@@ -143,7 +152,7 @@ class Job:
             logger.info("running cleanup for '%s'" % str(c.name))
             c.cleanup()
         if self.delete_rundir:
-            logger.info("Job: deleting execute dir '%s'" % self.rundir)
+            logger.info("Job: deleting run dir '%s'" % self.rundir)
             shutil.rmtree(self.rundir)
         if self.log_out != sys.stdout:
             self.log_out.close()
