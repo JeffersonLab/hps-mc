@@ -44,7 +44,7 @@ class EGS5(EventGenerator):
         ebeam = self.run_params.get("beam_energy")
         electrons = self.run_params.get("num_electrons") * self.bunches
                 
-        seed_data = "%d %f %f %d" % (self.rand_seed, target_z, ebeam, electrons)
+        seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
         seed_file.close()
@@ -112,9 +112,9 @@ class MG4(EventGenerator):
             self.params = {}
 
     @staticmethod
-    def set_run_card_params(run_card, nevents, rand_seed):
+    def set_run_card_params(run_card, nevents, seed):
         
-        print "MG4: setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, rand_seed)
+        print "MG4: setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, seed)
             
         with open(run_card, 'r') as file:
             data = file.readlines()
@@ -123,7 +123,7 @@ class MG4(EventGenerator):
             if "= nevents" in data[i]:
                 data[i] = " " + str(nevents) + " = nevents ! Number of unweighted events requested" + '\n'
             if "= iseed" in data[i]:
-                data[i] = " " + str(rand_seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
+                data[i] = " " + str(seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
                 
         with open(run_card, 'w') as file:
             file.writelines(data)
@@ -167,7 +167,7 @@ class MG4(EventGenerator):
         print "MG4: copying run card from '%s' to '%s'" % (run_card_src, run_card_dest)
         shutil.copyfile(run_card_src, run_card_dest)
         
-        MG4.set_run_card_params(run_card_dest, self.nevents, self.rand_seed)
+        MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
         param_card_src = os.path.join(self.mg4_dir, proc_dirs[0], "param_card.dat")
         param_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "param_card.dat")
@@ -229,7 +229,7 @@ class MG5(EventGenerator):
         
         shutil.copyfile(run_card_src, run_card_dest)
         
-        MG4.set_run_card_params(run_card_dest, self.nevents, self.rand_seed)
+        MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
     def execute(self):
         os.chdir(os.path.dirname(self.command))

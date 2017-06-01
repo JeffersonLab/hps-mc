@@ -3,40 +3,47 @@ import os, subprocess, sys, shutil, argparse, getpass, json
 class Component:
 
     def __init__(self, **kwargs):
+        
         if "name" in kwargs:
             self.name = kwargs["name"]
         elif self.name is None:
             raise Exception("The name of a Component is required.")
+        
         if "args" in kwargs:
             if not isinstance(kwargs["args"], list):
                 raise Exception("The args are not a list.")
             self.args = kwargs["args"]
         else:
             self.args = []
+            
         if "outputs" in kwargs:
             if not isinstance(kwargs["outputs"], list):
                 raise Exception("The outputs arg is not a list.")
             self.outputs = kwargs["outputs"]
         else:
             self.outputs = []
+            
         if "inputs" in kwargs:
             if not isinstance(kwargs["inputs"], list):
                 raise Exception("The inputs arg is not a list.")
             self.inputs = kwargs["inputs"]
         else:
             self.inputs = []
+            
         if "nevents" in kwargs:
             self.nevents = kwargs["nevents"]
         else:
             self.nevents = -1
-        if "description" in kwargs:
-            self.description = kwargs["description"]
+                        
+        if "seed" in kwargs:
+            self.seed = kwargs["seed"]
         else:
-            self.description = ""
-        if "rand_seed" in kwargs:
-            self.rand_seed = kwargs["rand_seed"]
+            self.seed = 1
+            
+        if "ignore_returncode" in kwargs:
+            self.ignore_returncode = kwargs["ignore_returncode"]
         else:
-            self.rand_seed = 1
+            self.ignore_returncode = False
 
     def execute(self):
         
@@ -46,8 +53,9 @@ class Component:
         print "Component: executing '%s' with command %s" % (self.name, cl)
         proc = subprocess.Popen(cl, shell=False)
         proc.communicate()
-                            
-        return proc.returncode
+
+        if not self.ignore_returncode and proc.returncode:
+            raise Exception("Component: error code '%d' returned by '%s'" % (proc.returncode, c.name))
 
     def cmd_exists(self):
         return subprocess.call("type " + self.command, shell=True, 
@@ -84,11 +92,13 @@ class DummyComponent(Component):
 
 class Job:
 
-    def __init__(self, job_args = None, **kwargs):
+    def __init__(self, **kwargs):
+        
         if "name" in kwargs:
             self.name = kwargs["name"] 
         else:
             self.name = "HPS MC Job"
+            
         self.delete_rundir = False
         if "rundir" in kwargs:
             self.rundir = kwargs["rundir"]
@@ -98,64 +108,90 @@ class Job:
                 self.delete_rundir = True
             else:
                 self.rundir = os.getcwd()
+                
         if "components" in kwargs:
             self.components = kwargs["components"]
         else:
-            self.components = []
-        if "job_num" in kwargs:
-            self.job_num = kwargs["job_num"]
-        else:
-            self.job_num = 1
-        if "output_files" in kwargs:
-            self.output_files = kwargs["output_files"]
-        else:
-            self.output_files = {}
-        if "output_dir" in kwargs:
-            self.output_dir = kwargs["output_dir"]
-            if self.output_dir:
-                if not os.path.isabs(self.output_dir):
-                    raise Exception("The output_dir should be absolute.")
-        else:
-            self.output_dir = None
-        if "append_job_num" in kwargs:
-            self.append_job_num = kwargs["append_job_num"]
-        else:
-            self.append_job_num = False
+            self.components = []            
+            
         if "job_num_pad" in kwargs:
             self.job_num_pad = kwargs["job_num_pad"]
         else:
             self.job_num_pad = 4
-        if "ignore_return_codes" in kwargs:
-            self.ignore_return_codes = kwargs["ignore_return_codes"]
-        else:
-            self.ignore_return_codes = False
+                        
         if "delete_existing" in kwargs:
             self.delete_existing = kwargs["delete_existing"]
         else:
             self.delete_existing = False
-        if "inputs" in kwargs:
-            self.inputs = kwargs["inputs"]
+            
+        if "set_component_seeds" in kwargs:
+            self.set_component_seeds = kwargs["set_component_seeds"]
         else:
-            self.inputs = {}
+            self.set_component_seeds = True
+            
+        self.params = None
+            
+    def parse_args(self):
+        
+        parser = argparse.ArgumentParser(description=self.name)
+        parser.add_argument("params", nargs=1, help="Job params in JSON format")
+        cl = parser.parse_args()
+        
+        if len(cl.params):
+            print "Job: Loading job params from '%s'" % cl.params[0]
+            self.params = JobParameters(cl.params[0])
+            print json.dumps(self.params.json_dict, indent=4, sort_keys=False)
+        else:
+            raise Exception("Missing required JSON file with job params.")
+            
+        if hasattr(self.params, "input_files"):
+            self.input_files = self.params.input_files
+        else:
+            self.input_files = {}
+            
+        if hasattr(self.params, "output_files"):
+            self.output_files = self.params.output_files
+        else:
+            self.output_files = {}
+            
+        if hasattr(self.params, "seed"):
+            self.seed = self.params.seed
+        else:
+            print "Job: random seed is set to default value '%d'" % (self.seed)
+            self.seed = 1
+            
+        if hasattr(self.params, "output_dir"):
+            self.output_dir = self.params.output_dir
+            if not os.path.isabs(self.output_dir):
+                self.output_dir= os.path.abspath(self.output_dir)
+                print "Job: changed output dir to abs path '%s'" % self.output_dir
+        else:
+            self.output_dir = os.getcwd()
 
-        if job_args:
-            self.job_num = job_args.job
-            self.output_dir = job_args.output_dir
-            self.params = job_args.params[0]
-            self.seed = job_args.seed 
-            self.inputs = job_args.input_files
-
-    def run(self):
+        if hasattr(self.params, "job_num"):
+            self.job_num = self.params.job_num
+        else:
+            self.job_num = 1        
+            
+    def run(self): 
+        if not len(self.components):
+            raise Exception("Job has no components.")
+        if not self.params:
+            raise Exception("Job params were never parsed.")
+        self.copy_input_files()
+        self.setup()
+        self.execute()
+        self.copy_output_files()
+        self.cleanup()
+                      
+    def execute(self):
         print "Job: running '%s'" % self.name
         if not len(self.components):
-            raise Exception("Job has no components to run.")
+            raise Exception("Job has no components to execute.")
         for i in range(0, len(self.components)):
             c = self.components[i]
-            print "Job: executing '%s' with description '%s'" % (str(c.name), str(c.description))
-            print "Job: command '%s' with inputs %s and outputs %s" % (c.command, str(c.inputs), str(c.outputs))
-            retcode = c.execute()
-            if not self.ignore_return_codes and retcode:
-                raise Exception("Job: error code '%d' returned by '%s'" % (retcode, str(c.name)))
+            print "Job: executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs))
+            c.execute()
 
     def setup(self):
         if not os.path.exists(self.rundir):
@@ -164,6 +200,9 @@ class Job:
         for c in self.components:
             print "Job: setting up '%s'" % (c.name)
             c.rundir = self.rundir
+            if self.set_component_seeds:
+                print "Job: setting seed on '%s' to '%d'" % (c.name, self.seed)
+                c.seed = self.seed
             c.setup()
             if not c.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
@@ -173,46 +212,29 @@ class Job:
             print "Job: running cleanup for '%s'" % str(c.name)
             c.cleanup()
         if self.delete_rundir:
-            print "Job: deleting run dir '%s'" % self.rundir
+            print "Job: deleting execute dir '%s'" % self.rundir
             shutil.rmtree(self.rundir)
     
     def copy_output_files(self):
-        
-        if self.output_dir:
-        
-            if not os.path.exists(self.output_dir):
-                print "Job: creating output dir '%s'" % self.output_dir
-                os.makedirs(self.output_dir, 0755)
-               
-            for output_file in self.output_files:
-                if isinstance(output_file, basestring):
-                    src_file = os.path.join(self.rundir, output_file)
-                    dest_file = os.path.join(self.output_dir, output_file)
-                elif isinstance(output_file, dict):
-                    src, dest = output_file.iteritems().next()
-                    src_file = os.path.join(self.rundir, src)
-                    if not os.path.isabs(dest):
-                        dest_file = os.path.join(self.output_dir, dest)
-                    else:
-                        dest_file = dest
-                if self.append_job_num:
-                    base,ext = os.path.splitext(dest_file)
-                    dest_file = base + "_" + (("%0" + str(self.job_num_pad) + "d") % self.job_num) + ext
-                if os.path.isfile(dest_file):
-                    if self.delete_existing:
-                        print "Job: deleting existing file at '%s'" % dest_file
-                        os.remove(dest_file)
-                    else:
-                        raise Exception("Output file '%s' already exists." % dest_file)
                 
-                print "Job: copying '%s' to '%s'" % (src_file, dest_file)
-                shutil.copyfile(src_file, dest_file)      
-        else:
-            
-            print "Job: No output_dir was set so files will not be copied."
+        if not os.path.exists(self.output_dir):
+            print "Job: creating output dir '%s'" % self.output_dir
+            os.makedirs(self.output_dir, 0755)
+               
+        for src,dest in self.output_files.iteritems():
+            src_file = os.path.join(self.rundir, src)
+            dest_file = os.path.join(self.output_dir, dest)
+            if os.path.isfile(dest_file):
+                if self.delete_existing:
+                    print "Job: deleting existing file at '%s'" % dest_file
+                    os.remove(dest_file)
+                else:
+                    raise Exception("Output file '%s' already exists." % dest_file)
+            print "Job: copying '%s' to '%s'" % (src_file, dest_file)
+            shutil.copyfile(src_file, dest_file)
             
     def copy_input_files(self):
-        for dest,src in self.inputs.iteritems():
+        for dest,src in self.input_files.iteritems():
             if not os.path.isabs(src):
                 raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
@@ -222,12 +244,13 @@ class Job:
             
 class JobParameters:
     
-    def __init__(self, filename):
-        self.load(filename)
+    def __init__(self, filename = None):
+        if filename:
+            self.load(filename)
     
     def load(self, filename):
         rawdata = open(filename, 'r').read()
-        self.json_dict = json.loads(rawdata)
+        self.json_dict = json.loads(rawdata)        
 
     def __getattr__(self, attr):
         if attr in self.json_dict:
@@ -238,31 +261,4 @@ class JobParameters:
     
     def __str__(self):
         return str(self.json_dict)
-                    
-class JobStandardArgs:
-    
-    def create_parser(self):
-
-        parser = argparse.ArgumentParser(description="Run an HPS MC job")
-        parser.add_argument("-j", "--job",  help="Job number", type=int, default=1)
-        parser.add_argument("-o", "--output-dir", help="Job output dir", default=os.getcwd())
-        parser.add_argument("-s", "--seed", help="Job random seed", type=int, default=1)
-        parser.add_argument("-i", "--input-files", help="Input files in JSON format", required=False)
-        parser.add_argument("params", nargs=1, help="Job params in JSON format")
-        return parser
-
-    def parse_args(self):
-        
-        parser = self.create_parser()
-        cl = parser.parse_args()
-
-        self.job = cl.job
-        self.output_dir = cl.output_dir
-        self.params = cl.params[0]
-        self.seed = cl.seed
-       
-        if cl.input_files: 
-            rawdata = open(cl.input_files, 'r').read()
-            self.input_files = json.loads(rawdata)
-        else:
-            self.input_files = {}
+     
