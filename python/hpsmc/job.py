@@ -41,11 +41,20 @@ class Job:
             self.set_component_seeds = kwargs["set_component_seeds"]
         else:
             self.set_component_seeds = True
-            
+
         self.params = None
         
         self.log_out = sys.stdout
         self.log_err = sys.stderr
+        
+        self.input_files = {}
+        self.output_files = {}
+        
+        self.seed = 1
+        
+        self.output_dir = os.getcwd()
+        
+        self.job_num = 1
             
     def parse_args(self):
         
@@ -77,37 +86,26 @@ class Job:
             
         if hasattr(self.params, "input_files"):
             self.input_files = self.params.input_files
-        else:
-            self.input_files = {}
             
         if hasattr(self.params, "output_files"):
             self.output_files = self.params.output_files
-        else:
-            self.output_files = {}
             
         if hasattr(self.params, "seed"):
             self.seed = self.params.seed
-        else:
-            logger.info("random seed is set to default value '%d'" % (self.seed))
-            self.seed = 1
             
         if hasattr(self.params, "output_dir"):
             self.output_dir = self.params.output_dir
             if not os.path.isabs(self.output_dir):
                 self.output_dir= os.path.abspath(self.output_dir)
                 logger.info("changed output dir to abs path '%s'" % self.output_dir)
-        else:
-            self.output_dir = os.getcwd()
 
         if hasattr(self.params, "job_num"):
             self.job_num = self.params.job_num
-        else:
-            self.job_num = 1        
             
     def run(self): 
         if not len(self.components):
             raise Exception("Job has no components.")
-        if not self.params:
+        if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
         self.copy_input_files()
         self.setup()
