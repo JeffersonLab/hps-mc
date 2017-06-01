@@ -55,7 +55,7 @@ class Job:
         self.output_dir = os.getcwd()
         
         self.job_num = 1
-            
+                    
     def parse_args(self):
         
         parser = argparse.ArgumentParser(description=self.name)
@@ -103,10 +103,18 @@ class Job:
             self.job_num = self.params.job_num
             
     def run(self): 
+        
         if not len(self.components):
             raise Exception("Job has no components.")
+
         if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
+
+        if not os.path.exists(self.rundir):
+            os.makedirs(self.rundir)
+
+        os.chdir(self.rundir)
+
         self.copy_input_files()
         self.setup()
         self.execute()
@@ -123,15 +131,13 @@ class Job:
             c.execute(self.log_out, self.log_err)
 
     def setup(self):
-        if not os.path.exists(self.rundir):
-            os.makedirs(self.rundir)
-        os.chdir(self.rundir)
         for c in self.components:
             logger.info("setting up '%s'" % (c.name))
             c.rundir = self.rundir
             if self.set_component_seeds:
                 logger.info("setting seed on '%s' to '%d'" % (c.name, self.seed))
                 c.seed = self.seed
+            #os.chdir(self.rundir)
             c.setup()
             if not c.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
