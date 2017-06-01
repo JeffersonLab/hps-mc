@@ -1,6 +1,6 @@
 import os, socket, gzip, shutil
 
-from hpsmc.base import Component
+from hpsmc.component import Component
 
 class StdHepTool(Component):
 
@@ -225,7 +225,7 @@ class Unzip(Component):
     def cmd_exists(self):
         return True
         
-    def execute(self):
+    def execute(self, log_out, log_err):
         zip_path = self.inputs[0]
         with gzip.open(zip_path, 'rb') as in_file, open(os.path.splitext(zip_path)[0], 'wb') as out_file:
             shutil.copyfileobj(in_file, out_file)
