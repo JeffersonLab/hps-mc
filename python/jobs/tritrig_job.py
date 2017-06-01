@@ -4,7 +4,7 @@ Python script for generating 'tritrig' events in MG5 and running through simulat
 
 import sys, random
 
-from hpsmc.base import Job
+from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterMCBunches, StdHepTool

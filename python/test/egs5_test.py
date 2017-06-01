@@ -1,4 +1,4 @@
-from hpsmc.base import Job
+from hpsmc.job import Job
 from hpsmc.generators import EGS5
 from hpsmc.run_params import RunParameters
 
@@ -8,6 +8,5 @@ egs5 = EGS5(name="moller_v3",
     outputs=["events.stdhep"])
 
 job = Job(name="EGS5 Test", components=[egs5])
-job.setup()
+
 job.run()
-job.cleanup()

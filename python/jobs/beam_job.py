@@ -7,7 +7,7 @@ https://github.com/JeffersonLab/hps-mc/blob/master/scripts/mc_scripts/slic/beam.
 
 """
 
-from hpsmc.base import Job
+from hpsmc.job import Job
 from hpsmc.tools import StdHepTool
 
 job = Job(name="beam job")

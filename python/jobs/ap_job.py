@@ -1,7 +1,7 @@
 import sys, os, argparse
 
+from hpsmc.job import Job
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.base import Job
 from hpsmc.tools import Unzip, StdHepTool, SLIC, FilterMCBunches, JobManager, LCIOTool
 
 job = Job(name="AP job")
