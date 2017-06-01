@@ -61,15 +61,15 @@ class Job:
             logging.basicConfig(level=level)
         
         if cl.out:
-            logger.info("stdout from execution will be redirected to '%s'" % cl.out[0])
+            logger.info("component stdout will be redirected to '%s'" % cl.out[0])
             self.log_out = open(cl.out[0], "w")
             
         if cl.err:
-            logger.info("stderr from execution will be redirected to '%s'" % cl.err[0])
+            logger.info("component stderr will be redirected to '%s'" % cl.err[0])
             self.log_err = open(cl.err[0], "w")
         
         if cl.params:
-            logger.info("Loading job params from '%s'" % cl.params[0])
+            logger.info("loading job params from '%s'" % cl.params[0])
             self.params = JobParameters(cl.params[0])
             logger.info(json.dumps(self.params.json_dict, indent=4, sort_keys=False))
         else:
