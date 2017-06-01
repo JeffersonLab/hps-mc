@@ -1,5 +1,5 @@
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.base import Job
+from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.tools import Unzip, StdHepTool
 

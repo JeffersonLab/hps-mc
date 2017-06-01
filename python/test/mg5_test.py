@@ -1,5 +1,5 @@
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.base import Job
+from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 
 mg5 = MG5(description="Generate tritrig events using MG5",
