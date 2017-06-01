@@ -21,7 +21,12 @@ class Job:
                 self.delete_rundir = True
             else:
                 self.rundir = os.getcwd()
+        logger.info("run dir set to '%s'" % self.rundir)
                 
+        if not os.path.exists(self.rundir):
+            logger.info("creating run dir '%s'" % self.rundir)
+            os.makedirs(self.rundir)
+
         if "components" in kwargs:
             self.components = kwargs["components"]
         else:
@@ -70,12 +75,14 @@ class Job:
             logging.basicConfig(level=level)
         
         if cl.out:
-            logger.info("component stdout will be redirected to '%s'" % cl.out[0])
-            self.log_out = open(cl.out[0], "w")
+            log_out = os.path.join(self.rundir, cl.out[0])
+            logger.info("stdout will be redirected to '%s'" % log_out)
+            self.log_out = open(log_out, "w")
             
         if cl.err:
-            logger.info("component stderr will be redirected to '%s'" % cl.err[0])
-            self.log_err = open(cl.err[0], "w")
+            log_err = os.path.join(self.rundir, cl.err[0])
+            logger.info("stderr will be redirected to '%s'" % log_err)
+            self.log_err = open(log_err, "w")
         
         if cl.params:
             logger.info("loading job params from '%s'" % cl.params[0])
@@ -110,8 +117,6 @@ class Job:
         if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
 
-        if not os.path.exists(self.rundir):
-            os.makedirs(self.rundir)
 
         os.chdir(self.rundir)
 
@@ -135,7 +140,7 @@ class Job:
             logger.info("setting up '%s'" % (c.name))
             c.rundir = self.rundir
             if self.set_component_seeds:
-                logger.info("setting seed on '%s' to '%d'" % (c.name, self.seed))
+                logger.info("setting seed on '%s' to %d" % (c.name, self.seed))
                 c.seed = self.seed
             #os.chdir(self.rundir)
             c.setup()
@@ -147,7 +152,7 @@ class Job:
             logger.info("running cleanup for '%s'" % str(c.name))
             c.cleanup()
         if self.delete_rundir:
-            logger.info("Job: deleting execute dir '%s'" % self.rundir)
+            logger.info("Job: deleting run dir '%s'" % self.rundir)
             shutil.rmtree(self.rundir)
         if self.log_out != sys.stdout:
             self.log_out.close()

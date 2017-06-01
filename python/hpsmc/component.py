@@ -58,7 +58,7 @@ class Component:
         proc.communicate()
         end = time.time()
         elapsed = end - start
-        logger.info("execution of '%s' took '%d' second(s)" % (self.name, elapsed))
+        logger.info("execution of '%s' took %d second(s)" % (self.name, elapsed))
 
         if not self.ignore_returncode and proc.returncode:
             raise Exception("Component: error code '%d' returned by '%s'" % (proc.returncode, c.name))

@@ -1,4 +1,4 @@
-import argparse, json, os
+import argparse, json, os, subprocess
 from workflow import Workflow
 
 class Batch:
@@ -26,9 +26,10 @@ class LSF(Batch):
 
     def build_cmd(self, name, job_params):
         param_file = name+".json"
-        cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  os.path.abspath(name+".out"), "-e",  os.path.abspath(name+".out")]
-        #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", param_file])
-        cmd.extend(["python", self.script, os.path.abspath(param_file)])
+        cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  os.path.abspath(name+".log"), "-e",  os.path.abspath(name+".log")]
+        cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
+        job_params["output_files"]["job.out"] = name+".out"
+        job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:
             json.dump(job_params, jobfile, indent=4, sort_keys=True)
         return cmd
@@ -36,8 +37,8 @@ class LSF(Batch):
     def submit_single(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
         print ' '.join(cmd)
-        #proc = subprocess.Popen(cmd, shell=False)
-        #proc.communicate()
+        proc = subprocess.Popen(cmd, shell=False)
+        proc.communicate()
     
 class Auger(Batch):
     
