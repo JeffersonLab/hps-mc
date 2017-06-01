@@ -23,13 +23,11 @@ class Workflow:
         parser.add_argument("-o", "--output-dir", nargs=1, help="Job output directory")
         parser.add_argument("-r", "--random-seed", nargs=1, type=int, help="Base number for random seed", default=1)
         parser.add_argument("-w", "--workflow", nargs=1, help="Name of workflow", default="jobs")
-        parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("params", nargs=1, help="Job param template in JSON format")
         cl = parser.parse_args()
         
         self.job_start = cl.job_start[0]
         self.num_jobs = cl.num_jobs[0]
-        self.script = cl.script[0]
         self.params = JobParameters(cl.params[0])
         self.seed = cl.random_seed[0]
         if cl.output_dir:
