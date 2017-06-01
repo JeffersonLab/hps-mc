@@ -1,5 +1,7 @@
-import os, subprocess, sys, shutil, argparse, getpass, json
+import os, sys, shutil, argparse, getpass, json, logging
 from component import Component
+
+logger = logging.getLogger("job")
 
 class Job:
 
@@ -41,17 +43,35 @@ class Job:
             self.set_component_seeds = True
             
         self.params = None
+        
+        self.log_out = sys.stdout
+        self.log_err = sys.stderr
             
     def parse_args(self):
         
         parser = argparse.ArgumentParser(description=self.name)
+        parser.add_argument("-o", "--out", nargs=1, help="Log file for stdout from components")
+        parser.add_argument("-e", "--err", nargs=1, help="Log file for stderr from components")
+        parser.add_argument("-L", "--level", nargs=1, help="Global log level")
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         cl = parser.parse_args()
         
-        if len(cl.params):
-            print "Job: Loading job params from '%s'" % cl.params[0]
+        if cl.level:
+            level = logging.getLevelName(cl.level[0])
+            logging.basicConfig(level=level)
+        
+        if cl.out:
+            logger.info("stdout from execution will be redirected to '%s'" % cl.out[0])
+            self.log_out = open(cl.out[0], "w")
+            
+        if cl.err:
+            logger.info("stderr from execution will be redirected to '%s'" % cl.err[0])
+            self.log_err = open(cl.err[0], "w")
+        
+        if cl.params:
+            logger.info("Loading job params from '%s'" % cl.params[0])
             self.params = JobParameters(cl.params[0])
-            print json.dumps(self.params.json_dict, indent=4, sort_keys=False)
+            logger.info(json.dumps(self.params.json_dict, indent=4, sort_keys=False))
         else:
             raise Exception("Missing required JSON file with job params.")
             
@@ -68,14 +88,14 @@ class Job:
         if hasattr(self.params, "seed"):
             self.seed = self.params.seed
         else:
-            print "Job: random seed is set to default value '%d'" % (self.seed)
+            logger.info("random seed is set to default value '%d'" % (self.seed))
             self.seed = 1
             
         if hasattr(self.params, "output_dir"):
             self.output_dir = self.params.output_dir
             if not os.path.isabs(self.output_dir):
                 self.output_dir= os.path.abspath(self.output_dir)
-                print "Job: changed output dir to abs path '%s'" % self.output_dir
+                logger.info("changed output dir to abs path '%s'" % self.output_dir)
         else:
             self.output_dir = os.getcwd()
 
@@ -96,23 +116,23 @@ class Job:
         self.cleanup()
                       
     def execute(self):
-        print "Job: running '%s'" % self.name
+        logger.info("running '%s'" % self.name)
         if not len(self.components):
             raise Exception("Job has no components to execute.")
         for i in range(0, len(self.components)):
             c = self.components[i]
-            print "Job: executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs))
-            c.execute()
+            logger.info("executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
+            c.execute(self.log_out, self.log_err)
 
     def setup(self):
         if not os.path.exists(self.rundir):
             os.makedirs(self.rundir)
         os.chdir(self.rundir)
         for c in self.components:
-            print "Job: setting up '%s'" % (c.name)
+            logger.info("setting up '%s'" % (c.name))
             c.rundir = self.rundir
             if self.set_component_seeds:
-                print "Job: setting seed on '%s' to '%d'" % (c.name, self.seed)
+                logger.info("setting seed on '%s' to '%d'" % (c.name, self.seed))
                 c.seed = self.seed
             c.setup()
             if not c.cmd_exists():
@@ -120,16 +140,20 @@ class Job:
 
     def cleanup(self):
         for c in self.components:
-            print "Job: running cleanup for '%s'" % str(c.name)
+            logger.info("running cleanup for '%s'" % str(c.name))
             c.cleanup()
         if self.delete_rundir:
-            print "Job: deleting execute dir '%s'" % self.rundir
+            logger.info("Job: deleting execute dir '%s'" % self.rundir)
             shutil.rmtree(self.rundir)
+        if self.log_out != sys.stdout:
+            self.log_out.close()
+        if self.log_err != sys.stderr:
+            self.log_err.close()
     
     def copy_output_files(self):
                 
         if not os.path.exists(self.output_dir):
-            print "Job: creating output dir '%s'" % self.output_dir
+            logger.info("creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
                
         for src,dest in self.output_files.iteritems():
@@ -137,11 +161,11 @@ class Job:
             dest_file = os.path.join(self.output_dir, dest)
             if os.path.isfile(dest_file):
                 if self.delete_existing:
-                    print "Job: deleting existing file at '%s'" % dest_file
+                    logger.info("deleting existing file at '%s'" % dest_file)
                     os.remove(dest_file)
                 else:
                     raise Exception("Output file '%s' already exists." % dest_file)
-            print "Job: copying '%s' to '%s'" % (src_file, dest_file)
+            logger.info("copying '%s' to '%s'" % (src_file, dest_file))
             shutil.copyfile(src_file, dest_file)
             
     def copy_input_files(self):
@@ -150,7 +174,7 @@ class Job:
                 raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
-            print "Job: copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest))
+            logger.info("copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             
 class JobParameters:

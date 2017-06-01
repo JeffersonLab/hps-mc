@@ -1,4 +1,6 @@
-import os, subprocess, sys, shutil, argparse, getpass, json
+import os, subprocess, sys, shutil, argparse, getpass, json, logging
+
+logger = logging.getLogger("component")
 
 class Component:
 
@@ -45,13 +47,13 @@ class Component:
         else:
             self.ignore_returncode = False
 
-    def execute(self):
+    def execute(self, log_out, log_err):
         
         cl = [self.command]
         cl.extend(self.cmd_args())
                                   
-        print "Component: executing '%s' with command %s" % (self.name, cl)
-        proc = subprocess.Popen(cl, shell=False)
+        logger.info("executing '%s' with command %s" % (self.name, cl))
+        proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
         proc.communicate()
 
         if not self.ignore_returncode and proc.returncode:
@@ -69,22 +71,4 @@ class Component:
 
     def cleanup(self):
         pass
-    
-class DummyComponent(Component):
-    
-    def __init__(self, **kwargs):
-        print "DummyComponent: init"  
-        Component.__init__(self, **kwargs)
-        self.command = "dummy"
-        
-    def execute(self):
-        print "DummyComponent: execute"
-        
-    def cmd_exists(self):
-        return True
-    
-    def setup(self):
-        print "DummyComponent: setup"
-        
-    def cleanup(self):
-        print "DummyComponent: cleanup"     
+         

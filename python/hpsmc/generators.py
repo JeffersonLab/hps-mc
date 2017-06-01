@@ -2,6 +2,8 @@ import os, subprocess, shutil, random, glob, gzip
 
 from hpsmc.base import Component
 
+logger = logging.getLogger("generators")
+
 class EventGenerator(Component):
 
     def __init__(self, **kwargs):
@@ -49,13 +51,13 @@ class EGS5(EventGenerator):
         seed_file.write(seed_data)
         seed_file.close()
     
-    def execute(self):
-        EventGenerator.execute(self)
+    def execute(self, log_out, log_err):
+        EventGenerator.execute(self, log_out, log_err)
         stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
         if len(stdhep_files) > 1:
             raise Exception("Multiple stdhep files present after running EGS5.")
         stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
-        print "EGS5: moving '%s' to '%s'" % (stdhep_files[0], stdhep_output_path)
+        logger.info("EGS5 - moving '%s' to '%s'" % (stdhep_files[0], stdhep_output_path))
         shutil.move(stdhep_files[0], stdhep_output_path)
 
 class StdHepConverter(EGS5):
@@ -69,7 +71,7 @@ class StdHepConverter(EGS5):
         if not len(self.inputs):
             raise Exception("Missing required input LHE file.")                    
 
-    def execute(self):
+    def execute(self, log_out, log_err):
         input_file = self.inputs[0]
         base,ext = os.path.splitext(input_file)
         if ext == ".lhe":
@@ -83,7 +85,7 @@ class StdHepConverter(EGS5):
             infile.close()
         else:
             raise Exception("Input file '%s' has an unknown extension." % self.inputs[0])
-        return EGS5.execute(self)
+        return EGS5.execute(self, log_out, log_err)
 
 class MG4(EventGenerator):
 
@@ -114,7 +116,7 @@ class MG4(EventGenerator):
     @staticmethod
     def set_run_card_params(run_card, nevents, seed):
         
-        print "MG4: setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, seed)
+        logger.info("MG4 - setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, seed))
             
         with open(run_card, 'r') as file:
             data = file.readlines()
@@ -152,7 +154,7 @@ class MG4(EventGenerator):
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
         src = os.path.join(self.mg4_dir, proc_dirs[0], proc_dirs[1])
         dest = proc_dirs[1]
-        print "MG4: copying '%s' to '%s'" % (src, dest)
+        logger.info("MG4 - copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
         
         self.event_dir = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Events")
@@ -160,32 +162,32 @@ class MG4(EventGenerator):
             os.makedirs(self.event_dir)
 
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
-        print "MG4: command set to '%s'"  % self.command
+        logger.info("MG4 - command set to '%s'"  % self.command)
 
         run_card_src = os.path.join(self.mg4_dir, proc_dirs[0], self.run_card)
         run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
-        print "MG4: copying run card from '%s' to '%s'" % (run_card_src, run_card_dest)
+        logger.info("MG4 - copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         shutil.copyfile(run_card_src, run_card_dest)
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
         param_card_src = os.path.join(self.mg4_dir, proc_dirs[0], "param_card.dat")
         param_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "param_card.dat")
-        print "MG4: copying params from '%s' to '%s'" % (param_card_src, param_card_dest)
+        logger.info("MG4 - copying params from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
         if len(self.params):
-            print "MG4: setting params %s on '%s'" % (repr(self.params), param_card_dest)
+            logger.info("MG4 - setting params %s on '%s'" % (repr(self.params), param_card_dest))
             MG4.set_params(param_card_dest, self.params)
         else:
-            print "MG4: no user params set on param card"
+            logger.info("MG4 - no user params set on param card")
                 
-    def execute(self):
+    def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
-        print "MG4: executing '%s' from '%s'" % (self.name, os.getcwd())
-        Component.execute(self)
+        logger.info("MG4 - executing '%s' from '%s'" % (self.name, os.getcwd()))
+        Component.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
-            print "MG4: copying '%s' to '%s'" % (f, self.rundir)
+            logger.info("MG4 - copying '%s' to '%s'" % (f, self.rundir))
             shutil.copy(f, self.rundir)
         os.chdir(self.rundir)
                 
@@ -220,25 +222,25 @@ class MG5(EventGenerator):
         shutil.copytree(src, dest, symlinks=True)
         
         self.command = os.path.join(dest, "bin", "generate_events")
-        print "MG5: command set to '%s'" % self.command
+        logger.info("MG5 - command set to '%s'" % self.command)
         
         run_card_src = os.path.join(src, "Cards", self.run_card)
         run_card_dest = os.path.join(dest, "Cards", "run_card.dat")
         
-        print "MG5: copying run card from '%s' to '%s'" % (run_card_src, run_card_dest)
+        logger.info("MG5 - copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         
         shutil.copyfile(run_card_src, run_card_dest)
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
-    def execute(self):
+    def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
-        print "MG5: executing '%s' from '%s'" % (self.name, os.getcwd())
-        Component.execute(self)
+        logger.info("MG5 - executing '%s' from '%s'" % (self.name, os.getcwd()))
+        Component.execute(self, log_out, log_err)
         
         lhe_files = glob.glob(os.path.join(self.rundir, self.proc_dir, "Events", self.name, "*.lhe.gz"))
         for f in lhe_files:            
-            print "MG5: copying '%s' to '%s'" % (f, self.rundir)
+            logger.info("MG5 - copying '%s' to '%s'" % (f, self.rundir))
             shutil.copyfile(f, os.path.join(self.rundir, self.name + "_" + os.path.basename(f)))
         
         os.chdir(self.rundir)
