@@ -70,7 +70,7 @@ install(FILES ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/distribution/
 install(DIRECTORY ${CMAKE_BINARY_DIR}/hps-java/hps-java-${HPSJAVA_TAG}/detector-data/detectors/ DESTINATION share/detectors/ 
     PATTERN "*.properties" EXCLUDE
     PATTERN "*.xml" EXCLUDE
-    PATTERN "SampleFractions" EXCLUDE)
+    PATTERN "SamplingFractions" EXCLUDE)
 
 # create fieldmap install dir
 file(MAKE_DIRECTORY ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/)
