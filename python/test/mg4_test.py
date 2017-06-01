@@ -25,7 +25,6 @@ dump = StdHepTool(name="print_stdhep",
           
 job = Job(name="AP test",
           components=[ap, unzip, displ, dump])
+job.params = {}
 
-job.setup()
 job.run()
-job.cleanup()
