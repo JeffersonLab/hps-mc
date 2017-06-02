@@ -52,13 +52,15 @@ class EGS5(EventGenerator):
         seed_file.close()
     
     def execute(self, log_out, log_err):
+        pre_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
         EventGenerator.execute(self, log_out, log_err)
-        stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
-        if len(stdhep_files) > 1:
-            raise Exception("Multiple stdhep files present after running EGS5.")
-        stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
-        logger.info("EGS5 - moving '%s' to '%s'" % (stdhep_files[0], stdhep_output_path))
-        shutil.move(stdhep_files[0], stdhep_output_path)
+        post_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
+        for stdhep_file in post_stdhep_files:
+            if stdhep_file not in pre_stdhep_files:
+                stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
+                logger.info("EGS5 - moving '%s' to '%s'" % (stdhep_file, stdhep_output_path))
+                shutil.move(stdhep_file, stdhep_output_path)
+                break
 
 class StdHepConverter(EGS5):
 
@@ -108,6 +110,10 @@ class MG4(EventGenerator):
             self.run_card = kwargs["run_card"]
         else:
             raise Exception("Missing required run_card argument to MG4.")
+        if "param_card" in kwargs:
+            self.param_card = kwargs["param_card"]
+        else:
+            self.param_card = "param_card.dat"    
         if "params" in kwargs:
             self.params = kwargs["params"]
         else:
@@ -171,15 +177,15 @@ class MG4(EventGenerator):
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
-        param_card_src = os.path.join(self.mg4_dir, proc_dirs[0], "param_card.dat")
+        param_card_src = os.path.join(self.mg4_dir, proc_dirs[0], self.param_card)
         param_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "param_card.dat")
-        logger.info("MG4 - copying params from '%s' to '%s'" % (param_card_src, param_card_dest))
+        logger.info("MG4 - copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
         if len(self.params):
             logger.info("MG4 - setting params %s on '%s'" % (repr(self.params), param_card_dest))
             MG4.set_params(param_card_dest, self.params)
         else:
-            logger.info("MG4 - no user params set on param card")
+            logger.info("MG4 - no user params were set on param card")
                 
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
