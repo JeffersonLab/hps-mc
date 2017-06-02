@@ -10,7 +10,7 @@ from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterMCBunches, StdHepTool
 
 job = Job(name="tritrig job")
-job.parse_args()
+job.initialize()
 
 params = job.params
 filename = params.filename

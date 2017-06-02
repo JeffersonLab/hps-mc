@@ -61,7 +61,7 @@ class Component:
         logger.info("execution of '%s' took %d second(s)" % (self.name, elapsed))
 
         if not self.ignore_returncode and proc.returncode:
-            raise Exception("Component: error code '%d' returned by '%s'" % (proc.returncode, c.name))
+            raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
 
     def cmd_exists(self):
         return subprocess.call("type " + self.command, shell=True, 
