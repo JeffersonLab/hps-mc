@@ -12,7 +12,7 @@ from hpsmc.job import Job
 from hpsmc.tools import StdHepTool
 
 job = Job(name="beam job")
-job.parse_args()
+job.initialize()
 
 if len(job.input_files) > 1:
     raise Exception("Too many input files (expected 1 but got %d)." % len(job.input_files))

@@ -5,7 +5,7 @@ from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import Unzip, StdHepTool, SLIC, FilterMCBunches, JobManager, LCIOTool
 
 job = Job(name="AP job")
-job.parse_args()
+job.initialize()
 
 params = job.params
 filename = params.filename

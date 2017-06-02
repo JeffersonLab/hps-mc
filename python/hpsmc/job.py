@@ -23,9 +23,6 @@ class Job:
                 self.rundir = os.getcwd()
         logger.info("run dir set to '%s'" % self.rundir)
                 
-        if not os.path.exists(self.rundir):
-            logger.info("creating run dir '%s'" % self.rundir)
-            os.makedirs(self.rundir)
 
         if "components" in kwargs:
             self.components = kwargs["components"]
@@ -75,14 +72,16 @@ class Job:
             logging.basicConfig(level=level)
         
         if cl.out:
-            log_out = os.path.join(self.rundir, cl.out[0])
-            logger.info("stdout will be redirected to '%s'" % log_out)
-            self.log_out = open(log_out, "w")
+            self.out_file = os.path.join(self.rundir, cl.out[0])
+            logger.info("stdout will be redirected to '%s'" % self.out_file)
+        else:
+            self.out_file = None
             
         if cl.err:
-            log_err = os.path.join(self.rundir, cl.err[0])
-            logger.info("stderr will be redirected to '%s'" % log_err)
-            self.log_err = open(log_err, "w")
+            self.err_file = os.path.join(self.rundir, cl.err[0])
+            logger.info("stderr will be redirected to '%s'" % self.err_file)
+        else:
+            self.err_file = None
         
         if cl.params:
             logger.info("loading job params from '%s'" % cl.params[0])
@@ -108,6 +107,23 @@ class Job:
 
         if hasattr(self.params, "job_num"):
             self.job_num = self.params.job_num
+
+    def initialize(self):
+
+        self.parse_args()
+
+        if not os.path.exists(self.rundir):
+            logger.info("creating run dir '%s'" % self.rundir)
+            os.makedirs(self.rundir)
+
+        os.chdir(self.rundir)
+
+        if self.out_file:
+            self.log_out = open(self.out_file, "w")
+        if self.err_file:
+            self.log_err = open(self.err_file, "w")
+        
+        self.copy_input_files()
             
     def run(self): 
         
@@ -117,10 +133,6 @@ class Job:
         if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
 
-
-        os.chdir(self.rundir)
-
-        self.copy_input_files()
         self.setup()
         self.execute()
         self.copy_output_files()
