@@ -7,7 +7,6 @@ Calculate integrated luminosity.
 def lint(run_params, density = 6.306e-2):
     w = run_params.get("target_z")    
     ne = run_params.get("num_electrons")
-    #print "lint=%f"%(density*w*ne)
     return density*w*ne
 
 """
@@ -25,12 +24,22 @@ def csection(filename):
     if "xs" not in locals():
         raise Exception("Could not find 'Integrated weight' in LHE input file.")
 
-    #print "xs=%d"%xs
-
     return xs
 
 """
-Calculate mu = number of events per 500k bunches (???).
+Calculate mu = number of events per bunch.
 """
 def mu(run_params, filename):
     return lint(run_params) * 1e-12 * csection(filename)
+
+# TODO: https://github.com/JeffersonLab/hps-mc/blob/master/scripts/MadGraph/nbunches.csh
+
+# TODO: https://github.com/JeffersonLab/hps-mc/blob/master/scripts/MadGraph/nevents.csh
+
+# TODO: wab LHE file fixup
+"""
+echo "Transmuting A's to photons..."
+          gunzip -f wab.lhe.gz
+          sed -i 's/\([:blank:]*\)622 /\1 22 /' wab.lhe
+          gzip wab.lhe
+"""
