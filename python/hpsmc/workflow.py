@@ -18,24 +18,24 @@ class Workflow:
     def parse_args(self):
         
         parser = argparse.ArgumentParser(description="Create a workflow with one or more jobs")
-        parser.add_argument("-j", "--job-start", nargs=1, type=int, help="Starting job number", default=1)
-        parser.add_argument("-n", "--num-jobs", nargs=1, type=int, help="Number of jobs", default=1)
-        parser.add_argument("-o", "--output-dir", nargs=1, help="Job output directory")
-        parser.add_argument("-r", "--random-seed", nargs=1, type=int, help="Base number for random seed", default=1)
-        parser.add_argument("-w", "--workflow", nargs=1, help="Name of workflow", default="jobs")
-        parser.add_argument("params", nargs=1, help="Job param template in JSON format")
+        parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
+        parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
+        parser.add_argument("-o", "--output-dir", nargs="?", help="Job output directory", default=os.getcwd())
+        parser.add_argument("-r", "--random-seed", nargs="?", type=int, help="Base number for random seed", default=1)
+        parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", default="jobs")
+        parser.add_argument("params", nargs="?", help="Job param template in JSON format", default="job.json")
         cl = parser.parse_args()
         
-        self.job_start = cl.job_start[0]
-        self.num_jobs = cl.num_jobs[0]
-        self.params = JobParameters(cl.params[0])
-        self.seed = cl.random_seed[0]
+        self.job_start = cl.job_start
+        self.num_jobs = cl.num_jobs
+        self.params = JobParameters(cl.params)
+        self.seed = cl.random_seed
         if cl.output_dir:
-            self.output_dir = cl.output_dir[0]
+            self.output_dir = cl.output_dir
         else:
             self.output_dir = os.getcwd()
-        self.workflow = cl.workflow[0]
-        self.job_store = cl.workflow[0] + ".json"
+        self.workflow = cl.workflow
+        self.job_store = cl.workflow + ".json"
         
         dir(self)
         
@@ -81,6 +81,7 @@ class Workflow:
     
     def load(self, json_store):
         print "loading JSON from '%s'" % json_store
+        print
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
         self.jobs = data.itervalues().next()
