@@ -91,7 +91,10 @@ class Auger(Batch):
         mem.set("space", "2000")
         mem.set("unit", "MB")
         limit = ET.SubElement(req, "TimeLimit")
-        limit.set("time", "24")
+        if self.debug:
+            limit.set("time", "4")
+        else:
+            limit.set("time", "24")
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
         os_elem.set("name", "centos7")
