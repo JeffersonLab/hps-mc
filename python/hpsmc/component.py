@@ -52,7 +52,7 @@ class Component:
         cl = [self.command]
         cl.extend(self.cmd_args())
                                   
-        logger.info("executing '%s' with command %s" % (self.name, cl))
+        logger.info("executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
         start = time.time()
         proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
         proc.communicate()
