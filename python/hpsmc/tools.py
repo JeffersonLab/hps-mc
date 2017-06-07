@@ -99,7 +99,7 @@ class JavaTool(Component):
         if "java_args" in kwargs:
             self.java_args = kwargs["java_args"]
         else:
-            self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
+            self.java_args = ["-Xmx1g", "-XX:+UseSerialGC"]
         if "java_class" in kwargs:
             self.java_class = kwargs["java_class"]
         elif self.java_class is None:
