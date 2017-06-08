@@ -1,6 +1,8 @@
+#!/usr/bin/env python
+
 import argparse, os, json, glob
 
-from job import JobParameters
+from hpsmc.job import JobParameters
 
 class Workflow:
     

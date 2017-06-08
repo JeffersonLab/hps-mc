@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 """
 Python script for generating 'tritrig' events in MG5 and running through simulation, readout and reconstruction. 
 """

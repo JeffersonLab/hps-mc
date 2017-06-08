@@ -1,4 +1,6 @@
-from batch import LSF
+#!/usr/bin/env python
+
+from hpsmc.batch import LSF
 
 if __name__ == "__main__":
     submit = LSF()
