@@ -2,6 +2,9 @@
 
 setenv PATH @CMAKE_INSTALL_PREFIX@/bin:$PATH
 
+if (! $?PYTHONPATH) then       
+    setenv PYTHONPATH ""
+endif
 setenv PYTHONPATH @PROJECT_SOURCE_DIR@/python:$PYTHONPATH
 
 setenv HPSMC_DATA_DIR @CMAKE_INSTALL_PREFIX@/share/
