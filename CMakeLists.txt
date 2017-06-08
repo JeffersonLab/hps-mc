@@ -137,3 +137,15 @@ install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.csh DESTINATION bin
 
 # install run params data
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
+
+# install python job helper scripts
+install(FILES python/hpsmc/bsub.py python/hpsmc/jsub.py python/hpsmc/workflow.py DESTINATION bin
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# install python job scripts
+file(GLOB python_job_scripts python/jobs/*.py)
+foreach (python_job_script ${python_job_scripts})
+    install(FILES ${python_job_script} DESTINATION bin 
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+endforeach()
+
