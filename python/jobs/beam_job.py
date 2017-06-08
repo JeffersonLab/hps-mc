@@ -17,7 +17,7 @@ job.initialize()
 if len(job.input_files) > 1:
     raise Exception("Too many input files (expected 1 but got %d)." % len(job.input_files))
 
-input_file = job.input_files.keys()[0]
+input_file = "beam.stdhep"
 base,ext = os.path.splitext(input_file) 
 
 rot = StdHepTool(name="beam_coords",
