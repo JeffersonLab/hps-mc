@@ -69,9 +69,6 @@ class Auger(Batch):
     def build_job_files(self, name, job_params):
 
         param_file = name+".json"
-        with open(param_file, "w") as jobfile:
-             json.dump(job_params, jobfile, indent=4, sort_keys=True)
-        print "wrote job param file '%s'" % (param_file)
 
         req = ET.Element("Request")
         req_name = ET.SubElement(req, "Name")
@@ -113,7 +110,7 @@ class Auger(Batch):
         job_config.set("src", os.path.join(os.getcwd(), param_file))
         job_config.set("dest", param_file)
         outputfiles = job_params.pop("output_files")
-        outputdir = job_params["output_dir"]
+        outputdir = job_params.pop("output_dir")
         outputdir = os.path.realpath(outputdir)
         for src,dest in outputfiles.iteritems():
             output_elem = ET.SubElement(job, "Output")
@@ -137,7 +134,12 @@ class Auger(Batch):
         cmd_text = unescape(cmd_text)
         cmd.text = cmd_text
 
-        pretty = minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    ")
+        with open(param_file, "w") as jobfile:
+             json.dump(job_params, jobfile, indent=4, sort_keys=True)
+        print "wrote job param file '%s'" % (param_file)
+
+        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    "))
+#.replace("&lt;", "<").replace("&gt;", ">")
         xml_file = name+".xml"
         with open(xml_file, "w") as f:
             f.write(pretty)
