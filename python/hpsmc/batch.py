@@ -60,11 +60,9 @@ class LSF(Batch):
 class Auger(Batch):
 
     def __init__(self):
-        self.debug = False
-
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
-            raise Exception("Failed to find 'hps-mc-env.csh' setup script in environment.")
+            raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
    
     def build_job_files(self, name, job_params):
 
@@ -127,9 +125,7 @@ class Auger(Batch):
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
         cmd_lines.append("python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file)))
         cmd_lines.append("]]>")
-        cmd_text = '\n'.join(cmd_lines)
-        cmd_text = unescape(cmd_text)
-        cmd.text = cmd_text
+        cmd.text = '\n'.join(cmd_lines)
 
         with open(param_file, "w") as jobfile:
              json.dump(job_params, jobfile, indent=4, sort_keys=True)
