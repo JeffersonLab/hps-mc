@@ -18,7 +18,7 @@ class Batch:
         cl = parser.parse_args()
 
         self.workflow = Workflow(cl.jobstore[0])
-        self.script = os.path.abspath(cl.script[0])
+        self.script = find_executable(cl.script[0])
         self.email = cl.email
         self.debug = cl.debug
         if cl.no_submit:
