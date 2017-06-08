@@ -62,7 +62,7 @@ class Auger(Batch):
     def __init__(self):
         self.debug = False
 
-        self.setup_script = find_executable('hps-mc-env.csh')
+        self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' setup script in environment.")
    
@@ -106,16 +106,6 @@ class Auger(Batch):
             else:
                 src_file = src
             input_elem.set("src", src_file)
-        job_config = ET.SubElement(job, "Input")
-        job_config.set("src", os.path.join(os.getcwd(), param_file))
-        job_config.set("dest", param_file)
-        job_script = ET.SubElement(job, "Input")
-        script_file = os.path.realpath(self.script)
-        job_script.set("src", os.path.realpath(self.script))
-        job_script.set("dest", os.path.basename(script_file))
-        env_script = ET.SubElement(job, "Input")
-        env_script.set("src", self.setup_script)
-        env_script.set("dest", os.path.basename(self.setup_script))
         outputfiles = job_params.pop("output_files")
         outputdir = job_params.pop("output_dir")
         outputdir = os.path.realpath(outputdir)
@@ -134,8 +124,8 @@ class Auger(Batch):
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
-        cmd_lines.append("source %s" % os.path.basename(self.setup_script))
-        cmd_lines.append("python %s %s" % (os.path.basename(script_file), param_file))
+        cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
+        cmd_lines.append("python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file)))
         cmd_lines.append("]]>")
         cmd_text = '\n'.join(cmd_lines)
         cmd_text = unescape(cmd_text)
@@ -146,7 +136,6 @@ class Auger(Batch):
         print "wrote job param file '%s'" % (param_file)
 
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    "))
-#.replace("&lt;", "<").replace("&gt;", ">")
         xml_file = name+".xml"
         with open(xml_file, "w") as f:
             f.write(pretty)
