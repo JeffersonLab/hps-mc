@@ -205,7 +205,7 @@ class JobParameters:
             self.seed = 1
 
         if not hasattr(self, "output_dir"):
-            self.out_dir = os.getcwd()            
+            self.output_dir = os.getcwd()            
 
         if not hasattr(self, "job_num"):
             self.job_num = 1
