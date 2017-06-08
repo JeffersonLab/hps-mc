@@ -113,8 +113,11 @@ class Job:
             self.log_out = open(self.out_file, "w")
         if self.err_file:
             self.log_err = open(self.err_file, "w")
-        
-        self.copy_input_files()
+       
+        if "AUGER_ID" not in os.environ: 
+            self.copy_input_files()
+        else:
+            logger.info("Auger environment detector so copy input files is skipped.")
             
     def run(self): 
         
@@ -126,7 +129,10 @@ class Job:
 
         self.setup()
         self.execute()
-        self.copy_output_files()
+        if "AUGER_ID" not in os.environ:
+            self.copy_output_files()
+        else:
+            logger.info("Auger environment detected so copy output files is skipped.")
         self.cleanup()
                       
     def execute(self):
