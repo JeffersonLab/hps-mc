@@ -95,7 +95,7 @@ class Auger(Batch):
         os_elem.set("name", "centos7")
 
         job = ET.SubElement(req, "Job")
-        inputfiles = job_params.pop("input_files")
+        inputfiles = job_params["input_files"]
         for dest,src in inputfiles.iteritems():
             input_elem = ET.SubElement(job, "Input")
             input_elem.set("dest", dest)
@@ -104,8 +104,8 @@ class Auger(Batch):
             else:
                 src_file = src
             input_elem.set("src", src_file)
-        outputfiles = job_params.pop("output_files")
-        outputdir = job_params.pop("output_dir")
+        outputfiles = job_params["output_files"]
+        outputdir = job_params["output_dir"]
         outputdir = os.path.realpath(outputdir)
         for src,dest in outputfiles.iteritems():
             output_elem = ET.SubElement(job, "Output")
