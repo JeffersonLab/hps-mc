@@ -17,8 +17,12 @@ class Batch:
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
 
+        if not os.path.isfile(cl.jobstore[0]):
+            raise Exception("The job store file '%s' does not exist." % cl.jobstore[0])
         self.workflow = Workflow(cl.jobstore[0])
         self.script = cl.script[0]
+        if not os.path.isfile(self.script):
+            raise Exception("The script '%s' does not exist." % self.script)
         self.email = cl.email
         self.debug = cl.debug
         if cl.no_submit:
@@ -50,7 +54,6 @@ class LSF(Batch):
 
     def submit_single(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
-        print cmd
         print ' '.join(cmd)
         if self.submit:
             proc = subprocess.Popen(cmd, shell=False)
