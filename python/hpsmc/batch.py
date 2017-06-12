@@ -45,7 +45,8 @@ class LSF(Batch):
     def build_cmd(self, name, job_params):
         param_file = name+".json"
         cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  os.path.abspath(name+".log"), "-e",  os.path.abspath(name+".log")]
-        cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
+        #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
+        cmd.extend(["python", self.script, os.path.abspath(param_file)])
         job_params["output_files"]["job.out"] = name+".out"
         job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:
