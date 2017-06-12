@@ -18,7 +18,7 @@ class Batch:
         cl = parser.parse_args()
 
         self.workflow = Workflow(cl.jobstore[0])
-        self.script = find_executable(cl.script[0])
+        self.script = cl.script[0]
         self.email = cl.email
         self.debug = cl.debug
         if cl.no_submit:
@@ -50,6 +50,7 @@ class LSF(Batch):
 
     def submit_single(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
+        print cmd
         print ' '.join(cmd)
         if self.submit:
             proc = subprocess.Popen(cmd, shell=False)
