@@ -44,40 +44,52 @@ class Workflow:
     def build(self):
         
         jobs = {self.workflow: {}}
-                    
+                                        
         input_file_lists = {}
-        for dest,src in self.params.input_files.iteritems():            
-            flist = glob.glob(src)
+        input_file_count = {}
+        for dest,src in self.params.input_files.iteritems():
+            if isinstance(src, dict):
+                src_files,ntoread = src.iteritems().next()
+            else:
+                src_files = src
+                ntoread = 1
+            
+            flist = glob.glob(src_files)
             flist.sort()
-            input_file_lists[dest] = flist                    
-
-        ifile = 0                
+            input_file_lists[dest] = flist
+            input_file_count[dest] = ntoread
+                
         for jobnum in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
             job["job_num"] = jobnum
             job["seed"] = int(str(self.seed) + str(jobnum))
             job["output_dir"] = self.output_dir
-            job["input_files"] = {}            
+            job["input_files"] = {}
+            
             if input_file_lists:
                 for dest,src in input_file_lists.iteritems():
-                    job["input_files"][dest] = src[ifile]
+                    ntoread = input_file_count[dest]
+                    if ntoread > 1:
+                        for i in range(1, ntoread + 1):
+                            job["input_files"][dest+"."+str(i)] = src.pop(0)
+                    else:
+                        job["input_files"][dest] = src.pop(0)
+            
             job["output_files"] = {}
-            job_num_padded = ("%0" + str(self.job_num_pad) + "d") % jobnum
+            job_num_padded = ("%0" + str(self.job_num_pad) + "d") % jobnum                                            
             for src,dest in self.params.output_files.iteritems():
                 base,ext = os.path.splitext(dest)
                 if "." in base:
                     ext = dest[dest.find("."):]
                     base = base[:base.find(".")]
                 dest_file = base + "_" + job_num_padded + ext
-                job["output_files"][src] = dest_file
+                job["output_files"][src] = dest_file            
             
             for k,v in self.params.json_dict.iteritems():
                 if k not in Workflow.base_params:
                     job[k] = v
             
-            jobs[self.workflow][self.workflow + "_"+ job_num_padded] = job
-                                
-            ifile += 1
+            jobs[self.workflow][self.workflow + "_"+ job_num_padded] = job                                
                 
         with open(self.job_store, "w") as jobfile:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)
