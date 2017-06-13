@@ -65,6 +65,9 @@ class Workflow:
             job_num_padded = ("%0" + str(self.job_num_pad) + "d") % jobnum
             for src,dest in self.params.output_files.iteritems():
                 base,ext = os.path.splitext(dest)
+                if "." in base:
+                    ext = dest[dest.find("."):]
+                    base = base[:base.find(".")]
                 dest_file = base + "_" + job_num_padded + ext
                 job["output_files"][src] = dest_file
             
