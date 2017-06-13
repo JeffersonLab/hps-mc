@@ -22,9 +22,9 @@ beam_input = "beam.stdhep"
 
 # check for required inputs
 if beam_input not in params.input_files:
-    raise Exception("Missing '%s input file." % beam_input)
+    raise Exception("Missing '%s' input file in job params." % beam_input)
 if wab_input not in params.input_files:
-    raise Exception("Missing '%s' input file." % wab_input)
+    raise Exception("Missing '%s' input file in job params." % wab_input)
 
 # get run params
 run_params = RunParameters(key=params.run_params)
