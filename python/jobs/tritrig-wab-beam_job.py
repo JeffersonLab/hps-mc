@@ -35,7 +35,7 @@ if len(tritrig_files) != len(wab_files):
 # filter and space tritrig files
 filter_tritrig = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
                                  inputs=tritrig_files,
-                                 outputs=["tritrig_filt.slcio"],
+                                 outputs=["tritrig_filter.slcio"],
                                  ecal_hit_ecut=0.05,
                                  enable_ecal_energy_filter=True,
                                  nevents=2000000,
