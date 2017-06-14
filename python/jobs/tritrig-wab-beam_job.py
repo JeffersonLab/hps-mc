@@ -58,7 +58,7 @@ readout = JobManager(steering_resource=params.readout_steering,
                      java_args=["-DdisableSvtAlignmentConstants"],
                      defs={"detector": params.detector, "run": params.run},
                      inputs=["merged.slcio"],
-                     outputs=["readout.slcio"])
+                     outputs=["readout"])
 
 # run physics reconstruction
 recon = JobManager(steering_resource=params.recon_steering,
