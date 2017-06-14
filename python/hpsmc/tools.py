@@ -133,8 +133,6 @@ class FilterMCBunches(JavaTool):
             self.enable_ecal_energy_filter = kwargs["enable_ecal_energy_filter"]
         else:
             self.enable_ecal_energy_filter = False 
-        if self.nevents == -1:
-            raise Exception("Missing required nevents arg for FilterMCBunches.")
                     
     def cmd_args(self):
         if not len(self.inputs):
@@ -153,8 +151,9 @@ class FilterMCBunches(JavaTool):
         if self.ecal_hit_ecut is not None:
             self.args.append("-E")
             self.args.append(str(self.ecal_hit_ecut))
-        self.args.append("-w")
-        self.args.append(str(self.nevents))
+        if self.nevents > 0:
+            self.args.append("-w")
+            self.args.append(str(self.nevents))
         return self.args
 
 class DST(Component):

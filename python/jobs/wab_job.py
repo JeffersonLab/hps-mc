@@ -25,12 +25,6 @@ mg = MG4(description="Generate wab events using MG4",
          outputs=[procname],
          nevents=params.nevents)
 
-# convert LHE output to stdhep
-stdhep_cnv = StdHepConverter(description="Convert LHE events to StdHep using EGS5",
-                             run_params=RunParameters(key=params.run_params),
-                             inputs=[procname+"_events.lhe.gz"],
-                             outputs=[procname+".stdhep"])
- 
 # run the job
-job.components=[mg, stdhep_cnv] 
+job.components=[mg] 
 job.run()
