@@ -39,7 +39,11 @@ class SLIC(Component):
         detector_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.detector, self.detector + ".lcdd")
         if not len(self.outputs):
             outputs.append("slic_events.slcio")
-        self.args = ["-g", detector_file, "-i", self.inputs[0], "-o", self.outputs[0], "-r", str(self.nevents)]
+        self.args = ["-g", detector_file, 
+                     "-i", self.inputs[0], 
+                     "-o", self.outputs[0], 
+                     "-r", str(self.nevents),
+                     "-d", str(self.seed)]
         return self.args
 
     def setup(self):
