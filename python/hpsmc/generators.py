@@ -46,6 +46,8 @@ class EGS5(EventGenerator):
         ebeam = self.run_params.get("beam_energy")
         electrons = self.run_params.get("num_electrons") * self.bunches
                 
+        logger.info("EGS5 - generating %d electrons" % electrons)
+        
         seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", "w")
         seed_file.write(seed_data)
