@@ -55,7 +55,7 @@ rot_beam = StdHepTool(name="beam_coords",
                       outputs=["beam_rot.stdhep"],
                       args=["-s", str(params.seed), "-z", str(params.z)])
     
-# sample beam backgroun events 
+# sample beam background events 
 sample_beam = StdHepTool(name="random_sample",
                          inputs=["beam_rot.stdhep"],
                          outputs=["beam_sampled"],
