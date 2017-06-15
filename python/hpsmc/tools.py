@@ -1,4 +1,4 @@
-import os, socket, gzip, shutil
+import os, socket, gzip, shutil, logging
 
 from hpsmc.component import Component
 
