@@ -135,9 +135,25 @@ configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.csh.in ${CMAKE_BINARY_DI
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.csh DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
+# install stdhep script
+install(FILES scripts/stdhep_count.sh DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
 # install run params data
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
 
 # install python job helper scripts
 install(FILES python/hpsmc/bsub.py python/hpsmc/jsub.py python/hpsmc/workflow.py DESTINATION bin
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# find slic to get location of particle.tbl for installation
+find_program(SLIC slic)
+if(SLIC)
+    get_filename_component(slic_bin_dir ${SLIC} DIRECTORY)
+    set(slic_particle_tbl ${slic_bin_dir}/../share/particle.tbl)
+    if(EXISTS ${slic_particle_tbl})
+       message(STATUS "SLIC particle data will be installed from: ${slic_particle_tbl}")
+       install(FILES ${slic_particle_tbl} DESTINATION share 
+               PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
+    endif()
+endif()
