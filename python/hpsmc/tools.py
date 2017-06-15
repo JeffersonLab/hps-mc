@@ -2,6 +2,8 @@ import os, socket, gzip, shutil
 
 from hpsmc.component import Component
 
+logger = logging.getLogger("tools")
+
 class StdHepTool(Component):
 
     def __init__(self, **kwargs):
@@ -39,11 +41,16 @@ class SLIC(Component):
         detector_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.detector, self.detector + ".lcdd")
         if not len(self.outputs):
             outputs.append("slic_events.slcio")
-        self.args = ["-g", detector_file, 
-                     "-i", self.inputs[0], 
-                     "-o", self.outputs[0], 
+        self.args = ["-g", detector_file,
+                     "-i", self.inputs[0],
+                     "-o", self.outputs[0],
                      "-r", str(self.nevents),
                      "-d", str(self.seed)]
+        tbl = os.path.join(os.environ["HPSMC_DATA_DIR"], "particle.tbl")
+        if os.path.exists(tbl):
+            self.args.extend(["-P", tbl])
+        else:
+            logger.warn("SLIC - particle.tbl location is not being set automatically!")
         return self.args
 
     def setup(self):
