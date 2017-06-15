@@ -45,7 +45,7 @@ class SLIC(Component):
                      "-i", self.inputs[0],
                      "-o", self.outputs[0],
                      "-r", str(self.nevents),
-                     "-d", str(self.seed)]
+                     "-d%s" % str(self.seed)]
         tbl = os.path.join(os.environ["HPSMC_DATA_DIR"], "particle.tbl")
         if os.path.exists(tbl):
             self.args.extend(["-P", tbl])
