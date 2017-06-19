@@ -11,7 +11,7 @@ params = job.params
 
 egs5 = EGS5(name="beam_v3",
     bunches=params.bunches,
-    run_params=RunParameters(key="1pt05"),
+    run_params=RunParameters(key=params.run_params),
     outputs=["beam.stdhep"])
 
 job.components = [egs5]
