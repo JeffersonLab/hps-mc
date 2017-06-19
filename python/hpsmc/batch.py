@@ -13,6 +13,7 @@ class Batch:
         parser.add_argument("--email", nargs='?', help="Email address", default=getpass.getuser()+"@jlab.org")
         parser.add_argument("--debug", action='store_true', help="Enable debug settings")
         parser.add_argument("--no-submit", action='store_true', help="Do not actually submit the jobs")
+        parser.add_argument("--job-ids", nargs="*", default=[])
         parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
@@ -29,10 +30,13 @@ class Batch:
             self.submit = False
         else:
             self.submit = True
+        
+        self.job_ids = map(int, cl.job_ids)
 
     def submit_all(self):
         for k in sorted(self.workflow.jobs):
-            self.submit_single(k, self.workflow.jobs[k])
+            if not len(self.job_ids) or self.workflow.jobs[k]["job_id"] in self.job_ids:
+                self.submit_single(k, self.workflow.jobs[k])
     
     def submit_single(self, name, job_params):
         pass
