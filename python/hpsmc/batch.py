@@ -13,7 +13,8 @@ class Batch:
         parser.add_argument("--email", nargs='?', help="Email address", default=getpass.getuser()+"@jlab.org")
         parser.add_argument("--debug", action='store_true', help="Enable debug settings")
         parser.add_argument("--no-submit", action='store_true', help="Do not actually submit the jobs")
-        parser.add_argument("--job-ids", nargs="*", default=[])
+        parser.add_argument("--job-ids", nargs="*", default=[], help="List of job IDs to submit")
+        parser.add_argument("--work-dir", nargs=1, default=os.getcwd(), help="Work dir where JSON and XML files will be saved")
         parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
@@ -30,7 +31,13 @@ class Batch:
             self.submit = False
         else:
             self.submit = True
-        
+            
+        self.work_dir = cl.work_dir[0]
+        try:
+            os.stat(self.work_dir)
+        except:
+            os.makedirs(self.work_dir)
+                    
         self.job_ids = map(int, cl.job_ids)
 
     def submit_all(self):
@@ -47,7 +54,7 @@ class LSF(Batch):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
 
     def build_cmd(self, name, job_params):
-        param_file = name+".json"
+        param_file = os.path.join(self.work_dir, name + ".json")
         cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  os.path.abspath(name+".log"), "-e",  os.path.abspath(name+".log")]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
         cmd.extend(["python", self.script, os.path.abspath(param_file)])
@@ -75,7 +82,7 @@ class Auger(Batch):
    
     def build_job_files(self, name, job_params):
 
-        param_file = name+".json"
+        param_file = os.path.join(self.work_dir, name + ".json")
 
         req = ET.Element("Request")
         req_name = ET.SubElement(req, "Name")
@@ -141,10 +148,10 @@ class Auger(Batch):
         print "wrote job param file '%s'" % (param_file)
 
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    "))
-        xml_file = name+".xml"
+        xml_file = os.path.join(self.work_dir, name+".xml")
         with open(xml_file, "w") as f:
             f.write(pretty)
-        print "wrote Auger XML '%s'" % (name+".xml")
+        print "wrote Auger XML '%s'" % xml_file
 
         return param_file, xml_file
 
