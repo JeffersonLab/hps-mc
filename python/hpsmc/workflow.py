@@ -22,20 +22,13 @@ class Workflow:
         parser = argparse.ArgumentParser(description="Create a workflow with one or more jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
-        parser.add_argument("-o", "--output-dir", nargs="?", help="Job output directory", default=os.getcwd())
-        parser.add_argument("-r", "--random-seed", nargs="?", type=int, help="Base number for random seed", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", default="jobs")
-        parser.add_argument("params", nargs="?", help="Job param template in JSON format", default="job.json")
+        parser.add_argument("params", nargs="?", help="Job template in JSON format", default="job.json")
         cl = parser.parse_args()
         
         self.job_start = cl.job_start
         self.num_jobs = cl.num_jobs
         self.params = JobParameters(cl.params)
-        self.seed = cl.random_seed
-        if cl.output_dir:
-            self.output_dir = cl.output_dir
-        else:
-            self.output_dir = os.getcwd()
         self.workflow = cl.workflow
         self.job_store = cl.workflow + ".json"
         
@@ -62,8 +55,8 @@ class Workflow:
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
             job["job_id"] = jobid
-            job["seed"] = int(str(self.seed) + str(jobid))
-            job["output_dir"] = self.output_dir
+            job["seed"] = self.params.seed
+            job["output_dir"] = self.params.output_dir
             job["input_files"] = {}
             
             if input_file_lists:
