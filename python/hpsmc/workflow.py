@@ -6,13 +6,13 @@ from hpsmc.job import JobParameters
 
 class Workflow:
     
-    base_params = ["job_num", "seed", "output_dir", "input_files", "output_files"]
+    base_params = ["job_id", "seed", "output_dir", "input_files", "output_files"]
     
     def __init__(self, json_file = None):
         jobs = []
         
         # TODO: make command line arg
-        self.job_num_pad = 4
+        self.job_id_pad = 4
 
         if json_file:
             self.load(json_file)
@@ -59,10 +59,10 @@ class Workflow:
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
                 
-        for jobnum in range(self.job_start, self.job_start + self.num_jobs):
+        for jobid in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
-            job["job_num"] = jobnum
-            job["seed"] = int(str(self.seed) + str(jobnum))
+            job["job_id"] = jobid
+            job["seed"] = int(str(self.seed) + str(jobid))
             job["output_dir"] = self.output_dir
             job["input_files"] = {}
             
@@ -76,20 +76,20 @@ class Workflow:
                         job["input_files"][dest] = src.pop(0)
             
             job["output_files"] = {}
-            job_num_padded = ("%0" + str(self.job_num_pad) + "d") % jobnum                                            
+            job_id_padded = ("%0" + str(self.job_id_pad) + "d") % jobid                                            
             for src,dest in self.params.output_files.iteritems():
                 base,ext = os.path.splitext(dest)
                 if "." in base:
                     ext = dest[dest.find("."):]
                     base = base[:base.find(".")]
-                dest_file = base + "_" + job_num_padded + ext
+                dest_file = base + "_" + job_id_padded + ext
                 job["output_files"][src] = dest_file            
             
             for k,v in self.params.json_dict.iteritems():
                 if k not in Workflow.base_params:
                     job[k] = v
             
-            jobs[self.workflow][self.workflow + "_"+ job_num_padded] = job                                
+            jobs[self.workflow][self.workflow + "_"+ job_id_padded] = job
                 
         with open(self.job_store, "w") as jobfile:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)

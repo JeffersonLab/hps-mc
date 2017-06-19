@@ -29,10 +29,10 @@ class Job:
         else:
             self.components = []            
             
-        if "job_num_pad" in kwargs:
-            self.job_num_pad = kwargs["job_num_pad"]
+        if "job_id_pad" in kwargs:
+            self.job_id_pad = kwargs["job_id_pad"]
         else:
-            self.job_num_pad = 4
+            self.job_id_pad = 4
                         
         if "delete_existing" in kwargs:
             self.delete_existing = kwargs["delete_existing"]
@@ -56,7 +56,7 @@ class Job:
         
         self.output_dir = os.getcwd()
         
-        self.job_num = 1
+        self.job_id = 1
                     
     def parse_args(self):
         
@@ -97,7 +97,7 @@ class Job:
         if not os.path.isabs(self.output_dir):
             self.output_dir= os.path.abspath(self.output_dir)
             logger.info("changed output dir to abs path '%s'" % self.output_dir)
-        self.job_num = self.params.job_num
+        self.job_id = self.params.job_id
 
     def initialize(self):
 
@@ -213,8 +213,8 @@ class JobParameters:
         if not hasattr(self, "output_dir"):
             self.output_dir = os.getcwd()            
 
-        if not hasattr(self, "job_num"):
-            self.job_num = 1
+        if not hasattr(self, "job_id"):
+            self.job_id = 1
     
     def load(self, filename):
         rawdata = open(filename, 'r').read()
