@@ -26,13 +26,13 @@ unzip = Unzip(inputs=[filename+"_events.lhe.gz"])
 displ = StdHepTool(name="lhe_tridents_displacetime",
                    inputs=[filename+"_events.lhe"],
                    outputs=[filename+".stdhep"],
-                   args=["-s", str(params.seed), "-l", str(params.ctau)])
+                   args=["-l", str(params.ctau)])
 
 # rotate events into beam coordinates and move vertex by 5 mm
 rot = StdHepTool(name="beam_coords",
                  inputs=[filename+".stdhep"],
                  outputs=[filename+"_rot.stdhep"],
-                 args=["-s", str(params.seed), "-z", str(params.z)])
+                 args=["-z", str(params.z)])
 
 # print rotated AP events
 dump = StdHepTool(name="print_stdhep",
