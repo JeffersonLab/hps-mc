@@ -6,11 +6,21 @@ logger = logging.getLogger("tools")
 
 class StdHepTool(Component):
 
+    seed_names = ["beam_coords", 
+                  "beam_coords_old", 
+                  "lhe_tridents", 
+                  "lhe_tridents_displacetime", 
+                  "merge_poisson",
+                  "mix_signal",
+                  "random_sample"]
+
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)        
         self.command = "stdhep_" + self.name
 
-    def cmd_args(self):
+    def cmd_args(self):        
+        if self.name in StdHepTool.seed_names:
+            self.args.extend(["-s", str(self.seed)])
         if len(self.outputs):
             self.args.insert(0, self.outputs[0])
         elif len(self.outputs) > 1:
