@@ -46,7 +46,7 @@ class EGS5(EventGenerator):
         ebeam = self.run_params.get("beam_energy")
         electrons = self.run_params.get("num_electrons") * self.bunches
                 
-        logger.info("EGS5 - generating %d electrons" % electrons)
+        logger.info("EGS5 - Generating %d electrons" % electrons)
         
         seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", "w")
@@ -60,7 +60,7 @@ class EGS5(EventGenerator):
         for stdhep_file in post_stdhep_files:
             if stdhep_file not in pre_stdhep_files:
                 stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
-                logger.info("EGS5 - moving '%s' to '%s'" % (stdhep_file, stdhep_output_path))
+                logger.info("EGS5 - Moving '%s' to '%s'" % (stdhep_file, stdhep_output_path))
                 shutil.move(stdhep_file, stdhep_output_path)
                 break
 
@@ -124,7 +124,7 @@ class MG4(EventGenerator):
     @staticmethod
     def set_run_card_params(run_card, nevents, seed):
         
-        logger.info("MG4 - setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, seed))
+        logger.info("MG4 - Setting run card params on '%s' with nevents '%d' and rand seed '%d'" % (run_card, nevents, seed))
             
         with open(run_card, 'r') as file:
             data = file.readlines()
@@ -162,7 +162,7 @@ class MG4(EventGenerator):
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
         src = os.path.join(self.mg4_dir, proc_dirs[0], proc_dirs[1])
         dest = proc_dirs[1]
-        logger.info("MG4 - copying '%s' to '%s'" % (src, dest))
+        logger.info("MG4 - Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
         
         self.event_dir = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Events")
@@ -170,32 +170,32 @@ class MG4(EventGenerator):
             os.makedirs(self.event_dir)
 
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
-        logger.info("MG4 - command set to '%s'"  % self.command)
+        logger.info("MG4 - Command set to '%s'"  % self.command)
 
         run_card_src = os.path.join(self.mg4_dir, proc_dirs[0], self.run_card)
         run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
-        logger.info("MG4 - copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
+        logger.info("MG4 - Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         shutil.copyfile(run_card_src, run_card_dest)
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
         
         param_card_src = os.path.join(self.mg4_dir, proc_dirs[0], self.param_card)
         param_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "param_card.dat")
-        logger.info("MG4 - copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
+        logger.info("MG4 - Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
         if len(self.params):
-            logger.info("MG4 - setting params %s on '%s'" % (repr(self.params), param_card_dest))
+            logger.info("MG4 - Setting params %s on '%s'" % (repr(self.params), param_card_dest))
             MG4.set_params(param_card_dest, self.params)
         else:
-            logger.info("MG4 - no user params were set on param card")
+            logger.info("MG4 - No user params were set on param card")
                 
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
-        logger.info("MG4 - executing '%s' from '%s'" % (self.name, os.getcwd()))
+        logger.info("MG4 - Executing '%s' from '%s'" % (self.name, os.getcwd()))
         Component.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
-            logger.info("MG4 - copying '%s' to '%s'" % (f, self.rundir))
+            logger.info("MG4 - Copying '%s' to '%s'" % (f, self.rundir))
             shutil.copy(f, self.rundir)
         os.chdir(self.rundir)
                 
@@ -230,12 +230,12 @@ class MG5(EventGenerator):
         shutil.copytree(src, dest, symlinks=True)
         
         self.command = os.path.join(dest, "bin", "generate_events")
-        logger.info("MG5 - command set to '%s'" % self.command)
+        logger.info("MG5 - Command set to '%s'" % self.command)
         
         run_card_src = os.path.join(src, "Cards", self.run_card)
         run_card_dest = os.path.join(dest, "Cards", "run_card.dat")
         
-        logger.info("MG5 - copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
+        logger.info("MG5 - Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         
         shutil.copyfile(run_card_src, run_card_dest)
         
@@ -243,12 +243,12 @@ class MG5(EventGenerator):
         
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
-        logger.info("MG5 - executing '%s' from '%s'" % (self.name, os.getcwd()))
+        logger.info("MG5 - Executing '%s' from '%s'" % (self.name, os.getcwd()))
         Component.execute(self, log_out, log_err)
         
         lhe_files = glob.glob(os.path.join(self.rundir, self.proc_dir, "Events", self.name, "*.lhe.gz"))
         for f in lhe_files:            
-            logger.info("MG5 - copying '%s' to '%s'" % (f, self.rundir))
+            logger.info("MG5 - Copying '%s' to '%s'" % (f, self.rundir))
             shutil.copyfile(f, os.path.join(self.rundir, self.name + "_" + os.path.basename(f)))
         
         os.chdir(self.rundir)

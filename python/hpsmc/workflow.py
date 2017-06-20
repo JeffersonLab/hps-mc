@@ -11,9 +11,6 @@ class Workflow:
     def __init__(self, json_file = None):
         jobs = []
         
-        # TODO: make command line arg
-        self.job_id_pad = 4
-
         if json_file:
             self.load(json_file)
     
@@ -23,6 +20,7 @@ class Workflow:
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", default="jobs")
+        parser.add_argument("-p", "--pad", nargs=1, type=int, help="Padding spaces for filenames (default is 4)", default=4)
         parser.add_argument("params", nargs="?", help="Job template in JSON format", default="job.json")
         cl = parser.parse_args()
         
@@ -31,6 +29,7 @@ class Workflow:
         self.params = JobParameters(cl.params)
         self.workflow = cl.workflow
         self.job_store = cl.workflow + ".json"
+        self.job_id_pad = cl.pad
         
         dir(self)
         

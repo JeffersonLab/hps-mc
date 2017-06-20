@@ -15,7 +15,6 @@ job = Job(name="tritrig job")
 job.initialize()
 
 params = job.params
-filename = params.filename
 
 # used for intermediate file names
 procname = "tritrig"
@@ -23,7 +22,7 @@ procname = "tritrig"
 # generate tritrig in MG5
 mg = MG5(name=procname,
          run_card="run_card_"+params.run_params+".dat",
-         outputs=[filename],
+         outputs=[procname],
          nevents=params.nevents)
 
 # convert LHE output to stdhep
@@ -69,7 +68,7 @@ recon = JobManager(steering_resource=params.recon_steering,
                    java_args=["-DdisableSvtAlignmentConstants"],
                    defs={"detector": params.detector, "run": params.run},
                    inputs=[procname+"_readout.slcio"],
-                   outputs=[filename+"_recon"])
+                   outputs=[procname+"_recon"])
  
 # run the job
 job.components=[mg, stdhep_cnv, mom, rot, slic, filter_bunches, readout, recon] 

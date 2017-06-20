@@ -52,13 +52,13 @@ class Component:
         cl = [self.command]
         cl.extend(self.cmd_args())
                                   
-        logger.info("executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
+        logger.info("Executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
         start = time.time()
         proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
         proc.communicate()
         end = time.time()
         elapsed = end - start
-        logger.info("execution of '%s' took %d second(s)" % (self.name, elapsed))
+        logger.info("Execution of '%s' took %d second(s)" % (self.name, elapsed))
 
         if not self.ignore_returncode and proc.returncode:
             raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
