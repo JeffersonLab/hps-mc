@@ -60,7 +60,7 @@ class SLIC(Component):
         if os.path.exists(tbl):
             self.args.extend(["-P", tbl])
         else:
-            logger.warn("SLIC - particle.tbl location is not being set automatically!")
+            logger.warn("SLIC - The particle.tbl location is not being set automatically!")
         return self.args
 
     def setup(self):
