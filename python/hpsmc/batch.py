@@ -10,11 +10,13 @@ class Batch:
     
     def parse_args(self):
         parser = argparse.ArgumentParser("Submit batch jobs")
-        parser.add_argument("--email", nargs='?', help="Email address", default=getpass.getuser()+"@jlab.org")
+        parser.add_argument("--email", nargs='?', help="Your email address", default=getpass.getuser()+"@jlab.org")
         parser.add_argument("--debug", action='store_true', help="Enable debug settings")
         parser.add_argument("--no-submit", action='store_true', help="Do not actually submit the jobs")
         parser.add_argument("--job-ids", nargs="*", default=[], help="List of job IDs to submit")
-        parser.add_argument("--work-dir", nargs=1, default=os.getcwd(), help="Work dir where JSON and XML files will be saved")
+        parser.add_argument("--work-dir", nargs=1, help="Work dir where JSON and XML files will be saved")
+        parser.add_argument("--log-dir", nargs=1, help="Log file output dir")
+        parser.add_argument("--check-output", action='store_true')
         parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
@@ -31,19 +33,44 @@ class Batch:
             self.submit = False
         else:
             self.submit = True
-            
-        self.work_dir = cl.work_dir[0]
+
+        if cl.work_dir:
+            self.work_dir = cl.work_dir[0]
+        else:
+            cl.work_dir = os.getcwd()                        
         try:
             os.stat(self.work_dir)
         except:
             os.makedirs(self.work_dir)
+
+        if cl.log_dir:            
+            self.log_dir = cl.log_dir[0]
+        else:
+            self.log_dir = os.getcwd()        
+        try:
+            os.stat(self.log_dir)
+        except:
+            os.makedirs(self.log_dir)
+            
+        self.check_output = cl.check_output
                     
         self.job_ids = map(int, cl.job_ids)
+        
+    @staticmethod
+    def outputs_exist(job):
+        for o in job["output_files"]:
+            if not os.path.exists(o):
+                return False
+        return True
 
     def submit_all(self):
         for k in sorted(self.workflow.jobs):
-            if not len(self.job_ids) or self.workflow.jobs[k]["job_id"] in self.job_ids:
-                self.submit_single(k, self.workflow.jobs[k])
+            job = self.workflow.jobs[k]
+            if not len(self.job_ids) or job["job_id"] in self.job_ids:
+                if not self.check_output or not outputs_exist(job):
+                    self.submit_single(k, self.workflow.jobs[k])
+                else:
+                    print "The output files for job %d already exist so submission is skipped." % job["job_id"]
     
     def submit_single(self, name, job_params):
         pass
@@ -55,7 +82,8 @@ class LSF(Batch):
 
     def build_cmd(self, name, job_params):
         param_file = os.path.join(self.work_dir, name + ".json")
-        cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  os.path.abspath(name+".log"), "-e",  os.path.abspath(name+".log")]
+        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
+        cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  log_file, "-e",  log_file]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
         cmd.extend(["python", self.script, os.path.abspath(param_file)])
         #job_params["output_files"]["job.out"] = name+".out"
@@ -131,9 +159,10 @@ class Auger(Batch):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
         job_err = ET.SubElement(job, "Stderr")
-        job_err.set("dest", os.path.join(os.getcwd(), name+".err"))
+        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
+        job_err.set("dest", log_file)
         job_out = ET.SubElement(job, "Stdout")
-        job_out.set("dest", os.path.join(os.getcwd(), name+".out"))
+        job_out.set("dest", log_file)
                 
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
