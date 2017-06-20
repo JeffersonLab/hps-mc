@@ -1,6 +1,7 @@
 """
-Python script for generating 'wab-beam' events.
+Python script for generating 'wab-beam-tri' events.
 """
+
 import sys, random
 
 import hpsmc.func as func
@@ -21,7 +22,7 @@ beam_input = "beam.stdhep"
 
 # check for required inputs
 if beam_input not in params.input_files:
-    raise Exception("Missing '%s input file." % beam_input)
+    raise Exception("Missing '%s' input file." % beam_input)
 if wab_input not in params.input_files:
     raise Exception("Missing '%s' input file." % wab_input)
 if tri_input not in params.input_files:
@@ -42,14 +43,13 @@ stdhep_tri = StdHepConverter(run_params=run_params,
 rot_tri = StdHepTool(name="beam_coords",
                      inputs=["tri.stdhep"],
                      outputs=["tri_rot.stdhep"],
-                     args=["-s", str(params.seed), "-z", str(params.z)])
+                     args=["-z", str(params.z)])
 
 # sample tris using poisson distribution
 sample_tri = StdHepTool(name="merge_poisson",
                        inputs=["tri_rot.stdhep"],
                        outputs=["tri_sampled"],
-                       args=["-m", str(mu), "-N", "1", "-n", "500000", "-s", str(params.seed)])
-
+                       args=["-m", str(mu), "-N", "1", "-n", "500000"])
 
 # calculate mu for wab sampling
 mu = func.mu(run_params, wab_input)
@@ -63,25 +63,25 @@ stdhep_wab = StdHepConverter(run_params=run_params,
 rot_wab = StdHepTool(name="beam_coords",
                      inputs=["wab.stdhep"],
                      outputs=["wab_rot.stdhep"],
-                     args=["-s", str(params.seed), "-z", str(params.z)])
+                     args=["-z", str(params.z)])
 
 # sample wabs using poisson distribution
 sample_wab = StdHepTool(name="merge_poisson",
                        inputs=["wab_rot.stdhep"],
                        outputs=["wab_sampled"],
-                       args=["-m", str(mu), "-N", "1", "-n", "500000", "-s", str(params.seed)])
+                       args=["-m", str(mu), "-N", "1", "-n", "500000"])
 
 # rotate beam background events into beam coordinates
 rot_beam = StdHepTool(name="beam_coords",
                       inputs=["beam.stdhep"],
                       outputs=["beam_rot.stdhep"],
-                      args=["-s", str(params.seed), "-z", str(params.z)])
+                      args=["-z", str(params.z)])
     
 # sample beam backgroun events 
 sample_beam = StdHepTool(name="random_sample",
                          inputs=["beam_rot.stdhep"],
                          outputs=["beam_sampled"],
-                         args=["-N", "1", "-s", str(params.seed)])
+                         args=["-N", "1"])
 
 # merge beam, wab and tri events
 merge = StdHepTool(name="merge_files",
