@@ -17,6 +17,7 @@ class Batch:
         parser.add_argument("--work-dir", nargs=1, help="Work dir where JSON and XML files will be saved")
         parser.add_argument("--log-dir", nargs=1, help="Log file output dir")
         parser.add_argument("--check-output", action='store_true')
+        parser.add_argument("--job-steps", type=int, default=-1)
         parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
@@ -56,6 +57,8 @@ class Batch:
                     
         self.job_ids = map(int, cl.job_ids)
         
+        self.job_steps = cl.job_steps
+        
     @staticmethod
     def outputs_exist(job):
         for o in job["output_files"]:
@@ -85,7 +88,10 @@ class LSF(Batch):
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
         cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  log_file, "-e",  log_file]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
-        cmd.extend(["python", self.script, os.path.abspath(param_file)])
+        cmd.extend(["python", self.script])        
+        if self.job_steps > 0:
+            cmd.extend(["--job-steps", str(self.job_steps)])
+        cmd.append(os.path.abspath(param_file))
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:

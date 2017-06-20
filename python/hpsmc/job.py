@@ -21,8 +21,7 @@ class Job:
                 self.delete_rundir = True
             else:
                 self.rundir = os.getcwd()
-        logger.info("run dir set to '%s'" % self.rundir)
-                
+        logger.info("Run dir set to '%s'" % self.rundir)                
 
         if "components" in kwargs:
             self.components = kwargs["components"]
@@ -64,6 +63,7 @@ class Job:
         parser.add_argument("-o", "--out", nargs=1, help="Log file for stdout from components")
         parser.add_argument("-e", "--err", nargs=1, help="Log file for stderr from components")
         parser.add_argument("-L", "--level", nargs=1, help="Global log level")
+        parser.add_argument("--job-steps", type=int, default=-1)
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         cl = parser.parse_args()
         
@@ -73,18 +73,20 @@ class Job:
         
         if cl.out:
             self.out_file = os.path.join(self.rundir, cl.out[0])
-            logger.info("stdout will be redirected to '%s'" % self.out_file)
+            logger.info("Stdout will be redirected to '%s'" % self.out_file)
         else:
             self.out_file = None
             
         if cl.err:
             self.err_file = os.path.join(self.rundir, cl.err[0])
-            logger.info("stderr will be redirected to '%s'" % self.err_file)
+            logger.info("Stderr will be redirected to '%s'" % self.err_file)
         else:
             self.err_file = None
         
+        self.job_steps = cl.job_steps
+        
         if cl.params:
-            logger.info("loading job params from '%s'" % cl.params[0])
+            logger.info("Loading job params from '%s'" % cl.params[0])
             self.params = JobParameters(cl.params[0])
             logger.info(json.dumps(self.params.json_dict, indent=4, sort_keys=False))
         else:
@@ -96,7 +98,7 @@ class Job:
         self.output_dir = self.params.output_dir
         if not os.path.isabs(self.output_dir):
             self.output_dir= os.path.abspath(self.output_dir)
-            logger.info("changed output dir to abs path '%s'" % self.output_dir)
+            logger.info("Changed output dir to abs path '%s'" % self.output_dir)
         self.job_id = self.params.job_id
 
     def initialize(self):
@@ -104,7 +106,7 @@ class Job:
         self.parse_args()
 
         if not os.path.exists(self.rundir):
-            logger.info("creating run dir '%s'" % self.rundir)
+            logger.info("Creating run dir '%s'" % self.rundir)
             os.makedirs(self.rundir)
 
         os.chdir(self.rundir)
@@ -117,7 +119,7 @@ class Job:
         if "AUGER_ID" not in os.environ: 
             self.copy_input_files()
         else:
-            logger.info("Auger environment detector so copy input files is skipped.")
+            logger.info("Auger environment detected so input files will not be copied.")
             
     def run(self): 
         
@@ -132,24 +134,29 @@ class Job:
         if "AUGER_ID" not in os.environ:
             self.copy_output_files()
         else:
-            logger.info("Auger environment detected so copy output files is skipped.")
+            logger.info("Auger environment detected so output files will not be copied.")
         self.cleanup()
                       
     def execute(self):
-        logger.info("running '%s'" % self.name)
+        logger.info("Running '%s'" % self.name)
         if not len(self.components):
             raise Exception("Job has no components to execute.")
-        for i in range(0, len(self.components)):
-            c = self.components[i]
-            logger.info("executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
+                
+        components = self.components
+        if self.job_steps > 0:            
+            components = self.components[0:self.job_steps-1]    
+            logger.info("Job is limited to first %d steps." % self.job_steps)
+            
+        for c in components:        
+            logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
             c.execute(self.log_out, self.log_err)
 
     def setup(self):
         for c in self.components:
-            logger.info("setting up '%s'" % (c.name))
+            logger.info("Setting up '%s'" % (c.name))
             c.rundir = self.rundir
             if self.set_component_seeds:
-                logger.info("setting seed on '%s' to %d" % (c.name, self.seed))
+                logger.info("Setting seed on '%s' to %d" % (c.name, self.seed))
                 c.seed = self.seed
             #os.chdir(self.rundir)
             c.setup()
@@ -158,10 +165,10 @@ class Job:
 
     def cleanup(self):
         for c in self.components:
-            logger.info("running cleanup for '%s'" % str(c.name))
+            logger.info("Running cleanup for '%s'" % str(c.name))
             c.cleanup()
         if self.delete_rundir:
-            logger.info("Job: deleting run dir '%s'" % self.rundir)
+            logger.info("Deleting run dir '%s'" % self.rundir)
             shutil.rmtree(self.rundir)
         if self.log_out != sys.stdout:
             self.log_out.close()
@@ -171,7 +178,7 @@ class Job:
     def copy_output_files(self):
                 
         if not os.path.exists(self.output_dir):
-            logger.info("creating output dir '%s'" % self.output_dir)
+            logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
                
         for src,dest in self.output_files.iteritems():
@@ -179,11 +186,11 @@ class Job:
             dest_file = os.path.join(self.output_dir, dest)
             if os.path.isfile(dest_file):
                 if self.delete_existing:
-                    logger.info("deleting existing file at '%s'" % dest_file)
+                    logger.info("Deleting existing file at '%s'" % dest_file)
                     os.remove(dest_file)
                 else:
                     raise Exception("Output file '%s' already exists." % dest_file)
-            logger.info("copying '%s' to '%s'" % (src_file, dest_file))
+            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
             shutil.copyfile(src_file, dest_file)
             
     def copy_input_files(self):
@@ -192,7 +199,7 @@ class Job:
                 raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
-            logger.info("copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
+            logger.info("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             
 class JobParameters:
