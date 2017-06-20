@@ -1,5 +1,17 @@
 # hps-mc
 
+## Prerequisites
+
+There are a number of required programs and tools you must have installed on your system to build and run hps-mc.
+
+- gcc - at least version 4.8
+- CMake - at least version 3.0
+- Maven - at least version 3.0
+- python - tested with Python 2.7.13
+- Java - tested with Java 1.8
+
+The [slic](https://github.com/slaclab/slic) program should be pre-installed and avialable in the system path.
+
 ## Installation
 
 You need to have CMake installed on your system as well as gcc (preferably version 4.8 or greater).
