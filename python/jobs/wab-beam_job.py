@@ -41,19 +41,19 @@ stdhep_cnv = StdHepConverter(run_params=run_params,
 rot_wab = StdHepTool(name="beam_coords",
                      inputs=["wab.stdhep"],
                      outputs=["wab_rot.stdhep"],
-                     args=["-s", str(params.seed), "-z", str(params.z)])
+                     args=["-z", str(params.z)])
 
 # sample wabs using poisson distribution
 sample_wab = StdHepTool(name="merge_poisson",
                        inputs=["wab_rot.stdhep"],
                        outputs=["wab_sampled"],
-                       args=["-m", str(mu), "-N", "1", "-n", "500000", "-s", str(params.seed)])
+                       args=["-m", str(mu), "-N", "1", "-n", "500000"])
 
 # rotate beam background events into beam coordinates
 rot_beam = StdHepTool(name="beam_coords",
                       inputs=["beam.stdhep"],
                       outputs=["beam_rot.stdhep"],
-                      args=["-s", str(params.seed), "-z", str(params.z)])
+                      args=["-z", str(params.z)])
     
 # sample beam background events 
 sample_beam = StdHepTool(name="random_sample",
