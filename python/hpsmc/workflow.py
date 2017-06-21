@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse, os, json, glob
 
 from hpsmc.job import JobParameters
@@ -94,8 +92,3 @@ class Workflow:
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
         self.jobs = data.itervalues().next()
-                
-if __name__ == "__main__":
-    workflow = Workflow()
-    workflow.parse_args()
-    workflow.build()
