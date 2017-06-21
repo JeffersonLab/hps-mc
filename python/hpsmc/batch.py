@@ -5,6 +5,7 @@ from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
 from workflow import Workflow
+from db import Database
 
 class Batch:
     
@@ -18,6 +19,7 @@ class Batch:
         parser.add_argument("--log-dir", nargs=1, help="Log file output dir")
         parser.add_argument("--check-output", action='store_true')
         parser.add_argument("--job-steps", type=int, default=-1)
+        parser.add_argument("--database", help="Name of SQLite db file")
         parser.add_argument("script", nargs=1, help="Python job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
@@ -38,7 +40,7 @@ class Batch:
         if cl.work_dir:
             self.work_dir = cl.work_dir[0]
         else:
-            cl.work_dir = os.getcwd()                        
+            self.work_dir = os.getcwd()
         try:
             os.stat(self.work_dir)
         except:
@@ -59,6 +61,12 @@ class Batch:
         
         self.job_steps = cl.job_steps
         
+        if cl.database:
+            self.db = Database(cl.database)
+            self.db.connect()
+        else:
+            self.db = None
+        
     @staticmethod
     def outputs_exist(job):
         for o in job["output_files"]:
@@ -67,13 +75,24 @@ class Batch:
         return True
 
     def submit_all(self):
+        if self.db:
+            prod = self.db.productions.select(self.workflow.name)
+            prod_id = prod[0]
         for k in sorted(self.workflow.jobs):
             job = self.workflow.jobs[k]
-            if not len(self.job_ids) or job["job_id"] in self.job_ids:
+            job_id = job["job_id"]
+            if not len(self.job_ids) or job_id in self.job_ids:
+                if self.db:
+                    job_rec = self.db.jobs.select(prod_id, job_id)
                 if not self.check_output or not outputs_exist(job):
-                    self.submit_single(k, self.workflow.jobs[k])
+                    batch_id = self.submit_single(k, self.workflow.jobs[k])
+                    if batch_id:
+                        if self.db:
+                            self.db.batch_jobs.insert(batch_id, job_id, prod_id, self.sys)
                 else:
                     print "The output files for job %d already exist so submission is skipped." % job["job_id"]
+                    
+            self.db.commit()
     
     def submit_single(self, name, job_params):
         pass
@@ -82,6 +101,7 @@ class LSF(Batch):
     
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
+        self.sys = 'LSF'
 
     def build_cmd(self, name, job_params):
         param_file = os.path.join(self.work_dir, name + ".json")
@@ -101,11 +121,19 @@ class LSF(Batch):
     def submit_single(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
         print ' '.join(cmd)
-        if self.submit:
-            proc = subprocess.Popen(cmd, shell=False)
-            proc.communicate()
+        if self.submit:            
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+            out,err = proc.communicate()
+            if err != None:
+                raise Exception("Submit error '%s'." % err)
+            tokens = out.split(' ')
+            if tokens[0] != 'Job':
+                raise Exception("Unexpected output '%s' from bsub command." % out)
+            batch_id = int(tokens[1].replace('<', '').replace('>', ''))
+            return batch_id
         else:
             print "Job was not submitted."
+            return None
     
 class Auger(Batch):
 
@@ -113,6 +141,7 @@ class Auger(Batch):
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
+        self.sys = 'Auger'
    
     def build_job_files(self, name, job_params):
 
