@@ -4,7 +4,7 @@ class Database:
     
     def __init__(self, filename):
         
-        self.filename = filename        
+        self.filename = filename
         self.conn = None
         self.curs = None
         
@@ -77,12 +77,12 @@ class Jobs:
                 
     def create(self):        
         self.db.execute("CREATE TABLE IF NOT EXISTS jobs "
-                        "(job_id INTEGER, prod_id INT, params TEXT, "
+                        "(job_id INTEGER, prod_id INT, params TEXT, name TEXT, "
                         "FOREIGN KEY(prod_id) REFERENCES productions(prod_id))")
         
-    def insert(self, job_id, prod_id, params):
-        self.db.execute("INSERT INTO jobs (job_id, prod_id, params) VALUES (%d, %d, \"%s\")"
-                        % (job_id, prod_id, params))
+    def insert(self, job_id, prod_id, params, name):
+        self.db.execute("INSERT INTO jobs (job_id, prod_id, params, name) VALUES (%d, %d, \"%s\", '%s')"
+                        % (job_id, prod_id, params, name))
                     
     def select(self, prod_id):
         return self.db.execute("SELECT * FROM jobs WHERE prod_id = %d" % prod_id)
@@ -92,17 +92,15 @@ class Jobs:
     
 class BatchJobs:
     
-    status_codes = {0: 'unknown',
-                    1: 'submitted',
-                    2: 'running',
-                    3: 'done',
-                    4: 'error'}
+    states = {0: 'UNKOWN',
+              1: 'SUBMIT',
+              2: 'PEND',
+              3: 'RUN',
+              4: 'SUSP',
+              5: 'DONE',
+              6: 'EXIT'}
     
-    status_lookup = {'unknown':   0,
-                     'submitted': 1,
-                     'running':   2,
-                     'done':      3,
-                     'error':     4}
+    states_lookup = {v: k for k, v in states.iteritems()}
     
     systems = ['LSF', 'Auger', 'local']
     
@@ -110,27 +108,41 @@ class BatchJobs:
         self.db = db
         
     @staticmethod
-    def status(status):
-        if type(status) == int:
-            return BatchJobs.status_codes[status]
-        elif type(status) == str:
-            return BatchJobs.status_lookup[status]
+    def state(s):
+        if type(s) == int:
+            return BatchJobs.states[s]
+        elif type(s) == str:
+            return BatchJobs.states_lookup[s]
         else:
-            raise Exception("The arg '%s' has the wrong type." % status)
+            raise Exception("The arg '%s' has the wrong type '%s'." % (str(s), type(s)))
         
     def drop(self):
         self.db.execute("DROP TABLE IF EXISTS batch_jobs")
         
     def create(self):
         self.db.execute("CREATE TABLE IF NOT EXISTS batch_jobs "
-                        "(batch_id INTEGER, job_id INTEGER, prod_id INTEGER, sys TEXT, status INTEGER)")
+                        "(batch_id INTEGER, job_id INTEGER, prod_id INTEGER, sys TEXT, state INTEGER)")
         
-    def insert(self, batch_id, job_id, prod_id, sys):
+    def insert(self, batch_id, job_id, prod_id, sys, state = 0):
         if sys not in BatchJobs.systems:
             raise Exception("The system '%s' is not valid." % sys)
-        self.db.execute("INSERT INTO batch_jobs (batch_id, job_id, prod_id, sys, status) VALUES (%d, %d, %d, '%s', %d)" 
-                        % (batch_id, job_id, prod_id, sys, BatchJobs.status('unknown')))
+        self.db.execute("INSERT INTO batch_jobs (batch_id, job_id, prod_id, sys, state) VALUES (%d, %d, %d, '%s', %d)" 
+                        % (batch_id, job_id, prod_id, sys, state))
         
     def select(self, job_id, prod_id):
         return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d and job_id = %d" % prod_id, job_id)
     
+    def select(self, prod_id):
+        return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d" % prod_id)
+    
+    def select_all(self):
+        return self.db.execute("SELECT * FROM batch_jobs")
+    
+    def update(self, job_id, prod_id, batch_id, state):
+        if type(state) == str:
+            s = BatchJobs.state(state)
+        elif type(state) == int:
+            s = state
+        else:
+            raise Exception("The state '%s' has the wrong type '%s'." % (state, type(state)))
+        self.db.execute("UPDATE batch_jobs set state = %d where job_id = %d and prod_id = %d and batch_id = %d" % (s, job_id, prod_id, batch_id))

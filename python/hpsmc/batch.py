@@ -1,15 +1,21 @@
-import argparse, json, os, subprocess, getpass
+import argparse, json, os, subprocess, getpass, sys
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
 from workflow import Workflow
-from db import Database
+from db import Database, BatchJobs
 
 class Batch:
     
+    def __init__(self):
+        self.sys = 'local'
+    
+    # TODO: add submission of job ID range
     def parse_args(self):
+        """Parse command line arguments and perform setup."""
+        
         parser = argparse.ArgumentParser("Submit batch jobs")
         parser.add_argument("--email", nargs='?', help="Your email address", default=getpass.getuser()+"@jlab.org")
         parser.add_argument("--debug", action='store_true', help="Enable debug settings")
@@ -19,17 +25,18 @@ class Batch:
         parser.add_argument("--log-dir", nargs=1, help="Log file output dir")
         parser.add_argument("--check-output", action='store_true')
         parser.add_argument("--job-steps", type=int, default=-1)
-        parser.add_argument("--database", help="Name of SQLite db file")
-        parser.add_argument("script", nargs=1, help="Python job script")
+        parser.add_argument("--database", help="Name of database file")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         cl = parser.parse_args()
 
         if not os.path.isfile(cl.jobstore[0]):
             raise Exception("The job store file '%s' does not exist." % cl.jobstore[0])
         self.workflow = Workflow(cl.jobstore[0])
-        self.script = cl.script[0]
+        
+        self.script = self.workflow.job_script
         if not os.path.isfile(self.script):
             raise Exception("The script '%s' does not exist." % self.script)
+        
         self.email = cl.email
         self.debug = cl.debug
         if cl.no_submit:
@@ -64,62 +71,80 @@ class Batch:
         if cl.database:
             self.db = Database(cl.database)
             self.db.connect()
+            self.prod_id = self.db.productions.select(self.workflow.name)[0]
         else:
-            self.db = None
-            
-        self.sys = 'local'
+            self.db = None            
         
     @staticmethod
     def outputs_exist(job):
+        """Check if all job outputs exist."""
         for o in job["output_files"]:
             if not os.path.exists(o):
                 return False
         return True
 
     def submit_all(self):
-        if self.db:
-            prod_id = self.db.productions.select(self.workflow.name)[0]
+        """Submit all jobs to batch system."""
         for k in sorted(self.workflow.jobs):
-            job = self.workflow.jobs[k]
-            job_id = job["job_id"]
-            if not len(self.job_ids) or job_id in self.job_ids:
-                if self.db:
-                    job_rec = self.db.jobs.select(prod_id, job_id)
-                if not self.check_output or not outputs_exist(job):
-                    batch_id = self.submit_single(k, self.workflow.jobs[k])
-                    if batch_id and self.db:
-                        self.db.batch_jobs.insert(batch_id, job_id, prod_id, self.sys)
+            self.submit_job(k, self.workflow.jobs[k])
+    
+    def submit_job(self, name, job):
+        """Submit job to batch system."""
+        job_id = job["job_id"]
+        res = None
+        if not len(self.job_ids) or job_id in self.job_ids:
+            if self.db:
+                job_rec = self.db.jobs.select(self.prod_id, job_id)
+            if not self.check_output or not outputs_exist(job):
+                batch_id = self.submit_cmd(name, job)                
+                if batch_id:
+                    print "Submitted <%s> with job ID <%d> and batch ID <%d>" % (name, job_id, batch_id)
+                    if self.db:
+                        self.db.batch_jobs.insert(batch_id, job_id, self.prod_id, self.sys)
+                        self.db.commit()
                 else:
-                    print "The output files for job %d already exist so submission is skipped." % job["job_id"]
-                    
-            self.db.commit()
+                    print "Job '%s' was not submitted." % name
+            else:
+                print "The output files for job %d already exist so submission is skipped." % job["job_id"]        
     
-    def submit_single(self, name, job_params):
+    def submit_cmd(name, job):
+        """Submit a single batch job using system-specific command and return the batch ID."""
         return None
-    
-    # TODO: get list of records from 'batch_jobs' table for the workflow
+     
     def batch_jobs(self):
+        """Get a list of batch job db records for this production."""
+        return self.db.batch_jobs.select(self.prod_id)
+    
+    def kill_all(self):
+        """Kill all the batch jobs of this workflow."""
+        for b in self.batch_jobs():
+            batch_id = b[0] 
+            self.kill_job(b[0])
+            print "Killed job <%d> with batch ID <%d>" % (b[0], b[1])
+    
+    def kill_job(self, batch_id):
+        """Kill a job by its batch ID using system specific commands."""
         raise Exception("Method not implemented.")
-
-    # TODO: find active batch jobs that are in the current workflow, e.g. using 'bjobs -a' for LSF, and return their batch IDs and statuses
-    def active_jobs(self):
-        raise Exception("Method not implemented.")
-
-    # TODO: kill all active batch jobs in the workflow and delete their db records
-    def kill(self):
-        raise Exception("Method not implemented.")
-
-    # TODO: update the status fields in 'batch_jobs' e.g. using info from 'bjobs -a' for LSF
+    
     def update(self):
+        """Update states of all batch jobs."""
+        jobs = []
+        for b in self.batch_jobs():
+            jobs.append(b)        
+        for b in jobs:
+            self.update_job(b[1], b[0])
+    
+    def update_job(self, job_id, batch_id):
+        """Update the batch job state for a job using system specific command."""
         raise Exception("Method not implemented.")
 
-    # TODO: check if the output files exist for every job in the workflow and print results
-    def check_outputs(self):     
-        raise Exception("Method not implemented.")
-
-    # TODO: submitting jobs using a range of job IDs
-    def submit_range(self, start, end):
-        raise Exception("Method not implemented.")
+    def check_outputs(self):
+        """Checks if job outputs exist and prints results."""
+        for k in sorted(self.workflow.jobs):
+            j = self.workflow.jobs[k]
+            job_id = j["job_id"]
+            if not outputs_exist(j):
+                print "Job %d outputs do not exist." % job_id
     
 class LSF(Batch):
     
@@ -142,13 +167,13 @@ class LSF(Batch):
             json.dump(job_params, jobfile, indent=4, sort_keys=True)
         return cmd
 
-    def submit_single(self, name, job_params):
+    def submit_cmd(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
-        print ' '.join(cmd)
-        if self.submit:            
-            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        #print ' '.join(cmd)
+        if self.submit:
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out,err = proc.communicate()
-            if err != None:
+            if err != None and len(err):
                 raise Exception("Submit error '%s'." % err)
             tokens = out.split(' ')
             if tokens[0] != 'Job':
@@ -156,9 +181,28 @@ class LSF(Batch):
             batch_id = int(tokens[1].replace('<', '').replace('>', ''))
             return batch_id
         else:
-            print "Job was not submitted."
             return None
     
+    def kill_job(self, batch_id):
+        proc = subprocess.Popen(["bkill", str(batch_id)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc.communicate()
+        
+    def update_job(self, job_id, batch_id):
+        proc = subprocess.Popen(["bjobs", str(batch_id)], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out,err = proc.communicate()
+        lines = out.split('\n')
+        if not len(err) and len(lines) > 1:
+            s = lines[1].split()[2]
+            if s in ["RUN", "EXIT", "DONE", "PEND"]:
+                s = BatchJobs.state(s)
+            elif "SUSP" in s:
+                s = BatchJobs.state("SUSP")
+                        
+            self.db.batch_jobs.update(job_id, self.prod_id, batch_id, s)
+            self.db.commit()
+            
+            print "Updated job <%d> with batch ID <%d> to state <%s> " % (job_id, batch_id, BatchJobs.state(s))
+            
 class Auger(Batch):
 
     def __init__(self):
@@ -244,7 +288,7 @@ class Auger(Batch):
         return param_file, xml_file
 
     # TODO: should return the Auger ID of the submitted job
-    def submit_single(self, name, job_params):
+    def submit_cmd(self, name, job_params):
         param_file,xml_file = self.build_job_files(name, job_params)
 
         cmd = ['jsub', '-xml', xml_file]
@@ -252,6 +296,10 @@ class Auger(Batch):
         if self.submit:
             proc = subprocess.Popen(cmd, shell=False)
             proc.communicate()
+            
+            # FIXME: Get Auger ID of job here!
+            return 1
         else:
             print "Job was not submitted."
-        print
+            return None
+        print        

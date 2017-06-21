@@ -24,14 +24,18 @@ class Workflow:
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", required=True)
         parser.add_argument("-p", "--pad", nargs=1, type=int, help="Padding spaces for filenames (default is 4)", default=4)
         parser.add_argument("-d", "--database", help="Name of SQLite db file")
-        parser.add_argument("params", nargs="?", help="Job template in JSON format")
+        parser.add_argument("script", help="Python job script")
+        parser.add_argument("params", help="Job template in JSON format")
         cl = parser.parse_args()
+                
+        if not os.path.isfile(cl.params):
+            raise Exception("The params file '%s' does not exist.")
+        self.params = JobParameters(cl.params)
         
-        if cl.params:
-            self.params = JobParameters(cl.params)
-        else:
-            parser.print_usage()
-            raise Exception("Missing param file argument.")
+        self.job_script = os.path.abspath(cl.script)
+        if not os.path.isfile(self.job_script):
+            raise Exception("The job script '%s' does not exist.")
+        
         
         self.job_start = cl.job_start
         self.num_jobs = cl.num_jobs    
@@ -41,22 +45,15 @@ class Workflow:
         
         if cl.database:
             self.db = Database(cl.database)
-        else:
-            self.db = None    
-        
-    def setup(self):
-        if self.db:
             self.db.connect()
             self.db.create()
-            
-    def cleanup(self):
-        if self.db:
-            self.db.commit()
-            self.db.close()
+        else:
+            self.db = None
         
     def build(self):
         
         jobs = {self.workflow: {}}
+        jobs["job_script"] = self.job_script
                                                 
         input_file_lists = {}
         input_file_count = {}
@@ -71,11 +68,13 @@ class Workflow:
             flist.sort()
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
+            
+        seed = self.params.seed
                 
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
             job["job_id"] = jobid
-            job["seed"] = self.params.seed
+            job["seed"] = seed
             job["output_dir"] = self.params.output_dir
             job["input_files"] = {}
             
@@ -103,10 +102,13 @@ class Workflow:
                     job[k] = v
             
             jobs[self.workflow][self.workflow + "_"+ job_id_padded] = job
+            
+            seed += 1
                 
         with open(self.job_store, "w") as jobfile:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)
-            
+
+        print "Created '%s' for workflow '%s'" % (self.job_store, self.workflow)
         print json.dumps(jobs, indent=4, sort_keys=True)
         
         if self.db:  
@@ -115,10 +117,14 @@ class Workflow:
             d = jobs[self.workflow]
             for k in sorted(d):
                 j = d[k]
-                self.db.jobs.insert(j['job_id'], prod_id, str(j))
+                self.db.jobs.insert(j['job_id'], prod_id, str(j), k)
+            self.db.commit()
     
     def load(self, json_store):
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
+        self.job_script = data.pop("job_script", None)
+        if not self.job_script:
+            raise Exception("JSON file is missing 'job_script' key.")
         self.name = data.keys()[0]
-        self.jobs = data.itervalues().next()
+        self.jobs = data[self.name]
