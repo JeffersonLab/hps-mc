@@ -143,7 +143,8 @@ install(FILES scripts/stdhep_count.sh DESTINATION bin
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
 
 # install python job helper scripts
-install(FILES python/hpsmc/bsub.py python/hpsmc/jsub.py python/hpsmc/workflow.py DESTINATION bin
+file(GLOB python_scripts python/scripts/*.py)
+install(FILES ${python_scripts} DESTINATION bin
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # find slic to get location of particle.tbl for installation

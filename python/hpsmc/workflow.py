@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import argparse, os, json, glob
 from collections import OrderedDict
 
@@ -124,10 +122,3 @@ class Workflow:
         data = json.loads(rawdata)
         self.name = data.keys()[0]
         self.jobs = data.itervalues().next()
-                
-if __name__ == "__main__":
-    workflow = Workflow()
-    workflow.parse_args()
-    workflow.setup()
-    workflow.build()
-    workflow.cleanup()
