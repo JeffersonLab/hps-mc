@@ -3,18 +3,20 @@
 import argparse, os, json, glob
 from collections import OrderedDict
 
-from hpsmc.job import JobParameters
-from hpsmc.db import Database, Productions
+from job import JobParameters
+from db import Database, Productions
 
 class Workflow:
     
     base_params = ["job_id", "seed", "output_dir", "input_files", "output_files"]
     
     def __init__(self, json_file = None):
+        
         jobs = []
+        self.name = None
         
         if json_file:
-            self.load(json_file)
+            self.load(json_file)            
     
     def parse_args(self):
         
@@ -42,9 +44,7 @@ class Workflow:
         if cl.database:
             self.db = Database(cl.database)
         else:
-            self.db = None
-        
-        dir(self)
+            self.db = None    
         
     def setup(self):
         if self.db:
@@ -111,21 +111,20 @@ class Workflow:
             
         print json.dumps(jobs, indent=4, sort_keys=True)
         
-        if self.db:
-            prod = self.db.productions()
-            jobdb = self.db.jobs()
-            prod.insert(self.workflow, self.job_store)
-            prod_id = prod.prod_id(self.workflow)
-            d = jobs[self.workflow] 
+        if self.db:  
+            self.db.productions.insert(self.workflow, self.job_store)
+            prod_id = self.db.productions.prod_id(self.workflow)
+            d = jobs[self.workflow]
             for k in sorted(d):
                 j = d[k]
-                jobdb.insert(j['job_id'], prod_id, str(j))
+                self.db.jobs.insert(j['job_id'], prod_id, str(j))
     
     def load(self, json_store):
         print "loading JSON from '%s'" % json_store
         print
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
+        self.name = data.keys()[0]
         self.jobs = data.itervalues().next()
                 
 if __name__ == "__main__":
