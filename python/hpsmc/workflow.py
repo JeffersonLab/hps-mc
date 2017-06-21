@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import argparse, os, json, glob
+from collections import OrderedDict
 
 from hpsmc.job import JobParameters
+from hpsmc.db import Database, Productions
 
 class Workflow:
     
@@ -19,24 +21,45 @@ class Workflow:
         parser = argparse.ArgumentParser(description="Create a workflow with one or more jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
-        parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", default="jobs")
+        parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", required=True)
         parser.add_argument("-p", "--pad", nargs=1, type=int, help="Padding spaces for filenames (default is 4)", default=4)
-        parser.add_argument("params", nargs="?", help="Job template in JSON format", default="job.json")
+        parser.add_argument("-d", "--database", help="Name of SQLite db file")
+        parser.add_argument("params", nargs="?", help="Job template in JSON format")
         cl = parser.parse_args()
         
+        if cl.params:
+            self.params = JobParameters(cl.params)
+        else:
+            parser.print_usage()
+            raise Exception("Missing param file argument.")
+        
         self.job_start = cl.job_start
-        self.num_jobs = cl.num_jobs
-        self.params = JobParameters(cl.params)
+        self.num_jobs = cl.num_jobs    
         self.workflow = cl.workflow
         self.job_store = cl.workflow + ".json"
         self.job_id_pad = cl.pad
         
+        if cl.database:
+            self.db = Database(cl.database)
+        else:
+            self.db = None
+        
         dir(self)
+        
+    def setup(self):
+        if self.db:
+            self.db.connect()
+            self.db.create()
+            
+    def cleanup(self):
+        if self.db:
+            self.db.commit()
+            self.db.close()
         
     def build(self):
         
         jobs = {self.workflow: {}}
-                                        
+                                                
         input_file_lists = {}
         input_file_count = {}
         for dest,src in self.params.input_files.iteritems():
@@ -87,6 +110,16 @@ class Workflow:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)
             
         print json.dumps(jobs, indent=4, sort_keys=True)
+        
+        if self.db:
+            prod = self.db.productions()
+            jobdb = self.db.jobs()
+            prod.insert(self.workflow, self.job_store)
+            prod_id = prod.prod_id(self.workflow)
+            d = jobs[self.workflow] 
+            for k in sorted(d):
+                j = d[k]
+                jobdb.insert(j['job_id'], prod_id, str(j))
     
     def load(self, json_store):
         print "loading JSON from '%s'" % json_store
@@ -98,4 +131,6 @@ class Workflow:
 if __name__ == "__main__":
     workflow = Workflow()
     workflow.parse_args()
+    workflow.setup()
     workflow.build()
+    workflow.cleanup()
