@@ -3,8 +3,8 @@
 import argparse, os, json, glob
 from collections import OrderedDict
 
-from job import JobParameters
-from db import Database, Productions
+from hpsmc.job import JobParameters
+from hpsmc.db import Database, Productions
 
 class Workflow:
     
@@ -120,8 +120,6 @@ class Workflow:
                 self.db.jobs.insert(j['job_id'], prod_id, str(j))
     
     def load(self, json_store):
-        print "loading JSON from '%s'" % json_store
-        print
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
         self.name = data.keys()[0]

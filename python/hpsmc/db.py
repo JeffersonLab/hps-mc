@@ -35,8 +35,9 @@ class Database:
     def close(self):
         self.conn.close()
         self.conn = None
-        self.curs = None                       
-            
+        self.curs = None
+
+# TODO: add job_script field
 class Productions:
     
     def __init__(self, db):
@@ -94,13 +95,13 @@ class BatchJobs:
     status_codes = {0: 'unknown',
                     1: 'submitted',
                     2: 'running',
-                    3: 'complete',
+                    3: 'done',
                     4: 'error'}
     
     status_lookup = {'unknown':   0,
                      'submitted': 1,
                      'running':   2,
-                     'complete':  3,
+                     'done':      3,
                      'error':     4}
     
     systems = ['LSF', 'Auger', 'local']

@@ -66,6 +66,8 @@ class Batch:
             self.db.connect()
         else:
             self.db = None
+            
+        self.sys = 'local'
         
     @staticmethod
     def outputs_exist(job):
@@ -76,8 +78,7 @@ class Batch:
 
     def submit_all(self):
         if self.db:
-            prod = self.db.productions.select(self.workflow.name)
-            prod_id = prod[0]
+            prod_id = self.db.productions.select(self.workflow.name)[0]
         for k in sorted(self.workflow.jobs):
             job = self.workflow.jobs[k]
             job_id = job["job_id"]
@@ -86,16 +87,39 @@ class Batch:
                     job_rec = self.db.jobs.select(prod_id, job_id)
                 if not self.check_output or not outputs_exist(job):
                     batch_id = self.submit_single(k, self.workflow.jobs[k])
-                    if batch_id:
-                        if self.db:
-                            self.db.batch_jobs.insert(batch_id, job_id, prod_id, self.sys)
+                    if batch_id and self.db:
+                        self.db.batch_jobs.insert(batch_id, job_id, prod_id, self.sys)
                 else:
                     print "The output files for job %d already exist so submission is skipped." % job["job_id"]
                     
             self.db.commit()
     
     def submit_single(self, name, job_params):
-        pass
+        return None
+    
+    # TODO: get list of records from 'batch_jobs' table for the workflow
+    def batch_jobs(self):
+        raise Exception("Method not implemented.")
+
+    # TODO: find active batch jobs that are in the current workflow, e.g. using 'bjobs -a' for LSF, and return their batch IDs and statuses
+    def active_jobs(self):
+        raise Exception("Method not implemented.")
+
+    # TODO: kill all active batch jobs in the workflow and delete their db records
+    def kill(self):
+        raise Exception("Method not implemented.")
+
+    # TODO: update the status fields in 'batch_jobs' e.g. using info from 'bjobs -a' for LSF
+    def update(self):
+        raise Exception("Method not implemented.")
+
+    # TODO: check if the output files exist for every job in the workflow and print results
+    def check_outputs(self):     
+        raise Exception("Method not implemented.")
+
+    # TODO: submitting jobs using a range of job IDs
+    def submit_range(self, start, end):
+        raise Exception("Method not implemented.")
     
 class LSF(Batch):
     
@@ -219,6 +243,7 @@ class Auger(Batch):
 
         return param_file, xml_file
 
+    # TODO: should return the Auger ID of the submitted job
     def submit_single(self, name, job_params):
         param_file,xml_file = self.build_job_files(name, job_params)
 
