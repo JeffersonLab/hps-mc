@@ -8,33 +8,23 @@ class Database:
         self.conn = None
         self.curs = None
         
-        self.tables = {}
-        self.tables['productions'] = Productions(self)
-        self.tables['jobs'] = Jobs(self)
-        self.tables['batch_jobs'] = BatchJobs(self)
+        self.productions = Productions(self)
+        self.jobs = Jobs(self)
+        self.batch_jobs = BatchJobs(self)
                     
     def connect(self):
         self.conn = sqlite3.connect(self.filename)
-        self.curs = self.conn.cursor()
-        
-    def productions(self):
-        return self.tables['productions']
-    
-    def jobs(self):
-        return self.tables['jobs']
-    
-    def batch_jobs(self):
-        return self.tables['batch_jobs']
+        self.curs = self.conn.cursor()        
         
     def drop(self):
-        self.jobs().drop()
-        self.productions().drop()
-        self.batch_jobs().drop()
+        self.jobs.drop()
+        self.productions.drop()
+        self.batch_jobs.drop()
         
     def create(self):
-        self.productions().create()
-        self.jobs().create()
-        self.batch_jobs().create()
+        self.productions.create()
+        self.jobs.create()
+        self.batch_jobs.create()
                 
     def execute(self, query):
         return self.curs.execute(query)
@@ -65,10 +55,13 @@ class Productions:
                      % (name, data, getpass.getuser()))
         
     def select(self, name):
-        return self.db.execute("SELECT rowid,* FROM productions WHERE name = '%s'" % name)
+        return self.db.execute("SELECT rowid,* FROM productions WHERE name = '%s'" % name).next()
+    
+    def select_all(self):
+        return self.db.execute("SELECT rowid,* FROM productions")
     
     def prod_id(self, name):
-        return self.select(name).next()[0]
+        return self.select(name)[0]
     
     def delete(self, name):
         self.db.execute("DELETE FROM productions WHERE name = '%s'" % name)
@@ -91,7 +84,10 @@ class Jobs:
                         % (job_id, prod_id, params))
                     
     def select(self, prod_id):
-        return self.db.execute("SELECT rowid, * FROM jobs WHERE prod_id = %d" % prod_id)
+        return self.db.execute("SELECT * FROM jobs WHERE prod_id = %d" % prod_id)
+    
+    def select(self, prod_id, job_id):
+        return self.db.execute("SELECT * FROM jobs WHERE prod_id = %d and job_id = %d" % (prod_id, job_id)).next()
     
 class BatchJobs:
     
@@ -116,7 +112,7 @@ class BatchJobs:
     def status(status):
         if type(status) == int:
             return BatchJobs.status_codes[status]
-        elif type(status) == basestring:
+        elif type(status) == str:
             return BatchJobs.status_lookup[status]
         else:
             raise Exception("The arg '%s' has the wrong type." % status)
@@ -126,14 +122,14 @@ class BatchJobs:
         
     def create(self):
         self.db.execute("CREATE TABLE IF NOT EXISTS batch_jobs "
-                        "(batch_id INTEGER, job_id INTEGER, sys TEXT, status INTEGER, "
-                        "FOREIGN KEY(job_id) REFERENCES jobs(rowid))")
+                        "(batch_id INTEGER, job_id INTEGER, prod_id INTEGER, sys TEXT, status INTEGER)")
         
-    def insert(self, job_id, batch_id, sys):
+    def insert(self, batch_id, job_id, prod_id, sys):
         if sys not in BatchJobs.systems:
             raise Exception("The system '%s' is not valid." % sys)
-        self.db.execute("INSERT INTO batch_jobs (batch_id, job_id, sys, status) VALUES (%d, %d, '%s', 0)" % (batch_id, job_id, sys))
+        self.db.execute("INSERT INTO batch_jobs (batch_id, job_id, prod_id, sys, status) VALUES (%d, %d, %d, '%s', %d)" 
+                        % (batch_id, job_id, prod_id, sys, BatchJobs.status('unknown')))
         
-    def select(self, job_id):
-        return self.db.execute("SELECT * FROM batch_jobs WHERE job_id = %d" % job_id)
+    def select(self, job_id, prod_id):
+        return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d and job_id = %d" % prod_id, job_id)
     
