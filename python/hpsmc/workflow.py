@@ -11,14 +11,13 @@ class Workflow:
     def __init__(self, json_file = None):
         
         jobs = []
-        self.name = None
         
         if json_file:
-            self.load(json_file)            
+            self.load(json_file)
     
     def parse_args(self):
         
-        parser = argparse.ArgumentParser(description="Create a workflow with one or more jobs")
+        parser = argparse.ArgumentParser(description="Manage and create workflows with multiple jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", required=True)
@@ -35,12 +34,11 @@ class Workflow:
         self.job_script = os.path.abspath(cl.script)
         if not os.path.isfile(self.job_script):
             raise Exception("The job script '%s' does not exist.")
-        
-        
+                
         self.job_start = cl.job_start
         self.num_jobs = cl.num_jobs    
-        self.workflow = cl.workflow
-        self.job_store = cl.workflow + ".json"
+        self.name = cl.workflow
+        self.job_store = self.name + ".json"
         self.job_id_pad = cl.pad
         
         if cl.database:
@@ -52,7 +50,7 @@ class Workflow:
         
     def build(self):
         
-        jobs = {self.workflow: {}}
+        jobs = {self.name: {}}
         jobs["job_script"] = self.job_script
                                                 
         input_file_lists = {}
@@ -70,12 +68,13 @@ class Workflow:
             input_file_count[dest] = ntoread
             
         seed = self.params.seed
+        output_dir = os.path.abspath(self.params.output_dir)
                 
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
             job["job_id"] = jobid
             job["seed"] = seed
-            job["output_dir"] = self.params.output_dir
+            job["output_dir"] = output_dir
             job["input_files"] = {}
             
             if input_file_lists:
@@ -101,20 +100,20 @@ class Workflow:
                 if k not in Workflow.base_params:
                     job[k] = v
             
-            jobs[self.workflow][self.workflow + "_"+ job_id_padded] = job
+            jobs[self.name][self.name + "_"+ job_id_padded] = job
             
             seed += 1
                 
         with open(self.job_store, "w") as jobfile:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)
 
-        print "Created '%s' for workflow '%s'" % (self.job_store, self.workflow)
+        print "Created '%s' for workflow '%s'" % (self.job_store, self.name)
         print json.dumps(jobs, indent=4, sort_keys=True)
         
         if self.db:  
-            self.db.productions.insert(self.workflow, self.job_store)
-            prod_id = self.db.productions.prod_id(self.workflow)
-            d = jobs[self.workflow]
+            self.db.productions.insert(self.name, self.job_store)
+            prod_id = self.db.productions.prod_id(self.name)
+            d = jobs[self.name]
             for k in sorted(d):
                 j = d[k]
                 self.db.jobs.insert(j['job_id'], prod_id, str(j), k)
@@ -128,3 +127,14 @@ class Workflow:
             raise Exception("JSON file is missing 'job_script' key.")
         self.name = data.keys()[0]
         self.jobs = data[self.name]
+        
+    def delete(self):
+        if self.name:
+            if self.db:
+                self.db.productions.delete(self.name)
+                self.db.commit()
+                print "Deleted workflow <%s>" % self.name
+            else:
+                raise Exception("The database is not enabled.")
+        else:
+            raise Exception("The name field is not set.")

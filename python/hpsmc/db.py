@@ -37,7 +37,6 @@ class Database:
         self.conn = None
         self.curs = None
 
-# TODO: add job_script field
 class Productions:
     
     def __init__(self, db):
@@ -65,6 +64,9 @@ class Productions:
         return self.select(name)[0]
     
     def delete(self, name):
+        id = self.prod_id(name)
+        self.db.execute("DELETE FROM batch_jobs WHERE prod_id = %d" % id)
+        self.db.execute("DELETE FROM jobs WHERE prod_id = %d" % id)
         self.db.execute("DELETE FROM productions WHERE name = '%s'" % name)
         
 class Jobs:
@@ -84,7 +86,7 @@ class Jobs:
         self.db.execute("INSERT INTO jobs (job_id, prod_id, params, name) VALUES (%d, %d, \"%s\", '%s')"
                         % (job_id, prod_id, params, name))
                     
-    def select(self, prod_id):
+    def select_prod(self, prod_id):
         return self.db.execute("SELECT * FROM jobs WHERE prod_id = %d" % prod_id)
     
     def select(self, prod_id, job_id):
@@ -92,7 +94,7 @@ class Jobs:
     
 class BatchJobs:
     
-    states = {0: 'UNKOWN',
+    states = {0: 'UNKNOWN',
               1: 'SUBMIT',
               2: 'PEND',
               3: 'RUN',
@@ -129,8 +131,8 @@ class BatchJobs:
         self.db.execute("INSERT INTO batch_jobs (batch_id, job_id, prod_id, sys, state) VALUES (%d, %d, %d, '%s', %d)" 
                         % (batch_id, job_id, prod_id, sys, state))
         
-    def select(self, job_id, prod_id):
-        return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d and job_id = %d" % prod_id, job_id)
+    def select_job(self, job_id, prod_id):
+        return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d and job_id = %d" % (prod_id, job_id))
     
     def select(self, prod_id):
         return self.db.execute("SELECT * FROM batch_jobs WHERE prod_id = %d" % prod_id)
