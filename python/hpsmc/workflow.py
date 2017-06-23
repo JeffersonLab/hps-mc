@@ -21,7 +21,7 @@ class Workflow:
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", required=True)
-        parser.add_argument("-p", "--pad", nargs=1, type=int, help="Padding spaces for filenames (default is 4)", default=4)
+        parser.add_argument("-p", "--pad", nargs="?", type=int, help="Padding spaces for filenames (default is 4)", default=4)
         parser.add_argument("-d", "--database", help="Name of SQLite db file")
         parser.add_argument("script", help="Python job script")
         parser.add_argument("params", help="Job template in JSON format")
