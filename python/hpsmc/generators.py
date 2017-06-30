@@ -1,6 +1,6 @@
 import os, subprocess, shutil, random, glob, gzip, logging
 
-from hpsmc.component import Component
+from component import Component
 
 logger = logging.getLogger("generators")
 

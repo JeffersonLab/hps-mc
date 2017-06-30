@@ -1,12 +1,15 @@
 import argparse, os, json, glob
+from collections import OrderedDict
 
 from hpsmc.job import JobParameters
+from hpsmc.db import Database, Productions
 
 class Workflow:
     
     base_params = ["job_id", "seed", "output_dir", "input_files", "output_files"]
     
     def __init__(self, json_file = None):
+        
         jobs = []
         
         if json_file:
@@ -14,27 +17,42 @@ class Workflow:
     
     def parse_args(self):
         
-        parser = argparse.ArgumentParser(description="Create a workflow with one or more jobs")
+        parser = argparse.ArgumentParser(description="Manage and create workflows with multiple jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number", default=1)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
-        parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", default="jobs")
-        parser.add_argument("-p", "--pad", nargs=1, type=int, help="Padding spaces for filenames (default is 4)", default=4)
-        parser.add_argument("params", nargs="?", help="Job template in JSON format", default="job.json")
+        parser.add_argument("-w", "--workflow", nargs="?", help="Name of workflow", required=True)
+        parser.add_argument("-p", "--pad", nargs="?", type=int, help="Padding spaces for filenames (default is 4)", default=4)
+        parser.add_argument("-d", "--database", help="Name of SQLite db file")
+        parser.add_argument("script", help="Python job script")
+        parser.add_argument("params", help="Job template in JSON format")
         cl = parser.parse_args()
-        
-        self.job_start = cl.job_start
-        self.num_jobs = cl.num_jobs
+                
+        if not os.path.isfile(cl.params):
+            raise Exception("The params file '%s' does not exist.")
         self.params = JobParameters(cl.params)
-        self.workflow = cl.workflow
-        self.job_store = cl.workflow + ".json"
+        
+        self.job_script = os.path.abspath(cl.script)
+        if not os.path.isfile(self.job_script):
+            raise Exception("The job script '%s' does not exist.")
+                
+        self.job_start = cl.job_start
+        self.num_jobs = cl.num_jobs    
+        self.name = cl.workflow
+        self.job_store = self.name + ".json"
         self.job_id_pad = cl.pad
         
-        dir(self)
+        if cl.database:
+            self.db = Database(cl.database)
+            self.db.connect()
+            self.db.create()
+        else:
+            self.db = None
         
     def build(self):
         
-        jobs = {self.workflow: {}}
-                                        
+        jobs = {self.name: {}}
+        jobs["job_script"] = self.job_script
+                                                
         input_file_lists = {}
         input_file_count = {}
         for dest,src in self.params.input_files.iteritems():
@@ -48,12 +66,15 @@ class Workflow:
             flist.sort()
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
+            
+        seed = self.params.seed
+        output_dir = os.path.abspath(self.params.output_dir)
                 
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
             job = {}
             job["job_id"] = jobid
-            job["seed"] = self.params.seed
-            job["output_dir"] = self.params.output_dir
+            job["seed"] = seed
+            job["output_dir"] = output_dir
             job["input_files"] = {}
             
             if input_file_lists:
@@ -79,16 +100,41 @@ class Workflow:
                 if k not in Workflow.base_params:
                     job[k] = v
             
-            jobs[self.workflow][self.workflow + "_"+ job_id_padded] = job
+            jobs[self.name][self.name + "_"+ job_id_padded] = job
+            
+            seed += 1
                 
         with open(self.job_store, "w") as jobfile:
             json.dump(jobs, jobfile, indent=4, sort_keys=True)
-            
+
+        print "Created '%s' for workflow '%s'" % (self.job_store, self.name)
         print json.dumps(jobs, indent=4, sort_keys=True)
+        
+        if self.db:  
+            self.db.productions.insert(self.name, self.job_store)
+            prod_id = self.db.productions.prod_id(self.name)
+            d = jobs[self.name]
+            for k in sorted(d):
+                j = d[k]
+                self.db.jobs.insert(j['job_id'], prod_id, str(j), k)
+            self.db.commit()
     
     def load(self, json_store):
-        print "loading JSON from '%s'" % json_store
-        print
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
-        self.jobs = data.itervalues().next()
+        self.job_script = data.pop("job_script", None)
+        if not self.job_script:
+            raise Exception("JSON file is missing 'job_script' key.")
+        self.name = data.keys()[0]
+        self.jobs = data[self.name]
+        
+    def delete(self):
+        if self.name:
+            if self.db:
+                self.db.productions.delete(self.name)
+                self.db.commit()
+                print "Deleted workflow <%s>" % self.name
+            else:
+                raise Exception("The database is not enabled.")
+        else:
+            raise Exception("The name field is not set.")

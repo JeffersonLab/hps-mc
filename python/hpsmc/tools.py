@@ -1,6 +1,6 @@
 import os, socket, gzip, shutil, logging
 
-from hpsmc.component import Component
+from component import Component
 
 logger = logging.getLogger("tools")
 
