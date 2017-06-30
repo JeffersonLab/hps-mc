@@ -29,17 +29,46 @@ def csection(filename):
 """
 Calculate mu = number of events per bunch.
 """
-def mu(run_params, filename):
+def mu(filename, run_params):
     return lint(run_params) * 1e-12 * csection(filename)
 
-# TODO: https://github.com/JeffersonLab/hps-mc/blob/master/scripts/MadGraph/nbunches.csh
+"""
+Read number of events in file from LHE header and optionally confirm by counting <event> blocks.
+"""
+def nevents(filename, confirm = False):
+    
+    with gzip.open(filename, 'rb') as in_file:
+        lines = in_file.readlines()
+        
+    for line in lines:
+        if "nevents" in line:
+            nevents = int(line.split()[0])
 
-# TODO: https://github.com/JeffersonLab/hps-mc/blob/master/scripts/MadGraph/nevents.csh
+    if "nevents" not in locals():
+        raise Exception("Could not find 'nevents' in LHE input file.")
 
+    if confirm:
+        event_count = 0
+        for line in lines:
+            if "<event>" in line:
+                event_count += 1
+        if event_count != nevents:
+            raise Exception("The number of events %d from header does not match the count %d in file '%s'." % (nevents, event_count, filename))
+
+    return nevents
+
+"""
+Get the approximate number of beam bunches represented by an LHE file from its event count.
+"""
+def nbunches(filename, run_params):
+    n = nevents(filename)
+    m = mu(filename, run_params)
+    return int(n/m)
+            
 # TODO: wab LHE file fixup
 """
 echo "Transmuting A's to photons..."
-          gunzip -f wab.lhe.gz
-          sed -i 's/\([:blank:]*\)622 /\1 22 /' wab.lhe
-          gzip wab.lhe
+gunzip -f wab.lhe.gz
+sed -i 's/\([:blank:]*\)622 /\1 22 /' wab.lhe
+gzip wab.lhe
 """
