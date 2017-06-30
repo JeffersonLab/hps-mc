@@ -30,7 +30,7 @@ if wab_input not in params.input_files:
 run_params = RunParameters(key=params.run_params)
 
 # calculate mu for wab sampling
-mu = func.mu(run_params, wab_input)
+mu = func.mu(wab_input, run_params)
 
 # convert wab events to stdhep
 stdhep_cnv = StdHepConverter(run_params=run_params,

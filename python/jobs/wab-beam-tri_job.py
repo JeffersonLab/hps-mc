@@ -32,7 +32,7 @@ if tri_input not in params.input_files:
 run_params = RunParameters(key=params.run_params)
 
 # calculate mu for tri sampling
-mu = func.mu(run_params, tri_input)
+mu = func.mu(tri_input, run_params)
 
 # convert tri events to stdhep
 stdhep_tri = StdHepConverter(run_params=run_params,
@@ -52,7 +52,7 @@ sample_tri = StdHepTool(name="merge_poisson",
                        args=["-m", str(mu), "-N", "1", "-n", "500000"])
 
 # calculate mu for wab sampling
-mu = func.mu(run_params, wab_input)
+mu = func.mu(wab_input, run_params)
 
 # convert wab events to stdhep
 stdhep_wab = StdHepConverter(run_params=run_params,
