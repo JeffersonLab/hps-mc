@@ -231,6 +231,24 @@ class LCIOTool(Component):
         self.args.extend(orig_args)
         return self.args
     
+class LCIOConcat(LCIOTool):
+    
+    def __init__(self, **kwargs):
+        self.name = "concat"
+        LCIOTool.__init__(self, **kwargs)
+        
+    def cmd_args(self):
+        args = LCIOTool.cmd_args(self)
+        if not len(self.inputs):
+            raise Exception("Missing at least one input file.")
+        if not len(self.outputs):
+            raise Exception("Missing output file.")
+        for i in self.inputs:
+            args.extend(["-f", i])
+        args.extend(["-o", self.outputs[0]])
+        self.args = args
+        return self.args
+    
 class Unzip(Component):
 
     def __init__(self, **kwargs):
