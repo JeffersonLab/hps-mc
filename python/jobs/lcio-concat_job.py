@@ -10,7 +10,7 @@ from hpsmc.tools import LCIOConcat
 job = Job(name="LCIO concat job")
 job.initialize()
 
-input_files = job.params.input_files.keys()
+input_files = sorted(job.params.input_files.keys())
 
 if len(input_files) < 2:
     raise Exception("Not enough input files were provided.")
