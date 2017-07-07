@@ -17,7 +17,7 @@ if len(input_files) < 2:
 
 print input_files
 
-concat = LCIOConcat(inputs=input_files, outputs=["events.slcio"])
+concat = LCIOConcat(inputs=input_files, outputs=["events_combined.slcio"])
 
 job.components = [concat]
 
