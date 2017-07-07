@@ -82,7 +82,7 @@ class Workflow:
                     ntoread = input_file_count[dest]
                     if ntoread > 1:
                         for i in range(1, ntoread + 1):
-                            job["input_files"][dest+"."+str(i)] = src.pop(0)
+                            job["input_files"][dest+"."+str(i).zfill(3)] = src.pop(0)
                     else:
                         job["input_files"][dest] = src.pop(0)
             
