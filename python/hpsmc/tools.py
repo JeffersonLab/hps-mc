@@ -267,4 +267,33 @@ class Unzip(Component):
         zip_path = self.inputs[0]
         with gzip.open(zip_path, 'rb') as in_file, open(os.path.splitext(zip_path)[0], 'wb') as out_file:
             shutil.copyfileobj(in_file, out_file)
+            
+class LHECount(Component):
     
+    def __init__(self, minevents=0, **kwargs):
+        self.name = "lhe_count"
+        self.minevents = minevents
+        Component.__init__(self, **kwargs)
+        
+    def setup(self):
+        if not len(self.inputs):
+            raise Exception("Missing inputs.")
+        
+    def cmd_exists(self):
+        return True
+    
+    def execute(self, log_out, log_err):
+        for i in self.inputs:
+            with gzip.open(i, 'rb') as in_file:
+                lines = in_file.readlines()
+        
+            nevents = 0
+            for l in lines:
+                if "<event>" in l:
+                    nevents += 1
+            
+            logger.info("LHE file '%s' has %d events." % (i, nevents))
+            
+            if self.minevents:
+                if nevents < self.minevents:
+                    raise Exception("LHE file '%s' does not contain the minimum %d events." % (i, nevents))
