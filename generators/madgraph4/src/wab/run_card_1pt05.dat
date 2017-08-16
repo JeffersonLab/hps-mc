@@ -75,13 +75,13 @@
 # Fixed-Target Cuts
 #*******************                                                 
 #
- 0.05 = ef        ! minimum E for all f's
+ 0.20 = ef        ! minimum E for all f's
  100.0 = efmax     ! maximum E for all f's
  0.0 = thetafmin ! min angle for both f's
  100.0 = thetafmax ! max angle for both f's
  0.0 = thetaxfmin ! min angle (x direction) for both f's
  100.0 = thetaxfmax ! max angle (x direction) for both f's 
- 0.010 = thetayfmin ! min angle (y direction) for both f's
+ 0.005 = thetayfmin ! min angle (y direction) for both f's
  100.0 = thetayfmax ! max angle (y direction) for both f's 
  0.0 = xthetaxfmin ! min angle (x direction) for >=1 f's
  100.0 = xthetaxfmax ! max angle (x direction) for >=1 f's 
