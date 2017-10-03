@@ -57,14 +57,16 @@ filter_bunches = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
 # run simulated events in readout to generate triggers
 readout = JobManager(steering_resource=params.readout_steering,
                      java_args=["-DdisableSvtAlignmentConstants"],
-                     defs={"detector": params.detector, "run": params.run},
+                     run=params.run,
+                     detector=params.detector,
                      inputs=[filename+"_filt.slcio"],
                      outputs=[filename+"_readout"])
 
 # run physics reconstruction
 recon = JobManager(steering_resource=params.recon_steering,
                    java_args=["-DdisableSvtAlignmentConstants"],
-                   defs={"detector": params.detector, "run": params.run},
+                   run=params.run,
+                   detector=params.detector,
                    inputs=[filename+"_readout.slcio"],
                    outputs=[filename+"_recon"])
 

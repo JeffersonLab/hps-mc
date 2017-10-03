@@ -56,14 +56,16 @@ merge = LCIOTool(name="merge",
 # run simulated events in readout to generate triggers
 readout = JobManager(steering_resource=params.readout_steering,
                      java_args=["-DdisableSvtAlignmentConstants"],
-                     defs={"detector": params.detector, "run": params.run},
+                     run=params.run,
+                     detector=params.detector,
                      inputs=["merged.slcio"],
                      outputs=["readout"])
 
 # run physics reconstruction
 recon = JobManager(steering_resource=params.recon_steering,
                    java_args=["-DdisableSvtAlignmentConstants"],
-                   defs={"detector": params.detector, "run": params.run},
+                   run=params.run,
+                   detector=params.detector,
                    inputs=["readout.slcio"],
                    outputs=["tritrig-wab-beam"])
  

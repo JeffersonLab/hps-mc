@@ -100,7 +100,8 @@ slic = SLIC(description="Run detector simulation using SLIC",
 readout = JobManager(description="Run the readout simulation to create triggers",
                      steering_resource=params.readout_steering,
                      java_args=["-DdisableSvtAlignmentConstants"],
-                     defs={"detector": params.detector, "run": params.run},
+                     run=params.run,
+                     detector=params.detector,
                      inputs=["wab-beam-tri.slcio"],
                      outputs=["wab-beam-tri_readout"])
 
@@ -108,7 +109,8 @@ readout = JobManager(description="Run the readout simulation to create triggers"
 recon = JobManager(description="Run the MC recon",
                    steering_resource=params.recon_steering,
                    java_args=["-DdisableSvtAlignmentConstants"],
-                   defs={"detector": params.detector, "run": params.run},
+                   run=params.run,
+                   detector=params.detector,
                    inputs=["wab-beam-tri_readout.slcio"],
                    outputs=["wab-beam-tri_recon"])
                         

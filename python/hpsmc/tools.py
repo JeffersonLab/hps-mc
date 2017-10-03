@@ -79,6 +79,14 @@ class JobManager(Component):
             self.steering_file = kwargs["steering_file"]
         else:
             raise Exception("A steering resource or file was not provided to hps-java.")
+        if "run" in kwargs:
+            self.run_number = kwargs["run"]
+        else:
+            self.run_number = None
+        if "detector" in kwargs:
+            self.detector = kwargs["detector"]
+        else:
+            self.detector = None
         if "defs" in kwargs:
             self.defs = kwargs["defs"]
         else:
@@ -98,6 +106,12 @@ class JobManager(Component):
         self.args.append(os.environ["HPSJAVA_JAR"])
         self.args.append("-i")
         self.args.append(self.inputs[0])
+        if self.run_number is not None:
+            self.args.append("-R")
+            self.args.append(str(self.run_number))
+        if self.detector is not None:
+            self.args.append("-d")
+            self.args.append(self.detector)
         if len(self.outputs):
             self.args.append("-D")
             self.args.append("outputFile="+self.outputs[0])
@@ -109,6 +123,7 @@ class JobManager(Component):
             self.args.append(self.steering_resource)
         elif self.steering_file is not None:
             self.args.append(self.steering_file)
+        
         return self.args
     
 class JavaTool(Component):
@@ -247,6 +262,7 @@ class LCIOConcat(LCIOTool):
             args.extend(["-f", i])
         args.extend(["-o", self.outputs[0]])
         self.args = args
+        logger("JobManager got args: %s" % str(self.args))
         return self.args
     
 class Unzip(Component):
