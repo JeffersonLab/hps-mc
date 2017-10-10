@@ -105,7 +105,7 @@ class Workflow:
             seed += 1
                 
         with open(self.job_store, "w") as jobfile:
-            json.dump(jobs, jobfile, indent=4, sort_keys=True)
+            json.dump(jobs, jobfile, indent=2, sort_keys=True)
 
         print "Created '%s' for workflow '%s'" % (self.job_store, self.name)
         print json.dumps(jobs, indent=4, sort_keys=True)
