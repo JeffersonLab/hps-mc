@@ -109,7 +109,7 @@ class Batch:
                         self.db.batch_jobs.insert(batch_id, job_id, self.prod_id, self.sys, BatchJobs.state('SUBMIT'))
                         self.db.commit()
                 else:
-                    print "Job <%s> was not submitted." % name
+                    print "WARNING: Job <%s> did not return a batch ID so DB was not updated." % name
             else:
                 print "Outputs for <%s> already exist so submit is skipped." % name
     
@@ -196,7 +196,7 @@ class LSF(Batch):
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:
-            json.dump(job_params, jobfile, indent=4, sort_keys=True)
+            json.dump(job_params, jobfile, indent=2, sort_keys=True)
         return cmd
 
     def submit_cmd(self, name, job_params):
@@ -309,10 +309,10 @@ class Auger(Batch):
         cmd.text = '\n'.join(cmd_lines)
 
         with open(param_file, "w") as jobfile:
-             json.dump(job_params, jobfile, indent=4, sort_keys=True)
+             json.dump(job_params, jobfile, indent=2, sort_keys=True)
         print "Wrote job param file <%s>" % (param_file)
 
-        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    "))
+        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
         xml_file = os.path.join(self.work_dir, name+".xml")
         with open(xml_file, "w") as f:
             f.write(pretty)
@@ -336,3 +336,37 @@ class Auger(Batch):
             print "Job <%s> was not submitted." % name
             return None
         print        
+
+
+class Local(Batch):
+    """Run a local batch job on the current system."""
+    
+    def __init__(self):
+        self.sys = 'local'
+        
+    def parse_args(self):
+        Batch.parse_args(self)
+
+    def build_cmd(self, name, job_params):
+        param_file = os.path.join(self.work_dir, name + ".json")
+        with open(param_file, "w") as jobfile:
+            json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        cmd = ["python", self.script, os.path.abspath(param_file)]
+        if self.job_steps > 0:
+            cmd.extend(["--job-steps", str(self.job_steps)])
+        return cmd
+
+    def submit_cmd(self, name, job_params):
+        """Run a single job locally."""
+        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
+        cmd = self.build_cmd(name, job_params)
+        if self.submit:
+            print "Executing local job <%s>" % name
+            proc = subprocess.Popen(cmd, shell=False, stdout=log_out, stderr=log_out)
+            proc.communicate()
+            log_out.close()
+            if proc.returncode:
+               print "ERROR: Local execution of <%s> returned error code: %d" + (name, proc.returncode)
+            raise Exception("Local job execution failed.")
+        else:
+            return None
