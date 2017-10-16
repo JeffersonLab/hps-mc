@@ -14,7 +14,7 @@ foreach (stdhep_program_source ${stdhep_program_sources})
     message(STATUS "Configuring StdHep tool: ${stdhep_program}")
     list(APPEND stdhep_programs ${STDHEP_TOOLS_BIN_DIR}/${stdhep_program})
     install(FILES ${CMAKE_BINARY_DIR}/stdhep-tools-src/bin/${stdhep_program} DESTINATION bin RENAME stdhep_${stdhep_program}
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_READ WORLD_WRITE)
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endforeach()
 
 add_custom_command(OUTPUT ${stdhep_programs}

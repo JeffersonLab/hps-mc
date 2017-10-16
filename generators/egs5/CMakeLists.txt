@@ -31,5 +31,5 @@ foreach (egs_program_source ${egs_program_sources})
   add_custom_target(${egs_program}_build ALL DEPENDS ${CMAKE_BINARY_DIR}/egs5/config/${egs_program}.exe)
   add_dependencies(egs5 ${egs_program}_build)
   install(FILES ${CMAKE_BINARY_DIR}/egs5/config/${egs_program}.exe DESTINATION bin RENAME egs5_${egs_program}
-          PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_WRITE WORLD_READ WORLD_WRITE)
+          PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endforeach()
