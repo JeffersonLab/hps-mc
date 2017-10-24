@@ -51,5 +51,6 @@ scratch
 .cproject
 .project
 .pydevproject
+.settings
 
 *.pyc
