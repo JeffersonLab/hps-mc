@@ -90,7 +90,7 @@ class Batch:
             if self.start_job_num > self.end_job_num:
                 raise ValueError("The start job number must be >= the end job num when using a range.")
             if self.start_job_num < 0 or self.end_job_num < 0:
-                raise ValueError("The job range nubmers must be > 0.")
+                raise ValueError("The job range numbers must be > 0.")
         else:
             self.start_job_num = None
             self.end_job_num = None
