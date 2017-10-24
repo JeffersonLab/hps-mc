@@ -83,7 +83,6 @@ class Batch:
             
         if cl.job_range:
             toks = cl.job_range.split(':')
-            print str(toks)
             if len(toks) != 2:
                 raise ValueError("Bad format for job range: " + cl.job_range)
             self.start_job_num = int(toks[0])
