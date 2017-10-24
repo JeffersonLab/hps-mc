@@ -10,7 +10,7 @@ job = Job(name="AP job")
 job.initialize()
 
 params = job.params
-filename = params.filename
+filename = "aprime"
 
 # generate A-prime events using Madgraph 4
 ap = MG4(name="ap",
