@@ -67,7 +67,10 @@ class Batch:
             
         self.check_output = cl.check_output
                     
-        self.jobids = map(int, cl.jobids)
+        if cl.jobids:                    
+            self.job_ids = map(int, cl.jobids)
+        else:
+            self.job_ids = []
         
         self.job_steps = cl.job_steps
         
@@ -82,7 +85,7 @@ class Batch:
             toks = cl.job_range.split(':')
             print str(toks)
             if len(toks) != 2:
-                raise ValueError("Bad format for job range string.")
+                raise ValueError("Bad format for job range: " + cl.job_range)
             self.start_job_num = int(toks[0])
             self.end_job_num = int(toks[1])
             if self.start_job_num > self.end_job_num:
@@ -93,8 +96,7 @@ class Batch:
             self.start_job_num = None
             self.end_job_num = None
             
-        self.jobs = sorted(self.workflow.jobs)
-            
+        self.jobs = sorted(self.workflow.jobs)            
         
     @staticmethod
     def outputs_exist(job):
@@ -112,9 +114,9 @@ class Batch:
         if self.start_job_num:
             # submit from a range of job IDs
             self.submit_job_range(self.start_job_num, self.end_job_num)
-        elif len(self.jobids):
+        elif len(self.job_ids):
             # submit jobs from a set of job IDs 
-            self.submit_jobs(self.jobids)
+            self.submit_jobs(self.job_ids)
         else:
             # submit all jobs in the workflow
             self.submit_all()
@@ -128,24 +130,25 @@ class Batch:
         """Submit a single job to the batch system."""
         job_id = job["job_id"]
         res = None
-        if self.db:
-            job_rec = self.db.jobs.select(self.prod_id, job_id)
-        if not self.check_output or not Batch.outputs_exist(job):
-            batch_id = self.submit_cmd(name, job)
-            if batch_id:
-                print "Submitted <%s> with batch ID <%d>" % (name, batch_id)
-                if self.db:
-                    self.db.batch_jobs.insert(batch_id, job_id, self.prod_id, self.sys, BatchJobs.state('SUBMIT'))
-                    self.db.commit()
-            #else:
-            #print "Job <%s> was not submitted." % name
-        else:
-            print "Outputs for job <%s> already exist so submit is skipped." % name
+        if not len(self.job_ids) or job_id in self.job_ids:
+            if self.db:
+                job_rec = self.db.jobs.select(self.prod_id, job_id)
+            if not self.check_output or not Batch.outputs_exist(job):
+                batch_id = self.submit_cmd(name, job)                
+                if batch_id:
+                    print "Submitted <%s> with batch ID <%d>" % (name, batch_id)
+                    if self.db:
+                        self.db.batch_jobs.insert(batch_id, job_id, self.prod_id, self.sys, BatchJobs.state('SUBMIT'))
+                        self.db.commit()
+                else:
+                    print "WARNING: Job <%s> did not return a batch ID so DB was not updated." % name
+            else:
+                print "Outputs for <%s> already exist so submit is skipped." % name
     
-    def submit_jobs(self, jobids):
+    def submit_jobs(self, job_ids):
         """Submit the jobs with the specified job IDs to the batch system."""
         for k in self.workflow.jobs:        
-            if self.workflow.jobs[k]["job_id"] in self.jobids:
+            if self.workflow.jobs[k]["job_id"] in self.job_ids:
                 j = self.workflow.jobs[k]
                 self.submit_job(k, j)
                 
@@ -241,7 +244,7 @@ class LSF(Batch):
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:
-            json.dump(job_params, jobfile, indent=4, sort_keys=True)
+            json.dump(job_params, jobfile, indent=2, sort_keys=True)
         return cmd
 
     def submit_cmd(self, name, job_params): 
@@ -354,10 +357,10 @@ class Auger(Batch):
         cmd.text = '\n'.join(cmd_lines)
 
         with open(param_file, "w") as jobfile:
-             json.dump(job_params, jobfile, indent=4, sort_keys=True)
+             json.dump(job_params, jobfile, indent=2, sort_keys=True)
         print "Wrote job param file <%s>" % (param_file)
 
-        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "    "))
+        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
         xml_file = os.path.join(self.work_dir, name+".xml")
         with open(xml_file, "w") as f:
             f.write(pretty)
@@ -381,3 +384,37 @@ class Auger(Batch):
             print "Job <%s> was not submitted." % name
             return None
         print        
+
+
+class Local(Batch):
+    """Run a local batch job on the current system."""
+    
+    def __init__(self):
+        self.sys = 'local'
+        
+    def parse_args(self):
+        Batch.parse_args(self)
+
+    def build_cmd(self, name, job_params):
+        param_file = os.path.join(self.work_dir, name + ".json")
+        with open(param_file, "w") as jobfile:
+            json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        cmd = ["python", self.script, os.path.abspath(param_file)]
+        if self.job_steps > 0:
+            cmd.extend(["--job-steps", str(self.job_steps)])
+        return cmd
+
+    def submit_cmd(self, name, job_params):
+        """Run a single job locally."""
+        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
+        cmd = self.build_cmd(name, job_params)
+        if self.submit:
+            print "Executing local job <%s>" % name
+            proc = subprocess.Popen(cmd, shell=False, stdout=log_out, stderr=log_out)
+            proc.communicate()
+            log_out.close()
+            if proc.returncode:
+               print "ERROR: Local execution of <%s> returned error code: %d" + (name, proc.returncode)
+            raise Exception("Local job execution failed.")
+        else:
+            return None
