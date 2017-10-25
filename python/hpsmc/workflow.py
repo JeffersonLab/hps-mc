@@ -1,14 +1,15 @@
 import argparse, os, json, glob
-from collections import OrderedDict
 
 from hpsmc.job import JobParameters
 
 def to_ascii(str):
-    """Simple util to coerce strings to ASCII for Ganga.""" 
+    """Coerce unicode strings to ASCII for Ganga.""" 
     return str.encode('ascii', 'ignore')
 
 class Workflow:
-    """Represents a set of related MC jobs to be managed and run by a batch system.
+    """Represents a set of MC job parameters and a job script to be managed 
+    and run by a batch system.  The workflow data is stored in a single JSON
+    file which can be unpacked into individual configuration files for each job.
     
     Example command line usage to create a workflow:
     
@@ -17,10 +18,11 @@ class Workflow:
     This will create 10 jobs, numbered from 1, in a workflow called 'ap' with a working
     directory called 'workdir'.  It will automatically submit the workflow to Ganga
     and also unpacks the job configs to individual JSON files.  The 'ap_job.py' script
-    is used to run the actual job, and the parameters for the script are contained 
-    in a file called 'job.json'.  Job numbers will be padded using 6 characters.
+    is used to run the actual job, and the job parameters for the script are contained 
+    in a file called 'job.json' which is used to create individual JSON configurations.  
+    Job numbers will be padded using 6 characters.
     
-    The standard argparse switches can be used to print out detailed help info describing
+    The standard argparse switch can be used to print out detailed help info describing
     all the available options:
     
     python workflow.py --help
@@ -32,7 +34,6 @@ class Workflow:
     base_params = ["job_id", "seed", "output_dir", "input_files", "output_files"]
     
     def __init__(self, json_file = None):
-        self.jobs = {}
         if json_file:
             self.load(json_file)
     
@@ -69,7 +70,7 @@ class Workflow:
         self.do_unpack = cl.unpack
         
     def build(self):
-        """Build a workflow from the input parameters and write out a single JSON file with all job definitions."""
+        """Build a workflow from the input parameters and write out a single JSON file containing all job definitions."""
         
         self.jobs = {self.name: {}}
         self.jobs["job_script"] = self.job_script
