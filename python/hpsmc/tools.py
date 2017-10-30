@@ -262,7 +262,6 @@ class LCIOConcat(LCIOTool):
             args.extend(["-f", i])
         args.extend(["-o", self.outputs[0]])
         self.args = args
-        logger("JobManager got args: %s" % str(self.args))
         return self.args
     
 class Unzip(Component):
