@@ -2,7 +2,7 @@ import os, subprocess, shutil, random, glob, gzip, logging
 
 from component import Component
 
-logger = logging.getLogger("generators")
+logger = logging.getLogger("hpsmc.generators")
 
 class EventGenerator(Component):
 

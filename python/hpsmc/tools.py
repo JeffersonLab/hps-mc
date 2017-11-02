@@ -2,7 +2,7 @@ import os, socket, gzip, shutil, logging
 
 from component import Component
 
-logger = logging.getLogger("tools")
+logger = logging.getLogger("hpsmc.tools")
 
 class StdHepTool(Component):
 
