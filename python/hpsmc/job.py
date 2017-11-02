@@ -1,7 +1,7 @@
 import os, sys, shutil, argparse, getpass, json, logging
 from component import Component
 
-logger = logging.getLogger("job")
+logger = logging.getLogger("hpsmc.job")
 
 class Job:
 
