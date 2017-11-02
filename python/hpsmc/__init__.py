@@ -1,5 +1,8 @@
 # hpsmc python package
-import logging
+import logging, sys
 
-# set global log level
-logging.basicConfig(level=logging.INFO)
+global_logger = logging.getLogger("hpsmc")
+global_logger.setLevel(logging.INFO)
+handler = logging.StreamHandler(sys.stdout)
+handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
+global_logger.addHandler(handler)
