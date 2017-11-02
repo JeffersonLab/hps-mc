@@ -34,7 +34,11 @@ def subjobs(wf, nsub, waittime):
                 print "Submitting next " + str(len(subjobs)) + " jobs."
                 for j in subjobs:
                     print "Submitting job: " + str(j)
-                    jobs(j).submit()
+                    try:
+                        jobs(j).submit()
+                    except Exception as e:
+                        print "Error during job submission: " + e.message
+                        jobs(j).force_status('failed')
                 print "Submitted jobs: " + str(subjobs)
             print "Sleeping for " + str(waittime) + " seconds ..."
             time.sleep(waittime)
