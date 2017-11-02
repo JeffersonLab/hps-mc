@@ -1,6 +1,6 @@
 import os, subprocess, sys, shutil, argparse, getpass, json, logging, time
 
-logger = logging.getLogger("component")
+logger = logging.getLogger("hpsmc.component")
 
 class Component:
 
