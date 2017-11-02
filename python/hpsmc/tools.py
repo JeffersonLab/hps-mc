@@ -1,4 +1,5 @@
-import os, socket, gzip, shutil, logging
+import os, socket, gzip, shutil, logging, subprocess
+from subprocess import PIPE
 
 from component import Component
 
@@ -263,6 +264,40 @@ class LCIOConcat(LCIOTool):
         args.extend(["-o", self.outputs[0]])
         self.args = args
         return self.args
+
+class LCIOCount(LCIOTool):
+
+    def __init__(self, minevents=0, **kwargs):
+        self.name = "count"
+        self.minevents = minevents
+        LCIOTool.__init__(self, **kwargs)
+        
+    def cmd_args(self):
+        args = LCIOTool.cmd_args(self)
+        if not len(self.inputs):
+            raise Exception("Missing an input file.")
+        args.extend(["-f", self.inputs[0]])
+        self.args = args
+        return self.args
+
+    def execute(self, log_out, log_err):
+        
+        cl = [self.command]
+        cl.extend(self.cmd_args())
+                                          
+        proc = subprocess.Popen(cl, stdout=PIPE)
+        (output, err) = proc.communicate()
+                
+        nevents = int(output.split()[1])
+        
+        logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents)) 
+        
+        if self.minevents:
+            if nevents < self.minevents:
+                raise Exception("LHE file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents))
+
+        if not self.ignore_returncode and proc.returncode:
+            raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))        
     
 class Unzip(Component):
 
@@ -312,3 +347,4 @@ class LHECount(Component):
             if self.minevents:
                 if nevents < self.minevents:
                     raise Exception("LHE file '%s' does not contain the minimum %d events." % (i, nevents))
+
