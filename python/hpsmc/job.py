@@ -56,6 +56,9 @@ class Job:
         self.output_dir = os.getcwd()
         
         self.job_id = 1
+        
+        self.enable_copy_output_files = True
+        self.enable_copy_input_files = True
                     
     def parse_args(self):
         
@@ -116,10 +119,8 @@ class Job:
         if self.err_file:
             self.log_err = open(self.err_file, "w")
        
-        if "AUGER_ID" not in os.environ: 
+        if self.enable_copy_input_files: 
             self.copy_input_files()
-        else:
-            logger.info("Auger environment detected so input files will not be copied.")
             
     def run(self): 
         
@@ -131,10 +132,8 @@ class Job:
 
         self.setup()
         self.execute()
-        if "AUGER_ID" not in os.environ:
+        if self.enable_copy_output_files:
             self.copy_output_files()
-        else:
-            logger.info("Auger environment detected so output files will not be copied.")
         self.cleanup()
                       
     def execute(self):
