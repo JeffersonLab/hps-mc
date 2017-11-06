@@ -160,14 +160,17 @@ class Workflow:
     def get_job_names(self):
         """Get a sorted list of job names defined by this workflow."""
         return sorted(self.jobs[self.name])
-
+    
     def add_to_ganga(self, job_dir, work_dir):
         """Add all jobs from this workflow to Ganga."""
         try:
             import ganga
         except:
             raise Exception("Ganga is not available in your python installation, or it did not import successfully.")
-        from ganga import Job, LSF, jobtree
+        from ganga import Job, LSF, jobtree, CustomChecker
+        
+        file_checker_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "file_checker.py"
+        file_checker = CustomChecker(module = file_checker_path)
         
         job_names = sorted(self.jobs[self.name])
         jobtree.mkdir(job_dir)
@@ -184,6 +187,7 @@ class Workflow:
             gj.backend.queue = 'long'
             gj.name = to_ascii(k)
             gj.parallel_submit = True
+            gj.postprocessors.append(file_checker)
             jobtree.add(gj)
             print "Added Ganga job <" + k + "> with id " + str(gj.id) + " and JSON config <" + jobfile + ">"          
             
