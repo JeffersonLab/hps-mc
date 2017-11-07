@@ -185,6 +185,7 @@ class Workflow:
             gj.application.args = [self.job_script, jobfile]
             gj.backend = LSF()
             gj.backend.queue = 'long'
+            gj.backend.extraopts = '-W 24'
             gj.name = to_ascii(k)
             gj.parallel_submit = True
             gj.postprocessors.append(file_checker)
