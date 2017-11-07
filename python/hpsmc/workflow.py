@@ -182,10 +182,11 @@ class Workflow:
             gj.application.exe = 'python'
             jobfile = to_ascii(k + ".json")
             jobfile = work_dir + "/" + jobfile 
+            gj.comment = "job " + str(int(jobdict["job_id"])) + " in '" + self.name + "'"
             gj.application.args = [self.job_script, jobfile]
             gj.backend = LSF()
             gj.backend.queue = 'long'
-            gj.backend.extraopts = '-W 24'
+            gj.backend.extraopts = '-W 24:0'
             gj.name = to_ascii(k)
             gj.parallel_submit = True
             gj.postprocessors.append(file_checker)
