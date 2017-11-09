@@ -45,9 +45,7 @@ class Workflow:
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of the workflow", required=True)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job numbers (default is 4)", default=4)
-        parser.add_argument("-g", "--ganga", action='store_true', help="Automatically create Ganga jobs from this workflow")
         parser.add_argument("-d", "--workdir", nargs="?", default=os.getcwd(), help="Working dir for storing JSON files")
-        parser.add_argument("-u", "--unpack", action='store_true', help="Unpack workflow into individual JSON files in the work dir")
         parser.add_argument("script", help="Python job script")
         parser.add_argument("params", help="Job template in JSON format")
         cl = parser.parse_args()
@@ -65,9 +63,7 @@ class Workflow:
         self.name = cl.workflow
         self.job_store = self.name + ".json"
         self.job_id_pad = cl.pad
-        self.enable_ganga = cl.ganga
         self.workdir = os.path.abspath(cl.workdir)
-        self.do_unpack = cl.unpack
         
     def build(self):
         """Build a workflow from the input parameters and write out a single JSON file containing all job definitions."""
@@ -134,14 +130,12 @@ class Workflow:
             json.dump(self.jobs, jobfile, indent=2, sort_keys=True)
 
         # register the jobs with Ganga so they are runnable in LSF
-        if self.enable_ganga:
-            print "Adding jobs to Ganga"
-            self.add_to_ganga("/" + self.name, self.workdir)
+        print "Adding jobs to Ganga"
+        self.add_to_ganga("/" + self.name, self.workdir)
         
         # unpack workflow into individual JSON config files
-        if self.do_unpack:
-            print "Unpacking jobs to <" + self.workdir + ">"
-            self.unpack()
+        print "Unpacking jobs to <" + self.workdir + ">"
+        self.unpack()
     
     def load(self, json_store):
         """Load JSON job store into this workflow."""
