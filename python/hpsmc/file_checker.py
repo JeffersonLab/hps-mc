@@ -10,7 +10,9 @@ def check(j):
     if "output_files" in data:
         outputfiles = data["output_files"]
         for k,v in outputfiles.iteritems():
-            fpath = output_dir + os.path.sep + v
+            fpath = v
+            if not os.path.isabs(v):
+                fpath = output_dir + os.path.sep + v
             if not os.path.exists(fpath):
                 return False
     return True
