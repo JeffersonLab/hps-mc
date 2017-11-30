@@ -90,8 +90,8 @@ def subjobs(wf, nsub, waittime, maxjobs):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Staggered job submission to LSF using Ganga interface")
-    parser.add_argument("-n", "--njobs", nargs="?", type=int, default=200, help="Number of jobs to submit in one batch")
-    parser.add_argument("-t", "--time", nargs="?", type=int, default=60*5, help="Number of seconds to wait between batch submissions")
+    parser.add_argument("-n", "--njobs", nargs="?", type=int, default=1000, help="Number of jobs to submit in one batch")
+    parser.add_argument("-t", "--time", nargs="?", type=int, default=0, help="Number of seconds to wait between batch submissions")
     parser.add_argument("-m", "--max", nargs="?", type=int, default=sys.maxint, help="Maximum number of jobs to submit")
     parser.add_argument("-w", "--workdir", nargs=1, help="Work dir where JSON and XML files will be saved", required=False)
     parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
