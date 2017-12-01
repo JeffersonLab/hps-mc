@@ -41,7 +41,7 @@ class Workflow:
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of the workflow", required=True)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job numbers (default is 4)", default=4)
         parser.add_argument("-d", "--workdir", nargs="?", default=None, help="Working dir for storing JSON files")
-        parser.add_argument("-r", "--seed", nargs="?", type=int, help="Starting random seed")
+        parser.add_argument("-r", "--seed", nargs="?", type=int, help="Starting random seed", default=1)
         parser.add_argument("script", help="Python job script")
         parser.add_argument("params", help="Job template in JSON format")
         cl = parser.parse_args()
@@ -59,10 +59,7 @@ class Workflow:
         self.name = cl.workflow
         self.job_store = self.name + ".json"
         self.job_id_pad = cl.pad
-        if cl.seed:
-            self.seed = cl.seed
-        else:
-            self.seed = self.job_start
+        self.seed = cl.seed
 
         self.workdir= cl.workdir
         if not self.workdir:
@@ -95,8 +92,7 @@ class Workflow:
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
         
-        # TODO: Should rand seed instead be a param to workflow?
-        seed = self.params.seed
+        seed = self.seed
         
         output_dir = os.path.abspath(self.params.output_dir)
 
