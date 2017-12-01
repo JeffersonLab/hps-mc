@@ -2,10 +2,6 @@ import argparse, os, json, glob
 
 from hpsmc.job import JobParameters
 
-def to_ascii(str):
-    """Coerce unicode strings to ASCII for Ganga.""" 
-    return str.encode('ascii', 'ignore')
-
 class Workflow:
     """Represents a set of MC job parameters and a job script to be managed 
     and run by a batch system.  The workflow data is stored in a single JSON
@@ -16,11 +12,10 @@ class Workflow:
     python workflow.py -j 1 -n 10 -w ap -g -d workdir -u -p 6 ap_job.py job.json
     
     This will create 10 jobs, numbered from 1, in a workflow called 'ap' with a working
-    directory called 'workdir'.  It will automatically submit the workflow to Ganga
-    and also unpacks the job configs to individual JSON files.  The 'ap_job.py' script
-    is used to run the actual job, and the job parameters for the script are contained 
-    in a file called 'job.json' which is used to create individual JSON configurations.  
-    Job numbers will be padded using 6 characters.
+    directory called 'workdir'.  The 'ap_job.py' script is used to run the actual job, 
+    and the job parameters for the script are contained in a file called 'job.json' which 
+    is used to create individual JSON configurations.  Job numbers will be padded 
+    using 6 characters.
     
     The standard argparse switch can be used to print out detailed help info describing
     all the available options:
@@ -45,16 +40,17 @@ class Workflow:
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of the workflow", required=True)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job numbers (default is 4)", default=4)
-        parser.add_argument("-d", "--workdir", nargs="?", default=os.getcwd(), help="Working dir for storing JSON files")
+        parser.add_argument("-d", "--workdir", nargs="?", default=None, help="Working dir for storing JSON files")
+        parser.add_argument("-r", "--seed", nargs="?", type=int, help="Starting random seed", default=1)
         parser.add_argument("script", help="Python job script")
         parser.add_argument("params", help="Job template in JSON format")
         cl = parser.parse_args()
-                
+
         if not os.path.isfile(cl.params):
             raise Exception("The job param file '%s' does not exist.")
         self.params = JobParameters(cl.params)
         
-        self.job_script = to_ascii(os.path.abspath(cl.script))
+        self.job_script = os.path.abspath(cl.script)
         if not os.path.isfile(self.job_script):
             raise Exception("The job script '%s' does not exist.")
                 
@@ -63,16 +59,27 @@ class Workflow:
         self.name = cl.workflow
         self.job_store = self.name + ".json"
         self.job_id_pad = cl.pad
-        self.workdir = os.path.abspath(cl.workdir)
+        self.seed = cl.seed
+
+        self.workdir= cl.workdir
+        if not self.workdir:
+            self.workdir = os.getcwd() + os.path.sep + self.name
+        else: 
+            self.workdir = cl.workdir
+        self.workdir = os.path.abspath(self.workdir)
         
     def build(self):
         """Build a workflow from the input parameters and write out a single JSON file containing all job definitions."""
         
-        self.jobs = {self.name: {}}
-        self.jobs["job_script"] = self.job_script
-                                          
+        self.data = {self.name: {}}
+        self.data["job_script"] = self.job_script
+        self.data["workdir"] = self.workdir
+
+        if not os.path.isdir(self.workdir):
+            os.makedirs(self.workdir)
+
         # configure input files depending on how they are defined in the job params                                                
-        input_file_lists = {}
+        input_file_lists = {} 
         input_file_count = {}
         for dest,src in self.params.input_files.iteritems():
             if isinstance(src, dict):
@@ -85,8 +92,7 @@ class Workflow:
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
         
-        # TODO: Should rand seed instead be a param to workflow?
-        seed = self.params.seed
+        seed = self.seed
         
         output_dir = os.path.abspath(self.params.output_dir)
 
@@ -127,12 +133,8 @@ class Workflow:
         
         # write out entire workflow to single JSON file
         with open(self.job_store, "w") as jobfile:
-            json.dump(self.jobs, jobfile, indent=2, sort_keys=True)
+            json.dump(self.data, jobfile, indent=2, sort_keys=True)
 
-        # register the jobs with Ganga so they are runnable in LSF
-        print "Adding jobs to Ganga"
-        self.add_to_ganga("/" + self.name, self.workdir)
-        
         # unpack workflow into individual JSON config files
         print "Unpacking jobs to <" + self.workdir + ">"
         self.unpack()
@@ -142,51 +144,18 @@ class Workflow:
         rawdata = open(json_store, "r").read()
         data = json.loads(rawdata)
         self.job_script = data.pop("job_script", None)
-        if not self.job_script:
-            raise Exception("JSON file is missing 'job_script' key.")
+        self.workdir = data.pop("workdir", None)
         self.name = data.keys()[0]
-        self.jobs = data[self.name]
+        self.data = data
         
     def get_jobs(self):
         """Get the dictionary representing all the individual jobs."""
-        return self.jobs[self.name]
+        return self.data[self.name]
     
     def get_job_names(self):
         """Get a sorted list of job names defined by this workflow."""
-        return sorted(self.jobs[self.name])
+        return sorted(self.data[self.name])
     
-    def add_to_ganga(self, job_dir, work_dir):
-        """Add all jobs from this workflow to Ganga."""
-        try:
-            import ganga
-        except:
-            raise Exception("Ganga is not available in your python installation, or it did not import successfully.")
-        from ganga import Job, LSF, jobtree, CustomChecker
-        
-        file_checker_path = os.path.dirname(os.path.realpath(__file__)) + os.path.sep + "file_checker.py"
-        file_checker = CustomChecker(module = file_checker_path)
-        
-        job_names = sorted(self.jobs[self.name])
-        jobtree.mkdir(job_dir)
-        jobtree.cd(job_dir)
-        jobs = self.get_jobs()
-        for k in job_names:
-            jobdict = self.get_jobs()[k]
-            gj = Job()
-            gj.application.exe = 'python'
-            jobfile = to_ascii(k + ".json")
-            jobfile = work_dir + "/" + jobfile 
-            gj.comment = "job " + str(int(jobdict["job_id"])) + " in '" + self.name + "'"
-            gj.application.args = [self.job_script, jobfile]
-            gj.backend = LSF()
-            gj.backend.queue = 'long'
-            gj.backend.extraopts = '-W 24:0'
-            gj.name = to_ascii(k)
-            gj.parallel_submit = True
-            gj.postprocessors.append(file_checker)
-            jobtree.add(gj)
-            print "Added Ganga job <" + k + "> with id " + str(gj.id) + " and JSON config <" + jobfile + ">"          
-            
     def unpack(self):
         """Unpack the workflow into individual JSON job configuration files."""
         for k in self.get_job_names():
@@ -201,4 +170,3 @@ if __name__ == "__main__":
     workflow = Workflow()
     workflow.parse_args()
     workflow.build()
-        
