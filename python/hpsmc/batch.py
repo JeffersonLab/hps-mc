@@ -20,7 +20,7 @@ class Batch:
         parser.add_argument("-e", "--email", nargs='?', help="Your email address", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)
         parser.add_argument("-x", "--dryrun", action='store_true', help="Process the workflow but do not actually submit the jobs", required=False)        
-        parser.add_argument("-w", "--work-dir", nargs=1, help="Work dir where JSON and XML files will be saved", required=False)
+        parser.add_argument("-w", "--workdir", nargs=1, help="Work dir where JSON and XML files will be saved", required=False)
         parser.add_argument("-l", "--log-dir", nargs=1, help="Log file output dir", required=False)
         parser.add_argument("-c", "--check-output", action='store_true', required=False)
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
@@ -47,14 +47,14 @@ class Batch:
         
         self.dryrun = cl.dryrun        
 
-        if cl.work_dir:
-            self.work_dir = cl.work_dir[0]
+        if cl.workdir:
+            self.workdir = cl.workdir[0]
         else:
-            self.work_dir = os.getcwd()
+            self.workdir = os.getcwd() + os.path.sep + self.workflow.name
         try:
-            os.stat(self.work_dir)
+            os.stat(self.workdir)
         except:
-            os.makedirs(self.work_dir)
+            os.makedirs(self.workdir)
 
         if cl.log_dir:            
             self.log_dir = cl.log_dir[0]
@@ -232,7 +232,7 @@ class LSF(Batch):
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
     def build_cmd(self, name, job_params):
-        param_file = os.path.join(self.work_dir, name + ".json")
+        param_file = os.path.join(self.workdir, name + ".json")
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
         cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  log_file, "-e",  log_file]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
@@ -293,7 +293,7 @@ class Auger(Batch):
    
     def build_job_files(self, name, job_params):
 
-        param_file = os.path.join(self.work_dir, name + ".json")
+        param_file = os.path.join(self.workdir, name + ".json")
 
         req = ET.Element("Request")
         req_name = ET.SubElement(req, "Name")
@@ -360,7 +360,7 @@ class Auger(Batch):
         print "Wrote job param file <%s>" % (param_file)
 
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
-        xml_file = os.path.join(self.work_dir, name+".xml")
+        xml_file = os.path.join(self.workdir, name+".xml")
         with open(xml_file, "w") as f:
             f.write(pretty)
         print "Wrote Auger XML <%s>" % xml_file
@@ -395,7 +395,7 @@ class Local(Batch):
         Batch.parse_args(self)
 
     def build_cmd(self, name, job_params):
-        param_file = os.path.join(self.work_dir, name + ".json")
+        param_file = os.path.join(self.workdir, name + ".json")
         with open(param_file, "w") as jobfile:
             json.dump(job_params, jobfile, indent=2, sort_keys=True)
         cmd = ["python", self.script, os.path.abspath(param_file)]
