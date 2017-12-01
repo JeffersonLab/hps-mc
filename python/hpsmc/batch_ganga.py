@@ -53,7 +53,7 @@ def subjobs(wf, nsub, waittime, maxjobs):
         ganga.runMonitoring()
         if len(subjobs) != 0:
             for jobid in subjobs:
-                if jobs(jobid).status not in ['running', 'failed', 'completed']:
+                if ganga.jobs(jobid).status not in ['running', 'failed', 'completed']:
                     print "Some jobs from the last submission have not run yet."
                     jobsrunning = False
                     break
