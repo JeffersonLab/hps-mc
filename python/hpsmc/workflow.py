@@ -64,8 +64,6 @@ class Workflow:
         self.workdir= cl.workdir
         if not self.workdir:
             self.workdir = os.getcwd() + os.path.sep + self.name
-        else: 
-            self.workdir = cl.workdir
         self.workdir = os.path.abspath(self.workdir)
         
     def build(self):
@@ -160,7 +158,7 @@ class Workflow:
         """Unpack the workflow into individual JSON job configuration files."""
         for k in self.get_job_names():
             jobdict = self.get_jobs()[k]
-            jobfile = self.workdir + "/" + k + ".json"            
+            jobfile = self.workdir + os.path.sep + k + ".json"            
             with open(jobfile, "w") as outfile:
                 json.dump(jobdict, outfile, indent=2, sort_keys=True)
             print "Wrote JSON config <" + jobfile + "> for job <" + k + ">"
