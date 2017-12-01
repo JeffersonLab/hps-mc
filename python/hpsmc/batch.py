@@ -286,7 +286,8 @@ class Auger(Batch):
         if not self.dryrun:
             proc = subprocess.Popen(cmd, shell=False)
             proc.communicate()
-            return 1
+            # TODO: get ID of submitted job here
+            return -1
         else:
             print "Job <%s> was not submitted." % name
             return None
