@@ -96,6 +96,7 @@ class Workflow:
 
         # build configuration for each job in the workflow                
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
+                    
             job = {}
             job["job_id"] = jobid
             job["seed"] = seed
@@ -147,8 +148,8 @@ class Workflow:
         self.data = data
         
     def get_jobs(self):
-        """Get the dictionary representing all the individual jobs."""
-        return collections.OrderedDict(sorted(self.data[self.name].items()))
+        """Get the unsorted dictionary representing all the individual jobs."""
+        return self.data[self.name]
     
     def get_job_names(self):
         """Get a sorted list of job names defined by this workflow."""
