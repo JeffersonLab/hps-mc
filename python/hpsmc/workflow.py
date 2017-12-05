@@ -1,4 +1,4 @@
-import argparse, os, json, glob
+import argparse, os, json, glob, collections
 
 from hpsmc.job import JobParameters
 
@@ -36,7 +36,7 @@ class Workflow:
         """Parse command line arguments to build and configure workflow."""
         
         parser = argparse.ArgumentParser(description="Manage and create workflows with multiple jobs")
-        parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number for file naming", default=1)
+        parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job number for file naming", default=0)
         parser.add_argument("-n", "--num-jobs", nargs="?", type=int, help="Number of jobs", default=1)
         parser.add_argument("-w", "--workflow", nargs="?", help="Name of the workflow", required=True)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job numbers (default is 4)", default=4)
@@ -148,7 +148,7 @@ class Workflow:
         
     def get_jobs(self):
         """Get the dictionary representing all the individual jobs."""
-        return self.data[self.name]
+        return collections.OrderedDict(sorted(self.data[self.name].items()))
     
     def get_job_names(self):
         """Get a sorted list of job names defined by this workflow."""
