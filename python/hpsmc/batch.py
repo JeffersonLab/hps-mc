@@ -110,7 +110,7 @@ class Batch:
 
     def submit_all(self):
         """Submit all jobs in the workflow to the batch system."""
-        for k in self.jobs:
+        for k in sorted(self.jobs):
             self.submit_job(k, self.jobs[k])
     
     def submit_job(self, name, job):
