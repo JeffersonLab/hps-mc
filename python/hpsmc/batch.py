@@ -1,4 +1,4 @@
-import argparse, json, os, subprocess, getpass, sys
+import argparse, json, os, subprocess, getpass, sys, time
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
@@ -23,6 +23,8 @@ class Batch:
         parser.add_argument("-c", "--check-output", action='store_true', required=False)
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", help="Submit jobs numbers within range (e.g. '1:100')", required=False)
+        parser.add_argument("-n", "--nsub", type=int, default=-1, help="Number of jobs to submit before waiting when using staggered submission", required=False)
+        parser.add_argument("-t", "--time", type=int, default=0, help="Number of seconds to wait before submitting next job set when using staggered submission", required=False)
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
         cl = parser.parse_args()
@@ -83,7 +85,16 @@ class Batch:
             self.start_job_num = None
             self.end_job_num = None
             
-        self.jobs = self.workflow.get_jobs()            
+        self.jobs = self.workflow.get_jobs()          
+        
+        self.nsub = cl.nsub
+        self.waittime = cl.time
+        if self.nsub > 0 and self.waittime > 0:
+            print "Job submission staggering is enabled."
+            self.enable_staggered = True
+        else:
+            print "Job submission staggering is disabled."
+            self.enable_staggered = False
         
     @staticmethod
     def outputs_exist(job):
@@ -99,20 +110,44 @@ class Batch:
         Primary method for submitting jobs based on current command line arguments.
         """
         if self.start_job_num:
-            # submit from a range of job IDs
-            self.submit_job_range(self.start_job_num, self.end_job_num)
+            if self.enable_staggered:
+                # Submit a specified range of job IDs, waiting between job sets.
+                self.submit_staggered(self.start_job_num, self.end_job_num)
+            else:
+                # Submit from a specified range of job IDs.
+                self.submit_job_range(self.start_job_num, self.end_job_num)
         elif len(self.job_ids):
-            # submit jobs from a set of job IDs 
+            # Submit jobs from a set of specified job IDs.  Submissions staggering not usable.
             self.submit_jobs(self.job_ids)
         else:
-            # submit all jobs in the workflow
-            self.submit_all()
+            if self.enable_staggered:
+                # Submit all jobs, waiting between job sets.
+                self.submit_staggered()
+            else:
+                # Submit all jobs in the workflow.
+                self.submit_all()
 
     def submit_all(self):
-        """Submit all jobs in the workflow to the batch system."""
+        """Submit all jobs in the workflow to the batch system."""        
         for k in sorted(self.jobs):
             self.submit_job(k, self.jobs[k])
-    
+            
+    def submit_staggered(self, job_start = 0, job_end = sys.maxint):
+        """Submit range of jobs from the workflow to the batch system with a wait time between job sets."""
+        print "Submitting %d jobs at a time and waiting %d seconds between submissions ..." % (self.nsub, self.waittime)
+        submitted = 0
+        for k in sorted(self.jobs):            
+            job = self.jobs[k]
+            id = job["job_id"]
+            if id >= job_start and id <= job_end:
+                self.submit_job(k, self.jobs[k])
+                submitted += 1
+            if submitted == self.nsub:
+                print "Waiting for %d seconds before submitting next set of jobs ..." % self.waittime
+                time.sleep(self.waittime)
+                print "Done waiting!"
+                submitted = 0
+                    
     def submit_job(self, name, job):
         """Submit a single job to the batch system."""
         job_id = job["job_id"]
@@ -140,11 +175,14 @@ class Batch:
                 self.submit_job(k, job)
     
     def submit_cmd(name, jobparams):
-        """Submit a single batch job from the parameters and return the batch ID."""
-        pass
+        """
+        Submit a single batch job and return the batch ID.
+        Must be implemented by derived classes.
+        """
+        raise NotImplementedError
      
     def check_outputs(self):
-        """Checks if job outputs exist and prints results."""
+        """Checks if job outputs exist and prints the results."""
         for k in sorted(self.jobs):
             j = self.jobs[k]
             job_id = j["job_id"]
