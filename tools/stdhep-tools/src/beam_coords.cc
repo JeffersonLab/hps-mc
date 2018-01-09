@@ -38,7 +38,7 @@ int main(int argc,char** argv)
 
 	int c;
 
-	while ((c = getopt(argc,argv,"hs:x:y:r:z:")) !=-1)
+	while ((c = getopt(argc,argv,"hs:x:y:r:z:q:")) !=-1)
 		switch (c)
 		{
 			case 'h':
