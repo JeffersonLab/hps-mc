@@ -39,6 +39,8 @@ if hasattr(params, "target_z"):
     rot.args.extend(["-z", str(params.target_z)])
 if hasattr(params, "beam_rotation"):
     rot.args.extend(["-r", str(params.beam_rotation)])
+if hasattr(params, "beam_skew"):
+    rot.args.extend(["-q", str(params.beam_skew)])
             
 sample = StdHepTool(name="random_sample",
                     inputs=[base+"_rot.stdhep"],
