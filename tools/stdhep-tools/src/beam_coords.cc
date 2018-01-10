@@ -34,9 +34,11 @@ int main(int argc,char** argv)
 	double sigma_y = 0.030;
     double target_z = 0.0;
 
+    double skdeg = 15.0;
+
 	int c;
 
-	while ((c = getopt(argc,argv,"hs:x:y:r:z:")) !=-1)
+	while ((c = getopt(argc,argv,"hs:x:y:r:z:q:")) !=-1)
 		switch (c)
 		{
 			case 'h':
@@ -44,12 +46,16 @@ int main(int argc,char** argv)
 				printf("-s: RNG seed\n");
 				printf("-x: beam sigma_x in mm\n");
 				printf("-y: beam sigma_y in mm\n");
+				printf("-q: beam skew angle in degrees\n");
 				printf("-r: beam rotation in radians\n");
 				printf("-z: target Z in mm\n");
 				return(0);
 				break;
 			case 's':
 				rseed = atoi(optarg);
+				break;
+			case 'q':
+				skdeg = atof(optarg);
 				break;
 			case 'r':
 				theta = atof(optarg);
@@ -89,6 +95,8 @@ int main(int argc,char** argv)
 	int istream = 0;
 	int ostream = 1;
 
+        double skrad = skdeg * 0.01745;
+
 	n_events = open_read(argv[optind],istream);
 
 	open_write(argv[optind+1],ostream,n_events);
@@ -106,6 +114,13 @@ int main(int argc,char** argv)
 		double shift_x = 0.0, shift_y = 0.0;
 		if (sigma_x>0) shift_x = sigma_x*gsl_ran_gaussian(r,sigma_x);
 		if (sigma_y>0) shift_y = sigma_y*gsl_ran_gaussian(r,sigma_y);
+
+		double temp_x, temp_y;
+		temp_x = shift_x * cos(skrad) - shift_y * sin(skrad);
+		temp_y = shift_y * cos(skrad) + shift_x * sin(skrad);
+
+		shift_x = temp_x;
+		shift_y = temp_y;
 
 		for (int i=0;i<new_event.size();i++) {
                         rotate_entry(&(new_event[i]),theta);
