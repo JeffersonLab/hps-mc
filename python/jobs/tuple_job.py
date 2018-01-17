@@ -24,7 +24,7 @@ base,ext = os.path.splitext(output_archive)
 make_tuples = JobManager(steering_resource=params.tuple_steering,
                    run=params.run,
                    detector=params.detector,
-                   inputs=input_files.values(),
+                   inputs=input_files.keys(),
                    outputs=[base])
 job.components.append(make_tuples)
 
