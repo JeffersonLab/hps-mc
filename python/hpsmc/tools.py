@@ -1,6 +1,6 @@
-import os, socket, gzip, shutil, logging, subprocess
+import os, sys, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
-
+from ROOT import gROOT, TFile, TTree
 from component import Component
 
 logger = logging.getLogger("hpsmc.tools")
@@ -347,4 +347,72 @@ class LHECount(Component):
             if self.minevents:
                 if nevents < self.minevents:
                     raise Exception("LHE file '%s' does not contain the minimum %d events." % (i, nevents))
+                
+class TarFiles(Component):
+    
+    def __init__(self, **kwargs):
+        self.name = "Tar files"
+        self.command = "python"
+        Component.__init__(self, **kwargs)
 
+    def cmd_exists(self):
+        return True
+        
+    def execute(self, log_out, log_err):
+        logger.info("Opening '%s' for writing ..." % self.outputs[0])  
+        tar = tarfile.open(self.outputs[0], "w")
+        for i in self.inputs:
+            logger.info("Adding '%s' to archive" % i)
+            tar.add(i)
+        tar.close()
+        logger.info("Wrote archive '%s'" % self.outputs[0])
+
+class MakeTree(Component):
+    
+    def __init__(self, **kwargs):
+        self.name = "Make ROOT tree"
+        Component.__init__(self, **kwargs)
+        
+    def cmd_exists(self):
+        return True
+    
+    def execute(self, log_out, log_err):        
+        
+        output_file = self.outputs[0]
+        input_files = self.inputs
+        
+        logger.info("Creating output ROOT tuple '%s'" % output_file)
+        logger.info("Input text files: %s" % str(input_files))
+            
+        treeFile = TFile(output_file, "RECREATE")
+        tree = TTree("ntuple", "data from text tuple " + input_files[0])
+        
+        if len(input_files) > 1:
+            inputfile = tempfile.NamedTemporaryFile(delete=False)
+            print inputfile.name
+            firstfile = True
+            for filename in input_files:
+                f = open(filename)
+                firstline = True
+                for i in f:
+                    if firstline:
+                        if firstfile:
+                            branchdescriptor = i
+                            inputfile.write(i)
+                        else:
+                            if branchdescriptor != i:
+                                print "branch descriptor doesn't match"
+                                sys.exit(-1)
+                    else:
+                        inputfile.write(i)
+                    firstline = False
+                f.close()
+                firstfile = False
+            inputfile.close()
+            print tree.ReadFile(inputfile.name)
+            os.remove(inputfile.name)
+        else:
+            print tree.ReadFile(input_files[0])
+        
+        tree.Write()        
+            
