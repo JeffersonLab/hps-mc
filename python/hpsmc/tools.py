@@ -414,5 +414,4 @@ class MakeTree(Component):
         else:
             print tree.ReadFile(input_files[0])
         
-        tree.Write()        
-            
+        tree.Write()
