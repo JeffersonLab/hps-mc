@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 
+"""
+Creates text format, single event N-tuples from LCIO recon file inputs.
+"""
+
 import sys, random, os.path
 
 from hpsmc.job import Job

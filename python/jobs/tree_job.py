@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 
+"""
+Creates a ROOT tree from one or more input tuples in text format.
+"""
+
 from hpsmc.job import Job
 from hpsmc.tools import MakeTree
 
 # Initialize the job.
 job = Job(name="Make ROOT tree job")
 job.initialize()
-params = job.params
 input_files = job.params.input_files
 output_files = job.params.output_files
 
