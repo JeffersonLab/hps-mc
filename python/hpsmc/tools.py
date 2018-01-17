@@ -1,6 +1,5 @@
 import os, sys, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
-from ROOT import gROOT, TFile, TTree
 from component import Component
 
 logger = logging.getLogger("hpsmc.tools")
@@ -377,6 +376,9 @@ class MakeTree(Component):
         return True
     
     def execute(self, log_out, log_err):        
+
+        # Use local ROOT imports so ROOT env isn't necessary just to load the module.
+        from ROOT import gROOT, TFile, TTree
         
         output_file = self.outputs[0]
         input_files = self.inputs
