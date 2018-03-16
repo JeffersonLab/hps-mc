@@ -16,23 +16,28 @@ params = job.params
 input_files = job.params.input_files
 output_files = job.params.output_files
 
-# Get base output name from output file key.
-output_archive = job.params.output_files.keys()[0]
-base,ext = os.path.splitext(output_archive)
+# Get base output name from input file key.
+output_base,ext = os.path.splitext(input_files.keys()[0])
+
+# Job parameters may optionally specify number of events to read from LCIO file.
+if hasattr(params, "nevents"):
+    nevents = params.nevents
+else:
+    nevents = -1
 
 # Make text tuple outputs.
 make_tuples = JobManager(steering_resource=params.tuple_steering,
                    run=params.run,
                    detector=params.detector,
                    inputs=input_files.keys(),
-                   outputs=[base])
+                   outputs=[output_base],
+                   nevents=nevents)
 job.components.append(make_tuples)
 
 # Create components to convert each of the text tuple files to ROOT.
 tuple_outputs = []
-for tuple_type in ["fee", "moller", "tri"]:
-    #, "fulltruth"]:
-    tuple_base = base + "_" + tuple_type
+for tuple_type in ["fee", "moller", "tri", "fulltruth"]:
+    tuple_base = output_base + "_" + tuple_type
     tuple_input = tuple_base + ".txt"
     tuple_output = tuple_base + ".root"
     tuple_outputs.append(tuple_output)
@@ -40,6 +45,7 @@ for tuple_type in ["fee", "moller", "tri"]:
     job.components.append(make_tree)
        
 # Tar the files into an output archive.
+output_archive = output_base
 tar_files = TarFiles(inputs=tuple_outputs,
                      outputs=[output_archive])
 job.components.append(tar_files)
