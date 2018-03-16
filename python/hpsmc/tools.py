@@ -87,6 +87,10 @@ class JobManager(Component):
             self.detector = kwargs["detector"]
         else:
             self.detector = None
+        if "nevents" in kwargs:
+            self.nevents = kwargs["nevents"]
+        else:
+            self.nevents = -1
         if "defs" in kwargs:
             self.defs = kwargs["defs"]
         else:
@@ -123,6 +127,9 @@ class JobManager(Component):
             self.args.append(self.steering_resource)
         elif self.steering_file is not None:
             self.args.append(self.steering_file)
+        if self.nevents != -1:
+            self.args.append("-n")
+            self.args.append(str(self.nevents))
         
         return self.args
     
@@ -394,22 +401,25 @@ class MakeTree(Component):
             print inputfile.name
             firstfile = True
             for filename in input_files:
-                f = open(filename)
-                firstline = True
-                for i in f:
-                    if firstline:
-                        if firstfile:
-                            branchdescriptor = i
-                            inputfile.write(i)
+                if os.path.isfile(filename):
+                    f = open(filename, 'r')
+                    firstline = True
+                    for i in f:
+                        if firstline:
+                            if firstfile:
+                                branchdescriptor = i
+                                inputfile.write(i)
+                            else:
+                                if branchdescriptor != i:
+                                    print "branch descriptor doesn't match"
+                                    sys.exit(-1)
                         else:
-                            if branchdescriptor != i:
-                                print "branch descriptor doesn't match"
-                                sys.exit(-1)
-                    else:
-                        inputfile.write(i)
-                    firstline = False
-                f.close()
-                firstfile = False
+                            inputfile.write(i)
+                        firstline = False
+                    f.close()
+                    firstfile = False
+                else:
+                    logger.warn("Ignoring non-existant input file '%s'" % filename)
             inputfile.close()
             print tree.ReadFile(inputfile.name)
             os.remove(inputfile.name)
