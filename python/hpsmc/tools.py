@@ -108,8 +108,6 @@ class JobManager(Component):
         self.args.extend(self.java_args)
         self.args.append("-jar")
         self.args.append(os.environ["HPSJAVA_JAR"])
-        self.args.append("-i")
-        self.args.append(self.inputs[0])
         if self.run_number is not None:
             self.args.append("-R")
             self.args.append(str(self.run_number))
@@ -130,6 +128,9 @@ class JobManager(Component):
         if self.nevents != -1:
             self.args.append("-n")
             self.args.append(str(self.nevents))
+        for input_file in self.inputs:
+            self.args.append("-i")
+            self.args.append(input_file)
         
         return self.args
     
