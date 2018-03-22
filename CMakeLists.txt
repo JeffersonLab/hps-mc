@@ -135,6 +135,16 @@ configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.csh.in ${CMAKE_BINARY_DI
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.csh DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
+# config and install workflow script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-workflow.in ${CMAKE_BINARY_DIR}/hps-mc-workflow)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-workflow DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# config and install batch script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-batch.in ${CMAKE_BINARY_DIR}/hps-mc-batch)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-batch DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
 # install stdhep script
 install(FILES scripts/stdhep_count.sh DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
@@ -143,9 +153,11 @@ install(FILES scripts/stdhep_count.sh DESTINATION bin
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
 
 # install python job helper scripts
-file(GLOB python_scripts python/scripts/*.py)
-install(FILES ${python_scripts} DESTINATION bin
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+install(DIRECTORY python DESTINATION lib)
+
+#file(GLOB python_scripts python/scripts/*.py)
+#install(FILES ${python_scripts} DESTINATION bin
+#        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # find slic to get location of particle.tbl for installation
 find_program(SLIC slic)

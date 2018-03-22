@@ -4,8 +4,6 @@
 Python script for generating WAB events in MG4.
 """
 
-import sys, random
-
 from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG4, StdHepConverter
