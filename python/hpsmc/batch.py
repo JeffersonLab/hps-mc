@@ -204,7 +204,7 @@ class LSF(Batch):
     def build_cmd(self, name, job_params):
         param_file = os.path.join(self.workdir, name + ".json")
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        cmd = ["bsub", "-W", "24:0", "-q", "long", "-o",  log_file, "-e",  log_file]
+        cmd = ["bsub", "-W", "48:0", "-q", "long", "-o",  log_file, "-e",  log_file]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
         cmd.extend(["python", self.script])        
         if self.job_steps > 0:

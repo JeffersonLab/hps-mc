@@ -140,9 +140,14 @@ configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-workflow.in ${CMAKE_BINARY_D
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-workflow DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
-# config and install batch script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-batch.in ${CMAKE_BINARY_DIR}/hps-mc-batch)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-batch DESTINATION bin
+# config and install bsub script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-bsub.in ${CMAKE_BINARY_DIR}/hps-mc-bsub)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-bsub DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+
+# config and install jsub script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-jsub.in ${CMAKE_BINARY_DIR}/hps-mc-jsub)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-jsub DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # install stdhep script
@@ -152,7 +157,7 @@ install(FILES scripts/stdhep_count.sh DESTINATION bin
 # install run params data
 install(FILES ${CMAKE_SOURCE_DIR}/data/run_params.json DESTINATION share)
 
-# install python job helper scripts
+# install python scripts
 install(DIRECTORY python DESTINATION lib)
 
 #file(GLOB python_scripts python/scripts/*.py)

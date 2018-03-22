@@ -5,4 +5,4 @@ if [ -z "$HPSMC_DIR" ]; then
     exit 1
 fi
 
-python $HPSMC_DIR/lib/python/hpsmc/batch.py $@
+python $HPSMC_DIR/lib/python/hpsmc/jsub.py $@
