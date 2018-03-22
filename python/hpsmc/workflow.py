@@ -86,6 +86,7 @@ class Workflow:
                 src_files = src
                 ntoread = 1            
             flist = glob.glob(src_files)
+            #print "got %d files from glob '%s'" % (len(flist), src_files)
             flist.sort()
             input_file_lists[dest] = flist
             input_file_count[dest] = ntoread
@@ -106,9 +107,14 @@ class Workflow:
             if input_file_lists:
                 for dest,src in input_file_lists.iteritems():
                     ntoread = input_file_count[dest]
+                    #print "reading next " + str(ntoread) + " files"
+                    #print "src has %d files left" % len(src)
                     if ntoread > 1:
-                        for i in range(1, ntoread + 1):
+                        for i in range(0, ntoread):
+                            #try:
                             job["input_files"][dest+"."+str(i).zfill(3)] = src.pop(0)
+                            #except:
+                            #raise Exception("Not enough input files were provided for the job.")
                     else:
                         job["input_files"][dest] = src.pop(0)
             
