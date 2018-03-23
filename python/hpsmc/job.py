@@ -227,27 +227,35 @@ class JobParameters:
 
         if not hasattr(self, "job_id"):
             self.job_id = 1
- 
+
         self.defaults = defaults
-    
+
     def load(self, filename):
         rawdata = open(filename, 'r').read()
-        self.json_dict = json.loads(rawdata)        
+        self.json_dict = json.loads(rawdata)
 
     def __getattr__(self, attr):
         if attr in self.json_dict:
             return self.json_dict[attr]
         else:
-            raise AttributeError("%r has no attribute '%s'" %
-                                 (self.__class__, attr))
+            raise AttributeError("%r has no attribute '%s'" % (self.__class__, attr))
 
     def __getitem__(self, key):
         if key in self.json_dict:
+            # from the JSON file
             return self.json_dict[key]
         elif key in self.defaults:
+            # from defaults supplied by the job script
             return self.defaults[key]
+        elif key in vars(self):
+            # from a variable on the params (e.g. for job_id, seed, etc.)
+            return vars(self)[key]
         else:
-            return self.__getattr__(key)
+            # parameter was not set (this may occur for 'nevents' which is fine as it has no reasonable default)
+            raise Exception("%r has no item '%s'" % (self.__class__, key))
+
+    def __contains__(self, item):
+        return item in self.json_dict or item in self.defaults or item in vars(self)
 
     def __str__(self):
         return "job params: " + str(self.json_dict) + ", defaults: " + str(self.defaults)
