@@ -228,6 +228,10 @@ class JobParameters:
         if not hasattr(self, "job_id"):
             self.job_id = 1
 
+        if not hasattr(self, "nevents"):
+            # WARNING: This might cause certain components to blow up if not overridden!
+            self.nevents = -1
+
         self.defaults = defaults
 
     def load(self, filename):
@@ -251,7 +255,7 @@ class JobParameters:
             # from a variable on the params (e.g. for job_id, seed, etc.)
             return vars(self)[key]
         else:
-            # parameter was not set (this may occur for 'nevents' which is fine as it has no reasonable default)
+            # parameter was not set
             raise Exception("%r has no item '%s'" % (self.__class__, key))
 
     def __contains__(self, item):
