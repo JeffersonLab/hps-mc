@@ -44,6 +44,7 @@ class Job:
             self.set_component_seeds = True
 
         self.params = None
+        self.default_params = {}
         
         self.log_out = sys.stdout
         self.log_err = sys.stderr
@@ -59,6 +60,9 @@ class Job:
         
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
+
+    def set_default_params(self, default_params):
+        self.default_params = default_params
                     
     def parse_args(self):
         
@@ -90,7 +94,7 @@ class Job:
         
         if cl.params:
             logger.info("Loading job params from '%s'" % cl.params[0])
-            self.params = JobParameters(cl.params[0])
+            self.params = JobParameters(cl.params[0], defaults = self.default_params)
             logger.info(json.dumps(self.params.json_dict, indent=4, sort_keys=False))
         else:
             raise Exception("Missing required JSON file with job params.")
@@ -129,6 +133,8 @@ class Job:
 
         if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
+
+        logger.info("Job parameters: " + str(self.params))
 
         self.setup()
         self.execute()
@@ -203,7 +209,7 @@ class Job:
             
 class JobParameters:
     
-    def __init__(self, filename = None):
+    def __init__(self, filename = None, defaults = {}):
         if filename:
             self.load(filename)
 
@@ -221,6 +227,8 @@ class JobParameters:
 
         if not hasattr(self, "job_id"):
             self.job_id = 1
+ 
+        self.defaults = defaults
     
     def load(self, filename):
         rawdata = open(filename, 'r').read()
@@ -232,7 +240,15 @@ class JobParameters:
         else:
             raise AttributeError("%r has no attribute '%s'" %
                                  (self.__class__, attr))
-    
+
+    def __getitem__(self, key):
+        if key in self.json_dict:
+            return self.json_dict[key]
+        elif key in self.defaults:
+            return self.defaults[key]
+        else:
+            return self.__getattr__(key)
+
     def __str__(self):
-        return str(self.json_dict)
+        return "job params: " + str(self.json_dict) + ", defaults: " + str(self.defaults)
      
