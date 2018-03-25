@@ -189,14 +189,17 @@ class Job:
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
             dest_file = os.path.join(self.output_dir, dest)
-            if os.path.isfile(dest_file):
-                if self.delete_existing:
-                    logger.info("Deleting existing file at '%s'" % dest_file)
-                    os.remove(dest_file)
-                else:
-                    raise Exception("Output file '%s' already exists." % dest_file)
-            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
-            shutil.copyfile(src_file, dest_file)
+            if not os.path.samefile(src_file, dest_file):
+                if os.path.isfile(dest_file):
+                    if self.delete_existing:
+                        logger.info("Deleting existing file at '%s'" % dest_file)
+                        os.remove(dest_file)
+                    else:
+                        raise Exception("Output file '%s' already exists." % dest_file)
+                logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+                shutil.copyfile(src_file, dest_file)
+            else:
+                logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
             
     def copy_input_files(self):
         for dest,src in self.input_files.iteritems():
