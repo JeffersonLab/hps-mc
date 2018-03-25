@@ -8,7 +8,7 @@ import sys, os, argparse
 
 from hpsmc.job import Job
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.tools import Unzip, StdHepTool
+from hpsmc.tools import Unzip, StdHepTool, MoveFiles
 
 # define default job parameters
 def_params = {
@@ -58,6 +58,11 @@ dump = StdHepTool(name="print_stdhep",
 
 # define job components
 job.components = [ap, unzip, displ, rot, dump]
+
+# move final StdHep file to user-defined output file name if output_files is set in JSON params
+if len(params.output_files):
+    mv = MoveFiles(inputs=[filename+"_rot.stdhep"], outputs=[params.output_files.keys()[0]])
+    job.components.append(mv)
 
 # run the job
 job.run()
