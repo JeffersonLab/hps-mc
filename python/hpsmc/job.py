@@ -44,6 +44,7 @@ class Job:
             self.set_component_seeds = True
 
         self.params = None
+        self.default_params = {}
         
         self.log_out = sys.stdout
         self.log_err = sys.stderr
@@ -59,6 +60,9 @@ class Job:
         
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
+
+    def set_default_params(self, default_params):
+        self.default_params = default_params
                     
     def parse_args(self):
         
@@ -90,7 +94,7 @@ class Job:
         
         if cl.params:
             logger.info("Loading job params from '%s'" % cl.params[0])
-            self.params = JobParameters(cl.params[0])
+            self.params = JobParameters(cl.params[0], defaults = self.default_params)
             logger.info(json.dumps(self.params.json_dict, indent=4, sort_keys=False))
         else:
             raise Exception("Missing required JSON file with job params.")
@@ -129,6 +133,8 @@ class Job:
 
         if not hasattr(self, "params"):
             raise Exception("Job params were never parsed.")
+
+        logger.info("Job parameters: " + str(self.params))
 
         self.setup()
         self.execute()
@@ -183,14 +189,17 @@ class Job:
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
             dest_file = os.path.join(self.output_dir, dest)
-            if os.path.isfile(dest_file):
-                if self.delete_existing:
-                    logger.info("Deleting existing file at '%s'" % dest_file)
-                    os.remove(dest_file)
-                else:
-                    raise Exception("Output file '%s' already exists." % dest_file)
-            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
-            shutil.copyfile(src_file, dest_file)
+            if not os.path.samefile(src_file, dest_file):
+                if os.path.isfile(dest_file):
+                    if self.delete_existing:
+                        logger.info("Deleting existing file at '%s'" % dest_file)
+                        os.remove(dest_file)
+                    else:
+                        raise Exception("Output file '%s' already exists." % dest_file)
+                logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+                shutil.copyfile(src_file, dest_file)
+            else:
+                logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
             
     def copy_input_files(self):
         for dest,src in self.input_files.iteritems():
@@ -203,7 +212,7 @@ class Job:
             
 class JobParameters:
     
-    def __init__(self, filename = None):
+    def __init__(self, filename = None, defaults = {}):
         if filename:
             self.load(filename)
 
@@ -221,18 +230,40 @@ class JobParameters:
 
         if not hasattr(self, "job_id"):
             self.job_id = 1
-    
+
+        if not hasattr(self, "nevents"):
+            # WARNING: This might cause certain components to blow up if not overridden!
+            self.nevents = -1
+
+        self.defaults = defaults
+
     def load(self, filename):
         rawdata = open(filename, 'r').read()
-        self.json_dict = json.loads(rawdata)        
+        self.json_dict = json.loads(rawdata)
 
     def __getattr__(self, attr):
         if attr in self.json_dict:
             return self.json_dict[attr]
         else:
-            raise AttributeError("%r has no attribute '%s'" %
-                                 (self.__class__, attr))
-    
+            raise AttributeError("%r has no attribute '%s'" % (self.__class__, attr))
+
+    def __getitem__(self, key):
+        if key in self.json_dict:
+            # from the JSON file
+            return self.json_dict[key]
+        elif key in self.defaults:
+            # from defaults supplied by the job script
+            return self.defaults[key]
+        elif key in vars(self):
+            # from a variable on the params (e.g. for job_id, seed, etc.)
+            return vars(self)[key]
+        else:
+            # parameter was not set
+            raise Exception("%r has no item '%s'" % (self.__class__, key))
+
+    def __contains__(self, item):
+        return item in self.json_dict or item in self.defaults or item in vars(self)
+
     def __str__(self):
-        return str(self.json_dict)
+        return "job params: " + str(self.json_dict) + ", defaults: " + str(self.defaults)
      
