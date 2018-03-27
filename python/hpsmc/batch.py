@@ -335,10 +335,13 @@ class Auger(Batch):
         cmd = ['jsub', '-xml', xml_file]
         print ' '.join(cmd)
         if not self.dryrun:
-            proc = subprocess.Popen(cmd, shell=False)
-            proc.communicate()
-            # TODO: get ID of submitted job here
-            return -1
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+            out, err = proc.communicate()
+            print out
+            jobid = None
+            if "<jobIndex>" in out:
+                jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
+            return jobid
         else:
             print "Job <%s> was not submitted." % name
             return None
