@@ -246,6 +246,7 @@ class Auger(Batch):
         param_file = os.path.join(self.workdir, name + ".json")
 
         req = ET.Element("Request")
+
         req_name = ET.SubElement(req, "Name")
         req_name.set("name", name)
         prj = ET.SubElement(req, "Project")
@@ -255,10 +256,11 @@ class Auger(Batch):
             trk.set("name", "debug")
         else:
             trk.set("name", "simulation")
-        email = ET.SubElement(req, "Email")
-        email.set("email", self.email)
-        email.set("request", "true")
-        email.set("job", "true")
+        if self.email:
+            email = ET.SubElement(req, "Email")
+            email.set("email", self.email)
+            email.set("request", "true")
+            email.set("job", "true")
         mem = ET.SubElement(req, "Memory")
         mem.set("space", "2000")
         mem.set("unit", "MB")
