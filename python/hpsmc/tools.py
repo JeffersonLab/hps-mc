@@ -430,3 +430,23 @@ class MakeTree(Component):
             print tree.ReadFile(input_files[0])
         
         tree.Write()
+
+class MoveFiles(Component):
+
+    def __init__(self, **kwargs):
+        self.command = "mv"
+        self.name = "mv"
+        Component.__init__(self, **kwargs)
+
+    def cmd_exists(self):
+        return True
+
+    def execute(self, log_out, log_err):
+        if len(self.inputs) != len(self.outputs):
+            raise Exception("Input and output lists are not the same length!")
+        for io in zip(self.inputs, self.outputs):
+            print io
+            src = io[0]
+            dest = io[1] 
+            logger("Moving '%s' to '%s'" % (src, dest))
+            shutil.move(src, dest)
