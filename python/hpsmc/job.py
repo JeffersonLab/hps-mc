@@ -189,7 +189,7 @@ class Job:
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
             dest_file = os.path.join(self.output_dir, dest)
-            if not os.path.samefile(src_file, dest_file):
+            if os.path.exists(dest_file) and not os.path.samefile(src_file, dest_file):
                 if os.path.isfile(dest_file):
                     if self.delete_existing:
                         logger.info("Deleting existing file at '%s'" % dest_file)
