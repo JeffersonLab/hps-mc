@@ -149,7 +149,7 @@ class Job:
                 
         components = self.components
         if self.job_steps > 0:            
-            components = self.components[0:self.job_steps-1]    
+            components = self.components[0:self.job_steps]
             logger.info("Job is limited to first %d steps." % self.job_steps)
             
         for c in components:        
