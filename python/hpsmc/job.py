@@ -189,14 +189,24 @@ class Job:
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
             dest_file = os.path.join(self.output_dir, dest)
-            if os.path.exists(dest_file) and not os.path.samefile(src_file, dest_file):
-                if os.path.isfile(dest_file):
-                    if self.delete_existing:
-                        logger.info("Deleting existing file at '%s'" % dest_file)
-                        os.remove(dest_file)
-                    else:
-                        raise Exception("Output file '%s' already exists." % dest_file)
-                logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+
+            # check if the file is already there and does not need copying (e.g. if running in local dir)
+            samefile = False
+            if os.path.exists(dest_file):
+                if os.path.samefile(src_file, dest_file):
+                    samefile = True
+
+            # if target file already exists then see if it can be deleted; otherwise raise an error
+            if os.path.isfile(dest_file):
+                if self.delete_existing:
+                    logger.info("Deleting existing file at '%s'" % dest_file)
+                    os.remove(dest_file)
+                else:
+                    raise Exception("Output file '%s' already exists." % dest_file)
+
+            # copy the file to the destination dir if not already created by the job
+            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+            if not samefile:
                 shutil.copyfile(src_file, dest_file)
             else:
                 logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
