@@ -25,6 +25,8 @@ class Batch:
         parser.add_argument("-r", "--job-range", help="Submit jobs numbers within range (e.g. '1:100')", required=False)
         parser.add_argument("-n", "--nsub", type=int, default=-1, help="Number of jobs to submit before waiting when using staggered submission", required=False)
         parser.add_argument("-t", "--time", type=int, default=0, help="Number of seconds to wait before submitting next job set when using staggered submission", required=False)
+        parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
+        parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
         cl = parser.parse_args()
@@ -95,6 +97,16 @@ class Batch:
         else:
             print "Job submission staggering is disabled."
             self.enable_staggered = False
+
+        if cl.queue:
+            self.queue = cl.queue[0]
+        else:
+            self.queue = "long"
+
+        if cl.job_length:
+            self.job_length = int(cl.job_length[0])
+        else:
+            self.job_length = 48
         
     @staticmethod
     def outputs_exist(job):
@@ -204,7 +216,7 @@ class LSF(Batch):
     def build_cmd(self, name, job_params):
         param_file = os.path.join(self.workdir, name + ".json")
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        cmd = ["bsub", "-W", "48:0", "-q", "long", "-o",  log_file, "-e",  log_file]
+        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o",  log_file, "-e",  log_file]
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
         cmd.extend(["python", self.script])        
         if self.job_steps > 0:
@@ -218,7 +230,7 @@ class LSF(Batch):
 
     def submit_cmd(self, name, job_params): 
         cmd = self.build_cmd(name, job_params)
-        #print ' '.join(cmd)
+        print ' '.join(cmd)
         if not self.dryrun:
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out,err = proc.communicate()
@@ -255,10 +267,11 @@ class Auger(Batch):
             trk.set("name", "debug")
         else:
             trk.set("name", "simulation")
-        email = ET.SubElement(req, "Email")
-        email.set("email", self.email)
-        email.set("request", "true")
-        email.set("job", "true")
+        if self.email:
+            email = ET.SubElement(req, "Email")
+            email.set("email", self.email)
+            email.set("request", "true")
+            email.set("job", "true")
         mem = ET.SubElement(req, "Memory")
         mem.set("space", "2000")
         mem.set("unit", "MB")
@@ -325,10 +338,13 @@ class Auger(Batch):
         cmd = ['jsub', '-xml', xml_file]
         print ' '.join(cmd)
         if not self.dryrun:
-            proc = subprocess.Popen(cmd, shell=False)
-            proc.communicate()
-            # TODO: get ID of submitted job here
-            return -1
+            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+            out, err = proc.communicate()
+            print out
+            jobid = None
+            if "<jobIndex>" in out:
+                jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
+            return jobid
         else:
             print "Job <%s> was not submitted." % name
             return None
