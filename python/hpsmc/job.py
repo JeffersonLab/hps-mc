@@ -1,4 +1,4 @@
-import os, sys, shutil, argparse, getpass, json, logging
+import os, sys, shutil, argparse, getpass, json, logging, subprocess
 from component import Component
 
 logger = logging.getLogger("hpsmc.job")
@@ -147,16 +147,17 @@ class Job:
         if not len(self.components):
             raise Exception("Job has no components to execute.")
                 
-        components = self.components
-        if self.job_steps > 0:            
-            components = self.components[0:self.job_steps]
-            logger.info("Job is limited to first %d steps." % self.job_steps)
-            
-        for c in components:        
+        for c in self.components:
             logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
             c.execute(self.log_out, self.log_err)
 
     def setup(self):
+        # limit components according to job steps
+        if self.job_steps > 0:
+            self.components = self.components[0:self.job_steps]
+            logger.info("Job is limited to first %d steps." % self.job_steps)
+
+        # run setup methods of each component
         for c in self.components:
             logger.info("Setting up '%s'" % (c.name))
             c.rundir = self.rundir
@@ -185,6 +186,13 @@ class Job:
         if not os.path.exists(self.output_dir):
             logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
+
+        # debug
+        #logger.info("pwd: " + os.getcwd())
+        #p = subprocess.Popen(['ls', os.getcwd()], shell=True, stdout=subprocess.PIPE)
+        #out, err = p.communicate()
+        #print "dir list..."
+        #print out
                
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
@@ -236,7 +244,7 @@ class JobParameters:
             self.seed = 1
 
         if not hasattr(self, "output_dir"):
-            self.output_dir = os.getcwd()            
+            self.output_dir = os.getcwd()
 
         if not hasattr(self, "job_id"):
             self.job_id = 1
