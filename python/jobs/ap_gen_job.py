@@ -2,6 +2,9 @@
 
 """
 Job script to generate A-prime events, convert to StdHep and apply transformations.
+
+Run with '--job-steps 1' to only generate the LHE output and not generate StdHep files
+with transforms.
 """
 
 import sys, os, argparse

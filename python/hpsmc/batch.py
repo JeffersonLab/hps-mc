@@ -314,7 +314,10 @@ class Auger(Batch):
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
-        cmd_lines.append("python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file)))
+        job_cmd = "python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file))
+        if self.job_steps > 0:
+            job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
+        cmd_lines.append(job_cmd)
         cmd_lines.append("]]>")
         cmd.text = '\n'.join(cmd_lines)
 
