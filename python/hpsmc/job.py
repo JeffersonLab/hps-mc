@@ -1,4 +1,4 @@
-import os, sys, shutil, argparse, getpass, json, logging
+import os, sys, shutil, argparse, getpass, json, logging, subprocess
 from component import Component
 
 logger = logging.getLogger("hpsmc.job")
@@ -147,16 +147,17 @@ class Job:
         if not len(self.components):
             raise Exception("Job has no components to execute.")
                 
-        components = self.components
-        if self.job_steps > 0:            
-            components = self.components[0:self.job_steps-1]    
-            logger.info("Job is limited to first %d steps." % self.job_steps)
-            
-        for c in components:        
+        for c in self.components:
             logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
             c.execute(self.log_out, self.log_err)
 
     def setup(self):
+        # limit components according to job steps
+        if self.job_steps > 0:
+            self.components = self.components[0:self.job_steps]
+            logger.info("Job is limited to first %d steps." % self.job_steps)
+
+        # run setup methods of each component
         for c in self.components:
             logger.info("Setting up '%s'" % (c.name))
             c.rundir = self.rundir
@@ -185,18 +186,35 @@ class Job:
         if not os.path.exists(self.output_dir):
             logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
+
+        # debug
+        #logger.info("pwd: " + os.getcwd())
+        #p = subprocess.Popen(['ls', os.getcwd()], shell=True, stdout=subprocess.PIPE)
+        #out, err = p.communicate()
+        #print "dir list..."
+        #print out
                
         for src,dest in self.output_files.iteritems():
             src_file = os.path.join(self.rundir, src)
             dest_file = os.path.join(self.output_dir, dest)
-            if not os.path.samefile(src_file, dest_file):
-                if os.path.isfile(dest_file):
-                    if self.delete_existing:
-                        logger.info("Deleting existing file at '%s'" % dest_file)
-                        os.remove(dest_file)
-                    else:
-                        raise Exception("Output file '%s' already exists." % dest_file)
-                logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+
+            # check if the file is already there and does not need copying (e.g. if running in local dir)
+            samefile = False
+            if os.path.exists(dest_file):
+                if os.path.samefile(src_file, dest_file):
+                    samefile = True
+
+            # if target file already exists then see if it can be deleted; otherwise raise an error
+            if os.path.isfile(dest_file):
+                if self.delete_existing:
+                    logger.info("Deleting existing file at '%s'" % dest_file)
+                    os.remove(dest_file)
+                else:
+                    raise Exception("Output file '%s' already exists." % dest_file)
+
+            # copy the file to the destination dir if not already created by the job
+            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+            if not samefile:
                 shutil.copyfile(src_file, dest_file)
             else:
                 logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
@@ -226,7 +244,7 @@ class JobParameters:
             self.seed = 1
 
         if not hasattr(self, "output_dir"):
-            self.output_dir = os.getcwd()            
+            self.output_dir = os.getcwd()
 
         if not hasattr(self, "job_id"):
             self.job_id = 1
