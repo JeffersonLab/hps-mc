@@ -116,7 +116,7 @@ add_custom_target(lcio_download ALL DEPENDS ${CMAKE_BINARY_DIR}/LCIO)
 
 # build LCIO java lib
 add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar
-    COMMAND mvn ARGS -Dmaven.repo.local=${M2REPO} -DskipTests -q
+    COMMAND mvn ARGS -Dmaven.repo.local=${M2REPO} -DskipTests -q install
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/LCIO)
 add_custom_target(lcio_java_build ALL DEPENDS lcio_download ${CMAKE_BINARY_DIR}/LCIO/target/lcio-${LCIO_VERSION}-SNAPSHOT-bin.jar)
 
