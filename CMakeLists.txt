@@ -90,6 +90,19 @@ add_custom_command(OUTPUT ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/BmapCorrected3
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-fieldmaps/)
 add_custom_target(hps_fieldmaps_install ALL DEPENDS hps_fieldmaps_download ${CMAKE_INSTALL_PREFIX}/share/fieldmaps/BmapCorrected3D_13k_unfolded_scaled_1.15384615385.dat)
 
+# checkout conditions files for installing locally
+add_custom_command(OUTPUT ${CMAKE_BINARY_DIR}/hps-conditions-backup/
+    COMMAND git clone https://github.com/JeffersonLab/hps-conditions-backup.git
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+add_custom_target(hps_conditions_download ALL DEPENDS ${CMAKE_BINARY_DIR}/hps-conditions-backup/)
+
+# decompress conditions db and copy to install dir
+add_custom_command(OUTPUT ${CMAKE_INSTALL_PREFIX}/share/hps_conditions.db
+    COMMAND tar -zxvf hps_conditions.db.tar.gz
+    COMMAND cp hps_conditions.db ${CMAKE_INSTALL_PREFIX}/share
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/hps-conditions-backup/)
+add_custom_target(hps_conditions_install ALL DEPENDS hps_conditions_download ${CMAKE_INSTALL_PREFIX}/share/hps_conditions.db)
+
 # clone LCIO from github
 set(LCIO_TAG v02-07-04)
 set(LCIO_VERSION 2.7.4)
