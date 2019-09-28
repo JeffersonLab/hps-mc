@@ -4,6 +4,33 @@ from component import Component
 
 logger = logging.getLogger("hpsmc.tools")
 
+# Set java command
+if 'JAVA_HOME' in os.environ:
+    java = '%s/bin/java' % os.environ['JAVA_HOME']
+else:
+    java = 'java'
+logger.info('java set to: %s' % java)
+
+# Test that java is valid
+devnull = open(os.devnull, 'w')
+try:
+    subprocess.call([java], stdout=devnull, stderr=devnull)
+except OSError as e:
+    if e.errno == errno.ENOENT:
+        raise Exception("Java could not be found")
+    else:
+        raise Exception("Unknown error")
+devnull.close()
+
+# Test component that just executes java.
+class JavaTest(Component):
+
+    def __init__(self, **kwargs):
+        self.name = "Java Test"
+        Component.__init__(self, **kwargs)
+        self.command = java
+        self.ignore_returncode = True
+
 class StdHepTool(Component):
 
     seed_names = ["beam_coords", 
@@ -72,7 +99,7 @@ class JobManager(Component):
     def __init__(self, **kwargs):
         self.name = "HPS Java Job Manager"
         Component.__init__(self, **kwargs)
-        self.command = "java"
+        self.command = java 
         if "steering_resource" in kwargs:
             self.steering_resource = kwargs["steering_resource"]
         elif "steering_file" in kwargs:
@@ -141,7 +168,7 @@ class JavaTool(Component):
     def __init__(self, **kwargs):
         self.name = "HPS Java Tool"
         Component.__init__(self, **kwargs)
-        self.command = "java"
+        self.command = java
         if "java_args" in kwargs:
             self.java_args = kwargs["java_args"]
         else:
@@ -246,7 +273,7 @@ class LCIODumpEvent(Component):
 class LCIOTool(Component):
 
     def __init__(self, **kwargs):
-        self.command = "java"
+        self.command = java
         Component.__init__(self, **kwargs)
 
     def cmd_args(self):
