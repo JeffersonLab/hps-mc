@@ -23,6 +23,7 @@ class Batch:
         parser.add_argument("-c", "--check-output", action='store_true', required=False)
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", help="Submit jobs numbers within range (e.g. '1:100')", required=False)
+        parser.add_argument("-R", "--res-req", help="Specify resource requirement (e.g. for LSF)", required=False)
         parser.add_argument("-n", "--nsub", type=int, default=-1, help="Number of jobs to submit before waiting when using staggered submission", required=False)
         parser.add_argument("-t", "--time", type=int, default=0, help="Number of seconds to wait before submitting next job set when using staggered submission", required=False)
         parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
@@ -107,6 +108,11 @@ class Batch:
             self.job_length = int(cl.job_length[0])
         else:
             self.job_length = 48
+
+        if cl.res_req:
+            self.res_req = cl.res_req
+        else:
+            self.res_req = None
         
     @staticmethod
     def outputs_exist(job):
@@ -217,6 +223,8 @@ class LSF(Batch):
         param_file = os.path.join(self.workdir, name + ".json")
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
         cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o",  log_file, "-e",  log_file]
+        if self.res_req is not None:
+            cmd.extend(['-R', self.res_req])
         #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
         cmd.extend(["python", self.script])        
         if self.job_steps > 0:
