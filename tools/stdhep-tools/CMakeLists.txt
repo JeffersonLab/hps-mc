@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0)
 
 project(stdhep-tools)
 
+add_definitions(-std=c++11)
+
 file(COPY ${PROJECT_SOURCE_DIR}/src/ DESTINATION ${CMAKE_BINARY_DIR}/stdhep-tools-src/)
 
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/stdhep-tools-src/bin)
@@ -9,6 +11,7 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/stdhep-tools-src/bin)
 set(STDHEP_TOOLS_BIN_DIR ${CMAKE_BINARY_DIR}/stdhep-tools-src/bin)
 
 file(GLOB stdhep_program_sources ${PROJECT_SOURCE_DIR}/src/*.cc)
+
 foreach (stdhep_program_source ${stdhep_program_sources})
     get_filename_component(stdhep_program ${stdhep_program_source} NAME_WE)
     message(STATUS "Configuring StdHep tool: ${stdhep_program}")
