@@ -32,7 +32,9 @@ extern "C" {
 
 
 int StdHepXdrReadInit(char *filename, int ntries, int ist);
+int StdHepXdrReadInitNTries(char *filename, int  *ntries, int ist);
 int StdHepXdrReadOpen(char *filename, int ntries, int ist);
+int StdHepXdrReadOpenNTries(char *filename, int *ntries, int ist);
 int StdHepXdrRead(int *ilbl, int ist);
 int StdHepXdrReadMulti(int *ilbl, int ist);
 int StdHepXdrWriteInit(char *filename, char *title, int ntries, int ist);
