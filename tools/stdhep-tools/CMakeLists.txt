@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.0)
 
 project(stdhep-tools)
 
-add_definitions(-std=c++11)
-
 file(COPY ${PROJECT_SOURCE_DIR}/src/ DESTINATION ${CMAKE_BINARY_DIR}/stdhep-tools-src/)
 
 file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/stdhep-tools-src/bin)
