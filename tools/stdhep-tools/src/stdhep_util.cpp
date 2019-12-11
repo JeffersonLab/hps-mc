@@ -9,6 +9,8 @@
 bool xdr_init_done = false;
 bool has_hepev4 = false;
 
+static vector<stdhep_entry*> vect_for_Memoery_Release; 
+
 int read_stdhep(vector<stdhep_entry> *new_event)
 {
 	int offset = new_event->size();
@@ -28,6 +30,7 @@ int read_stdhep(vector<stdhep_entry> *new_event)
 		for (int j=0;j<5;j++) temp->phep[j] = hepevt_.phep[i][j];
 		for (int j=0;j<4;j++) temp->vhep[j] = hepevt_.vhep[i][j];
 		new_event->push_back(*temp);
+                vect_for_Memoery_Release.push_back(temp);
 	}
 	return hepevt_.nevhep;
 }
@@ -52,6 +55,7 @@ void read_stdhep(stdhep_event *new_event)
 		for (int j=0;j<5;j++) temp->phep[j] = hepevt_.phep[i][j];
 		for (int j=0;j<4;j++) temp->vhep[j] = hepevt_.vhep[i][j];
 		new_event->particles.push_back(*temp);
+                vect_for_Memoery_Release.push_back(temp);
 	}
     if (has_hepev4)
     {
@@ -77,7 +81,11 @@ void write_stdhep(vector<stdhep_entry> *new_event, int nevhep)
 		for (int j=0;j<5;j++) hepevt_.phep[i][j] = temp.phep[j];
 		for (int j=0;j<4;j++) hepevt_.vhep[i][j] = temp.vhep[j];
 	}
-    has_hepev4 = false;
+        has_hepev4 = false;
+        for (int i=0;i<vect_for_Memoery_Release.size();i++) {
+                delete vect_for_Memoery_Release[i];
+        }
+        vect_for_Memoery_Release.clear();
 	new_event->clear();
 }
 
@@ -110,6 +118,10 @@ void write_stdhep(stdhep_event *new_event)
         }
         has_hepev4 = true;
     }
+        for (int i = 0; i<vect_for_Memoery_Release.size();i++){
+                delete vect_for_Memoery_Release[i];
+        }
+        vect_for_Memoery_Release.clear();
 	new_event->particles.clear();
 }
 
@@ -127,6 +139,7 @@ void add_filler_particle(vector<stdhep_entry> *new_event) //add a 10 MeV photon 
 	for (int j=0;j<4;j++) temp->vhep[j] = 0.0;
 	temp->vhep[2]+=0.1; //0.1 mm after target
 	new_event->push_back(*temp);
+        vect_for_Memoery_Release.push_back(temp);
 }
 
 int append_stdhep(vector<stdhep_entry> *event, const vector<stdhep_entry> *new_event)
@@ -150,10 +163,10 @@ int open_read(char *filename, int istream, int n_events)
 {
 	printf("Reading from %s; expecting %d events\n",filename,n_events);
 	if (xdr_init_done)
-		StdHepXdrReadOpen(filename,n_events,istream);
+		StdHepXdrReadOpenNTries(filename,&n_events,istream);
 	else
 	{
-		StdHepXdrReadInit(filename,n_events,istream);
+		StdHepXdrReadInitNTries(filename,&n_events,istream);
 		xdr_init_done = true;
 	}
 	return n_events;

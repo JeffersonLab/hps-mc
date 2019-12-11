@@ -7,4 +7,4 @@ tree = ET.parse(sys.argv[1])
 root = tree.getroot()
 for child in root:
     if "version" in child.tag[child.tag.rfind('}')+1:]:
-        print child.text
+        print(child.text)
