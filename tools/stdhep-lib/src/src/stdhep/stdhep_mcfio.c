@@ -74,6 +74,14 @@ int StdHepXdrReadInit(char *filename, int ntries, int ist)
     ierr = StdHepXdrReadOpen(filename, ntries, ist);
     return ierr;
 }
+int StdHepXdrReadInitNTries(char *filename, int  *ntries, int ist)
+{
+    int ierr;
+
+    mcfioC_Init();
+    ierr = StdHepXdrReadOpenNTries(filename, ntries, ist);
+    return ierr;
+}
 int StdHepXdrReadOpen(char *filename, int ntries, int ist)
 {
     int istream, iblk;
@@ -88,7 +96,7 @@ int StdHepXdrReadOpen(char *filename, int ntries, int ist)
     mcfioC_InfoStreamChar(istream, MCFIO_CREATIONDATE, stdhd1_.date, &stdhd2_.dlen);
     mcfioC_InfoStreamChar(istream, MCFIO_TITLE, stdhd1_.title, &stdhd2_.tlen);
     mcfioC_InfoStreamChar(istream, MCFIO_COMMENT, stdhd1_.comment, &stdhd2_.clen);
-    mcfioC_InfoStreamInt(istream, MCFIO_NUMEVTS, &ntries);
+    mcfioC_InfoStreamInt(istream, MCFIO_NUMEVTS,  &ntries);
     mcfioC_InfoStreamInt(istream, MCFIO_NUMBLOCKS, &numblocks);
     mcfioC_InfoStreamInt(istream, MCFIO_BLOCKIDS, blkids);
 
@@ -104,6 +112,39 @@ int StdHepXdrReadOpen(char *filename, int ntries, int ist)
     fprintf(stdout,"          title: %s\n",stdhd1_.title);
     fprintf(stdout,"          date: %s\n",stdhd1_.date);
     fprintf(stdout,"                    %d events\n",ntries);
+    fprintf(stdout,"                    %d blocks per event\n",stdhd2_.numblocks);
+    return 0;
+}
+int StdHepXdrReadOpenNTries(char *filename, int *ntries, int ist)
+{
+    int istream, iblk;
+    int numblocks, blkids[50];
+
+    istream =  mcfioC_OpenReadDirect(filename);
+    stdstr_.ixdrstr[ist] = istream;
+    if (istream == -1) {
+        fprintf(stderr," StdHepXdrReadOpen: cannot open output file \n");
+        return -1;
+        }
+    mcfioC_InfoStreamChar(istream, MCFIO_CREATIONDATE, stdhd1_.date, &stdhd2_.dlen);
+    mcfioC_InfoStreamChar(istream, MCFIO_TITLE, stdhd1_.title, &stdhd2_.tlen);
+    mcfioC_InfoStreamChar(istream, MCFIO_COMMENT, stdhd1_.comment, &stdhd2_.clen);
+    mcfioC_InfoStreamInt(istream, MCFIO_NUMEVTS,  ntries);
+    mcfioC_InfoStreamInt(istream, MCFIO_NUMBLOCKS, &numblocks);
+    mcfioC_InfoStreamInt(istream, MCFIO_BLOCKIDS, blkids);
+
+    stdhd2_.numblocks = numblocks;
+    for ( iblk=0; iblk < numblocks; ++iblk ) {
+        stdhd2_.blkids[iblk] = blkids[iblk];
+    }
+
+    stdcnt_.nstdrd = 0;
+    stdcnt_.nlhrd = 0;
+    fprintf(stdout,
+       " StdHepXdrReadOpen: successfully opened input stream %d\n",istream);
+    fprintf(stdout,"          title: %s\n",stdhd1_.title);
+    fprintf(stdout,"          date: %s\n",stdhd1_.date);
+    fprintf(stdout,"                    %d events\n",*ntries);
     fprintf(stdout,"                    %d blocks per event\n",stdhd2_.numblocks);
     return 0;
 }

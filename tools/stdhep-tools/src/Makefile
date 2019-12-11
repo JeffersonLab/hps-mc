@@ -8,7 +8,7 @@ LOADLIBS=-L$(STDHEP_DIR)/lib
 LDLIBS=-lstdhepC -lFmcfio -lgsl -lgslcblas
 INCFILES=-I$(STDHEP_DIR)/src/inc -I$(SRC_DIR)
 CPP=g++
-CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g
+CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g -std=c++11
 TARGETS := $(patsubst $(SRC_DIR)/%.cc,$(BIN)/%,$(wildcard $(SRC_DIR)/*.cc))
 UTIL_SRC := $(wildcard $(SRC_DIR)/*.cpp)
 UTIL_OBJ := $(UTIL_SRC:.cpp=.o)
