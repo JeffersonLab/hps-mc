@@ -98,13 +98,18 @@ class JobManager(Component):
         if "java_args" in kwargs:
             self.java_args = kwargs["java_args"]
         else:
-            self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
-        if "slac.stanford.edu" in socket.getfqdn():
-            self.java_args.append("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
+            self.java_args = ["-Xmx1024m", "-XX:+UseSerialGC"]
+        self.use_offline_conditions_db = False
 
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs provided to hps-java.")
+        if self.use_offline_conditions_db:
+            # use offline SQLite db
+            self.args.append("-Dorg.hps.conditions.url=jdbc:sqlite:" + os.path.join(os.environ["HPSMC_DATA_DIR"], "hps_conditions.db")) 
+        elif "slac.stanford.edu" in socket.getfqdn():
+            # use SLAC connection
+            self.args.append("-Dorg.hps.conditions.url=jdbc:mysql://mysql-node03.slac.stanford.edu:3306/hps_conditions")
         self.args.extend(self.java_args)
         self.args.append("-jar")
         self.args.append(os.environ["HPSJAVA_JAR"])
@@ -179,6 +184,7 @@ class FilterMCBunches(JavaTool):
             self.enable_ecal_energy_filter = kwargs["enable_ecal_energy_filter"]
         else:
             self.enable_ecal_energy_filter = False 
+        self.use_offline_conditions_db = False
                     
     def cmd_args(self):
         if not len(self.inputs):
@@ -186,6 +192,12 @@ class FilterMCBunches(JavaTool):
         if not len(self.outputs):
             raise Exception("Missing required outputs for FilterMCBunches.")
         orig_args = self.args
+        if self.use_offline_conditions_db:
+            # use offline SQLite db
+            self.java_args.append("-Dorg.hps.conditions.url=jdbc:sqlite:" + os.path.join(os.environ["HPSMC_DATA_DIR"], "hps_conditions.db"))
+        elif "slac.stanford.edu" in socket.getfqdn():
+            # use SLAC connection
+            self.java_args.append("-Dorg.hps.conditions.url=jdbc:mysql://mysql-node03.slac.stanford.edu:3306/hps_conditions")
         self.args = JavaTool.cmd_args(self)
         self.args.append("-e")
         self.args.append(str(self.event_interval))
