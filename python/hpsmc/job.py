@@ -164,7 +164,10 @@ class Job:
             end = time.time()
             elapsed = end - start
             logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
-            logger.info("Return code of '%s' was %d" % (c.name, returncode))
+            if returncode is not None:
+                logger.info("Return code of '%s' was %d" % (c.name, returncode))
+            else:
+                logger.info("No return code from '%s'")
             # TODO: figure out if this can be used
             # if not self.ignore_returncode and proc.returncode:
             #     raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
