@@ -1,15 +1,17 @@
-import os, sys, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
+import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
 from component import Component
+
+import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 
 class StdHepTool(Component):
 
-    seed_names = ["beam_coords", 
-                  "beam_coords_old", 
-                  "lhe_tridents", 
-                  "lhe_tridents_displacetime", 
+    seed_names = ["beam_coords",
+                  "beam_coords_old",
+                  "lhe_tridents",
+                  "lhe_tridents_displacetime",
                   "merge_poisson",
                   "mix_signal",
                   "random_sample"]
@@ -48,6 +50,7 @@ class SLIC(Component):
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs given for SLIC.")
+        # TODO: replace with config
         detector_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.detector, self.detector + ".lcdd")
         if not len(self.outputs):
             outputs.append("slic_events.slcio")
@@ -56,16 +59,40 @@ class SLIC(Component):
                      "-o", self.outputs[0],
                      "-r", str(self.nevents),
                      "-d%s" % str(self.seed)]
-        tbl = os.path.join(os.environ["HPSMC_DATA_DIR"], "particle.tbl")
+        tbl = os.path.join(self.slic_dir, "share", particle.tbl)
         if os.path.exists(tbl):
             self.args.extend(["-P", tbl])
         else:
-            logger.warn("SLIC - The particle.tbl location is not being set automatically!")
+            logger.warn("The SLIC particle.tbl location is not being set automatically!")
         return self.args
 
     def setup(self):
+        
+        try:
+            if not os.path.exists(self.slic_dir):
+                raise Exception("slic_dir does not exist at '%s'" % self.slic_dir)
+            self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
+            if not os.path.exists(self.env_script):
+                raise Exception("slic setup script does not exist at '%s'" % self.name)
+            logger.info("slic command set to '%s'" % self.name)
+        except:
+            raise Exception("Required config slic_dir was never set.")
+    
+        # TODO: replace with config
         if not os.path.exists("./fieldmap"):
             os.symlink(os.environ["HPSMC_FIELDMAPS_DIR"], "fieldmap")
+            
+    def execute(self, log_out, log_err):
+               
+        # SLIC needs to be run from bash as the Geant4 script is a piece of #@$@#$.
+        args = self.cmd_args()
+        cl = 'bash -c ". %s && slic %s"' % (self.env_script, ' '.join(self.cmd_args()))
+                                          
+        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        
+        return proc.returncode
 
 class JobManager(Component):
 
@@ -75,8 +102,10 @@ class JobManager(Component):
         self.command = "java"
         if "steering_resource" in kwargs:
             self.steering_resource = kwargs["steering_resource"]
+            self.steering_file = None
         elif "steering_file" in kwargs:
             self.steering_file = kwargs["steering_file"]
+            self.steering_resource = None
         else:
             raise Exception("A steering resource or file was not provided to hps-java.")
         if "run" in kwargs:
@@ -95,19 +124,16 @@ class JobManager(Component):
             self.defs = kwargs["defs"]
         else:
             self.defs = {}
-        if "java_args" in kwargs:
-            self.java_args = kwargs["java_args"]
-        else:
-            self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
-        if "slac.stanford.edu" in socket.getfqdn():
-            self.java_args.append("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
 
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs provided to hps-java.")
-        self.args.extend(self.java_args)
+        self.args.append(self.java_args)
+        # TODO: replace with config (need to set properties instead of prop file)
+        #if "slac.stanford.edu" in socket.getfqdn():
+        #    self.args.extend("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
         self.args.append("-jar")
-        self.args.append(os.environ["HPSJAVA_JAR"])
+        self.args.append(self.hps_java_bin_jar)
         self.args.append("-e")
         self.args.append("1000")
         if self.run_number is not None:
@@ -136,16 +162,20 @@ class JobManager(Component):
         
         return self.args
     
+    def setup(self):
+        if config.parser.has_option("hps_java", "hps_java_bin_jar"):
+            self.hps_java_bin_jar = config.parser["hps_java"]["hps_java_bin_jar"]
+            
+        if config.parser.has_option("hps_java", "java_args"):
+            self.java_args = str(config.parser["hps_java"]["java_args"]).split(" ")
+            logger.info("Java args set from config: %s" % str(self.java_args))
+    
 class JavaTool(Component):
     
     def __init__(self, **kwargs):
         self.name = "HPS Java Tool"
         Component.__init__(self, **kwargs)
         self.command = "java"
-        if "java_args" in kwargs:
-            self.java_args = kwargs["java_args"]
-        else:
-            self.java_args = ["-Xmx1g", "-XX:+UseSerialGC"]
         if "java_class" in kwargs:
             self.java_class = kwargs["java_class"]
         elif self.java_class is None:
@@ -156,10 +186,14 @@ class JavaTool(Component):
         self.args = []
         self.args.extend(self.java_args)
         self.args.append("-cp")
-        self.args.append(os.environ["HPSJAVA_JAR"])
+        self.args.append(self.hps_java_bin_jar)
         self.args.append(self.java_class)
         self.args.extend(orig_args)
         return self.args
+
+    def setup(self):
+        if config.parser.has_option("hps_java", "hps_java_bin_jar"):
+            self.hps_java_bin_jar = config.parser["hps_java"]["hps_java_bin_jar"]
     
 class FilterMCBunches(JavaTool):
     
@@ -202,6 +236,7 @@ class FilterMCBunches(JavaTool):
             self.args.append(str(self.nevents))
         return self.args
 
+# Deprecated
 class DST(Component):
  
     def __init__(self, **kwargs):
@@ -251,7 +286,7 @@ class LCIOTool(Component):
 
     def cmd_args(self):
         orig_args = self.args
-        self.args = ["-jar", os.environ["LCIO_JAR"]]
+        self.args = ["-jar", self.lcio_bin_jar]
         self.args.append(self.name)
         self.args.extend(orig_args)
         return self.args

@@ -2,6 +2,8 @@ import os, subprocess, sys, shutil, argparse, getpass, json, logging, time
 
 logger = logging.getLogger("hpsmc.component")
 
+import hpsmc.config as config
+
 class Component:
 
     def __init__(self, **kwargs):
@@ -54,7 +56,8 @@ class Component:
                                   
         logger.info("Executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
         start = time.time()
-        proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
+        #proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
+        proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         end = time.time()
         elapsed = end - start
@@ -74,5 +77,19 @@ class Component:
         pass
 
     def cleanup(self):
-        pass
-         
+        pass    
+
+    def config(self):
+        """
+        Automatically load attributes from config file(s)
+        """
+        logger.info("Configuring '%s'" % self.name)
+        section_name = self.__class__.__name__
+        logger.info("Loading config for '%s'" % section_name)
+        if config.parser.has_section(section_name):
+            section = config.parser[section_name]
+            for name, value in section.items():
+                setattr(self, name, value)
+                logger.info("%s=%s" % (name, value))
+                
+                
