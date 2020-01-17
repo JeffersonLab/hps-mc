@@ -50,24 +50,19 @@ class Component:
             self.ignore_returncode = False
 
     def execute(self, log_out, log_err):
+        """
+        Generic component execution method. Individual components may override.
+        """
         
         cl = [self.command]
         cl.extend(self.cmd_args())
                                   
         logger.info("Executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
-        start = time.time()
-        #proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
         proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
-        end = time.time()
-        elapsed = end - start
-        logger.info("Execution of '%s' took %d second(s)" % (self.name, elapsed))
-
-        if not self.ignore_returncode and proc.returncode:
-            raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
 
     def cmd_exists(self):
-        return subprocess.call("type " + self.command, shell=True, 
+        return subprocess.call("type " + self.command, shell=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
     def cmd_args(self):
