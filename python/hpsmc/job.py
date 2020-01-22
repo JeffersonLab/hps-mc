@@ -167,7 +167,8 @@ class Job:
             if returncode is not None:
                 logger.info("Return code of '%s' was %d" % (c.name, returncode))
             else:
-                logger.info("No return code from '%s'")
+                logger.info("No return code from '%s'" % c.name)
+                
             # TODO: figure out if this can be used
             # if not self.ignore_returncode and proc.returncode:
             #     raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
