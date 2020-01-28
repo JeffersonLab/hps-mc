@@ -17,7 +17,7 @@ class StdHepTool(Component):
                   "random_sample"]
 
     def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)        
+        Component.__init__(self, **kwargs)
         self.command = "stdhep_" + self.name
 
     def cmd_args(self):
@@ -138,6 +138,8 @@ class JobManager(Component):
             self.defs = kwargs["defs"]
         else:
             self.defs = {}
+            
+        # TODO: java args
 
     def cmd_args(self):
         if not len(self.inputs):
@@ -272,12 +274,17 @@ class LCIODumpEvent(Component):
 
     def __init__(self, **kwargs):
         self.name = "LCIO dump event"
-        self.command = "lcio_dumpevent"
+        self.command = "dumpevent"
         Component.__init__(self, **kwargs)
         if "event_num" in kwargs:
             self.event_num = kwargs["event_num"]
         else:
             self.event_num = 1
+            
+    def setup(self):
+        if not hasattr(self, "lcio_dir"):
+            raise Exception("Missing required config lcio_dir")
+        self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
         if not len(self.inputs):
