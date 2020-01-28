@@ -2,6 +2,8 @@ import os, subprocess, sys, shutil, argparse, getpass, json, logging, time
 
 logger = logging.getLogger("hpsmc.component")
 
+import hpsmc.config as config
+
 class Component:
 
     def __init__(self, **kwargs):
@@ -48,23 +50,19 @@ class Component:
             self.ignore_returncode = False
 
     def execute(self, log_out, log_err):
+        """
+        Generic component execution method. Individual components may override.
+        """
         
         cl = [self.command]
         cl.extend(self.cmd_args())
                                   
         logger.info("Executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
-        start = time.time()
-        proc = subprocess.Popen(cl, shell=False, stdout=log_out, stderr=log_err)
+        proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
-        end = time.time()
-        elapsed = end - start
-        logger.info("Execution of '%s' took %d second(s)" % (self.name, elapsed))
-
-        if not self.ignore_returncode and proc.returncode:
-            raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
 
     def cmd_exists(self):
-        return subprocess.call("type " + self.command, shell=True, 
+        return subprocess.call("type " + self.command, shell=True,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
     def cmd_args(self):
@@ -74,5 +72,19 @@ class Component:
         pass
 
     def cleanup(self):
-        pass
-         
+        pass    
+
+    def config(self):
+        """
+        Automatically load attributes from config file(s)
+        """
+        logger.info("Configuring '%s'" % self.name)
+        section_name = self.__class__.__name__
+        logger.info("Loading config for '%s'" % section_name)
+        if config.parser.has_section(section_name):
+            section = config.parser[section_name]
+            for name, value in section.items():
+                setattr(self, name, value)
+                logger.info("%s=%s" % (name, value))
+                
+                
