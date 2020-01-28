@@ -154,6 +154,12 @@ class MG4(EventGenerator):
         for i in range(0, len(data)):                        
             if "APMASS" in params and "APMASS" in data[i]:
                 data[i] = "       622     %.7fe-03   # APMASS" % (params["APMASS"]) + '\n'
+            if "map" in params and "map" in data[i]:
+                data[i] = "      622 %.7fe-03 # map" % (params["map"]) + '\n'
+            if "mpid" in params and "mpid" in data[i]:
+                data[i] = "      624 %.7fe-03 # mpid" % (params["mpid"]) + '\n'
+            if "mrhod" in params and "mrhod" in data[i]:
+                data[i] = "      625 %.7fe-03 # mrhod" % (params["mrhod"]) + '\n'
                                 
         with open(param_card, 'w') as file:
             file.writelines(data)
@@ -214,7 +220,8 @@ class MG5(EventGenerator):
     
     dir_map = {"BH"      : "BH",
                "RAD"     : "RAD",
-               "tritrig" : "tritrig"}
+               "tritrig" : "tritrig",
+               "simp"    : "simp"}
 
     def __init__(self, **kwargs):
         EventGenerator.__init__(self, **kwargs)
@@ -225,7 +232,15 @@ class MG5(EventGenerator):
             self.run_card = kwargs["run_card"]
         else:
             raise Exception("Missing required run_card argument to MG4.")
-        
+        if "param_card" in kwargs:
+            self.param_card = kwargs["param_card"]
+        else:
+            self.param_card = "param_card.dat"    
+        if "params" in kwargs:
+            self.params = kwargs["params"]
+        else:
+            self.params = {}
+
     def setup(self):
 
         if not len(self.outputs):
@@ -256,6 +271,18 @@ class MG5(EventGenerator):
         shutil.copyfile(run_card_src, run_card_dest)
         
         MG4.set_run_card_params(run_card_dest, self.nevents, self.seed)
+
+        param_card_src = os.path.join(src, "Cards", self.param_card)
+        param_card_dest = os.path.join(dest, "Cards", "param_card.dat")
+        logger.info("MG5 - Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
+        shutil.copyfile(param_card_src, param_card_dest)
+
+        if len(self.params):
+            logger.info("MG5 - Setting params %s on '%s'" % (repr(self.params), param_card_dest))
+            MG4.set_params(param_card_dest, self.params)
+        else:
+            logger.info("MG5 - No user params were set on param card")
+
         
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
