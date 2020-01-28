@@ -13,8 +13,7 @@ class EGS5(EventGenerator):
 
     def __init__(self, **kwargs): 
         EventGenerator.__init__(self, **kwargs)
-        self.egs5_data_dir = os.environ["EGS5_DATA_DIR"]
-        self.egs5_config_dir = os.environ["EGS5_CONFIG_DIR"]
+                            
         if "bunches" not in kwargs:
             self.bunches = 5e5
         else:
@@ -28,6 +27,15 @@ class EGS5(EventGenerator):
     def setup(self):
         EventGenerator.setup(self)
        
+        if not hasattr(self, "egs5_dir"):
+            raise Exception("Missing required EGS5 config egs5_dir")
+       
+        self.egs5_data_dir = self.egs5_dir + os.path.sep + "/data"
+        self.egs5_config_dir = self.egs5_dir + os.path.sep + "/config"
+       
+        logger.info("egs5_data_dir=%s" % self.egs5_data_dir)
+        logger.info("egs5_config_dir=%s" % self.egs5_config_dir)
+               
         if self.run_params is None:
             raise Exception("The run_params were never set for EGS5.")
         
@@ -105,7 +113,7 @@ class MG4(EventGenerator):
         EventGenerator.__init__(self, **kwargs)
         if self.name not in MG4.dir_map:
             raise Exception("The name '" + self.name + " is not valid for MG4.")
-        self.mg4_dir = os.environ["MG4_DIR"]
+                
         if not len(self.outputs):
             self.outputs.append(self.name + "_events")
         if "run_card" in kwargs:
@@ -153,6 +161,9 @@ class MG4(EventGenerator):
     def setup(self):
         
         EventGenerator.setup(self)
+        
+        if not hasattr(self, "mg4_dir"):
+            raise Exception("Missing required MG4 config mg4_dir")
         
         if not len(self.outputs):
             raise Exception("The ouputs were not set for MG4.")
@@ -209,7 +220,7 @@ class MG5(EventGenerator):
         EventGenerator.__init__(self, **kwargs)
         if self.name not in MG5.dir_map:
             raise Exception("The name '" + self.name + " is not valid for MG4.")
-        self.mg5_dir = os.environ["MG5_DIR"]            
+                
         if "run_card" in kwargs:
             self.run_card = kwargs["run_card"]
         else:
@@ -220,12 +231,17 @@ class MG5(EventGenerator):
         if not len(self.outputs):
             raise Exception("The ouputs were not set for MG4.")
         
+        if not hasattr(self, "mg5_dir"):
+            raise Exception("Missing required MG5 config mg5_dir")
+        
         EventGenerator.setup(self)
         
         self.args = ["0", self.name]
         
         self.proc_dir = MG5.dir_map[self.name]
-        src = os.path.join(os.environ["MG5_DIR"], self.proc_dir)
+        
+        src = os.path.join(self.mg5_dir, self.proc_dir)
+        
         dest = os.path.join(self.rundir, self.proc_dir)        
         shutil.copytree(src, dest, symlinks=True)
         
