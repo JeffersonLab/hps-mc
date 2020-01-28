@@ -1,24 +1,26 @@
-import os, sys, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
+import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
 from component import Component
+
+import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 
 class StdHepTool(Component):
 
-    seed_names = ["beam_coords", 
-                  "beam_coords_old", 
-                  "lhe_tridents", 
-                  "lhe_tridents_displacetime", 
+    seed_names = ["beam_coords",
+                  "beam_coords_old",
+                  "lhe_tridents",
+                  "lhe_tridents_displacetime",
                   "merge_poisson",
                   "mix_signal",
                   "random_sample"]
 
     def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)        
+        Component.__init__(self, **kwargs)
         self.command = "stdhep_" + self.name
 
-    def cmd_args(self):        
+    def cmd_args(self):
         if self.name in StdHepTool.seed_names:
             self.args.extend(["-s", str(self.seed)])
         if len(self.outputs):
@@ -48,24 +50,63 @@ class SLIC(Component):
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs given for SLIC.")
-        detector_file = os.path.join(os.environ["HPSMC_DETECTOR_DIR"], self.detector, self.detector + ".lcdd")
+        
+        try:
+            self.detector_dir
+            detector_file = os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
+        except:
+            raise Exception("Required SLIC config detector_dir was not set.")
+         
+        # TODO: should this just be an exception?
         if not len(self.outputs):
             outputs.append("slic_events.slcio")
+            
         self.args = ["-g", detector_file,
                      "-i", self.inputs[0],
                      "-o", self.outputs[0],
                      "-r", str(self.nevents),
                      "-d%s" % str(self.seed)]
-        tbl = os.path.join(os.environ["HPSMC_DATA_DIR"], "particle.tbl")
+        tbl = os.path.join(self.slic_dir, "share", "particle.tbl")
         if os.path.exists(tbl):
             self.args.extend(["-P", tbl])
         else:
-            logger.warn("SLIC - The particle.tbl location is not being set automatically!")
+            raise Exception("SLIC particle.tbl does not exist at '%s'. (Did you install SLIC?)" % tbl)
         return self.args
 
     def setup(self):
-        if not os.path.exists("./fieldmap"):
-            os.symlink(os.environ["HPSMC_FIELDMAPS_DIR"], "fieldmap")
+        
+#        try:
+        if not os.path.exists(self.slic_dir):
+            raise Exception("slic_dir does not exist at '%s'" % self.slic_dir)
+        self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
+        if not os.path.exists(self.env_script):
+            raise Exception("slic setup script does not exist at '%s'" % self.name)
+        logger.info("slic command set to '%s'" % self.name)
+#        except:
+#            raise Exception("Missing required SLIC config slic_dir")
+    
+        if hasattr(self, "hps_fieldmaps_dir"):
+            logger.info("setting link to %s" % self.hps_fieldmaps_dir)
+            if not os.path.exists("fieldmap"):
+                os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+            else:
+                logger.warning("No symlink to fieldmap dir created (already exists)")
+        else:
+            raise Exception("Missing required SLIC config hps_fieldmaps_dir")
+            
+    def execute(self, log_out, log_err):
+               
+        args = self.cmd_args()
+        
+        # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
+        cl = 'bash -c ". %s && slic %s"' % (self.env_script, ' '.join(self.cmd_args()))
+                                          
+        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+        
+        return proc.returncode
 
 class JobManager(Component):
 
@@ -75,8 +116,10 @@ class JobManager(Component):
         self.command = "java"
         if "steering_resource" in kwargs:
             self.steering_resource = kwargs["steering_resource"]
+            self.steering_file = None
         elif "steering_file" in kwargs:
             self.steering_file = kwargs["steering_file"]
+            self.steering_resource = None
         else:
             raise Exception("A steering resource or file was not provided to hps-java.")
         if "run" in kwargs:
@@ -95,19 +138,25 @@ class JobManager(Component):
             self.defs = kwargs["defs"]
         else:
             self.defs = {}
-        if "java_args" in kwargs:
-            self.java_args = kwargs["java_args"]
-        else:
-            self.java_args = ["-Xmx500m", "-XX:+UseSerialGC"]
-        if "slac.stanford.edu" in socket.getfqdn():
-            self.java_args.append("-Dorg.hps.conditions.connection.resource=/org/hps/conditions/config/slac_connection.prop")
+            
+        # TODO: java args
 
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs provided to hps-java.")
-        self.args.extend(self.java_args)
+        if hasattr(self, "java_args"):
+            self.args.append(self.java_args)
+        if hasattr(self, "conditions_user"):
+            logger.info("setting conditions user from config: %s" % self.conditions_user)
+            self.args.append("-D%s" % self.conditions_user)
+        if hasattr(self, "conditions_password"):
+            logger.info("setting conditions password from config (not shown)")
+            self.args.append("-D%s" % self.conditions_password)
+        if hasattr(self, "conditions_url"):
+            logger.info("setting conditions url from config: %s" % self.conditions_url)
+            self.args.append("-D%s" % self.conditions_url)
         self.args.append("-jar")
-        self.args.append(os.environ["HPSJAVA_JAR"])
+        self.args.append(self.hps_java_bin_jar)
         self.args.append("-e")
         self.args.append("1000")
         if self.run_number is not None:
@@ -142,10 +191,6 @@ class JavaTool(Component):
         self.name = "HPS Java Tool"
         Component.__init__(self, **kwargs)
         self.command = "java"
-        if "java_args" in kwargs:
-            self.java_args = kwargs["java_args"]
-        else:
-            self.java_args = ["-Xmx1g", "-XX:+UseSerialGC"]
         if "java_class" in kwargs:
             self.java_class = kwargs["java_class"]
         elif self.java_class is None:
@@ -156,7 +201,7 @@ class JavaTool(Component):
         self.args = []
         self.args.extend(self.java_args)
         self.args.append("-cp")
-        self.args.append(os.environ["HPSJAVA_JAR"])
+        self.args.append(self.hps_java_bin_jar)
         self.args.append(self.java_class)
         self.args.extend(orig_args)
         return self.args
@@ -202,6 +247,7 @@ class FilterMCBunches(JavaTool):
             self.args.append(str(self.nevents))
         return self.args
 
+# Deprecated
 class DST(Component):
  
     def __init__(self, **kwargs):
@@ -228,12 +274,17 @@ class LCIODumpEvent(Component):
 
     def __init__(self, **kwargs):
         self.name = "LCIO dump event"
-        self.command = "lcio_dumpevent"
+        self.command = "dumpevent"
         Component.__init__(self, **kwargs)
         if "event_num" in kwargs:
             self.event_num = kwargs["event_num"]
         else:
             self.event_num = 1
+            
+    def setup(self):
+        if not hasattr(self, "lcio_dir"):
+            raise Exception("Missing required config lcio_dir")
+        self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
         if not len(self.inputs):
@@ -251,7 +302,7 @@ class LCIOTool(Component):
 
     def cmd_args(self):
         orig_args = self.args
-        self.args = ["-jar", os.environ["LCIO_JAR"]]
+        self.args = ["-jar", self.lcio_bin_jar]
         self.args.append(self.name)
         self.args.extend(orig_args)
         return self.args

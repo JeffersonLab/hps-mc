@@ -1,7 +1,9 @@
-import os, sys, shutil, argparse, getpass, json, logging, subprocess
+import os, sys, time, shutil, argparse, getpass, json, logging, subprocess
 from component import Component
 
 logger = logging.getLogger("hpsmc.job")
+
+import hpsmc.config as config
 
 class Job:
 
@@ -67,12 +69,15 @@ class Job:
     def parse_args(self):
         
         parser = argparse.ArgumentParser(description=self.name)
-        parser.add_argument("-o", "--out", nargs=1, help="Log file for stdout from components")
-        parser.add_argument("-e", "--err", nargs=1, help="Log file for stderr from components")
+        parser.add_argument("-c", "--config", nargs=1, help="Config file location")
+        parser.add_argument("-o", "--out", nargs=1, help="Log file for job stdout")
+        parser.add_argument("-e", "--err", nargs=1, help="Log file for job stderr")
         parser.add_argument("-L", "--level", nargs=1, help="Global log level")
         parser.add_argument("--job-steps", type=int, default=-1)
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         cl = parser.parse_args()
+        
+        self.config = cl.config
         
         if cl.level:
             level = logging.getLevelName(cl.level[0])
@@ -109,8 +114,12 @@ class Job:
         self.job_id = self.params.job_id
 
     def initialize(self):
-
+                                
         self.parse_args()
+
+        if self.config:
+            logger.info("Reading config from '%s'" % self.config)
+            config.parser.read(self.config)
 
         if not os.path.exists(self.rundir):
             logger.info("Creating run dir '%s'" % self.rundir)
@@ -135,7 +144,8 @@ class Job:
             raise Exception("Job params were never parsed.")
 
         logger.info("Job parameters: " + str(self.params))
-
+        
+        self.configure()
         self.setup()
         self.execute()
         if self.enable_copy_output_files:
@@ -149,7 +159,24 @@ class Job:
                 
         for c in self.components:
             logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
-            c.execute(self.log_out, self.log_err)
+            start = time.time()
+            returncode = c.execute(self.log_out, self.log_err)
+            end = time.time()
+            elapsed = end - start
+            logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
+            if returncode is not None:
+                logger.info("Return code of '%s' was %d" % (c.name, returncode))
+            else:
+                logger.info("No return code from '%s'" % c.name)
+                
+            # TODO: figure out if this can be used
+            # if not self.ignore_returncode and proc.returncode:
+            #     raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
+            
+    def configure(self):
+        for c in self.components:
+            logger.info("job is configuring '%s'" % c.name)
+            c.config()
 
     def setup(self):
         # limit components according to job steps
@@ -166,8 +193,8 @@ class Job:
                 c.seed = self.seed
             #os.chdir(self.rundir)
             c.setup()
-            if not c.cmd_exists():
-                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
+#            if not c.cmd_exists():
+#                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
 
     def cleanup(self):
         for c in self.components:
@@ -193,40 +220,59 @@ class Job:
         #out, err = p.communicate()
         #print "dir list..."
         #print out
-               
-        for src,dest in self.output_files.iteritems():
-            src_file = os.path.join(self.rundir, src)
-            dest_file = os.path.join(self.output_dir, dest)
+        
+        if isinstance(self.output_files, dict):
+            for src,dest in self.output_files.iteritems():
+                self.copy_output_file([src, dest])
+        elif isinstance(self.output_files, list):
+            for f in self.output_files:
+                self.copy_output_file(f)
+                                         
+    def copy_output_file(self, src_dest):
+        if isinstance(src_dest, list):
+            src = src_dest[0]
+            dest = src_dest[1]
+        else:
+            src = src_dest
+            dest = src_dest
+                    
+        src_file = os.path.join(self.rundir, src)
+        dest_file = os.path.join(self.output_dir, dest)
+        
+        # Check if the file is already there and does not need copying (e.g. if running in local dir)
+        samefile = False
+        if os.path.exists(dest_file):
+            if os.path.samefile(src_file, dest_file):
+                samefile = True
 
-            # check if the file is already there and does not need copying (e.g. if running in local dir)
-            samefile = False
-            if os.path.exists(dest_file):
-                if os.path.samefile(src_file, dest_file):
-                    samefile = True
-
-            # if target file already exists then see if it can be deleted; otherwise raise an error
-            if os.path.isfile(dest_file):
-                if self.delete_existing:
-                    logger.info("Deleting existing file at '%s'" % dest_file)
-                    os.remove(dest_file)
-                else:
-                    raise Exception("Output file '%s' already exists." % dest_file)
-
-            # copy the file to the destination dir if not already created by the job
-            logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
-            if not samefile:
-                shutil.copyfile(src_file, dest_file)
+        # If target file already exists then see if it can be deleted; otherwise raise an error
+        if os.path.isfile(dest_file):
+            if self.delete_existing:
+                logger.info("Deleting existing file at '%s'" % dest_file)
+                os.remove(dest_file)
             else:
-                logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
+                raise Exception("Output file '%s' already exists." % dest_file)
+
+        # Copy the file to the destination dir if not already created by the job
+        logger.info("Copying '%s' to '%s'" % (src_file, dest_file))
+        if not samefile:
+            shutil.copyfile(src_file, dest_file)
+        else:
+            logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
             
     def copy_input_files(self):
-        for dest,src in self.input_files.iteritems():
-            if not os.path.isabs(src):
-                raise Exception("The input source file '%s' is not an absolute path." % src)
-            if os.path.dirname(dest):
-                raise Exception("The input file destination '%s' is not valid." % dest)
-            logger.info("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
-            shutil.copyfile(src, os.path.join(self.rundir, dest))
+        if isinstance(self.input_files, dict):
+            for dest,src in self.input_files.iteritems():
+                if not os.path.isabs(src):
+                    raise Exception("The input source file '%s' is not an absolute path." % src)
+                if os.path.dirname(dest):
+                    raise Exception("The input file destination '%s' is not valid." % dest)
+                logger.info("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
+                shutil.copyfile(src, os.path.join(self.rundir, dest))
+        elif isinstance(self.input_files, list):
+            logger.warning("Skipping copy for input file list.")
+        else:
+            raise Exception("Invalid input files - must be dict or list.")
             
 class JobParameters:
     
