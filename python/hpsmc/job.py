@@ -29,17 +29,14 @@ class Job:
             self.components = kwargs["components"]
         else:
             self.components = []            
-            
+        
+        # TODO: make this config
         if "job_id_pad" in kwargs:
             self.job_id_pad = kwargs["job_id_pad"]
         else:
             self.job_id_pad = 4
-                        
-        if "delete_existing" in kwargs:
-            self.delete_existing = kwargs["delete_existing"]
-        else:
-            self.delete_existing = False
-            
+                                
+        # TODO: make this config    
         if "set_component_seeds" in kwargs:
             self.set_component_seeds = kwargs["set_component_seeds"]
         else:
@@ -59,9 +56,7 @@ class Job:
         self.output_dir = os.getcwd()
         
         self.job_id = 1
-        
-        self.enable_copy_output_files = True
-        self.enable_copy_input_files = True
+    
 
     def set_default_params(self, default_params):
         self.default_params = default_params
@@ -131,11 +126,13 @@ class Job:
             self.log_out = open(self.out_file, "w")
         if self.err_file:
             self.log_err = open(self.err_file, "w")
-       
-        if self.enable_copy_input_files: 
-            self.copy_input_files()
-            
+                   
     def run(self): 
+        """
+        This is the primary execution method that should be called by job scripts.
+        It will configure, setup, and execute this class and the components and then
+        execute the cleanup method.
+        """
         
         if not len(self.components):
             raise Exception("Job has no components.")
@@ -147,33 +144,58 @@ class Job:
         
         self.configure()
         self.setup()
+        if self.enable_copy_input_files: 
+            self.copy_input_files()
         self.execute()
-        if self.enable_copy_output_files:
-            self.copy_output_files()
-        self.cleanup()
+        if not self.dry_run:
+            if self.enable_copy_output_files:
+                self.copy_output_files()
+            self.cleanup()
                       
     def execute(self):
         logger.info("Running '%s'" % self.name)
         if not len(self.components):
             raise Exception("Job has no components to execute.")
                 
-        for c in self.components:
-            logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
-            start = time.time()
-            returncode = c.execute(self.log_out, self.log_err)
-            end = time.time()
-            elapsed = end - start
-            logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
-            if returncode is not None:
-                logger.info("Return code of '%s' was %d" % (c.name, returncode))
-            else:
-                logger.info("No return code from '%s'" % c.name)
-                
+        if not self.dry_run:
+            for c in self.components:
+                logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
+                start = time.time()
+                returncode = c.execute(self.log_out, self.log_err)
+                end = time.time()
+                elapsed = end - start
+                logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
+                if returncode is not None:
+                    logger.info("Return code of '%s' was %d" % (c.name, returncode))
+                else:
+                    logger.info("No return code from '%s'" % c.name)
             # TODO: figure out if this can be used
             # if not self.ignore_returncode and proc.returncode:
             #     raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
-            
+        else:
+            # Dry run mode. Just print component info but do not execute.
+            logger.info("Dry run enabled. Components will NOT be executed!")
+            for c in self.components:
+                logger.info("'%s' with args: %s (NOT EXECUTED)" % (c.name, ' '.join(c.cmd_args())))
+                            
     def configure(self):
+
+        logger.info("Job.configure")
+                
+        p = config.parser['DEFAULT']
+        
+        self.enable_copy_output_files = p.getboolean('copy_output_files', True)
+        logger.info("enable_copy_output_files=%s" % str(self.enable_copy_output_files))
+        
+        self.enable_copy_input_files = p.getboolean('copy_input_files', True)
+        logger.info("enable_copy_input_files=%s" % str(self.enable_copy_input_files))
+        
+        self.delete_existing = p.getboolean('delete_existing', False)
+        logger.info("delete_existing=%s" % str(self.delete_existing))
+        
+        self.dry_run = p.getboolean('dry_run', False)
+        logger.info("dry_run=%s" % str(self.dry_run))
+                
         for c in self.components:
             logger.info("job is configuring '%s'" % c.name)
             c.config()
@@ -270,6 +292,7 @@ class Job:
                 logger.info("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
                 shutil.copyfile(src, os.path.join(self.rundir, dest))
         elif isinstance(self.input_files, list):
+            # TODO: Should this actually copy input files to the current dir?
             logger.warning("Skipping copy for input file list.")
         else:
             raise Exception("Invalid input files - must be dict or list.")
