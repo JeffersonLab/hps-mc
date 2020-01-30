@@ -75,24 +75,26 @@ class SLIC(Component):
 
     def setup(self):
         
-#        try:
+        try:
+            self.slic_dir
+        except:
+            raise Exception("Missing required SLIC config slic_dir")
         if not os.path.exists(self.slic_dir):
             raise Exception("slic_dir does not exist at '%s'" % self.slic_dir)
         self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
             raise Exception("slic setup script does not exist at '%s'" % self.name)
         logger.info("slic command set to '%s'" % self.name)
-#        except:
-#            raise Exception("Missing required SLIC config slic_dir")
-    
-        if hasattr(self, "hps_fieldmaps_dir"):
-            logger.info("setting link to %s" % self.hps_fieldmaps_dir)
-            if not os.path.exists("fieldmap"):
-                os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-            else:
-                logger.warning("No symlink to fieldmap dir created (already exists)")
-        else:
+
+        try:
+            self.hps_fieldmaps_dir
+        except:
             raise Exception("Missing required SLIC config hps_fieldmaps_dir")
+        logger.info("setting link to %s" % self.hps_fieldmaps_dir)
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            logger.warning("No symlink to fieldmap dir created (already exists)")
             
     def execute(self, log_out, log_err):
                
@@ -139,22 +141,27 @@ class JobManager(Component):
         else:
             self.defs = {}
             
-        # TODO: java args
-
     def cmd_args(self):
         if not len(self.inputs):
             raise Exception("No inputs provided to hps-java.")
         if hasattr(self, "java_args"):
+            logger.info("setting java_args from config: %s" + self.java_args)
             self.args.append(self.java_args)
+        if hasattr(self, "logging_config_file"):
+            logger.info("setting logging_config_file from config: %s" % self.logging_config_file)
+            self.args.append("-Djava.util.logging.config.file=%s" % self.logging_config_file)
+        if hasattr(self, "lcsim_cache_dir"):
+            logger.info("setting lcsim_cache_dir from config: %s" % self.lcsim_cache_dir)
+            self.args.append("-Dorg.lcsim.cacheDir=%s" % self.lcsim_cache_dir)
         if hasattr(self, "conditions_user"):
-            logger.info("setting conditions user from config: %s" % self.conditions_user)
-            self.args.append("-D%s" % self.conditions_user)
+            logger.info("setting conditions_user from config: %s" % self.conditions_user)
+            self.args.append("-Dorg.hps.conditions.user=%s" % self.conditions_user)
         if hasattr(self, "conditions_password"):
             logger.info("setting conditions password from config (not shown)")
-            self.args.append("-D%s" % self.conditions_password)
+            self.args.append("-Dorg.hps.conditions.password=%s" % self.conditions_password)
         if hasattr(self, "conditions_url"):
             logger.info("setting conditions url from config: %s" % self.conditions_url)
-            self.args.append("-D%s" % self.conditions_url)
+            self.args.append("-Dorg.hps.conditions.url=%s" % self.conditions_url)
         self.args.append("-jar")
         self.args.append(self.hps_java_bin_jar)
         self.args.append("-e")
