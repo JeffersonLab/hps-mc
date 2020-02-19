@@ -1,8 +1,11 @@
-import os, logging, configparser
+import os, logging
+
+logger = logging.getLogger("hpsmc.config")
+logger.setLevel(logging.DEBUG)
 
 from os.path import expanduser
 
-logger = logging.getLogger("hpsmc.config")
+import ConfigParser as configparser
 
 config_files = [expanduser("~") + os.sep + ".hpsmc", ".hpsmc"]
 
@@ -10,14 +13,15 @@ config_files = [expanduser("~") + os.sep + ".hpsmc", ".hpsmc"]
 try:
     parser
 except:
-    parser = configparser.ConfigParser()    
-    logger.info("Reading config from: %s" % str(config_files))
+    parser = configparser.ConfigParser()
+    logger.debug("Reading config from: %s" % str(config_files))
     parser.read(config_files)
-    #print("Read config items...")
-    #for section in parser.items():
-    #    for item in section:
-    #        print(item)
-    logger.info("Done parsing config!")
+    for section in parser.sections():
+        logger.debug("[" + section + "]")        
+        for i,v in parser.items(section): 
+            logger.debug("%s=%s" % (i, v))
+                              
+    logger.debug("Done parsing config!")
 
 # Load from a non-default file location
 def load(self, path):

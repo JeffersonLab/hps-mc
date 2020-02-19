@@ -2,6 +2,7 @@ import os, sys, time, shutil, argparse, getpass, json, logging, subprocess
 from component import Component
 
 logger = logging.getLogger("hpsmc.job")
+logger.setLevel(logging.DEBUG)
 
 import hpsmc.config as config
 
@@ -68,7 +69,8 @@ class Job:
         parser.add_argument("-o", "--out", nargs=1, help="Log file for job stdout")
         parser.add_argument("-e", "--err", nargs=1, help="Log file for job stderr")
         parser.add_argument("-L", "--level", nargs=1, help="Global log level")
-        parser.add_argument("--job-steps", type=int, default=-1)
+        parser.add_argument("-s", "--job-steps", type=int, default=-1, 
+                            help="Job steps to run (single number)")
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         cl = parser.parse_args()
         
@@ -144,8 +146,9 @@ class Job:
         
         self.configure()
         self.setup()
-        if self.enable_copy_input_files: 
-            self.copy_input_files()
+        if not self.dry_run:
+            if self.enable_copy_input_files: 
+                self.copy_input_files()
         self.execute()
         if not self.dry_run:
             if self.enable_copy_output_files:
@@ -153,13 +156,16 @@ class Job:
             self.cleanup()
                       
     def execute(self):
-        logger.info("Running '%s'" % self.name)
+        
+        logger.info("Running job '%s'" % self.name)
+        
         if not len(self.components):
             raise Exception("Job has no components to execute.")
                 
         if not self.dry_run:
             for c in self.components:
-                logger.info("Executing '%s' with inputs %s and outputs %s" % (c.name, str(c.inputs), str(c.outputs)))
+                logger.info("Executing '%s' with inputs %s and outputs %s" % 
+                            (c.name, str(c.inputs), str(c.outputs)))
                 start = time.time()
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
@@ -179,25 +185,36 @@ class Job:
                 logger.info("'%s' with args: %s (NOT EXECUTED)" % (c.name, ' '.join(c.cmd_args())))
                             
     def configure(self):
-
-        logger.info("Job.configure")
+            
+        p = config.parser      
+        default = 'DEFAULT' 
+        
+        try:            
+            self.enable_copy_output_files = p.getboolean(default, 'copy_output_files')
+            logger.debug("enable_copy_output_files=%s" % str(self.enable_copy_output_files))
+        except:
+            self.enable_copy_output_files = True
                 
-        p = config.parser['DEFAULT']
+        try:        
+            self.enable_copy_input_files = p.getboolean(default, 'copy_input_files')
+            logger.debug("enable_copy_input_files=%s" % str(self.enable_copy_input_files))
+        except:
+            self.enable_copy_input_files = True
         
-        self.enable_copy_output_files = p.getboolean('copy_output_files', True)
-        logger.info("enable_copy_output_files=%s" % str(self.enable_copy_output_files))
+        try:
+            self.delete_existing = p.getboolean(default, 'delete_existing')
+            logger.debug("delete_existing=%s" % str(self.delete_existing))
+        except:
+            self.delete_existing = False
         
-        self.enable_copy_input_files = p.getboolean('copy_input_files', True)
-        logger.info("enable_copy_input_files=%s" % str(self.enable_copy_input_files))
-        
-        self.delete_existing = p.getboolean('delete_existing', False)
-        logger.info("delete_existing=%s" % str(self.delete_existing))
-        
-        self.dry_run = p.getboolean('dry_run', False)
-        logger.info("dry_run=%s" % str(self.dry_run))
+        try:
+            self.dry_run = p.getboolean(default, 'dry_run')
+            logger.debug("dry_run=%s" % str(self.dry_run))
+        except:
+            self.dry_run = False
                 
         for c in self.components:
-            logger.info("job is configuring '%s'" % c.name)
+            logger.info("Configuring job component '%s'" % c.name)
             c.config()
 
     def setup(self):

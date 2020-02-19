@@ -77,8 +77,11 @@ class StdHepConverter(EGS5):
     def __init__(self, **kwargs):
         self.name = "lhe_v1"
         EGS5.__init__(self, **kwargs)
+  
+    def config(self):
+        self.config("EGS5")
 
-    def setup(self):
+    def setup(self):    
         EGS5.setup(self)
         if not len(self.inputs):
             raise Exception("Missing required input LHE file.")                    
@@ -289,7 +292,7 @@ class MG5(EventGenerator):
         logger.info("MG5 - Executing '%s' from '%s'" % (self.name, os.getcwd()))
         Component.execute(self, log_out, log_err)
         
-        lhe_files = glob.glob(os.path.join(self.rundir, self.proc_dir, "Events", self.name, "*.lhe.gz"))
+        lhe_files = glob.glob(os.path.join(self.rundir, self.proc_dir, "Events", "*", "*.lhe.gz"))
         for f in lhe_files:            
             logger.info("MG5 - Copying '%s' to '%s'" % (f, self.rundir))
             shutil.copyfile(f, os.path.join(self.rundir, self.name + "_" + os.path.basename(f)))

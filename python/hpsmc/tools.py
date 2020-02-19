@@ -157,10 +157,10 @@ class JobManager(Component):
             logger.info("setting conditions_user from config: %s" % self.conditions_user)
             self.args.append("-Dorg.hps.conditions.user=%s" % self.conditions_user)
         if hasattr(self, "conditions_password"):
-            logger.info("setting conditions password from config (not shown)")
+            logger.info("setting conditions_password from config (not shown)")
             self.args.append("-Dorg.hps.conditions.password=%s" % self.conditions_password)
         if hasattr(self, "conditions_url"):
-            logger.info("setting conditions url from config: %s" % self.conditions_url)
+            logger.info("setting conditions_url from config: %s" % self.conditions_url)
             self.args.append("-Dorg.hps.conditions.url=%s" % self.conditions_url)
         self.args.append("-jar")
         self.args.append(self.hps_java_bin_jar)
