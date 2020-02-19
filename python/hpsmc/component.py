@@ -74,16 +74,22 @@ class Component:
     def cleanup(self):
         pass    
 
+    def config(self, section_name):
+        if config.parser.has_section(section_name):
+            for name, value in config.parser.items(section_name):
+                setattr(self, name, value)
+                logger.info("%s=%s" % (name, value))
+
     def config(self):
         """
-        Automatically load attributes from config file(s)
+        Automatically load attributes from config section
         """
         logger.info("Configuring '%s'" % self.name)
         section_name = self.__class__.__name__
         logger.info("Loading config for '%s'" % section_name)
         if config.parser.has_section(section_name):
-            section = config.parser[section_name]
-            for name, value in section.items():
+#            section = config.parser[section_name]
+            for name, value in config.parser.items(section_name):
                 setattr(self, name, value)
                 logger.info("%s=%s" % (name, value))
                 
