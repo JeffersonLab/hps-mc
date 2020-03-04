@@ -206,7 +206,10 @@ class JavaTool(Component):
     def cmd_args(self):
         orig_args = self.args
         self.args = []
-        self.args.extend(self.java_args)
+        # copied from JobManager
+        if hasattr(self, "java_args"):
+            logger.info("setting java_args from config: %s" + self.java_args)
+            self.args.append(self.java_args)
         self.args.append("-cp")
         self.args.append(self.hps_java_bin_jar)
         self.args.append(self.java_class)
