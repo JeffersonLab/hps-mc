@@ -21,6 +21,7 @@ else:
     outfiles = params.output_files
 
 hpstr = HPSTR(cfg="recoTuple_cfg.py",
+              run_mode=params.run_mode,
               inputs=infiles,
               outputs=outfiles)
 
