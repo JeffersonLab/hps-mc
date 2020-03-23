@@ -511,3 +511,76 @@ class MoveFiles(Component):
             dest = io[1] 
             logger("Moving '%s' to '%s'" % (src, dest))
             shutil.move(src, dest)
+            
+class HPSTR(Component):
+
+    def __init__(self, **kwargs):
+        
+        self.name = "hpstr"
+        self.command = self.name
+        
+        Component.__init__(self, **kwargs)
+        
+        if "year" in kwargs:
+            self.year = kwargs["year"]
+            
+        if "run_mode" in kwargs:
+            self.run_mode = kwargs["run_mode"]
+        else:
+            self.run_mode = 0
+            logger.info("Using default run_mode: %d" % self.run_mode)
+            
+        if "cfg" in kwargs:
+            self.cfg = kwargs["cfg"]
+        else:
+            raise Exception("Missing required argument cfg pointing to Python config file.")
+        
+    def setup(self):     
+        try:
+            self.hpstr_install_dir
+        except:
+            raise Exception("Missing required hpstr config hpstr_install_dir")
+
+        try:
+            self.hpstr_base
+        except:
+            raise Exception("Missing required hpstr config hpstr_base")
+        
+        if not os.path.exists(self.hpstr_install_dir):
+            raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
+        self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
+        
+    def cmd_args(self):
+
+        if not len(self.inputs):
+            raise Exception("No inputs given for HPSTR.")
+        
+        if not len(self.outputs):
+            raise Exception("No inputs given for HPSTR.")
+            
+        self.args = ["-t", str(self.run_mode),
+                     "-i", self.inputs[0],
+                     "-o", self.outputs[0]]
+        if self.nevents != -1:
+            self.args.extend(["-n", str(self.nevents)])
+        if hasattr(self, "year"):
+            self.args.extend(["-y", str(self.year)])
+        
+        return self.args
+                
+    def execute(self, log_out, log_err):
+               
+        args = self.cmd_args()
+        
+        cfg_path = os.path.join(self.hpstr_base, "processors",  "config", self.cfg)
+                
+        cl = 'bash -c ". %s && %s %s %s"' % (self.env_script, self.command, cfg_path,
+                                             ' '.join(self.cmd_args()))
+                                                  
+        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+        
+        return proc.returncode
+        
