@@ -12,7 +12,7 @@ class Batch:
     """Generic interface to a batch system."""
     
     def __init__(self):
-        self.sys = 'local'
+        self.sys = 'NONE'
     
     def parse_args(self):
         """Parse command line arguments and perform setup."""
@@ -404,7 +404,6 @@ def run_job_pool_args(job_name, script, param_file, job_dir):
         os.mkdir(job_dir)
     log_file = os.path.join(job_dir, "%s.log" % job_name)
     cmd = ["python", script, "-d", job_dir, "-o", log_file, "-e", log_file, param_file]
-    log = open(os.path.join(job_dir, "%s.log" % job_name), 'w+')
     sys.stdout.flush()
     #returncode = subprocess.call(cmd, stdout=log, stderr=log)
     returncode = subprocess.call(cmd)
@@ -418,6 +417,9 @@ def run_job_pool_args(job_name, script, param_file, job_dir):
     return returncode
                 
 class Pool(Batch):
+    """
+    Run a set of jobs in a local pool using Python's multiprocessing module.
+    """
     
     def __init__(self):
         self.sys = 'pool'
@@ -428,7 +430,6 @@ class Pool(Batch):
             job_params = self.jobs[job_name]
             param_file = self.get_job_file_path(job_name)
             job_dir = os.path.join(os.getcwd(), job_name)
-            print("job_dir: %s" % job_dir)
             params.append([job_name, self.script, param_file, job_dir])
         print(params)
                 
@@ -438,7 +439,7 @@ class Pool(Batch):
         try:
             res = pool.map_async(run_job_pool, params)
             # timeout must be properly set, otherwise tasks will crash
-            logger.info("Pool results:" + str(res.get(sys.maxint)))
+            logger.info("Pool results: " + str(res.get(sys.maxint)))
             logger.info("Normal termination")
             pool.close()
             pool.join()
@@ -446,11 +447,11 @@ class Pool(Batch):
             logger.fatal("Caught KeyboardInterrupt, terminating workers")
             pool.terminate()
         except Exception as e:
-            logger.fatal("Caught Exception %s, terminating workers" %(str(e)))
+            logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
             pool.terminate()
         except: # catch *all* exceptions
             e = sys.exc_info()[0]
-            logger.fatal("Caught non-Python Exception %s" % (e))
+            logger.fatal("Caught non-Python Exception '%s'" % (e))
             pool.terminate()
 
 if __name__ == "__main__":
