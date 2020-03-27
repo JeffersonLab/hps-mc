@@ -71,7 +71,15 @@ class Job:
         parser.add_argument("-L", "--level", nargs=1, help="Global log level")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, 
                             help="Job steps to run (single number)")
+        parser.add_argument("-d", "--run-dir", nargs=1, help="Job run dir")
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
+        
+        # TODO: CL option to disable automatic copying of ouput files
+        # parser.add_argument("--no-copy-output-files", help="Disable copying of output files")
+        #parser.add_argument('--feature', dest='feature', action='store_true')
+        #parser.add_argument('--no-feature', dest='feature', action='store_false')
+        #parser.set_defaults(feature=True)
+        
         cl = parser.parse_args()
         
         self.config = cl.config
@@ -109,6 +117,9 @@ class Job:
             self.output_dir= os.path.abspath(self.output_dir)
             logger.info("Changed output dir to abs path '%s'" % self.output_dir)
         self.job_id = self.params.job_id
+        
+        if cl.run_dir:
+            self.rundir = cl.run_dir[0]
 
     def initialize(self):
                                 
@@ -122,6 +133,7 @@ class Job:
             logger.info("Creating run dir '%s'" % self.rundir)
             os.makedirs(self.rundir)
 
+        logger.info("Changing to run dir '%s'" % self.rundir)
         os.chdir(self.rundir)
 
         if self.out_file:
