@@ -226,7 +226,8 @@ class Batch:
         Build the command to submit the job.
         This method creates the command for running locally.
         """
-        param_file = get_job_file_path(name)
+        param_file = self.get_job_file_path(name)
+        cmd = []
         cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err"])
         if self.config_file:
             cmd.extend(["-c", self.config_file])
@@ -266,8 +267,8 @@ class LSF(Batch):
      
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
-        with open(param_file, "w") as jobfile:
-            json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        #with open(param_file, "w") as jobfile:
+        #    json.dump(job_params, jobfile, indent=2, sort_keys=True)
         return cmd
 
     def submit_cmd(self, name, job_params): 
