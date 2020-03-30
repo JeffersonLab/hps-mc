@@ -30,6 +30,7 @@ class Batch:
         parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
         parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
         parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
+        parser.add_argument("--config-file", nargs=1, help="Config file", required=False)
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
         cl = parser.parse_args()
@@ -115,6 +116,11 @@ class Batch:
             self.pool_size = int(cl.pool_size[0])
         else:
             self.pool_size = 8 
+            
+        if cl.config_file:
+            self.config_file = cl.config_file[0]
+        else:
+            self.config_file = None
         
     @staticmethod
     def outputs_exist(job):
@@ -210,7 +216,25 @@ class Batch:
                 print "Job <%d> outputs do not exist." % job_id
                 
     def get_job_file_path(self, job_name):
+        """
+        Get the path to the job JSON parameters file from the job name.
+        """
         return os.path.join(self.workdir, job_name + ".json")
+    
+    def build_cmd(self, name, job_params):
+        """
+        Build the command to submit the job.
+        This method creates the command for running locally.
+        """
+        param_file = get_job_file_path(name)
+        cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err"])
+        if self.config_file:
+            cmd.extend(["-c", self.config_file])
+        if self.job_steps > 0:
+            cmd.extend(["--job-steps", str(self.job_steps)])       
+        cmd.append(os.path.abspath(param_file))
+        logger.info("Built command: %s" % " ".join(cmd))
+        return cmd
     
 class LSF(Batch):
     """Manage LSF batch jobs."""
@@ -225,14 +249,21 @@ class LSF(Batch):
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
     def build_cmd(self, name, job_params):
-        param_file = os.path.join(self.workdir, name + ".json")
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
         cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o",  log_file, "-e",  log_file]
-        #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
-        cmd.extend(["python", self.script])        
+
+        cmd.extend(Batch.build_cmd(self, name, job_params))
+
+        """
+        param_file = os.path.join(self.workdir, name + ".json")
+        cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err"])
+        if self.config_file:
+            cmd.extend(["-c", self.config_file])
         if self.job_steps > 0:
-            cmd.extend(["--job-steps", str(self.job_steps)])
+            cmd.extend(["--job-steps", str(self.job_steps)])            
         cmd.append(os.path.abspath(param_file))
+        """
+     
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
         with open(param_file, "w") as jobfile:
@@ -259,6 +290,7 @@ class Auger(Batch):
     """Manage Auger batch jobs."""
 
     def __init__(self):
+        # TODO: Get this from config info
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
@@ -325,7 +357,10 @@ class Auger(Batch):
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
-        job_cmd = "python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file))
+        
+        #job_cmd = "python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file))
+        job_cmd = self.build_cmd(name, job_params)
+        
         if self.job_steps > 0:
             job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
         cmd_lines.append(job_cmd)
@@ -370,6 +405,7 @@ class Local(Batch):
     def parse_args(self):
         Batch.parse_args(self)
 
+    """
     def build_cmd(self, name, job_params):
         param_file = os.path.join(self.workdir, name + ".json")
         with open(param_file, "w") as jobfile:
@@ -378,6 +414,7 @@ class Local(Batch):
         if self.job_steps > 0:
             cmd.extend(["--job-steps", str(self.job_steps)])
         return cmd
+    """
 
     def submit_cmd(self, name, job_params):
         """Run a single job locally."""
