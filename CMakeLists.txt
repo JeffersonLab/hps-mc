@@ -72,6 +72,11 @@ install(FILES ${CMAKE_BINARY_DIR}/hps-mc-bsub DESTINATION bin
 configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-jsub.in ${CMAKE_BINARY_DIR}/hps-mc-jsub)
 install(FILES ${CMAKE_BINARY_DIR}/hps-mc-jsub DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+    
+# Config and install pool script
+configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-pool.in ${CMAKE_BINARY_DIR}/hps-mc-pool)
+install(FILES ${CMAKE_BINARY_DIR}/hps-mc-pool DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # Install job script
 install(FILES ${PROJECT_SOURCE_DIR}/scripts/hps-mc-job DESTINATION bin

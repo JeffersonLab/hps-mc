@@ -65,7 +65,7 @@ class Workflow:
         if not self.workdir:
             self.workdir = os.getcwd() + os.path.sep + self.name
         self.workdir = os.path.abspath(self.workdir)
-        
+                
     def build(self):
         """Build a workflow from the input parameters and write out a single JSON file containing all job definitions."""
         
@@ -98,10 +98,12 @@ class Workflow:
         # build configuration for each job in the workflow                
         for jobid in range(self.job_start, self.job_start + self.num_jobs):
                     
+                    
             job = {}
             job["job_id"] = jobid
+            job_id_padded = ("%0" + str(self.job_id_pad) + "d") % jobid
             job["seed"] = seed
-            job["output_dir"] = output_dir
+            job["output_dir"] = output_dir                
             job["input_files"] = {}
             
             if input_file_lists:
@@ -119,7 +121,6 @@ class Workflow:
                         job["input_files"][dest] = src.pop(0)
             
             job["output_files"] = {}
-            job_id_padded = ("%0" + str(self.job_id_pad) + "d") % jobid                                            
             for src,dest in self.params.output_files.iteritems():
                 base,ext = os.path.splitext(dest)
                 if "." in base:

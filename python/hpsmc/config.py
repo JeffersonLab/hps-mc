@@ -1,7 +1,7 @@
 import os, logging
 
 logger = logging.getLogger("hpsmc.config")
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 from os.path import expanduser
 
@@ -25,5 +25,5 @@ except:
 
 # Load from a non-default file location
 def load(self, path):
-    logger.info("Loading config from '%s'" % path)
+    logger.debug("Loading config from '%s'" % path)
     parser.read(path)

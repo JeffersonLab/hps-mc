@@ -1,4 +1,4 @@
-import argparse, json, os, subprocess, getpass, sys, time
+import argparse, json, os, subprocess, getpass, sys, time, logging, signal, multiprocessing
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
@@ -6,11 +6,13 @@ from distutils.spawn import find_executable
 
 from workflow import Workflow
 
+logger = logging.getLogger("hpsmc.batch")
+
 class Batch:
     """Generic interface to a batch system."""
     
     def __init__(self):
-        self.sys = 'local'
+        self.sys = 'NONE'
     
     def parse_args(self):
         """Parse command line arguments and perform setup."""
@@ -27,6 +29,7 @@ class Batch:
         parser.add_argument("-t", "--time", type=int, default=0, help="Number of seconds to wait before submitting next job set when using staggered submission", required=False)
         parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
         parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
+        parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
         cl = parser.parse_args()
@@ -107,6 +110,11 @@ class Batch:
             self.job_length = int(cl.job_length[0])
         else:
             self.job_length = 48
+            
+        if cl.pool_size:
+            self.pool_size = int(cl.pool_size[0])
+        else:
+            self.pool_size = 8 
         
     @staticmethod
     def outputs_exist(job):
@@ -167,7 +175,7 @@ class Batch:
         if not len(self.job_ids) or job_id in self.job_ids:
             if not self.check_output or not Batch.outputs_exist(job):
                 batch_id = self.submit_cmd(name, job)                
-                print "Submitted <%s> with batch ID <%d>" % (name, batch_id)
+                print "Submitted <%s> with batch ID <%s>" % (name, str(batch_id))
             else:
                 print "Outputs for <%s> already exist so submit is skipped." % name
     
@@ -200,6 +208,9 @@ class Batch:
             job_id = j["job_id"]
             if not outputs_exist(j):
                 print "Job <%d> outputs do not exist." % job_id
+                
+    def get_job_file_path(self, job_name):
+        return os.path.join(self.workdir, job_name + ".json")
     
 class LSF(Batch):
     """Manage LSF batch jobs."""
@@ -382,6 +393,66 @@ class Local(Batch):
             raise Exception("Local job execution failed.")
         else:
             return None
+                
+def run_job_pool(args):
+    run_job_pool_args(*args)
+    
+def run_job_pool_args(job_name, script, param_file, job_dir):
+    #logger.info("Running job %s" % job_name)
+    if not os.path.isdir(job_dir):
+        logger.info("Creating job dir '%s" % job_dir)
+        os.mkdir(job_dir)
+    log_file = os.path.join(job_dir, "%s.log" % job_name)
+    cmd = ["python", script, "-d", job_dir, "-o", log_file, "-e", log_file, param_file]
+    sys.stdout.flush()
+    #returncode = subprocess.call(cmd, stdout=log, stderr=log)
+    returncode = subprocess.call(cmd)
+    try:   
+        sys.stdout.flush()
+        returncode = subprocess.call(cmd,stdout=log,stderr=log)
+    except CalledProcessError as e:
+        print(str(e))
+        sys.stdout.flush()
+        pass
+    return returncode
+                
+class Pool(Batch):
+    """
+    Run a set of jobs in a local pool using Python's multiprocessing module.
+    """
+    
+    def __init__(self):
+        self.sys = 'pool'
+                    
+    def submit(self):        
+        params = []
+        for job_name in sorted(self.jobs):
+            job_params = self.jobs[job_name]
+            param_file = self.get_job_file_path(job_name)
+            job_dir = os.path.join(os.getcwd(), job_name)
+            params.append([job_name, self.script, param_file, job_dir])
+        print(params)
+                
+        original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+        pool = multiprocessing.Pool(self.pool_size)
+        signal.signal(signal.SIGINT, original_sigint_handler)      
+        try:
+            res = pool.map_async(run_job_pool, params)
+            # timeout must be properly set, otherwise tasks will crash
+            logger.info("Pool results: " + str(res.get(sys.maxint)))
+            logger.info("Normal termination")
+            pool.close()
+            pool.join()
+        except KeyboardInterrupt:
+            logger.fatal("Caught KeyboardInterrupt, terminating workers")
+            pool.terminate()
+        except Exception as e:
+            logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
+            pool.terminate()
+        except: # catch *all* exceptions
+            e = sys.exc_info()[0]
+            logger.fatal("Caught non-Python Exception '%s'" % (e))
+            pool.terminate()
 
 if __name__ == "__main__":
     batch = LSF()
