@@ -11,7 +11,7 @@ class EventGenerator(Component):
         
     def required_parameters(self):
         return ['nevents']
-            
+                
 class EGS5(EventGenerator):
 
     def __init__(self, **kwargs): 
@@ -104,7 +104,6 @@ class StdHepConverter(EGS5):
             raise Exception("Input file '%s' has an unknown extension." % self.inputs[0])
         return EGS5.execute(self, log_out, log_err)
     
-# FIXME: Remove duplicate code from MG4 and MG5 classes and put in this class.
 class MG(EventGenerator):
     """
     Abstract class for MadGraph generators.
@@ -113,16 +112,20 @@ class MG(EventGenerator):
     
         EventGenerator.__init__(self, **kwargs)
     
-        # Default name of param card which can be overridden in job JSON.
+        # Default name of param card
         self.param_card = "param_card.dat"
         
-        # Extra parameters for param card which could be in job JSON (typically not set)
+        # Extra parameters for param card:
+        # map = mass of the A-prime
+        # mpid = mass of the dark pion
+        # mrhod = mass of the dark rho
         self.map = None
         self.mpid = None
         self.mrhod = None
     
     def output_files(self):
-        return [self.name + "_unweighted_events.lhe.gz"]
+        return [self.name + "_unweighted_events.lhe.gz",
+                self.name + "_events.lhe.gz"]
     
     def set_parameters(self, params):
         Component.set_parameters(self, params)
@@ -132,7 +135,10 @@ class MG(EventGenerator):
         return ['nevents', 'run_params', 'apmass']
     
     def optional_parameters(self):
-        return ['param_card']
+        return ['seed', 'param_card']
+    
+    def required_config(self):
+        return ['madgraph_dir']
         
     def make_run_card(self, run_card):
         
@@ -143,8 +149,10 @@ class MG(EventGenerator):
         
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
+                logger.info("Setting nevents %d in run card" % self.nevents)
                 data[i] = " " + str(self.nevents) + " = nevents ! Number of unweighted events requested" + '\n'
             if "= iseed" in data[i]:
+                logger.info("Setting seed %d in run card" % self.seed)
                 data[i] = " " + str(self.seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
                 
         with open(run_card, 'w') as file:
@@ -203,10 +211,7 @@ class MG4(MG):
                                                                    
     def setup(self):
         
-        EventGenerator.setup(self)
-        
-        if not hasattr(self, "madgraph_dir"):
-            raise Exception("Missing required MG4 config madgraph_dir")
+        MG.setup(self)
             
         self.args = ["0", self.name]
 
@@ -254,13 +259,8 @@ class MG5(MG):
                                 
     def setup(self):
         
-        EventGenerator.setup(self)
-        
-        if not hasattr(self, "madgraph_dir"):
-            raise Exception("Missing required MG5 config madgraph_dir")
-        
-        EventGenerator.setup(self)
-        
+        MG.setup(self)
+         
         self.args = ["0", self.name]
         
         self.proc_dir = MG5.dir_map[self.name]        
