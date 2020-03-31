@@ -6,34 +6,6 @@ import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 
-class StdHepTool(Component):
-
-    seed_names = ["beam_coords",
-                  "beam_coords_old",
-                  "lhe_tridents",
-                  "lhe_tridents_displacetime",
-                  "merge_poisson",
-                  "mix_signal",
-                  "random_sample"]
-
-    def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)
-        self.command = "stdhep_" + self.name
-
-    def cmd_args(self):
-        if self.name in StdHepTool.seed_names:
-            self.args.extend(["-s", str(self.seed)])
-        if len(self.outputs):
-            self.args.insert(0, self.outputs[0])
-        elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified for StdHepTool.")
-        if len(self.inputs):
-            for i in self.inputs:
-                self.args.insert(0, i)
-        else:
-            raise Exception("Not enough inputs specified for StdHepTool.")
-        return self.args
-
 class SLIC(Component):
 
     def __init__(self, **kwargs):
@@ -44,7 +16,8 @@ class SLIC(Component):
         self.nevents = 999999999
  
     def cmd_args(self):
-        if not len(self.inputs):
+        
+        if not len(self.input_files()):
             raise Exception("No inputs given for SLIC.")
         
         try:
@@ -58,30 +31,37 @@ class SLIC(Component):
                      "-o", self.output_files()[0],
                      "-r", str(self.nevents),
                      "-d%s" % str(self.seed)]
+        
         tbl = os.path.join(self.slic_dir, "share", "particle.tbl")
         if os.path.exists(tbl):
             self.args.extend(["-P", tbl])
         else:
             raise Exception("SLIC particle.tbl does not exist at '%s'. (Did you install SLIC?)" % tbl)
+
         return self.args
 
     def setup(self):
         
+        """
         try:
             self.slic_dir
         except:
             raise Exception("Missing required SLIC config slic_dir")
+        """
         if not os.path.exists(self.slic_dir):
             raise Exception("slic_dir does not exist at '%s'" % self.slic_dir)
+        
         self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
             raise Exception("slic setup script does not exist at '%s'" % self.name)
         logger.info("slic command set to '%s'" % self.name)
 
+        """
         try:
             self.hps_fieldmaps_dir
         except:
             raise Exception("Missing required SLIC config hps_fieldmaps_dir")
+        """
         logger.info("setting link to %s" % self.hps_fieldmaps_dir)
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
@@ -90,6 +70,9 @@ class SLIC(Component):
     
     def required_parameters(self):
         return ['detector']
+    
+    def required_config(self):
+        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
         
     def execute(self, log_out, log_err):
                
@@ -106,13 +89,16 @@ class SLIC(Component):
         return proc.returncode
     
     def output_files(self):
-        if not len(self.outputs):
-          for infile in self.input_files():
-              filename,ext = os.path.splitext(infile)
-              self.outputs.append("%s.slcio" % os.path.basename(filename))
-        return self.outputs
-            
+        for infile in self.input_files():
+            filename,ext = os.path.splitext(infile)
+            yield self.outputs.append("%s.slcio" % os.path.basename(filename))
+
 class JobManager(Component):
+    """
+    Run the hps-java JobManager class.
+    
+    This component can take multiple inputs but will only write one output.
+    """
 
     def __init__(self, **kwargs):
         
@@ -123,94 +109,124 @@ class JobManager(Component):
         self.run_number = None
         self.detector = None
         self.nevents = -1
-        
-        # FIXME: Figure out if this looks like a file or resource.
-        #        If it begins with '/org/lcsim' then it is a resource.
-        if "steering_resource" in kwargs:
-            self.steering_resource = kwargs["steering_resource"]
-            self.steering_file = None
-        elif "steering_file" in kwargs:
-            self.steering_file = kwargs["steering_file"]
-            self.steering_resource = None
-        else:
-            raise Exception("A steering resource or file was not provided to hps-java.")
-        
-        #if "run" in kwargs:
-        #    self.run_number = kwargs["run"]
-        #else:
-        #    self.run_number = None
-        
-        #if "detector" in kwargs:
-        #    self.detector = kwargs["detector"]
-        #else:
-        #    self.detector = None
-            
-        #if "nevents" in kwargs:
-        #    self.nevents = kwargs["nevents"]
-        #else:
-        #    self.nevents = -1
-            
+        self.event_print_interval = 1000
+        self.defs = {}
+        self.filename_append = 'recon'
+                                
+        # TODO: Put defs in job parameters instead
         if "defs" in kwargs:
             self.defs = kwargs["defs"]
         else:
             self.defs = {}
             
+    def required_config(self):
+        return ['hps_java_bin_jar']
+    
+    def output_files(self):
+        return [os.path.basename(os.path.splitext(self.input_files()[0])[0] + filename_append + ".slcio")]
+            
     def cmd_args(self):
-        if not len(self.inputs):
+                                
+        if not len(self.input_files()):
             raise Exception("No inputs provided to hps-java.")
+        
         if hasattr(self, "java_args"):
-            logger.info("setting java_args from config: %s" + self.java_args)
+            logger.info("Setting java_args from config: %s" % self.java_args)
             self.args.append(self.java_args)
+        
         if hasattr(self, "logging_config_file"):
-            logger.info("setting logging_config_file from config: %s" % self.logging_config_file)
+            logger.info("Setting logging_config_file from config: %s" % self.logging_config_file)
             self.args.append("-Djava.util.logging.config.file=%s" % self.logging_config_file)
+        
         if hasattr(self, "lcsim_cache_dir"):
             logger.info("setting lcsim_cache_dir from config: %s" % self.lcsim_cache_dir)
             self.args.append("-Dorg.lcsim.cacheDir=%s" % self.lcsim_cache_dir)
+        
         if hasattr(self, "conditions_user"):
-            logger.info("setting conditions_user from config: %s" % self.conditions_user)
+            logger.info("Setting conditions_user from config: %s" % self.conditions_user)
             self.args.append("-Dorg.hps.conditions.user=%s" % self.conditions_user)
         if hasattr(self, "conditions_password"):
-            logger.info("setting conditions_password from config (not shown)")
+            logger.info("Setting conditions_password from config (not shown)")
             self.args.append("-Dorg.hps.conditions.password=%s" % self.conditions_password)
         if hasattr(self, "conditions_url"):
-            logger.info("setting conditions_url from config: %s" % self.conditions_url)
+            logger.info("Setting conditions_url from config: %s" % self.conditions_url)
             self.args.append("-Dorg.hps.conditions.url=%s" % self.conditions_url)
+        
         self.args.append("-jar")
         self.args.append(self.hps_java_bin_jar)
+        
         self.args.append("-e")
-        self.args.append("1000")
+        self.args.append(str(self.event_print_interval))
+        
         if self.run_number is not None:
             self.args.append("-R")
             self.args.append(str(self.run_number))
+            
         if self.detector is not None:
             self.args.append("-d")
             self.args.append(self.detector)
-        if len(self.outputs):
+            
+        if len(self.output_files()):
             self.args.append("-D")
-            self.args.append("outputFile="+self.outputs[0])
+            self.args.append("outputFile=" + self.output_files()[0])
+            
         for k,v in self.defs.iteritems():
             self.args.append("-D")
             self.args.append(k+"="+str(v))
-        if self.steering_resource is not None:
+                
+        if not os.path.isfile(self.steering):
+            # If steering isn't a valid file, assume it is a resource in the jar.
             self.args.append("-r")
-            self.args.append(self.steering_resource)
-        elif self.steering_file is not None:
-            self.args.append(self.steering_file)
+        self.args.append(self.steering)
+            
         if self.nevents != -1:
             self.args.append("-n")
             self.args.append(str(self.nevents))
-        for input_file in self.inputs:
+            
+        for input_file in self.input_files():
             self.args.append("-i")
-            self.args.append(input_file)        
+            self.args.append(input_file)
+            
         return self.args
     
     def required_parameters(self):
-        return ['steering_file']
+        return ['steering']
 
     def optional_parameters(self):
-        return ['detector', 'run']    
+        return ['detector', 'run', 'defs']
+    
+class StdHepTool(Component):
+
+    seed_names = ["beam_coords",
+                  "beam_coords_old",
+                  "lhe_tridents",
+                  "lhe_tridents_displacetime",
+                  "merge_poisson",
+                  "mix_signal",
+                  "random_sample"]
+
+    def __init__(self, **kwargs):
+        Component.__init__(self, **kwargs)
+        self.command = "stdhep_" + self.name
+
+    def cmd_args(self):
         
+        if self.name in StdHepTool.seed_names:
+            self.args.extend(["-s", str(self.seed)])
+        
+        if len(self.outputs):
+            self.args.insert(0, self.outputs[0])
+        elif len(self.outputs) > 1:
+            raise Exception("Too many outputs specified for StdHepTool.")
+        
+        if len(self.inputs):
+            for i in self.inputs:
+                self.args.insert(0, i)
+        else:
+            raise Exception("Not enough inputs specified for StdHepTool.")
+        
+        return self.args
+                    
 class JavaTool(Component):
     
     def __init__(self, **kwargs):
@@ -275,31 +291,6 @@ class FilterMCBunches(JavaTool):
             self.args.append("-w")
             self.args.append(str(self.nevents))
         return self.args
-
-# Deprecated
-"""
-class DST(Component):
- 
-    def __init__(self, **kwargs):
-        self.name = "HPS DST Maker"
-        self.command = "dst_maker"
-        Component.__init__(self, **kwargs)
-        
-    def cmd_args(self):
-        if not len(self.outputs):
-            raise Exception("Missing required outputs for DST.")
-        if not len(self.inputs):
-            raise Exception("Missing required inputs for DST.")
-        self.args = []
-        self.args.append("-o")
-        self.args.append(self.outputs[0])
-        if self.nevents != -1:
-            self.args.append("-n")
-            self.args.append(str(self.nevents))
-        for i in self.inputs:
-            self.args.append(i)
-        return self.args
-"""
                 
 class LCIODumpEvent(Component):
 
@@ -396,18 +387,17 @@ class Unzip(Component):
         self.command = "gunzip"
         self.name = "gunzip"
         Component.__init__(self, **kwargs)
-        
-    def setup(self):
-        if not len(self.inputs):
-            raise Exception("Missing inputs.")
-        
-    def cmd_exists(self):
-        return True
-        
+            
+    def output_files(self):
+        for inputfile in self.input_files():
+            yield self.outputs.append(os.path.basename(os.path.splitext(inputfile)[0]))
+                
     def execute(self, log_out, log_err):
-        zip_path = self.inputs[0]
-        with gzip.open(zip_path, 'rb') as in_file, open(os.path.splitext(zip_path)[0], 'wb') as out_file:
-            shutil.copyfileobj(in_file, out_file)
+        for inputfile in self.input_files():
+            outputfile = os.path.splitext(inputfile)[0]
+            with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
+                shutil.copyfileobj(in_file, out_file)
+                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
             
 class LHECount(Component):
     
