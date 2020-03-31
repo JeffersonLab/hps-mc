@@ -48,35 +48,15 @@ add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
 
-# Config and install bash env script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.sh.in ${CMAKE_BINARY_DIR}/hps-mc-env.sh)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.sh DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-
-# Config and install csh env script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-env.csh.in ${CMAKE_BINARY_DIR}/hps-mc-env.csh)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-env.csh DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-
-# Config and install workflow script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-workflow.in ${CMAKE_BINARY_DIR}/hps-mc-workflow)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-workflow DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-
-# Config and install bsub script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-bsub.in ${CMAKE_BINARY_DIR}/hps-mc-bsub)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-bsub DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-
-# Config and install jsub script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-jsub.in ${CMAKE_BINARY_DIR}/hps-mc-jsub)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-jsub DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-    
-# Config and install pool script
-configure_file(${PROJECT_SOURCE_DIR}/scripts/hps-mc-pool.in ${CMAKE_BINARY_DIR}/hps-mc-pool)
-install(FILES ${CMAKE_BINARY_DIR}/hps-mc-pool DESTINATION bin
-    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+# Install configured scripts
+file(GLOB SCRIPTS_IN scripts/*.in)
+foreach(SCRIPT_IN ${SCRIPTS_IN})
+    get_filename_component(SCRIPT_IN_FILE ${SCRIPT_IN} NAME)
+    string(REPLACE ".in" "" SCRIPT_OUT ${SCRIPT_IN_FILE})
+    configure_file(${SCRIPT_IN} ${CMAKE_BINARY_DIR}/${SCRIPT_OUT})
+    install(FILES ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} DESTINATION bin
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)   
+endforeach()
 
 # Install job script
 install(FILES ${PROJECT_SOURCE_DIR}/scripts/hps-mc-job DESTINATION bin
