@@ -9,27 +9,24 @@ print_jobs() {
 }
 
 if [ -z "$HPSMC_DIR" ]; then
-    echo "ERROR: The $HPSMC_DIR is not set!"
+    echo "ERROR: The HPSMC_DIR is not set!"
     exit 1
 fi
 
-if [ "$#" -ne 2 ]; then
-    echo "Usage: hps-mc-job [job_name] [job_params]"
-    print_jobs 
+if [ "$#" -lt 2 ]; then
+    echo "Usage: hps-mc-job [job_name] [args]"
+    print_jobs
     exit 1
 fi
 
 job_name=$1
-job_params=$2
-
-echo "job_name=$job_name"
-echo "job_params=$job_params"
+shift
+args=$@
 
 job_script=$HPSMC_DIR/lib/python/jobs/${job_name}_job.py
-echo "job_script=$job_script"
-
+echo job_script=$job_script
 if [ -f "$job_script" ]; then
-    python $job_script $job_params
+    python $job_script $@
 else 
     echo "ERROR: No job script exists for '${job_name}' in '$HPSMC_DIR/lib/python/jobs' dir."
     print_jobs
