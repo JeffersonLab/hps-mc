@@ -1,0 +1,10 @@
+{
+    "steering": "/work/slac/hps-mc/scratch/hps-java/steering.lcsim",
+    "defs": {
+        "foo": "bar",
+        "baz": 1.2345
+    },
+    "input_files": {
+        "/work/slac/hps-mc/scratch/slic/wab-beam.slcio": "wab-beam.slcio"
+    }
+}
