@@ -24,32 +24,16 @@ class Job:
         
         self.components = []
 
-        # FIXME: This doesn't belong here and the run dir should not be set with keyword args.
-        if "rundir" in kwargs:
-            self.rundir = kwargs["rundir"]
-        else:
-            # Special config for running in LSF.
-            # TODO: Better to put this in batch.py instead since env check would not be necessary
-            if "LSB_JOBID" in os.environ:
-                self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
-                self.delete_rundir = True
-            else:
-                self.rundir = os.getcwd()
-        logger.info("Run dir set to '%s'" % self.rundir)    
-        
-        # TODO: put this in config instead
-        if "job_id_pad" in kwargs:
-            self.job_id_pad = kwargs["job_id_pad"]
-        else:
-            self.job_id_pad = 4
-                                
-        # TODO: put this in config instead    
-        if "set_component_seeds" in kwargs:
-            self.set_component_seeds = kwargs["set_component_seeds"]
-        else:
-            self.set_component_seeds = True
+        self.rundir = os.getcwd()
 
-        self.params = {}        
+        # TODO: Better to put this in batch.py instead
+        if "LSB_JOBID" in os.environ:
+            self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
+            self.delete_rundir = True
+            
+        self.job_id_pad = 4
+                                
+        self.params = {}
         
         self.log_out = sys.stdout
         self.log_err = sys.stderr
@@ -59,9 +43,7 @@ class Job:
         
         self.out_file = None
         self.err_file = None
-        
-        self.seed = 1
-        
+                
         self.output_dir = os.getcwd()
         
         self.rundir = os.getcwd()
@@ -71,9 +53,11 @@ class Job:
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
         self.delete_existing = False
-        self.delete_existing = False
         self.delete_rundir = False
         self.dry_run = False
+        
+        # TODO: Check output files of each component
+        # self.check_output_files = True
         
         self.__initialize()
 
@@ -86,7 +70,7 @@ class Job:
         else:
             self.components.append(component)
 
-    def add_parameters(self, params):
+    def set_parameters(self, params):
         """
         Add parameters to the job, overriding values if they exist already.
         
@@ -99,7 +83,10 @@ class Job:
             self.params[k] = v
                     
     def __parse_args(self):
-        
+        """
+        Setup from command line arguments.
+        """
+                
         parser = argparse.ArgumentParser(description=self.name)
         parser.add_argument("-c", "--config", nargs=1, help="Config file location")
         parser.add_argument("-o", "--out", nargs=1, help="Log file for job stdout")
@@ -138,14 +125,14 @@ class Job:
         if cl.params:
             self.param_file = cl.params[0]
             logger.info("Loading job params from '%s'" % self.param_file)
-            self.add_parameters(load_json_file(cl.params[0]))
+            self.set_parameters(load_json_file(cl.params[0]))
             logger.info(json.dumps(self.params, indent=4, sort_keys=False))
         
         if 'output_dir' in self.params:
             self.output_dir = self.params['output_dir']
         if not os.path.isabs(self.output_dir):
             self.output_dir = os.path.abspath(self.output_dir)
-            logger.info("Changed output dir to abs path '%s'" % self.output_dir)
+            logger.info("Changed rel output dir to abs path '%s'" % self.output_dir)
         
         if 'job_id' in self.params:
             self.job_id = self.params['job_id']
@@ -155,7 +142,7 @@ class Job:
   
     def __initialize(self):
         """
-        Perform basic initialization before adding job components.
+        Perform basic initialization before job components are added.
         """
                                 
         self.__parse_args()
@@ -180,12 +167,12 @@ class Job:
             self.input_files = self.params['input_files']
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
-                   
+                                                   
     def run(self): 
         """
         This is the primary execution method that should be called at the end of a job script.
-        It will configure, setup, and execute this class and the components and then
-        perform cleanup after the job finishes.
+        It will configure, setup, and execute the components and then perform cleanup after 
+        the job finishes.
         """
         
         if not len(self.components):
@@ -202,7 +189,7 @@ class Job:
         self.__set_parameters()
         
         # Perform component setup to prepare for execution.
-        # May use config and parameters set from above.
+        # May use config and parameters that were set from above.
         self.__setup()
         
         # Copy the input files to the run dir if not in dry run mode
@@ -241,7 +228,7 @@ class Job:
                 else:
                     logger.info("No return code from '%s'" % c.name)
                     
-                # TODO: Add check here on component outputs and raise exception if do not exist.    
+                # TODO: Add check here on component outputs and raise exception if they do not exist.
                 
                 # FIXME: All return codes ignored for now.
                 # if not self.ignore_returncode and proc.returncode:
@@ -283,8 +270,9 @@ class Job:
             pass
                 
         for c in self.components:
-            logger.info("Configuring job component '%s'" % c.name)
+            logger.info("Configuring '%s'" % c.name)
             c.config()
+            c.check_config()
 
     def __setup(self):
         # limit components according to job steps
@@ -297,11 +285,7 @@ class Job:
         # run setup methods of each component
         for c in self.components:
             logger.info("Setting up '%s'" % (c.name))
-            c.rundir = self.rundir
-            
-            if self.set_component_seeds:
-                logger.info("Setting seed on '%s' to %d" % (c.name, self.seed))
-                c.seed = self.seed
+            c.rundir = self.rundir           
             c.setup()
 #            if not c.cmd_exists():
 #                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
@@ -314,7 +298,7 @@ class Job:
                 logger.info("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.input_files.values())))
                 c.inputs = self.input_files.values()
-            elif i - 1 > 0:
+            elif i > -1:
                 logger.info("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.components[i - 1].output_files())))
                 c.inputs = self.components[i - 1].output_files()
@@ -347,7 +331,7 @@ class Job:
             logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
 
-        # debug
+        # TODO: Make this a utility method to print run dir contents
         #logger.info("pwd: " + os.getcwd())
         #p = subprocess.Popen(['ls', os.getcwd()], shell=True, stdout=subprocess.PIPE)
         #out, err = p.communicate()
