@@ -1,0 +1,12 @@
+{
+  "nevents": 10,
+  "seed": 67890,
+  "detector": "HPS-EngRun2015-Nominal-v6-0-fieldmap",
+  "input_files": {
+      "/work/slac/data/stdhep/wab-beam_0001.stdhep": "wab-beam.stdhep"
+  },
+  "output_files": {
+      "wab-beam.slcio": "wab-beam_0001.slcio"
+  },
+  "output_dir": "output"
+}

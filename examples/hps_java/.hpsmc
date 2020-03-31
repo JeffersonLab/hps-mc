@@ -1,0 +1,12 @@
+[Job]
+copy_output_files = yes
+copy_input_files = yes
+delete_existing = no
+dry_run = no
+
+[JobManager]
+hps_java_bin_jar = /home/jermc/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
+java_args = -Xmx1g -XX:+UseSerialGC
+logging_config_file = /work/slac/hps-mc/scratch/hps-java/logging.properties
+lcsim_cache_dir = /tmp
+event_print_interval = 1000
