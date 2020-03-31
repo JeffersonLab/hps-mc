@@ -40,12 +40,8 @@ class SLIC(Component):
         self.name = "slic"
         Component.__init__(self, **kwargs)
         self.command = self.name
-        if "detector" in kwargs:
-            self.detector = kwargs["detector"]
-        else:
-            raise Exception("Missing detector argument for SLIC.")
-        if self.nevents == -1:
-            self.nevents = 999999999
+        
+        self.nevents = 999999999
  
     def cmd_args(self):
         if not len(self.inputs):
@@ -56,14 +52,10 @@ class SLIC(Component):
             detector_file = os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
         except:
             raise Exception("Required SLIC config detector_dir was not set.")
-         
-        # TODO: should this just be an exception?
-        if not len(self.outputs):
-            outputs.append("slic_events.slcio")
-            
+                     
         self.args = ["-g", detector_file,
-                     "-i", self.inputs[0],
-                     "-o", self.outputs[0],
+                     "-i", self.input_files()[0],
+                     "-o", self.output_files()[0],
                      "-r", str(self.nevents),
                      "-d%s" % str(self.seed)]
         tbl = os.path.join(self.slic_dir, "share", "particle.tbl")
@@ -95,7 +87,10 @@ class SLIC(Component):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
             logger.warning("No symlink to fieldmap dir created (already exists)")
-            
+    
+    def required_parameters(self):
+        return ['detector']
+        
     def execute(self, log_out, log_err):
                
         args = self.cmd_args()
@@ -109,13 +104,28 @@ class SLIC(Component):
         proc.wait()
         
         return proc.returncode
-
+    
+    def output_files(self):
+        if not len(self.outputs):
+          for infile in self.input_files():
+              filename,ext = os.path.splitext(infile)
+              self.outputs.append("%s.slcio" % os.path.basename(filename))
+        return self.outputs
+            
 class JobManager(Component):
 
     def __init__(self, **kwargs):
+        
         self.name = "HPS Java Job Manager"
         Component.__init__(self, **kwargs)
         self.command = "java"
+ 
+        self.run_number = None
+        self.detector = None
+        self.nevents = -1
+        
+        # FIXME: Figure out if this looks like a file or resource.
+        #        If it begins with '/org/lcsim' then it is a resource.
         if "steering_resource" in kwargs:
             self.steering_resource = kwargs["steering_resource"]
             self.steering_file = None
@@ -124,18 +134,22 @@ class JobManager(Component):
             self.steering_resource = None
         else:
             raise Exception("A steering resource or file was not provided to hps-java.")
-        if "run" in kwargs:
-            self.run_number = kwargs["run"]
-        else:
-            self.run_number = None
-        if "detector" in kwargs:
-            self.detector = kwargs["detector"]
-        else:
-            self.detector = None
-        if "nevents" in kwargs:
-            self.nevents = kwargs["nevents"]
-        else:
-            self.nevents = -1
+        
+        #if "run" in kwargs:
+        #    self.run_number = kwargs["run"]
+        #else:
+        #    self.run_number = None
+        
+        #if "detector" in kwargs:
+        #    self.detector = kwargs["detector"]
+        #else:
+        #    self.detector = None
+            
+        #if "nevents" in kwargs:
+        #    self.nevents = kwargs["nevents"]
+        #else:
+        #    self.nevents = -1
+            
         if "defs" in kwargs:
             self.defs = kwargs["defs"]
         else:
@@ -188,10 +202,15 @@ class JobManager(Component):
             self.args.append(str(self.nevents))
         for input_file in self.inputs:
             self.args.append("-i")
-            self.args.append(input_file)
-        
+            self.args.append(input_file)        
         return self.args
     
+    def required_parameters(self):
+        return ['steering_file']
+
+    def optional_parameters(self):
+        return ['detector', 'run']    
+        
 class JavaTool(Component):
     
     def __init__(self, **kwargs):
@@ -258,6 +277,7 @@ class FilterMCBunches(JavaTool):
         return self.args
 
 # Deprecated
+"""
 class DST(Component):
  
     def __init__(self, **kwargs):
@@ -279,6 +299,7 @@ class DST(Component):
         for i in self.inputs:
             self.args.append(i)
         return self.args
+"""
                 
 class LCIODumpEvent(Component):
 
