@@ -17,19 +17,19 @@ class Job:
 
     def __init__(self, **kwargs):
         
-        if "name" in kwargs:
-            self.name = kwargs["name"] 
+        if 'name' not in kwargs:
+            self.name = os.path.basename(sys.argv[0]).replace('.py', '')
         else:
-            self.name = "HPS MC Job"
-        
+            self.name = kwargs['name']
+            
+        if 'description' not in kwargs:
+            self.description = "HPS MC Job"
+        else:
+            self.description = kwargs['description']
+                
         self.components = []
 
         self.rundir = os.getcwd()
-
-        # TODO: Better to put this in batch.py instead
-        if "LSB_JOBID" in os.environ:
-            self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
-            self.delete_rundir = True
             
         self.job_id_pad = 4
                                 
@@ -55,6 +55,7 @@ class Job:
         self.delete_existing = False
         self.delete_rundir = False
         self.dry_run = False
+        self.ignore_return_codes = True
         
         # TODO: Check output files of each component
         # self.check_output_files = True
@@ -65,7 +66,7 @@ class Job:
         """
         Public method for adding components to the job.
         """
-        if isinstance(component, collections.Sequence) and not isinstance(obj, basestring):
+        if isinstance(component, collections.Sequence) and not isinstance(component, basestring):
             self.components.extend(component)
         else:
             self.components.append(component)
@@ -124,9 +125,17 @@ class Job:
         
         if cl.params:
             self.param_file = cl.params[0]
-            logger.info("Loading job params from '%s'" % self.param_file)
-            self.set_parameters(load_json_file(cl.params[0]))
-            logger.info(json.dumps(self.params, indent=4, sort_keys=False))
+            self.__load_params(self.param_file)
+                    
+        if cl.run_dir:
+            self.rundir = cl.run_dir[0]
+  
+    def __load_params(self, param_file):
+        
+        logger.info("Loading job params from '%s'" % param_file)
+        
+        self.set_parameters(load_json_file(param_file))
+        logger.info(json.dumps(self.params, indent=4, sort_keys=False))
         
         if 'output_dir' in self.params:
             self.output_dir = self.params['output_dir']
@@ -136,9 +145,6 @@ class Job:
         
         if 'job_id' in self.params:
             self.job_id = self.params['job_id']
-        
-        if cl.run_dir:
-            self.rundir = cl.run_dir[0]
   
     def __initialize(self):
         """
@@ -154,6 +160,12 @@ class Job:
         if not os.path.exists(self.rundir):
             logger.info("Creating run dir '%s'" % self.rundir)
             os.makedirs(self.rundir)
+
+        # Set run dir if running inside LSF
+        if "LSB_JOBID" in os.environ:
+            self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
+            logger.info("Set run dir to '%s' for LSF" % self.rundir)
+            self.delete_rundir = True
 
         logger.info("Changing to run dir '%s'" % self.rundir)
         os.chdir(self.rundir)
@@ -192,8 +204,7 @@ class Job:
         # May use config and parameters that were set from above.
         self.__setup()
         
-        # Copy the input files to the run dir if not in dry run mode
-        # and this feature is enabled.
+        # Copy the input files to the run dir if enabled and not in dry run.
         if not self.dry_run:
             if self.enable_copy_input_files: 
                 self.__copy_input_files()
@@ -201,8 +212,7 @@ class Job:
         # Execute the job.
         self.__execute()
         
-        # Copy the output files to the output dir not in dry run mode
-        # and this feature is enable.
+        # Copy the output files to the output dir if enabled and not in dry run.
         if not self.dry_run:
             if self.enable_copy_output_files:
                 self.__copy_output_files()
@@ -216,23 +226,23 @@ class Job:
             
         if not self.dry_run:
             for c in self.components:
+                
                 logger.info("Executing '%s' with inputs %s and outputs %s" % 
-                            (c.name, str(c.inputs), str(c.outputs)))
+                            (c.name, str(c.inputs), str(c.outputs)))                
                 start = time.time()
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
                 elapsed = end - start
+                
                 logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
+                
                 if returncode is not None:
                     logger.info("Return code of '%s' was %d" % (c.name, returncode))
                 else:
                     logger.info("No return code from '%s'" % c.name)
-                    
-                # TODO: Add check here on component outputs and raise exception if they do not exist.
-                
-                # FIXME: All return codes ignored for now.
-                # if not self.ignore_returncode and proc.returncode:
-                #     raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))
+                                    
+                if not self.ignore_return_codes and proc.returncode:
+                    raise Exception("Non-zero return code %d from '%s'" % (proc.returncode, self.name))
         else:
             # Dry run mode. Just print component info but do not execute.
             logger.info("Dry run enabled. Components will NOT be executed!")
@@ -266,6 +276,18 @@ class Job:
         try:
             self.dry_run = p.getboolean(default, 'dry_run')
             logger.debug("dry_run=%s" % str(self.dry_run))
+        except:
+            pass
+        
+        try:
+            self.ignore_return_codes = p.getboolean(default, 'ignore_return_codes')
+            logger.debug("ignore_return_codes=%s" % str(self.ignore_return_codes))
+        except:
+            pass
+        
+        try:
+            self.job_id_pad = p.getint(default, 'job_id_pad')
+            logger.debug("job_id_pad=%d" % self.job_id_pad)
         except:
             pass
                 
@@ -330,13 +352,6 @@ class Job:
         if not os.path.exists(self.output_dir):
             logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
-
-        # TODO: Make this a utility method to print run dir contents
-        #logger.info("pwd: " + os.getcwd())
-        #p = subprocess.Popen(['ls', os.getcwd()], shell=True, stdout=subprocess.PIPE)
-        #out, err = p.communicate()
-        #print "dir list..."
-        #print out
         
         for src,dest in self.output_files.iteritems():
             self.__copy_output_file(src, dest)

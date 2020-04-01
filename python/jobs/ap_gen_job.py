@@ -3,8 +3,7 @@
 """
 Job script to generate A-prime events, convert to StdHep and apply transformations.
 
-Run with '--job-steps 1' to only generate the LHE output and not generate StdHep files
-with transforms.
+Run with '--job-steps 1' to only generate the untransformed LHE output.
 """
 
 import sys, os, argparse
@@ -13,59 +12,26 @@ from hpsmc.job import Job
 from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import Unzip, StdHepTool, MoveFiles
 
-# define default job parameters
-def_params = {
-    "nevents": 10000,
-    "run_params": "1pt05",
-    "apmass": 40.0,
-    "ctau": 1.0,
-    "z": -5.0,
-}
+job = Job(name="ap_gen")
 
-# setup job including default parameters
-job = Job(name="AP event gen job")
-job.set_default_params(def_params)
-job.initialize()
+# Generate A-prime events using MadGraph4
+ap = MG4(name="ap")
 
-# get job params
-params = job.params
+# Unzip the LHE events to a local file, excluding the unweighted event file
+unzip = Unzip(exclude=['unweighted'])
 
-# base file name
-filename = "aprime"
+# Create a stdhep file, displacing the time of decay using the ctau param
+displace = StdHepTool(name="lhe_tridents_displacetime")
 
-# generate A-prime events using Madgraph 4
-ap = MG4(name="ap",
-         run_card="run_card_"+params['run_params']+".dat",
-         params={"APMASS": params['apmass']},
-         outputs=[filename],
-         nevents=params['nevents'])
+# Rotate events into beam coordinates and move the vertices
+rotate = StdHepTool(name="beam_coords",
+                    append="_rotated")
 
-# unzip the LHE events to local file
-unzip = Unzip(inputs=[filename+"_events.lhe.gz"])
+# Print the final events
+dump = StdHepTool(name="print_stdhep")
 
-# displace the time of decay using ctau param
-displ = StdHepTool(name="lhe_tridents_displacetime",
-                   inputs=[filename+"_events.lhe"],
-                   outputs=[filename+".stdhep"],
-                   args=["-l", str(params['ctau'])])
+# Add components to the job
+job.add([ap, unzip, displace, rotate, dump])
 
-# rotate events into beam coordinates and move vertex by 5 mm
-rot = StdHepTool(name="beam_coords",
-                 inputs=[filename+".stdhep"],
-                 outputs=[filename+"_rot.stdhep"],
-                 args=["-z", str(params['z'])])
-
-# print rotated AP events
-dump = StdHepTool(name="print_stdhep",
-                  inputs=[filename+"_rot.stdhep"])
-
-# define job components
-job.components = [ap, unzip, displ, rot, dump]
-
-# move final StdHep file to user-defined output file name if output_files is set in JSON params
-if len(params.output_files):
-    mv = MoveFiles(inputs=[filename+"_rot.stdhep"], outputs=[params.output_files.keys()[0]])
-    job.components.append(mv)
-
-# run the job
+# Run the job
 job.run()
