@@ -1,1 +1,1 @@
-rm -rf output *.lhe.gz MG_mini *.log &> /dev/null
+rm -rf output *.lhe *.lhe.gz *.stdhep MG_mini *.log &> /dev/null
