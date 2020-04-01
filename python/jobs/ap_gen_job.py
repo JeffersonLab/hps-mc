@@ -12,7 +12,7 @@ from hpsmc.job import Job
 from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import Unzip, StdHepTool, MoveFiles
 
-job = Job(name="ap_gen")
+job = Job()
 
 # Generate A-prime events using MadGraph4
 ap = MG4(name="ap")
