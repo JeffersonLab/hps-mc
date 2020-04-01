@@ -2,6 +2,8 @@ import os, subprocess, shutil, random, glob, gzip, logging
 
 from component import Component
 
+from run_params import RunParameters
+
 logger = logging.getLogger("hpsmc.generators")
 
 class EventGenerator(Component):
@@ -14,30 +16,21 @@ class EventGenerator(Component):
                 
 class EGS5(EventGenerator):
 
-    def __init__(self, **kwargs): 
+    def __init__(self, **kwargs):         
         EventGenerator.__init__(self, **kwargs)
-        self.bunches = 5e5
 
+        self.bunches = 5e5
         self.command = "egs5_" + self.name
-        
+                
     def setup(self):
         EventGenerator.setup(self)
-       
-        if not hasattr(self, "egs5_dir"):
-            raise Exception("Missing required EGS5 config egs5_dir")
-       
-        self.egs5_data_dir = self.egs5_dir + os.path.sep + "/data"
-        self.egs5_config_dir = self.egs5_dir + os.path.sep + "/config"
+              
+        self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
+        self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
        
         logger.info("egs5_data_dir=%s" % self.egs5_data_dir)
         logger.info("egs5_config_dir=%s" % self.egs5_config_dir)
-               
-        if self.run_params is None:
-            raise Exception("The run_params were never set for EGS5.")
-        
-        if not len(self.outputs):
-            raise Exception("The outputs were never set for EGS5.")
- 
+                           
         if os.path.exists("data"):
             os.unlink("data")
         os.symlink(self.egs5_data_dir, "data")
@@ -45,21 +38,34 @@ class EGS5(EventGenerator):
         if os.path.exists("pgs5job.pegs5inp"):
             os.unlink("pgs5job.pegs5inp")
         os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
-                
-        target_z = self.run_params.get("target_z") 
-        ebeam = self.run_params.get("beam_energy")
-        electrons = self.run_params.get("num_electrons") * self.bunches
-                
-        logger.info("Generating %d electrons" % electrons)
         
+        self.run_param_data = RunParameters(self.run_params)        
+        target_z = self.run_param_data.get("target_z") 
+        ebeam = self.run_param_data.get("beam_energy")
+        electrons = self.run_param_data.get("num_electrons") * self.bunches
+        
+        logger.info("Read target_z=%d, ebeam=%d, electrons=%d from '%s' run params"
+                    % (target_z, ebeam, electrons, self.run_params))
+                
+#        logger.info("Generating %d electrons" % electrons)        
         seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
-        seed_file = open("seed.dat", "w")
+        seed_file = open("seed.dat", 'w')
         seed_file.write(seed_data)
         seed_file.close()
+        
+    def output_files(self):
+        return ['beam.stdhep']
     
     def execute(self, log_out, log_err):
-        pre_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
         EventGenerator.execute(self, log_out, log_err)
+        src = os.path.join(self.rundir, 'brems.stdhep')
+        dest = os.path.join(self.rundir, self.output_files()[0])
+        logger.info("Copying '%s' to '%'s" % (src, dest))
+        shutil.copy(src, dst)
+        
+        """
+        pre_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
+        EventGenerator.execute(self, log_out, log_err)        
         post_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
         for stdhep_file in post_stdhep_files:
             if stdhep_file not in pre_stdhep_files:
@@ -67,12 +73,16 @@ class EGS5(EventGenerator):
                 logger.info("Moving '%s' to '%s'" % (stdhep_file, stdhep_output_path))
                 shutil.move(stdhep_file, stdhep_output_path)
                 break
+        """
                             
     def required_parameters(self):
         return ['run_params']
     
     def optional_parameters(self):
         return ['bunches']
+    
+    def required_config(self):
+        return ['egs5_dir']
 
 class StdHepConverter(EGS5):
 
