@@ -5,6 +5,6 @@
         "baz": 1.2345
     },
     "input_files": {
-        "/work/slac/hps-mc/scratch/slic/wab-beam.slcio": "wab-beam.slcio"
+        "/work/slac/hps-mc/examples/slic/wab-beam.slcio": "wab-beam.slcio"
     }
 }
