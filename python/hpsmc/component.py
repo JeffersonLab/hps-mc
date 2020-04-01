@@ -21,6 +21,8 @@ class Component:
         
         self.append = ''
         
+        self.args = ''
+        
         for k,v in kwargs.iteritems():
             logger.info("Setting init arg: %s=%s" % (k, str(v)))
             setattr(self, k, v)
