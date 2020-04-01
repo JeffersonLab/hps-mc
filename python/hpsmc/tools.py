@@ -100,19 +100,24 @@ class JobManager(Component):
         self.nevents = -1
         self.event_print_interval = 1000
         self.defs = None
-        self.append = 'recon'
-                                
-        # TODO: Put defs in job parameters instead
-        #if "defs" in kwargs:
-        #    self.defs = kwargs["defs"]
-        #else:
-        #    self.defs = {}
-                    
+        self.replace = {
+            '_filt': '_readout',
+            '_readout': '_recon'
+        }                        
+                            
     def required_config(self):
         return ['hps_java_bin_jar']
     
+    def __replace(self, f):
+        nf = f
+        for k,v in self.replace.iteritems():
+            if nf.endswith(k):
+                nf = nf.replace(k, v)
+                break
+        return nf
+    
     def output_files(self):
-        return [os.path.basename(os.path.splitext(self.input_files()[0])[0] + self.append + ".slcio")]
+        return [self.__replace(os.path.splitext(self.input_files()[0])[0]) + ".slcio"]
             
     def cmd_args(self):
                
@@ -159,7 +164,7 @@ class JobManager(Component):
             
         if len(self.output_files()):
             args.append("-D")
-            args.append("outputFile=" + self.output_files()[0])
+            args.append("outputFile=" + os.path.splitext(self.output_files()[0])[0])
         
         if self.defs:
             for k,v in self.defs.iteritems():
@@ -185,7 +190,7 @@ class JobManager(Component):
         return ['steering']
 
     def optional_parameters(self):
-        return ['detector', 'run', 'defs']
+        return ['detector', 'run_number', 'defs']
     
 class StdHepTool(Component):
 
@@ -308,32 +313,19 @@ class FilterMCBunches(JavaTool):
     def __init__(self, **kwargs):
         self.name = "Filter MC Bunches"
         self.java_class = "org.hps.util.FilterMCBunches"
-        JavaTool.__init__(self, **kwargs)
-        if "ecal_hit_ecut" in kwargs:
-            self.ecal_hit_ecut = kwargs["ecal_hit_ecut"]
-        else:
-            self.ecal_hit_ecut = None
-        if "event_interval" in kwargs:
-            self.event_interval = kwargs["event_interval"]
-        else:
-            raise Exception("Missing required event_interval arg for FilterMCBunches.")
-        if "enable_ecal_energy_filter" in kwargs:
-            self.enable_ecal_energy_filter = kwargs["enable_ecal_energy_filter"]
-        else:
-            self.enable_ecal_energy_filter = False 
+        
+        JavaTool.__init__(self, **kwargs)        
+                   
+        self.append = '_filt'
                     
     def cmd_args(self):
-        if not len(self.inputs):
-            raise Exception("Missing required inputs for FilterMCBunches.")
-        if not len(self.outputs):
-            raise Exception("Missing required outputs for FilterMCBunches.")
         orig_args = self.args
         self.args = JavaTool.cmd_args(self)
         self.args.append("-e")
         self.args.append(str(self.event_interval))
-        for i in self.inputs:
+        for i in self.input_files():
             self.args.append(i)
-        self.args.append(self.outputs[0])
+        self.args.append(self.output_files()[0])
         if self.enable_ecal_energy_filter:
             self.args.append("-d")
         if self.ecal_hit_ecut is not None:
@@ -343,6 +335,18 @@ class FilterMCBunches(JavaTool):
             self.args.append("-w")
             self.args.append(str(self.nevents))
         return self.args
+    
+    def output_files(self):
+        self.outputs = []
+        for infile in self.input_files():
+            self.outputs.append(os.path.splitext(infile)[0] + self.append + ".slcio")
+        return self.outputs
+    
+    def required_parameters(self):
+        return ['event_interval']
+    
+    def optional_parameters(self):
+        return ['ecal_hit_ecut', 'enable_ecal_energy_filter']
                 
 class LCIODumpEvent(Component):
 
