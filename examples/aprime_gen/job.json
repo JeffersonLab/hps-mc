@@ -1,11 +1,12 @@
 {
-    "nevents": 10000,
+    "nevents": 1000,
     "run_params": "1pt05",
     "apmass": 50.0,
+    "ctau": 1.0,
+    "z": -5.0,
     "seed": 1234567,
     "output_files": {
-        "ap_unweighted_events.lhe.gz": "ap_events_unweighted_1.lhe.gz",
-        "ap_events.lhe.gz": "ap_events_1.lhe.gz"
+        "ap_events_rotated.stdhep": "ap_events_1.stdhep"
     },
     "output_dir": "output"
 }
