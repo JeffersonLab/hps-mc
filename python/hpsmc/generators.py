@@ -60,8 +60,8 @@ class EGS5(EventGenerator):
         EventGenerator.execute(self, log_out, log_err)
         src = os.path.join(self.rundir, 'brems.stdhep')
         dest = os.path.join(self.rundir, self.output_files()[0])
-        logger.info("Copying '%s' to '%'s" % (src, dest))
-        shutil.copy(src, dst)
+        logger.info("Copying '%s' to '%s'" % (src, dest))
+        shutil.copy(src, dest)
         
         """
         pre_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
