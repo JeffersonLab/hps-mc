@@ -10,8 +10,8 @@ class Component:
     """
 
     def __init__(self, **kwargs):
-
-        logger.info("Initializing %s" % str(self))
+        
+        logger.debug("Initializing %s" % str(self))
         
         self.outputs = []
         self.inputs = []
@@ -24,8 +24,10 @@ class Component:
         self.args = []
         
         for k,v in kwargs.iteritems():
-            logger.info("Setting init arg: %s=%s" % (k, str(v)))
+            logger.debug("Setting init arg: %s=%s" % (k, str(v)))
             setattr(self, k, v)
+
+        logger.debug("Initialized %s" % self.name)
                                      
     def execute(self, log_out, log_err):
         """
@@ -87,14 +89,14 @@ class Component:
         
         Components should not need to override this method.
         """
-        logger.info("Configuring '%s'" % self.name)
+        logger.debug("Configuring '%s'" % self.name)
         section_name = self.__class__.__name__
-        logger.info("Loading config for '%s'" % section_name)
+        logger.debug("Loading config for '%s'" % section_name)
         if config.parser.has_section(section_name):
 #            section = config.parser[section_name]
             for name, value in config.parser.items(section_name):
                 setattr(self, name, value)
-                logger.info("%s=%s" % (name, value))
+                logger.debug("%s=%s" % (name, value))
                 
     def set_parameters(self, params):
         """
@@ -105,12 +107,13 @@ class Component:
         
         # Set required parameters. 
         for p in self.required_parameters():
-            if p not in params:
+            if p not in params and not hasattr(self, p):
                 raise Exception("Required parameter '%s' is missing for component '%s'." 
                                 % (p, self.name))
-            setattr(self, p, params[p])
-            logger.info("Set required parameter '%s' to '%s' for component '%s'."
-                        % (p, params[p], self.name))
+            elif p in params:
+                setattr(self, p, params[p])
+                logger.info("Set required parameter '%s' to '%s' for component '%s'."
+                            % (p, params[p], self.name))
             
         # Set optional parameters.
         for p in self.optional_parameters():
