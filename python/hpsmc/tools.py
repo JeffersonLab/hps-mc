@@ -30,8 +30,9 @@ def _filtered(exclude, seq):
 class SLIC(Component):
 
     def __init__(self, **kwargs):
+        self.macros = []
+        self.run_number = None
         Component.__init__(self, "slic", **kwargs)
-        self.command = self.name
                  
     def cmd_args(self):
         
@@ -42,9 +43,18 @@ class SLIC(Component):
                 "-i", self.input_files()[0],
                 "-o", self.output_files()[0],
                 "-d%s" % str(self.seed)]
+        
+        if len(self.macros):
+            for macro in self.macros:
+                if macro == "run_number.mac":
+                    raise Exception("Macro name '%s' is not allowed." % macro)
+                args.extend(["-m", macro])
                         
         if self.nevents is not None:
             args.extend(["-r", str(self.nevents)])
+            
+        if self.run_number is not None:
+            args.extend(["-m", "run_number.mac"])
         
         tbl = self.__particle_tbl()
         if os.path.exists(tbl):
@@ -75,8 +85,14 @@ class SLIC(Component):
         else:
             logger.warning("Link to fieldmap dir already exists!")
     
+        if self.run_number is not None:
+            run_number_cmd = "/lcio/runNumber %d" % self.run_number
+            run_number_mac = open("run_number.mac", 'w')
+            run_number_mac.write(run_number_cmd)
+            run_number_mac.close()
+    
     def optional_parameters(self):
-        return ['nevents']
+        return ['nevents', 'macros', 'run_number']
     
     def required_parameters(self):
         return ['detector']
@@ -287,10 +303,8 @@ class FileFilter(Component):
                         
 class JavaTool(Component):
     
-    def __init__(self, **kwargs):
-        self.name = "HPS Java Tool"
-        Component.__init__(self, **kwargs)
-        self.command = "java"
+    def __init__(self, name="java", command=None, **kwargs):
+        Component.__init__(self, name, command, **kwargs)
         if "java_class" in kwargs:
             self.java_class = kwargs["java_class"]
         elif self.java_class is None:
