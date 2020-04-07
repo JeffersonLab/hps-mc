@@ -9,25 +9,30 @@ class Component:
     Base class for components in a job.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, name, command=None, **kwargs):
         
         logger.debug("Initializing %s" % str(self))
         
+        self.name = name
+        self.command = command
+        if self.command is None:
+            self.command = self.name
+        self.args = []
+               
         self.outputs = []
         self.inputs = []
             
         self.nevents = None
-        self.seed = 1
+        self.seed = 1      
         
+        self.replace = {}
         self.append = ''
-        
-        self.args = []
         
         for k,v in kwargs.iteritems():
             logger.debug("Setting init arg: %s=%s" % (k, str(v)))
             setattr(self, k, v)
 
-        logger.debug("Initialized %s" % self.name)
+        logger.debug("Initialized component %s" % self.name)
                                      
     def execute(self, log_out, log_err):
         """
@@ -104,23 +109,23 @@ class Component:
         
         Components should not need to override this method.
         """
+        
+        # Set required parameters.
         for p in self.required_parameters():
-            # Class attributes will not be overridden unless set to None.
-            if not hasattr(self, p) or getattr(self, p) is None:
-                if p not in params:
-                    raise Exception("Required parameter '%s' is missing for component '%s'." 
-                                    % (p, self.name))                
+            if p not in params:
+                raise Exception("Required parameter '%s' is missing for component '%s'." 
+                                % (p, self.name))                
+            else:
                 setattr(self, p, params[p])
                 logger.info("Set required parameter '%s' to '%s' for component '%s'."
                             % (p, params[p], self.name))
             
         # Set optional parameters.
         for p in self.optional_parameters():
-            if not hasattr(self, p):
-                if p in params:
-                    setattr(self, p, params[p])
-                    logger.info("Set optional parameter '%s' to '%s' for component '%s'."
-                                % (p, params[p], self.name))
+            if p in params:
+                setattr(self, p, params[p])
+                logger.info("Set optional parameter '%s' to '%s' for component '%s'."
+                            % (p, params[p], self.name))
     
     def required_parameters(self):
         """
@@ -168,5 +173,4 @@ class DummyComponent(Component):
         def execute(self, log_out, log_err):
             logger.info("DummComponent.execute - inputs %s and outputs %s"
                         % (str(self.input_files()), str(self.output_files())))
-
                        
