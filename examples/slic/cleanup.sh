@@ -1,1 +1,1 @@
-rm wab-beam.stdhep *.slcio output/*.slcio *.log fieldmap &> /dev/null
+rm -rf output scratch fieldmap &> /dev/null
