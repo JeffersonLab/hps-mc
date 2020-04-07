@@ -8,19 +8,17 @@ logger = logging.getLogger("hpsmc.generators")
 
 class EventGenerator(Component):
 
-    def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)
+    def __init__(self, name, command=None, **kwargs):
+        Component.__init__(self, name, command=command, **kwargs)
         
     def required_parameters(self):
         return ['nevents']
                 
 class EGS5(EventGenerator):
 
-    def __init__(self, **kwargs):         
+    def __init__(self, name, **kwargs):
         self.bunches = 5e5
-        self.command = "egs5_" + self.name
-        
-        EventGenerator.__init__(self, **kwargs)
+        EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
                 
     def setup(self):
         EventGenerator.setup(self)
@@ -75,8 +73,7 @@ class EGS5(EventGenerator):
 class StdHepConverter(EGS5):
 
     def __init__(self, **kwargs):
-        self.name = "lhe_v1"
-        EGS5.__init__(self, **kwargs)
+        EGS5.__init__(self, "lhe_v1", **kwargs)
   
     def config(self):
         EGS5.config(self)
@@ -109,7 +106,7 @@ class MG(EventGenerator):
     """
     Abstract class for MadGraph generators.
     """    
-    def __init__(self, **kwargs):
+    def __init__(self, name, **kwargs):
         
         # Default name of param card
         self.param_card = "param_card.dat"
@@ -123,7 +120,7 @@ class MG(EventGenerator):
         self.mpid = None
         self.mrhod = None
         
-        EventGenerator.__init__(self, **kwargs)
+        EventGenerator.__init__(self, name, **kwargs)
     
     def output_files(self):
         return [self.name + "_unweighted_events.lhe.gz",
@@ -188,14 +185,8 @@ class MG(EventGenerator):
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
         logger.info("Executing '%s' from '%s'" % (self.name, os.getcwd()))
-        Component.execute(self, log_out, log_err)
-        lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
-        for f in lhe_files:
-            dest = os.path.join(self.rundir, "%s_%s" % (self.name, os.path.basename(f)))
-            logger.info("Copying '%s' to '%s'" % (f, dest))
-            shutil.copy(f, dest)
-        os.chdir(self.rundir)
-        
+        return Component.execute(self, log_out, log_err)
+                
     def setup(self):
         
         EventGenerator.setup(self)
@@ -214,9 +205,9 @@ class MG4(MG):
                "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
                "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
         
-    def __init__(self, **kwargs):
+    def __init__(self, name, **kwargs):
         
-        MG.__init__(self, **kwargs)
+        MG.__init__(self, name, **kwargs)
         
         if self.name not in MG4.dir_map:
             raise Exception("The name '%s' is not valid for MG4." % self.name)
@@ -254,7 +245,17 @@ class MG4(MG):
         shutil.copyfile(param_card_src, param_card_dest)
                 
         self.make_param_card(param_card_dest)
-                                         
+        
+    def execute(self, log_out, log_err):
+        returncode = MG.execute(self, log_out, log_err)
+        lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
+        for f in lhe_files:
+            dest = os.path.join(self.rundir, os.path.basename(f))
+            logger.info("Copying '%s' to '%s'" % (f, dest))
+            shutil.copy(f, dest)
+        os.chdir(self.rundir) 
+        return returncode
+                                      
 class MG5(MG):
     
     # TODO: Put this information into a method in the MG superclass.
@@ -263,9 +264,9 @@ class MG5(MG):
                "tritrig" : "tritrig",
                "simp"    : "simp"}
 
-    def __init__(self, **kwargs):
+    def __init__(self, name, **kwargs):
                 
-        MG.__init__(self, **kwargs)
+        MG.__init__(self, name, **kwargs)
         
         if self.name not in MG5.dir_map:
             raise Exception("The name '%s' is not valid for MG5." % self.name)
@@ -284,7 +285,7 @@ class MG5(MG):
         logger.info("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
 
-        # FIXME: This doesn't seem to work as generate_events doesn't read the input config. :(
+        # FIXME: This doesn't seem to work as generate_events doesn't read the input config.
         """
         input_dir = os.path.join(self.madgraph_dir, "input")
         dest_input_dir = os.path.join(self.rundir, self.proc_dir, "input")
@@ -307,4 +308,15 @@ class MG5(MG):
         logger.info("Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
 
-        self.make_param_card(param_card_dest)      
+        self.make_param_card(param_card_dest)
+
+    def execute(self, log_out, log_err):
+        returncode = MG.execute(self, log_out, log_err)
+        lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
+        for f in lhe_files:
+            dest = os.path.join(self.rundir, '%s_%s' % (self.name, os.path.basename(f)))
+            logger.info("Copying '%s' to '%s'" % (f, dest))
+            shutil.copy(f, dest)
+        os.chdir(self.rundir) 
+        return returncode
+            

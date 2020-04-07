@@ -30,22 +30,21 @@ def _filtered(exclude, seq):
 class SLIC(Component):
 
     def __init__(self, **kwargs):
-        self.name = "slic"
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, "slic", **kwargs)
         self.command = self.name
-        
-        self.nevents = 999999999
-         
+                 
     def cmd_args(self):
         
         if not len(self.input_files()):
-            raise Exception("No inputs given for SLIC.")
-                 
+            raise Exception("No inputs given for SLIC.")  
+            
         args = ["-g", self.__detector_file(),
                 "-i", self.input_files()[0],
                 "-o", self.output_files()[0],
-                "-r", str(self.nevents),
                 "-d%s" % str(self.seed)]
+                        
+        if self.nevents is not None:
+            args.extend(["-r", str(self.nevents)])
         
         tbl = self.__particle_tbl()
         if os.path.exists(tbl):
@@ -75,6 +74,9 @@ class SLIC(Component):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
             logger.warning("Link to fieldmap dir already exists!")
+    
+    def optional_parameters(self):
+        return ['nevents']
     
     def required_parameters(self):
         return ['detector']
@@ -110,21 +112,12 @@ class JobManager(Component):
     This component can take multiple inputs but will only write one output.
     """
 
-    def __init__(self, **kwargs):
-        
-        self.name = "HPS Java Job Manager"
-        Component.__init__(self, **kwargs)
-        self.command = "java"
- 
+    def __init__(self, **kwargs):                
         self.run_number = None
         self.detector = None
-        self.nevents = -1
         self.event_print_interval = 1000
         self.defs = None
-        self.replace = {
-            '_filt': '_readout',
-            '_readout': '_recon'
-        }
+        Component.__init__(self, "job_manager", "java", **kwargs)
                             
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -191,7 +184,7 @@ class JobManager(Component):
             args.append("-r")
         args.append(self.steering)
             
-        if self.nevents != -1:
+        if self.nevents is not None:
             args.append("-n")
             args.append(str(self.nevents))
             
@@ -219,16 +212,9 @@ class StdHepTool(Component):
                   "mix_signal",
                   "random_sample"]
 
-    def __init__(self, **kwargs):
-        Component.__init__(self, **kwargs)
-        self.command = "stdhep_" + self.name
-        self.replace = {
-            '_mom': '_rot'
-        }        
-        self.append = ''
-        if self.name is 'add_mother':
-            self.append = '_mom'
-
+    def __init__(self, name, **kwargs):
+        Component.__init__(self, name, "stdhep_" + name, **kwargs)
+        
     def cmd_args(self):
         
         args = []
@@ -269,20 +255,14 @@ class Unzip(Component):
     """
 
     def __init__(self, **kwargs):
-        self.command = "gunzip"
-        self.name = "gunzip"
-        exclude = []
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, "unzip", **kwargs)
                
     def output_files(self):
         self.outputs = []
         for inputfile in self.input_files():
             self.outputs.append(os.path.basename(os.path.splitext(inputfile)[0]))
         return self.outputs
-        
-    def input_files(self):
-        return _filtered(self.exclude, Component.input_files(self))
-                
+                        
     def execute(self, log_out, log_err):
         for inputfile in self.input_files():
             outputfile = os.path.splitext(inputfile)[0]
@@ -297,10 +277,13 @@ class FileFilter(Component):
     
     def __init__(self, **kwargs):
         self.excludes = []
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, "file_filter", **kwargs)
+
+    def execute(self, log_out, log_err):
+        return 0
         
     def output_files(self):
-        return filtered(self.excludes, self.input_files())
+        return _filtered(self.excludes, self.input_files())
                         
 class JavaTool(Component):
     
@@ -326,15 +309,11 @@ class JavaTool(Component):
 #        args.extend(orig_args)
         return args
     
-class FilterMCBunches(JavaTool):
+class FilterBunches(JavaTool):
     
     def __init__(self, **kwargs):
-        self.name = "Filter MC Bunches"
         self.java_class = "org.hps.util.FilterMCBunches"
-        
-        JavaTool.__init__(self, **kwargs)        
-                   
-        self.append = '_filt'
+        JavaTool.__init__(self, "filter_bunches", "java", **kwargs)
                     
     def cmd_args(self):
         orig_args = self.args
@@ -458,9 +437,8 @@ class LCIOCount(LCIOTool):
 class LHECount(Component):
     
     def __init__(self, minevents=0, **kwargs):
-        self.name = "lhe_count"
         self.minevents = minevents
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, name="lhe_count", **kwargs)
         
     def setup(self):
         if not len(self.inputs):
@@ -488,15 +466,10 @@ class LHECount(Component):
 class TarFiles(Component):
     
     def __init__(self, **kwargs):
-        self.name = "Tar files"
-        self.command = "python"
-        Component.__init__(self, **kwargs)
-
-    def cmd_exists(self):
-        return True
+        Component.__init__(self, 'tar_files', **kwargs)
         
     def execute(self, log_out, log_err):
-        logger.info("Opening '%s' for writing ..." % self.outputs[0])  
+        logger.info("Opening '%s' for writing ..." % self.outputs[0])
         tar = tarfile.open(self.outputs[0], "w")
         for i in self.inputs:
             logger.info("Adding '%s' to archive" % i)
@@ -507,8 +480,7 @@ class TarFiles(Component):
 class MakeTree(Component):
     
     def __init__(self, **kwargs):
-        self.name = "Make ROOT tree"
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, "make_tree", **kwargs)
         
     def cmd_exists(self):
         return True
@@ -562,9 +534,7 @@ class MakeTree(Component):
 class MoveFiles(Component):
 
     def __init__(self, **kwargs):
-        self.command = "mv"
-        self.name = "mv"
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, "move_files", **kwargs)
 
     def cmd_exists(self):
         return True
@@ -582,11 +552,8 @@ class MoveFiles(Component):
 class HPSTR(Component):
 
     def __init__(self, **kwargs):
-        
-        self.name = "hpstr"
-        self.command = self.name
-        
-        Component.__init__(self, **kwargs)
+                
+        Component.__init__(self, 'hpstr', **kwargs)
         
         if "year" in kwargs:
             self.year = kwargs["year"]
