@@ -1,1 +1,1 @@
-hps-mc-job slic -c .hpsmc job.json &> job.log
+hps-mc-job slic -c .hpsmc job.json
