@@ -19,10 +19,12 @@ mg = MG5(name="tritrig")
 cnv = StdHepConverter()
 
 # Add mother particle to tag trident particles
-mom = StdHepTool(name="add_mother")
+mom = StdHepTool(name="add_mother",
+                 append='_mom')
 
 # Rotate events into beam coords
-rot = StdHepTool(name="beam_coords")
+rot = StdHepTool(name="beam_coords",
+                 replace={'_mom': '_rot'})
 
 # Print results
 p = StdHepTool(name="print_stdhep")
