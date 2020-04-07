@@ -1,0 +1,9 @@
+{
+    "nevents": 10000,
+    "run_params": "1pt05",
+    "z": -5.0,
+    "output_files": {
+        "tritrig_unweighted_events_rot.stdhep": "tritrig_1.stdhep"
+    },
+    "output_dir": "output"
+}
