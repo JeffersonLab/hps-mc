@@ -129,7 +129,7 @@ class Job:
                     
         if cl.run_dir:
             self.rundir = cl.run_dir[0]
-  
+                  
     def __load_params(self, param_file):
         
         logger.info("Loading job params from '%s'" % param_file)
@@ -157,6 +157,9 @@ class Job:
             logger.info("Reading config from '%s'" % self.config)
             config.parser.read(self.config)
 
+        if not os.path.isabs(self.rundir):
+            raise Exception("The run dir '%s' is not an absolute path." % self.rundir)
+            
         if not os.path.exists(self.rundir):
             logger.info("Creating run dir '%s'" % self.rundir)
             os.makedirs(self.rundir)
@@ -225,15 +228,13 @@ class Job:
         logger.info("Running job '%s'" % self.name)
             
         if not self.dry_run:
-            for c in self.components:
-                
+            for c in self.components:                
                 logger.info("Executing '%s' with inputs %s and outputs %s" % 
-                            (c.name, str(c.inputs), str(c.outputs)))                
+                            (c.name, str(c.input_files()), str(c.output_files())))
                 start = time.time()
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
-                elapsed = end - start
-                
+                elapsed = end - start                
                 logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
                 
                 if returncode is not None:
