@@ -1,12 +1,14 @@
 {
-  "nevents": 10,
+  "nevents": 10000,
   "seed": 67890,
-  "detector": "HPS-EngRun2015-Nominal-v6-0-fieldmap",
+  "run_number": 7984,
+  "detector": "HPS-PhysicsRun2016-Pass2",
+  "macros": ["/work/slac/hps-mc/examples/slic/test.mac"],
   "input_files": {
-      "/work/slac/data/stdhep/wab-beam_0001.stdhep": "wab-beam.stdhep"
+      "/work/slac/data/stdhep/tritrig_1.stdhep": "tritrig.stdhep"
   },
   "output_files": {
-      "wab-beam.slcio": "wab-beam_0001.slcio"
+      "tritrig.slcio": "tritrig_2016.slcio"
   },
   "output_dir": "output"
 }
