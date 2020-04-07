@@ -48,6 +48,8 @@ class SLIC(Component):
             for macro in self.macros:
                 if macro == "run_number.mac":
                     raise Exception("Macro name '%s' is not allowed." % macro)
+                if not os.path.isabs(macro):
+                    raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
                         
         if self.nevents is not None:
@@ -128,11 +130,14 @@ class JobManager(Component):
     This component can take multiple inputs but will only write one output.
     """
 
-    def __init__(self, **kwargs):                
+    def __init__(self, steering, **kwargs):
         self.run_number = None
         self.detector = None
         self.event_print_interval = 1000
         self.defs = None
+        self.readout_steering = None
+        self.recon_steering = None
+        self.steering = steering
         Component.__init__(self, "job_manager", "java", **kwargs)
                             
     def required_config(self):
@@ -195,10 +200,14 @@ class JobManager(Component):
                 args.append("-D")
                 args.append(k+"="+str(v))
                 
-        if not os.path.isfile(self.steering):
-            # If steering isn't a valid file, assume it is a resource in the jar.
+        if self.steering not in self.steering_files:
+            raise Exception("The steering '%s' does not exist in %s" % str(self.steering_files))
+        steering_file = self.steering_files[self.steering]
+        logger.debug("Using steering file '%s'" % steering_file)
+        if not os.path.isfile(steering_file):
             args.append("-r")
-        args.append(self.steering)
+            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % steering_file)
+        args.append(steering_file)
             
         if self.nevents is not None:
             args.append("-n")
@@ -209,10 +218,10 @@ class JobManager(Component):
             args.append(input_file)
             
         return args
-    
-    def required_parameters(self):
-        return ['steering']
 
+    def required_parameters(self):
+        return ['steering_files']
+    
     def optional_parameters(self):
         return ['detector', 'run_number', 'defs']
     
