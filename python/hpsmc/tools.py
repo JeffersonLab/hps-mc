@@ -6,6 +6,27 @@ import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 
+def _replace(r, f):
+    nf = f
+    for k,v in r.iteritems():
+        if nf.endswith(k):
+            nf = nf.replace(k, v)
+            break
+    return nf
+
+def _filtered(exclude, seq):
+    r = []
+    for s in seq:
+        include = True
+        for e in exclude:
+            if e in s:
+                include = False
+                logger.info("Excluded '%s' which contains '%s'" % (s, e))
+                break
+        if include:
+            r.append(s)
+    return r
+
 class SLIC(Component):
 
     def __init__(self, **kwargs):
@@ -103,21 +124,15 @@ class JobManager(Component):
         self.replace = {
             '_filt': '_readout',
             '_readout': '_recon'
-        }                        
+        }
                             
     def required_config(self):
         return ['hps_java_bin_jar']
     
-    def __replace(self, f):
-        nf = f
-        for k,v in self.replace.iteritems():
-            if nf.endswith(k):
-                nf = nf.replace(k, v)
-                break
-        return nf
-    
     def output_files(self):
-        return [self.__replace(os.path.splitext(self.input_files()[0])[0]) + ".slcio"]
+        # Return one output file name with appropriate string replacement depending on if readout
+        # or recon is being run.
+        return [_replace(self.replace, os.path.splitext(self.input_files()[0])[0]) + ".slcio"]
             
     def cmd_args(self):
                
@@ -194,6 +209,8 @@ class JobManager(Component):
     
 class StdHepTool(Component):
 
+    # TODO: Need list of valid names rather than just those 
+    #       that accept a seed argument.
     seed_names = ["beam_coords",
                   "beam_coords_old",
                   "lhe_tridents",
@@ -205,15 +222,20 @@ class StdHepTool(Component):
     def __init__(self, **kwargs):
         Component.__init__(self, **kwargs)
         self.command = "stdhep_" + self.name
+        self.replace = {
+            '_mom': '_rot'
+        }        
+        self.append = ''
+        if self.name is 'add_mother':
+            self.append = '_mom'
 
     def cmd_args(self):
         
         args = []
-        
-        # FIXME: This seems hacky. :(
-        if self.name is "lhe_tridents_displacetime":
+ 
+        if self.name is "lhe_tridents_displacetime" and hasattr(self, "ctau"):
             args.extend(["-l", str(self.ctau)])
-        elif self.name is "beam_coords":
+        elif self.name is "beam_coords" and hasattr(self, "z"):        
             args.extend(["-z", str(self.z)])
         
         if self.name in StdHepTool.seed_names:
@@ -228,32 +250,16 @@ class StdHepTool(Component):
             for i in self.inputs:
                 args.insert(0, i)
         else:
-            raise Exception("Not enough inputs specified for StdHepTool.")
+            raise Exception("No inputs specified for StdHepTool.")
         
         return args
     
     def output_files(self):
-        self.outputs = []
-        for inputfile in self.input_files():
-            self.outputs.append("%s%s.stdhep"
-                                % (os.path.basename(os.path.splitext(inputfile)[0]), self.append))
-        return self.outputs
+        f = os.path.basename(os.path.splitext(self.input_files()[0])[0])
+        return ["%s%s.stdhep" % (_replace(self.replace, f), self.append)]
     
     def optional_parameters(self):
         return ['ctau', 'z']
-    
-def filtered(exclude, seq):
-    r = []
-    for s in seq:
-        include = True
-        for e in exclude:
-            if e in s:
-                include = False
-                logger.info("Excluded '%s' which contains '%s'" % (s, e))
-                break
-        if include:
-            r.append(s)
-    return r
 
 class Unzip(Component):
     """
@@ -275,7 +281,7 @@ class Unzip(Component):
         return self.outputs
         
     def input_files(self):
-        return filtered(self.exclude, Component.input_files(self))
+        return _filtered(self.exclude, Component.input_files(self))
                 
     def execute(self, log_out, log_err):
         for inputfile in self.input_files():
@@ -284,6 +290,18 @@ class Unzip(Component):
                 shutil.copyfileobj(in_file, out_file)
                 logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
                     
+class FileFilter(Component):
+    """
+    Filter input to output files based on a list of strings.
+    """
+    
+    def __init__(self, **kwargs):
+        self.excludes = []
+        Component.__init__(self, **kwargs)
+        
+    def output_files(self):
+        return filtered(self.excludes, self.input_files())
+                        
 class JavaTool(Component):
     
     def __init__(self, **kwargs):

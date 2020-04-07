@@ -16,7 +16,7 @@ class Component:
         self.outputs = []
         self.inputs = []
             
-        self.nevents = -1     
+        self.nevents = None
         self.seed = 1
         
         self.append = ''
@@ -103,24 +103,24 @@ class Component:
         Set class attributes for the component based on JSON parameters.
         
         Components should not need to override this method.
-        """       
-        
-        # Set required parameters. 
+        """
         for p in self.required_parameters():
-            if p not in params and not hasattr(self, p):
-                raise Exception("Required parameter '%s' is missing for component '%s'." 
-                                % (p, self.name))
-            elif p in params:
+            # Class attributes will not be overridden unless set to None.
+            if not hasattr(self, p) or getattr(self, p) is None:
+                if p not in params:
+                    raise Exception("Required parameter '%s' is missing for component '%s'." 
+                                    % (p, self.name))                
                 setattr(self, p, params[p])
                 logger.info("Set required parameter '%s' to '%s' for component '%s'."
                             % (p, params[p], self.name))
             
         # Set optional parameters.
         for p in self.optional_parameters():
-            if p in params:
-                setattr(self, p, params[p])
-                logger.info("Set optional parameter '%s' to '%s' for component '%s'."
-                            % (p, params[p], self.name))
+            if not hasattr(self, p):
+                if p in params:
+                    setattr(self, p, params[p])
+                    logger.info("Set optional parameter '%s' to '%s' for component '%s'."
+                                % (p, params[p], self.name))
     
     def required_parameters(self):
         """

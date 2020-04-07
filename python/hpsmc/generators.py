@@ -17,10 +17,10 @@ class EventGenerator(Component):
 class EGS5(EventGenerator):
 
     def __init__(self, **kwargs):         
-        EventGenerator.__init__(self, **kwargs)
-
         self.bunches = 5e5
         self.command = "egs5_" + self.name
+        
+        EventGenerator.__init__(self, **kwargs)
                 
     def setup(self):
         EventGenerator.setup(self)
@@ -62,19 +62,7 @@ class EGS5(EventGenerator):
         dest = os.path.join(self.rundir, self.output_files()[0])
         logger.info("Copying '%s' to '%s'" % (src, dest))
         shutil.copy(src, dest)
-        
-        """
-        pre_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
-        EventGenerator.execute(self, log_out, log_err)        
-        post_stdhep_files = glob.glob(os.path.join(self.rundir, "*.stdhep"))
-        for stdhep_file in post_stdhep_files:
-            if stdhep_file not in pre_stdhep_files:
-                stdhep_output_path = os.path.join(self.rundir, self.outputs[0])
-                logger.info("Moving '%s' to '%s'" % (stdhep_file, stdhep_output_path))
-                shutil.move(stdhep_file, stdhep_output_path)
-                break
-        """
-                            
+                                   
     def required_parameters(self):
         return ['run_params']
     
@@ -93,7 +81,7 @@ class StdHepConverter(EGS5):
     def config(self):
         EGS5.config(self)
 
-    def setup(self):    
+    def setup(self):
         EGS5.setup(self)
         if not len(self.inputs):
             raise Exception("Missing required input LHE file.")                    
@@ -111,17 +99,18 @@ class StdHepConverter(EGS5):
             f.close()
             infile.close()
         else:
-            raise Exception("Input file '%s' has an unknown extension." % self.inputs[0])
+            raise Exception("Input file '%s' has an unknown extension." % input_file)
         return EGS5.execute(self, log_out, log_err)
+    
+    def output_files(self):
+        return [self.input_files()[0].replace(".lhe.gz", ".stdhep").replace(".lhe", ".stdhep")]
     
 class MG(EventGenerator):
     """
     Abstract class for MadGraph generators.
     """    
     def __init__(self, **kwargs):
-    
-        EventGenerator.__init__(self, **kwargs)
-    
+        
         # Default name of param card
         self.param_card = "param_card.dat"
         
@@ -129,9 +118,12 @@ class MG(EventGenerator):
         # map = mass of the A-prime
         # mpid = mass of the dark pion
         # mrhod = mass of the dark rho
+        self.apmass = None
         self.map = None
         self.mpid = None
         self.mrhod = None
+        
+        EventGenerator.__init__(self, **kwargs)
     
     def output_files(self):
         return [self.name + "_unweighted_events.lhe.gz",
@@ -142,27 +134,27 @@ class MG(EventGenerator):
         self.run_card = "run_card_" + self.run_params + ".dat"
         
     def required_parameters(self):
-        return ['nevents', 'run_params', 'apmass']
+        return ['nevents', 'run_params']
     
     def optional_parameters(self):
-        return ['seed', 'param_card']
+        return ['seed', 'param_card', 'apmass']
     
     def required_config(self):
         return ['madgraph_dir']
         
     def make_run_card(self, run_card):
         
-        logger.info("Making run card '%s' with nevents %d and seed %d" % (run_card, self.nevents, self.seed))
+        logger.info("Making run card '%s' with nevents=%d, seed=%d" % (run_card, self.nevents, self.seed))
             
         with open(run_card, 'r') as file:
             data = file.readlines()
         
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
-                logger.info("Setting nevents %d in run card" % self.nevents)
+                logger.info("Setting nevents=%d in run card" % self.nevents)
                 data[i] = " " + str(self.nevents) + " = nevents ! Number of unweighted events requested" + '\n'
             if "= iseed" in data[i]:
-                logger.info("Setting seed %d in run card" % self.seed)
+                logger.info("Setting seed=%d in run card" % self.seed)
                 data[i] = " " + str(self.seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
                 
         with open(run_card, 'w') as file:
@@ -192,18 +184,28 @@ class MG(EventGenerator):
         with open(param_card, 'w') as file:
             file.writelines(data)
             
+    # FIXME: Change so it just copies specifically the weighted and unweighted event files
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
         logger.info("Executing '%s' from '%s'" % (self.name, os.getcwd()))
         Component.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
-            logger.info("Copying '%s' to '%s'" % (f, self.rundir))
-            shutil.copy(f, self.rundir)
+            dest = os.path.join(self.rundir, "%s_%s" % (self.name, os.path.basename(f)))
+            logger.info("Copying '%s' to '%s'" % (f, dest))
+            shutil.copy(f, dest)
         os.chdir(self.rundir)
-
+        
+    def setup(self):
+        
+        EventGenerator.setup(self)
+        
+        if self.name is 'ap' and self.apmass is None:
+            raise Exception("Missing apmass param for AP generation.")
+            
 class MG4(MG):
 
+    # TODO: Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH/MG_mini_BH/apBH",
                "RAD"     : "RAD/MG_mini_Rad/apRad",
                "TM"      : "TM/MG_mini/ap",
@@ -217,12 +219,12 @@ class MG4(MG):
         MG.__init__(self, **kwargs)
         
         if self.name not in MG4.dir_map:
-            raise Exception("The name '" + self.name + " is not valid for MG4.")
+            raise Exception("The name '%s' is not valid for MG4." % self.name)
                                                                    
     def setup(self):
         
         MG.setup(self)
-            
+        
         self.args = ["0", self.name]
 
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
@@ -255,6 +257,7 @@ class MG4(MG):
                                          
 class MG5(MG):
     
+    # TODO: Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH",
                "RAD"     : "RAD",
                "tritrig" : "tritrig",
@@ -265,27 +268,36 @@ class MG5(MG):
         MG.__init__(self, **kwargs)
         
         if self.name not in MG5.dir_map:
-            raise Exception("The name '" + self.name + " is not valid for MG4.")
-                                
+            raise Exception("The name '%s' is not valid for MG5." % self.name)
+
     def setup(self):
-        
+
         MG.setup(self)
-         
+                          
         self.args = ["0", self.name]
         
-        self.proc_dir = MG5.dir_map[self.name]        
-        src = os.path.join(self.madgraph_dir, self.proc_dir)        
+        self.proc_dir = MG5.dir_map[self.name]
+        self.event_dir = os.path.join(self.rundir, self.proc_dir, "Events", self.proc_dir)
+               
+        src = os.path.join(self.madgraph_dir, self.proc_dir)
         dest = os.path.join(self.rundir, self.proc_dir)
+        logger.info("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
+
+        # FIXME: This doesn't seem to work as generate_events doesn't read the input config. :(
+        """
+        input_dir = os.path.join(self.madgraph_dir, "input")
+        dest_input_dir = os.path.join(self.rundir, self.proc_dir, "input")
+        logger.info("Copying '%s' to '%s'" % (input_dir, dest_input_dir))
+        shutil.copytree(input_dir, dest_input_dir)
+        """
         
         self.command = os.path.join(dest, "bin", "generate_events")
         logger.info("Command set to '%s'" % self.command)
         
         run_card_src = os.path.join(src, "Cards", self.run_card)
-        run_card_dest = os.path.join(dest, "Cards", "run_card.dat")
-        
-        logger.info("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
-        
+        run_card_dest = os.path.join(dest, "Cards", "run_card.dat")        
+        logger.info("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))        
         shutil.copyfile(run_card_src, run_card_dest)
         
         self.make_run_card(run_card_dest)
