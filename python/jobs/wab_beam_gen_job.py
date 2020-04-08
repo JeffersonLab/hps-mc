@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Python script for generating 'wab-beam' StdHep events, which are beam backgrounds
 with single WAB events sampled using a Poisson distribution.

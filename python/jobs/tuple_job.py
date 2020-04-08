@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Creates a tar archive with ROOT tuple files from LCIO recon file inputs.
 """

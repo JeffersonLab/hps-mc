@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Python script for generating 'simp' events in MG5 and running through simulation, readout and reconstruction. 
 """
@@ -9,7 +7,7 @@ import sys, random
 from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterMCBunches, StdHepTool
+from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool
 
 job = Job(name="simp job")
 job.initialize()
@@ -52,7 +50,7 @@ slic = SLIC(detector=params.detector,
              ignore_returncode=True)
 
 # insert empty bunches expected by pile-up simulation
-filter_bunches = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
+filter_bunches = FilterBunches(java_args=["-DdisableSvtAlignmentConstants"],
                                  inputs=[procname+".slcio"],
                                  outputs=[procname+"_filt.slcio"],
                                  ecal_hit_ecut=0.05,

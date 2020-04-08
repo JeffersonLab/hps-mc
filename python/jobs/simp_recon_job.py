@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Python script for running readout 'simp' events through reconstruction.
 """
@@ -7,7 +5,7 @@ Python script for running readout 'simp' events through reconstruction.
 import sys, random
 
 from hpsmc.job import Job
-from hpsmc.tools import SLIC, JobManager, FilterMCBunches
+from hpsmc.tools import SLIC, JobManager, FilterBunches
 
 job = Job(name="simp job")
 job.initialize()

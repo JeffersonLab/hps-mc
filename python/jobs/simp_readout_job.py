@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Python script for running generating 'simp' events through PU simulation, readout.
 """
@@ -7,7 +5,7 @@ Python script for running generating 'simp' events through PU simulation, readou
 import sys, random
 
 from hpsmc.job import Job
-from hpsmc.tools import SLIC, JobManager, FilterMCBunches
+from hpsmc.tools import SLIC, JobManager, FilterBunches
 
 job = Job(name="simp job")
 job.initialize()
@@ -22,7 +20,7 @@ for input_file in input_files:
 procname = "simp"
 
 # insert empty bunches expected by pile-up simulation
-filter_bunches = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
+filter_bunches = FilterBunches(java_args=["-DdisableSvtAlignmentConstants"],
                                  inputs=simp_files,
                                  outputs=[procname+"_filt.slcio"],
                                  ecal_hit_ecut=0.05,
