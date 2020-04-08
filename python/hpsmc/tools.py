@@ -133,7 +133,7 @@ class JobManager(Component):
     def __init__(self, steering, **kwargs):
         self.run_number = None
         self.detector = None
-        self.event_print_interval = 1000
+        self.event_print_interval = None
         self.defs = None
         self.readout_steering = None
         self.recon_steering = None
@@ -180,8 +180,9 @@ class JobManager(Component):
         args.append("-jar")
         args.append(self.hps_java_bin_jar)
         
-        args.append("-e")
-        args.append(str(self.event_print_interval))
+        if self.event_print_interval is not None:
+            args.append("-e")
+            args.append(str(self.event_print_interval))
         
         if self.run_number is not None:
             args.append("-R")
@@ -312,12 +313,9 @@ class FileFilter(Component):
                         
 class JavaTool(Component):
     
-    def __init__(self, name="java", command=None, **kwargs):
+    def __init__(self, java_class, name="java", command="java", **kwargs):
         Component.__init__(self, name, command, **kwargs)
-        if "java_class" in kwargs:
-            self.java_class = kwargs["java_class"]
-        elif self.java_class is None:
-            raise Exception("Missing java_class argument for JavaTool.")
+        self.java_class = java_class
             
     def cmd_args(self):
         #orig_args = self.args
@@ -333,10 +331,27 @@ class JavaTool(Component):
         return args
     
 class FilterBunches(JavaTool):
+    """
+    Space MC events and apply energy filters to process before readout.
+    
+    The nevents parameter is not settable from JSON in this class. It should
+    be supplied as an init argument in the job script if it needs to be
+    customized (the default nevents and event_interval used to apply spacing 
+    should usually not need to be changed by the user).
+    """
     
     def __init__(self, **kwargs):
-        self.java_class = "org.hps.util.FilterMCBunches"
-        JavaTool.__init__(self, "filter_bunches", "java", **kwargs)
+        
+        # Default max output events
+        nevents = 2000000
+        
+        # Default event spacing interval
+        event_interval = 250
+        
+        JavaTool.__init__(self, 
+                          name="filter_bunches", 
+                          command="java",
+                          java_class="org.hps.util.FilterMCBunches", **kwargs)
                     
     def cmd_args(self):
         orig_args = self.args
@@ -361,13 +376,10 @@ class FilterBunches(JavaTool):
         for infile in self.input_files():
             self.outputs.append(os.path.splitext(infile)[0] + self.append + ".slcio")
         return self.outputs
-    
-    def required_parameters(self):
-        return ['event_interval']
-    
+        
     def optional_parameters(self):
-        return ['ecal_hit_ecut', 'enable_ecal_energy_filter']
-                
+        return ['ecal_hit_ecut', 'enable_ecal_energy_filter', 'event_interval']
+                   
 class LCIODumpEvent(Component):
 
     def __init__(self, **kwargs):
@@ -576,64 +588,57 @@ class HPSTR(Component):
 
     def __init__(self, **kwargs):
                 
-        Component.__init__(self, 'hpstr', **kwargs)
-        
-        if "year" in kwargs:
-            self.year = kwargs["year"]
-            
-        if "run_mode" in kwargs:
-            self.run_mode = kwargs["run_mode"]
-        else:
-            self.run_mode = 0
-            logger.info("Using default run_mode: %d" % self.run_mode)
-            
-        if "cfg" in kwargs:
-            self.cfg = kwargs["cfg"]
-        else:
-            raise Exception("Missing required argument cfg pointing to Python config file.")
-        
-    def setup(self):     
-        try:
-            self.hpstr_install_dir
-        except:
-            raise Exception("Missing required hpstr config hpstr_install_dir")
+        self.run_mode = 0
+        self.year = None
 
-        try:
-            self.hpstr_base
-        except:
-            raise Exception("Missing required hpstr config hpstr_base")
-        
+        Component.__init__(self, 'hpstr', **kwargs)
+                    
+    def setup(self):      
         if not os.path.exists(self.hpstr_install_dir):
             raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
         self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
-        
-    def cmd_args(self):
 
-        if not len(self.inputs):
-            raise Exception("No inputs given for HPSTR.")
-        
-        if not len(self.outputs):
-            raise Exception("No inputs given for HPSTR.")
+        if len(os.path.dirname(self.cfg)):
+            if os.path.isabs(self.cfg):
+                self.cfg_path = self.cfg
+            else:
+                raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
+        else:
+            self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", self.cfg)
             
-        self.args = ["-t", str(self.run_mode),
-                     "-i", self.inputs[0],
-                     "-o", self.outputs[0]]
-        if self.nevents != -1:
+        logger.info("Set config path to '%s'" % self.cfg_path)
+
+    def required_parameters(self):
+        return ['cfg']
+    
+    def optional_parameters(self):
+        return ['year', 'run_mode', 'nevents']
+
+    def required_config(self):
+        return ['hpstr_install_dir', 'hpstr_base']
+        
+    def cmd_args(self):                
+        self.args = [self.cfg_path,            
+                     "-t", str(self.run_mode),
+                     "-i", self.input_files()[0],
+                     "-o", self.output_files()[0]]
+        if self.nevents is not None:
             self.args.extend(["-n", str(self.nevents)])
-        if hasattr(self, "year"):
+        if self.year is not None:
             self.args.extend(["-y", str(self.year)])
-        
         return self.args
+    
+    def output_files(self):
+        if self.run_mode is 0:
+            return ['%s.root' % (os.path.splitext(f)[0]) for f in self.input_files()]
+        else:
+            raise Exception("Don't know how to make output file list for run_mode != 0 yet!")
                 
-    def execute(self, log_out, log_err):
-               
+    def execute(self, log_out, log_err):               
         args = self.cmd_args()
-        
-        cfg_path = os.path.join(self.hpstr_base, "processors",  "config", self.cfg)
-                
-        cl = 'bash -c ". %s && %s %s %s"' % (self.env_script, self.command, cfg_path,
-                                             ' '.join(self.cmd_args()))
-                                                  
+        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, 
+                                          ' '.join(self.cmd_args()))
+
         logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
