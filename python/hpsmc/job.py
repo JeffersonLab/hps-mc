@@ -56,9 +56,7 @@ class Job:
         self.delete_rundir = False
         self.dry_run = False
         self.ignore_return_codes = True
-        
-        # TODO: Check output files of each component
-        # self.check_output_files = True
+        self.check_output_files = True
         
         self.__initialize()
 
@@ -236,14 +234,15 @@ class Job:
                 end = time.time()
                 elapsed = end - start                
                 logger.info("Execution of '%s' took %d second(s)" % (c.name, elapsed))
-                
-                if returncode is not None:
-                    logger.info("Return code of '%s' was %d" % (c.name, returncode))
-                else:
-                    logger.info("No return code from '%s'" % c.name)
-                                    
+                logger.info("Return code of '%s' was %s" % (c.name, str(returncode)))
+                                     
                 if not self.ignore_return_codes and proc.returncode:
                     raise Exception("Non-zero return code %d from '%s'" % (proc.returncode, self.name))
+                
+                if self.check_output_files:
+                    for outputfile in c.output_files():
+                        if not os.path.isfile(outputfile):
+                            raise Exception("Output file '%s' is missing after execution." % outputfile)
         else:
             # Dry run mode. Just print component info but do not execute.
             logger.info("Dry run enabled. Components will NOT be executed!")
