@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Job for concatenating LCIO files together.
 

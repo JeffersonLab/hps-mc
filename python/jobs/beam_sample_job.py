@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Python script for creating beam background events.
 

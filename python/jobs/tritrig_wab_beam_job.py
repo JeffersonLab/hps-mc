@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 Script to generate 'tritrig-wab-beam' events (Oh my!) from sets of input LCIO files.
 
@@ -13,7 +11,7 @@ must be the same length or an error will be raised.
 """
 
 from hpsmc.job import Job
-from hpsmc.tools import FilterMCBunches, LCIOTool, JobManager
+from hpsmc.tools import FilterBunches, LCIOTool, JobManager
 
 job = Job(name="tritrig job")
 job.initialize()
@@ -33,8 +31,7 @@ if len(tritrig_files) != len(wab_files):
     raise Exception("The 'tritrig' and 'wab-beam' input file lists must have the same length.")
 
 # filter and space tritrig files
-filter_tritrig = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
-                                 inputs=tritrig_files,
+filter_tritrig = FilterBunches(inputs=tritrig_files,
                                  outputs=["tritrig_filter.slcio"],
                                  ecal_hit_ecut=0.05,
                                  enable_ecal_energy_filter=True,
@@ -42,8 +39,7 @@ filter_tritrig = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
                                  event_interval=250)
 
 # filter and space wab-beam files
-filter_wab = FilterMCBunches(java_args=["-DdisableSvtAlignmentConstants"],
-                             inputs=wab_files,
+filter_wab = FilterBunches(inputs=wab_files,
                              outputs=["wab-beam_filter.slcio"],
                              event_interval=0,
                              enable_ecal_energy_filter=False,
@@ -55,7 +51,6 @@ merge = LCIOTool(name="merge",
 
 # run simulated events in readout to generate triggers
 readout = JobManager(steering_resource=params.readout_steering,
-                     java_args=["-DdisableSvtAlignmentConstants"],
                      run=params.run,
                      detector=params.detector,
                      inputs=["merged.slcio"],
@@ -63,7 +58,6 @@ readout = JobManager(steering_resource=params.readout_steering,
 
 # run physics reconstruction
 recon = JobManager(steering_resource=params.recon_steering,
-                   java_args=["-DdisableSvtAlignmentConstants"],
                    run=params.run,
                    detector=params.detector,
                    inputs=["readout.slcio"],

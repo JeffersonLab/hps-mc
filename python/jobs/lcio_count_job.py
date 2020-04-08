@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 from hpsmc.job import Job
 from hpsmc.tools import LCIOCount

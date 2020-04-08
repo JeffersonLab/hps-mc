@@ -8,7 +8,8 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool
 job = Job()
 
 # Insert empty bunches expected by pile-up simulation
-filter_bunches = FilterBunches(nevents=2000000, append='_filt')
+filter_bunches = FilterBunches(nevents=2000000,
+                               append='_filt')
 
 # Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout',
