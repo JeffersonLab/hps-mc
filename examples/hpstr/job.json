@@ -1,12 +1,13 @@
 {
 
     "cfg": "recoTuple_cfg.py",
+    "run_mode": 0,
+    "nevents": 50,
     "input_files": {
-        "/work/slac/hps-mc/examples/hpstr/events.slcio": "events.slcio"
+        "/work/slac/hps-mc/examples/readout_recon/output/tritrig_2016_recon_1.slcio": "recon_events.slcio"
     },
     "output_files": {
-        "events.root": "events.root"
+        "recon_events.root": "tritrig_2016_recon_1.root"
     },
-    "output_dir": "output",
-    "nevents": 100
+    "output_dir": "output"
 }
