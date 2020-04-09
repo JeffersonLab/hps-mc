@@ -1,7 +1,0 @@
-[JobManager]
-hps_java_bin_jar = /home/jermc/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
-java_args = -Xmx1g -XX:+UseSerialGC
-logging_config_file = /work/slac/hps-mc/scratch/hps-java/logging.properties
-lcsim_cache_dir = /tmp
-event_print_interval = 1000
-conditions_url = jdbc:sqlite:/work/slac/data/hps_conditions.db
