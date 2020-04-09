@@ -126,8 +126,6 @@ class SLIC(Component):
 class JobManager(Component):
     """
     Run the hps-java JobManager class.
-    
-    This component can take multiple inputs but will only write one output.
     """
 
     def __init__(self, steering, **kwargs):
@@ -137,12 +135,26 @@ class JobManager(Component):
         self.defs = None
         self.readout_steering = None
         self.recon_steering = None
+        self.java_args = None
+        self.logging_config_file = None
+        self.lcsim_cache_dir = None
+        self.conditions_user = None
+        self.conditions_password = None
+        self.conditions_url = None        
         self.steering = steering
         Component.__init__(self, "job_manager", "java", **kwargs)
                             
     def required_config(self):
         return ['hps_java_bin_jar']
     
+    def setup(self):
+        if not len(self.input_files()):
+            raise Exception("No inputs provided to hps-java.")
+        
+        if self.steering not in self.steering_files:
+            raise Exception("Steering '%s' not found in %s" % (self.steering, self.steering_files))        
+        self.steering_file = self.steering_files[self.steering]
+        
     def output_files(self):
         # Return one output file name with appropriate string replacement depending on if readout
         # or recon is being run.
@@ -151,30 +163,27 @@ class JobManager(Component):
     def cmd_args(self):
                
         args = []
-                                
-        if not len(self.input_files()):
-            raise Exception("No inputs provided to hps-java.")
-        
-        if hasattr(self, "java_args"):
-            logger.info("Setting java_args from config: %s" % self.java_args)
+                
+        if self.java_args is not None:
+            logger.debug("Setting java_args from config: %s" % self.java_args)
             args.append(self.java_args)
         
-        if hasattr(self, "logging_config_file"):
-            logger.info("Setting logging_config_file from config: %s" % self.logging_config_file)
+        if self.logging_config_file is not None:
+            logger.debug("Setting logging_config_file from config: %s" % self.logging_config_file)
             args.append("-Djava.util.logging.config.file=%s" % self.logging_config_file)
         
-        if hasattr(self, "lcsim_cache_dir"):
-            logger.info("setting lcsim_cache_dir from config: %s" % self.lcsim_cache_dir)
+        if self.lcsim_cache_dir is not None:
+            logger.debug("setting lcsim_cache_dir from config: %s" % self.lcsim_cache_dir)
             args.append("-Dorg.lcsim.cacheDir=%s" % self.lcsim_cache_dir)
         
-        if hasattr(self, "conditions_user"):
-            logger.info("Setting conditions_user from config: %s" % self.conditions_user)
+        if self.conditions_user is not None:
+            logger.debug("Setting conditions_user from config: %s" % self.conditions_user)
             args.append("-Dorg.hps.conditions.user=%s" % self.conditions_user)
-        if hasattr(self, "conditions_password"):
-            logger.info("Setting conditions_password from config (not shown)")
+        if self.conditions_password is not None:
+            logger.debug("Setting conditions_password from config (not shown)")
             args.append("-Dorg.hps.conditions.password=%s" % self.conditions_password)
-        if hasattr(self, "conditions_url"):
-            logger.info("Setting conditions_url from config: %s" % self.conditions_url)
+        if self.conditions_url is not None:
+            logger.debug("Setting conditions_url from config: %s" % self.conditions_url)
             args.append("-Dorg.hps.conditions.url=%s" % self.conditions_url)
         
         args.append("-jar")
@@ -200,16 +209,15 @@ class JobManager(Component):
             for k,v in self.defs.iteritems():
                 args.append("-D")
                 args.append(k+"="+str(v))
-                
-        if self.steering not in self.steering_files:
-            raise Exception("The steering '%s' does not exist in %s" % str(self.steering_files))
-        steering_file = self.steering_files[self.steering]
-        logger.debug("Using steering file '%s'" % steering_file)
-        if not os.path.isfile(steering_file):
+    
+        if not os.path.isfile(self.steering_file):
             args.append("-r")
-            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % steering_file)
-        args.append(steering_file)
-            
+            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
+        else:
+            if not os.path.isabs(self.steering_file):
+                raise Exception("Steering '%s' looks like a file but is not an abs path." % self.steering_file)
+        args.append(self.steering_file)
+                            
         if self.nevents is not None:
             args.append("-n")
             args.append(str(self.nevents))
@@ -219,16 +227,94 @@ class JobManager(Component):
             args.append(input_file)
             
         return args
-
+    
     def required_parameters(self):
         return ['steering_files']
     
     def optional_parameters(self):
         return ['detector', 'run_number', 'defs']
+
+class HPSTR(Component):
+    """
+    Component for the hpstr analysis tool.
+    """
+
+    def __init__(self, cfg, **kwargs):
+                
+        self.run_mode = 0
+        self.year = None
+        self.cfg = cfg
+
+        Component.__init__(self, 'hpstr', **kwargs)
+        
+        if not len(self.append):
+            self.append = "_%s" % self.cfg
+            logger.debug("Append automatically set to '%s'" % self.append)
+                    
+    def setup(self):              
+        if not os.path.exists(self.hpstr_install_dir):
+            raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
+        self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
+        
+        if self.cfg not in self.config_files:
+            raise Exception("Config '%s' was not found in %s" % (self.cfg, self.config_files))
+        config_file = self.config_files[self.cfg]
+        if len(os.path.dirname(config_file)):
+            if os.path.isabs(config_file):
+                self.cfg_path = config_file
+            else:
+                raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
+        else:
+            self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
+            
+        logger.info("Set config path to '%s'" % self.cfg_path)
     
+    def required_parameters(self):
+        return ['config_files']
+    
+    def optional_parameters(self):
+        return ['year', 'run_mode', 'nevents']
+
+    def required_config(self):
+        return ['hpstr_install_dir', 'hpstr_base']
+        
+    def cmd_args(self):
+        args = [self.cfg_path,
+                "-t", str(self.run_mode),
+                "-i", self.input_files()[0],
+                "-o", self.output_files()[0]]
+        if self.nevents is not None:
+            args.extend(["-n", str(self.nevents)])
+        if self.year is not None:
+            args.extend(["-y", str(self.year)])
+        return args
+    
+    def output_files(self):
+        f,ext = os.path.splitext(self.input_files()[0])
+        print(f)
+        print(ext)
+        if '.slcio' in ext:
+            print('>>>> slcio')
+            return ['%s.root' % f]
+        else:
+            print('>>>> root')
+            return ['%s%s.root' % (f, self.append)]
+                
+    def execute(self, log_out, log_err):               
+        args = self.cmd_args()
+        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, 
+                                          ' '.join(self.cmd_args()))
+
+        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+        
+        return proc.returncode
+        
 class StdHepTool(Component):
 
-    # TODO: Need list of valid names rather than just those 
+    # TODO: Need list of valid program names rather than just those
     #       that accept a seed argument.
     seed_names = ["beam_coords",
                   "beam_coords_old",
@@ -314,20 +400,21 @@ class FileFilter(Component):
 class JavaTool(Component):
     
     def __init__(self, java_class, name="java", command="java", **kwargs):
-        Component.__init__(self, name, command, **kwargs)
         self.java_class = java_class
+        self.java_args = None
+        Component.__init__(self, name, command, **kwargs)
+
+    def required_config(self):
+        return ['hps_java_bin_jar']
             
     def cmd_args(self):
-        #orig_args = self.args
         args = []
-        # copied from JobManager
-        if hasattr(self, "java_args"):
+        if self.java_args is not None:
             logger.info("setting java_args from config: %s" + self.java_args)
             args.append(self.java_args)
         args.append("-cp")
         args.append(self.hps_java_bin_jar)
         args.append(self.java_class)
-#        args.extend(orig_args)
         return args
     
 class FilterBunches(JavaTool):
@@ -354,22 +441,22 @@ class FilterBunches(JavaTool):
                           java_class="org.hps.util.FilterMCBunches", **kwargs)
                     
     def cmd_args(self):
-        orig_args = self.args
-        self.args = JavaTool.cmd_args(self)
-        self.args.append("-e")
-        self.args.append(str(self.event_interval))
+        
+        args = JavaTool.cmd_args(self)
+        args.append("-e")
+        args.append(str(self.event_interval))
         for i in self.input_files():
-            self.args.append(i)
-        self.args.append(self.output_files()[0])
+            args.append(i)
+        args.append(self.output_files()[0])
         if self.enable_ecal_energy_filter:
-            self.args.append("-d")
+            args.append("-d")
         if self.ecal_hit_ecut is not None:
-            self.args.append("-E")
-            self.args.append(str(self.ecal_hit_ecut))
+            args.append("-E")
+            args.append(str(self.ecal_hit_ecut))
         if self.nevents > 0:
-            self.args.append("-w")
-            self.args.append(str(self.nevents))
-        return self.args
+            args.append("-w")
+            args.append(str(self.nevents))
+        return args
     
     def output_files(self):
         self.outputs = []
@@ -397,12 +484,12 @@ class LCIODumpEvent(Component):
         self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
-        if not len(self.inputs):
+        if not len(self.input_files()):
             raise Exception("Missing required inputs for LCIODumpEvent.")
-        self.args = []
-        self.args.append(self.inputs[0])
-        self.args.append(str(self.event_num))
-        return self.args
+        args = []
+        args.append(self.input_files()[0])
+        args.append(str(self.event_num))
+        return args
 
 class LCIOTool(Component):
 
@@ -411,11 +498,10 @@ class LCIOTool(Component):
         Component.__init__(self, **kwargs)
 
     def cmd_args(self):
-        orig_args = self.args
-        self.args = ["-jar", self.lcio_bin_jar]
-        self.args.append(self.name)
-        self.args.extend(orig_args)
-        return self.args
+        args = []
+        args = ["-jar", self.lcio_bin_jar]
+        args.append(self.name)
+        return args
     
 class LCIOConcat(LCIOTool):
     
@@ -425,14 +511,13 @@ class LCIOConcat(LCIOTool):
         
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
-        if not len(self.inputs):
+        if not len(self.input_files()):
             raise Exception("Missing at least one input file.")
-        if not len(self.outputs):
-            raise Exception("Missing output file.")
-        for i in self.inputs:
+        if not len(self.output_files()):
+            raise Exception("Missing an output file.")
+        for i in self.input_files():
             args.extend(["-f", i])
         args.extend(["-o", self.outputs[0]])
-        self.args = args
         return self.args
 
 class LCIOCount(LCIOTool):
@@ -447,8 +532,7 @@ class LCIOCount(LCIOTool):
         if not len(self.inputs):
             raise Exception("Missing an input file.")
         args.extend(["-f", self.inputs[0]])
-        self.args = args
-        return self.args
+        return args
 
     def execute(self, log_out, log_err):
         
@@ -512,6 +596,22 @@ class TarFiles(Component):
         tar.close()
         logger.info("Wrote archive '%s'" % self.outputs[0])
 
+class MoveFiles(Component):
+
+    def __init__(self, **kwargs):
+        Component.__init__(self, "move_files", **kwargs)
+
+    def execute(self, log_out, log_err):
+        if len(self.inputs) != len(self.outputs):
+            raise Exception("Input and output lists are not the same length!")
+        for io in zip(self.inputs, self.outputs):
+            print io
+            src = io[0]
+            dest = io[1] 
+            logger("Moving '%s' to '%s'" % (src, dest))
+            shutil.move(src, dest)            
+
+"""
 class MakeTree(Component):
     
     def __init__(self, **kwargs):
@@ -565,84 +665,4 @@ class MakeTree(Component):
             print tree.ReadFile(input_files[0])
         
         tree.Write()
-
-class MoveFiles(Component):
-
-    def __init__(self, **kwargs):
-        Component.__init__(self, "move_files", **kwargs)
-
-    def cmd_exists(self):
-        return True
-
-    def execute(self, log_out, log_err):
-        if len(self.inputs) != len(self.outputs):
-            raise Exception("Input and output lists are not the same length!")
-        for io in zip(self.inputs, self.outputs):
-            print io
-            src = io[0]
-            dest = io[1] 
-            logger("Moving '%s' to '%s'" % (src, dest))
-            shutil.move(src, dest)
-            
-class HPSTR(Component):
-
-    def __init__(self, **kwargs):
-                
-        self.run_mode = 0
-        self.year = None
-
-        Component.__init__(self, 'hpstr', **kwargs)
-                    
-    def setup(self):      
-        if not os.path.exists(self.hpstr_install_dir):
-            raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
-        self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
-
-        if len(os.path.dirname(self.cfg)):
-            if os.path.isabs(self.cfg):
-                self.cfg_path = self.cfg
-            else:
-                raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
-        else:
-            self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", self.cfg)
-            
-        logger.info("Set config path to '%s'" % self.cfg_path)
-
-    def required_parameters(self):
-        return ['cfg']
-    
-    def optional_parameters(self):
-        return ['year', 'run_mode', 'nevents']
-
-    def required_config(self):
-        return ['hpstr_install_dir', 'hpstr_base']
-        
-    def cmd_args(self):                
-        self.args = [self.cfg_path,            
-                     "-t", str(self.run_mode),
-                     "-i", self.input_files()[0],
-                     "-o", self.output_files()[0]]
-        if self.nevents is not None:
-            self.args.extend(["-n", str(self.nevents)])
-        if self.year is not None:
-            self.args.extend(["-y", str(self.year)])
-        return self.args
-    
-    def output_files(self):
-        if self.run_mode is 0:
-            return ['%s.root' % (os.path.splitext(f)[0]) for f in self.input_files()]
-        else:
-            raise Exception("Don't know how to make output file list for run_mode != 0 yet!")
-                
-    def execute(self, log_out, log_err):               
-        args = self.cmd_args()
-        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, 
-                                          ' '.join(self.cmd_args()))
-
-        logger.info("Executing '%s' with command: %s" % (self.name, cl))
-        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
-        proc.communicate()
-        proc.wait()
-        
-        return proc.returncode
-        
+"""

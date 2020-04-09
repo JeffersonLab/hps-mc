@@ -1,7 +1,7 @@
 { 
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
-        "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
+        "reco": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
     "ecal_hit_ecut": 0.05,
     "enable_ecal_energy_filter": true,
