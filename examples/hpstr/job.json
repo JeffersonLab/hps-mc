@@ -1,13 +1,16 @@
 {
-
-    "cfg": "recoTuple_cfg.py",
+    "config_files": {
+        "reco": "recoTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
     "run_mode": 0,
     "nevents": 50,
     "input_files": {
         "/work/slac/hps-mc/examples/readout_recon/output/tritrig_2016_recon_1.slcio": "recon_events.slcio"
     },
     "output_files": {
-        "recon_events.root": "tritrig_2016_recon_1.root"
+        "recon_events.root": "recon_events.root",
+        "recon_events_ana.root": "tritrig_ana.root"
     },
     "output_dir": "output"
 }
