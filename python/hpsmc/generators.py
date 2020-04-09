@@ -178,6 +178,9 @@ class MG(EventGenerator):
         with open(param_card, 'w') as file:
             file.writelines(data)
             
+    def cmd_args(self):
+        return ["0", self.name]
+            
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
         logger.info("Executing '%s' from '%s'" % (self.name, os.getcwd()))
@@ -212,8 +215,6 @@ class MG4(MG):
         
         MG.setup(self)
         
-        self.args = ["0", self.name]
-
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
         src = os.path.join(self.madgraph_dir, proc_dirs[0], proc_dirs[1])
         dest = proc_dirs[1]
@@ -240,10 +241,7 @@ class MG4(MG):
         shutil.copyfile(param_card_src, param_card_dest)
                 
         self.make_param_card(param_card_dest)
-        
-    def cmd_args(self):
-        return ["0", self.name]
-        
+                
     def execute(self, log_out, log_err):
         returncode = MG.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
