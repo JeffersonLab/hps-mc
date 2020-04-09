@@ -16,7 +16,7 @@ readout = JobManager(steering='readout',
                     replace={'_filt': '_readout'})
 
 # Run physics reconstruction
-reco = JobManager(steering='reco',
+reco = JobManager(steering='recon',
                    replace={'_readout': '_recon'})
 
 job.add([filter_bunches, readout, reco])

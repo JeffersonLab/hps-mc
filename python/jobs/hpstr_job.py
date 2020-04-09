@@ -4,7 +4,7 @@ from hpsmc.tools import HPSTR
 job = Job()
 
 # Convert LCIO to ROOT
-cnv = HPSTR(cfg='reco')
+cnv = HPSTR(cfg='recon')
 
 # Run an analysis on the ROOT file
 ana = HPSTR(cfg='ana')
