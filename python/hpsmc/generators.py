@@ -45,7 +45,6 @@ class EGS5(EventGenerator):
         logger.info("Read target_z=%d, ebeam=%d, electrons=%d from '%s' run params"
                     % (target_z, ebeam, electrons, self.run_params))
                 
-#        logger.info("Generating %d electrons" % electrons)        
         seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
         seed_file = open("seed.dat", 'w')
         seed_file.write(seed_data)
@@ -129,6 +128,7 @@ class MG(EventGenerator):
     def set_parameters(self, params):
         Component.set_parameters(self, params)
         self.run_card = "run_card_" + self.run_params + ".dat"
+        logger.info("Set run card to '%s'" % self.run_card)     
         
     def required_parameters(self):
         return ['nevents', 'run_params']
@@ -165,23 +165,19 @@ class MG(EventGenerator):
             data = file.readlines()
 
         for i in range(0, len(data)):
-            if "APMASS" in data[i]:
+            if "APMASS" in data[i] and self.apmass is not None:
                 data[i] = "       622     %.7fe-03   # APMASS" % (self.apmass) + '\n'
                 logger.info("APMASS in param card set to %d" % self.apmass)
-            if "map" in data[i]:
-                if self.map is not None:
-                    data[i] = "      622 %.7fe-03 # map" % (params["map"]) + '\n'
-            if "mpid" in data[i]:
-                if self.mpid is not None:
-                    data[i] = "      624 %.7fe-03 # mpid" % (params["mpid"]) + '\n'
-            if "mrhod" in data[i]:
-                if self.mrhod is not None:
-                    data[i] = "      625 %.7fe-03 # mrhod" % (params["mrhod"]) + '\n'
+            if "map" in data[i] and self.map is not None:
+                data[i] = "      622 %.7fe-03 # map" % (params["map"]) + '\n'
+            if "mpid" in data[i] and self.mpid is not None:
+                data[i] = "      624 %.7fe-03 # mpid" % (params["mpid"]) + '\n'
+            if "mrhod" in data[i] and self.mrhod is not None:
+                data[i] = "      625 %.7fe-03 # mrhod" % (params["mrhod"]) + '\n'
                                 
         with open(param_card, 'w') as file:
             file.writelines(data)
             
-    # FIXME: Change so it just copies specifically the weighted and unweighted event files
     def execute(self, log_out, log_err):
         os.chdir(os.path.dirname(self.command))
         logger.info("Executing '%s' from '%s'" % (self.name, os.getcwd()))
@@ -236,7 +232,6 @@ class MG4(MG):
         logger.info("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         shutil.copyfile(run_card_src, run_card_dest)
         
-        logger.info("Making run card '%s'" % run_card_dest)
         self.make_run_card(run_card_dest)
         
         param_card_src = os.path.join(self.madgraph_dir, proc_dirs[0], self.param_card)
@@ -245,6 +240,9 @@ class MG4(MG):
         shutil.copyfile(param_card_src, param_card_dest)
                 
         self.make_param_card(param_card_dest)
+        
+    def cmd_args(self):
+        return ["0", self.name]
         
     def execute(self, log_out, log_err):
         returncode = MG.execute(self, log_out, log_err)
@@ -274,9 +272,7 @@ class MG5(MG):
     def setup(self):
 
         MG.setup(self)
-                          
-        self.args = ["0", self.name]
-        
+                                  
         self.proc_dir = MG5.dir_map[self.name]
         self.event_dir = os.path.join(self.rundir, self.proc_dir, "Events", self.proc_dir)
                
