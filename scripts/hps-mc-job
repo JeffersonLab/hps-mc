@@ -24,9 +24,11 @@ shift
 args=$@
 
 job_script=$HPSMC_DIR/lib/python/jobs/${job_name}_job.py
-echo job_script=$job_script
+#echo job_script=$job_script
 if [ -f "$job_script" ]; then
-    python $job_script $@
+    cmd="python $job_script $@"
+    echo "Executing: $cmd"
+    exec $cmd
 else 
     echo "ERROR: No job script exists for '${job_name}' in '$HPSMC_DIR/lib/python/jobs' dir."
     print_jobs
