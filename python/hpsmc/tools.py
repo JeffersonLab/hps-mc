@@ -6,34 +6,22 @@ import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 
-def _replace(r, f):
-    nf = f
-    for k,v in r.iteritems():
-        if nf.endswith(k):
-            nf = nf.replace(k, v)
-            break
-    return nf
-
-def _filtered(exclude, seq):
-    r = []
-    for s in seq:
-        include = True
-        for e in exclude:
-            if e in s:
-                include = False
-                logger.info("Excluded '%s' which contains '%s'" % (s, e))
-                break
-        if include:
-            r.append(s)
-    return r
-
 class SLIC(Component):
 
     def __init__(self, **kwargs):
+        
+        # List of macros to run (optional)
         self.macros = []
-        self.run_number = None
-        Component.__init__(self, "slic", **kwargs)
-                 
+        
+        # Run number to set on output file (optional)
+        self.run_number = None                
+        
+        Component.__init__(self, 
+                           name="slic",
+                           command="slic",
+                           replacements={'rot': ''},
+                           output_ext='.slcio')
+                               
     def cmd_args(self):
         
         if not len(self.input_files()):
@@ -116,19 +104,13 @@ class SLIC(Component):
         
         return proc.returncode
     
-    def output_files(self):
-        self.outputs = []
-        for infile in self.input_files():
-            filename,ext = os.path.splitext(infile)
-            self.outputs.append("%s.slcio" % os.path.basename(filename))
-        return self.outputs 
-
 class JobManager(Component):
     """
     Run the hps-java JobManager class.
     """
 
-    def __init__(self, steering, **kwargs):
+    def __init__(self, steering):        
+        
         self.run_number = None
         self.detector = None
         self.event_print_interval = None
@@ -142,8 +124,13 @@ class JobManager(Component):
         self.conditions_password = None
         self.conditions_url = None        
         self.steering = steering
-        Component.__init__(self, "job_manager", "java", **kwargs)
-                            
+        
+        Component.__init__(self,
+                           name="job_manager", 
+                           command="java", 
+                           replacements={'filt': 'readout',
+                                         'readout': 'recon'})
+                                    
     def required_config(self):
         return ['hps_java_bin_jar']
     
@@ -153,13 +140,8 @@ class JobManager(Component):
         
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in %s" % (self.steering, self.steering_files))        
-        self.steering_file = self.steering_files[self.steering]
-        
-    def output_files(self):
-        # Return one output file name with appropriate string replacement depending on if readout
-        # or recon is being run.
-        return [_replace(self.replace, os.path.splitext(self.input_files()[0])[0]) + ".slcio"]
-            
+        self.steering_file = self.steering_files[self.steering]     
+             
     def cmd_args(self):
                
         args = []
@@ -239,19 +221,24 @@ class HPSTR(Component):
     Component for the hpstr analysis tool.
     """
 
-    def __init__(self, cfg, **kwargs):
-                
-        self.run_mode = 0
-        self.year = None
-        self.cfg = cfg
+    def __init__(self, cfg, run_mode=0, year=None):
+#        , **kwargs
 
-        Component.__init__(self, 'hpstr', **kwargs)
-        
-        if not len(self.append):
-            self.append = "_%s" % self.cfg
-            logger.debug("Append automatically set to '%s'" % self.append)
+        self.cfg = cfg                
+        self.run_mode = run_mode
+        self.year = year
+
+        a = ''
+        if os.path.splitext(self.get_input_files(self)[0])[1] is '.root':
+            a = self.cfg
+
+        Component.__init__(self, 
+                           name='hpstr', 
+                           command='hpstr',
+                           append=a,
+                           **kwargs)
                     
-    def setup(self):              
+    def setup(self):        
         if not os.path.exists(self.hpstr_install_dir):
             raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
         self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
@@ -288,7 +275,8 @@ class HPSTR(Component):
         if self.year is not None:
             args.extend(["-y", str(self.year)])
         return args
-    
+
+    # FIXME: Make the generic Component method usable with this class.
     def output_files(self):
         f,ext = os.path.splitext(self.input_files()[0])
         print(f)
@@ -325,7 +313,20 @@ class StdHepTool(Component):
                   "random_sample"]
 
     def __init__(self, name, **kwargs):
-        Component.__init__(self, name, "stdhep_" + name, **kwargs)
+
+        a = ''        
+        if 'add_mother' in name:
+            a = 'mom'
+
+        r = {}
+        if 'beam_coords' in name:
+            r = {'mom': 'rot'}
+                            
+        Component.__init__(self, 
+                           name=name, 
+                           command="stdhep_" + name, 
+                           replacements=r,
+                           append=a)
         
     def cmd_args(self):
         
@@ -351,14 +352,81 @@ class StdHepTool(Component):
             raise Exception("No inputs specified for StdHepTool.")
         
         return args
-    
-    def output_files(self):
-        f = os.path.basename(os.path.splitext(self.input_files()[0])[0])
-        return ["%s%s.stdhep" % (_replace(self.replace, f), self.append)]
-    
+        
     def optional_parameters(self):
         return ['ctau', 'z']
 
+class JavaTool(Component):
+    
+    def __init__(self, java_class, name="java", command="java", replacements={}, append='', excludes=[], **kwargs):
+        self.java_class = java_class
+        self.java_args = None
+        Component.__init__(self, 
+                           name, 
+                           command=command, 
+                           replacements=replacements, 
+                           append=append, 
+                           excludes=excludes)
+
+    def required_config(self):
+        return ['hps_java_bin_jar']
+            
+    def cmd_args(self):
+        args = []
+        if self.java_args is not None:
+            logger.info("setting java_args from config: %s" + self.java_args)
+            args.append(self.java_args)
+        args.append("-cp")
+        args.append(self.hps_java_bin_jar)
+        args.append(self.java_class)
+        return args
+    
+class FilterBunches(JavaTool):
+    """
+    Space MC events and apply energy filters to process before readout.
+    
+    The nevents parameter is not settable from JSON in this class. It should
+    be supplied as an init argument in the job script if it needs to be
+    customized (the default nevents and event_interval used to apply spacing 
+    should usually not need to be changed by the user).
+    """
+    
+    def __init__(self, nevents=2000000, event_interval=250):
+
+        # Default max output events
+        self.nevents = nevents
+        
+        # Default event spacing interval
+        self.event_interval = event_interval
+                
+        JavaTool.__init__(self, 
+                          name="filter_bunches", 
+                          command="java",
+                          replacements={'rot': ''},
+                          append='filt',
+                          java_class="org.hps.util.FilterMCBunches")
+                            
+    def cmd_args(self):
+        
+        args = JavaTool.cmd_args(self)
+        args.append("-e")
+        args.append(str(self.event_interval))
+        for i in self.input_files():
+            args.append(i)
+        args.append(self.output_files()[0])
+        if self.enable_ecal_energy_filter:
+            args.append("-d")
+        if self.ecal_hit_ecut is not None:
+            args.append("-E")
+            args.append(str(self.ecal_hit_ecut))
+        if self.nevents > 0:
+            args.append("-w")
+            args.append(str(self.nevents))
+        return args
+
+    def optional_parameters(self):
+        return ['ecal_hit_ecut', 'enable_ecal_energy_filter', 'event_interval']
+                   
 class Unzip(Component):
     """
     Unzip the input files to outputs.
@@ -394,79 +462,9 @@ class FileFilter(Component):
     def execute(self, log_out, log_err):
         return 0
         
-    def output_files(self):
-        return _filtered(self.excludes, self.input_files())
+    def output_files(self):         
+        return self._filtered(self.input_files())
                         
-class JavaTool(Component):
-    
-    def __init__(self, java_class, name="java", command="java", **kwargs):
-        self.java_class = java_class
-        self.java_args = None
-        Component.__init__(self, name, command, **kwargs)
-
-    def required_config(self):
-        return ['hps_java_bin_jar']
-            
-    def cmd_args(self):
-        args = []
-        if self.java_args is not None:
-            logger.info("setting java_args from config: %s" + self.java_args)
-            args.append(self.java_args)
-        args.append("-cp")
-        args.append(self.hps_java_bin_jar)
-        args.append(self.java_class)
-        return args
-    
-class FilterBunches(JavaTool):
-    """
-    Space MC events and apply energy filters to process before readout.
-    
-    The nevents parameter is not settable from JSON in this class. It should
-    be supplied as an init argument in the job script if it needs to be
-    customized (the default nevents and event_interval used to apply spacing 
-    should usually not need to be changed by the user).
-    """
-    
-    def __init__(self, **kwargs):
-        
-        # Default max output events
-        nevents = 2000000
-        
-        # Default event spacing interval
-        event_interval = 250
-        
-        JavaTool.__init__(self, 
-                          name="filter_bunches", 
-                          command="java",
-                          java_class="org.hps.util.FilterMCBunches", **kwargs)
-                    
-    def cmd_args(self):
-        
-        args = JavaTool.cmd_args(self)
-        args.append("-e")
-        args.append(str(self.event_interval))
-        for i in self.input_files():
-            args.append(i)
-        args.append(self.output_files()[0])
-        if self.enable_ecal_energy_filter:
-            args.append("-d")
-        if self.ecal_hit_ecut is not None:
-            args.append("-E")
-            args.append(str(self.ecal_hit_ecut))
-        if self.nevents > 0:
-            args.append("-w")
-            args.append(str(self.nevents))
-        return args
-    
-    def output_files(self):
-        self.outputs = []
-        for infile in self.input_files():
-            self.outputs.append(os.path.splitext(infile)[0] + self.append + ".slcio")
-        return self.outputs
-        
-    def optional_parameters(self):
-        return ['ecal_hit_ecut', 'enable_ecal_energy_filter', 'event_interval']
-                   
 class LCIODumpEvent(Component):
 
     def __init__(self, **kwargs):
@@ -518,7 +516,7 @@ class LCIOConcat(LCIOTool):
         for i in self.input_files():
             args.extend(["-f", i])
         args.extend(["-o", self.outputs[0]])
-        return self.args
+        return args
 
 class LCIOCount(LCIOTool):
 
@@ -610,59 +608,3 @@ class MoveFiles(Component):
             dest = io[1] 
             logger("Moving '%s' to '%s'" % (src, dest))
             shutil.move(src, dest)            
-
-"""
-class MakeTree(Component):
-    
-    def __init__(self, **kwargs):
-        Component.__init__(self, "make_tree", **kwargs)
-        
-    def cmd_exists(self):
-        return True
-    
-    def execute(self, log_out, log_err):        
-
-        # Use local ROOT imports so ROOT env isn't necessary just to load the module.
-        from ROOT import gROOT, TFile, TTree
-        
-        output_file = self.outputs[0]
-        input_files = self.inputs
-        
-        logger.info("Creating output ROOT tuple '%s'" % output_file)
-        logger.info("Input text files: %s" % str(input_files))
-            
-        treeFile = TFile(output_file, "RECREATE")
-        tree = TTree("ntuple", "data from text tuple " + input_files[0])
-        
-        if len(input_files) > 1:
-            inputfile = tempfile.NamedTemporaryFile(delete=False)
-            print inputfile.name
-            firstfile = True
-            for filename in input_files:
-                if os.path.isfile(filename):
-                    f = open(filename, 'r')
-                    firstline = True
-                    for i in f:
-                        if firstline:
-                            if firstfile:
-                                branchdescriptor = i
-                                inputfile.write(i)
-                            else:
-                                if branchdescriptor != i:
-                                    print "branch descriptor doesn't match"
-                                    sys.exit(-1)
-                        else:
-                            inputfile.write(i)
-                        firstline = False
-                    f.close()
-                    firstfile = False
-                else:
-                    logger.warn("Ignoring non-existant input file '%s'" % filename)
-            inputfile.close()
-            print tree.ReadFile(inputfile.name)
-            os.remove(inputfile.name)
-        else:
-            print tree.ReadFile(input_files[0])
-        
-        tree.Write()
-"""
