@@ -83,7 +83,7 @@ class Job:
                     
     def __parse_args(self):
         """
-        Setup from command line arguments.
+        Configure the job from command line arguments.
         """
                 
         parser = argparse.ArgumentParser(description=self.name)
@@ -96,7 +96,8 @@ class Job:
         parser.add_argument("-d", "--run-dir", nargs=1, help="Job run dir")
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         
-        # TODO: CL option to disable automatic copying of ouput files
+        # TODO: CL option to disable automatic copying of ouput files.
+        #       The files should be symlinked if copying is disabled.
         # parser.add_argument("--no-copy-output-files", help="Disable copying of output files")
         #parser.add_argument('--feature', dest='feature', action='store_true')
         #parser.add_argument('--no-feature', dest='feature', action='store_false')
@@ -129,6 +130,9 @@ class Job:
             self.rundir = cl.run_dir[0]
                   
     def __load_params(self, param_file):
+        """
+        Load the job parameters from a JSON file.
+        """
         
         logger.info("Loading job params from '%s'" % param_file)
         
@@ -226,10 +230,13 @@ class Job:
         logger.info("Running job '%s'" % self.name)
             
         if not self.dry_run:
-            for c in self.components:                
-                logger.info("Executing '%s' with inputs %s and outputs %s" % 
+            for c in self.components:
+                logger.info("Executing cmd '%s' with inputs %s and outputs %s" % 
                             (c.name, str(c.input_files()), str(c.output_files())))
                 start = time.time()
+                #print('>>>>>>>>')
+                #print(c._inputs_to_outputs())
+                #print('>>>>>>>>')
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
                 elapsed = end - start                
@@ -255,6 +262,7 @@ class Job:
         
         default = 'Job'
         
+        # TODO: Load these automatically based on a list
         try:            
             self.enable_copy_output_files = p.getboolean(default, 'copy_output_files')
             logger.debug("enable_copy_output_files=%s" % str(self.enable_copy_output_files))
@@ -290,11 +298,13 @@ class Job:
             logger.debug("job_id_pad=%d" % self.job_id_pad)
         except:
             pass
-                
+        
+        logger.info("Configuring components ...") 
         for c in self.components:
             logger.info("Configuring '%s'" % c.name)
             c.config()
             c.check_config()
+        logger.info("Done configuring components!")
 
     def __setup(self):
         # limit components according to job steps
@@ -313,9 +323,12 @@ class Job:
 #                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
 
     def __config_file_pipeline(self):
+        """
+        Pipe component outputs to inputs automatically.
+        """
         for i in range(0, len(self.components)):
-            logger.info("Configuring file IO for component %d" % i)
             c = self.components[i]
+            logger.info("Configuring file IO for component '%s' with order %d" % (c. name, i))
             if i == 0:
                 logger.info("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.input_files.values())))
@@ -348,7 +361,10 @@ class Job:
             self.log_err.close()
     
     def __copy_output_files(self):
-                
+        """
+        Copy output files to output directory.
+        """        
+        
         if not os.path.exists(self.output_dir):
             logger.info("Creating output dir '%s'" % self.output_dir)
             os.makedirs(self.output_dir, 0755)
@@ -357,6 +373,9 @@ class Job:
             self.__copy_output_file(src, dest)
                                          
     def __copy_output_file(self, src, dest):
+        """
+        Copy an output file from src to dest.
+        """
                     
         src_file = os.path.join(self.rundir, src)
         dest_file = os.path.join(self.output_dir, dest)
@@ -383,6 +402,9 @@ class Job:
             logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
             
     def __copy_input_files(self):
+        """
+        Copy input files to the run dir.
+        """        
         for src,dest in self.input_files.iteritems():
             if not os.path.isabs(src):
                 # FIXME: Could try and convert to abspath here.
