@@ -312,21 +312,16 @@ class StdHepTool(Component):
                   "mix_signal",
                   "random_sample"]
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, name, replacements={}, append=[]):
 
-        a = ''        
         if 'add_mother' in name:
-            a = 'mom'
-
-        r = {}
-        if 'beam_coords' in name:
-            r = {'mom': 'rot'}
-                            
+            append.append['mom']            
+                                                 
         Component.__init__(self, 
                            name=name, 
                            command="stdhep_" + name, 
-                           replacements=r,
-                           append=a)
+                           replacements=replacements,
+                           append=append)
         
     def cmd_args(self):
         
@@ -334,8 +329,6 @@ class StdHepTool(Component):
  
         if self.name is "lhe_tridents_displacetime" and hasattr(self, "ctau"):
             args.extend(["-l", str(self.ctau)])
-        elif self.name is "beam_coords" and hasattr(self, "z"):        
-            args.extend(["-z", str(self.z)])
         
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
@@ -356,6 +349,46 @@ class StdHepTool(Component):
     def optional_parameters(self):
         return ['ctau', 'z']
 
+class BeamCoords(StdHepTool):
+    """
+    Transform StdHep events into beam coordinates.
+    """
+
+    def __init__(self):
+        
+        self.beam_sigma_x = None
+        self.beam_sigma_y = None
+        self.target_z = None
+        self.beam_rotation = None
+        self.beam_skew = None
+   
+        StdHepTool.__init__(self, name='beam_coords', replacements={'mom': ''}, append='rot')
+
+    def cmd_args(self):
+        args = StdHepTool.cmd_args(self)
+        if self.beam_sigma_x is not None:
+            args.extend(['-x', str(self.beam_sigma_x)])
+        if self.beam_sigma_y is not None:
+            args.extend(['-y', str(self.beam_sigma_y)])
+        if self.beam_skew is not None:
+            args.extend(['-q', str(self.beam_skew)])
+        if self.beam_rotation is not None:
+            args.extend(['-r', str(self.beam_rotation)])
+        if self.target_z is not None:
+            args.extend(['-z', str(self.target_z)])
+        return args
+    
+    def optional_parameters(self):
+        return['beam_sigma_x', 'beam_sigma_y', 'target_z', 'beam_rotation', 'beam_skew']
+        
+class RandomSample(StdHepTool):
+    
+    def __init__(self):
+        StdHepTool.__init__(self, name='beam_coords', replacements={'rot': 'sampled'})
+    
+    def output_files(self):
+        return [f.replace('_1.stdhep', '') for f in Component.output_files(self)]
+        
 class JavaTool(Component):
     
     def __init__(self, java_class, name="java", command="java", replacements={}, append='', excludes=[], **kwargs):
