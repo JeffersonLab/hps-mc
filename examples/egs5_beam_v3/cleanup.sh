@@ -1,1 +1,1 @@
-rm -rf scratch/*
+rm -rf scratch output &> /dev/null
