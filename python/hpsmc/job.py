@@ -234,9 +234,6 @@ class Job:
                 logger.info("Executing cmd '%s' with inputs %s and outputs %s" % 
                             (c.name, str(c.input_files()), str(c.output_files())))
                 start = time.time()
-                #print('>>>>>>>>')
-                #print(c._inputs_to_outputs())
-                #print('>>>>>>>>')
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
                 elapsed = end - start                
