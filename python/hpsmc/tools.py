@@ -221,21 +221,15 @@ class HPSTR(Component):
     Component for the hpstr analysis tool.
     """
 
-    def __init__(self, cfg, run_mode=0, year=None):
+    def __init__(self, cfg, run_mode=0, year=None, **kwargs):
         
         self.cfg = cfg                
         self.run_mode = run_mode
         self.year = year
 
-        # TODO: Might be best if append was passed from job script
-        a = ''
-        if os.path.splitext(self.get_input_files(self)[0])[1] is '.root':
-            a = self.cfg
-
         Component.__init__(self, 
                            name='hpstr', 
                            command='hpstr',
-                           append_tok=a,
                            **kwargs)
                     
     def setup(self):        
@@ -253,6 +247,9 @@ class HPSTR(Component):
                 raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
         else:
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
+        
+        if os.path.splitext(self.input_files()[0])[1] is '.root':
+            self.append_tok = self.cfg
             
         logger.info("Set config path to '%s'" % self.cfg_path)
     
@@ -282,11 +279,9 @@ class HPSTR(Component):
         print(f)
         print(ext)
         if '.slcio' in ext:
-            print('>>>> slcio')
             return ['%s.root' % f]
         else:
-            print('>>>> root')
-            return ['%s%s.root' % (f, self.append)]
+            return ['%s_%s.root' % (f, self.append_tok)]
                 
     def execute(self, log_out, log_err):               
         args = self.cmd_args()
@@ -453,7 +448,7 @@ class FilterBunches(JavaTool):
                           "filter_bunches",
                           "org.hps.util.FilterMCBunches",
                           replacements={'rot': ''},
-                          append='filt')
+                          append_tok='filt')
                             
     def cmd_args(self):
         
