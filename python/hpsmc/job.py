@@ -10,7 +10,7 @@ def load_json_file(filename):
     rawdata = open(filename, 'r').read()
     return json.loads(rawdata)
 
-class Job:
+class Job(object):
     """
     Primary class to run HPS jobs from a Python script.
     """

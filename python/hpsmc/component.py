@@ -21,16 +21,26 @@ class Component(object):
         self.command = command
         if self.command is None:
             self.command = self.name
-               
-        self.inputs = []
-            
-        self.nevents = None
-        self.seed = 1      
-        
+                                   
         if 'description' in kwargs:
             self.description = kwargs['description']
         else:
             self.description = ''
+
+        if 'nevents' in kwargs:
+            self.nevents = kwargs['nevents']
+        else:
+            self.nevents = None
+            
+        if 'seed' in kwargs:
+            self.seed = kwargs['seed']
+        else:
+            self.seed = 1
+        
+        if 'inputs' in kwargs:
+            self.inputs = kwargs[inputs]
+        else:
+            self.inputs = []
         
         if 'replacements' in kwargs:
             self.replacements = kwargs['replacements']
@@ -51,9 +61,9 @@ class Component(object):
             self.output_ext = kwargs['output_ext']
         else:
             self.output_ext = None
-                
-#        print(self.name)
-#        print(vars(self))
+        
+        logger.debug("Initialized component '%s'" % self.name)
+        logger.debug(vars(self))
                                             
     def execute(self, log_out, log_err):
         """
