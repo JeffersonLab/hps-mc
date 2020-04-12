@@ -46,7 +46,6 @@ index.html
 
 build
 install
-scratch
 
 .cproject
 .project
@@ -66,3 +65,6 @@ scratch
 
 # The stdhep-lib build creates this
 log.mcfio.*
+
+examples/*/output
+examples/*/scratch
