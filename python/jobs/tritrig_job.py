@@ -8,7 +8,7 @@ import sys, random
 from hpsmc.job import Job
 from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool
+from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, AddMother
 
 job = Job()
 
@@ -19,10 +19,10 @@ mg = MG5(name='tritrig')
 cnv = StdHepConverter()
 
 # Add mother particle to tag trident particles
-mom = StdHepTool(name='add_mother')
+mom = AddMother()
 
 # Rotate events into beam coords
-rot = StdHepTool(name='beam_coords')
+rot = BeamCoords()
 
 # Print results
 #p = StdHepTool(name="print_stdhep")
