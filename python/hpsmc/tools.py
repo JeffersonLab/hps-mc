@@ -8,7 +8,7 @@ logger = logging.getLogger("hpsmc.tools")
 
 class SLIC(Component):
 
-    def __init__(self, **kwargs):
+    def __init__(self):
         
         # List of macros to run (optional)
         self.macros = []
@@ -17,8 +17,8 @@ class SLIC(Component):
         self.run_number = None                
         
         Component.__init__(self, 
-                           name="slic",
-                           command="slic",
+                           'slic',
+                           'slic',
                            replacements={'rot': ''},
                            output_ext='.slcio')
                                
@@ -109,7 +109,7 @@ class JobManager(Component):
     Run the hps-java JobManager class.
     """
 
-    def __init__(self, steering):        
+    def __init__(self, steering):
         
         self.run_number = None
         self.detector = None
@@ -125,12 +125,12 @@ class JobManager(Component):
         self.conditions_url = None        
         self.steering = steering
         
-        Component.__init__(self,
-                           name="job_manager", 
-                           command="java", 
-                           replacements={'filt': 'readout',
-                                         'readout': 'recon'})
-                                    
+        Component.__init__(self, 
+                           'job_manager', 
+                           'java', 
+                           replacements={'filt': 'readout', 'readout': 'recon'},
+                           output_ext='.slcio')
+        
     def required_config(self):
         return ['hps_java_bin_jar']
     
@@ -222,12 +222,12 @@ class HPSTR(Component):
     """
 
     def __init__(self, cfg, run_mode=0, year=None):
-#        , **kwargs
-
+        
         self.cfg = cfg                
         self.run_mode = run_mode
         self.year = year
 
+        # TODO: Might be best if append was passed from job script
         a = ''
         if os.path.splitext(self.get_input_files(self)[0])[1] is '.root':
             a = self.cfg
@@ -235,7 +235,7 @@ class HPSTR(Component):
         Component.__init__(self, 
                            name='hpstr', 
                            command='hpstr',
-                           append=a,
+                           append_tok=a,
                            **kwargs)
                     
     def setup(self):        
@@ -312,24 +312,17 @@ class StdHepTool(Component):
                   "mix_signal",
                   "random_sample"]
 
-    def __init__(self, name, replacements={}, append=[]):
-
-        if 'add_mother' in name:
-            append.append['mom']            
-                                                 
+    def __init__(self, name, **kwargs):
+                       
         Component.__init__(self, 
-                           name=name, 
-                           command="stdhep_" + name, 
-                           replacements=replacements,
-                           append=append)
+                           name,
+                           "stdhep_" + name,                           
+                           **kwargs)
         
     def cmd_args(self):
         
         args = []
- 
-        if self.name is "lhe_tridents_displacetime" and hasattr(self, "ctau"):
-            args.extend(["-l", str(self.ctau)])
-        
+         
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
         
@@ -362,7 +355,10 @@ class BeamCoords(StdHepTool):
         self.beam_rotation = None
         self.beam_skew = None
    
-        StdHepTool.__init__(self, name='beam_coords', replacements={'mom': ''}, append='rot')
+        StdHepTool.__init__(self, 
+                            'beam_coords',
+                            replacements={'mom': ''},
+                            append_tok='rot')
 
     def cmd_args(self):
         args = StdHepTool.cmd_args(self)
@@ -389,17 +385,38 @@ class RandomSample(StdHepTool):
     def output_files(self):
         return [f.replace('_1.stdhep', '') for f in Component.output_files(self)]
         
+class DisplaceTime(StdHepTool):
+    """
+    Convert LHE files to StdHep, displacing the time by given ctau.
+    """
+    
+    def __init__(self):
+        self.ctau = None
+        StdHepTool.__init__(self, name='lhe_tridents_displacetime', output_ext='.stdhep')
+
+    def cmd_args(self):
+        args = StdHepTool.cmd_args(self) 
+        if self.ctau is not None:
+            args.extend(["-l", str(self.ctau)])
+        return args
+
+    def optional_parameters(self):
+        return ['ctau']   
+        
+class AddMother(StdHepTool):
+    
+    def __init__(self):
+        StdHepTool.__init__(self, 'add_mother', append_tok='mom')
+        
 class JavaTool(Component):
     
-    def __init__(self, java_class, name="java", command="java", replacements={}, append='', excludes=[], **kwargs):
+    def __init__(self, name, java_class, **kwargs):
         self.java_class = java_class
         self.java_args = None
         Component.__init__(self, 
                            name, 
-                           command=command, 
-                           replacements=replacements, 
-                           append=append, 
-                           excludes=excludes)
+                           "java", 
+                           **kwargs)
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -433,11 +450,10 @@ class FilterBunches(JavaTool):
         self.event_interval = event_interval
                 
         JavaTool.__init__(self, 
-                          name="filter_bunches", 
-                          command="java",
+                          "filter_bunches",
+                          "org.hps.util.FilterMCBunches",
                           replacements={'rot': ''},
-                          append='filt',
-                          java_class="org.hps.util.FilterMCBunches")
+                          append='filt')
                             
     def cmd_args(self):
         
@@ -468,7 +484,7 @@ class Unzip(Component):
     """
 
     def __init__(self, **kwargs):
-        Component.__init__(self, "unzip", **kwargs)
+        Component.__init__(self, "unzip", "unzip", **kwargs)
                
     def output_files(self):
         self.outputs = []
@@ -488,15 +504,11 @@ class FileFilter(Component):
     Filter input to output files based on a list of strings.
     """
     
-    def __init__(self, **kwargs):
-        self.excludes = []
-        Component.__init__(self, "file_filter", **kwargs)
+    def __init__(self, excludes):
+        Component.__init__(self, "file_filter", "filter_filter", excludes=excludes)
 
     def execute(self, log_out, log_err):
         return 0
-        
-    def output_files(self):         
-        return self._filtered(self.input_files())
                         
 class LCIODumpEvent(Component):
 
@@ -521,6 +533,8 @@ class LCIODumpEvent(Component):
         args.append(self.input_files()[0])
         args.append(str(self.event_num))
         return args
+
+# FIXME: Everything below here is broken!
 
 class LCIOTool(Component):
 

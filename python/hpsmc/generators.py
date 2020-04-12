@@ -9,7 +9,7 @@ logger = logging.getLogger("hpsmc.generators")
 class EventGenerator(Component):
 
     def __init__(self, name, command=None, **kwargs):
-        Component.__init__(self, name, command=command, **kwargs)
+        Component.__init__(self, name, command=command, description='', **kwargs)
         
     def required_parameters(self):
         return ['nevents']

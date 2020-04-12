@@ -1,39 +1,60 @@
 import os, subprocess, sys, shutil, argparse, getpass, json, logging, time
+from __builtin__ import True, object
 
 logger = logging.getLogger("hpsmc.component")
 
 import hpsmc.config as config
 
-class Component:
+class Component(object):
     """
     Base class for components in a job.
     """
 
     def __init__(self, 
-                 name, 
-                 command=None, 
-                 description='',
-                 replacements={}, 
-                 append='', 
-                 excludes=[], 
-                 output_ext=None):
-                
+                 name,
+                 command,
+                 **kwargs):
+                 
+        print("Component kwargs: " + str(kwargs))
+                 
         self.name = name
         self.command = command
         if self.command is None:
             self.command = self.name
-        self.description = description
                
         self.inputs = []
             
         self.nevents = None
         self.seed = 1      
         
-        self.replacements = replacements
-        self.excludes = excludes
-        self.append = append
-        self.output_ext = output_ext
-                                             
+        if 'description' in kwargs:
+            self.description = kwargs['description']
+        else:
+            self.description = ''
+        
+        if 'replacements' in kwargs:
+            self.replacements = kwargs['replacements']
+        else:
+            self.replacements = {}
+        
+        if 'excludes' in kwargs:
+            self.excludes = kwargs['excludes']
+        else:
+            self.excludes = []
+            
+        if 'append_tok' in kwargs:
+            self.append_tok = kwargs['append_tok']
+        else:
+            self.append_tok = None
+            
+        if 'output_ext' in kwargs:
+            self.output_ext = kwargs['output_ext']
+        else:
+            self.output_ext = None
+                
+#        print(self.name)
+#        print(vars(self))
+                                            
     def execute(self, log_out, log_err):
         """
         Generic component execution method. 
@@ -124,7 +145,8 @@ class Component:
                 setattr(self, p, params[p])
                 logger.info("Set required parameter '%s' to '%s' for component '%s'"
                             % (p, params[p], self.name))
-            
+        
+        # TODO: Set optional parameters to None if not present in JSON so it doesn't need to be done in init.
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
@@ -176,6 +198,12 @@ class Component:
         """
         return self._inputs_to_outputs()
 
+    def __exclude_input(self, i):
+        for e in self.excludes:
+            if e in i:
+                return True
+        return False
+
     def _inputs_to_outputs(self):
         """
         This is the default method for automatically transforming input file names
@@ -185,14 +213,13 @@ class Component:
         User components may override the output_files() method to customize this default 
         behavior.
         """        
-        
         outputs = []
+        logger.debug("Processing inputs %s" % self.input_files())
         for infile in self.input_files():
             f,ext = os.path.splitext(infile)
-            infile_split = f.split('_')     
-            for e in self.excludes:
-                if e in f:
-                    continue
+            infile_split = f.split('_')
+            if self.__exclude_input(infile):
+                continue
             if len(self.replacements):
                 for k,v in self.replacements.iteritems():
                     if infile_split[-1] == k:
@@ -200,12 +227,14 @@ class Component:
                         if not len(infile_split[-1]):
                             infile_split = infile_split[:-1]
                         break
-            if len(self.append):
-                infile_split.append(self.append)                
+            if self.append_tok is not None:
+                infile_split.append(self.append_tok)
             if self.output_ext is not None:
                 ext = self.output_ext
             outfile = '_'.join(infile_split) + ext
+            logger.debug("Appending output '%s'" % outfile)
             outputs.append(outfile)
+        logger.debug("Outputs %s" % outputs)
         return outputs
     
 class DummyComponent(Component):
