@@ -8,7 +8,7 @@ import sys, os, argparse
 
 from hpsmc.job import Job
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.tools import Unzip, StdHepTool, MoveFiles, FileFilter
+from hpsmc.tools import Unzip, StdHepTool, DisplaceTime, FileFilter, BeamCoords
 
 job = Job()
 
@@ -22,16 +22,13 @@ filt = FileFilter(excludes=['unweighted'])
 unzip = Unzip()
 
 # Create a stdhep file, displacing the time of decay using the ctau param
-displace = StdHepTool(name="lhe_tridents_displacetime")
+displace = DisplaceTime()
 
 # Rotate events into beam coordinates and move the vertices
-rotate = StdHepTool(name="beam_coords")
-
-# Print the final events
-dump = StdHepTool(name="print_stdhep")
+rotate = BeamCoords()
 
 # Add components to the job
-job.add([ap, filt, unzip, displace, rotate, dump])
+job.add([ap, filt, unzip, displace, rotate])
 
 # Run the job
 job.run()
