@@ -204,16 +204,16 @@ class Job(object):
         
         # Set component parameters from job JSON file.                
         self.__set_parameters()
-        
-        # Perform component setup to prepare for execution.
-        # May use config and parameters that were set from above.
-        self.__setup()
-        
+
         # Copy the input files to the run dir if enabled and not in dry run.
         if not self.dry_run:
             if self.enable_copy_input_files: 
                 self.__copy_input_files()
-                
+        
+        # Perform component setup to prepare for execution.
+        # May use config and parameters that were set from above.
+        self.__setup()
+                        
         # Execute the job.
         self.__execute()
         
