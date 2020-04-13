@@ -1,8 +1,11 @@
 import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
-from component import Component
 
+from component import Component
+from .run_params import RunParameters
+import hpsmc.func as func
 import hpsmc.config as config
+from audioop import mul
 
 logger = logging.getLogger("hpsmc.tools")
 
@@ -403,6 +406,65 @@ class AddMother(StdHepTool):
     def __init__(self):
         StdHepTool.__init__(self, 'add_mother', append_tok='mom')
         
+class MergePoisson(StdHepTool):
+        
+    def __init__(self, **kwargs):
+        if 'lhe_file' in kwargs:
+            self.lhe_file = kwargs['lhe_file']
+        else:
+            raise Exception("Missing required init argument 'lhe_file' to compute mu")
+        StdHepTool.__init__(self, 'merge_poisson', replacements={'rot': ''}, append_tok='sampled', **kwargs)
+    
+    def setup(self):
+        self.run_param_data = RunParameters(self.run_params)
+        self.mu = func.mu(self.lhe_file, self.run_param_data)       
+    
+    def required_parameters(self):
+        return ['run_params']
+    
+    def optional_parameters(self):
+        return ['lhe_file']
+    
+    def output_files(self):
+        return ["%s_1.stdhep" % os.path.splitext(f)[0] for f in Component.output_files(self)]
+            
+    def cmd_args(self):
+        args = StdHepTool.cmd_args(self)
+        return args
+    
+    def cmd_args(self):
+        
+        args = []
+         
+        if self.name in StdHepTool.seed_names:
+            args.extend(["-s", str(self.seed)])
+        
+        args.extend(["-m", str(self.mu), "-N", str(1), "-n", str(self.nevents)])
+        
+        if len(self.output_files()):
+            args.insert(0, '_'.join(os.path.splitext(self.output_files()[0])[0].split('_')[:-1]))
+        elif len(self.outputs) > 1:
+            raise Exception("Too many outputs specified for StdHepTool.")       
+        
+        if len(self.input_files()):
+            for i in self.inputs:
+                args.insert(0, i)
+        else:
+            raise Exception("No inputs specified for StdHepTool.")
+        
+        return args
+        
+class MergeFiles(StdHepTool):
+    
+    def __init__(self, output_name):
+        StdHepTool.__init__(self, 'merge_files')
+
+    def required_parameters(self):
+        return ['output_name']
+        
+    def output_files(self):
+        return ['%s.stdhep' % self.output_name]
+                                    
 class JavaTool(Component):
     
     def __init__(self, name, java_class, **kwargs):
