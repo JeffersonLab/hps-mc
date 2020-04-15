@@ -1,5 +1,5 @@
 """
-Job script to generate A-prime events, convert to StdHep and apply transformations.
+Job script to generate A-prime events, convert to StdHep, and apply transformations.
 
 Run with '--job-steps 1' to only generate the untransformed LHE output.
 """
@@ -13,12 +13,9 @@ from hpsmc.tools import Unzip, StdHepTool, DisplaceTime, FileFilter, BeamCoords
 job = Job()
 
 # Generate A-prime events using MadGraph4
-ap = MG4(name="ap")
+ap = MG4(name="ap", event_types=['unweighted'])
 
-# Filter out unweighted events
-filt = FileFilter(excludes=['unweighted'])
-
-# Unzip the LHE events to a local file, excluding the unweighted event file
+# Unzip the LHE events to a local file
 unzip = Unzip()
 
 # Create a stdhep file, displacing the time of decay using the ctau param
@@ -28,7 +25,7 @@ displace = DisplaceTime()
 rotate = BeamCoords()
 
 # Add components to the job
-job.add([ap, filt, unzip, displace, rotate])
+job.add([ap, unzip, displace, rotate])
 
 # Run the job
 job.run()
