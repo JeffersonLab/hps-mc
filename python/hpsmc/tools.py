@@ -226,7 +226,7 @@ class HPSTR(Component):
 
     def __init__(self, cfg, run_mode=0, year=None, **kwargs):
         
-        self.cfg = cfg                
+        self.cfg = cfg
         self.run_mode = run_mode
         self.year = year
 
@@ -240,22 +240,27 @@ class HPSTR(Component):
             raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
         self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
         
+        # The config file to use is read from a dict in the JSON parameters.
         if self.cfg not in self.config_files:
             raise Exception("Config '%s' was not found in %s" % (self.cfg, self.config_files))
         config_file = self.config_files[self.cfg]
         if len(os.path.dirname(config_file)):
+            # If there is a directory name then we expect an absolute path not in the hpstr dir.
             if os.path.isabs(config_file):
                 self.cfg_path = config_file
             else:
+                # The config must be an abs path.
                 raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
         else:
+            # Assume the cfg file is within the hpstr base dir.
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
-        
-        if os.path.splitext(self.input_files()[0])[1] is '.root':
-            self.append_tok = self.cfg
-            
         logger.info("Set config path to '%s'" % self.cfg_path)
-    
+        
+        # For ROOT output, automatically append the cfg key from the job params.
+        if os.path.splitext(self.input_files()[0])[1] == '.root':
+            self.append_tok = self.cfg
+            logger.debug("Automatically appending token '%s' to output file" % self.append_tok)
+            
     def required_parameters(self):
         return ['config_files']
     
@@ -553,6 +558,9 @@ class Unzip(Component):
         for inputfile in self.input_files():
             self.outputs.append(os.path.basename(os.path.splitext(inputfile)[0]))
         return self.outputs
+
+    def cmd_exists(self):
+        return True
                         
     def execute(self, log_out, log_err):
         for inputfile in self.input_files():
@@ -560,6 +568,7 @@ class Unzip(Component):
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
                 shutil.copyfileobj(in_file, out_file)
                 logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+        return 0
                     
 class FileFilter(Component):
     """
@@ -596,7 +605,77 @@ class LCIODumpEvent(Component):
         args.append(str(self.event_num))
         return args
 
-# FIXME: Everything below here is broken!
+class LHECount(Component):
+    
+    def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
+        self.minevents = minevents
+        Component.__init__(self, name="lhe_count", **kwargs)
+        
+    def setup(self):
+        if not len(self.input_files()):
+            raise Exception("Missing at least one input file.")
+        
+    def cmd_exists(self):
+        return True
+    
+    def execute(self, log_out, log_err):
+        for i in self.inputs:
+            with gzip.open(i, 'rb') as in_file:
+                lines = in_file.readlines()
+        
+            nevents = 0
+            for l in lines:
+                if "<event>" in l:
+                    nevents += 1
+            
+            logger.info("LHE file '%s' has %d events." % (i, nevents))
+            
+            if nevents < self.minevents:
+                msg = "LHE file '%s' does not contain the minimum %d events." % (i, nevents)
+                if self.fail_on_underflow:
+                    raise Exception(msg)
+                else:
+                    logger.warning(msg)
+        return 0
+                
+class TarFiles(Component):
+    
+    def __init__(self, **kwargs):
+        Component.__init__(self, 'tar_files', **kwargs)
+        
+    def cmd_exists(self):
+        return True
+        
+    def execute(self, log_out, log_err):
+        logger.info("Opening '%s' for writing ..." % self.outputs[0])
+        tar = tarfile.open(self.outputs[0], "w")
+        for i in self.inputs:
+            logger.info("Adding '%s' to archive" % i)
+            tar.add(i)
+        tar.close()
+        logger.info("Wrote archive '%s'" % self.outputs[0])
+        return 0
+
+class MoveFiles(Component):
+
+    def __init__(self, **kwargs):
+        Component.__init__(self, 'move_files', **kwargs)
+
+    def cmd_exists(self):
+        return True
+
+    def execute(self, log_out, log_err):
+        if len(self.inputs) != len(self.outputs):
+            raise Exception("Input and output lists are not the same length!")
+        for io in zip(self.inputs, self.outputs):
+            print io
+            src = io[0]
+            dest = io[1] 
+            logger.info("Moving '%s' to '%s'" % (src, dest))
+            shutil.move(src, dest)
+        return 0          
+
+# FIXME: Everything below here is probably broken!
 
 class LCIOTool(Component):
 
@@ -629,7 +708,7 @@ class LCIOConcat(LCIOTool):
 
 class LCIOCount(LCIOTool):
 
-    def __init__(self, minevents=0, **kwargs):
+    def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.name = "count"
         self.minevents = minevents
         LCIOTool.__init__(self, **kwargs)
@@ -653,67 +732,11 @@ class LCIOCount(LCIOTool):
         
         logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents)) 
         
-        if self.minevents:
-            if nevents < self.minevents:
-                raise Exception("LHE file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents))
+        if nevents < self.minevents:
+            msg = "LHE file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
+            if self.fail_on_underflow:
+                raise Exception(msg)
+            else:
+                logger.warning(msg)
 
-        if not self.ignore_returncode and proc.returncode:
-            raise Exception("Component: error code %d returned by '%s'" % (proc.returncode, self.name))        
-            
-class LHECount(Component):
-    
-    def __init__(self, minevents=0, **kwargs):
-        self.minevents = minevents
-        Component.__init__(self, name="lhe_count", **kwargs)
-        
-    def setup(self):
-        if not len(self.inputs):
-            raise Exception("Missing inputs.")
-        
-    def cmd_exists(self):
-        return True
-    
-    def execute(self, log_out, log_err):
-        for i in self.inputs:
-            with gzip.open(i, 'rb') as in_file:
-                lines = in_file.readlines()
-        
-            nevents = 0
-            for l in lines:
-                if "<event>" in l:
-                    nevents += 1
-            
-            logger.info("LHE file '%s' has %d events." % (i, nevents))
-            
-            if self.minevents:
-                if nevents < self.minevents:
-                    raise Exception("LHE file '%s' does not contain the minimum %d events." % (i, nevents))
-                
-class TarFiles(Component):
-    
-    def __init__(self, **kwargs):
-        Component.__init__(self, 'tar_files', **kwargs)
-        
-    def execute(self, log_out, log_err):
-        logger.info("Opening '%s' for writing ..." % self.outputs[0])
-        tar = tarfile.open(self.outputs[0], "w")
-        for i in self.inputs:
-            logger.info("Adding '%s' to archive" % i)
-            tar.add(i)
-        tar.close()
-        logger.info("Wrote archive '%s'" % self.outputs[0])
-
-class MoveFiles(Component):
-
-    def __init__(self, **kwargs):
-        Component.__init__(self, "move_files", "", **kwargs)
-
-    def execute(self, log_out, log_err):
-        if len(self.inputs) != len(self.outputs):
-            raise Exception("Input and output lists are not the same length!")
-        for io in zip(self.inputs, self.outputs):
-            print io
-            src = io[0]
-            dest = io[1] 
-            logger.info("Moving '%s' to '%s'" % (src, dest))
-            shutil.move(src, dest)            
+        return proc.returncode            
