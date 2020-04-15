@@ -503,6 +503,11 @@ class FilterBunches(JavaTool):
         # Default max output events
         self.nevents = nevents
         
+        # True to enable filtering on min ecal energy dep
+        self.enable_ecal_energy_filter = False
+        
+        self.ecal_hit_ecut = None
+        
         # Default event spacing interval
         self.event_interval = event_interval
                 
@@ -701,7 +706,7 @@ class TarFiles(Component):
 class MoveFiles(Component):
 
     def __init__(self, **kwargs):
-        Component.__init__(self, "move_files", **kwargs)
+        Component.__init__(self, "move_files", "", **kwargs)
 
     def execute(self, log_out, log_err):
         if len(self.inputs) != len(self.outputs):
@@ -710,5 +715,5 @@ class MoveFiles(Component):
             print io
             src = io[0]
             dest = io[1] 
-            logger("Moving '%s' to '%s'" % (src, dest))
+            logger.info("Moving '%s' to '%s'" % (src, dest))
             shutil.move(src, dest)            
