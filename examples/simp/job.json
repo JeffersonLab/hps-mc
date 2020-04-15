@@ -1,0 +1,19 @@
+{
+    "nevents": 10000,
+    "run_params": "2pt3",
+    "target_z": 0.5,
+    "map": 100,
+    "mpid": 10,
+    "mrhod": 10,
+    "run_number": 5772,
+    "detector": "HPS-PhysicsRun2016-v5-3-fieldmap_globalAlign",
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
+    },
+    "output_files": {
+        "simp.slcio": "simp.slcio",
+        "simp_recon.slcio": "simp_recon.slcio"
+    },
+    "output_dir": "output"
+}
