@@ -1,4 +1,4 @@
-import os, subprocess, sys, shutil, argparse, getpass, json, logging, time
+import os, subprocess, sys, shutil, argparse, getpass, json, logging, time, re
 from __builtin__ import True, object
 
 logger = logging.getLogger("hpsmc.component")
@@ -38,9 +38,14 @@ class Component(object):
             self.seed = 1
         
         if 'inputs' in kwargs:
-            self.inputs = kwargs[inputs]
+            self.inputs = kwargs['inputs']
         else:
             self.inputs = []
+            
+        if 'outputs' in kwargs:
+            self.outputs = kwargs['outputs']
+        else:
+            self.outputs = None
         
         if 'replacements' in kwargs:
             self.replacements = kwargs['replacements']
@@ -61,6 +66,11 @@ class Component(object):
             self.output_ext = kwargs['output_ext']
         else:
             self.output_ext = None
+            
+        if 'input_filter' in kwargs:
+            self.input_filter = kwargs['input_filter']
+        else:
+            self.input_filter = None
         
         logger.debug("Initialized component '%s'" % self.name)
         logger.debug(vars(self))
@@ -192,12 +202,22 @@ class Component(object):
         for c in self.required_config():
             if not hasattr(self, c):
                 raise Exception("Missing required config '%s' for '%s'" % (c, self.name))
+    
+    def _filtered_inputs(self):
+        """
+        Return a list of filtered input files.
+        """
+        return [inputfile for inputfile in self.inputs
+                if re.search(self.input_filter, inputfile) is not None]
         
     def input_files(self):
         """
-        Return a list of input files for this component.
+        Return a list of input files for this component, using an input filter if there is one.
         """
-        return self.inputs
+        if self.input_filter is not None:
+            return self._filtered_inputs()
+        else:
+            return self.inputs
     
     def output_files(self):
         """
@@ -206,7 +226,10 @@ class Component(object):
         By default, a series of transformations will be performed on intputs to
         transform them into outputs.
         """
-        return self._inputs_to_outputs()
+        if self.outputs is not None and len(self.outputs):
+            return self.outputs
+        else:
+            return self._inputs_to_outputs()
 
     def __exclude_input(self, i):
         for e in self.excludes:
