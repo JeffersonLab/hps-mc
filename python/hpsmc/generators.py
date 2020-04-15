@@ -104,7 +104,7 @@ class StdHepConverter(EGS5):
 class MG(EventGenerator):
     """
     Abstract class for MadGraph generators.
-    """    
+    """
     def __init__(self, name, **kwargs):
         
         # Default name of param card
@@ -119,16 +119,25 @@ class MG(EventGenerator):
         self.mpid = None
         self.mrhod = None
         
+        if 'event_types' in kwargs:
+            self.event_types = kwargs['event_types']
+        else:
+            self.event_types = ['weighted', 'unweighted']
+        
         EventGenerator.__init__(self, name, **kwargs)
     
     def output_files(self):
-        return [self.name + "_unweighted_events.lhe.gz",
-                self.name + "_events.lhe.gz"]
+        o = []
+        if 'weighted' in self.event_types:
+            o.append(self.name + "_events.lhe.gz")
+        if 'unweighted' in self.event_types:
+            o.append(self.name + "_unweighted_events.lhe.gz")
+        return o
     
     def set_parameters(self, params):
         Component.set_parameters(self, params)
         self.run_card = "run_card_" + self.run_params + ".dat"
-        logger.info("Set run card to '%s'" % self.run_card)     
+        logger.info("Set run card to '%s'" % self.run_card)  
         
     def required_parameters(self):
         return ['nevents', 'run_params']
@@ -210,7 +219,7 @@ class MG4(MG):
         
         if self.name not in MG4.dir_map:
             raise Exception("The name '%s' is not valid for MG4." % self.name)
-                                                                   
+            
     def setup(self):
         
         MG.setup(self)
@@ -313,4 +322,3 @@ class MG5(MG):
             shutil.copy(f, dest)
         os.chdir(self.rundir) 
         return returncode
-            
