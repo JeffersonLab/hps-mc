@@ -12,16 +12,14 @@ class Component(object):
 
     def __init__(self, 
                  name,
-                 command,
+                 command=None,
                  **kwargs):
                  
         print("Component kwargs: " + str(kwargs))
                  
         self.name = name
         self.command = command
-        if self.command is None:
-            self.command = self.name
-                                   
+                                           
         if 'description' in kwargs:
             self.description = kwargs['description']
         else:
@@ -130,8 +128,11 @@ class Component(object):
         """
         if config.parser.has_section(section_name):
             for name, value in config.parser.items(section_name):
-                setattr(self, name, value)
-                logger.info("%s=%s" % (name, value))
+                setattr(self, name, config.convert_value(value))
+                logger.debug("%s:%s:%s=%s" % (self.name, 
+                                              name, 
+                                              getattr(self, name).__class__.__name__, 
+                                              getattr(self, name)))
 
     def config(self):
         """
@@ -146,8 +147,11 @@ class Component(object):
         logger.debug("Loading config for '%s'" % section_name)
         if config.parser.has_section(section_name):
             for name, value in config.parser.items(section_name):
-                setattr(self, name, value)
-                logger.debug("%s=%s" % (name, value))
+                setattr(self, name, config.convert_value(value))
+                logger.debug("%s:%s:%s=%s" % (self.name, 
+                                              name, 
+                                              getattr(self, name).__class__.__name__, 
+                                              getattr(self, name)))
                 
     def set_parameters(self, params):
         """
@@ -272,7 +276,10 @@ class Component(object):
     
 class DummyComponent(Component):
     
-        def execute(self, log_out, log_err):
-            logger.info("DummComponent.execute - inputs %s and outputs %s"
-                        % (str(self.input_files()), str(self.output_files())))
+    def __init__(self, **kwargs):
+        Component.__init__(self, 'dummy', 'dummy', **kwargs)
+    
+    def execute(self, log_out, log_err):
+        logger.info("DummComponent.execute - inputs %s and outputs %s"
+                    % (str(self.input_files()), str(self.output_files())))
                        
