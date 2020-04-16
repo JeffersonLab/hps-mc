@@ -1,4 +1,7 @@
+[Job]
+dry_run = False
+
 [SLIC]
-slic_dir = /work/slac/sim/slic/install
+slic_dir = /work/slac/sim/slic/install-geant4-v10_06_p01
 hps_fieldmaps_dir = /work/slac/hps-fieldmaps
 detector_dir = /work/slac/hps-java/hps-java/detector-data/detectors
