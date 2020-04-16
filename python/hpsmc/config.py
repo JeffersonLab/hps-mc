@@ -1,4 +1,5 @@
 import os, logging
+from __builtin__ import True
 
 logger = logging.getLogger("hpsmc.config")
 logger.setLevel(logging.INFO)
@@ -27,3 +28,21 @@ except:
 def load(self, path):
     logger.debug("Loading config from '%s'" % path)
     parser.read(path)
+    
+def convert_value(val):
+    if val == 'True' or val == 'true': 
+        return True
+    elif val == 'False' or val == 'false':
+        return False
+    try:
+        if val.contains('.'):
+            floatval = float(value)
+            return floatval
+    except:
+        pass
+    try:
+        intval = int(val)
+        return intval
+    except:
+        pass
+    return val

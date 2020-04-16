@@ -281,7 +281,6 @@ class HPSTR(Component):
             args.extend(["-y", str(self.year)])
         return args
 
-    # FIXME: Make the generic Component method usable with this class.
     def output_files(self):
         f,ext = os.path.splitext(self.input_files()[0])
         print(f)
@@ -305,15 +304,14 @@ class HPSTR(Component):
         
 class StdHepTool(Component):
 
-    # TODO: Need list of valid program names rather than just those
-    #       that accept a seed argument.
-    seed_names = ["beam_coords",
-                  "beam_coords_old",
-                  "lhe_tridents",
-                  "lhe_tridents_displacetime",
-                  "merge_poisson",
-                  "mix_signal",
-                  "random_sample"]
+    """List of commands which accept a 'seed' argument."""
+    seed_names = ['beam_coords',
+                  'beam_coords_old',
+                  'lhe_tridents',
+                  'lhe_tridents_displacetime',
+                  'merge_poisson',
+                  'mix_signal',
+                  'random_sample']
 
     def __init__(self, name, **kwargs):
                        
@@ -517,8 +515,8 @@ class FilterBunches(JavaTool):
         self.event_interval = event_interval
                 
         JavaTool.__init__(self, 
-                          "filter_bunches",
-                          "org.hps.util.FilterMCBunches",
+                          'filter_bunches',
+                          'org.hps.util.FilterMCBunches',
                           replacements={'rot': ''},
                           append_tok='filt')
                             
@@ -551,7 +549,7 @@ class Unzip(Component):
     """
 
     def __init__(self, **kwargs):
-        Component.__init__(self, "unzip", "unzip", **kwargs)
+        Component.__init__(self, 'unzip', **kwargs)
                
     def output_files(self):
         self.outputs = []
@@ -576,7 +574,7 @@ class FileFilter(Component):
     """
     
     def __init__(self, excludes):
-        Component.__init__(self, "file_filter", "filter_filter", excludes=excludes)
+        Component.__init__(self, 'file_filter', excludes=excludes)
 
     def execute(self, log_out, log_err):
         return 0

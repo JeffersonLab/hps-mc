@@ -6,14 +6,27 @@ logger.setLevel(logging.DEBUG)
 
 import hpsmc.config as config
 
-def load_json_file(filename):
+def _load_json_file(filename):
     rawdata = open(filename, 'r').read()
     return json.loads(rawdata)
 
 class Job(object):
     """
     Primary class to run HPS jobs from a Python script.
+    
+    Executes a series of components configured by a config file with
+    parameters set in a JSON job file.
     """
+
+    """List of config names to be read for the Job class."""
+    _config_names = ['enable_copy_output_files',
+                     'enable_copy_input_files',
+                     'delete_existing',
+                     'delete_rundir',
+                     'dry_run',
+                     'ignore_return_codes',
+                     'job_id_pad',
+                     'check_output_files']
 
     def __init__(self, **kwargs):
         
@@ -30,9 +43,7 @@ class Job(object):
         self.components = []
 
         self.rundir = os.getcwd()
-            
-        self.job_id_pad = 4
-                                
+                                            
         self.params = {}
         
         self.log_out = sys.stdout
@@ -50,6 +61,8 @@ class Job(object):
         
         self.job_id = 1
         
+        # These are all settable by config file.
+        self.job_id_pad = 4
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
         self.delete_existing = False
@@ -57,6 +70,7 @@ class Job(object):
         self.dry_run = False
         self.ignore_return_codes = True
         self.check_output_files = True
+        self.check_commands = False
         
         self.__initialize()
 
@@ -136,7 +150,7 @@ class Job(object):
         
         logger.info("Loading job params from '%s'" % param_file)
         
-        self.set_parameters(load_json_file(param_file))
+        self.set_parameters(_load_json_file(param_file))
         logger.info(json.dumps(self.params, indent=4, sort_keys=False))
         
         if 'output_dir' in self.params:
@@ -254,70 +268,45 @@ class Job(object):
                 logger.info("'%s' with args: %s (NOT EXECUTED)" % (c.name, ' '.join(c.cmd_args())))
                             
     def __configure(self):
-            
-        p = config.parser  
         
-        default = 'Job'
-        
-        # TODO: Load these automatically based on a list
-        try:            
-            self.enable_copy_output_files = p.getboolean(default, 'copy_output_files')
-            logger.debug("enable_copy_output_files=%s" % str(self.enable_copy_output_files))
-        except:
-            pass
+        logger.info('Configuring job ...')    
+        p = config.parser        
+        job_config = 'Job'        
+        if config.parser.has_section(job_config):
+            for name, value in config.parser.items(job_config):
+                if name in Job._config_names:
+                    setattr(self, name, config.convert_value(value))
+                    logger.debug("Job:%s:%s=%s" % (name, 
+                                                   getattr(self, name).__class__.__name__, 
+                                                   getattr(self, name)))
+                else:
+                    logger.warning("Unknown config name '%s' in the Job section" % name)
+        logger.info('Done configuring job!')
                 
-        try:        
-            self.enable_copy_input_files = p.getboolean(default, 'copy_input_files')
-            logger.debug("enable_copy_input_files=%s" % str(self.enable_copy_input_files))
-        except:
-            pass
-        
-        try:
-            self.delete_existing = p.getboolean(default, 'delete_existing')
-            logger.debug("delete_existing=%s" % str(self.delete_existing))
-        except:
-            pass
-        
-        try:
-            self.dry_run = p.getboolean(default, 'dry_run')
-            logger.debug("dry_run=%s" % str(self.dry_run))
-        except:
-            pass
-        
-        try:
-            self.ignore_return_codes = p.getboolean(default, 'ignore_return_codes')
-            logger.debug("ignore_return_codes=%s" % str(self.ignore_return_codes))
-        except:
-            pass
-        
-        try:
-            self.job_id_pad = p.getint(default, 'job_id_pad')
-            logger.debug("job_id_pad=%d" % self.job_id_pad)
-        except:
-            pass
-        
         logger.info("Configuring components ...") 
         for c in self.components:
-            logger.info("Configuring '%s'" % c.name)
+            logger.info("Configuring component '%s'" % c.name)
             c.config()
             c.check_config()
         logger.info("Done configuring components!")
 
     def __setup(self):
-        # limit components according to job steps
+        # Limit components according to job steps
         if self.job_steps > 0:
             self.components = self.components[0:self.job_steps]
             logger.info("Job is limited to first %d steps." % self.job_steps)
+        else:
+            logger.info("No job steps specified so full job will be run.")
 
         self.__config_file_pipeline()
 
-        # run setup methods of each component
+        # Run setup methods of each component
         for c in self.components:
             logger.info("Setting up '%s'" % (c.name))
             c.rundir = self.rundir           
             c.setup()
-#            if not c.cmd_exists():
-#                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
+            if self.check_commands and not c.cmd_exists():
+                raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
 
     def __config_file_pipeline(self):
         """
