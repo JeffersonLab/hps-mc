@@ -1,5 +1,4 @@
 import os, logging
-from __builtin__ import True
 
 logger = logging.getLogger("hpsmc.config")
 logger.setLevel(logging.INFO)
