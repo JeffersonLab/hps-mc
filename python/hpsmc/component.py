@@ -14,9 +14,7 @@ class Component(object):
                  name,
                  command=None,
                  **kwargs):
-                 
-        print("Component kwargs: " + str(kwargs))
-                 
+                                  
         self.name = name
         self.command = command
                                            
@@ -144,7 +142,6 @@ class Component(object):
         """
         logger.debug("Configuring '%s'" % self.name)
         section_name = self.__class__.__name__
-        logger.debug("Loading config for '%s'" % section_name)
         if config.parser.has_section(section_name):
             for name, value in config.parser.items(section_name):
                 setattr(self, name, config.convert_value(value))
