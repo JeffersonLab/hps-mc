@@ -1,5 +1,4 @@
 import os, subprocess, sys, shutil, argparse, getpass, json, logging, time, re
-from __builtin__ import True, object
 
 logger = logging.getLogger("hpsmc.component")
 
