@@ -219,10 +219,13 @@ class Job(object):
         # Set component parameters from job JSON file.                
         self.__set_parameters()
 
-        # Copy the input files to the run dir if enabled and not in dry run.
         if not self.dry_run:
             if self.enable_copy_input_files: 
+                # Copy input files to the run dir.
                 self.__copy_input_files()
+            else:
+                # Symlink input files if copying is disabled.
+                self.__symlink_input_files()
         
         # Perform component setup to prepare for execution.
         # May use config and parameters that were set from above.
@@ -400,4 +403,15 @@ class Job(object):
             logger.info("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             shutil.copyfile(src, os.path.join(self.rundir, dest))
          
-            
+    def __symlink_input_files(self):
+        """
+        Symlink input files.
+        """
+        for src,dest in self.input_files.iteritems():
+            if not os.path.isabs(src):
+                # FIXME: Could try and convert to abspath here.
+                raise Exception("The input source file '%s' is not an absolute path." % src)            
+            if os.path.dirname(dest):
+                raise Exception("The input file destination '%s' is not valid." % dest)
+            logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
+            os.symlink(src, os.path.join(self.rundir, dest))
