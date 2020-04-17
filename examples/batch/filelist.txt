@@ -1,0 +1,2 @@
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_1.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_10.stdhep

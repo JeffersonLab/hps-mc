@@ -1,0 +1,28 @@
+{
+    "100": {
+        "run_number": 7984, 
+        "nevents": 10, 
+        "seed": 1, 
+        "output_dir": "output", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "input_files": {
+            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_1.stdhep": "events.stdhep"
+        }, 
+        "output_files": {
+            "events.slcio": "events_0100.slcio"
+        }
+    }, 
+    "101": {
+        "run_number": 7984, 
+        "nevents": 10, 
+        "seed": 2, 
+        "output_dir": "output", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "input_files": {
+            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_10.stdhep": "events.stdhep"
+        }, 
+        "output_files": {
+            "events.slcio": "events_0101.slcio"
+        }
+    }
+}

@@ -1,17 +1,19 @@
-import argparse, os, json, glob, collections
-
+import argparse, os, json, glob, collections, logging
 from string import Template
-
 import hpsmc.util as util
+
+logger = logging.getLogger("hpsmc.job_store")
 
 class JobStore:
     """
     Create a JSON job store using a JSON template and list of files.
     """
         
-    def __init__(self, json_file=None):
-        if json_file:
-            self.load(json_file)
+    def __init__(self, path=None):
+        self.path = path
+        if path:
+            logger.info("Initializing job store from '%s'" % self.path)
+            self.load(path)
     
     def parse_args(self):
         """Parse command line arguments to build and configure the job store."""
@@ -72,9 +74,11 @@ class JobStore:
             job_id +=1
             seed +=1
                 
+        self.data = jobs
+        
         with open(self.job_store, 'w') as f:
             json.dump(jobs, f, indent=4)
-        
+                
         print("Wrote job store to '%s'" % self.job_store)
             
     def load(self, json_store):
@@ -82,16 +86,16 @@ class JobStore:
         rawdata = open(json_store, "r").read()
         self.data = json.loads(rawdata)
         
-    def get_job(self, job_id_str):
+    def get_job(self, job_id):
         """Get a job by its job ID."""
-        return self.data[job_id_str]
+        return self.data[str(job_id)]
         
     def get_job_data(self):
         """Get the raw dict containing all the job data."""
         return self.data
-    
+        
     def get_job_ids(self):
-        """Get a sorted list of job ID strings."""
+        """Get a sorted list of job IDs."""
         return sorted(self.data.keys())
     
 # Run from the command line to create a job store
