@@ -1,5 +1,5 @@
 {
-  "nevents": 10000,
+  "nevents": 10,
   "seed": 67890,
   "run_number": 7984,
   "detector": "HPS-PhysicsRun2016-Pass2",

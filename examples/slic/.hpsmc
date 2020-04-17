@@ -1,5 +1,6 @@
 [Job]
 dry_run = False
+enable_copy_input_files = True
 
 [SLIC]
 slic_dir = /work/slac/sim/slic/install-geant4-v10_06_p01

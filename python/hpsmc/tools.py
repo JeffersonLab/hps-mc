@@ -5,7 +5,6 @@ from component import Component
 from .run_params import RunParameters
 import hpsmc.func as func
 import hpsmc.config as config
-from audioop import mul
 
 logger = logging.getLogger("hpsmc.tools")
 
@@ -490,6 +489,70 @@ class JavaTool(Component):
         args.append(self.hps_java_bin_jar)
         args.append(self.java_class)
         return args
+
+class EvioToLcio(JavaTool):
+    """
+    Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
+    """    
+    
+    def __init__(self, steering, **kwargs):
+       
+       self.detector = None
+       self.steering = None
+       self.run_number = None
+       self.skip_events = None
+       self.event_print_interval = None
+       self.steering = steering
+       
+       JavaTool.__init__(self, 
+                         'evio_to_lcio', 
+                         'org.hps.evio.EvioToLcio', 
+                         output_ext='.slcio', 
+                         **kwargs)
+    
+    def required_parameters(self):
+        return ['detector', 'steering_files']
+    
+    def optional_parameters(self):
+        return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
+    
+    def setup(self):
+        if self.steering not in self.steering_files:
+            raise Exception("Steering '%s' not found in %s" % (self.steering, self.steering_files))        
+        self.steering_file = self.steering_files[self.steering]
+        
+    def cmd_args(self):
+        args = JavaTool.cmd_args(self)
+        if not len(self.output_files()):
+            raise Exception('No output files were provided.')
+        output_file = self.output_files()[0]
+        args.append('-DoutputFile=%s' % os.path.splitext(output_file)[0])
+        args.extend(['-d', self.detector])
+        if self.run_number is not None:
+            args.extend(['-R', str(self.run_number)])
+        if self.skip_events is not None:
+            args.extend(['-s', str(self.skip_events)])
+        
+        if not os.path.isfile(self.steering_file):
+            args.append('-r')
+            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
+        else:
+            if not os.path.isabs(self.steering_file):
+                raise Exception("Steering '%s' looks like a file but is not an abs path." % self.steering_file)
+        args.extend(['-x', self.steering_file])
+         
+        if self.nevents is not None:
+            args.extend(['-n', str(self.nevents)])
+
+        args.append('-b')
+        
+        for inputfile in self.input_files():
+            args.append(inputfile)
+        
+        if self.event_print_interval is not None:
+            args.extend(['-e', str(self.event_print_interval)])
+        
+        return args    
     
 class FilterBunches(JavaTool):
     """
