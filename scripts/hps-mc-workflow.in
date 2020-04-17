@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-if [ -z "$HPSMC_DIR" ]; then
-    echo "ERROR: The $HPSMC_DIR is not set!"
-    exit 1
-fi
-
-python $HPSMC_DIR/lib/python/hpsmc/workflow.py $@

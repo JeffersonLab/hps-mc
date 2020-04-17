@@ -1,0 +1,3 @@
+#!/bin/sh
+
+python @CMAKE_INSTALL_PREFIX@/lib/python/hpsmc/local.py $@
