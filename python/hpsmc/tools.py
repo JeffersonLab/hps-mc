@@ -338,9 +338,6 @@ class StdHepTool(Component):
             raise Exception("No inputs specified for StdHepTool.")
         
         return args
-        
-    def optional_parameters(self):
-        return ['ctau', 'z']
 
 class BeamCoords(StdHepTool):
     """
@@ -739,6 +736,7 @@ class MoveFiles(Component):
 # FIXME: Everything below here is probably broken!
 
 class LCIOTool(Component):
+# TODO: This should extend JavaTool.
 
     def __init__(self, **kwargs):
         self.command = "java"
