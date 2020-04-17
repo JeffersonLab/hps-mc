@@ -1,0 +1,14 @@
+{
+  "nevents": 10,
+  "seed": 67890,
+  "run_number": 7984,
+  "detector": "HPS-PhysicsRun2016-Pass2",
+  "macros": ["/work/slac/hps-mc/examples/slic/test.mac"],
+  "input_files": {
+      "/work/slac/data/stdhep/tritrig_1.stdhep": "tritrig.stdhep"
+  },
+  "output_files": {
+      "tritrig.slcio": "tritrig_2016.slcio"
+  },
+  "output_dir": "output"
+}

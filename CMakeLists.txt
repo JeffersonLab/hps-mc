@@ -61,6 +61,10 @@ endforeach()
 # Install job script
 install(FILES ${PROJECT_SOURCE_DIR}/scripts/hps-mc-job DESTINATION bin
     PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+    
+# Install jobstore script
+install(FILES ${PROJECT_SOURCE_DIR}/scripts/hps-mc-jobstore DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 
 # Install stdhep script
 install(FILES scripts/stdhep_count.sh DESTINATION bin
