@@ -59,7 +59,7 @@ class Job(object):
         
         self.rundir = os.getcwd()
         
-        self.job_id = 1
+        self.job_id = None
         
         # These are all settable by config file.
         self.job_id_pad = 4
@@ -83,7 +83,7 @@ class Job(object):
         else:
             self.components.append(component)
 
-    def set_parameters(self, params):
+    def set_parameters(self, params):                
         """
         Add parameters to the job, overriding values if they exist already.
         
@@ -108,6 +108,7 @@ class Job(object):
         parser.add_argument("-s", "--job-steps", type=int, default=-1, 
                             help="Job steps to run (single number)")
         parser.add_argument("-d", "--run-dir", nargs=1, help="Job run dir")
+        parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
         parser.add_argument("params", nargs=1, help="Job params in JSON format")
         
         # TODO: CL option to disable automatic copying of ouput files.
@@ -138,19 +139,37 @@ class Job(object):
         
         if cl.params:
             self.param_file = cl.params[0]
-            self.__load_params(self.param_file)
                     
         if cl.run_dir:
             self.rundir = cl.run_dir[0]
+        
+        params = {}
+        if cl.job_id:
+            # Load data from a job store containing multiple jobs.
+            self.job_id = cl.job_id
+            print('job_id=%d' % self.job_id)
+            logger.info("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
+            with open(self.param_file, 'r') as infile:
+                jobstore = json.load(infile)
+            job_id_str = str(self.job_id)
+            if job_id_str in jobstore.keys():
+                params = jobstore[job_id_str]
+            else:
+                raise Exception("No job id %d in job store '%s'" % (self.job_id, self.param_file))
+        else:
+            # Load data from a JSON file with a single job.
+            logger.info("Loading job parameters from '%s'" % self.param_file)
+            params = _load_json_file(self.param_file)
+        
+        self.__load_params(params)
                   
-    def __load_params(self, param_file):
+    def __load_params(self, params):
         """
-        Load the job parameters from a JSON file.
+        Load the job parameters from JSON DATA.
         """
+    
+        self.set_parameters(params)
         
-        logger.info("Loading job params from '%s'" % param_file)
-        
-        self.set_parameters(_load_json_file(param_file))
         logger.info(json.dumps(self.params, indent=4, sort_keys=False))
         
         if 'output_dir' in self.params:
@@ -415,3 +434,4 @@ class Job(object):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             os.symlink(src, os.path.join(self.rundir, dest))
+            
