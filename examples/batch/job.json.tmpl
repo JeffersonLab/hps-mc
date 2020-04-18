@@ -1,13 +1,13 @@
 {
     "seed": ${seed},
-    "nevents": 10,
-    "run_number": 7984,
-    "detector": "HPS-PhysicsRun2016-Pass2",
+    "nevents": ${nevents},
+    "run_number": ${run_number},
+    "detector": "${detector}",
     "input_files": {
         "${input_file}": "events.stdhep"
     },
     "output_files": {
-      "${output_file}": "events_${job_id}.slcio"
+      "${output_file}": "events_${detector}_${run_number}_${job_id}_${nevents}.slcio"
     },
-    "output_dir": "output"
+    "output_dir": "output/${detector}"
 }
