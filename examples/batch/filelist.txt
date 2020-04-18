@@ -1,2 +1,10 @@
 /work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_1.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_2.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_3.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_4.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_5.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_6.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_7.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_8.stdhep
+/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_9.stdhep
 /work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_10.stdhep
