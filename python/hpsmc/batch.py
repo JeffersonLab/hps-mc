@@ -180,14 +180,14 @@ class Batch:
         This generically creates the command to run the job locally but subclasses
         may override if necessary.
         """
-        job_dir = os.path.join(self.run_dir, job_id)
+        job_dir = os.path.join(self.run_dir, str(job_id))
         if self.log_dir is not None:
             log_dir = self.log_dir
         else:
             log_dir = job_dir
         cmd = ['python', self.script,
-               '-o', os.path.join(log_dir, 'job.%s.out' % job_id),
-               '-e', os.path.join(log_dir, 'job.%s.err' % job_id)]
+               '-o', os.path.join(log_dir, 'job.%d.out' % job_id),
+               '-e', os.path.join(log_dir, 'job.%d.err' % job_id)]
         cmd.extend(['-d', job_dir])
         if self.config_file:
             cmd.extend(['-c', self.config_file])
