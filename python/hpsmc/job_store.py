@@ -4,6 +4,7 @@ import hpsmc.util as util
 
 logger = logging.getLogger("hpsmc.job_store")
 
+# TODO: Add option to read N input files per job and create vars input_file_1, input_file_2, etc.
 class JobStore:
     """
     Create a JSON job store using a JSON template and variable substitutions. 
@@ -21,7 +22,7 @@ class JobStore:
         if path:
             logger.info("Initializing job store from '%s'" % self.path)
             self.load(path)
-    
+        
     def parse_args(self):
         """Parse command line arguments to build and configure the job store."""
         
@@ -100,8 +101,8 @@ class JobStore:
             mapping["output_file"] = self.output_file
         seed = self.seed
 
-        # Dict which will contain all jobs
-        jobs = {}
+        # List which will contain all the jobs
+        jobs = []
         
         # Read in the template file
         with open(self.json_template_file, 'r') as tmpl_file:
@@ -117,7 +118,9 @@ class JobStore:
             mapping['seed'] = seed
             job_str = tmpl.substitute(mapping)
             job_json = json.loads(job_str)
-            jobs[str(job_id)] = job_json
+            job_json["job_id"] = job_id
+#            jobs[str(job_id)] = job_json
+            jobs.append(job_json)
             job_id +=1
             seed +=1 
         
@@ -131,12 +134,16 @@ class JobStore:
             
     def load(self, json_store):
         """Load raw JSON data into this job store."""
-        rawdata = open(json_store, "r").read()
-        self.data = json.loads(rawdata)
+        with open(json_store, 'r') as f:
+            json_data = json.loads(f.read())
+        self.data = {}
+        for j in json_data:
+            self.data[j['job_id']] = j
+        print("Loaded %d jobs from job store '%s'" % (len(self.data), json_store))
         
     def get_job(self, job_id):
         """Get a job by its job ID."""
-        return self.data[str(job_id)]
+        return self.data[int(job_id)]
         
     def get_job_data(self):
         """Get the raw dict containing all the job data."""

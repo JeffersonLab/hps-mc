@@ -6,6 +6,8 @@ logger.setLevel(logging.DEBUG)
 
 import hpsmc.config as config
 
+from job_store import JobStore
+
 def _load_json_file(filename):
     rawdata = open(filename, 'r').read()
     return json.loads(rawdata)
@@ -149,15 +151,13 @@ class Job(object):
             self.job_id = cl.job_id
             print('job_id=%d' % self.job_id)
             logger.info("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
-            with open(self.param_file, 'r') as infile:
-                jobstore = json.load(infile)
-            job_id_str = str(self.job_id)
-            if job_id_str in jobstore.keys():
-                params = jobstore[job_id_str]
+            jobstore = JobStore(self.param_file)
+            if jobstore.has_job_id(self.job_id):
+                params = jobstore.get_job(self.job_id)
             else:
-                raise Exception("No job id %d in job store '%s'" % (self.job_id, self.param_file))
+                raise Exception("No job id %d was found in the job store '%s'" % (self.job_id, self.param_file))
         else:
-            # Load data from a JSON file with a single job.
+            # Load data from a JSON file with a single job definition.
             logger.info("Loading job parameters from '%s'" % self.param_file)
             params = _load_json_file(self.param_file)
         
