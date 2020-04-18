@@ -32,21 +32,22 @@ class Batch:
         parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
         parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
         parser.add_argument("-c", "--config-file", nargs=1, help="Config file", required=False)
-        parser.add_argument("-d", "--run-dir", nargs=1, help="Run dir")
+        parser.add_argument("-d", "--run-dir", nargs=1, help="Base run dir for the jobs")
         parser.add_argument("script", nargs=1, help="Full path to job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
         cl = parser.parse_args()
-                
+
+        if not cl.jobstore: 
+            raise Exception('The job store is a required argument.')
         if not os.path.isfile(cl.jobstore[0]):
-            raise Exception("The job store file '%s' does not exist." % cl.jobstore[0])
+            raise Exception("The job store '%s' does not exist." % cl.jobstore[0])
         self.jobstore = JobStore(cl.jobstore[0])
-        self.jobs = self.jobstore.get_job_data()
-        
+
         if cl.script:
             self.script = cl.script[0]
             if not os.path.isfile(self.script):
-                raise Exception("The script '%s' does not exist." % self.script)       
+                raise Exception("The job script '%s' does not exist." % self.script)       
         else:
             raise Exception('The job script is a required argument.')
          
@@ -57,14 +58,16 @@ class Batch:
             
         self.debug = cl.debug
         
-        if cl.log_dir:            
+        if cl.log_dir:
             self.log_dir = cl.log_dir[0]
         else:
-            self.log_dir = os.getcwd()        
-        try:
-            os.stat(self.log_dir)
-        except:
-            os.makedirs(self.log_dir)
+            self.log_dir = None
+        #else:
+        #    self.log_dir = os.getcwd()        
+        #try:
+        #    os.stat(self.log_dir)
+        #except:
+        #    os.makedirs(self.log_dir)
             
         self.check_output = cl.check_output
                     
@@ -113,7 +116,7 @@ class Batch:
             self.run_dir = cl.run_dir[0]
         else:
             self.run_dir = os.getcwd()
-        
+                
         return cl
         
     def submit_cmd(job_id, job_data):
@@ -131,26 +134,27 @@ class Batch:
                 print "Job output '%s' does not exist." % (dest)
                 return False
         return True
+    
+    def get_filtered_job_ids(self):
+        """
+        Get a list of job IDs to submit based on parsed command line options.
+        """        
+        submit_ids = self.jobstore.get_job_ids()
+        if self.start_job_num:            
+            submit_ids = [id for id in all_job_ids 
+                          if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
+        elif len(self.job_ids):
+            submit_ids = job_ids
+        return submit_ids
         
     def submit(self):
         """
         Primary public method for submitting jobs after args are parsed.
         """
-        if self.start_job_num:
-            # Submit from a specified range of job IDs.
-            self._submit_job_range(self.start_job_num, self.end_job_num)
-        elif len(self.job_ids):
-            # Submit jobs from a set of specified job IDs.
-            self._submit_jobs(self.job_ids)
-        else:
-            # Submit all the jobs.
-            self._submit_all()
-
-    def _submit_all(self):
-        """Submit all jobs in the workflow to the batch system."""
-        for job_id in self.jobstore.get_job_ids():
-            self._submit_job(job_id, self.jobstore.get_job(job_id))
-                                
+        job_ids = self.get_filtered_job_ids()
+        logger.info('Submitting jobs: %s' % str(job_ids))
+        self._submit_jobs(job_ids)
+        
     def _submit_job(self, job_id, job):
         """Submit a single job to the batch system."""
         batch_id = None
@@ -163,37 +167,28 @@ class Batch:
     
     def _submit_jobs(self, job_ids):
         """Submit the jobs with the specified job IDs to the batch system."""
-        for k in self.jobs:        
-            if self.jobs[k]["job_id"] in self.job_ids:
-                j = self.jobs[k]
-                self.submit_job(k, j)
-                
-    def _submit_job_range(self, start_job_num, end_job_num):
-        """Submit jobs using a range of job IDs."""
-        for k in sorted(self.jobs):            
-            job = self.jobs[k]
-            id = job["job_id"]
-            if id >= self.start_job_num and id <= self.end_job_num:
-                self.submit_job(k, job)
-
-    """                
-    def _check_outputs(self):
-        for k in sorted(self.jobs):
-            j = self.jobs[k]
-            job_id = j["job_id"]
-            if not outputs_exist(j):
-                print "Job <%d> outputs do not exist." % job_id
-    """
+        for job_id in job_ids:
+            if not self.jobstore.has_job_id(job_id):
+                raise Exception('Job ID %s was not found in job store' % job_id)
+            job_data = self.jobstore.get_job(job_id)
+            self._submit_job(job_id, job_data)
                     
     def build_cmd(self, job_id, job_params):
         """
-        Create the command to run the job.
+        Create the command to run a single job.
         
         This generically creates the command to run the job locally but subclasses
         may override if necessary.
         """
-        cmd = ['python', self.script, '-o', 'job_%s.out' % job_id, '-e', 'job_%s.err' % job_id]
-        cmd.extend(['-d', os.path.join(self.run_dir, job_id)])
+        job_dir = os.path.join(self.run_dir, job_id)
+        if self.log_dir is not None:
+            log_dir = self.log_dir
+        else:
+            log_dir = job_dir
+        cmd = ['python', self.script,
+               '-o', os.path.join(log_dir, 'job.%s.out' % job_id),
+               '-e', os.path.join(log_dir, 'job.%s.err' % job_id)]
+        cmd.extend(['-d', job_dir])
         if self.config_file:
             cmd.extend(['-c', self.config_file])
         if self.job_steps > 0:
@@ -222,13 +217,12 @@ class LSF(Batch):
      
         #job_params["output_files"]["job.out"] = name+".out"
         #job_params["output_files"]["job.err"] = name+".err"
-        #with open(param_file, "w") as jobfile:
-        #    json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        
         return cmd
 
     def submit_cmd(self, name, job_params): 
         cmd = self.build_cmd(name, job_params)
-        logger.info('Submitting LSF job with command: %s' % ' '.join(cmd))
+        logger.info('Submitting job %s to LSF with command: %s' % (name, ' '.join(cmd)))
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out,err = proc.communicate()
         if err != None and len(err):
@@ -239,7 +233,7 @@ class LSF(Batch):
         batch_id = int(tokens[1].replace('<', '').replace('>', ''))
         return batch_id
 
-# FIXME: Probably this class is completely broken.    
+# FIXME: Probably this class is completely broken.
 class Auger(Batch):
     """Manage Auger batch jobs."""
 
@@ -370,63 +364,33 @@ class Local(Batch):
 
 def run_job_pool(cmd):
     sys.stdout.flush()
-    #returncode = subprocess.call(cmd, stdout=log, stderr=log)
     returncode = subprocess.call(cmd)
-    try:   
+    try:
         sys.stdout.flush()
         returncode = subprocess.call(cmd, stdout=log,stderr=log)
-    except CalledProcessError as e:
+    except subprocess.CalledProcessError as e:
         print(str(e))
         sys.stdout.flush()
         pass
     return returncode
-
-"""
-def run_job_pool(args):
-    run_job_pool_args(*args)
-    
-def run_job_pool_args(job_name, script, param_file, job_dir):
-    #logger.info("Running job %s" % job_name)
-    if not os.path.isdir(job_dir):
-        logger.info("Creating job dir '%s" % job_dir)
-        os.mkdir(job_dir)
-    log_file = os.path.join(job_dir, "%s.log" % job_name)
-    cmd = ["python", script, "-d", job_dir, "-o", log_file, "-e", log_file, param_file]
-    sys.stdout.flush()
-    #returncode = subprocess.call(cmd, stdout=log, stderr=log)
-    returncode = subprocess.call(cmd)
-    try:   
-        sys.stdout.flush()
-        returncode = subprocess.call(cmd,stdout=log,stderr=log)
-    except CalledProcessError as e:
-        print(str(e))
-        sys.stdout.flush()
-        pass
-    return returncode
-"""
                 
-# FIXME: Make this work with job range and job IDs.
 class Pool(Batch):
     """
     Run a set of jobs in a local pool using Python's multiprocessing module.    
     """
                         
     def submit(self):
+                
         cmds = []
-        for job_id in self.jobstore.get_job_ids():
+        for job_id in self.get_filtered_job_ids():
             job_data = self.jobstore.get_job(job_id)
             cmd = self.build_cmd(job_id, job_data)
             cmds.append(cmd)
         print(cmds)
         
-        """
-        for job_name in sorted(self.jobs):
-            job_params = self.jobs[job_name]
-            param_file = self.get_job_file_path(job_name)
-            job_dir = os.path.join(os.getcwd(), job_name)
-            params.append([job_name, self.script, param_file, job_dir])
-        """
-                    
+        if not len(cmds):
+            raise Exception('No job IDs found to submit')
+                            
         original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
         pool = multiprocessing.Pool(self.pool_size)
         signal.signal(signal.SIGINT, original_sigint_handler)      
@@ -447,8 +411,3 @@ class Pool(Batch):
             e = sys.exc_info()[0]
             logger.fatal("Caught non-Python Exception '%s'" % (e))
             pool.terminate()
-
-if __name__ == "__main__":
-    batch = LSF()
-    batch.parse_args()
-    batch.submit() 
