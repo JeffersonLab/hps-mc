@@ -29,14 +29,15 @@ class JobStore:
         parser = argparse.ArgumentParser(description="Create a job store with multiple jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 4)", default=4)
-        parser.add_argument("-r", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
+        parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
         parser.add_argument("-i", "--input-files", help="Input file list (text file)")
         parser.add_argument("-o", "--output-file", help="Output file written by the job script")
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
+        parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
         parser.add_argument("json_template_file", help="Job template in JSON format")
         parser.add_argument("job_store", help="Output file containing the JSON job store")
         cl = parser.parse_args()
-
+        
         self.json_template_file = cl.json_template_file
         if not os.path.isfile(self.json_template_file):
             raise Exception("The JSON template file '%s' does not exist.")
@@ -48,9 +49,9 @@ class JobStore:
         self.seed = cl.seed
 
         self.input_files = []
-        input_files = cl.input_files
-        with open(input_files) as f:
-            self.input_files = f.read().splitlines()
+        if cl.input_files:
+            with open(cl.input_files) as f:
+                self.input_files = f.read().splitlines()
 
         if cl.output_file:           
             self.output_file = cl.output_file
@@ -66,6 +67,10 @@ class JobStore:
                 self.itervars = json.load(f)
         else:
             self.itervars = None
+
+        self.repeat = cl.repeat
+        if self.repeat < 1:
+            raise Exception('Bad value %d for repeat argument.' % self.repeat)
  
     def get_iter_vars(self):
         """
@@ -91,15 +96,11 @@ class JobStore:
         # Get the iteration variable names and value lists
         var_names, var_lists = self.get_iter_vars()
 
-        # Setup the basic variable mapping for the template
-        job_id = self.job_start
+        # Setup the basic variable mapping for the template        
         mapping = {
-            "job_id": None,
-            "seed": None
         }
         if self.output_file:
             mapping["output_file"] = self.output_file
-        seed = self.seed
 
         # List which will contain all the jobs
         jobs = []
@@ -109,20 +110,22 @@ class JobStore:
             tmpl = Template(tmpl_file.read())
         
         # Loop over the variable lists and substitute into the template
+        seed = self.seed
+        job_id = self.job_start
         for var_list in var_lists:
             for varname, value in zip(var_names, var_list):
-                mapping[varname] = value                
-                #print('%s=%s' % (str(varname), str(value)))
-            job_id_padded = ("%0" + str(self.job_id_pad) + "d") % job_id
-            mapping['job_id'] = job_id_padded
-            mapping['seed'] = seed
-            job_str = tmpl.substitute(mapping)
-            job_json = json.loads(job_str)
-            job_json["job_id"] = job_id
-#            jobs[str(job_id)] = job_json
-            jobs.append(job_json)
-            job_id +=1
-            seed +=1 
+                mapping[varname] = value
+            for r in range(0, self.repeat):
+#                job_id_padded = ("%0" + str(self.job_id_pad) + "d") % job_id
+                mapping['seed'] = seed
+                mapping['job_id'] = job_id
+                mapping['sequence'] = r + 1
+                job_str = tmpl.substitute(mapping)
+                job_json = json.loads(job_str)
+                job_json["job_id"] = job_id
+                jobs.append(job_json)
+                job_id +=1
+                seed +=1 
         
         self.data = jobs
         
@@ -130,7 +133,7 @@ class JobStore:
         with open(self.job_store, 'w') as f:
             json.dump(jobs, f, indent=4)
                 
-        print("Wrote %d jobs to job store '%s'" % (len(self.data), self.job_store))
+        print("Wrote %d jobs to '%s'" % (len(self.data), self.job_store))
             
     def load(self, json_store):
         """Load raw JSON data into this job store."""
