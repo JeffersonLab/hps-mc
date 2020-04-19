@@ -8,13 +8,6 @@ from job_store import JobStore
 
 logger = logging.getLogger("hpsmc.batch")
 
-# TODO:
-# [x] make work with JobStore instead of Workflow
-# [x] add argument with path to job script
-# [ ] simplify the command line interface (not sure all args are really necessary)
-# [ ] consolidate the number of methods defined in the base class
-# [ ] check that LSF, Auger, Local and Pool work after changes
-# [ ] consider removing the support for staggered submission
 class Batch:
     """Generic interface to a batch system."""
     
@@ -144,7 +137,7 @@ class Batch:
             submit_ids = [id for id in all_job_ids 
                           if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
         elif len(self.job_ids):
-            submit_ids = job_ids
+            submit_ids = self.job_ids
         return submit_ids
         
     def submit(self):
@@ -182,8 +175,10 @@ class Batch:
         """
         job_dir = os.path.join(self.run_dir, str(job_id))
         if self.log_dir is not None:
+            # User specified log dir
             log_dir = self.log_dir
         else:
+            # Log files go into the job dir
             log_dir = job_dir
         cmd = ['python', self.script,
                '-o', os.path.join(log_dir, 'job.%d.out' % job_id),
@@ -211,13 +206,8 @@ class LSF(Batch):
 
     def build_cmd(self, name, job_params):
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o",  log_file, "-e",  log_file]
-
-        cmd.extend(Batch.build_cmd(self, name, job_params))
-     
-        #job_params["output_files"]["job.out"] = name+".out"
-        #job_params["output_files"]["job.err"] = name+".err"
-        
+        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o", log_file, "-e", log_file]
+        cmd.extend(Batch.build_cmd(self, name, job_params))        
         return cmd
 
     def submit_cmd(self, name, job_params): 
@@ -306,7 +296,6 @@ class Auger(Batch):
         cmd_lines.append("<![CDATA[")
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
         
-        #job_cmd = "python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file))
         job_cmd = self.build_cmd(name, job_params)
         
         if self.job_steps > 0:
@@ -317,20 +306,20 @@ class Auger(Batch):
 
         with open(param_file, "w") as jobfile:
              json.dump(job_params, jobfile, indent=2, sort_keys=True)
-        print "Wrote job param file <%s>" % (param_file)
+        print "Wrote job param file '%s'" % (param_file)
 
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
         xml_file = os.path.join(self.workdir, name+".xml")
         with open(xml_file, "w") as f:
             f.write(pretty)
-        print "Wrote Auger XML <%s>" % xml_file
+        print "Wrote Auger XML '%s'" % xml_file
 
         return param_file, xml_file
 
     def submit_cmd(self, name, job_params):
         param_file,xml_file = self.build_job_files(name, job_params)
         cmd = ['jsub', '-xml', xml_file]
-        print ' '.join(cmd)
+        #print(' '.join(cmd))
         if not self.dryrun:
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
             out, err = proc.communicate()
@@ -340,7 +329,7 @@ class Auger(Batch):
                 jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
             return jobid
         else:
-            print "Job <%s> was not submitted." % name
+            print "Job %s was not submitted." % name
             return None
         print        
 
