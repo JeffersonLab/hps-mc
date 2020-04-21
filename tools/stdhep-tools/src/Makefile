@@ -3,10 +3,11 @@
 #STDHEP_DIR := $(SRC_DIR)/stdhep-5-06-01
 STDHEP_C := $(STDHEP_DIR)/lib/libstdhepC.a
 MCFIO := $(STDHEP_DIR)/lib/libFmcfio.a
-LOADLIBS=-L$(STDHEP_DIR)/lib
+LOADLIBS=-L$(STDHEP_DIR)/lib -L$(dir $(GSL_LIBRARY))
 #LOADLIBS=-L/usr/local/lib/stdhep -L/afs/slac.stanford.edu/package/cernlib/@sys/cern/2002/lib
 LDLIBS=-lstdhepC -lFmcfio -lgsl -lgslcblas
-INCFILES=-I$(STDHEP_DIR)/src/inc -I$(SRC_DIR)
+#-l$(GSL_CBLAS_LIBRARY) -l$(GSL_LIBRARY) 
+INCFILES=-I$(STDHEP_DIR)/src/inc -I$(SRC_DIR) -I$(GSL_INCLUDE_DIRS)
 CPP=g++
 CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g -std=c++11
 TARGETS := $(patsubst $(SRC_DIR)/%.cc,$(BIN)/%,$(wildcard $(SRC_DIR)/*.cc))
