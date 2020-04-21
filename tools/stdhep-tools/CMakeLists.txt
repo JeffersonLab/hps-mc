@@ -19,8 +19,9 @@ foreach (stdhep_program_source ${stdhep_program_sources})
 endforeach()
 
 add_custom_command(OUTPUT ${stdhep_programs}
-    COMMAND make BIN=${STDHEP_TOOLS_BIN_DIR} SRC_DIR=${CMAKE_BINARY_DIR}/stdhep-tools-src/ STDHEP_DIR=${STDHEP_DIR}
+    COMMAND make BIN=${STDHEP_TOOLS_BIN_DIR} SRC_DIR=${CMAKE_BINARY_DIR}/stdhep-tools-src/ STDHEP_DIR=${STDHEP_DIR} GSL_INCLUDE_DIRS=${GSL_INCLUDE_DIRS} GSL_LIBRARY=${GSL_LIBRARY}
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stdhep-tools-src"
     DEPENDS "${CMAKE_BINARY_DIR}/stdhep-tools-src")
 
 add_custom_target(stdhep_tools_build ALL DEPENDS ${stdhep_programs})
+
