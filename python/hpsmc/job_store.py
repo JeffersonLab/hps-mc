@@ -30,7 +30,7 @@ class JobStore:
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 4)", default=4)
         parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
-        parser.add_argument("-i", "--input-files", help="Input file list (text file)")
+        parser.add_argument("-i", "--input-file-list", action='append', nargs=2, help="Input file lists and number of reads per job")
         parser.add_argument("-o", "--output-file", help="Output file written by the job script")
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
         parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
@@ -47,11 +47,19 @@ class JobStore:
         self.job_start = cl.job_start
         self.job_id_pad = cl.pad
         self.seed = cl.seed
-
-        self.input_files = []
-        if cl.input_files:
-            with open(cl.input_files) as f:
-                self.input_files = f.read().splitlines()
+        
+        # TODO: handle multiple input file lists here
+        self.input_lists = [] 
+        if cl.input_file_list is not None:
+            for f in cl.input_file_list:
+                self.input_lists.append([f[0], int(f[1])])
+#            print(self.input_lists)
+        self.list_reader = FileListReader(self.input_lists)
+        
+#        self.input_files = []
+#        if cl.input_files:
+#            with open(cl.input_files) as f:
+#                self.input_files = f.read().splitlines()
 
         if cl.output_file:           
             self.output_file = cl.output_file
@@ -78,9 +86,10 @@ class JobStore:
         """
         var_list = []
         var_names = []
-        if len(self.input_files):
-            var_names.append('input_file')
-            var_list.append(self.input_files)
+        # TODO: remove this from itervars (handle it in the job creation loop)
+        #if len(self.input_files):
+        #    var_names.append('input_file')
+        #    var_list.append(self.input_files)
         if self.itervars:
             var_names.extend(sorted(self.itervars.keys()))
             for k in sorted(self.itervars.keys()):
@@ -109,31 +118,45 @@ class JobStore:
         with open(self.json_template_file, 'r') as tmpl_file:
             tmpl = Template(tmpl_file.read())
         
+        self.list_reader.open()
+        
         # Loop over the variable lists and substitute into the template
         seed = self.seed
         job_id = self.job_start
         for var_list in var_lists:
+            # TODO: handle multiple input file lists here
             for varname, value in zip(var_names, var_list):
                 mapping[varname] = value
             for r in range(0, self.repeat):
-#                job_id_padded = ("%0" + str(self.job_id_pad) + "d") % job_id
+                
                 mapping['seed'] = seed
                 mapping['job_id'] = job_id
                 mapping['sequence'] = r + 1
+                
+                file_vars = self.list_reader.read_next()
+                print("read next files: " + str(file_vars))
+                for name,path in file_vars.iteritems():
+                    mapping[name] = path
+                
                 job_str = tmpl.substitute(mapping)
                 job_json = json.loads(job_str)
                 job_json["job_id"] = job_id
                 jobs.append(job_json)
+                                
                 job_id +=1
-                seed +=1 
-        
+                seed +=1
+                
         self.data = jobs
+        
+        self.list_reader.close()
         
         # Dump the results to a file
         with open(self.job_store, 'w') as f:
             json.dump(jobs, f, indent=4)
                 
         print("Wrote %d jobs to '%s'" % (len(self.data), self.job_store))
+        
+        # TODO: Load the store here
             
     def load(self, json_store):
         """Load raw JSON data into this job store."""
@@ -159,6 +182,36 @@ class JobStore:
     def has_job_id(self, job_id):
         """Return true if the job ID exists in the store."""
         return job_id in self.data.keys()
+    
+class FileListReader:
+    
+    def __init__(self, flists):
+        self.flists = flists
+        self.fhandles = {}
+
+    def open(self):
+        for flist,nread in self.flists:
+            list_name = os.path.splitext(os.path.basename(flist))[0]
+            if self.fhandles.has_key(list_name):
+                raise Exception("Duplicate file list name: %s" % list_name)
+            f = open(flist, 'r')
+            self.fhandles[list_name] = [f, nread]
+        print(self.flists)
+        print(self.fhandles)
+                
+    def read_next(self):
+        file_vars = {}
+        for name,f in self.fhandles.iteritems():
+            for i in range(f[1]):
+                file_vars['_'.join([name, str(i + 1)])] = f[0].readline().strip()
+        return file_vars
+    
+    def close(self):
+        for name,f in self.fhandles.iteritems():
+            try:
+                f.close()
+            except:
+                pass
     
 # Run from the command line to create a new job store
 if __name__ == "__main__":
