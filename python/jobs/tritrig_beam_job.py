@@ -15,7 +15,7 @@ tritrig_file_name = "tritrig_events.lhe.gz"
 # Input beam events (StdHep format)
 beam_file_name = "beam.stdhep"
 
-# Check for expected input file targetsd
+# Check for expected input file targets
 if tritrig_file_name not in inputs:
     raise Exception("Missing required input file '%s'" % tritrig_file_name)
 if beam_file_name not in inputs:
