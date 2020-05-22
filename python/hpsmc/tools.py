@@ -10,7 +10,7 @@ logger = logging.getLogger("hpsmc.tools")
 
 class SLIC(Component):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         
         # List of macros to run (optional)
         self.macros = []
@@ -22,7 +22,8 @@ class SLIC(Component):
                            'slic',
                            'slic',
                            replacements={'rot': ''},
-                           output_ext='.slcio')
+                           output_ext='.slcio',
+                           **kwargs)
                                
     def cmd_args(self):
         
@@ -111,7 +112,7 @@ class JobManager(Component):
     Run the hps-java JobManager class.
     """
 
-    def __init__(self, steering):
+    def __init__(self, steering, **kwargs):
         
         self.run_number = None
         self.detector = None
@@ -131,7 +132,8 @@ class JobManager(Component):
                            'job_manager', 
                            'java', 
                            replacements={'filt': 'readout', 'readout': 'recon'},
-                           output_ext='.slcio')
+                           output_ext='.slcio',
+                           **kwargs)
         
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -344,7 +346,7 @@ class BeamCoords(StdHepTool):
     Transform StdHep events into beam coordinates.
     """
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         
         self.beam_sigma_x = None
         self.beam_sigma_y = None
@@ -355,7 +357,8 @@ class BeamCoords(StdHepTool):
         StdHepTool.__init__(self, 
                             'beam_coords',
                             replacements={'mom': ''},
-                            append_tok='rot')
+                            append_tok='rot',
+                            **kwargs)
 
     def cmd_args(self):
         args = StdHepTool.cmd_args(self)
@@ -376,20 +379,42 @@ class BeamCoords(StdHepTool):
         
 class RandomSample(StdHepTool):
     
-    def __init__(self):
-        StdHepTool.__init__(self, name='beam_coords', replacements={'rot': 'sampled'})
+    def __init__(self, **kwargs):
+        StdHepTool.__init__(self, name='random_sample', replacements={'rot': 'sampled'}, **kwargs)
     
-    def output_files(self):
-        return [f.replace('_1.stdhep', '') for f in Component.output_files(self)]
+#    def output_files(self):
+#        return [f.replace('_1.stdhep', '') for f in Component.output_files(self)]
+    
+    def cmd_args(self):
+        
+        args = []
+         
+        if self.name in StdHepTool.seed_names:
+            args.extend(["-s", str(self.seed)])
+        
+        args.extend(["-N", str(1), "-n", str(self.nevents)])
+        
+        if len(self.output_files()):
+            args.insert(0, os.path.splitext(self.output_files()[0])[0])
+        elif len(self.outputs) > 1:
+            raise Exception("Too many outputs specified.")
+        
+        if len(self.input_files()):
+            for i in self.inputs:
+                args.insert(0, i)
+        else:
+            raise Exception("No inputs were provided.")
+        
+        return args
         
 class DisplaceTime(StdHepTool):
     """
     Convert LHE files to StdHep, displacing the time by given ctau.
     """
     
-    def __init__(self):
+    def __init__(self, **kwargs):
         self.ctau = None
-        StdHepTool.__init__(self, name='lhe_tridents_displacetime', output_ext='.stdhep')
+        StdHepTool.__init__(self, name='lhe_tridents_displacetime', output_ext='.stdhep', **kwargs)
 
     def cmd_args(self):
         args = StdHepTool.cmd_args(self) 
@@ -402,8 +427,8 @@ class DisplaceTime(StdHepTool):
         
 class AddMother(StdHepTool):
     
-    def __init__(self):
-        StdHepTool.__init__(self, 'add_mother', append_tok='mom')
+    def __init__(self, **kwargs):
+        StdHepTool.__init__(self, 'add_mother', append_tok='mom', **kwargs)
         
 class MergePoisson(StdHepTool):
         
@@ -412,24 +437,22 @@ class MergePoisson(StdHepTool):
             self.lhe_file = kwargs['lhe_file']
         else:
             raise Exception("Missing required init argument 'lhe_file' to compute mu")
-        StdHepTool.__init__(self, 'merge_poisson', replacements={'rot': ''}, append_tok='sampled', **kwargs)
+        StdHepTool.__init__(self, 
+                            'merge_poisson', 
+                            replacements={'rot': ''}, 
+                            append_tok='sampled', 
+                            **kwargs)
     
     def setup(self):
         self.run_param_data = RunParameters(self.run_params)
-        self.mu = func.mu(self.lhe_file, self.run_param_data)       
+        self.mu = func.mu(self.lhe_file, self.run_param_data)
     
     def required_parameters(self):
         return ['run_params']
     
-    def optional_parameters(self):
-        return ['lhe_file']
-    
     def output_files(self):
+        # TODO: strip number at end here
         return ["%s_1.stdhep" % os.path.splitext(f)[0] for f in Component.output_files(self)]
-            
-    def cmd_args(self):
-        args = StdHepTool.cmd_args(self)
-        return args
     
     def cmd_args(self):
         
@@ -443,23 +466,27 @@ class MergePoisson(StdHepTool):
         if len(self.output_files()):
             args.insert(0, '_'.join(os.path.splitext(self.output_files()[0])[0].split('_')[:-1]))
         elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified for StdHepTool.")       
+            raise Exception("Too many outputs specified.")       
         
         if len(self.input_files()):
             for i in self.inputs:
                 args.insert(0, i)
         else:
-            raise Exception("No inputs specified for StdHepTool.")
+            raise Exception("No inputs were provided.")
         
         return args
         
 class MergeFiles(StdHepTool):
     
-    def __init__(self, output_name):
-        StdHepTool.__init__(self, 'merge_files')
-
+    def __init__(self, output_name, **kwargs):
+        self.output_name = output_name
+        StdHepTool.__init__(self, 'merge_files', **kwargs)
+    
+    def optional_parameters(self):
+        return []
+    
     def required_parameters(self):
-        return ['output_name']
+        return []
         
     def output_files(self):
         return ['%s.stdhep' % self.output_name]
@@ -561,13 +588,13 @@ class FilterBunches(JavaTool):
     should usually not need to be changed by the user).
     """
     
-    def __init__(self, nevents=2000000, event_interval=250):
+    def __init__(self, nevents=2000000, event_interval=250, **kwargs):
 
         # Default max output events
         self.nevents = nevents
         
         # True to enable filtering on min ecal energy dep
-        self.enable_ecal_energy_filter = False
+        self.enable_ecal_energy_filter = True
         
         self.ecal_hit_ecut = None
         
@@ -578,7 +605,8 @@ class FilterBunches(JavaTool):
                           'filter_bunches',
                           'org.hps.util.FilterMCBunches',
                           replacements={'rot': ''},
-                          append_tok='filt')
+                          append_tok='filt',
+                          **kwargs)
                             
     def cmd_args(self):
         
