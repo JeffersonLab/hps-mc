@@ -1,0 +1,22 @@
+{
+    "nevents": ${nevents},
+    "run_params": "${run_params}",
+    "target_z": ${target_z},
+    "run_number": ${run_number},
+    "detector": "${detector}",
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
+    },
+    "ecal_hit_ecut": 0.05,
+    "enable_ecal_energy_filter": true,
+    "event_interval": 250,
+    "output_files": {
+        "tritrig-beam_recon.slcio": "tritrig-beam_recon_${job_id}.slcio"
+    },
+    "input_files": {
+        "${tritrig_files_1}": "tritrig_events.lhe.gz",
+        "${beam_files_1}": "beam.stdhep"
+    },
+    "output_dir": "output/${run_params}/${detector}/recon"
+}
