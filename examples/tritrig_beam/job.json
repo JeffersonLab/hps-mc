@@ -1,0 +1,20 @@
+ {
+    "job_id": 1,
+    "nevents": 10000,
+    "target_z": -4.3,
+    "run_params": "2pt3",
+    "run_number": 7984,
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim",
+        "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+    },
+    "output_dir": "output/test",
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "input_files": {
+        "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_1.lhe.gz": "tritrig_events.lhe.gz",
+        "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_1.stdhep": "beam.stdhep"
+    },
+    "output_files": {
+        "tritrig-beam_recon.slcio": "tritrig-beam_recon_1.slcio"
+    }
+}
