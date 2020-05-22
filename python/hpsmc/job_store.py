@@ -4,17 +4,10 @@ import hpsmc.util as util
 
 logger = logging.getLogger("hpsmc.job_store")
 
-# TODO: Add option to read N input files per job and create vars input_file_1, input_file_2, etc.
+# TODO: Separate JSON job store from job builder algorithm
 class JobStore:
     """
-    Create a JSON job store using a JSON template and variable substitutions. 
-    
-    The user may provide a file containing a list of input files to process as 
-    well as a JSON file containing variable lists. All combinations of the 
-    input files and variables are combined together using itertools and the 
-    template is processed to expand in a full set of jobs, which are written 
-    into a JSON job store. The input file list and the variable file are both
-    optional but at least one of them must be provided.
+    Create a JSON job store using a JSON template and variable substitutions.
     """
         
     def __init__(self, path=None):        
@@ -31,7 +24,7 @@ class JobStore:
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 4)", default=4)
         parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
         parser.add_argument("-i", "--input-file-list", action='append', nargs=2, help="Input file lists and number of reads per job")
-        parser.add_argument("-o", "--output-file", help="Output file written by the job script")
+#        parser.add_argument("-o", "--output-file", help="Output file written by the job script")
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
         parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
         parser.add_argument("json_template_file", help="Job template in JSON format")
@@ -48,24 +41,12 @@ class JobStore:
         self.job_id_pad = cl.pad
         self.seed = cl.seed
         
-        # TODO: handle multiple input file lists here
         self.input_lists = [] 
         if cl.input_file_list is not None:
             for f in cl.input_file_list:
                 self.input_lists.append([f[0], int(f[1])])
-#            print(self.input_lists)
         self.list_reader = FileListReader(self.input_lists)
-        
-#        self.input_files = []
-#        if cl.input_files:
-#            with open(cl.input_files) as f:
-#                self.input_files = f.read().splitlines()
-
-        if cl.output_file:           
-            self.output_file = cl.output_file
-        else:
-            self.output_file = None
-        
+                
         if cl.var_file:
             var_file = cl.var_file
             print("Iteration variables will be read from '%s'" % var_file)
@@ -82,20 +63,16 @@ class JobStore:
  
     def get_iter_vars(self):
         """
-        Return all combinations of the (optional) input files with the iteration variables.
+        Return all combinations of the iteration variables.
         """
         var_list = []
         var_names = []
-        # TODO: remove this from itervars (handle it in the job creation loop)
-        #if len(self.input_files):
-        #    var_names.append('input_file')
-        #    var_list.append(self.input_files)
         if self.itervars:
             var_names.extend(sorted(self.itervars.keys()))
             for k in sorted(self.itervars.keys()):
                 var_list.append(self.itervars[k])
         prod = itertools.product(*var_list)
-        return var_names, list(prod)
+        return var_names,list(prod)
                 
     def build(self):
         """
@@ -103,13 +80,11 @@ class JobStore:
         """ 
         
         # Get the iteration variable names and value lists
-        var_names, var_lists = self.get_iter_vars()
+        var_names,var_lists = self.get_iter_vars()
 
         # Setup the basic variable mapping for the template        
         mapping = {
         }
-        if self.output_file:
-            mapping["output_file"] = self.output_file
 
         # List which will contain all the jobs
         jobs = []
@@ -124,7 +99,6 @@ class JobStore:
         seed = self.seed
         job_id = self.job_start
         for var_list in var_lists:
-            # TODO: handle multiple input file lists here
             for varname, value in zip(var_names, var_list):
                 mapping[varname] = value
             for r in range(0, self.repeat):
@@ -134,7 +108,7 @@ class JobStore:
                 mapping['sequence'] = r + 1
                 
                 file_vars = self.list_reader.read_next()
-                print("read next files: " + str(file_vars))
+                #print("read next files: " + str(file_vars))
                 for name,path in file_vars.iteritems():
                     mapping[name] = path
                 
@@ -183,6 +157,8 @@ class JobStore:
         """Return true if the job ID exists in the store."""
         return job_id in self.data.keys()
     
+# TODO: instead of keeping file handles open, read in all files at beginning of job into 
+#       lists and pop them in read_next()
 class FileListReader:
     
     def __init__(self, flists):
@@ -196,8 +172,6 @@ class FileListReader:
                 raise Exception("Duplicate file list name: %s" % list_name)
             f = open(flist, 'r')
             self.fhandles[list_name] = [f, nread]
-        print(self.flists)
-        print(self.fhandles)
                 
     def read_next(self):
         file_vars = {}
