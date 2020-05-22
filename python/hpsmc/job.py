@@ -28,7 +28,8 @@ class Job(object):
                      'dry_run',
                      'ignore_return_codes',
                      'job_id_pad',
-                     'check_output_files']
+                     'check_output_files',
+                     'enable_file_chaining']
 
     def __init__(self, **kwargs):
         
@@ -73,6 +74,7 @@ class Job(object):
         self.ignore_return_codes = True
         self.check_output_files = True
         self.check_commands = False
+        self.enable_file_chaining = True
         
         self.__initialize()
 
@@ -320,7 +322,8 @@ class Job(object):
         else:
             logger.info("No job steps specified so full job will be run.")
 
-        self.__config_file_pipeline()
+        if self.enable_file_chaining:
+            self.__config_file_pipeline()
 
         # Run setup methods of each component
         for c in self.components:
