@@ -761,26 +761,22 @@ class MoveFiles(Component):
             shutil.move(src, dest)
         return 0          
 
-# FIXME: Everything below here is probably broken!
-
 class LCIOTool(Component):
 # TODO: This should extend JavaTool.
 
-    def __init__(self, **kwargs):
-        self.command = "java"
-        Component.__init__(self, **kwargs)
+    def __init__(self, name, **kwargs):
+        Component.__init__(self, name, command='java', **kwargs)
 
     def cmd_args(self):
         args = []
-        args = ["-jar", self.lcio_bin_jar]
+        args = ['-jar', self.lcio_bin_jar]
         args.append(self.name)
         return args
     
 class LCIOConcat(LCIOTool):
     
     def __init__(self, **kwargs):
-        self.name = "concat"
-        LCIOTool.__init__(self, **kwargs)
+        LCIOTool.__init__(self, 'concat', **kwargs)
         
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
@@ -796,9 +792,8 @@ class LCIOConcat(LCIOTool):
 class LCIOCount(LCIOTool):
 
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
-        self.name = "count"
         self.minevents = minevents
-        LCIOTool.__init__(self, **kwargs)
+        LCIOTool.__init__(self, 'count', **kwargs)
         
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
@@ -820,7 +815,7 @@ class LCIOCount(LCIOTool):
         logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents)) 
         
         if nevents < self.minevents:
-            msg = "LHE file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
+            msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
             if self.fail_on_underflow:
                 raise Exception(msg)
             else:
