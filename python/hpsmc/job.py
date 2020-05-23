@@ -391,6 +391,11 @@ class Job(object):
         src_file = os.path.join(self.rundir, src)
         dest_file = os.path.join(self.output_dir, dest)
         
+        # Create directory if not exists; this allows relative path segments
+        # in output file strings.
+        if not os.path.exists(os.path.dirname(dest_file)):
+            os.makedirs(os.path.dirname(dest_file), 0755)
+        
         # Check if the file is already there and does not need copying (e.g. if running in local dir)
         samefile = False
         if os.path.exists(dest_file):
