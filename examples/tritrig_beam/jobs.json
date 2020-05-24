@@ -1,231 +1,271 @@
 [
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 1, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 1, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_1.lhe.gz": "tritrig_events.lhe.gz", 
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_1.stdhep": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_1.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_1.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_1.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_1.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 2, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 2, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_2.lhe.gz": "tritrig_events.lhe.gz", 
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_2.stdhep": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_2.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_2.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_2.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_2.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 3, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 3, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_3.stdhep": "beam.stdhep", 
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_3.lhe.gz": "tritrig_events.lhe.gz"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_3.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_3.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_3.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_3.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 4, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 4, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_4.stdhep": "beam.stdhep", 
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_4.lhe.gz": "tritrig_events.lhe.gz"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_4.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_4.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_4.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_4.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 5, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 5, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_5.stdhep": "beam.stdhep", 
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_5.lhe.gz": "tritrig_events.lhe.gz"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_5.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_5.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_5.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_5.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 6, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 6, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_6.stdhep": "beam.stdhep", 
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_6.lhe.gz": "tritrig_events.lhe.gz"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_6.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_6.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_6.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_6.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 7, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 7, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_7.lhe.gz": "tritrig_events.lhe.gz", 
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_7.stdhep": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_7.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_7.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_7.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_7.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 8, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 8, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_8.lhe.gz": "tritrig_events.lhe.gz", 
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_8.stdhep": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_8.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_8.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_8.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_8.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 9, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 9, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_recon_9.lhe.gz": "tritrig_events.lhe.gz", 
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_9.stdhep": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_9.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_9.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_9.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_9.slcio"
+        }, 
+        "run_mode": 0
     }, 
     {
         "run_number": 7984, 
-        "event_interval": 250, 
-        "ecal_hit_ecut": 0.05, 
+        "job_id": 10, 
         "steering_files": {
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
-        "job_id": 10, 
-        "target_z": -4.3, 
-        "nevents": 100, 
-        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2/recon", 
-        "run_params": "2pt3", 
-        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "config_files": {
+            "recon": "recoTuple_cfg.py", 
+            "ana": "anaVtxTuple_cfg.py"
+        }, 
         "input_files": {
             "": "beam.stdhep"
         }, 
-        "enable_ecal_energy_filter": true, 
+        "target_z": -4.3, 
+        "nevents": 100, 
+        "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "tritrig-beam_recon.slcio": "tritrig-beam_recon_10.slcio"
-        }
+            "tritrig-beam_ana.root": "ana/tritrig-beam_ana_10.root", 
+            "tritrig-beam_recon.root": "tuple/tritrig-beam_recon_10.root", 
+            "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_10.slcio"
+        }, 
+        "run_mode": 0
     }
 ]
