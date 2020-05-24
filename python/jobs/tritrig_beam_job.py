@@ -2,7 +2,8 @@ import sys, random
 
 from hpsmc.job import Job
 from hpsmc.generators import StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, AddMother, MergePoisson, RandomSample, MergeFiles
+from hpsmc.tools import BeamCoords, AddMother, MergePoisson, RandomSample, MergeFiles
+from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR, LCIOCount
 
 job = Job()
 
@@ -10,10 +11,10 @@ job = Job()
 inputs = job.input_files.values()
 
 # Input tritrig events (LHE format)
-tritrig_file_name = "tritrig_events.lhe.gz"
+tritrig_file_name = 'tritrig_events.lhe.gz'
 
 # Input beam events (StdHep format)
-beam_file_name = "beam.stdhep"
+beam_file_name = 'beam.stdhep'
 
 # Check for expected input file targets
 if tritrig_file_name not in inputs:
@@ -22,10 +23,10 @@ if beam_file_name not in inputs:
     raise Exception("Missing required input file '%s'" % beam_file_name)
 
 # Base name of intermediate tritrig files
-tritrig_name = "tritrig"
+tritrig_name = 'tritrig'
 
 # Base name of intermediate beam files
-beam_name = "beam"
+beam_name = 'beam'
 
 # Base name of merged files
 tritrig_beam_name = 'tritrig-beam'
@@ -58,7 +59,7 @@ sample_beam = RandomSample(inputs=rot_beam.output_files(),
                            #nevents=500000
 
 # Merge signal and background events
-merge = MergeFiles('tritrig-beam',
+merge = MergeFiles(tritrig_beam_name,
                    inputs=['tritrig_sampled_1.stdhep', 'beam_sampled_1.stdhep'])
 
 # Run simulation
@@ -75,13 +76,31 @@ readout = JobManager(steering='readout',
                      inputs=filter_bunches.output_files(),
                      outputs=['%s_readout.slcio' % tritrig_beam_name])
 
+# Print number of readout events
+count_readout = LCIOCount(inputs=readout.output_files())
+
 # Run physics reconstruction
 recon = JobManager(steering='recon',
                    inputs=readout.output_files(),
-                   outputs=['%s_recon.slcio'])
+                   outputs=['%s_recon.slcio' % tritrig_beam_name])
+
+# Print number of recon events
+count_recon = LCIOCount(inputs=recon.output_files())
+
+# Convert LCIO to ROOT
+tuple = HPSTR(cfg='recon', 
+              inputs=recon.output_files(),
+              outputs=['%s_recon.root' % tritrig_beam_name])
+
+# Run an analysis on the ROOT file
+ana = HPSTR(cfg='ana',
+            inputs=tuple.output_files(),
+            outputs=['%s_ana.root' % tritrig_beam_name])
  
 # Add the components
-job.add([cnv, mom, rot, sample, rot_beam, sample_beam, merge, slic, filter_bunches, readout, recon])
+job.add([cnv, mom, rot, sample, rot_beam, sample_beam, merge, slic,
+         filter_bunches, readout, count_readout, recon, count_recon, 
+         tuple, ana])
 
 # Run the job
 job.run()
