@@ -5,16 +5,18 @@ from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
 from job_store import JobStore
+from script_db import JobScriptDatabase
 
 logger = logging.getLogger("hpsmc.batch")
 
 class Batch:
     """Generic interface to a batch system."""
     
-    def parse_args(self):
+    def parse_args(self, args):
         """Parse command line arguments and perform setup."""
         
-        parser = argparse.ArgumentParser("Batch system command line interface")
+        parser = argparse.ArgumentParser("Batch system command line interface",
+                                         epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
         parser.add_argument("-e", "--email", nargs='?', help="Your email address", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False) 
         parser.add_argument("-l", "--log-dir", nargs=1, help="Log file output dir", required=False)
@@ -26,10 +28,10 @@ class Batch:
         parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
         parser.add_argument("-c", "--config-file", nargs=1, help="Config file", required=False)
         parser.add_argument("-d", "--run-dir", nargs=1, help="Base run dir for the jobs")
-        parser.add_argument("script", nargs=1, help="Full path to job script")
+        parser.add_argument("script", nargs=1, help="Name of job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
-        cl = parser.parse_args()
+        cl = parser.parse_args(args)
 
         if not cl.jobstore: 
             raise Exception('The job store is a required argument.')
@@ -38,7 +40,11 @@ class Batch:
         self.jobstore = JobStore(cl.jobstore[0])
 
         if cl.script:
-            self.script = cl.script[0]
+            script_name = cl.script[0]
+            script_db = JobScriptDatabase()
+            if not script_db.exists(script_name):
+                raise Exception("The script name '%s' is not valid.")
+            self.script = script_db.get_script_path(script_name)
             if not os.path.isfile(self.script):
                 raise Exception("The job script '%s' does not exist." % self.script)       
         else:
@@ -199,8 +205,8 @@ class LSF(Batch):
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
         
-    def parse_args(self):
-        Batch.parse_args(self)
+    def parse_args(self, args):
+        Batch.parse_args(self, args)
         if self.email:
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
@@ -336,8 +342,8 @@ class Auger(Batch):
 class Local(Batch):
     """Run a local batch job on the current system."""
             
-    def parse_args(self):
-        Batch.parse_args(self)
+    def parse_args(self, args):
+        Batch.parse_args(self, args)
 
     def submit_cmd(self, name, job_params):
         """Run a single job locally."""
@@ -400,3 +406,24 @@ class Pool(Batch):
             e = sys.exc_info()[0]
             logger.fatal("Caught non-Python Exception '%s'" % (e))
             pool.terminate()
+
+if __name__ == '__main__':
+    system_dict = {
+        "lsf": LSF,
+        "auger": Auger,
+        "local": Local,
+        "pool": Pool
+    }
+    if len(sys.argv) > 1:
+         system = sys.argv[1].lower()
+         if system not in system_dict.keys():
+             raise Exception("The batch system '%s' is not valid." % system)
+         batch = system_dict[system]()
+         args = sys.argv[2:]
+         print(args)
+         batch.parse_args(args)
+         batch.submit()
+    else:
+        print("Usage: batch.py [system] [args]")
+        print("    available systems: %s" % ', '.join(system_dict.keys()))
+           
