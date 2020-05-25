@@ -106,7 +106,7 @@ class SLIC(Component):
         proc.wait()
         
         return proc.returncode
-    
+        
 class JobManager(Component):
     """
     Run the hps-java JobManager class.
@@ -258,9 +258,9 @@ class HPSTR(Component):
         logger.info("Set config path to '%s'" % self.cfg_path)
         
         # For ROOT output, automatically append the cfg key from the job params.
-#        if os.path.splitext(self.input_files()[0])[1] == '.root':
-#            self.append_tok = self.cfg
-#            logger.debug("Automatically appending token '%s' to output file" % self.append_tok)
+        if os.path.splitext(self.input_files()[0])[1] == '.root':
+            self.append_tok = self.cfg
+            logger.debug("Automatically appending token '%s' to output file" % self.append_tok)
             
     def required_parameters(self):
         return ['config_files']
@@ -282,14 +282,12 @@ class HPSTR(Component):
             args.extend(["-y", str(self.year)])
         return args
 
-#    def output_files(self):
-#        f,ext = os.path.splitext(self.input_files()[0])
-#        print(f)
-#        print(ext)
-#        if '.slcio' in ext:
-#            return ['%s.root' % f]
-#        else:
-#            return ['%s_%s.root' % (f, self.append_tok)]
+    def output_files(self):
+        f,ext = os.path.splitext(self.input_files()[0])
+        if '.slcio' in ext:
+            return ['%s.root' % f]
+        else:
+            return ['%s_%s.root' % (f, self.append_tok)]
                 
     def execute(self, log_out, log_err):               
         args = self.cmd_args()
