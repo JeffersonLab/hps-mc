@@ -1,5 +1,6 @@
 import os, sys, time, shutil, argparse, getpass, json, logging, subprocess, collections
 from component import Component
+from script_db import JobScriptDatabase
 
 logger = logging.getLogger("hpsmc.job")
 logger.setLevel(logging.DEBUG)
@@ -29,7 +30,8 @@ class Job(object):
                      'ignore_return_codes',
                      'job_id_pad',
                      'check_output_files',
-                     'enable_file_chaining']
+                     'enable_file_chaining',
+                     'enable_environ_config']
 
     def __init__(self, **kwargs):
         
@@ -75,6 +77,7 @@ class Job(object):
         self.check_output_files = True
         self.check_commands = False
         self.enable_file_chaining = True
+        self.enable_environ_config = False
         
         self.__initialize()
 
@@ -306,11 +309,16 @@ class Job(object):
                 else:
                     logger.warning("Unknown config name '%s' in the Job section" % name)
         logger.info('Done configuring job!')
-                
+        
         logger.info("Configuring components ...") 
         for c in self.components:
             logger.info("Configuring component '%s'" % c.name)
-            c.config()
+            if not self.enable_environ_config:
+                # Read component config from config file
+                c.config()
+            else:
+                # Read config from environment
+                c.config_from_environ()
             c.check_config()
         logger.info("Done configuring components!")
 
@@ -328,7 +336,7 @@ class Job(object):
         # Run setup methods of each component
         for c in self.components:
             logger.info("Setting up '%s'" % (c.name))
-            c.rundir = self.rundir           
+            c.rundir = self.rundir
             c.setup()
             if self.check_commands and not c.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (c.command, c.name))
@@ -442,4 +450,18 @@ class Job(object):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             os.symlink(src, os.path.join(self.rundir, dest))
-            
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        job_name = sys.argv[1]
+        script_db = JobScriptDatabase()
+        if not script_db.exists(job_name):
+            raise Exception("The job name '%s' is not valid." % job_name)    
+        script_path = script_db.get_script_path(job_name)
+        args = sys.argv[2:]
+        cmd = '%s %s %s' % (sys.executable, script_path, ' '.join(args))
+        print('Executing cmd: %s' % cmd)
+        os.system(cmd)
+    else:
+        print("Usage: job.py [job] [args]")
+        print("    Available jobs: %s" % ', '.join(script_db.get_script_names()))

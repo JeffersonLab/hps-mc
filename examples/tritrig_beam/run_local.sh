@@ -1,2 +1,2 @@
 #!/bin/sh
-hps-mc-local -d $PWD/scratch ${HPSMC_DIR}/lib/python/jobs/tritrig_gen_job.py jobs.json 1
+hps-mc-batch local -d $PWD/scratch tritrig_gen jobs.json 1
