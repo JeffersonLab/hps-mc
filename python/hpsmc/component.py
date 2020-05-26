@@ -79,7 +79,6 @@ class Component(object):
         
         cl = [self.command]
         cl.extend(self.cmd_args())
-                                  
         logger.info("Executing '%s' with command '%s'" % (self.name, ' '.join(cl)))
         proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
@@ -269,6 +268,15 @@ class Component(object):
             outputs.append(outfile)
         logger.debug("Outputs %s" % outputs)
         return outputs
+    
+    def config_from_environ(self):
+        for c in self.required_config():
+            logger.debug("Setting config '%s' from environ" % c)
+            if c.upper() in os.environ:
+                setattr(self, c, os.environ[c.upper()])
+                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+            else:
+                raise Exception("Missing config in environ for '%s'" % c) 
     
 class DummyComponent(Component):
     
