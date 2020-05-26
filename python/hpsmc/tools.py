@@ -378,11 +378,9 @@ class BeamCoords(StdHepTool):
 class RandomSample(StdHepTool):
     
     def __init__(self, **kwargs):
+        self.nevents = None
         StdHepTool.__init__(self, name='random_sample', replacements={'rot': 'sampled'}, **kwargs)
-    
-#    def output_files(self):
-#        return [f.replace('_1.stdhep', '') for f in Component.output_files(self)]
-    
+        
     def cmd_args(self):
         
         args = []
@@ -390,7 +388,10 @@ class RandomSample(StdHepTool):
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
         
-        args.extend(["-N", str(1), "-n", str(self.nevents)])
+        args.extend(["-N", str(1)])
+        
+        if self.nevents is not None:
+            args.extend(["-n", str(self.nevents)])
         
         if len(self.output_files()):
             args.insert(0, os.path.splitext(self.output_files()[0])[0])
@@ -404,6 +405,20 @@ class RandomSample(StdHepTool):
             raise Exception("No inputs were provided.")
         
         return args
+    
+    def execute(self, log_out, log_err):
+        r = Component.execute(self, log_out, log_err)
+        
+        # Move file from tool to proper output file location.
+        src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
+        dest = '%s.stdhep' % os.path.splitext(self.output_files()[0])[0]
+        logger.debug("Moving '%s' to '%s'" % (src, dest))
+        shutil.move(src, dest)
+        
+        return r
+        
+    def optional_parameters(self):
+        return ['nevents']
         
 class DisplaceTime(StdHepTool):
     """
@@ -448,9 +463,9 @@ class MergePoisson(StdHepTool):
     def required_parameters(self):
         return ['run_params']
     
-    def output_files(self):
+#    def output_files(self):
         # TODO: strip number at end here
-        return ["%s_1.stdhep" % os.path.splitext(f)[0] for f in Component.output_files(self)]
+#        return ["%s_1.stdhep" % os.path.splitext(f)[0] for f in Component.output_files(self)]
     
     def cmd_args(self):
         
@@ -462,7 +477,7 @@ class MergePoisson(StdHepTool):
         args.extend(["-m", str(self.mu), "-N", str(1), "-n", str(self.nevents)])
         
         if len(self.output_files()):
-            args.insert(0, '_'.join(os.path.splitext(self.output_files()[0])[0].split('_')[:-1]))
+            args.insert(0, os.path.splitext(self.output_files()[0])[0])
         elif len(self.outputs) > 1:
             raise Exception("Too many outputs specified.")       
         
@@ -474,10 +489,20 @@ class MergePoisson(StdHepTool):
         
         return args
         
+    def execute(self, log_out, log_err):
+        r = Component.execute(self, log_out, log_err)
+        
+        # Move file from tool to proper output file location.
+        src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
+        dest = '%s.stdhep' % os.path.splitext(self.output_files()[0])[0]
+        logger.debug("Moving '%s' to '%s'" % (src, dest))
+        shutil.move(src, dest)
+        
+        return r
+        
 class MergeFiles(StdHepTool):
     
-    def __init__(self, output_name, **kwargs):
-        self.output_name = output_name
+    def __init__(self, **kwargs):
         StdHepTool.__init__(self, 'merge_files', **kwargs)
     
     def optional_parameters(self):
@@ -485,9 +510,6 @@ class MergeFiles(StdHepTool):
     
     def required_parameters(self):
         return []
-        
-    def output_files(self):
-        return ['%s.stdhep' % self.output_name]
                                     
 class JavaTool(Component):
     
