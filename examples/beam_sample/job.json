@@ -1,4 +1,5 @@
 {
+    "nevets": 100000,
     "beam_sigma_x": 0.300,
     "beam_sigma_y": 0.030,
     "target_z": 0.0,
