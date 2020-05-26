@@ -46,7 +46,7 @@ rot = BeamCoords(inputs=mom.output_files(),
 # Sample tritrig events using poisson distribution
 sample = MergePoisson(lhe_file=tritrig_file_name, # for calculating mu
                       inputs=rot.output_files(),
-                      outputs=['%s_sampled' % tritrig_name],
+                      outputs=['%s_sampled.stdhep' % tritrig_name],
                       nevents=500000)
 
 # Transform beam events
@@ -55,19 +55,19 @@ rot_beam = BeamCoords(inputs=[beam_file_name],
 
 # Sample the beam events
 sample_beam = RandomSample(inputs=rot_beam.output_files(),
-                           outputs=['beam_sampled'])
-                           #nevents=500000
+                           outputs=['%s_sampled.stdhep' % beam_name])
 
 # Merge signal and background events
-merge = MergeFiles(tritrig_beam_name,
-                   inputs=['tritrig_sampled_1.stdhep', 'beam_sampled_1.stdhep'])
+merge = MergeFiles(inputs=[sample.output_files()[0],
+                           sample_beam.output_files()[0]],
+                   outputs=['%s.stdhep' % tritrig_beam_name])
 
 # Run simulation
 slic = SLIC(inputs=merge.output_files(),
             outputs=['%s.slcio' % tritrig_beam_name])
 
 # Space events for readout simulation
-filter_bunches = FilterBunches(nevents=2000000, 
+filter_bunches = FilterBunches(nevents=2000000,
                                inputs=slic.output_files(),
                                outputs=['%s_filt.slcio' % tritrig_beam_name])
 
