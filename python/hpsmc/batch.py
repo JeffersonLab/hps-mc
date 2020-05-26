@@ -43,7 +43,7 @@ class Batch:
             script_name = cl.script[0]
             script_db = JobScriptDatabase()
             if not script_db.exists(script_name):
-                raise Exception("The script name '%s' is not valid.")
+                raise Exception("The script name '%s' is not valid." % script_name)
             self.script = script_db.get_script_path(script_name)
             if not os.path.isfile(self.script):
                 raise Exception("The job script '%s' does not exist." % self.script)       
@@ -140,7 +140,7 @@ class Batch:
         """        
         submit_ids = self.jobstore.get_job_ids()
         if self.start_job_num:            
-            submit_ids = [id for id in all_job_ids 
+            submit_ids = [id for id in submit_ids 
                           if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
         elif len(self.job_ids):
             submit_ids = self.job_ids
@@ -420,7 +420,6 @@ if __name__ == '__main__':
              raise Exception("The batch system '%s' is not valid." % system)
          batch = system_dict[system]()
          args = sys.argv[2:]
-         print(args)
          batch.parse_args(args)
          batch.submit()
     else:
