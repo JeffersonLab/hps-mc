@@ -108,7 +108,6 @@ class JobStore:
                 mapping['sequence'] = r + 1
                 
                 file_vars = self.list_reader.read_next()
-                #print("read next files: " + str(file_vars))
                 for name,path in file_vars.iteritems():
                     mapping[name] = path
                 
@@ -177,7 +176,10 @@ class FileListReader:
         file_vars = {}
         for name,f in self.fhandles.iteritems():
             for i in range(f[1]):
-                file_vars['_'.join([name, str(i + 1)])] = f[0].readline().strip()
+                line = f[0].readline().strip()
+                if line is None or len(line) == 0:
+                    raise Exception("Ran out of input files from '%s'" % name)
+                file_vars['_'.join([name, str(i + 1)])] = line
         return file_vars
     
     def close(self):
