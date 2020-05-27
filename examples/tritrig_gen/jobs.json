@@ -5,7 +5,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_1.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_1.lhe.gz"
         }
     }, 
     {
@@ -14,7 +14,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_2.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_2.lhe.gz"
         }
     }, 
     {
@@ -23,7 +23,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_3.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_3.lhe.gz"
         }
     }, 
     {
@@ -32,7 +32,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_4.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_4.lhe.gz"
         }
     }, 
     {
@@ -41,7 +41,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_5.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_5.lhe.gz"
         }
     }, 
     {
@@ -50,7 +50,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_6.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_6.lhe.gz"
         }
     }, 
     {
@@ -59,7 +59,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_7.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_7.lhe.gz"
         }
     }, 
     {
@@ -68,7 +68,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_8.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_8.lhe.gz"
         }
     }, 
     {
@@ -77,7 +77,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_9.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_9.lhe.gz"
         }
     }, 
     {
@@ -86,7 +86,7 @@
         "output_dir": "output", 
         "run_params": "1pt05", 
         "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_recon_10.lhe.gz"
+            "tritrig_events.lhe.gz": "tritrig_events_10.lhe.gz"
         }
     }
 ]

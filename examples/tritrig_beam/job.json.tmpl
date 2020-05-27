@@ -4,6 +4,8 @@
     "target_z": ${target_z},
     "run_number": ${run_number},
     "detector": "${detector}",
+    "event_interval": 250,
+    "ecal_hit_ecut": 0.05,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
@@ -18,10 +20,7 @@
     },
     "input_files": {
         "${tritrig_files_1}": "tritrig_events.lhe.gz",
-        "${beam_files_1}": "beam_1.stdhep",
-        "${beam_files_2}": "beam_2.stdhep",
-        "${beam_files_3}": "beam_3.stdhep",
-        "${beam_files_4}": "beam_4.stdhep"
+        "${beam_files_1}": "beam.stdhep"
     },
     "output_dir": "output/${run_params}/${detector}"
 }
