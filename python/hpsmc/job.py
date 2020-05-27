@@ -1,13 +1,12 @@
 import os, sys, time, shutil, argparse, getpass, json, logging, subprocess, collections
+import ConfigParser as configparser
+from os.path import expanduser
 from component import Component
 from script_db import JobScriptDatabase
+from job_store import JobStore
 
 logger = logging.getLogger("hpsmc.job")
 logger.setLevel(logging.DEBUG)
-
-import hpsmc.config as config
-
-from job_store import JobStore
 
 def _load_json_file(filename):
     rawdata = open(filename, 'r').read()
@@ -30,8 +29,7 @@ class Job(object):
                      'ignore_return_codes',
                      'job_id_pad',
                      'check_output_files',
-                     'enable_file_chaining',
-                     'enable_environ_config']
+                     'enable_file_chaining']
 
     def __init__(self, args=sys.argv, **kwargs):
         
@@ -133,8 +131,16 @@ class Job(object):
         #parser.set_defaults(feature=True)
         
         cl = parser.parse_args(self.args)
-            
-        self.config = cl.config
+        
+        # Figure out locations for config files
+        if cl.config:
+            self.config = os.path.abspath(cl.config[0])
+        else:
+            self.config = None
+        self.config_files = [os.path.join(expanduser("~"), ".hpsmc"), # user home dir
+                             os.path.abspath(".hpsmc")]               # current dir
+        if self.config and not self.config in self.config_files:
+            self.config_files.append(self.config) # user specified file
         
         if cl.level:
             level = logging.getLevelName(cl.level[0])
@@ -205,9 +211,9 @@ class Job(object):
                                 
         self.__parse_args()
 
-        if self.config:
-            logger.info("Reading config from '%s'" % self.config)
-            config.parser.read(self.config)
+#        if self.config:
+#            logger.info("Reading config from '%s'" % self.config)
+#            config.parser.read(self.config)
 
         if not os.path.isabs(self.rundir):
             raise Exception("The run dir '%s' is not an absolute path." % self.rundir)
@@ -325,32 +331,39 @@ class Job(object):
                 logger.info("'%s' with args: %s (NOT EXECUTED)" % (c.name, ' '.join(c.cmd_args())))
                             
     def __configure(self):
-        
-        logger.info('Configuring job ...')    
-        p = config.parser        
+
+        # Read in config files and crash if none are found
+        parser = configparser.ConfigParser()
+        logger.debug("Reading config from: %s" % str(self.config_files))
+        parsed = parser.read(self.config_files)    
+        if not len(parsed):
+            raise Exception('No configuration file found from locations: %s' % str(self.config_files))
+        parser_lines = ['Read config from: %s' % str(parsed)]    
+        for section in parser.sections():
+            parser_lines.append("[" + section + "]")
+            for i,v in parser.items(section): 
+                parser_lines.append("%s=%s" % (i, v))
+        parser_lines.append('\n')
+        logger.info('\n'.join(parser_lines))
+    
+        # Configure job (this class)
+        logger.info('Configuring job ...')
         job_config = 'Job'        
-        if config.parser.has_section(job_config):
-            for name, value in config.parser.items(job_config):
+        if parser.has_section(job_config):
+            for name, value in parser.items(job_config):
                 if name in Job._config_names:
                     setattr(self, name, config.convert_value(value))
                     logger.debug("Job:%s:%s=%s" % (name, 
                                                    getattr(self, name).__class__.__name__, 
                                                    getattr(self, name)))
                 else:
-                    logger.warning("Unknown config name '%s' in the Job section" % name)
-        logger.info('Done configuring job!')
+                    logger.warning("Unknown config name '%s' in the [Job] section" % name)
         
-        logger.info("Configuring components ...") 
+        # Configure components
         for c in self.components:
             logger.info("Configuring component '%s'" % c.name)
-            if not self.enable_environ_config:
-                # Read component config from config file
-                c.config()
-            else:
-                # Read config from environment
-                c.config_from_environ()
+            c.config(parser)
             c.check_config()
-        logger.info("Done configuring components!")
 
     def __setup(self):
                 
@@ -481,7 +494,7 @@ class Job(object):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             os.symlink(src, os.path.join(self.rundir, dest))
-                    
+                                        
 cmds = {
     'run': 'Run a job script',
     'avail': 'Print available job names'}

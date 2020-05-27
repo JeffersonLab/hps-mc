@@ -4,6 +4,24 @@ logger = logging.getLogger("hpsmc.component")
 
 import hpsmc.config as config
 
+def _convert_config_value(val):
+    if val == 'True' or val == 'true': 
+        return True
+    elif val == 'False' or val == 'false':
+        return False
+    try:
+        if val.contains('.'):
+            floatval = float(value)
+            return floatval
+    except:
+        pass
+    try:
+        intval = int(val)
+        return intval
+    except:
+        pass
+    return val
+
 class Component(object):
     """
     Base class for components in a job.
@@ -123,19 +141,18 @@ class Component(object):
         """
         pass    
 
-    def config(self, section_name):
-        """
-        Configure this component from configuration file using a specific, named section.
-        """
-        if config.parser.has_section(section_name):
-            for name, value in config.parser.items(section_name):
-                setattr(self, name, config.convert_value(value))
+    """
+    def config(self, parser, section_name):
+        if parser.has_section(section_name):
+            for name, value in parser.items(section_name):
+                setattr(self, name, convert_config_value(value))
                 logger.debug("%s:%s:%s=%s" % (self.name, 
                                               name, 
                                               getattr(self, name).__class__.__name__, 
                                               getattr(self, name)))
+    """
 
-    def config(self):
+    def config(self, parser):
         """
         Automatically load attributes from config by reading in values from 
         the section with the same name as the class in the config file and 
@@ -145,9 +162,9 @@ class Component(object):
         """
         logger.debug("Configuring '%s'" % self.name)
         section_name = self.__class__.__name__
-        if config.parser.has_section(section_name):
-            for name, value in config.parser.items(section_name):
-                setattr(self, name, config.convert_value(value))
+        if parser.has_section(section_name):
+            for name, value in parser.items(section_name):
+                setattr(self, name, _convert_config_value(value))
                 logger.debug("%s:%s:%s=%s" % (self.name, 
                                               name, 
                                               getattr(self, name).__class__.__name__, 
@@ -172,7 +189,6 @@ class Component(object):
                 else:
                     logger.info("Ignored job param '%s'" % p)
                 
-        # TODO: Set optional parameters to None if not present in JSON so it doesn't need to be done in init.
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
@@ -256,7 +272,6 @@ class Component(object):
         behavior.
         """        
         outputs = []
-        logger.debug("Processing inputs %s" % self.input_files())
         for infile in self.input_files():
             f,ext = os.path.splitext(infile)
             infile_split = f.split('_')
@@ -274,19 +289,8 @@ class Component(object):
             if self.output_ext is not None:
                 ext = self.output_ext
             outfile = '_'.join(infile_split) + ext
-            logger.debug("Appending output '%s'" % outfile)
             outputs.append(outfile)
-        logger.debug("Outputs %s" % outputs)
         return outputs
-    
-    def config_from_environ(self):
-        for c in self.required_config():
-            logger.debug("Setting config '%s' from environ" % c)
-            if c.upper() in os.environ:
-                setattr(self, c, os.environ[c.upper()])
-                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
-            else:
-                raise Exception("Missing config in environ for '%s'" % c) 
     
 class DummyComponent(Component):
     
