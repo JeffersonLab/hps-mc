@@ -24,3 +24,6 @@ hpstr_base = /work/slac/hpstr
 
 [LCIOCount]
 lcio_bin_jar = /work/slac/sim/lcio/LCIO-02-07-05/target/lcio-2.7.4-SNAPSHOT-bin.jar
+
+[LCIOMerge]
+lcio_bin_jar = /work/slac/sim/lcio/LCIO-02-07-05/target/lcio-2.7.4-SNAPSHOT-bin.jar
