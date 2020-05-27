@@ -670,7 +670,7 @@ class Unzip(Component):
         Component.__init__(self, 'unzip', 'gunzip', **kwargs)
                
     def output_files(self):
-        return [os.path.splitext(i)[0] for i in self.input_files()[0]]
+        return [os.path.splitext(i)[0] for i in self.input_files()]
     
     def cmd_args(self):
         return ['-q'].extend(self.output_files())
