@@ -481,17 +481,21 @@ class Job(object):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             os.symlink(src, os.path.join(self.rundir, dest))
+                    
+cmds = {
+    'run': 'Run a job script',
+    'avail': 'Print available job names'}
 
-cmds = ['run', 'avail']
-
-def print_usage(self):
-        print("Usage: job.py [command] [args]")
-        print("    command: %s" % ' '.join(cmds))
+def print_usage():
+    print("Usage: job.py [command] [args]")
+    print("    command:")
+    for name,descr in cmds.iteritems():
+        print("        %s: %s" % (name,descr))
 
 if __name__ == '__main__':    
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        if cmd not in cmds:
+        if cmd not in cmds.keys():
             print_usage()
             raise Exception("The job command '%s' is not valid." % cmd)
         args = sys.argv[2:]
@@ -502,7 +506,7 @@ if __name__ == '__main__':
             scriptdb = JobScriptDatabase()
             print("Available job scripts: ")
             for name in sorted(scriptdb.get_script_names()):
-                print('    %s: %s' % (name, scriptdb.get_script_path(name)))
+                print('    %s: %s' % (name, scriptdb.get_script_path(name)))            
     else:
         print_usage()
     
