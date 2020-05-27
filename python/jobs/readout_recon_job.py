@@ -1,11 +1,4 @@
-import sys, random
-
-from hpsmc.job import Job
-from hpsmc.run_params import RunParameters
-from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool
-
-job = Job()
+from hpsmc.tools import JobManager, FilterBunches
 
 # Insert empty bunches expected by pile-up simulation
 filter_bunches = FilterBunches(nevents=2000000)
@@ -17,4 +10,3 @@ readout = JobManager(steering='readout')
 reco = JobManager(steering='recon')
 
 job.add([filter_bunches, readout, reco])
-job.run()

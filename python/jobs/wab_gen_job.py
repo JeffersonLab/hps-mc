@@ -2,11 +2,8 @@
 Python script for generating WAB events in MG4.
 """
 
-from hpsmc.job import Job
 from hpsmc.generators import MG4
 from hpsmc.tools import LHECount
-
-job = Job()
 
 # generate tritrig in MG5
 mg = MG4(name="wab")
@@ -17,4 +14,3 @@ mg = MG4(name="wab")
 # run the job
 #job.components=[mg, check]
 job.add([mg])
-job.run()

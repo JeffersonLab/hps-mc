@@ -2,14 +2,8 @@
 Python script for generating 'simp' events in MG5 and running through simulation, readout and reconstruction. 
 """
 
-import sys, random
-
-from hpsmc.job import Job
-from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool, MoveFiles, BeamCoords
-
-job = Job()
 
 # Generate tritrig in MG5
 mg = MG5(name='simp',
@@ -18,6 +12,7 @@ mg = MG5(name='simp',
          event_types=['unweighted'])
 
 # Move LHE file
+# TODO: remove this step
 mv = MoveFiles(inputs=['simp_unweighted_events.lhe.gz'],
                outputs=['simp.lhe.gz'])
 
@@ -41,4 +36,3 @@ recon = JobManager(steering='recon')
  
 # Run the job
 job.add([mg, mv, cnv, rot, slic, filter_bunches, readout, recon])
-job.run()

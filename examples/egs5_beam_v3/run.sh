@@ -1,1 +1,1 @@
-hps-mc-run egs5_beam_v3 -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job run -n -d $PWD/scratch -c .hpsmc egs5_beam_v3 job.json

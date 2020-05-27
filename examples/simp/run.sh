@@ -1,1 +1,1 @@
-hps-mc-run simp -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job run -n -d $PWD/scratch -c .hpsmc simp job.json

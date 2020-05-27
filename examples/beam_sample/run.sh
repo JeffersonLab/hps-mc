@@ -1,1 +1,1 @@
-hps-mc-run beam_sample -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job run -n -d $PWD/scratch -c .hpsmc beam_sample job.json

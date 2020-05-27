@@ -1,5 +1,5 @@
 {
-    "nevents": [100],
+    "nevents": [10000],
     "run_params": ["2pt3"],
     "detector": ["HPS-PhysicsRun2016-Pass2"],
     "target_z": [-4.3],

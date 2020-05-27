@@ -1,1 +1,1 @@
-hps-mc-run wab_gen -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job run -n -d $PWD/scratch -c .hpsmc wab_gen job.json
