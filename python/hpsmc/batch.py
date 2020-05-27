@@ -188,7 +188,7 @@ class Batch:
         else:
             # Log files go into the job dir
             log_dir = job_dir
-        cmd = ['python', run_script,
+        cmd = ['python', run_script, 'run',
                '-o', os.path.join(log_dir, 'job.%d.out' % job_id),
                '-e', os.path.join(log_dir, 'job.%d.err' % job_id)]
         cmd.extend(['-d', job_dir])
