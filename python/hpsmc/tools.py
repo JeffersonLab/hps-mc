@@ -16,7 +16,7 @@ class SLIC(Component):
         self.macros = []
         
         # Run number to set on output file (optional)
-        self.run_number = None                
+        self.run_number = None
         
         Component.__init__(self, 
                            'slic',
@@ -378,8 +378,10 @@ class BeamCoords(StdHepTool):
 class RandomSample(StdHepTool):
     
     def __init__(self, **kwargs):
-        self.nevents = None
-        StdHepTool.__init__(self, name='random_sample', replacements={'rot': 'sampled'}, **kwargs)
+        StdHepTool.__init__(self, 
+                            name='random_sample', 
+                            replacements={'rot': 'sampled'}, 
+                            **kwargs)
         
     def cmd_args(self):
         
@@ -417,8 +419,8 @@ class RandomSample(StdHepTool):
         
         return r
         
-    def optional_parameters(self):
-        return ['nevents']
+#    def optional_parameters(self):
+#        return ['nevents']
         
 class DisplaceTime(StdHepTool):
     """
@@ -510,6 +512,26 @@ class MergeFiles(StdHepTool):
     
     def required_parameters(self):
         return []
+    
+class StdHepCount(Component):
+    
+    def __init__(self, **kwargs):
+        Component.__init__(self, 'stdhep_count', 'stdhep_count.sh', **kwargs)
+        
+    def cmd_args(self):
+        return [self.input_files()[0]]
+    
+    def execute(self, log_out, log_err):
+        
+        cl = [self.command]
+        cl.extend(self.cmd_args())
+        proc = subprocess.Popen(cl, stdout=PIPE)
+        (output, err) = proc.communicate()
+                
+        nevents = int(output.split()[1])        
+        logger.info("StdHep file '%s' has %d events." % (self.input_files()[0], nevents)) 
+        
+        return proc.returncode            
                                     
 class JavaTool(Component):
     
@@ -608,18 +630,10 @@ class FilterBunches(JavaTool):
     should usually not need to be changed by the user).
     """
     
-    def __init__(self, nevents=2000000, event_interval=250, **kwargs):
-
-        # Default max output events
-        self.nevents = nevents
-        
-        # True to enable filtering on min ecal energy dep
-        self.enable_ecal_energy_filter = True
-        
-        self.ecal_hit_ecut = None
-        
-        # Default event spacing interval
-        self.event_interval = event_interval
+    def __init__(self, **kwargs):
+                
+        self.ecal_hit_ecut = 0.05        
+        self.event_interval = 250
                 
         JavaTool.__init__(self, 
                           'filter_bunches',
@@ -628,17 +642,15 @@ class FilterBunches(JavaTool):
                           append_tok='filt',
                           **kwargs)
                             
-    def cmd_args(self):
-        
+    def cmd_args(self):        
         args = JavaTool.cmd_args(self)
         args.append("-e")
         args.append(str(self.event_interval))
         for i in self.input_files():
             args.append(i)
         args.append(self.output_files()[0])
-        if self.enable_ecal_energy_filter:
+        if self.ecal_hit_ecut > 0:
             args.append("-d")
-        if self.ecal_hit_ecut is not None:
             args.append("-E")
             args.append(str(self.ecal_hit_ecut))
         if self.nevents > 0:
@@ -647,45 +659,36 @@ class FilterBunches(JavaTool):
         return args
 
     def optional_parameters(self):
-        return ['ecal_hit_ecut', 'enable_ecal_energy_filter', 'event_interval']
+        return ['ecal_hit_ecut', 'event_interval']
                    
 class Unzip(Component):
     """
     Unzip the input files to outputs.
-    
-    A list of exclude strings can be provided to filter out unwanted files from the inputs.
     """
 
     def __init__(self, **kwargs):
-        Component.__init__(self, 'unzip', **kwargs)
+        Component.__init__(self, 'unzip', 'gunzip', **kwargs)
                
     def output_files(self):
-        self.outputs = []
-        for inputfile in self.input_files():
-            self.outputs.append(os.path.basename(os.path.splitext(inputfile)[0]))
-        return self.outputs
-
-    def cmd_exists(self):
-        return True
-                        
-    def execute(self, log_out, log_err):
-        for inputfile in self.input_files():
-            outputfile = os.path.splitext(inputfile)[0]
-            with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
-                shutil.copyfileobj(in_file, out_file)
-                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
-        return 0
-                    
-class FileFilter(Component):
-    """
-    Filter input to output files based on a list of strings.
-    """
+        return [os.path.splitext(i)[0] for i in self.input_files()[0]]
     
-    def __init__(self, excludes):
-        Component.__init__(self, 'file_filter', excludes=excludes)
+    def cmd_args(self):
+        return ['-q'].extend(self.output_files())
+                        
+#    def execute(self, log_out, log_err):
+#        for inputfile in self.input_files():
+#            outputfile = os.path.splitext(inputfile)[0]
+#            with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
+#                shutil.copyfileobj(in_file, out_file)
+#                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+#        return 0
+                    
+#class FileFilter(Component):   
+#    def __init__(self, excludes):
+#        Component.__init__(self, 'file_filter', excludes=excludes)
 
-    def execute(self, log_out, log_err):
-        return 0
+#    def execute(self, log_out, log_err):
+#        return 0
                         
 class LCIODumpEvent(Component):
 
@@ -842,3 +845,21 @@ class LCIOCount(LCIOTool):
                 logger.warning(msg)
 
         return proc.returncode            
+
+class LCIOMerge(LCIOTool):
+
+    def __init__(self, **kwargs):
+        LCIOTool.__init__(self, 'merge', **kwargs)
+
+    def cmd_args(self):
+        args = LCIOTool.cmd_args(self)
+        if not len(self.input_files()):
+            raise Exception("Missing at least one input file.")
+        if not len(self.output_files()):
+            raise Exception("Missing an output file.")
+        for i in self.input_files():
+            args.extend(["-f", i])
+        args.extend(["-o", self.outputs[0]])
+        if self.nevents is not None:
+            args.extend(['-n', str(self.nevents)])
+        return args
