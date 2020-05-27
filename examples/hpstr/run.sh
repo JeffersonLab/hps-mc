@@ -1,1 +1,1 @@
-hps-mc-run hpstr -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job run -n -d $PWD/scratch -c .hpsmc hpstr job.json

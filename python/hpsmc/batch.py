@@ -9,6 +9,8 @@ from script_db import JobScriptDatabase
 
 logger = logging.getLogger("hpsmc.batch")
 
+run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
+
 class Batch:
     """Generic interface to a batch system."""
     
@@ -186,7 +188,7 @@ class Batch:
         else:
             # Log files go into the job dir
             log_dir = job_dir
-        cmd = ['python', self.script,
+        cmd = ['python', run_script,
                '-o', os.path.join(log_dir, 'job.%d.out' % job_id),
                '-e', os.path.join(log_dir, 'job.%d.err' % job_id)]
         cmd.extend(['-d', job_dir])
@@ -195,6 +197,7 @@ class Batch:
         if self.job_steps > 0:
             cmd.extend(['--job-steps', str(self.job_steps)])
         cmd.extend(['-i', str(job_id)])
+        cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
         logger.info("Job command: %s" % " ".join(cmd))
         return cmd  

@@ -3,14 +3,8 @@ Python script for generating 'tritrig' events in MG5 and running
 through simulation, readout and reconstruction. 
 """
 
-import sys, random
-
-from hpsmc.job import Job
-from hpsmc.run_params import RunParameters
 from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, AddMother
-
-job = Job()
 
 # Generate tritrig in MG5
 mg = MG5(name='tritrig')
@@ -39,6 +33,5 @@ readout = JobManager(steering='readout')
 # Run physics reconstruction
 recon = JobManager(steering='recon')
  
-# run the job
-job.components=[mg, cnv, mom, rot, slic, filter_bunches, readout, recon]
-job.run()
+# Add job components
+job.add([mg, cnv, mom, rot, slic, filter_bunches, readout, recon])

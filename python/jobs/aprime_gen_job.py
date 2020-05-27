@@ -1,16 +1,9 @@
 """
 Job script to generate A-prime events, convert to StdHep, and apply transformations.
-
-Run with '--job-steps 1' to only generate the untransformed LHE output.
 """
 
-import sys, os, argparse
-
-from hpsmc.job import Job
-from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.tools import Unzip, StdHepTool, DisplaceTime, FileFilter, BeamCoords
-
-job = Job()
+from hpsmc.generators import MG4
+from hpsmc.tools import Unzip, StdHepTool, DisplaceTime, BeamCoords
 
 # Generate A-prime events using MadGraph4
 ap = MG4(name="ap", event_types=['unweighted'])
@@ -26,6 +19,3 @@ rotate = BeamCoords()
 
 # Add components to the job
 job.add([ap, unzip, displace, rotate])
-
-# Run the job
-job.run()

@@ -33,7 +33,7 @@ class Job(object):
                      'enable_file_chaining',
                      'enable_environ_config']
 
-    def __init__(self, **kwargs):
+    def __init__(self, args=sys.argv, **kwargs):
         
         if 'name' not in kwargs:
             self.name = os.path.basename(sys.argv[0]).replace('.py', '')
@@ -79,6 +79,10 @@ class Job(object):
         self.enable_file_chaining = True
         self.enable_environ_config = False
         
+        self.param_file = None
+        
+        self.args = args
+        
         self.__initialize()
 
     def add(self, component):
@@ -116,7 +120,10 @@ class Job(object):
                             help="Job steps to run (single number)")
         parser.add_argument("-d", "--run-dir", nargs=1, help="Job run dir")
         parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
-        parser.add_argument("params", nargs=1, help="Job params in JSON format")
+        parser.add_argument("-n", "--script-name", help="Interpret script argument as name and not path", 
+                            action='store_true', default=False)
+        parser.add_argument("script", nargs=1, help="Path to job script")
+        parser.add_argument("params", nargs='?', help="Job params in JSON format")
         
         # TODO: CL option to disable automatic copying of ouput files.
         #       The files should be symlinked if copying is disabled.
@@ -125,7 +132,7 @@ class Job(object):
         #parser.add_argument('--no-feature', dest='feature', action='store_false')
         #parser.set_defaults(feature=True)
         
-        cl = parser.parse_args()
+        cl = parser.parse_args(self.args)
             
         self.config = cl.config
         
@@ -145,28 +152,33 @@ class Job(object):
         self.job_steps = cl.job_steps
         
         if cl.params:
-            self.param_file = cl.params[0]
+            self.param_file = cl.params
+        
+        self.script_name = cl.script_name
+        
+        if cl.script:
+            self.script = cl.script[0]
                     
         if cl.run_dir:
             self.rundir = cl.run_dir[0]
         
-        params = {}
-        if cl.job_id:
-            # Load data from a job store containing multiple jobs.
-            self.job_id = cl.job_id
-            print('job_id=%d' % self.job_id)
-            logger.info("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
-            jobstore = JobStore(self.param_file)
-            if jobstore.has_job_id(self.job_id):
-                params = jobstore.get_job(self.job_id)
+        if self.param_file is not None:
+            params = {}
+            if cl.job_id:
+                # Load data from a job store containing multiple jobs.
+                self.job_id = cl.job_id
+                print('job_id=%d' % self.job_id)
+                logger.info("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
+                jobstore = JobStore(self.param_file)
+                if jobstore.has_job_id(self.job_id):
+                    params = jobstore.get_job(self.job_id)
+                else:
+                    raise Exception("No job id %d was found in the job store '%s'" % (self.job_id, self.param_file))
             else:
-                raise Exception("No job id %d was found in the job store '%s'" % (self.job_id, self.param_file))
-        else:
-            # Load data from a JSON file with a single job definition.
-            logger.info("Loading job parameters from '%s'" % self.param_file)
-            params = _load_json_file(self.param_file)
-        
-        self.__load_params(params)
+                # Load data from a JSON file with a single job definition.
+                logger.info("Loading job parameters from '%s'" % self.param_file)
+                params = _load_json_file(self.param_file)
+            self.__load_params(params)
                   
     def __load_params(self, params):
         """
@@ -188,7 +200,7 @@ class Job(object):
   
     def __initialize(self):
         """
-        Perform basic initialization before job components are added.
+        Perform basic initialization before the job script is loaded.
         """
                                 
         self.__parse_args()
@@ -222,13 +234,31 @@ class Job(object):
             self.input_files = self.params['input_files']
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
-                                                   
-    def run(self): 
+    
+    def __load_script(self):        
+        
+        if self.script_name:
+            logger.debug("Finding path to script '%s' ... " % self.script)
+            script_db = JobScriptDatabase()
+            if not script_db.exists(self.script):
+                raise Exception("The script name '%s' is not valid." % self.script)
+            script_path = script_db.get_script_path(self.script)
+            logger.debug("Found script '%s' from name '%s'" % (script_path, self.script))
+        else:
+            script_path = self.script
+        
+        logger.debug("Loading job script '%s" % script_path)
+
+        globals = {'job': self}       
+        execfile(script_path, globals)
+                       
+    def run(self):
         """
-        This is the primary execution method that should be called at the end of a job script.
-        It will configure, setup, and execute the components and then perform cleanup after 
-        the job finishes.
+        This is the primary execution method for running the job.
         """
+        
+        # Load the job components from the script
+        self.__load_script()
         
         if not len(self.components):
             raise Exception("Job has no components to execute.")
@@ -323,6 +353,7 @@ class Job(object):
         logger.info("Done configuring components!")
 
     def __setup(self):
+                
         # Limit components according to job steps
         if self.job_steps > 0:
             self.components = self.components[0:self.job_steps]
@@ -451,17 +482,27 @@ class Job(object):
             logger.info("Symlinking input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
             os.symlink(src, os.path.join(self.rundir, dest))
 
-if __name__ == '__main__':
+cmds = ['run', 'avail']
+
+def print_usage(self):
+        print("Usage: job.py [command] [args]")
+        print("    command: %s" % ' '.join(cmds))
+
+if __name__ == '__main__':    
     if len(sys.argv) > 1:
-        job_name = sys.argv[1]
-        script_db = JobScriptDatabase()
-        if not script_db.exists(job_name):
-            raise Exception("The job name '%s' is not valid." % job_name)    
-        script_path = script_db.get_script_path(job_name)
+        cmd = sys.argv[1]
+        if cmd not in cmds:
+            print_usage()
+            raise Exception("The job command '%s' is not valid." % cmd)
         args = sys.argv[2:]
-        cmd = '%s %s %s' % (sys.executable, script_path, ' '.join(args))
-        print('Executing cmd: %s' % cmd)
-        os.system(cmd)
+        if cmd == 'run':
+            job = Job(args)
+            job.run()
+        elif cmd == 'avail':
+            scriptdb = JobScriptDatabase()
+            print("Available job scripts: ")
+            for name in sorted(scriptdb.get_script_names()):
+                print('    %s: %s' % (name, scriptdb.get_script_path(name)))
     else:
-        print("Usage: job.py [job] [args]")
-        print("    Available jobs: %s" % ', '.join(script_db.get_script_names()))
+        print_usage()
+    

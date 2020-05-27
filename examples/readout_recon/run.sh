@@ -1,1 +1,1 @@
-hps-mc-run readout_recon -d $PWD/scratch -c .hpsmc job.json
+hps-mc-job -n -d $PWD/scratch -c .hpsmc readout_recon job.json

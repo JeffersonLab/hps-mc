@@ -5,13 +5,8 @@ The output events can be used as input to 'merge_job.py' with a beam StdHep file
 wab-beam sample file.
 """
 
-from hpsmc.job import Job
 from hpsmc.tools import BeamCoords, MergePoisson
 from hpsmc.generators import StdHepConverter
-from hpsmc.run_params import RunParameters
-
-# job init
-job = Job()
 
 # Convert wab events to stdhep
 cnv = StdHepConverter()
@@ -26,6 +21,3 @@ sample = MergePoisson(input_filter='wab',
 
 # Add components
 job.add([cnv, rot, sample])
-
-# Run the job
-job.run()

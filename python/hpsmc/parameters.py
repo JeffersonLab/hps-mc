@@ -86,9 +86,12 @@ class ParameterSet(object):
             raise Exception("Parameter with name '%s' already exists." % parameter.get_name())
         
     def get(self, name):
-        if name not in self.parameters.keys():
+        if not exists(name):
             raise Exception("No parameter called '%s'" % name)
         return self.parameters[name]
+    
+    def exists(self, name):
+        return name in self.parameters.keys()
             
 if __name__ == '__main__':
     p = Parameter('myparam', 'this does a thing', optional=False, value='foobarbaz', default_value='wut')

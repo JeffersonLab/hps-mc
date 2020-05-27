@@ -17,6 +17,9 @@ class JobScriptDatabase:
         
     def get_script_names(self):
         return self.scripts.keys()
+    
+    def get_scripts(self):
+        return self.scripts
         
     def exists(self, name):
         return name in self.scripts
