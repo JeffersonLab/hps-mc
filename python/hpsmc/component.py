@@ -66,9 +66,14 @@ class Component(object):
             self.input_filter = kwargs['input_filter']
         else:
             self.input_filter = None
+ 
+        if 'ignore_job_params' in kwargs:
+            self.ignore_job_params = kwargs['ignore_job_params']
+        else:
+            self.ignore_job_params = []
         
-        logger.debug("Initialized component '%s'" % self.name)
-        logger.debug(vars(self))
+#        logger.debug("Initialized component '%s'" % self.name)
+#        logger.debug(vars(self))
                                             
     def execute(self, log_out, log_err):
         """
@@ -159,19 +164,24 @@ class Component(object):
         for p in self.required_parameters():
             if p not in params:
                 raise Exception("Required parameter '%s' is missing for component '%s'" 
-                                % (p, self.name))                
+                                % (p, self.name))        
             else:
-                setattr(self, p, params[p])
-                logger.info("Set required parameter '%s' to '%s' for component '%s'"
-                            % (p, params[p], self.name))
-        
+                if p not in self.ignore_job_params:
+                    setattr(self, p, params[p])
+                    logger.info("%s:%s=%s [required]" % (self.name, p, params[p]))
+                else:
+                    logger.info("Ignored job param '%s'" % p)
+                
         # TODO: Set optional parameters to None if not present in JSON so it doesn't need to be done in init.
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
-                setattr(self, p, params[p])
-                logger.info("Set optional parameter '%s' to '%s' for component '%s'"
-                            % (p, params[p], self.name))
+                if p not in self.ignore_job_params:
+                    setattr(self, p, params[p])
+                    logger.info("%s:%s=%s [optional]"
+                                % (self.name, p, params[p]))
+                else:
+                    logger.info("Ignored job param '%s'" % p)
     
     def required_parameters(self):
         """
