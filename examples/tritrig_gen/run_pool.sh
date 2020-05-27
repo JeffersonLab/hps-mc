@@ -1,2 +1,2 @@
 #!/bin/sh
-hps-mc-pool -d $PWD/scratch -s 2 ${HPSMC_DIR}/lib/python/jobs/tritrig_gen_job.py jobs.json
+hps-mc-batch pool -d $PWD/scratch -s 2 tritrig_gen jobs.json
