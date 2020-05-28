@@ -1,6 +1,10 @@
 class Parameter(object):
-    
-    def __init__(self, name, description='', optional=True, value=None, default_value=None):
+    """
+    Class for holding information about a component parameter (not used yet)
+    """
+        
+    def __init__(self, name, description='', optional=True, value=None, 
+                 default_value=None, read_from_init=False, read_from_params=True):
         self.name = name
         self.description = description
         self.optional = optional
@@ -11,8 +15,8 @@ class Parameter(object):
                 raise Exception("Value '%s' has wrong type %s" % (self.value, type(self.value)))
         if value is None and default_value is not None:
             self.set_from_default_value()
-        if value is None and default_value is None:
-            raise Exception('Both value and default_value were None')
+        #if value is None and default_value is None:
+        #    raise Exception('Both value and default_value were None')
     
     def get_description(self):
         return self.description
@@ -81,17 +85,24 @@ class ParameterSet(object):
         for p in paramlist:
             self.add(p)
     
-    def add(self, parameter):
-        if param.get_name() in self.parameters().keys():
-            raise Exception("Parameter with name '%s' already exists." % parameter.get_name())
+    def add(self, *args):
+        for param in args:
+            if param.get_name() in self.parameters.keys():
+                raise Exception("Parameter with name '%s' already exists." % parameter.get_name())
         
     def get(self, name):
         if not exists(name):
             raise Exception("No parameter called '%s'" % name)
         return self.parameters[name]
     
-    def exists(self, name):
+    def has(self, name):
         return name in self.parameters.keys()
+    
+    def parameters(self):
+        return self.parameters
+    
+    def parameter_names(self):
+        return self.parameters.keys()
             
 if __name__ == '__main__':
     p = Parameter('myparam', 'this does a thing', optional=False, value='foobarbaz', default_value='wut')
