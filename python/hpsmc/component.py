@@ -1,26 +1,7 @@
 import os, subprocess, sys, shutil, argparse, getpass, json, logging, time, re
+from util import convert_config_value
 
 logger = logging.getLogger("hpsmc.component")
-
-import hpsmc.config as config
-
-def _convert_config_value(val):
-    if val == 'True' or val == 'true': 
-        return True
-    elif val == 'False' or val == 'false':
-        return False
-    try:
-        if val.contains('.'):
-            floatval = float(value)
-            return floatval
-    except:
-        pass
-    try:
-        intval = int(val)
-        return intval
-    except:
-        pass
-    return val
 
 class Component(object):
     """
@@ -141,17 +122,6 @@ class Component(object):
         """
         pass    
 
-    """
-    def config(self, parser, section_name):
-        if parser.has_section(section_name):
-            for name, value in parser.items(section_name):
-                setattr(self, name, convert_config_value(value))
-                logger.debug("%s:%s:%s=%s" % (self.name, 
-                                              name, 
-                                              getattr(self, name).__class__.__name__, 
-                                              getattr(self, name)))
-    """
-
     def config(self, parser):
         """
         Automatically load attributes from config by reading in values from 
@@ -164,7 +134,7 @@ class Component(object):
         section_name = self.__class__.__name__
         if parser.has_section(section_name):
             for name, value in parser.items(section_name):
-                setattr(self, name, _convert_config_value(value))
+                setattr(self, name, convert_config_value(value))
                 logger.debug("%s:%s:%s=%s" % (self.name, 
                                               name, 
                                               getattr(self, name).__class__.__name__, 

@@ -74,8 +74,8 @@ class StdHepConverter(EGS5):
     def __init__(self, **kwargs):
         EGS5.__init__(self, "lhe_v1", **kwargs)
   
-    def config(self):
-        EGS5.config(self)
+    def config(self, parser):
+        EGS5.config(self, parser)
 
     def setup(self):
         EGS5.setup(self)
