@@ -4,7 +4,6 @@ from subprocess import PIPE
 from component import Component
 from .run_params import RunParameters
 import hpsmc.func as func
-import hpsmc.config as config
 
 logger = logging.getLogger("hpsmc.tools")
 

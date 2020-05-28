@@ -4,6 +4,7 @@ from os.path import expanduser
 from component import Component
 from script_db import JobScriptDatabase
 from job_store import JobStore
+from util import convert_config_value
 
 logger = logging.getLogger("hpsmc.job")
 logger.setLevel(logging.DEBUG)
@@ -352,7 +353,7 @@ class Job(object):
         if parser.has_section(job_config):
             for name, value in parser.items(job_config):
                 if name in Job._config_names:
-                    setattr(self, name, config.convert_value(value))
+                    setattr(self, name, convert_config_value(value))
                     logger.debug("Job:%s:%s=%s" % (name, 
                                                    getattr(self, name).__class__.__name__, 
                                                    getattr(self, name)))
