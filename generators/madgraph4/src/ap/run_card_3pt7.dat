@@ -21,7 +21,7 @@
 #*********************************************************************
 # Tag name for the run (one word)                                    *
 #*********************************************************************
-  'HPS'     = run_tag ! name of the run 
+  'fermi'     = run_tag ! name of the run 
 #*********************************************************************
 # Run to generate the grid pack                                      *
 #*********************************************************************
@@ -36,7 +36,7 @@
 #*********************************************************************
         0     = lpp1  ! beam 1 type (0=NO PDF)
         0     = lpp2  ! beam 2 type (0=NO PDF)
-     2.3      = ebeam1  ! beam 1 energy in GeV
+    3.70     = ebeam1  ! beam 1 energy in GeV
     171.24    = ebeam2  ! beam 2 energy in GeV
     0.000511  = mbeam1  ! beam 1 energy in GeV
     171.24    = mbeam2  ! beam 2 energy in GeV
@@ -75,13 +75,13 @@
 # Fixed-Target Cuts
 #*******************                                                 
 #
- 0.400 = ef        ! minimum E for all f's (0.4 Ebeam)
+ 0.0 = ef        ! minimum E for all f's
  100.0 = efmax     ! maximum E for all f's
  0.0 = thetafmin ! min angle for both f's
  100.0 = thetafmax ! max angle for both f's
  0.0 = thetaxfmin ! min angle (x direction) for both f's
  100.0 = thetaxfmax ! max angle (x direction) for both f's 
- 0.005 = thetayfmin ! min angle (y direction) for both f's
+ 0.0 = thetayfmin ! min angle (y direction) for both f's
  100.0 = thetayfmax ! max angle (y direction) for both f's 
  0.0 = xthetaxfmin ! min angle (x direction) for >=1 f's
  100.0 = xthetaxfmax ! max angle (x direction) for >=1 f's 
