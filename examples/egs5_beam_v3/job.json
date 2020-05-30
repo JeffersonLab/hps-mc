@@ -1,5 +1,5 @@
 {
-    "run_params": "1pt05",
+    "run_params": "2pt3",
     "bunches": 500000,
     "seed": 1001001,
     "output_dir": "output",
