@@ -17,7 +17,7 @@
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_1.stdhep": "beam.stdhep"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -44,7 +44,7 @@
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_2.stdhep": "beam.stdhep"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -71,7 +71,7 @@
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_3.lhe.gz": "tritrig_events.lhe.gz"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -98,7 +98,7 @@
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_4.lhe.gz": "tritrig_events.lhe.gz"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -125,7 +125,7 @@
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_5.lhe.gz": "tritrig_events.lhe.gz"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -152,7 +152,7 @@
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_6.lhe.gz": "tritrig_events.lhe.gz"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -179,7 +179,7 @@
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_7.stdhep": "beam.stdhep"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -206,7 +206,7 @@
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_8.stdhep": "beam.stdhep"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -233,7 +233,7 @@
             "/work/slac/hps-mc/examples/egs5_beam_v3/output/2pt3/egs_v3/beam_egs_v3_2pt3_9.stdhep": "beam.stdhep"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
@@ -260,7 +260,7 @@
             "/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_10.lhe.gz": "tritrig_events.lhe.gz"
         }, 
         "target_z": -4.3, 
-        "nevents": 1000, 
+        "nevents": 8000, 
         "output_dir": "output/2pt3/HPS-PhysicsRun2016-Pass2", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
