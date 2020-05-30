@@ -327,7 +327,7 @@ class StdHepTool(Component):
         
         if len(self.output_files()):
             args.insert(0, self.output_files()[0])
-        elif len(self.outputs) > 1:
+        elif len(self.output_files()) > 1:
             raise Exception("Too many outputs specified for StdHepTool.")
         
         if len(self.input_files()):
@@ -844,6 +844,12 @@ class LCIOCount(LCIOTool):
                 logger.warning(msg)
 
         return proc.returncode            
+    
+    def required_parameters(self):
+        return []
+    
+    def optional_parameters(self):
+        return []
 
 class LCIOMerge(LCIOTool):
 
