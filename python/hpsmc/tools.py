@@ -671,16 +671,18 @@ class Unzip(Component):
     def output_files(self):
         return [os.path.splitext(i)[0] for i in self.input_files()]
     
-    def cmd_args(self):
-        return ['-q'].extend(self.output_files())
-                        
-#    def execute(self, log_out, log_err):
-#        for inputfile in self.input_files():
-#            outputfile = os.path.splitext(inputfile)[0]
-#            with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
-#                shutil.copyfileobj(in_file, out_file)
-#                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
-#        return 0
+#    def cmd_args(self):
+#        cmd = ['q']
+#        cmd.extend(self.output_files())
+#        return cmd
+                    
+    def execute(self, log_out, log_err):
+        for inputfile in self.input_files():
+            outputfile = os.path.splitext(inputfile)[0]
+            with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
+                shutil.copyfileobj(in_file, out_file)
+                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+        return 0
                     
 #class FileFilter(Component):   
 #    def __init__(self, excludes):
