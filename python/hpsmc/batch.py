@@ -347,11 +347,10 @@ class Auger(Batch):
         param_file,xml_file = self.build_job_files(name, job_params)
         cmd = ['jsub', '-xml', xml_file]
         print(' '.join(cmd))
-        raise Exception('')
         #if not self.dryrun:
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         out, err = proc.communicate()
-        print out
+        print(out)
         jobid = None
         if "<jobIndex>" in out:
             jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
