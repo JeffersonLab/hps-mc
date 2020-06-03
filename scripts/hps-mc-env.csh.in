@@ -1,5 +1,7 @@
 #!/bin/sh
 
+setenv HPSMC_DIR=@CMAKE_INSTALL_PREFIX@
+
 setenv PATH @CMAKE_INSTALL_PREFIX@/bin:$PATH
 
 if (! $?PYTHONPATH) then       
