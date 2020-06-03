@@ -42,11 +42,11 @@ class Batch:
         self.jobstore = JobStore(cl.jobstore[0])
 
         if cl.script:
-            script_name = cl.script[0]
+            self.script_name = cl.script[0]
             script_db = JobScriptDatabase()
-            if not script_db.exists(script_name):
-                raise Exception("The script name '%s' is not valid." % script_name)
-            self.script = script_db.get_script_path(script_name)
+            if not script_db.exists(self.script_name):
+                raise Exception("The script name '%s' is not valid." % self.script_name)
+            self.script = script_db.get_script_path(self.script_name)
             if not os.path.isfile(self.script):
                 raise Exception("The job script '%s' does not exist." % self.script)       
         else:
@@ -61,10 +61,10 @@ class Batch:
         
         if cl.log_dir:
             self.log_dir = cl.log_dir[0]
-        else:
-            self.log_dir = None
         #else:
-        #    self.log_dir = os.getcwd()        
+        #    self.log_dir = None
+        else:
+            self.log_dir = os.getcwd()        
         #try:
         #    os.stat(self.log_dir)
         #except:
@@ -109,7 +109,7 @@ class Batch:
             self.pool_size = 8 
             
         if cl.config_file:
-            self.config_file = cl.config_file[0]
+            self.config_file = os.path.abspath(cl.config_file[0])
         else:
             self.config_file = None
         
@@ -182,15 +182,15 @@ class Batch:
         may override if necessary.
         """
         job_dir = os.path.join(self.run_dir, str(job_id))
+        cmd = ['python', run_script, 'run']
         if self.log_dir is not None:
             # User specified log dir
             log_dir = self.log_dir
         else:
             # Log files go into the job dir
             log_dir = job_dir
-        cmd = ['python', run_script, 'run',
-               '-o', os.path.join(log_dir, 'job.%d.out' % job_id),
-               '-e', os.path.join(log_dir, 'job.%d.err' % job_id)]
+        cmd.extend(['-o', os.path.join(log_dir, 'job.%d.out' % job_id),
+                    '-e', os.path.join(log_dir, 'job.%d.err' % job_id)])
         cmd.extend(['-d', job_dir])
         if self.config_file:
             cmd.extend(['-c', self.config_file])
@@ -232,7 +232,6 @@ class LSF(Batch):
         batch_id = int(tokens[1].replace('<', '').replace('>', ''))
         return batch_id
 
-# FIXME: Probably this class is completely broken.
 class Auger(Batch):
     """Manage Auger batch jobs."""
 
@@ -242,14 +241,29 @@ class Auger(Batch):
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
+
+    def build_cmd(self, job_id, job_params):
+        job_dir = os.path.join(self.run_dir, str(job_id))
+        cmd = ['python', run_script, 'run']
+        cmd.extend(['-d', '/scratch/%d' % job_id])
+        if self.config_file:
+            cmd.extend(['-c', self.config_file])
+        if self.job_steps > 0:
+            cmd.extend(['--job-steps', str(self.job_steps)])
+        cmd.extend(['-i', str(job_id)])
+        cmd.append(self.script)
+        cmd.append(os.path.abspath(self.jobstore.path))
+        logger.info("Job command: %s" % " ".join(cmd))
+        return cmd  
    
     def build_job_files(self, name, job_params):
-
-        param_file = os.path.join(self.workdir, name + ".json")
+        
+#        param_file = os.path.join(self.workdir, name + ".json")
+        jobname = '%s_%d' % (self.script_name, name)
 
         req = ET.Element("Request")
         req_name = ET.SubElement(req, "Name")
-        req_name.set("name", name)
+        req_name.set("name", jobname)
         prj = ET.SubElement(req, "Project")
         prj.set("name", "hps")
         trk = ET.SubElement(req, "Track")
@@ -276,7 +290,7 @@ class Auger(Batch):
 
         job = ET.SubElement(req, "Job")
         inputfiles = job_params["input_files"]
-        for dest,src in inputfiles.iteritems():
+        for src,dest in inputfiles.iteritems():
             input_elem = ET.SubElement(job, "Input")
             input_elem.set("dest", dest)
             if src.startswith("/mss"):
@@ -295,52 +309,57 @@ class Auger(Batch):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
         job_err = ET.SubElement(job, "Stderr")
-        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        job_err.set("dest", log_file)
+        stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % name))
+        stderr_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.err" % name))
+        job_err.set("dest", stderr_file)
         job_out = ET.SubElement(job, "Stdout")
-        job_out.set("dest", log_file)
+        job_out.set("dest", stdout_file)
                 
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
-        
+        cmd_lines.append('\n')
+
         job_cmd = self.build_cmd(name, job_params)
         
         if self.job_steps > 0:
             job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
-        cmd_lines.append(job_cmd)
+        cmd_lines.extend(job_cmd)
         cmd_lines.append("]]>")
-        cmd.text = '\n'.join(cmd_lines)
+        print(cmd_lines)
+        cmd.text = ' '.join(cmd_lines)
 
-        with open(param_file, "w") as jobfile:
+        param_file = 'job_%d.json' % name
+        with open(param_file, 'w') as jobfile:
              json.dump(job_params, jobfile, indent=2, sort_keys=True)
         print "Wrote job param file '%s'" % (param_file)
 
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
-        xml_file = os.path.join(self.workdir, name+".xml")
-        with open(xml_file, "w") as f:
+        xml_file = 'temp.xml'
+        with open(xml_file, 'w') as f:
             f.write(pretty)
-        print "Wrote Auger XML '%s'" % xml_file
+        #print "Wrote Auger XML '%s'" % xml_file
 
         return param_file, xml_file
 
     def submit_cmd(self, name, job_params):
         param_file,xml_file = self.build_job_files(name, job_params)
         cmd = ['jsub', '-xml', xml_file]
-        #print(' '.join(cmd))
-        if not self.dryrun:
-            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-            out, err = proc.communicate()
-            print out
-            jobid = None
-            if "<jobIndex>" in out:
-                jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
-            return jobid
-        else:
-            print "Job %s was not submitted." % name
-            return None
-        print        
+        print(' '.join(cmd))
+        raise Exception('')
+        #if not self.dryrun:
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        out, err = proc.communicate()
+        print out
+        jobid = None
+        if "<jobIndex>" in out:
+            jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
+        return jobid
+        #else:
+        #    print "Job %s was not submitted." % name
+        #    return None
+        #print        
 
 class Local(Batch):
     """Run a local batch job on the current system."""
