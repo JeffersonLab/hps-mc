@@ -33,6 +33,7 @@ class Batch:
         parser.add_argument("script", nargs=1, help="Name of job script")
         parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
+        # TODO: add a workdir argument for storing JSON and other batch files 
         cl = parser.parse_args(args)
 
         if not cl.jobstore: 
@@ -245,7 +246,7 @@ class Auger(Batch):
     def build_cmd(self, job_id, job_params):
         job_dir = os.path.join(self.run_dir, str(job_id))
         cmd = ['python', run_script, 'run']
-        cmd.extend(['-d', '/scratch/%d' % job_id])
+        #cmd.extend(['-d', '/scratch/%d' % job_id])
         if self.config_file:
             cmd.extend(['-c', self.config_file])
         if self.job_steps > 0:
@@ -318,6 +319,8 @@ class Auger(Batch):
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
+        cmd_lines.append('pwd')
+        cmd_lines.append('\n')
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
         cmd_lines.append('\n')
 
@@ -326,8 +329,13 @@ class Auger(Batch):
         if self.job_steps > 0:
             job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
         cmd_lines.extend(job_cmd)
+       
+        # DEBUG
+        cmd_lines.append('\n')
+        cmd_lines.append('ls -lah .')
+
         cmd_lines.append("]]>")
-        print(cmd_lines)
+        #print(cmd_lines)
         cmd.text = ' '.join(cmd_lines)
 
         param_file = 'job_%d.json' % name
