@@ -5,7 +5,7 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR, LCIOCount, LCIOM
 # Get job input file targets
 inputs = job.input_files.values()
 
-"""
+
 if 'event_interval' in job.params:
     event_interval = job.params['event_interval']
 else:
@@ -14,8 +14,8 @@ else:
 if 'nevents' in job.params:
     nevents = job.params['nevents']
 else:
-    nevents = 8000
-"""
+    nevents = 10000
+
 
 # Input tritrig events (LHE format)
 tritrig_file_name = 'tritrig_events.lhe.gz'
