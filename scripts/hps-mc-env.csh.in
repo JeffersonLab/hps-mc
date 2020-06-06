@@ -8,3 +8,5 @@ if (! $?PYTHONPATH) then
     setenv PYTHONPATH ""
 endif
 setenv PYTHONPATH @CMAKE_INSTALL_PREFIX@/lib/python:$PYTHONPATH
+
+setenv MALLOC_CHECK_ 1
