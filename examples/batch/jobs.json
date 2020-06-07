@@ -10,7 +10,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_1.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_1_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0001_10.slcio"
         }
     }, 
     {
@@ -24,7 +24,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_2.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_2_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0002_10.slcio"
         }
     }, 
     {
@@ -38,7 +38,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_3.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_3_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0003_10.slcio"
         }
     }, 
     {
@@ -52,7 +52,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_4.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_4_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0004_10.slcio"
         }
     }, 
     {
@@ -66,7 +66,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_5.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_5_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0005_10.slcio"
         }
     }, 
     {
@@ -80,7 +80,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_6.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_6_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0006_10.slcio"
         }
     }, 
     {
@@ -94,7 +94,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_7.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_7_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0007_10.slcio"
         }
     }, 
     {
@@ -108,7 +108,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_8.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_8_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_0008_10.slcio"
         }
     }
 ]
