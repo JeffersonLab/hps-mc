@@ -1,7 +1,7 @@
 [
     {
         "run_number": 8000, 
-        "job_id": 101, 
+        "job_id": 1, 
         "nevents": 10, 
         "seed": 1, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -10,12 +10,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_1.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_101_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_1_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 102, 
+        "job_id": 2, 
         "nevents": 10, 
         "seed": 2, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -24,12 +24,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_2.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_102_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_2_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 103, 
+        "job_id": 3, 
         "nevents": 10, 
         "seed": 3, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -38,12 +38,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_3.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_103_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_3_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 104, 
+        "job_id": 4, 
         "nevents": 10, 
         "seed": 4, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -52,12 +52,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_4.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_104_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_4_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 105, 
+        "job_id": 5, 
         "nevents": 10, 
         "seed": 5, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -66,12 +66,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_5.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_105_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_5_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 106, 
+        "job_id": 6, 
         "nevents": 10, 
         "seed": 6, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -80,12 +80,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_6.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_106_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_6_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 107, 
+        "job_id": 7, 
         "nevents": 10, 
         "seed": 7, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -94,12 +94,12 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_7.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_107_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_7_10.slcio"
         }
     }, 
     {
         "run_number": 8000, 
-        "job_id": 108, 
+        "job_id": 8, 
         "nevents": 10, 
         "seed": 8, 
         "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
@@ -108,175 +108,7 @@
             "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_8.stdhep": "events.stdhep"
         }, 
         "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_108_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 109, 
-        "nevents": 10, 
-        "seed": 9, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_9.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_109_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 110, 
-        "nevents": 10, 
-        "seed": 10, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_10.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_110_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 111, 
-        "nevents": 10, 
-        "seed": 11, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_11.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_111_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 112, 
-        "nevents": 10, 
-        "seed": 12, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_12.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_112_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 113, 
-        "nevents": 10, 
-        "seed": 13, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_13.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_113_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 114, 
-        "nevents": 10, 
-        "seed": 14, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_14.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_114_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 115, 
-        "nevents": 10, 
-        "seed": 15, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_15.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_115_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 116, 
-        "nevents": 10, 
-        "seed": 16, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_16.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_116_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 117, 
-        "nevents": 10, 
-        "seed": 17, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_17.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_117_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 118, 
-        "nevents": 10, 
-        "seed": 18, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_18.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_118_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 119, 
-        "nevents": 10, 
-        "seed": 19, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_19.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_119_10.slcio"
-        }
-    }, 
-    {
-        "run_number": 8000, 
-        "job_id": 120, 
-        "nevents": 10, 
-        "seed": 20, 
-        "output_dir": "output/HPS-PhysicsRun2019-v1-4pt5", 
-        "detector": "HPS-PhysicsRun2019-v1-4pt5", 
-        "input_files": {
-            "/work/slac/data/stdhep/tritrigv2_MG5_ESum1GeV_20.stdhep": "events.stdhep"
-        }, 
-        "output_files": {
-            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_120_10.slcio"
+            "events.slcio": "events_HPS-PhysicsRun2019-v1-4pt5_8000_8_10.slcio"
         }
     }
 ]
