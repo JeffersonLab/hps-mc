@@ -387,11 +387,9 @@ class Local(Batch):
                logger.warn("Local execution of '%s' returned error code %d" % (name, proc.returncode))
 
 def run_job_pool(cmd):
-    sys.stdout.flush()
-    returncode = subprocess.call(cmd)
     try:
         sys.stdout.flush()
-        returncode = subprocess.call(cmd, stdout=log,stderr=log)
+        returncode = subprocess.call(cmd)
     except subprocess.CalledProcessError as e:
         print(str(e))
         sys.stdout.flush()
@@ -408,10 +406,11 @@ class Pool(Batch):
         cmds = []
         for job_id in self.get_filtered_job_ids():
             job_data = self.jobstore.get_job(job_id)
-            cmd = self.build_cmd(job_id, job_data)
+            cmd = self.build_cmd(job_id, job_data)            
             cmds.append(cmd)
-        print(cmds)
-        
+        # Uncomment to print all job commands here
+        #logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
+     
         if not len(cmds):
             raise Exception('No job IDs found to submit')
                             
