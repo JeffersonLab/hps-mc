@@ -1,1 +1,1 @@
-rm -rf output scratch *.log &> /dev/null
+rm -rf output/* scratch *.log *.err *.out &> /dev/null
