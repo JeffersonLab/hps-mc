@@ -4,10 +4,10 @@
     "run_number": ${run_number},
     "detector": "${detector}",
     "input_files": {
-        "${input_file}": "events.stdhep"
+        "${events_1}": "events.stdhep"
     },
     "output_files": {
-      "${output_file}": "events_${detector}_${run_number}_${job_id}_${nevents}.slcio"
+      "events.slcio": "events_${detector}_${run_number}_${job_id}_${nevents}.slcio"
     },
     "output_dir": "output/${detector}"
 }
