@@ -21,7 +21,7 @@ class JobStore:
         
         parser = argparse.ArgumentParser(description="Create a job store with multiple jobs")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
-        parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 4)", default=4)
+        parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 0 for no padding)", default=0)
         parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
         parser.add_argument("-i", "--input-file-list", action='append', nargs=2, help="Input file lists and number of reads per job")
 #        parser.add_argument("-o", "--output-file", help="Output file written by the job script")
@@ -38,7 +38,7 @@ class JobStore:
         self.job_store = cl.job_store
                         
         self.job_start = cl.job_start
-        self.job_id_pad = cl.pad
+        self.pad = cl.pad
         self.seed = cl.seed
         
         self.input_lists = [] 
@@ -104,7 +104,7 @@ class JobStore:
             for r in range(0, self.repeat):
                 
                 mapping['seed'] = seed
-                mapping['job_id'] = job_id
+                mapping['job_id'] = str(job_id).zfill(self.pad)
                 mapping['sequence'] = r + 1
                 
                 file_vars = self.list_reader.read_next()
