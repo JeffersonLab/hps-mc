@@ -1,4 +1,4 @@
-import json
+import json, sys, logging
 
 def load_json_data(filename):
     rawdata = open(filename, 'r').read()
@@ -21,3 +21,16 @@ def convert_config_value(val):
     except:
         pass
     return val
+
+def config_logging(stream=sys.stdout, level=logging.DEBUG):
+    """
+    Configure logging by setting an output stream and level (both optional).
+    Any handlers already registered will be replaced by calling this method.
+    """
+    global_logger = logging.getLogger('hpsmc')
+    global_logger.handlers = [] # Reset handlers in case this is called more than once
+    global_logger.setLevel(level)
+    handler = logging.StreamHandler(stream)
+    handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
+    global_logger.addHandler(handler)
+    
