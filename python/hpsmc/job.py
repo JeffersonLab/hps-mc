@@ -4,7 +4,7 @@ from os.path import expanduser
 from component import Component
 from script_db import JobScriptDatabase
 from job_store import JobStore
-from util import convert_config_value
+from util import convert_config_value, config_logging
 
 logger = logging.getLogger("hpsmc.job")
 logger.setLevel(logging.DEBUG)
@@ -112,8 +112,8 @@ class Job(object):
                 
         parser = argparse.ArgumentParser(description=self.name)
         parser.add_argument("-c", "--config", nargs=1, help="Config file location")
-        parser.add_argument("-o", "--out", nargs=1, help="Log file for job stdout")
-        parser.add_argument("-e", "--err", nargs=1, help="Log file for job stderr")
+        parser.add_argument("-o", "--out", nargs=1, help="File for component stdout")
+        parser.add_argument("-e", "--err", nargs=1, help="File for component stderr")
         parser.add_argument("-L", "--level", nargs=1, help="Global log level")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, 
                             help="Job steps to run (single number)")
@@ -121,6 +121,7 @@ class Job(object):
         parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
         parser.add_argument("-n", "--script-name", help="Interpret script argument as name and not path", 
                             action='store_true', default=False)
+        parser.add_argument("-l", "--log-out", help="File for logging output (default is print to terminal)", nargs=1)
         parser.add_argument("script", nargs=1, help="Path to job script")
         parser.add_argument("params", nargs='?', help="Job params in JSON format")
         
@@ -142,20 +143,25 @@ class Job(object):
                              os.path.abspath(".hpsmc")]               # current dir
         if self.config and not self.config in self.config_files:
             self.config_files.append(self.config) # user specified file
+                        
+        if cl.log_out:
+            self.log_file = os.path.join(self.rundir, cl.log_out[0])
+            print("Logging output will be written to '%s'" % self.log_file)            
+            config_logging(stream=open(self.log_file, 'w+'))
         
         if cl.level:
             level = logging.getLevelName(cl.level[0])
-            logger.info("Setting log level to '%s'" % level)
-            logging.basicConfig(level=level)
-        
+            print("Setting log level to '%s'" % level)
+            logging.getLogger('hpsmc').setLevel(level)
+             
         if cl.out:
             self.out_file = os.path.join(self.rundir, cl.out[0])
-            logger.info("Stdout will be redirected to '%s'" % self.out_file)
+            print("Component stdout will be written to '%s'" % self.out_file)
                     
         if cl.err:
             self.err_file = os.path.join(self.rundir, cl.err[0])
-            logger.info("Stderr will be redirected to '%s'" % self.err_file)
-        
+            print("Component stderr will be written to '%s'" % self.err_file)
+                                        
         self.job_steps = cl.job_steps
         
         if cl.params:
@@ -233,9 +239,9 @@ class Job(object):
         os.chdir(self.rundir)
 
         if self.out_file:
-            self.log_out = open(self.out_file, "w")
+            self.log_out = open(self.out_file, 'w+')
         if self.err_file:
-            self.log_err = open(self.err_file, "w")
+            self.log_err = open(self.err_file, 'w+')
         
         if 'input_files' in self.params:
             self.input_files = self.params['input_files']
@@ -312,6 +318,8 @@ class Job(object):
                 logger.info("Executing cmd '%s' with inputs %s and outputs %s" % 
                             (c.name, str(c.input_files()), str(c.output_files())))
                 start = time.time()
+                self.log_out.write('<<<< %s >>>>\n' % c.name) # Add header to output
+                self.log_out.flush()
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
                 elapsed = end - start                
