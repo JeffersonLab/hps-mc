@@ -388,7 +388,7 @@ class Local(Batch):
 
 def run_job_pool(cmd):
     try:
-        sys.stdout.flush()
+        sys.stdout.flush()            
         returncode = subprocess.call(cmd)
     except subprocess.CalledProcessError as e:
         print(str(e))
