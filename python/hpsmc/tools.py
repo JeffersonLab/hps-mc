@@ -20,7 +20,6 @@ class SLIC(Component):
         Component.__init__(self, 
                            'slic',
                            'slic',
-                           replacements={'rot': ''},
                            output_ext='.slcio',
                            **kwargs)
                                
@@ -130,9 +129,13 @@ class JobManager(Component):
         Component.__init__(self, 
                            'job_manager', 
                            'java', 
-                           replacements={'filt': 'readout', 'readout': 'recon'},
                            output_ext='.slcio',
                            **kwargs)
+        
+        # Automatically append steering file key to output file name
+        if self.append_tok is None:
+            self.append_tok = self.steering
+            logger.debug("Append tok for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
         
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -302,7 +305,7 @@ class HPSTR(Component):
         
 class StdHepTool(Component):
 
-    """List of commands which accept a 'seed' argument."""
+    # List of commands which accept a 'seed' argument.
     seed_names = ['beam_coords',
                   'beam_coords_old',
                   'lhe_tridents',
@@ -353,7 +356,6 @@ class BeamCoords(StdHepTool):
    
         StdHepTool.__init__(self, 
                             'beam_coords',
-                            replacements={'mom': ''},
                             append_tok='rot',
                             **kwargs)
 
@@ -379,7 +381,7 @@ class RandomSample(StdHepTool):
     def __init__(self, **kwargs):
         StdHepTool.__init__(self, 
                             name='random_sample', 
-                            replacements={'rot': 'sampled'}, 
+                            append_tok='sampled',
                             **kwargs)
         
     def cmd_args(self):
@@ -410,16 +412,13 @@ class RandomSample(StdHepTool):
     def execute(self, log_out, log_err):
         r = Component.execute(self, log_out, log_err)
         
-        # Move file from tool to proper output file location.
+        # Move file to proper output file location.
         src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
         dest = '%s.stdhep' % os.path.splitext(self.output_files()[0])[0]
         logger.debug("Moving '%s' to '%s'" % (src, dest))
         shutil.move(src, dest)
         
         return r
-        
-#    def optional_parameters(self):
-#        return ['nevents']
         
 class DisplaceTime(StdHepTool):
     """
@@ -428,7 +427,10 @@ class DisplaceTime(StdHepTool):
     
     def __init__(self, **kwargs):
         self.ctau = None
-        StdHepTool.__init__(self, name='lhe_tridents_displacetime', output_ext='.stdhep', **kwargs)
+        StdHepTool.__init__(self, 
+                            name='lhe_tridents_displacetime', 
+                            output_ext='.stdhep', 
+                            **kwargs)
 
     def cmd_args(self):
         args = StdHepTool.cmd_args(self) 
@@ -442,7 +444,10 @@ class DisplaceTime(StdHepTool):
 class AddMother(StdHepTool):
     
     def __init__(self, **kwargs):
-        StdHepTool.__init__(self, 'add_mother', append_tok='mom', **kwargs)
+        StdHepTool.__init__(self, 
+                            'add_mother', 
+                            append_tok='mom', 
+                            **kwargs)
         
 class MergePoisson(StdHepTool):
         
@@ -453,7 +458,6 @@ class MergePoisson(StdHepTool):
             raise Exception("Missing required init argument 'lhe_file' to compute mu")
         StdHepTool.__init__(self, 
                             'merge_poisson', 
-                            replacements={'rot': ''}, 
                             append_tok='sampled', 
                             **kwargs)
     
@@ -463,10 +467,6 @@ class MergePoisson(StdHepTool):
     
     def required_parameters(self):
         return ['run_params']
-    
-#    def output_files(self):
-        # TODO: strip number at end here
-#        return ["%s_1.stdhep" % os.path.splitext(f)[0] for f in Component.output_files(self)]
     
     def cmd_args(self):
         
@@ -630,14 +630,14 @@ class FilterBunches(JavaTool):
     """
     
     def __init__(self, **kwargs):
-                
+        
+        # FIXME: hard-coded defaults
         self.ecal_hit_ecut = 0.05        
         self.event_interval = 250
                 
         JavaTool.__init__(self, 
                           'filter_bunches',
                           'org.hps.util.FilterMCBunches',
-                          replacements={'rot': ''},
                           append_tok='filt',
                           **kwargs)
                             
@@ -670,11 +670,6 @@ class Unzip(Component):
                
     def output_files(self):
         return [os.path.splitext(i)[0] for i in self.input_files()]
-    
-#    def cmd_args(self):
-#        cmd = ['q']
-#        cmd.extend(self.output_files())
-#        return cmd
                     
     def execute(self, log_out, log_err):
         for inputfile in self.input_files():
@@ -683,13 +678,6 @@ class Unzip(Component):
                 shutil.copyfileobj(in_file, out_file)
                 logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
         return 0
-                    
-#class FileFilter(Component):   
-#    def __init__(self, excludes):
-#        Component.__init__(self, 'file_filter', excludes=excludes)
-
-#    def execute(self, log_out, log_err):
-#        return 0
                         
 class LCIODumpEvent(Component):
 
@@ -796,6 +784,9 @@ class LCIOTool(Component):
         args = ['-jar', self.lcio_bin_jar]
         args.append(self.name)
         return args
+    
+    def required_config(self):
+        return ['lcio_bin_jar']
     
 class LCIOConcat(LCIOTool):
     
