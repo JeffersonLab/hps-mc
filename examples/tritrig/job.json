@@ -1,7 +1,7 @@
 {
     "nevents": 10000,
-    "run_params": "1pt05",
-    "target_z": -5.0,
+    "run_params": "2pt3",
+    "target_z": -4.3,
     "run_number": 7984,
     "detector": "HPS-PhysicsRun2016-Pass2",
     "steering_files": {
@@ -12,7 +12,7 @@
     "enable_ecal_energy_filter": true,
     "event_interval": 250,
     "output_files": {
-        "tritrig_events_recon.slcio": "tritrig_recon_1.stdhep"
+        "tritrig_events_mom_rot_filt_readout_recon.slcio": "tritrig_recon_1.stdhep"
     },
     "output_dir": "output"
 }
