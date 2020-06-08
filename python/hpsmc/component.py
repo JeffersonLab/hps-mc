@@ -40,16 +40,6 @@ class Component(object):
             self.outputs = kwargs['outputs']
         else:
             self.outputs = None
-        
-        if 'replacements' in kwargs:
-            self.replacements = kwargs['replacements']
-        else:
-            self.replacements = {}
-        
-        if 'excludes' in kwargs:
-            self.excludes = kwargs['excludes']
-        else:
-            self.excludes = []
             
         if 'append_tok' in kwargs:
             self.append_tok = kwargs['append_tok']
@@ -60,20 +50,13 @@ class Component(object):
             self.output_ext = kwargs['output_ext']
         else:
             self.output_ext = None
-            
-        if 'input_filter' in kwargs:
-            self.input_filter = kwargs['input_filter']
-        else:
-            self.input_filter = None
- 
+    
+        # FIXME: This is hacky. 
         if 'ignore_job_params' in kwargs:
             self.ignore_job_params = kwargs['ignore_job_params']
         else:
             self.ignore_job_params = []
-        
-#        logger.debug("Initialized component '%s'" % self.name)
-#        logger.debug(vars(self))
-                                            
+                                                    
     def execute(self, log_out, log_err):
         """
         Generic component execution method. 
@@ -197,28 +180,15 @@ class Component(object):
         for c in self.required_config():
             if not hasattr(self, c):
                 raise Exception("Missing required config '%s' for '%s'" % (c, self.name))
-    
-    def _filtered_inputs(self):
-        """
-        Return a list of filtered input files.
-        """
-        return [inputfile for inputfile in self.inputs
-                if re.search(self.input_filter, inputfile) is not None]
         
     def input_files(self):
-        """
-        Return a list of input files for this component, using an input filter if there is one.
-        """
-        if self.input_filter is not None:
-            return self._filtered_inputs()
-        else:
-            return self.inputs
+        return self.inputs
     
     def output_files(self):
         """
         Return a list of output files created by this component.
         
-        By default, a series of transformations will be performed on intputs to
+        By default, a series of transformations will be performed on inputs to
         transform them into outputs.
         """
         if self.outputs is not None and len(self.outputs):
@@ -235,31 +205,16 @@ class Component(object):
     def _inputs_to_outputs(self):
         """
         This is the default method for automatically transforming input file names
-        to outputs. It applies a series of string transformations based on class attributes
-        for replacement, appending, file extensions, and exclusions. 
-        
-        User components may override the output_files() method to customize this default 
-        behavior.
+        to outputs when output file names are not explicitly provided.
         """        
         outputs = []
         for infile in self.input_files():
             f,ext = os.path.splitext(infile)
-            infile_split = f.split('_')
-            if self.__exclude_input(infile):
-                continue
-            if len(self.replacements):
-                for k,v in self.replacements.iteritems():
-                    if infile_split[-1] == k:
-                        infile_split[-1] = v
-                        if not len(infile_split[-1]):
-                            infile_split = infile_split[:-1]
-                        break
             if self.append_tok is not None:
-                infile_split.append(self.append_tok)
+                f += '_%s' % self.append_tok
             if self.output_ext is not None:
                 ext = self.output_ext
-            outfile = '_'.join(infile_split) + ext
-            outputs.append(outfile)
+            outputs.append('%s.%s' % (f,ext))
         return outputs
     
 class DummyComponent(Component):
