@@ -1,5 +1,7 @@
 from hpsmc.tools import LCIOCount
 
+job.description = 'LCIO count'
+
 output_files = sorted(job.params.output_files.keys())
 if len(output_files) < 1:
     raise Exception("Not enough output files were provided (at least 1 required).")

@@ -9,6 +9,8 @@ https://github.com/JeffersonLab/hps-mc/blob/master/scripts/mc_scripts/slic/beam.
 
 from hpsmc.tools import BeamCoords, RandomSample
 
+job.description = 'Beam sampling'
+
 # Rotate events into beam coordinates
 rot = BeamCoords()
 

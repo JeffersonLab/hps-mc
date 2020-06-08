@@ -5,6 +5,7 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR, LCIOCount, LCIOM
 # Get job input file targets
 inputs = job.input_files.values()
 
+job.description = 'tritrig beam'
 
 if 'event_interval' in job.params:
     event_interval = job.params['event_interval']

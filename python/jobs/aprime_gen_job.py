@@ -5,6 +5,8 @@ Job script to generate A-prime events, convert to StdHep, and apply transformati
 from hpsmc.generators import MG4
 from hpsmc.tools import Unzip, StdHepTool, DisplaceTime, BeamCoords
 
+job.description = 'A-prime generation using MadGraph'
+
 # Generate A-prime events using MadGraph4
 ap = MG4(name="ap", event_types=['unweighted'])
 

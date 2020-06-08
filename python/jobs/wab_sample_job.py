@@ -8,6 +8,8 @@ wab-beam sample file.
 from hpsmc.tools import BeamCoords, MergePoisson
 from hpsmc.generators import StdHepConverter
 
+job.description = 'WAB sampling'
+
 # Convert wab events to stdhep
 cnv = StdHepConverter()
 

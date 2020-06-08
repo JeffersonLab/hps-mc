@@ -1,9 +1,7 @@
-"""
-Python script for generating WAB events in MG4.
-"""
-
 from hpsmc.generators import MG4
 from hpsmc.tools import LHECount
+
+job.description = 'WAB generation using MadGraph4'
 
 # generate tritrig in MG5
 mg = MG4(name="wab")
