@@ -1,5 +1,8 @@
 [Job]
 dry_run = False
+ignore_return_codes = True
+enable_ptags = True
+enable_copy_output_files = False
 
 [MG5]
 madgraph_dir = /work/slac/hps-mc/generators/madgraph5/src
