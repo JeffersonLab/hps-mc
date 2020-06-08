@@ -1,5 +1,7 @@
 from hpsmc.tools import HPSTR 
 
+job.description = 'HPSTR recon and analysis'
+
 # Convert LCIO to ROOT
 cnv = HPSTR(cfg='recon')
 

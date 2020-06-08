@@ -1,9 +1,7 @@
-"""
-Python script for generating 'simp' events in MG5 and running through simulation, readout and reconstruction. 
-"""
-
 from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool, MoveFiles, BeamCoords
+
+job.description = 'SIMP generation to recon'
 
 # Generate tritrig in MG5
 mg = MG5(name='simp',
