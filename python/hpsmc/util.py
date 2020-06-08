@@ -22,7 +22,7 @@ def convert_config_value(val):
         pass
     return val
 
-def config_logging(stream=sys.stdout, level=logging.DEBUG):
+def config_logging(stream=sys.stdout, level=logging.INFO):
     """
     Configure logging by setting an output stream and level (both optional).
     Any handlers already registered will be replaced by calling this method.
