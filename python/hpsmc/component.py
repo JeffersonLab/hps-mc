@@ -196,12 +196,6 @@ class Component(object):
         else:
             return self._inputs_to_outputs()
 
-    def __exclude_input(self, i):
-        for e in self.excludes:
-            if e in i:
-                return True
-        return False
-
     def _inputs_to_outputs(self):
         """
         This is the default method for automatically transforming input file names
@@ -214,7 +208,7 @@ class Component(object):
                 f += '_%s' % self.append_tok
             if self.output_ext is not None:
                 ext = self.output_ext
-            outputs.append('%s.%s' % (f,ext))
+            outputs.append('%s%s' % (f,ext))
         return outputs
     
 class DummyComponent(Component):
