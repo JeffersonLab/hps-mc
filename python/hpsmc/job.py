@@ -292,12 +292,15 @@ class Job(object):
         
         # Copy the output files to the output dir if enabled and not in dry run.
         if not self.dry_run:
+            
             # Copy by actual output file name
             if self.enable_copy_output_files:
+                logger.info('Copying output files ..')
                 self.__copy_output_files()
             
             # Copy by key set in the job script
             if self.enable_ptags:
+                logger.info('Copying ptag output files ...')
                 self.__copy_ptag_output_files()
             
             # Perform job cleanup.
@@ -362,9 +365,9 @@ class Job(object):
             for name, value in parser.items(job_config):
                 if name in Job._config_names:
                     setattr(self, name, convert_config_value(value))
-                    logger.debug("Job:%s:%s=%s" % (name, 
-                                                   getattr(self, name).__class__.__name__, 
-                                                   getattr(self, name)))
+                    logger.info("Job:%s:%s=%s" % (name, 
+                                                  getattr(self, name).__class__.__name__, 
+                                                  getattr(self, name)))
                 else:
                     logger.warning("Unknown config name '%s' in the [Job] section" % name)
         
@@ -509,13 +512,9 @@ class Job(object):
         """
         Map a key to an output file name so a user can reference it in their job params.
         """
-        filename,ext = os.path.splitext(tag)
-        if len(ext):
-            raise Exception('Persistency tags are not allowed to have a file extension.')
-        # TODO: Add more strict checking of tag name (should allow only letters and underscores)
         if not tag in self.ptags.keys():
             self.ptags[tag] = filename
-            logger.info("Added persistency tag: %s -> %s" % (tag, filename))
+            logger.info("Added ptag '%s' to file '%s'" % (tag, filename))
         else:
             raise Exception("The ptag '%s' already exists." % tag)
         
@@ -523,9 +522,11 @@ class Job(object):
         if len(self.ptags):
             for src,dest in self.output_files.iteritems():
                 if src in self.ptags.keys():
-                    ptag_src = self.tags[src]
-                    logger.info("Copying ptag '%s' to '%s'" % ptag_src, dest)
-                    self.__copy_output_file(ptag_src, dest)
+                    src_file = self.ptags[src]
+                    logger.info("Copying ptag '%s' from '%s' to '%s'" % (src, src_file, dest))
+                    self.__copy_output_file(src_file, dest)
+        else:
+            logger.warning('Requested to copy ptag output files but none defined.')
                                         
 cmds = {
     'run': 'Run a job script',
