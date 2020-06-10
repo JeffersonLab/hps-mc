@@ -24,7 +24,6 @@ class JobStore:
         parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 0 for no padding)", default=0)
         parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
         parser.add_argument("-i", "--input-file-list", action='append', nargs=2, help="Input file lists and number of reads per job")
-#        parser.add_argument("-o", "--output-file", help="Output file written by the job script")
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
         parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
         parser.add_argument("json_template_file", help="Job template in JSON format")
@@ -138,7 +137,7 @@ class JobStore:
         self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
-        print("Loaded %d jobs from job store '%s'" % (len(self.data), json_store))
+        logger.debug("Loaded %d jobs from job store '%s'" % (len(self.data), json_store))
         
     def get_job(self, job_id):
         """Get a job by its job ID."""
