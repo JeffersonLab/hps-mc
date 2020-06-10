@@ -62,15 +62,13 @@ class Batch:
         
         if cl.log_dir:
             self.log_dir = cl.log_dir[0]
-        #else:
-        #    self.log_dir = None
-        else:
+        else:            
             self.log_dir = os.getcwd()        
-        #try:
-        #    os.stat(self.log_dir)
-        #except:
-        #    os.makedirs(self.log_dir)
-            
+        if not os.path.exists(self.log_dir):
+            logger.info("Creating log dir '%s" % self.log_dir)
+            os.makedirs(self.log_dir)
+        # TODO: Need option to write logs to run dir and copy back (Auger)
+                   
         self.check_output = cl.check_output
                     
         if cl.jobids:                    
@@ -184,14 +182,10 @@ class Batch:
         """
         job_dir = os.path.join(self.run_dir, str(job_id))
         cmd = ['python', run_script, 'run']
-        if self.log_dir is not None:
-            # User specified log dir
-            log_dir = self.log_dir
-        else:
-            # Log files go into the job dir
-            log_dir = job_dir
-        cmd.extend(['-o', os.path.join(log_dir, 'job.%d.out' % job_id),
-                    '-e', os.path.join(log_dir, 'job.%d.err' % job_id)])
+        cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
+                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
+                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
+                    ])
         cmd.extend(['-d', job_dir])
         if self.config_file:
             cmd.extend(['-c', self.config_file])
@@ -200,7 +194,7 @@ class Batch:
         cmd.extend(['-i', str(job_id)])
         cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
-        logger.info("Job command: %s" % " ".join(cmd))
+#        logger.info("Job command: %s" % " ".join(cmd))
         return cmd  
             
 class LSF(Batch):
@@ -400,7 +394,7 @@ class Pool(Batch):
     """
     Run a set of jobs in a local pool using Python's multiprocessing module.    
     """
-                        
+                            
     def submit(self):
                 
         cmds = []
@@ -408,8 +402,8 @@ class Pool(Batch):
             job_data = self.jobstore.get_job(job_id)
             cmd = self.build_cmd(job_id, job_data)            
             cmds.append(cmd)
-        # Uncomment to print all job commands here
-        #logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
+        logger.debug('Running job commands in pool ...')
+        logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
      
         if not len(cmds):
             raise Exception('No job IDs found to submit')
@@ -418,6 +412,7 @@ class Pool(Batch):
         pool = multiprocessing.Pool(self.pool_size)
         signal.signal(signal.SIGINT, original_sigint_handler)      
         try:
+            logger.info("Running %d jobs in pool ..." % len(cmds))
             res = pool.map_async(run_job_pool, cmds)
             # timeout must be properly set, otherwise tasks will crash
             logger.info("Pool results: " + str(res.get(sys.maxint)))
