@@ -350,9 +350,12 @@ class BeamCoords(StdHepTool):
         
         self.beam_sigma_x = None
         self.beam_sigma_y = None
+        self.target_x = None
+        self.target_y = None
         self.target_z = None
-        self.beam_rotation = None
-        self.beam_skew = None
+        self.beam_rot_x = None
+        self.beam_rot_y = None
+        self.beam_rot_z = None
    
         StdHepTool.__init__(self, 
                             'beam_coords',
@@ -360,21 +363,34 @@ class BeamCoords(StdHepTool):
                             **kwargs)
 
     def cmd_args(self):
+                
         args = StdHepTool.cmd_args(self)
+        
         if self.beam_sigma_x is not None:
             args.extend(['-x', str(self.beam_sigma_x)])
         if self.beam_sigma_y is not None:
             args.extend(['-y', str(self.beam_sigma_y)])
-        if self.beam_skew is not None:
-            args.extend(['-q', str(self.beam_skew)])
-        if self.beam_rotation is not None:
-            args.extend(['-r', str(self.beam_rotation)])
+        
+        if self.beam_rot_x is not None:
+            args.extend(['-u', str(self.beam_rot_x)])        
+        if self.beam_rot_y is not None:
+            args.extend(['-v', str(self.beam_rot_y)])        
+        if self.beam_rot_z is not None:
+            args.extend(['-w', str(self.beam_rot_z)])
+        
+        if self.target_x is not None:
+            args.extend(['-X', str(self.target_x)])
         if self.target_z is not None:
-            args.extend(['-z', str(self.target_z)])
+            args.extend(['-Y', str(self.target_y)]) 
+        if self.target_z is not None:
+            args.extend(['-Z', str(self.target_z)])    
+        
         return args
     
     def optional_parameters(self):
-        return['beam_sigma_x', 'beam_sigma_y', 'target_z', 'beam_rotation', 'beam_skew']
+        return['beam_sigma_x', 'beam_sigma_y', 'beam_rot_x',
+               'beam_rot_y', 'beam_rot_z',
+               'target_x', 'target_y', 'target_z']
         
 class RandomSample(StdHepTool):
     

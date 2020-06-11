@@ -2,13 +2,17 @@
     "nevents": 1000,
     "beam_sigma_x": 0.300,
     "beam_sigma_y": 0.030,
-    "target_z": 0.0,
-    "beam_rot_y": 0.0305,
+    "beam_rot_x": -0.00033,
+    "beam_rot_y": 0.03017,
+    "beam_rot_z": 0.2618,
+    "target_x": -0.224,
+    "target_y": -0.08,
+    "target_z": -4.3,
     "input_files": {
         "/work/slac/data/stdhep/egsv5_1.stdhep": "beam.stdhep"
     },
     "output_files": {
-        "beam_sampled.stdhep": "beam_sampled_1.stdhep"
+        "beam_rot.stdhep": "beam_rot_1.stdhep"
     },
     "output_dir": "output"
 }
