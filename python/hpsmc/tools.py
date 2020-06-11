@@ -452,7 +452,7 @@ class AddMother(StdHepTool):
 class AddMotherFullTruth(StdHepTool):
 
     def __init__(self, **kwargs):
-	if len(self.inputs) ! = 2: 
+	if len(self.inputs) != 2: 
 		raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
 	input_file_1 = self.inputs[0]
 	base,ext = os.path.splitext(input_file_1)
