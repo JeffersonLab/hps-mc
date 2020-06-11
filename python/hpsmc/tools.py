@@ -8,6 +8,9 @@ import hpsmc.func as func
 logger = logging.getLogger("hpsmc.tools")
 
 class SLIC(Component):
+    """
+    Run the SLIC Geant4 simulation.    
+    """
 
     def __init__(self, **kwargs):
         
@@ -224,7 +227,7 @@ class JobManager(Component):
 
 class HPSTR(Component):
     """
-    Component for the hpstr analysis tool.
+    Run the hpstr analysis tool.
     """
 
     def __init__(self, cfg, run_mode=0, year=None, **kwargs):
@@ -304,6 +307,9 @@ class HPSTR(Component):
         return proc.returncode
         
 class StdHepTool(Component):
+    """
+    Generic class for StdHep tools.
+    """
 
     # List of commands which accept a 'seed' argument.
     seed_names = ['beam_coords',
@@ -393,6 +399,9 @@ class BeamCoords(StdHepTool):
                'target_x', 'target_y', 'target_z']
         
 class RandomSample(StdHepTool):
+    """
+    Sample StdHep events into a new file.
+    """    
     
     def __init__(self, **kwargs):
         StdHepTool.__init__(self, 
@@ -458,6 +467,9 @@ class DisplaceTime(StdHepTool):
         return ['ctau']   
         
 class AddMother(StdHepTool):
+    """
+    Add mother particles for physics samples.
+    """    
     
     def __init__(self, **kwargs):
         StdHepTool.__init__(self, 
@@ -466,7 +478,10 @@ class AddMother(StdHepTool):
                             **kwargs)
         
 class MergePoisson(StdHepTool):
-        
+    """
+    Merge StdHep files, applying poisson sampling.
+    """    
+            
     def __init__(self, **kwargs):
         if 'lhe_file' in kwargs:
             self.lhe_file = kwargs['lhe_file']
@@ -518,6 +533,9 @@ class MergePoisson(StdHepTool):
         return r
         
 class MergeFiles(StdHepTool):
+    """
+    Merge StdHep files.
+    """    
     
     def __init__(self, **kwargs):
         StdHepTool.__init__(self, 'merge_files', **kwargs)
@@ -529,6 +547,9 @@ class MergeFiles(StdHepTool):
         return []
     
 class StdHepCount(Component):
+    """
+    Count number of events in a StdHep file.
+    """    
     
     def __init__(self, **kwargs):
         Component.__init__(self, 'stdhep_count', 'stdhep_count.sh', **kwargs)
@@ -549,7 +570,10 @@ class StdHepCount(Component):
         return proc.returncode            
                                     
 class JavaTool(Component):
-    
+    """
+    Generic base class for Java based tools.
+    """
+        
     def __init__(self, name, java_class, **kwargs):
         self.java_class = java_class
         self.java_args = None
@@ -696,6 +720,9 @@ class Unzip(Component):
         return 0
                         
 class LCIODumpEvent(Component):
+    """
+    Dump LCIO event information.
+    """
 
     def __init__(self, **kwargs):
         self.name = "LCIO dump event"
@@ -720,6 +747,9 @@ class LCIODumpEvent(Component):
         return args
 
 class LHECount(Component):
+    """
+    Count events in an LHE file.
+    """   
     
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.minevents = minevents
@@ -753,6 +783,9 @@ class LHECount(Component):
         return 0
                 
 class TarFiles(Component):
+    """
+    Tar files into an archive.
+    """    
     
     def __init__(self, **kwargs):
         Component.__init__(self, 'tar_files', **kwargs)
@@ -771,6 +804,9 @@ class TarFiles(Component):
         return 0
 
 class MoveFiles(Component):
+    """
+    Move input files to new locations.
+    """
 
     def __init__(self, **kwargs):
         Component.__init__(self, 'move_files', **kwargs)
@@ -790,7 +826,9 @@ class MoveFiles(Component):
         return 0          
 
 class LCIOTool(Component):
-# TODO: This should extend JavaTool.
+    """
+    Generic component for LCIO tools.
+    """
 
     def __init__(self, name, **kwargs):
         Component.__init__(self, name, command='java', **kwargs)
@@ -805,7 +843,10 @@ class LCIOTool(Component):
         return ['lcio_bin_jar']
     
 class LCIOConcat(LCIOTool):
-    
+    """
+    Concatenate LCIO files together.
+    """
+        
     def __init__(self, **kwargs):
         LCIOTool.__init__(self, 'concat', **kwargs)
         
@@ -821,7 +862,10 @@ class LCIOConcat(LCIOTool):
         return args
 
 class LCIOCount(LCIOTool):
-
+    """
+    Count events in LCIO files.
+    """
+    
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.minevents = minevents
         LCIOTool.__init__(self, 'count', **kwargs)
@@ -861,6 +905,9 @@ class LCIOCount(LCIOTool):
         return []
 
 class LCIOMerge(LCIOTool):
+    """
+    Merge LCIO files.
+    """
 
     def __init__(self, **kwargs):
         LCIOTool.__init__(self, 'merge', **kwargs)
