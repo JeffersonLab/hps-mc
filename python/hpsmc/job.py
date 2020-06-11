@@ -137,7 +137,7 @@ class Job(object):
         if cl.log_out:
             self.log_file = os.path.join(self.rundir, cl.log_out[0])
             print("Logging output will be written to '%s'" % self.log_file)            
-            config_logging(stream=open(self.log_file, 'w+'))
+            config_logging(stream=open(self.log_file, 'w'))
             
         if cl.level:
             level = logging.getLevelName(cl.level[0])
@@ -225,9 +225,9 @@ class Job(object):
         os.chdir(self.rundir)
 
         if self.out_file:
-            self.log_out = open(self.out_file, 'w+')
+            self.log_out = open(self.out_file, 'w')
         if self.err_file:
-            self.log_err = open(self.err_file, 'w+')
+            self.log_err = open(self.err_file, 'w')
         
         if 'input_files' in self.params:
             self.input_files = self.params['input_files']
