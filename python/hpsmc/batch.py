@@ -119,7 +119,7 @@ class Batch:
                 
         return cl
         
-    def submit_cmd(job_id, job_data):
+    def submit_cmd(self, job_id, job_data):
         """
         Submit a single batch job and return the batch ID.
         Must be implemented by derived classes for a specific batch system.
@@ -131,7 +131,7 @@ class Batch:
         """Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].iteritems():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                print "Job output '%s' does not exist." % (dest)
+                logger.warning("Job output '%s' does not exist." % (dest))
                 return False
         return True
     
@@ -228,37 +228,64 @@ class LSF(Batch):
         return batch_id
 
 class Auger(Batch):
-    """Manage Auger batch jobs."""
+    """Submit Auger batch jobs."""
 
     def __init__(self):
-        # TODO: Get this from config info
-        # FIXME: Can this use the bash script instead?
+        # TODO: Use path derived from config here instead
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
 
-    def build_cmd(self, job_id, job_params):
-        job_dir = os.path.join(self.run_dir, str(job_id))
-        cmd = ['python', run_script, 'run']
-        #cmd.extend(['-d', '/scratch/%d' % job_id])
-        if self.config_file:
-            cmd.extend(['-c', self.config_file])
-        if self.job_steps > 0:
-            cmd.extend(['--job-steps', str(self.job_steps)])
-        cmd.extend(['-i', str(job_id)])
-        cmd.append(self.script)
-        cmd.append(os.path.abspath(self.jobstore.path))
-        logger.info("Job command: %s" % " ".join(cmd))
-        return cmd  
-   
-    def build_job_files(self, name, job_params):
-        
-#        param_file = os.path.join(self.workdir, name + ".json")
-        jobname = '%s_%d' % (self.script_name, name)
+    def submit(self):
+        job_ids = self.get_filtered_job_ids()
+        logger.info('Submitting jobs: %s' % str(job_ids))
+        req = self._create_req(self.script_name)
+        for job_id in job_ids:
+            if not self.jobstore.has_job_id(job_id):
+                raise Exception('Job ID %s was not found in job store' % job_id)
+            job_params = self.jobstore.get_job(job_id)
+            self._add_job(req, job_params)     # add job to XML req
+            self._write_param_file(job_params) # write job's JSON param file
+        xml_filename = self._write_req(req)    # write request to XML file
+        auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
+        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
 
+    def _jsub(self, xml_filename):
+        cmd = ['jsub', '-xml', xml_filename]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        out, err = proc.communicate()
+        auger_ids = self._get_auger_ids(out)
+        return auger_ids 
+
+    def _get_auger_ids(self, out):
+        auger_ids = []
+        for line in out.splitlines():
+            if line.strip().startswith('<jsub>'):
+                j = ET.fromstring(line)
+                for req in j.getchildren():
+                    for child in req.getchildren():
+                        if child.tag == 'jobIndex':
+                            auger_id = int(child.text)
+                            auger_ids.append(auger_id)
+                break
+        return auger_ids
+
+    def _write_param_file(self, job_params):
+        param_file = 'job_%d.json' % job_params['job_id']
+        with open(param_file, 'w') as jobfile:
+             json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        #logger.info("Wrote job param file '%s'" % (param_file))
+
+    def _write_req(self, req, filename='temp.xml'):
+        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
+        with open(filename, 'w') as f:
+            f.write(pretty)
+            return f.name
+
+    def _create_req(self, req_name):
         req = ET.Element("Request")
-        req_name = ET.SubElement(req, "Name")
-        req_name.set("name", jobname)
+        name_elem = ET.SubElement(req, "Name")
+        name_elem.set("name", req_name)
         prj = ET.SubElement(req, "Project")
         prj.set("name", "hps")
         trk = ET.SubElement(req, "Track")
@@ -281,9 +308,26 @@ class Auger(Batch):
             limit.set("time", "24")
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os_elem.set("name", "centos7")
+        os_elem.set("name", "centos7")     
+        return req
 
+    def build_cmd(self, job_id, job_params):
+        job_dir = os.path.join(self.run_dir, str(job_id))
+        cmd = ['python', run_script, 'run']
+        #cmd.extend(['-d', '/scratch/%d' % job_id])
+        if self.config_file:
+            cmd.extend(['-c', self.config_file])
+        if self.job_steps > 0:
+            cmd.extend(['--job-steps', str(self.job_steps)])
+        cmd.extend(['-i', str(job_id)])
+        cmd.append(self.script)
+        cmd.append(os.path.abspath(self.jobstore.path))
+        logger.debug("Job command: %s" % " ".join(cmd))
+        return cmd  
+  
+    def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
+        job_id = job_params['job_id']
         inputfiles = job_params["input_files"]
         for src,dest in inputfiles.iteritems():
             input_elem = ET.SubElement(job, "Input")
@@ -304,8 +348,8 @@ class Auger(Batch):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
         job_err = ET.SubElement(job, "Stderr")
-        stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % name))
-        stderr_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.err" % name))
+        stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
+        stderr_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.err" % job_id))
         job_err.set("dest", stderr_file)
         job_out = ET.SubElement(job, "Stdout")
         job_out.set("dest", stdout_file)
@@ -318,49 +362,18 @@ class Auger(Batch):
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
         cmd_lines.append('\n')
 
-        job_cmd = self.build_cmd(name, job_params)
+        job_cmd = self.build_cmd(job_id, job_params)
         
         if self.job_steps > 0:
             job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
         cmd_lines.extend(job_cmd)
        
-        # DEBUG
         cmd_lines.append('\n')
         cmd_lines.append('ls -lah .')
 
         cmd_lines.append("]]>")
         #print(cmd_lines)
         cmd.text = ' '.join(cmd_lines)
-
-        param_file = 'job_%d.json' % name
-        with open(param_file, 'w') as jobfile:
-             json.dump(job_params, jobfile, indent=2, sort_keys=True)
-        print "Wrote job param file '%s'" % (param_file)
-
-        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
-        xml_file = 'temp.xml'
-        with open(xml_file, 'w') as f:
-            f.write(pretty)
-        #print "Wrote Auger XML '%s'" % xml_file
-
-        return param_file, xml_file
-
-    def submit_cmd(self, name, job_params):
-        param_file,xml_file = self.build_job_files(name, job_params)
-        cmd = ['jsub', '-xml', xml_file]
-        print(' '.join(cmd))
-        #if not self.dryrun:
-        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-        out, err = proc.communicate()
-        print(out)
-        jobid = None
-        if "<jobIndex>" in out:
-            jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
-        return jobid
-        #else:
-        #    print "Job %s was not submitted." % name
-        #    return None
-        #print        
 
 class Local(Batch):
     """Run a local batch job on the current system."""
@@ -378,14 +391,14 @@ class Local(Batch):
             proc.communicate()
 #            log_out.close()
             if proc.returncode:
-               logger.warn("Local execution of '%s' returned error code %d" % (name, proc.returncode))
+                logger.error("Local execution of '%s' returned error code %d" % (name, proc.returncode))
 
 def run_job_pool(cmd):
     try:
         sys.stdout.flush()            
         returncode = subprocess.call(cmd)
     except subprocess.CalledProcessError as e:
-        print(str(e))
+        logger.error(str(e))
         sys.stdout.flush()
         pass
     return returncode
