@@ -1,3 +1,5 @@
+"""Miscellaneous utility functions."""
+
 import json, sys, logging
 
 def load_json_data(filename):
@@ -31,6 +33,7 @@ def config_logging(stream=sys.stdout, level=logging.INFO):
     global_logger.handlers = [] # Reset handlers in case this is called more than once
     global_logger.setLevel(level)
     handler = logging.StreamHandler(stream)
+    handler.setLevel(logging.DEBUG)
     handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
     global_logger.addHandler(handler)
     

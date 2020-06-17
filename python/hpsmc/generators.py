@@ -1,3 +1,5 @@
+"""Event generation tools."""
+
 import os, subprocess, shutil, random, glob, gzip, logging
 
 from component import Component
@@ -15,8 +17,9 @@ class EventGenerator(Component):
         return ['nevents']
                 
 class EGS5(EventGenerator):
+    """Run the EGS5 event generator to produce a StdHep file."""
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, name='', **kwargs):
         self.bunches = 5e5
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
                 
@@ -70,6 +73,7 @@ class EGS5(EventGenerator):
         return ['egs5_dir']
 
 class StdHepConverter(EGS5):
+    """Convert LHE files to StdHep using EGS5."""
 
     def __init__(self, **kwargs):
         EGS5.__init__(self, "lhe_v1", **kwargs)
@@ -95,7 +99,7 @@ class StdHepConverter(EGS5):
             f.close()
             infile.close()
         else:
-            raise Exception("Input file '%s' has an unknown extension." % input_file)
+            raise Exception('Input file has an unknown extension: %s' % input_file)
         return EGS5.execute(self, log_out, log_err)
     
     def output_files(self):
@@ -203,6 +207,7 @@ class MG(EventGenerator):
             raise Exception("Missing apmass param for AP generation.")
             
 class MG4(MG):
+    """Run the MadGraph 4 event generator."""
 
     # TODO: Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH/MG_mini_BH/apBH",
@@ -213,7 +218,7 @@ class MG4(MG):
                "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
                "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
         
-    def __init__(self, name, **kwargs):
+    def __init__(self, name='ap', **kwargs):
         
         MG.__init__(self, name, **kwargs)
         
@@ -262,6 +267,7 @@ class MG4(MG):
         return returncode
                                       
 class MG5(MG):
+    """Run the MadGraph 5 event generator."""
     
     # TODO: Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH",
@@ -269,9 +275,9 @@ class MG5(MG):
                "tritrig" : "tritrig",
                "simp"    : "simp"}
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, name=None, **kwargs):
                 
-        MG.__init__(self, name, **kwargs)
+        MG.__init__(self, name='tritrig', **kwargs)
         
         if self.name not in MG5.dir_map:
             raise Exception("The name '%s' is not valid for MG5." % self.name)

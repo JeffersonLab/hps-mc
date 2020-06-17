@@ -1,3 +1,5 @@
+"""Simple utility for converting a short name into the path to an HPSMC job script."""
+
 import glob, os, sys
 
 class JobScriptDatabase:
