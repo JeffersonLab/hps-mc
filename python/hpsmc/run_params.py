@@ -1,3 +1,5 @@
+"""Data with physics run parameters by beam energy."""
+
 import os, sys, json
 
 run_params = {

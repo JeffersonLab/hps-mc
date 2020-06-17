@@ -1,3 +1,5 @@
+"""Miscellaneous math functions."""
+
 import gzip, logging
 from hpsmc.run_params import RunParameters
 

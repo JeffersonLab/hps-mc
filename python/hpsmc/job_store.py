@@ -1,3 +1,5 @@
+"""Defines a class for creating JSON files with multiple jobs in them."""
+
 import argparse, os, json, glob, collections, logging, itertools
 from string import Template
 import hpsmc.util as util
@@ -32,7 +34,7 @@ class JobStore:
         
         self.json_template_file = cl.json_template_file
         if not os.path.isfile(self.json_template_file):
-            raise Exception("The JSON template file '%s' does not exist.")
+            raise Exception('The JSON template file does not exist: %s' % self.json_template_file)
         
         self.job_store = cl.job_store
                         
@@ -48,9 +50,9 @@ class JobStore:
                 
         if cl.var_file:
             var_file = cl.var_file
-            print("Iteration variables will be read from '%s'" % var_file)
+            print("Iteration variables will be read from file: %s" % var_file)
             if not os.path.exists(var_file):
-                raise Exception("The var file '%s' does not exist." % var_file)
+                raise Exception('The var file does not exist: %s' % var_file)
             with open(var_file, 'r') as f:
                 self.itervars = json.load(f)
         else:
@@ -58,7 +60,7 @@ class JobStore:
 
         self.repeat = cl.repeat
         if self.repeat < 1:
-            raise Exception('Bad value %d for repeat argument.' % self.repeat)
+            raise Exception('Bad value for repeat argument: %d' % self.repeat)
  
     def get_iter_vars(self):
         """
@@ -126,7 +128,7 @@ class JobStore:
         with open(self.job_store, 'w') as f:
             json.dump(jobs, f, indent=4)
                 
-        print("Wrote %d jobs to '%s'" % (len(self.data), self.job_store))
+        print('Wrote %d jobs to file: %s' % (len(self.data), self.job_store))
         
         # TODO: Load the store here
             
@@ -137,7 +139,7 @@ class JobStore:
         self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
-        logger.debug("Loaded %d jobs from job store '%s'" % (len(self.data), json_store))
+        logger.debug("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
         
     def get_job(self, job_id):
         """Get a job by its job ID."""
@@ -167,7 +169,7 @@ class FileListReader:
         for flist,nread in self.flists:
             list_name = os.path.splitext(os.path.basename(flist))[0]
             if self.fhandles.has_key(list_name):
-                raise Exception("Duplicate file list name: %s" % list_name)
+                raise Exception('Duplicate file list name: %s' % list_name)
             f = open(flist, 'r')
             self.fhandles[list_name] = [f, nread]
                 
@@ -177,7 +179,7 @@ class FileListReader:
             for i in range(f[1]):
                 line = f[0].readline().strip()
                 if line is None or len(line) == 0:
-                    raise Exception("Ran out of input files from '%s'" % name)
+                    raise Exception('Ran out of input files from: %s' % name)
                 file_vars['_'.join([name, str(i + 1)])] = line
         return file_vars
     

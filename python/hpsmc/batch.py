@@ -1,3 +1,6 @@
+"""Provides a set of scripts for submitting batch jobs including support for
+local running, a multiprocessing pool, LSF, and Auger."""
+
 import argparse, json, os, subprocess, getpass, sys, time, logging, signal, multiprocessing
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -17,57 +20,53 @@ class Batch:
     def parse_args(self, args):
         """Parse command line arguments and perform setup."""
         
-        parser = argparse.ArgumentParser("Batch system command line interface",
+        parser = argparse.ArgumentParser("batch.py",
                                          epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
-        parser.add_argument("-e", "--email", nargs='?', help="Your email address", required=False)
-        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False) 
-        parser.add_argument("-l", "--log-dir", nargs=1, help="Log file output dir", required=False)
-        parser.add_argument("-o", "--check-output", action='store_true', required=False)
+        parser.add_argument("-c", "--config-file", nargs='?', help="Config file", action='append')
+        parser.add_argument("-l", "--log-dir", nargs='?', help="Log file output dir", required=False, default=os.getcwd())
+        parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (ignored for Auger and LSF)")
+        parser.add_argument("-q", "--queue", nargs='?', help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)", required=False)
+        parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
+        parser.add_argument("-p", "--pool-size", type=int, help="Job pool size (only applicable when running pool)", required=False, default=multiprocessing.cpu_count())
+        parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=2000)
+        parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
+        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)   
+        parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
-        parser.add_argument("-r", "--job-range", help="Submit jobs numbers within range (e.g. '1:100')", required=False)
-        parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
-        parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
-        parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
-        parser.add_argument("-c", "--config-file", nargs=1, help="Config file", required=False)
-        parser.add_argument("-d", "--run-dir", nargs=1, help="Base run dir for the jobs")
-        parser.add_argument("script", nargs=1, help="Name of job script")
-        parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
+        parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
+        parser.add_argument("script", nargs='?', help="Name of job script (required)")
+        parser.add_argument("jobstore", nargs='?', help="Job store in JSON format (required)")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
-        # TODO: add a workdir argument for storing JSON and other batch files 
-        cl = parser.parse_args(args)
-
-        if not cl.jobstore: 
-            raise Exception('The job store is a required argument.')
-        if not os.path.isfile(cl.jobstore[0]):
-            raise Exception("The job store '%s' does not exist." % cl.jobstore[0])
-        self.jobstore = JobStore(cl.jobstore[0])
-
-        if cl.script:
-            self.script_name = cl.script[0]
-            script_db = JobScriptDatabase()
-            if not script_db.exists(self.script_name):
-                raise Exception("The script name '%s' is not valid." % self.script_name)
-            self.script = script_db.get_script_path(self.script_name)
-            if not os.path.isfile(self.script):
-                raise Exception("The job script '%s' does not exist." % self.script)       
-        else:
-            raise Exception('The job script is a required argument.')
-         
-        if cl.email:
-            self.email = cl.email
-        else:
-            self.email = None
             
+        cl = parser.parse_args(args)
+ 
+        if cl.script is None:
+            raise Exception('The script is a required argument.')                
+        self.script_name = cl.script # Name of script    
+        script_db = JobScriptDatabase()
+        if not script_db.exists(self.script_name):
+            raise Exception('The script name is not valid: %s' % self.script_name)
+        self.script = script_db.get_script_path(self.script_name) # Path to script
+        if not os.path.isfile(self.script):
+            raise Exception('The job script does not exist: %s' % self.script)       
+
+        if cl.jobstore is None:
+            raise Exception('The job store file is a required argument.')
+        if not os.path.isfile(cl.jobstore):
+            raise Exception('The job store does not exist: %s' % cl.jobstore)
+        self.jobstore = JobStore(cl.jobstore)
+         
+        self.email = cl.email
+             
         self.debug = cl.debug
         
-        if cl.log_dir:
-            self.log_dir = cl.log_dir[0]
-        else:            
-            self.log_dir = os.getcwd()        
+        self.log_dir = cl.log_dir
+        if not os.path.isabs(self.log_dir):
+            raise Exception('The log dir is not an abs path: %s' % self.log_dir)
+        # FIXME: This probably shouldn't happen here.
         if not os.path.exists(self.log_dir):
-            logger.info("Creating log dir '%s" % self.log_dir)
+            logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
-        # TODO: Need option to write logs to run dir and copy back (Auger)
                    
         self.check_output = cl.check_output
                     
@@ -81,7 +80,7 @@ class Batch:
         if cl.job_range:
             toks = cl.job_range.split(':')
             if len(toks) != 2:
-                raise ValueError("Bad format for job range: " + cl.job_range)
+                raise ValueError('Bad format for job range: ' + cl.job_range)
             self.start_job_num = int(toks[0])
             self.end_job_num = int(toks[1])
             if self.start_job_num > self.end_job_num:
@@ -92,30 +91,19 @@ class Batch:
             self.start_job_num = None
             self.end_job_num = None
                     
-        if cl.queue:
-            self.queue = cl.queue[0]
-        else:
-            self.queue = "long"
+        self.queue = cl.queue
 
-        if cl.job_length:
-            self.job_length = int(cl.job_length[0])
-        else:
-            self.job_length = 48
-            
-        if cl.pool_size:
-            self.pool_size = int(cl.pool_size[0])
-        else:
-            self.pool_size = 8 
-            
-        if cl.config_file:
-            self.config_file = os.path.abspath(cl.config_file[0])
-        else:
-            self.config_file = None
+        self.job_length = cl.job_length         
+        self.memory = cl.memory
+                    
+        self.pool_size = int(cl.pool_size)
         
-        if cl.run_dir:
-            self.run_dir = cl.run_dir[0]
+        if cl.config_file:
+            self.config_files = map(os.path.abspath, cl.config_file)
         else:
-            self.run_dir = os.getcwd()
+            self.config_files = []
+                 
+        self.run_dir = cl.run_dir
                 
         return cl
         
@@ -131,7 +119,7 @@ class Batch:
         """Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].iteritems():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                logger.warning("Job output '%s' does not exist." % (dest))
+                logger.warning('Job output does not exist: %s' % (dest))
                 return False
         return True
     
@@ -140,7 +128,7 @@ class Batch:
         Get a list of job IDs to submit based on parsed command line options.
         """        
         submit_ids = self.jobstore.get_job_ids()
-        if self.start_job_num:            
+        if self.start_job_num:
             submit_ids = [id for id in submit_ids 
                           if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
         elif len(self.job_ids):
@@ -159,7 +147,7 @@ class Batch:
         """Submit a single job to the batch system."""
         batch_id = None
         if self.check_output and Batch._outputs_exist(job):
-            logger.warning("Skipping submission for job %s because outputs already exist!" % job_id)
+            logger.warning('Skipping submission for job because outputs already exist: %s' % job_id)
         else:
             batch_id = self.submit_cmd(job_id, job)
             logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
@@ -169,7 +157,7 @@ class Batch:
         """Submit the jobs with the specified job IDs to the batch system."""
         for job_id in job_ids:
             if not self.jobstore.has_job_id(job_id):
-                raise Exception('Job ID %s was not found in job store' % job_id)
+                raise Exception('Job ID was not found in job store: %s' % job_id)
             job_data = self.jobstore.get_job(job_id)
             self._submit_job(job_id, job_data)
                     
@@ -187,14 +175,15 @@ class Batch:
                     '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
                     ])
         cmd.extend(['-d', job_dir])
-        if self.config_file:
-            cmd.extend(['-c', self.config_file])
+        if len(self.config_files):
+            for cfg in self.config_files:
+                cmd.extend(['-c', cfg])
         if self.job_steps > 0:
             cmd.extend(['--job-steps', str(self.job_steps)])
         cmd.extend(['-i', str(job_id)])
         cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
-#        logger.info("Job command: %s" % " ".join(cmd))
+        logger.debug("Job command: %s" % " ".join(cmd))
         return cmd  
             
 class LSF(Batch):
@@ -210,8 +199,11 @@ class LSF(Batch):
 
     def build_cmd(self, name, job_params):
         log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o", log_file, "-e", log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params))        
+        queue = 'long'
+        if self.queue is not None:
+            queue = self.queue
+        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", queue, "-o", log_file, "-e", log_file]
+        cmd.extend(Batch.build_cmd(self, name, job_params)) 
         return cmd
 
     def submit_cmd(self, name, job_params): 
@@ -243,9 +235,13 @@ class Auger(Batch):
         req = self._create_req(self.script_name) # create request XML header
         for job_id in job_ids:
             if not self.jobstore.has_job_id(job_id):
-                raise Exception('Job ID %s was not found in job store' % job_id)
+                raise Exception('Job ID was not found in job store: %s' % job_id)
             job_params = self.jobstore.get_job(job_id)
-            self._add_job(req, job_params)     # add job to request
+            if self.check_output and Batch._outputs_exist(job_params):
+                logger.warning("Skipping Auger submission for job " 
+                               "because outputs already exist: %d" % job_id)
+            else:
+                self._add_job(req, job_params) # add job to request
         xml_filename = self._write_req(req)    # write request to file
         auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
         logger.info("Submitted Auger jobs: %s" % str(auger_ids))
@@ -284,33 +280,36 @@ class Auger(Batch):
         prj.set("name", "hps")
         trk = ET.SubElement(req, "Track")
         if self.debug:
+            # Queue arg is not used when debug flag is active.
             trk.set("name", "debug")
         else:
-            trk.set("name", "simulation")
+            # Queue name is used to set job track.
+            queue = 'simulation'
+            if self.queue is not None:
+                queue = self.queue
+            trk.set("name", queue)
         if self.email:
             email = ET.SubElement(req, "Email")
             email.set("email", self.email)
             email.set("request", "true")
             email.set("job", "true")
         mem = ET.SubElement(req, "Memory")
-        mem.set("space", "2000")
+        mem.set("space", self.memory)
         mem.set("unit", "MB")
-        limit = ET.SubElement(req, "TimeLimit")
-        if self.debug:
-            limit.set("time", "4")
-        else:
-            limit.set("time", "24")
+        limit = ET.SubElement(req, "TimeLimit")        
+        limit.set("time", self.job_length)
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os_elem.set("name", "centos7")     
+        os_elem.set("name", "centos7")
         return req
 
     def build_cmd(self, job_id, job_params):
         job_dir = os.path.join(self.run_dir, str(job_id))
         cmd = ['python', run_script, 'run']
         #cmd.extend(['-d', '/scratch/%d' % job_id])
-        if self.config_file:
-            cmd.extend(['-c', self.config_file])
+        if len(self.config_files):
+            for cfg in self.config_files:
+                cmd.extend(['-c', cfg])
         if self.job_steps > 0:
             cmd.extend(['--job-steps', str(self.job_steps)])
         cmd.extend(['-i', str(job_id)])
@@ -385,7 +384,7 @@ class Local(Batch):
             proc.communicate()
 #            log_out.close()
             if proc.returncode:
-                logger.error("Local execution of '%s' returned error code %d" % (name, proc.returncode))
+                logger.error("Local execution of '%s' returned error code: %d" % (name, proc.returncode))
 
 def run_job_pool(cmd):
     try:

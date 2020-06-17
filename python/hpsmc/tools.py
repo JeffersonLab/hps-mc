@@ -1,8 +1,10 @@
+"""Tools that can be used in HPSMC jobs."""
+
 import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
 from subprocess import PIPE
 
 from component import Component
-from .run_params import RunParameters
+from run_params import RunParameters
 import hpsmc.func as func
 
 logger = logging.getLogger("hpsmc.tools")
@@ -21,8 +23,8 @@ class SLIC(Component):
         self.run_number = None
         
         Component.__init__(self, 
-                           'slic',
-                           'slic',
+                           name='slic',
+                           command='slic',
                            output_ext='.slcio',
                            **kwargs)
                                
@@ -54,7 +56,7 @@ class SLIC(Component):
         if os.path.exists(tbl):
             args.extend(["-P", tbl])
         else:
-            raise Exception("SLIC particle.tbl does not exist at '%s'. (Did you install SLIC properly?)" % tbl)
+            raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
 
         return args
 
@@ -67,17 +69,17 @@ class SLIC(Component):
     def setup(self):
         
         if not os.path.exists(self.slic_dir):
-            raise Exception("slic_dir does not exist at '%s'" % self.slic_dir)
+            raise Exception("slic_dir does not exist: %s" % self.slic_dir)
         
         self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
-            raise Exception("SLIC setup script does not exist at '%s'" % self.name)
+            raise Exception('SLIC setup script does not exist: %s' % self.name)
     
-        logger.info("Setting fieldmap link to '%s'" % self.hps_fieldmaps_dir)
+        logger.info('Setting fieldmap link to: %s' % self.hps_fieldmaps_dir)
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
-            logger.warning("Link to fieldmap dir already exists!")
+            logger.warning('Link to fieldmap dir already exists!')
     
         if self.run_number is not None:
             run_number_cmd = "/lcio/runNumber %d" % self.run_number
@@ -113,7 +115,7 @@ class JobManager(Component):
     Run the hps-java JobManager class.
     """
 
-    def __init__(self, steering, **kwargs):
+    def __init__(self, steering=None, **kwargs):
         
         self.run_number = None
         self.detector = None
@@ -130,8 +132,9 @@ class JobManager(Component):
         self.steering = steering
         
         Component.__init__(self, 
-                           'job_manager', 
-                           'java', 
+                           name='job_manager', 
+                           command='java', 
+                           description='HPS Java Job Manager',
                            output_ext='.slcio',
                            **kwargs)
         
@@ -148,7 +151,7 @@ class JobManager(Component):
             raise Exception("No inputs provided to hps-java.")
         
         if self.steering not in self.steering_files:
-            raise Exception("Steering '%s' not found in %s" % (self.steering, self.steering_files))        
+            raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]     
              
     def cmd_args(self):
@@ -156,26 +159,26 @@ class JobManager(Component):
         args = []
                 
         if self.java_args is not None:
-            logger.debug("Setting java_args from config: %s" % self.java_args)
+            logger.debug('Setting java_args from config: %s' % self.java_args)
             args.append(self.java_args)
         
         if self.logging_config_file is not None:
-            logger.debug("Setting logging_config_file from config: %s" % self.logging_config_file)
-            args.append("-Djava.util.logging.config.file=%s" % self.logging_config_file)
+            logger.debug('Setting logging_config_file from config: %s' % self.logging_config_file)
+            args.append('-Djava.util.logging.config.file=%s' % self.logging_config_file)
         
         if self.lcsim_cache_dir is not None:
-            logger.debug("setting lcsim_cache_dir from config: %s" % self.lcsim_cache_dir)
-            args.append("-Dorg.lcsim.cacheDir=%s" % self.lcsim_cache_dir)
+            logger.debug('Setting lcsim_cache_dir from config: %s' % self.lcsim_cache_dir)
+            args.append('-Dorg.lcsim.cacheDir=%s' % self.lcsim_cache_dir)
         
         if self.conditions_user is not None:
-            logger.debug("Setting conditions_user from config: %s" % self.conditions_user)
-            args.append("-Dorg.hps.conditions.user=%s" % self.conditions_user)
+            logger.debug('Setting conditions_user from config: %s' % self.conditions_user)
+            args.append('-Dorg.hps.conditions.user=%s' % self.conditions_user)
         if self.conditions_password is not None:
-            logger.debug("Setting conditions_password from config (not shown)")
-            args.append("-Dorg.hps.conditions.password=%s" % self.conditions_password)
+            logger.debug('Setting conditions_password from config (not shown)')
+            args.append('-Dorg.hps.conditions.password=%s' % self.conditions_password)
         if self.conditions_url is not None:
-            logger.debug("Setting conditions_url from config: %s" % self.conditions_url)
-            args.append("-Dorg.hps.conditions.url=%s" % self.conditions_url)
+            logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
+            args.append('-Dorg.hps.conditions.url=%s' % self.conditions_url)
         
         args.append("-jar")
         args.append(self.hps_java_bin_jar)
@@ -206,7 +209,7 @@ class JobManager(Component):
             logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
         else:
             if not os.path.isabs(self.steering_file):
-                raise Exception("Steering '%s' looks like a file but is not an abs path." % self.steering_file)
+                raise Exception('Steering looks like a file but is not an abs path: %s' % self.steering_file)
         args.append(self.steering_file)
                             
         if self.nevents is not None:
@@ -230,7 +233,7 @@ class HPSTR(Component):
     Run the hpstr analysis tool.
     """
 
-    def __init__(self, cfg, run_mode=0, year=None, **kwargs):
+    def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
         
         self.cfg = cfg
         self.run_mode = run_mode
@@ -243,12 +246,12 @@ class HPSTR(Component):
                     
     def setup(self):        
         if not os.path.exists(self.hpstr_install_dir):
-            raise Exception("hpstr_install_dir does not exist at '%s'" % self.hpstr_install_dir)
+            raise Exception('hpstr_install_dir does not exist: %s' % self.hpstr_install_dir)
         self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
         
         # The config file to use is read from a dict in the JSON parameters.
         if self.cfg not in self.config_files:
-            raise Exception("Config '%s' was not found in %s" % (self.cfg, self.config_files))
+            raise Exception("Config '%s' was not found in: %s" % (self.cfg, self.config_files))
         config_file = self.config_files[self.cfg]
         if len(os.path.dirname(config_file)):
             # If there is a directory name then we expect an absolute path not in the hpstr dir.
@@ -256,16 +259,16 @@ class HPSTR(Component):
                 self.cfg_path = config_file
             else:
                 # The config must be an abs path.
-                raise Exception("The config '%s' has a directory but is not an abs path." % self.cfg)
+                raise Exception('The config has a directory but is not an abs path: %s' % self.cfg)
         else:
             # Assume the cfg file is within the hpstr base dir.
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
-        logger.info("Set config path to '%s'" % self.cfg_path)
+        logger.info('Set config path: %s' % self.cfg_path)
         
         # For ROOT output, automatically append the cfg key from the job params.
         if os.path.splitext(self.input_files()[0])[1] == '.root':
             self.append_tok = self.cfg
-            logger.debug("Automatically appending token '%s' to output file" % self.append_tok)
+            logger.debug('Automatically appending token to output file: %s' % self.append_tok)
             
     def required_parameters(self):
         return ['config_files']
@@ -320,11 +323,11 @@ class StdHepTool(Component):
                   'mix_signal',
                   'random_sample']
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, name=None, **kwargs):
                        
         Component.__init__(self, 
-                           name,
-                           "stdhep_" + name,                           
+                           name=name,
+                           command="stdhep_" + name,
                            **kwargs)
         
     def cmd_args(self):
@@ -364,7 +367,7 @@ class BeamCoords(StdHepTool):
         self.beam_rot_z = None
    
         StdHepTool.__init__(self, 
-                            'beam_coords',
+                            name='beam_coords',
                             append_tok='rot',
                             **kwargs)
 
@@ -400,7 +403,7 @@ class BeamCoords(StdHepTool):
         
 class RandomSample(StdHepTool):
     """
-    Sample StdHep events into a new file.
+    Randomly sample StdHep events into a new file.
     """    
     
     def __init__(self, **kwargs):
@@ -473,7 +476,7 @@ class AddMother(StdHepTool):
     
     def __init__(self, **kwargs):
         StdHepTool.__init__(self, 
-                            'add_mother', 
+                            name='add_mother',
                             append_tok='mom', 
                             **kwargs)
         
@@ -482,13 +485,10 @@ class MergePoisson(StdHepTool):
     Merge StdHep files, applying poisson sampling.
     """    
             
-    def __init__(self, **kwargs):
-        if 'lhe_file' in kwargs:
-            self.lhe_file = kwargs['lhe_file']
-        else:
-            raise Exception("Missing required init argument 'lhe_file' to compute mu")
+    def __init__(self, lhe_file=None, **kwargs):
+        self.lhe_file = lhe_file
         StdHepTool.__init__(self, 
-                            'merge_poisson', 
+                            name='merge_poisson',
                             append_tok='sampled', 
                             **kwargs)
     
@@ -538,7 +538,9 @@ class MergeFiles(StdHepTool):
     """    
     
     def __init__(self, **kwargs):
-        StdHepTool.__init__(self, 'merge_files', **kwargs)
+        StdHepTool.__init__(self, 
+                            name='merge_files', 
+                            **kwargs)
     
     def optional_parameters(self):
         return []
@@ -552,7 +554,10 @@ class StdHepCount(Component):
     """    
     
     def __init__(self, **kwargs):
-        Component.__init__(self, 'stdhep_count', 'stdhep_count.sh', **kwargs)
+        Component.__init__(self, 
+                           name='stdhep_count', 
+                           command='stdhep_count.sh', 
+                           **kwargs)
         
     def cmd_args(self):
         return [self.input_files()[0]]
@@ -588,7 +593,7 @@ class JavaTool(Component):
     def cmd_args(self):
         args = []
         if self.java_args is not None:
-            logger.info("setting java_args from config: %s" + self.java_args)
+            logger.debug("Setting java_args from config: %s" + self.java_args)
             args.append(self.java_args)
         args.append("-cp")
         args.append(self.hps_java_bin_jar)
@@ -600,7 +605,7 @@ class EvioToLcio(JavaTool):
     Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
     """    
     
-    def __init__(self, steering, **kwargs):
+    def __init__(self, steering=None, **kwargs):
        
        self.detector = None
        self.steering = None
@@ -610,9 +615,9 @@ class EvioToLcio(JavaTool):
        self.steering = steering
        
        JavaTool.__init__(self, 
-                         'evio_to_lcio', 
-                         'org.hps.evio.EvioToLcio', 
-                         output_ext='.slcio', 
+                         name='evio_to_lcio', 
+                         java_class='org.hps.evio.EvioToLcio', 
+                         output_ext='.slcio',
                          **kwargs)
     
     def required_parameters(self):
@@ -623,7 +628,7 @@ class EvioToLcio(JavaTool):
     
     def setup(self):
         if self.steering not in self.steering_files:
-            raise Exception("Steering '%s' not found in %s" % (self.steering, self.steering_files))        
+            raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))        
         self.steering_file = self.steering_files[self.steering]
         
     def cmd_args(self):
@@ -643,7 +648,7 @@ class EvioToLcio(JavaTool):
             logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
         else:
             if not os.path.isabs(self.steering_file):
-                raise Exception("Steering '%s' looks like a file but is not an abs path." % self.steering_file)
+                raise Exception("Steering looks like a file but is not an abs path: %s" % self.steering_file)
         args.extend(['-x', self.steering_file])
          
         if self.nevents is not None:
@@ -662,7 +667,9 @@ class EvioToLcio(JavaTool):
 class FilterBunches(JavaTool):
     """
     Space MC events and apply energy filters to process before readout.
+    """
     
+    """
     The nevents parameter is not settable from JSON in this class. It should
     be supplied as an init argument in the job script if it needs to be
     customized (the default nevents and event_interval used to apply spacing 
@@ -676,8 +683,8 @@ class FilterBunches(JavaTool):
         self.event_interval = 250
                 
         JavaTool.__init__(self, 
-                          'filter_bunches',
-                          'org.hps.util.FilterMCBunches',
+                          name='filter_bunches',
+                          java_class='org.hps.util.FilterMCBunches',
                           append_tok='filt',
                           **kwargs)
                             
@@ -706,7 +713,10 @@ class Unzip(Component):
     """
 
     def __init__(self, **kwargs):
-        Component.__init__(self, 'unzip', 'gunzip', **kwargs)
+        Component.__init__(self, 
+                           name='unzip', 
+                           command='gunzip', 
+                           **kwargs)
                
     def output_files(self):
         return [os.path.splitext(i)[0] for i in self.input_files()]
@@ -718,16 +728,17 @@ class Unzip(Component):
                 shutil.copyfileobj(in_file, out_file)
                 logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
         return 0
-                        
+
 class LCIODumpEvent(Component):
     """
     Dump LCIO event information.
     """
-
+    
     def __init__(self, **kwargs):
-        self.name = "LCIO dump event"
-        self.command = "dumpevent"
-        Component.__init__(self, **kwargs)
+        Component.__init__(self, 
+                           name='lcio_dump_event', 
+                           command='dumpevent', 
+                           **kwargs)
         if "event_num" in kwargs:
             self.event_num = kwargs["event_num"]
         else:
@@ -745,6 +756,9 @@ class LCIODumpEvent(Component):
         args.append(self.input_files()[0])
         args.append(str(self.event_num))
         return args
+    
+    def required_parameters(self):
+        return []
 
 class LHECount(Component):
     """
@@ -753,7 +767,9 @@ class LHECount(Component):
     
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.minevents = minevents
-        Component.__init__(self, name="lhe_count", **kwargs)
+        Component.__init__(self, 
+                           name="lhe_count", 
+                           **kwargs)
         
     def setup(self):
         if not len(self.input_files()):
@@ -788,7 +804,9 @@ class TarFiles(Component):
     """    
     
     def __init__(self, **kwargs):
-        Component.__init__(self, 'tar_files', **kwargs)
+        Component.__init__(self, 
+                           name='tar_files', 
+                           **kwargs)
         
     def cmd_exists(self):
         return True
@@ -809,7 +827,9 @@ class MoveFiles(Component):
     """
 
     def __init__(self, **kwargs):
-        Component.__init__(self, 'move_files', **kwargs)
+        Component.__init__(self, 
+                           name='move_files', 
+                           **kwargs)
 
     def cmd_exists(self):
         return True
@@ -830,8 +850,11 @@ class LCIOTool(Component):
     Generic component for LCIO tools.
     """
 
-    def __init__(self, name, **kwargs):
-        Component.__init__(self, name, command='java', **kwargs)
+    def __init__(self, name='', **kwargs):
+        Component.__init__(self, 
+                           name, 
+                           command='java', 
+                           **kwargs)
 
     def cmd_args(self):
         args = []
@@ -842,13 +865,18 @@ class LCIOTool(Component):
     def required_config(self):
         return ['lcio_bin_jar']
     
+    def required_parameters(self):
+        return []
+    
 class LCIOConcat(LCIOTool):
     """
     Concatenate LCIO files together.
     """
         
     def __init__(self, **kwargs):
-        LCIOTool.__init__(self, 'concat', **kwargs)
+        LCIOTool.__init__(self, 
+                          name='concat', 
+                          **kwargs)
         
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
@@ -868,7 +896,9 @@ class LCIOCount(LCIOTool):
     
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.minevents = minevents
-        LCIOTool.__init__(self, 'count', **kwargs)
+        LCIOTool.__init__(self, 
+                          name='count', 
+                          **kwargs)
         
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
@@ -910,7 +940,9 @@ class LCIOMerge(LCIOTool):
     """
 
     def __init__(self, **kwargs):
-        LCIOTool.__init__(self, 'merge', **kwargs)
+        LCIOTool.__init__(self, 
+                          name='merge', 
+                          **kwargs)
 
     def cmd_args(self):
         args = LCIOTool.cmd_args(self)
