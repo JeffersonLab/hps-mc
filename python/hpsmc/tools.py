@@ -386,7 +386,7 @@ class BeamCoords(StdHepTool):
         
         if self.target_x is not None:
             args.extend(['-X', str(self.target_x)])
-        if self.target_z is not None:
+        if self.target_y is not None:
             args.extend(['-Y', str(self.target_y)]) 
         if self.target_z is not None:
             args.extend(['-Z', str(self.target_z)])    
