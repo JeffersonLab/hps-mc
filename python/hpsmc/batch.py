@@ -231,22 +231,22 @@ class Auger(Batch):
     """Submit Auger batch jobs."""
 
     def __init__(self):
-        # TODO: Use path derived from config here instead
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
 
     def submit(self):
+        """Primary batch submission method for Auger."""
+
         job_ids = self.get_filtered_job_ids()
         logger.info('Submitting jobs: %s' % str(job_ids))
-        req = self._create_req(self.script_name)
+        req = self._create_req(self.script_name) # create request XML header
         for job_id in job_ids:
             if not self.jobstore.has_job_id(job_id):
                 raise Exception('Job ID %s was not found in job store' % job_id)
             job_params = self.jobstore.get_job(job_id)
-            self._add_job(req, job_params)     # add job to XML req
-            self._write_param_file(job_params) # write job's JSON param file
-        xml_filename = self._write_req(req)    # write request to XML file
+            self._add_job(req, job_params)     # add job to request
+        xml_filename = self._write_req(req)    # write request to file
         auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
         logger.info("Submitted Auger jobs: %s" % str(auger_ids))
 
@@ -269,12 +269,6 @@ class Auger(Batch):
                             auger_ids.append(auger_id)
                 break
         return auger_ids
-
-    def _write_param_file(self, job_params):
-        param_file = 'job_%d.json' % job_params['job_id']
-        with open(param_file, 'w') as jobfile:
-             json.dump(job_params, jobfile, indent=2, sort_keys=True)
-        #logger.info("Wrote job param file '%s'" % (param_file))
 
     def _write_req(self, req, filename='temp.xml'):
         pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
