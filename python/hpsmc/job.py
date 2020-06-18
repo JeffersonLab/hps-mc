@@ -223,7 +223,6 @@ class Job(object):
         
         # Params are actually optional as some job scripts might not need them.
         if cl.params:
-            print(cl.params)
             self.param_file = os.path.abspath(cl.params)
             params = {}
             if cl.job_id:
