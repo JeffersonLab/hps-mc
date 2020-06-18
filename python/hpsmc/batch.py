@@ -263,6 +263,9 @@ class Auger(Batch):
                         if child.tag == 'jobIndex':
                             auger_id = int(child.text)
                             auger_ids.append(auger_id)
+                        elif child.tag == 'error':
+                            # Submission failed so raise an exception with the error msg
+                            raise Exception(child.text)
                 break
         return auger_ids
 
@@ -401,6 +404,11 @@ class Pool(Batch):
     """
                             
     def submit(self):
+        """Submit jobs to a local processing pool.
+        
+        This method will not return until all jobs are finished or execution
+        is interrupted.
+        """
                 
         cmds = []
         for job_id in self.get_filtered_job_ids():
