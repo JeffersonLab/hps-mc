@@ -298,7 +298,7 @@ class Job(object):
         for c in self.components:
             c.config(self.job_config.parser) # Configure from supplied config files
             if self.enable_env_config:
-                c.config_from_environ()      # Configure from env vars
+                c.config_from_environ()      # Configure from env vars, if enabled
             c.check_config()                 # Check that the config is acceptable
                    
     def _load_script(self):
@@ -326,26 +326,28 @@ class Job(object):
         This is the primary execution method for running the job.
         """
         
-        self.__initialize()
-        
         logger.info("Running job: %s" % self.description)
-        logger.info("Components: " % [c.name for c in self.components])
-        start_time = time.time()
         
+        # Initialize after CL parameters were parsed.
+        self.__initialize()
+                
         # Load the job components from the script
         self._load_script()
         
         if not len(self.components):
             raise Exception("Job has no components to execute.")
 
+        # Print list of job components
+        logger.info("Job components: " % [c.name for c in self.components])        
+
         # Print job parameters.
         logger.info("Job parameters: " + str(self.params))
         
         # This will configure the Job class and its components by copying
-        # information into them from the .hpsmc config file.
+        # information into them from loaded config files.
         self.__configure()
         
-        # Set component parameters from job JSON file.                
+        # Set component parameters from job JSON file.
         self.__set_parameters()
 
         if not self.dry_run:
@@ -359,13 +361,21 @@ class Job(object):
         # Perform component setup to prepare for execution.
         # May use config and parameters that were set from above.
         self.__setup()
-                        
+        
+        # Save job start time
+        start_time = time.time()
+                 
         # Execute the job.
         self.__execute()
         
         # Copy the output files to the output dir if enabled and not in dry run.
         if not self.dry_run:
             
+            # Print job timer info
+            stop_time = time.time()
+            elapsed = stop_time - start_time
+            logger.info("Job execution took %f seconds" % elapsed)
+                        
             # Copy by actual output file name
             if self.enable_copy_output_files:
                 self.__copy_output_files()
@@ -376,13 +386,8 @@ class Job(object):
             
             # Perform job cleanup.
             self.__cleanup()
-        
-            # Print job timer info
-            stop_time = time.time()
-            elapsed = stop_time - start_time
-            logger.info("Job took %f seconds" % elapsed)
-       
-        logger.info("Finished running job '%s' successfully" % self.description)
+                           
+        logger.info('Successfully finished running job: %s' % self.description)
                     
     def __execute(self):
                     
@@ -391,9 +396,9 @@ class Job(object):
                 logger.info("Executing '%s' with inputs %s and outputs %s" % 
                             (c.name, str(c.input_files()), str(c.output_files())))
                 start = time.time()
-                #if self.log_out != sys.stdout:
-                #    self.log_out.write('<<<< %s >>>>\n' % c.name) # Add header to output file
-                #    self.log_out.flush()
+                if self.log_out != sys.stdout:
+                    self.log_out.write('==== %s ====\n' % c.name) # Add header to output file
+                    self.log_out.flush()
                 returncode = c.execute(self.log_out, self.log_err)
                 end = time.time()
                 elapsed = end - start                
@@ -408,7 +413,7 @@ class Job(object):
                         if not os.path.isfile(outputfile):
                             raise Exception("Output file '%s' is missing after execution." % outputfile)
         else:
-            # Dry run mode. Just print component info but do not execute.
+            # Dry run mode. Just print component command but do not execute it.
             logger.info("Dry run enabled. Components will NOT be executed!")
             for c in self.components:
                 logger.info("'%s' with args: %s (DRY RUN)" % (c.name, ' '.join(c.cmd_args())))
@@ -537,7 +542,6 @@ class Job(object):
         """
         for src,dest in self.input_files.iteritems():
             if not os.path.isabs(src):
-                # FIXME: Could try and convert to abspath here.
                 raise Exception('The input source file is not an absolute path: %s' % src)            
             if os.path.dirname(dest):
                 raise Exception('The input file destination is not valid: %s' % dest)
@@ -580,7 +584,7 @@ if __name__ == '__main__':
         cmd = sys.argv[1]
         if cmd not in cmds.keys():
             print_usage()
-            raise Exception("The job command '%s' is not valid." % cmd)
+            raise Exception('The job command is not valid: %s' % cmd)
         args = sys.argv[2:]
         if cmd == 'run':
             job = Job(args)
