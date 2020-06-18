@@ -294,17 +294,16 @@ class Auger(Batch):
             email.set("request", "true")
             email.set("job", "true")
         mem = ET.SubElement(req, "Memory")
-        mem.set("space", self.memory)
+        mem.set("space", str(self.memory))
         mem.set("unit", "MB")
         limit = ET.SubElement(req, "TimeLimit")        
-        limit.set("time", self.job_length)
+        limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
         os_elem.set("name", "general") # Suggested by Tongtong instead of centos7
         return req
 
     def build_cmd(self, job_id, job_params):
-        job_dir = os.path.join(self.run_dir, str(job_id))
         cmd = ['python', run_script, 'run']
         #cmd.extend(['-d', '/scratch/%d' % job_id])
         if len(self.config_files):
