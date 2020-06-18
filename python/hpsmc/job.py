@@ -83,7 +83,8 @@ class Job(object):
                      'job_id_pad',
                      'check_output_files',
                      'enable_file_chaining',
-                     'enable_ptags']
+                     'enable_ptags',
+                     'enable_env_config']
 
     def __init__(self, args=sys.argv, **kwargs):
                     
@@ -122,6 +123,7 @@ class Job(object):
         self.check_commands = False
         self.enable_file_chaining = True
         self.enable_ptags = False
+        self.enable_env_config = False
         
         self.param_file = None
         
@@ -130,8 +132,6 @@ class Job(object):
         # Mapping of tags to output files
         self.ptags = {}
         
-        self.__initialize()
-
     def add(self, component):
         """
         Public method for adding components to the job.
@@ -153,7 +153,7 @@ class Job(object):
                              % (str(v), str(k), params[k]))
             self.params[k] = v
                     
-    def __parse_args(self):
+    def parse_args(self):
         """
         Configure the job from command line arguments.
         """
@@ -223,6 +223,7 @@ class Job(object):
         
         # Params are actually optional as some job scripts might not need them.
         if cl.params:
+            print(cl.params)
             self.param_file = os.path.abspath(cl.params)
             params = {}
             if cl.job_id:
@@ -262,9 +263,7 @@ class Job(object):
         """
         Perform basic initialization before the job script is loaded.
         """
-                                
-        self.__parse_args()
-
+        
         if not os.path.isabs(self.rundir):
             raise Exception('The run dir is not an absolute path: %s' % self.rundir)
             
@@ -298,10 +297,12 @@ class Job(object):
         
         # Configure each of the job components
         for c in self.components:
-            c.config(self.job_config.parser)
-            c.check_config()
+            c.config(self.job_config.parser) # Configure from supplied config files
+            if self.enable_env_config:
+                c.config_from_environ()      # Configure from env vars
+            c.check_config()                 # Check that the config is acceptable
                    
-    def __load_script(self):                
+    def _load_script(self):
         if not self.script.endswith('.py'):
             # Script is a name.
             script_db = JobScriptDatabase()
@@ -326,11 +327,14 @@ class Job(object):
         This is the primary execution method for running the job.
         """
         
+        self.__initialize()
+        
         logger.info("Running job: %s" % self.description)
+        logger.info("Components: " % [c.name for c in self.components])
         start_time = time.time()
         
         # Load the job components from the script
-        self.__load_script()
+        self._load_script()
         
         if not len(self.components):
             raise Exception("Job has no components to execute.")
@@ -559,7 +563,7 @@ class Job(object):
                     logger.info("Copying ptag '%s' from '%s' to '%s'" % (src, src_file, dest))
                     self.__copy_output_file(src_file, dest)
         else:
-            logger.warning('Requested to copy ptag output files but none defined.')
+            logger.warning('Requested to copy ptag output files but none defined.')      
                                         
 cmds = {
     'run':   'Run a job script',
@@ -572,7 +576,7 @@ def print_usage():
     for name,descr in cmds.iteritems():
         print("        %s: %s" % (name,descr))
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd not in cmds.keys():
@@ -581,6 +585,7 @@ if __name__ == '__main__':
         args = sys.argv[2:]
         if cmd == 'run':
             job = Job(args)
+            job.parse_args()
             job.run()
         elif cmd == 'avail':
             scriptdb = JobScriptDatabase()
