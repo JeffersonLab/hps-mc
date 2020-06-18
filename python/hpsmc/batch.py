@@ -28,7 +28,7 @@ class Batch:
         parser.add_argument("-q", "--queue", nargs='?', help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)", required=False)
         parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
         parser.add_argument("-p", "--pool-size", type=int, help="Job pool size (only applicable when running pool)", required=False, default=multiprocessing.cpu_count())
-        parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=2000)
+        parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)   
         parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
@@ -300,7 +300,7 @@ class Auger(Batch):
         limit.set("time", self.job_length)
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os_elem.set("name", "centos7")
+        os_elem.set("name", "general") # Suggested by Tongtong instead of centos7
         return req
 
     def build_cmd(self, job_id, job_params):
