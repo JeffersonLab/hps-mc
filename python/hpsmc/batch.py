@@ -2,15 +2,19 @@
 local running, a multiprocessing pool, LSF, and Auger."""
 
 import argparse, json, os, subprocess, getpass, sys, time, logging, signal, multiprocessing
+import psutil
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
+from multiprocessing import Queue
 
 from job_store import JobStore
 from script_db import JobScriptDatabase
+from qtconsole.kill_ring import KillRing
 
 logger = logging.getLogger("hpsmc.batch")
+logger.setLevel(logging.DEBUG)
 
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
@@ -371,7 +375,7 @@ class Auger(Batch):
         cmd.text = ' '.join(cmd_lines)
 
 class Local(Batch):
-    """Run a local batch job on the current system."""
+    """Run a local batch jobs sequentially."""
             
     def parse_args(self, args):
         Batch.parse_args(self, args)
@@ -388,15 +392,54 @@ class Local(Batch):
             if proc.returncode:
                 logger.error("Local execution of '%s' returned error code: %d" % (name, proc.returncode))
 
+# Queue used to keep track of processes created by batch pool.
+mp_queue = Queue()
+
 def run_job_pool(cmd):
+    """Run the command in a new process which is added to a global MP queue."""
     try:
-        sys.stdout.flush()            
-        returncode = subprocess.call(cmd)
+        sys.stdout.flush()
+        proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
+        mp_queue.put(proc)
+        proc.wait()
+        returncode = proc.returncode
     except subprocess.CalledProcessError as e:
         logger.error(str(e))
         sys.stdout.flush()
         pass
     return returncode
+
+class KillProcessQueue():
+    """Kills process objects from an MP queue after exit from a with statement."""
+    
+    def __init__(self, mp_queue):
+        self.mp_queue = mp_queue
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, type, val, tb):
+        logger.debug('Killing %d processes in queue ...' % mp_queue.qsize())
+        while True:
+            proc = mp_queue.get()
+            logger.debug('Checking process %d' % proc.pid)
+            if proc.returncode is None:
+                try:
+                    parent = psutil.Process(proc.pid)
+                    for child in parent.children(recursive=True):
+                        logger.debug('Killing child process %d' % child.pid)
+                        child.kill()
+                    logger.debug('Killing parent process %s' % parent.pid)
+                    parent.kill()
+                except:
+                    pass
+            else:
+                logger.debug('Process %d already finished with returncode %d' % (proc.pid, proc.returncode))
+                                
+            if mp_queue.empty():
+                break
+            
+        logger.debug('Done killing processes!')
                 
 class Pool(Batch):
     """
@@ -420,28 +463,30 @@ class Pool(Batch):
      
         if not len(cmds):
             raise Exception('No job IDs found to submit')
-                            
-        original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
-        pool = multiprocessing.Pool(self.pool_size)
-        signal.signal(signal.SIGINT, original_sigint_handler)      
-        try:
-            logger.info("Running %d jobs in pool ..." % len(cmds))
-            res = pool.map_async(run_job_pool, cmds)
-            # timeout must be properly set, otherwise tasks will crash
-            logger.info("Pool results: " + str(res.get(sys.maxint)))
-            logger.info("Normal termination")
-            pool.close()
-            pool.join()
-        except KeyboardInterrupt:
-            logger.fatal("Caught KeyboardInterrupt, terminating workers")
-            pool.terminate()
-        except Exception as e:
-            logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
-            pool.terminate()
-        except: # catch *all* exceptions
-            e = sys.exc_info()[0]
-            logger.fatal("Caught non-Python Exception '%s'" % (e))
-            pool.terminate()
+
+        # Run jobs in an MP pool and cleanup child processes on exit        
+        with KillProcessQueue(mp_queue):
+            original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+            pool = multiprocessing.Pool(self.pool_size)
+            signal.signal(signal.SIGINT, original_sigint_handler)      
+            try:
+                logger.info("Running %d jobs in pool ..." % len(cmds))
+                res = pool.map_async(run_job_pool, cmds)
+                # timeout must be properly set, otherwise tasks will crash
+                logger.info("Pool results: " + str(res.get(sys.maxint)))
+                logger.info("Normal termination")
+                pool.close()
+                pool.join()
+            except KeyboardInterrupt:
+                logger.fatal("Caught KeyboardInterrupt, terminating workers")
+                pool.terminate()
+            except Exception as e:
+                logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
+                pool.terminate()
+            except: # catch *all* exceptions
+                e = sys.exc_info()[0]
+                logger.fatal("Caught non-Python Exception '%s'" % (e))
+                pool.terminate()
 
 if __name__ == '__main__':
     system_dict = {
