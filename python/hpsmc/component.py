@@ -186,6 +186,17 @@ class Component(object):
             outputs.append('%s%s' % (f,ext))
         return outputs
     
+    def config_from_environ(self):
+        """Configure component from environment variables which are just upper case
+        versions of the required config names set in the shell environment."""
+        for c in self.required_config():
+            logger.debug("Setting config '%s' from environ" % c)
+            if c.upper() in os.environ:
+                setattr(self, c, os.environ[c.upper()])
+                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+            else:
+                raise Exception("Missing config in environ for '%s'" % c) 
+    
 class DummyComponent(Component):
     """A dummy component that just prints some information instead of executing a program."""
     
