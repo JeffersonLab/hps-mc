@@ -479,6 +479,24 @@ class AddMother(StdHepTool):
                             name='add_mother',
                             append_tok='mom', 
                             **kwargs)
+
+class AddMotherFullTruth(StdHepTool):
+
+    def __init__(self, **kwargs):
+	if len(self.inputs) != 2: 
+		raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
+	input_file_1 = self.inputs[0]
+	base,ext = os.path.splitext(input_file_1)
+	if ext != '.stdhep':
+		raise Exception("The first input file must be a stdhep file")
+        input_file_2 = self.inputs[1]
+        base,ext = os.path.splitext(input_file_2)
+	if ext != '.lhe':
+		raise Exception("The second input file must be a lhe file")
+        StdHepTool.__init__(self,
+                            'add_mother_full_truth',
+                            append_tok='mom_full_truth',
+                            **kwargs)
         
 class MergePoisson(StdHepTool):
     """
