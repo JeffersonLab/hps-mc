@@ -209,13 +209,14 @@ class LSF(Batch):
         if queue is None:
             queue = 'long'
         
-        os = self.os
-        if os is None:
-            os = 'centos77'
+        if self.os is not None:
+            lsf_os = self.os
+        else:
+            lsf_os = 'centos77'
         
         cmd = ['bsub', 
                '-W', str(self.job_length) + ':0', 
-               '-R', os, 
+               '-R', lsf_os, 
                '-q', queue, 
                '-o', log_file, 
                '-e', log_file]
@@ -319,9 +320,10 @@ class Auger(Batch):
         limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os = self.os
-        if os is None:
-            os = "general" # Suggested by Tongtong instead of centos7
+        if self.os is not None:
+            auger_os = self.os
+        else:
+            auger_os = 'general'
         os_elem.set("name", os) 
         return req
 
