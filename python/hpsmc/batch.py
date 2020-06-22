@@ -231,7 +231,7 @@ class LSF(Batch):
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out,err = proc.communicate()
         if err != None and len(err):
-            raise Exception("Submit error: %s" % err)
+            logger.warning(err)
         tokens = out.split(' ')
         if tokens[0] != 'Job':
             raise Exception('Unexpected output from bsub command: %s' % out)
