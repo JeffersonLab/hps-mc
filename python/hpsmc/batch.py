@@ -37,8 +37,9 @@ class Batch:
         parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
-        parser.add_argument("script", nargs='?', help="Name of job script (required)")
-        parser.add_argument("jobstore", nargs='?', help="Job store in JSON format (required)")
+        parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
+        parser.add_argument("script", nargs='?', help="Name of job script")
+        parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
             
         cl = parser.parse_args(args)
@@ -95,6 +96,7 @@ class Batch:
             self.end_job_num = None
                     
         self.queue = cl.queue
+        self.os = cl.os
 
         self.job_length = cl.job_length         
         self.memory = cl.memory
@@ -201,12 +203,23 @@ class LSF(Batch):
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
     def build_cmd(self, name, job_params):
-        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        queue = 'long'
-        if self.queue is not None:
-            queue = self.queue
-        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", queue, "-o", log_file, "-e", log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params)) 
+        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
+        
+        queue = self.queue
+        if queue is None:
+            queue = 'long'
+        
+        os = self.os
+        if os is None:
+            os = 'centos77'
+        
+        cmd = ['bsub', 
+               '-W', str(self.job_length) + ':0', 
+               '-R', os, 
+               '-q', queue, 
+               '-o', log_file, 
+               '-e', log_file]
+        cmd.extend(Batch.build_cmd(self, name, job_params))
         return cmd
 
     def submit_cmd(self, name, job_params): 
@@ -306,7 +319,10 @@ class Auger(Batch):
         limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os_elem.set("name", "general") # Suggested by Tongtong instead of centos7
+        os = self.os
+        if os is None:
+            os = "general" # Suggested by Tongtong instead of centos7
+        os_elem.set("name", os) 
         return req
 
     def build_cmd(self, job_id, job_params):
