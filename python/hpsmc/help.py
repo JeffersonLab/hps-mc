@@ -3,6 +3,7 @@
 from tools import *
 from generators import *
 
+# These are all interfaces and not runnable components, which should be ignored.
 _ignore = ('Component', 'EventGenerator', 'StdHepTool', 'JavaTool', 'MG')
 
 def print_component(v):
