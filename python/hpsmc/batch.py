@@ -213,15 +213,16 @@ class LSF(Batch):
         if self.os is not None:
             lsf_os = self.os
         else:
-            lsf_os = 'centos77'
+            lsf_os = 'centos7'
         
         cmd = ['bsub', 
                '-W', str(self.job_length) + ':0', 
-               '-R', lsf_os, 
                '-q', queue,
+               '-R', lsf_os, 
                '-o', log_file,
                '-e', log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))
+        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))        
+        
         return cmd
 
     def submit_cmd(self, name, job_params): 
@@ -325,7 +326,7 @@ class Auger(Batch):
             auger_os = self.os
         else:
             auger_os = 'general'
-        os_elem.set("name", os) 
+        os_elem.set("name", auger_os) 
         return req
 
     def build_cmd(self, job_id, job_params):
