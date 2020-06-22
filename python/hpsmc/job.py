@@ -193,21 +193,20 @@ class Job(object):
         if cl.log:
             self.log_file = cl.log
             if not os.path.isabs(self.log_file):
-                raise Exception('The log file is not an abs path: %s' % self.log_file)
-            #print('Logging output will be written to: %s' % self.log_file)
+                self.log_file = os.path.abspath(self.log_file)
             config_logging(stream=open(self.log_file, 'w'))
              
         if cl.out:
             self.out_file = cl.out
             if not os.path.isabs(self.out_file):
-                raise Exception('The out file is not an abs path: %s' % self.out_file)
-            #print('Component stdout will be written to: %s' % self.out_file)
+                self.out_file = os.path.abspath(self.out_file)
+                logger.info('Changed stdout file to abs path: %s' % self.out_file)
                     
         if cl.err:
             self.err_file = cl.err
             if not os.path.isabs(self.err_file):
-                raise Exception('The err file is not an abs path: %s' % self.err_file)
-            #print('Component stderr will be written to: %s' % self.err_file)
+                self.err_file = os.path.abspath(self.err_file)
+                logger.info('Changed stderr file to abs path: %s' % self.err_file)
         
         if cl.config_file:
             self.config_files = map(os.path.abspath, cl.config_file)
@@ -264,20 +263,15 @@ class Job(object):
         """
         
         if not os.path.isabs(self.rundir):
-            raise Exception('The run dir is not an absolute path: %s' % self.rundir)
+            self.rundir = os.path.abspath(self.rundir)
+            logger.info('Changed run dir to abs path: %s' % self.rundir)
+            #raise Exception('The run dir is not an absolute path: %s' % self.rundir)
             
-        if not os.path.exists(self.rundir):
-            logger.info('Creating run dir: %s' % self.rundir)
-            os.makedirs(self.rundir)
-
         # Set run dir if running inside LSF
         if "LSB_JOBID" in os.environ:
             self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
             logger.info('Set run dir for LSF: %s' % self.rundir)
             self.delete_rundir = True
-
-        logger.debug('Changing to run dir: %s' % self.rundir)
-        os.chdir(self.rundir)
 
         if self.out_file:
             self.log_out = open(self.out_file, 'w')
@@ -392,6 +386,7 @@ class Job(object):
     def __execute(self):
                     
         if not self.dry_run:
+                       
             for c in self.components:
                 logger.info("Executing '%s' with inputs %s and outputs %s" % 
                             (c.name, str(c.input_files()), str(c.output_files())))
@@ -419,7 +414,16 @@ class Job(object):
                 logger.info("'%s' with args: %s (DRY RUN)" % (c.name, ' '.join(c.cmd_args())))
                                    
     def __setup(self):
-                
+        
+         # Create run dir if it does not exist
+        if not os.path.exists(self.rundir):
+            logger.info('Creating run dir: %s' % self.rundir)
+            os.makedirs(self.rundir)
+
+         # Change to run dir
+        logger.debug('Changing to run dir: %s' % self.rundir)
+        os.chdir(self.rundir)
+        
         # Limit components according to job steps
         if self.job_steps > 0:
             self.components = self.components[0:self.job_steps]
