@@ -11,7 +11,6 @@ from multiprocessing import Queue
 
 from job_store import JobStore
 from script_db import JobScriptDatabase
-from qtconsole.kill_ring import KillRing
 
 logger = logging.getLogger("hpsmc.batch")
 logger.setLevel(logging.DEBUG)
