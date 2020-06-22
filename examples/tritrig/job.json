@@ -12,7 +12,7 @@
     "enable_ecal_energy_filter": true,
     "event_interval": 250,
     "output_files": {
-        "recon": "tritrig_recon_1.stdhep"
+        "recon": "tritrig_recon_1.slcio"
     },
     "output_dir": "output"
 }

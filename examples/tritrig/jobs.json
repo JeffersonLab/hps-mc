@@ -7,12 +7,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_1.slcio"
+            "recon": "tritrig_recon_1.slcio"
         }
     }, 
     {
@@ -23,12 +23,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_2.slcio"
+            "recon": "tritrig_recon_2.slcio"
         }
     }, 
     {
@@ -39,12 +39,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_3.slcio"
+            "recon": "tritrig_recon_3.slcio"
         }
     }, 
     {
@@ -55,12 +55,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_4.slcio"
+            "recon": "tritrig_recon_4.slcio"
         }
     }, 
     {
@@ -71,12 +71,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_5.slcio"
+            "recon": "tritrig_recon_5.slcio"
         }
     }, 
     {
@@ -87,12 +87,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_6.slcio"
+            "recon": "tritrig_recon_6.slcio"
         }
     }, 
     {
@@ -103,12 +103,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_7.slcio"
+            "recon": "tritrig_recon_7.slcio"
         }
     }, 
     {
@@ -119,12 +119,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_8.slcio"
+            "recon": "tritrig_recon_8.slcio"
         }
     }, 
     {
@@ -135,12 +135,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_9.slcio"
+            "recon": "tritrig_recon_9.slcio"
         }
     }, 
     {
@@ -151,12 +151,12 @@
             "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
         }, 
         "target_z": -4.3, 
-        "nevents": 10000, 
+        "nevents": 1000, 
         "output_dir": "output", 
         "run_params": "2pt3", 
         "detector": "HPS-PhysicsRun2016-Pass2", 
         "output_files": {
-            "recon": "tritrig_10.slcio"
+            "recon": "tritrig_recon_10.slcio"
         }
     }
 ]
