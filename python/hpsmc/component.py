@@ -155,7 +155,7 @@ class Component(object):
         """Raise an exception on the first missing config setting for this component."""
         for c in self.required_config():
             if not hasattr(self, c):
-                raise Exception('Missing required config: %s' % (self.name))
+                raise Exception('Missing required config: %s' % (self.__class__.__name__))
         
     def input_files(self):
         """Get a list of input files for this component."""
