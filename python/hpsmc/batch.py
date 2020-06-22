@@ -326,15 +326,16 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
-        inputfiles = job_params["input_files"]
-        for src,dest in inputfiles.iteritems():
-            input_elem = ET.SubElement(job, "Input")
-            input_elem.set("dest", dest)
-            if src.startswith("/mss"):
-                src_file = "mss:%s" % src
-            else:
-                src_file = src
-            input_elem.set("src", src_file)
+	if "input_files" in job_params.keys():
+            inputfiles = job_params["input_files"]
+            for src,dest in inputfiles.iteritems():
+                input_elem = ET.SubElement(job, "Input")
+                input_elem.set("dest", dest)
+                if src.startswith("/mss"):
+                    src_file = "mss:%s" % src
+                else:
+                    src_file = src
+                input_elem.set("src", src_file)
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
         outputdir = os.path.realpath(outputdir)
