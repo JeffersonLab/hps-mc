@@ -166,20 +166,21 @@ class Batch:
             job_data = self.jobstore.get_job(job_id)
             self._submit_job(job_id, job_data)
                     
-    def build_cmd(self, job_id, job_params):
+    def build_cmd(self, job_id, job_params, set_job_dir=True):
         """
         Create the command to run a single job.
         
         This generically creates the command to run the job locally but subclasses
         may override if necessary.
         """
-        job_dir = os.path.join(self.run_dir, str(job_id))
         cmd = ['python', run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
                     '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
                     ])
-        cmd.extend(['-d', job_dir])
+        if set_job_dir:
+            job_dir = os.path.join(self.run_dir, str(job_id))
+            cmd.extend(['-d', job_dir])
         if len(self.config_files):
             for cfg in self.config_files:
                 cmd.extend(['-c', cfg])
@@ -217,10 +218,10 @@ class LSF(Batch):
         cmd = ['bsub', 
                '-W', str(self.job_length) + ':0', 
                '-R', lsf_os, 
-               '-q', queue, 
-               '-o', log_file, 
+               '-q', queue,
+               '-o', log_file,
                '-e', log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params))
+        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))
         return cmd
 
     def submit_cmd(self, name, job_params): 
