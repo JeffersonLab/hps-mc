@@ -344,6 +344,10 @@ class Job(object):
         # Set component parameters from job JSON file.
         self.__set_parameters()
 
+        # Perform component setup to prepare for execution.
+        # May use config and parameters that were set from above.
+        self.__setup()
+
         if not self.dry_run:
             if self.enable_copy_input_files: 
                 # Copy input files to the run dir.
@@ -351,11 +355,7 @@ class Job(object):
             else:
                 # Symlink input files if copying is disabled.
                 self.__symlink_input_files()
-        
-        # Perform component setup to prepare for execution.
-        # May use config and parameters that were set from above.
-        self.__setup()
-        
+                
         # Save job start time
         start_time = time.time()
                  
