@@ -46,7 +46,7 @@ class JobConfig(object):
         logger.info('\n'.join(parser_lines))
             
     def config(self, obj, section=None, required_names=[], allowed_names=[], require_section=True):
-        """Push config into an object by setting an attribute."""        
+        """Push config into an object by setting an attribute."""    
         if not section:
             section = obj.__class__.__name__
         if self.parser.has_section(section):
@@ -65,6 +65,8 @@ class JobConfig(object):
                                              getattr(obj, name)))
         elif require_section:
             raise Exception("Missing required config section '%s'" % section)
+        else:
+            logger.warning('Config section not found: %s' % section)
         
 class Job(object):
     """
@@ -286,7 +288,7 @@ class Job(object):
     def __configure(self):
         # Configure job class
         self.job_config = JobConfig(config_files=self.config_files)
-        self.job_config.config(self, allowed_names=Job._config_names)
+        self.job_config.config(self, allowed_names=Job._config_names, require_section=False)
         
         # Configure each of the job components
         for c in self.components:
