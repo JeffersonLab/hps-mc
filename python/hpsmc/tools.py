@@ -724,6 +724,54 @@ class FilterBunches(JavaTool):
 
     def optional_parameters(self):
         return ['ecal_hit_ecut', 'event_interval']
+
+class ExtractEventsWithHitAtHodoEcal(JavaTool):
+    """
+    Apply hodo-hit filter and space MC events to process before readout.
+    """
+
+    """
+    The nevents parameter is not settable from JSON in this class. It should
+    be supplied as an init argument in the job script if it needs to be
+    customized (the default nevents and event_interval used to apply spacing 
+    should usually not need to be changed by the user).
+    """
+
+    def __init__(self, **kwargs):
+
+	if "num_hodo_hits" in kwargs:
+	    self.num_hodo_hits = kwargs['num_hodo_hits']
+	else:
+            self.num_hodo_hits = 0
+
+	if "event_interval" in kwargs:
+	    self.event_interval = kwargs['event_interval']
+	else:
+            self.event_interval = 250
+
+        JavaTool.__init__(self,
+                          name='filter_events',
+                          java_class='org.hps.util.ExtractEventsWithHitAtHodoEcal',
+                          append_tok='filt',
+                          **kwargs)
+
+    def cmd_args(self):
+        args = JavaTool.cmd_args(self)
+        args.append("-e")
+        args.append(str(self.event_interval))
+        for i in self.input_files():
+            args.append(i)
+        args.append(self.output_files()[0])
+        if self.num_hodo_hits > 0:
+            args.append("-M")
+            args.append(str(self.num_hodo_hits))
+        if self.nevents > 0:
+            args.append("-w")
+            args.append(str(self.nevents))
+        return args
+
+    def optional_parameters(self):
+        return ['num_hodo_hits', 'event_interval']
                    
 class Unzip(Component):
     """
