@@ -45,7 +45,7 @@ class EGS5(EventGenerator):
         ebeam = self.run_param_data.get("beam_energy")
         electrons = self.run_param_data.get("num_electrons") * self.bunches
         
-        logger.info("Read target_z=%d, ebeam=%d, electrons=%d from '%s' run params"
+        logger.info("Read target_z=%f, ebeam=%d, electrons=%d from '%s' run params"
                     % (target_z, ebeam, electrons, self.run_params))
                 
         seed_data = "%d %f %f %d" % (self.seed, target_z, ebeam, electrons)
@@ -126,16 +126,16 @@ class MG(EventGenerator):
         if 'event_types' in kwargs:
             self.event_types = kwargs['event_types']
         else:
-            self.event_types = ['weighted', 'unweighted']
+            self.event_types = ['unweighted', 'weighted']
         
         EventGenerator.__init__(self, name, **kwargs)
     
     def output_files(self):
         o = []
-        if 'weighted' in self.event_types:
-            o.append(self.name + "_events.lhe.gz")
         if 'unweighted' in self.event_types:
             o.append(self.name + "_unweighted_events.lhe.gz")
+        if 'weighted' in self.event_types:
+            o.append(self.name + "_events.lhe.gz")
         return o
     
     def set_parameters(self, params):
