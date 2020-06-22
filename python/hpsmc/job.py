@@ -537,7 +537,7 @@ class Job(object):
                 raise Exception("The input source file '%s' is not an absolute path." % src)            
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
-            logger.debug("Copying input '%s' to '%s'" % (src, os.path.join(self.rundir, dest)))
+            logger.info("Copying input file: %s -> %s" % (src, os.path.join(self.rundir, dest)))
             shutil.copyfile(src, os.path.join(self.rundir, dest))
          
     def __symlink_input_files(self):
