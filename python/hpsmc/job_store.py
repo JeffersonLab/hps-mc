@@ -22,14 +22,30 @@ class JobStore:
         """Parse command line arguments to build and configure the job store."""
         
         parser = argparse.ArgumentParser(description="Create a job store with multiple jobs")
+
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
-        parser.add_argument("-p", "--pad", nargs="?", type=int, help="Number of padding spaces for job IDs (default is 0 for no padding)", default=0)
-        parser.add_argument("-s", "--seed", nargs="?", type=int, help="Starting random seed, incremented by 1 for each job", default=1)
-        parser.add_argument("-i", "--input-file-list", action='append', nargs=2, help="Input file lists and number of reads per job")
+        
+        parser.add_argument("-p", "--pad", nargs="?", type=int, 
+                            help="Number of padding spaces for job IDs (default is 0 for no padding)", default=0)
+        
+        parser.add_argument("-s", "--seed", nargs="?", type=int, 
+                            help="Starting random seed, incremented by 1 for each job", default=1)
+        
+        parser.add_argument("-i", "--input-file-list", action='append', nargs=2, 
+                            metavar=('FILE', 'N_READS'), help="Input file list and N reads per event")
+        
+        parser.add_argument("-g", "--glob", action='append', nargs=3,
+                            metavar=('NAME', 'GLOB', 'NREADS'),
+                            help="Glob pattern to read input files (use '\\\\*' for wildcard character)")
+        
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
+        
         parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
+        
         parser.add_argument("json_template_file", help="Job template in JSON format")
+        
         parser.add_argument("job_store", help="Output file containing the JSON job store")
+        
         cl = parser.parse_args()
         
         self.json_template_file = cl.json_template_file
@@ -61,6 +77,14 @@ class JobStore:
         self.repeat = cl.repeat
         if self.repeat < 1:
             raise Exception('Bad value for repeat argument: %d' % self.repeat)
+        
+        self.glob_readers = [] 
+        if cl.glob is not None:
+            for g in cl.glob:
+                name = g[0]
+                wildcard = g[1]
+                nreads = int(g[2])
+                self.glob_readers.append(GlobReader(name, wildcard, nreads))
  
     def get_iter_vars(self):
         """
@@ -96,6 +120,9 @@ class JobStore:
         
         self.list_reader.open()
         
+        for glob_reader in self.glob_readers:
+            glob_reader.open()
+        
         # Loop over the variable lists and substitute into the template
         seed = self.seed
         job_id = self.job_start
@@ -110,11 +137,17 @@ class JobStore:
                 
                 file_vars = self.list_reader.read_next()
                 for name,path in file_vars.iteritems():
-                    mapping[name] = path
-                
+                    mapping[name] = path   
+                    
+                for glob_reader in self.glob_readers:
+                    file_vars = glob_reader.read_next()
+                    for name,path in file_vars.iteritems():
+                        mapping[name] = path
+                                
                 job_str = tmpl.substitute(mapping)
                 job_json = json.loads(job_str)
                 job_json["job_id"] = job_id
+                job_json["seed"] = seed
                 jobs.append(job_json)
                                 
                 job_id +=1
@@ -156,15 +189,13 @@ class JobStore:
     def has_job_id(self, job_id):
         """Return true if the job ID exists in the store."""
         return job_id in self.data.keys()
-    
-# TODO: instead of keeping file handles open, read in all files at beginning of job into 
-#       lists and pop them in read_next()
+
 class FileListReader:
     
     def __init__(self, flists):
         self.flists = flists
         self.fhandles = {}
-
+        
     def open(self):
         for flist,nread in self.flists:
             list_name = os.path.splitext(os.path.basename(flist))[0]
@@ -189,7 +220,29 @@ class FileListReader:
                 f.close()
             except:
                 pass
+
+class GlobReader:
+    """Read list of input files using a glob pattern."""
     
+    def __init__(self, name, wildcard, nread):
+        self.name = name
+        self.wildcard = wildcard
+        self.nread = nread
+    
+    def open(self):
+        glob_hack = self.wildcard.replace('\*', '*')
+        files = glob.glob(glob_hack)
+        if not len(files):
+            raise Exception("No files found matching: %s" % (glob_hack))
+        self.files = files
+        
+    def read_next(self):
+        file_vars = {}
+        for i in range(self.nread):
+            file = self.files.pop()
+            file_vars['_'.join([self.name, str(i + 1)])] = file
+        return file_vars
+                
 # Run from the command line to create a new job store
 if __name__ == "__main__":
     jobstore = JobStore()
