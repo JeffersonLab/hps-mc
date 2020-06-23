@@ -115,7 +115,6 @@ class JobStore:
                 job_str = tmpl.substitute(mapping)
                 job_json = json.loads(job_str)
                 job_json["job_id"] = job_id
-                job_json["seed"] = seed
                 jobs.append(job_json)
                                 
                 job_id +=1
