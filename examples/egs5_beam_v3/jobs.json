@@ -2,7 +2,7 @@
     {
         "job_id": 1, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 1, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -12,7 +12,7 @@
     {
         "job_id": 2, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 2, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -22,7 +22,7 @@
     {
         "job_id": 3, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 3, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -32,7 +32,7 @@
     {
         "job_id": 4, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 4, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -42,7 +42,7 @@
     {
         "job_id": 5, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 5, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -52,7 +52,7 @@
     {
         "job_id": 6, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 6, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -62,7 +62,7 @@
     {
         "job_id": 7, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 7, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -72,7 +72,7 @@
     {
         "job_id": 8, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 8, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -82,7 +82,7 @@
     {
         "job_id": 9, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 9, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
@@ -92,7 +92,7 @@
     {
         "job_id": 10, 
         "output_dir": "output/2pt3/egs_v3", 
-        "seed": 1000001, 
+        "seed": 10, 
         "bunches": 500000, 
         "run_params": "2pt3", 
         "output_files": {
