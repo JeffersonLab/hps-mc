@@ -1,5 +1,5 @@
 # Save output to three separate files (stdout and stderr of components and logging output)
-hps-mc-job run -n -d $PWD/scratch -c .hpsmc -l job.log -o job.out -e job.err slic job.json
+hps-mc-job run -d $PWD/scratch -c .hpsmc -l job.log -o job.out -e job.err slic job.json
 
 # Print all output to the console
 #hps-mc-job run -n -d $PWD/scratch -c .hpsmc slic job.json

@@ -1,1 +1,1 @@
-hps-mc-job run -n -d $PWD/scratch -c .hpsmc tritrig_beam job.json
+hps-mc-job run -d $PWD/scratch -c .hpsmc tritrig_beam job.json

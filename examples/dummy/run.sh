@@ -1,1 +1,1 @@
-hps-mc-job run -n -d $PWD/scratch -c .hpsmc dummy job.json
+hps-mc-job run -d $PWD/scratch -c .hpsmc dummy job.json
