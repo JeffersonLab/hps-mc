@@ -17,7 +17,6 @@ if 'nevents' in job.params:
 else:
     nevents = 10000
 
-
 # Input tritrig events (LHE format)
 tritrig_file_name = 'tritrig_events.lhe.gz'
 
@@ -83,7 +82,7 @@ slic_beam = SLIC(inputs=sample_beam.output_files(),
                  ignore_job_params=['nevents'])
 
 # Merge signal and beam events
-merge = LCIOMerge(inputs=[slic.output_files()[0],
+merge = LCIOMerge(inputs=[filter_bunches.output_files()[0],
                           slic_beam.output_files()[0]],
                   outputs=['%s.slcio' % tritrig_beam_name],
                   ignore_job_params=['nevents'])
