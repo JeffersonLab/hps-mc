@@ -1,0 +1,8 @@
+[HPSTR]
+hpstr_install_dir = /work/slac/hpstr/install
+hpstr_base = /work/slac/hpstr
+
+[EvioToLcio]
+hps_java_bin_jar = /home/jermc/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
+java_args = -Xmx1g -XX:+UseSerialGC
+event_print_interval = 10

@@ -1,8 +1,12 @@
 #!/bin/sh
 
+setenv HPSMC_DIR @CMAKE_INSTALL_PREFIX@
+
 setenv PATH @CMAKE_INSTALL_PREFIX@/bin:$PATH
 
 if (! $?PYTHONPATH) then       
     setenv PYTHONPATH ""
 endif
 setenv PYTHONPATH @CMAKE_INSTALL_PREFIX@/lib/python:$PYTHONPATH
+
+setenv MALLOC_CHECK_ 1

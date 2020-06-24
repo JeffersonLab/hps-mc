@@ -1,0 +1,41 @@
+[Job]
+dry_run = False 
+enable_file_chaining = False 
+check_output_files = False
+
+[MG4]
+madgraph_dir = /u/group/hps/users/caot/hps-mc/generators/madgraph4/src
+
+[MG5]
+madgraph_dir = /u/group/hps/users/caot/hps-mc/generators/madgraph5/src
+
+[EGS5]
+egs5_dir = /u/group/hps/users/caot/hps-mc/generators/egs5
+
+[StdHepConverter]
+egs5_dir = /u/group/hps/users/caot/hps-mc/generators/egs5
+
+[SLIC]
+slic_dir = /group/hps/hps_soft/sim/slic/slic-install 
+hps_fieldmaps_dir = /group/hps/hps_soft/fieldmap 
+detector_dir = /group/hps/hps_soft/detector-data/detectors  
+
+[JobManager]
+hps_java_bin_jar = /u/group/hps/hps_soft/hps-java/hps-distribution-4.5-SNAPSHOT-bin_d1f1906b4.jar 
+java_args = -Xmx1g -XX:+UseSerialGC
+
+[FilterBunches]
+hps_java_bin_jar = /u/group/hps/hps_soft/hps-java/hps-distribution-4.5-SNAPSHOT-bin_d1f1906b4.jar 
+
+[ExtractEventsWithHitAtHodoEcal]
+hps_java_bin_jar = /u/group/hps/hps_soft/hps-java/hps-distribution-4.5-SNAPSHOT-bin_d1f1906b4.jar
+
+[HPSTR]
+hpstr_install_dir = /group/hps/sw/hpstr/dev/install-centos7-gcc4.8.5
+hpstr_base = /group/hps/sw/hpstr/dev/src 
+
+[LCIOCount]
+lcio_bin_jar = /group/hps/hps_soft/sim/lcio/lcio/target/lcio-2.7.4-SNAPSHOT-bin.jar 
+
+[LCIOMerge]
+lcio_bin_jar = /group/hps/hps_soft/sim/lcio/lcio/target/lcio-2.7.4-SNAPSHOT-bin.jar 

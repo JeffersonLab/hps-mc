@@ -1,0 +1,9 @@
+{
+    "run_params": "1pt05",
+    "bunches": 500000,
+    "seed": 1001002,
+    "output_dir": "output",
+    "output_files": {
+        "beam.stdhep": "egs5_beam_v5_1pt05.stdhep"
+    }
+}

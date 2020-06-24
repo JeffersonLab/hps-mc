@@ -1,0 +1,102 @@
+[
+    {
+        "job_id": 1, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 1, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_1.stdhep"
+        }
+    }, 
+    {
+        "job_id": 2, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 2, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_2.stdhep"
+        }
+    }, 
+    {
+        "job_id": 3, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 3, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_3.stdhep"
+        }
+    }, 
+    {
+        "job_id": 4, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 4, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_4.stdhep"
+        }
+    }, 
+    {
+        "job_id": 5, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 5, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_5.stdhep"
+        }
+    }, 
+    {
+        "job_id": 6, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 6, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_6.stdhep"
+        }
+    }, 
+    {
+        "job_id": 7, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 7, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_7.stdhep"
+        }
+    }, 
+    {
+        "job_id": 8, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 8, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_8.stdhep"
+        }
+    }, 
+    {
+        "job_id": 9, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 9, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_9.stdhep"
+        }
+    }, 
+    {
+        "job_id": 10, 
+        "output_dir": "output/2pt3/egs_v3", 
+        "seed": 10, 
+        "bunches": 500000, 
+        "run_params": "2pt3", 
+        "output_files": {
+            "beam.stdhep": "beam_egs_v3_2pt3_10.stdhep"
+        }
+    }
+]

@@ -46,7 +46,6 @@ index.html
 
 build
 install
-scratch
 
 .cproject
 .project
@@ -54,3 +53,18 @@ scratch
 .settings
 
 *.pyc
+
+# Log files
+*.log
+
+# Generated files
+*.slcio
+*.lhe.gz
+*.lhe
+*.stdhep
+
+# The stdhep-lib build creates this
+log.mcfio.*
+
+examples/*/output
+examples/*/scratch
