@@ -1,0 +1,34 @@
+[
+    {
+        "run_number": 10666, 
+        "job_id": 1, 
+        "target_z": -7.51, 
+        "nevents": 1000, 
+        "seed": 1, 
+        "output_dir": "output/2019/pass0", 
+        "run_params": "4pt55", 
+        "detector": "HPS-PhysicsRun2019-v2-4pt5", 
+        "output_files": {
+            "tritrig_unweighted_events_mom_rot.slcio": "slic/tritrig_1.slcio", 
+            "tritrig_unweighted_events.lhe.gz": "lhe/tritrig_1.lhe.gz", 
+            "tritrig_unweighted_events.stdhep": "egs5/tritrig_1.stdhep", 
+            "tritrig_unweighted_events_mom.stdhep": "stdhep/tritrig_1.stdhep"
+        }
+    }, 
+    {
+        "run_number": 10666, 
+        "job_id": 2, 
+        "target_z": -7.51, 
+        "nevents": 1000, 
+        "seed": 2, 
+        "output_dir": "output/2019/pass0", 
+        "run_params": "4pt55", 
+        "detector": "HPS-PhysicsRun2019-v2-4pt5", 
+        "output_files": {
+            "tritrig_unweighted_events_mom_rot.slcio": "slic/tritrig_2.slcio", 
+            "tritrig_unweighted_events.lhe.gz": "lhe/tritrig_2.lhe.gz", 
+            "tritrig_unweighted_events.stdhep": "egs5/tritrig_2.stdhep", 
+            "tritrig_unweighted_events_mom.stdhep": "stdhep/tritrig_2.stdhep"
+        }
+    }
+]
