@@ -346,8 +346,8 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
-	if "input_files" in job_params.keys():
-            inputfiles = job_params["input_files"]
+        if 'input_files' in job_params.keys():
+            inputfiles = job_params['input_files']
             for src,dest in inputfiles.iteritems():
                 input_elem = ET.SubElement(job, "Input")
                 input_elem.set("dest", dest)

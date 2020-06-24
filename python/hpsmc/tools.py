@@ -739,14 +739,14 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
 
     def __init__(self, **kwargs):
 
-	if "num_hodo_hits" in kwargs:
-	    self.num_hodo_hits = kwargs['num_hodo_hits']
-	else:
+    	if "num_hodo_hits" in kwargs:
+    	    self.num_hodo_hits = kwargs['num_hodo_hits']
+    	else:
             self.num_hodo_hits = 0
-
-	if "event_interval" in kwargs:
-	    self.event_interval = kwargs['event_interval']
-	else:
+    
+    	if "event_interval" in kwargs:
+    	    self.event_interval = kwargs['event_interval']
+    	else:
             self.event_interval = 250
 
         JavaTool.__init__(self,
