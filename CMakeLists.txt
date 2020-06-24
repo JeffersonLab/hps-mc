@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(hps-mc VERSION 0.0.1)
+project(hps-mc VERSION 2.0.0)
 
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran)
