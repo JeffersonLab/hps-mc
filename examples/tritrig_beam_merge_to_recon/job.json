@@ -1,0 +1,22 @@
+{
+    "run_number": 10666, 
+    "job_id": 1, 
+    "run_params": "4pt55",
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSingles.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    }, 
+    "input_files": {
+        "/u/group/hps/users/caot/test/hps-mc/examples/tritrig_gen_to_slic/output/2019/pass0/slic/tritrig.slcio": "tritrig.slcio", 
+        "/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_1.slcio": "beam_1.slcio",
+        "/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_2.slcio": "beam_2.slcio",
+        "/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_3.slcio": "beam_3.slcio",
+        "/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_4.slcio": "beam_4.slcio"
+    }, 
+    "output_files": {
+	"tritrig-beam_readout.slcio": "readout/tritrig-beam.slcio",
+        "tritrig-beam_recon.slcio": "recon/tritrig-beam.slcio"
+    }, 
+    "output_dir": "output/2019/pass0"
+} 

@@ -1,0 +1,162 @@
+[
+    {
+        "run_number": 7984, 
+        "job_id": 1, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_1.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 2, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_2.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 3, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_3.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 4, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_4.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 5, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_5.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 6, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_6.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 7, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_7.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 8, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_8.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 9, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_9.slcio"
+        }
+    }, 
+    {
+        "run_number": 7984, 
+        "job_id": 10, 
+        "steering_files": {
+            "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim", 
+            "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim"
+        }, 
+        "target_z": -4.3, 
+        "nevents": 1000, 
+        "output_dir": "output", 
+        "run_params": "2pt3", 
+        "detector": "HPS-PhysicsRun2016-Pass2", 
+        "output_files": {
+            "recon": "tritrig_recon_10.slcio"
+        }
+    }
+]

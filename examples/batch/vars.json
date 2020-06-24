@@ -1,0 +1,5 @@
+{
+    "detector": ["HPS-PhysicsRun2019-v1-4pt5"],
+    "nevents": [10],
+    "run_number": [8000]
+}

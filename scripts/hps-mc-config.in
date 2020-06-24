@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+@PYTHON@ @CMAKE_INSTALL_PREFIX@/lib/python/hpsmc/config_writer.py $@

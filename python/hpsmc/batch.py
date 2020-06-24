@@ -1,72 +1,77 @@
+"""Provides a set of scripts for submitting batch jobs including support for
+local running, a multiprocessing pool, LSF, and Auger."""
+
 import argparse, json, os, subprocess, getpass, sys, time, logging, signal, multiprocessing
+import psutil
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
+from multiprocessing import Queue
 
-from workflow import Workflow
+from job_store import JobStore
+from script_db import JobScriptDatabase
 
 logger = logging.getLogger("hpsmc.batch")
+logger.setLevel(logging.DEBUG)
+
+run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
 class Batch:
     """Generic interface to a batch system."""
     
-    def __init__(self):
-        self.sys = 'NONE'
-    
-    def parse_args(self):
+    def parse_args(self, args):
         """Parse command line arguments and perform setup."""
         
-        parser = argparse.ArgumentParser("Batch system command line interface")
-        parser.add_argument("-e", "--email", nargs='?', help="Your email address", required=False)
-        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)
-        parser.add_argument("-x", "--dryrun", action='store_true', help="Process the workflow but do not actually submit the jobs", required=False)        
-        parser.add_argument("-l", "--log-dir", nargs=1, help="Log file output dir", required=False)
-        parser.add_argument("-c", "--check-output", action='store_true', required=False)
+        parser = argparse.ArgumentParser("batch.py",
+                                         epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
+        parser.add_argument("-c", "--config-file", nargs='?', help="Config file", action='append')
+        parser.add_argument("-l", "--log-dir", nargs='?', help="Log file output dir", required=False, default=os.getcwd())
+        parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (ignored for Auger and LSF)")
+        parser.add_argument("-q", "--queue", nargs='?', help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)", required=False)
+        parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
+        parser.add_argument("-p", "--pool-size", type=int, help="Job pool size (only applicable when running pool)", required=False, default=multiprocessing.cpu_count())
+        parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
+        parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
+        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)   
+        parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
-        parser.add_argument("-r", "--job-range", help="Submit jobs numbers within range (e.g. '1:100')", required=False)
-        parser.add_argument("-n", "--nsub", type=int, default=-1, help="Number of jobs to submit before waiting when using staggered submission", required=False)
-        parser.add_argument("-t", "--time", type=int, default=0, help="Number of seconds to wait before submitting next job set when using staggered submission", required=False)
-        parser.add_argument("-q", "--queue", nargs=1, help="Job queue for submission (e.g. 'long' or 'medium' at SLAC)", required=False)
-        parser.add_argument("-W", "--job-length", nargs=1, help="Max job length in hours", required=False)
-        parser.add_argument("-p", "--pool-size", nargs=1, help="Job pool size (only applicable to local job pool)", required=False)
-        parser.add_argument("jobstore", nargs=1, help="Job store in JSON format")
+        parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
+        parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
+        parser.add_argument("script", nargs='?', help="Name of job script")
+        parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
-        cl = parser.parse_args()
-                
-        if not os.path.isfile(cl.jobstore[0]):
-            raise Exception("The job store file '%s' does not exist." % cl.jobstore[0])
-        self.workflow = Workflow(cl.jobstore[0])
-        
-        self.script = self.workflow.job_script
-        if not os.path.isfile(self.script):
-            raise Exception("The script '%s' does not exist." % self.script)
-        
-        if cl.email:
-            self.email = cl.email
-        else:
-            self.email = None
             
+        cl = parser.parse_args(args)
+ 
+        if cl.script is None:
+            raise Exception('The script is a required argument.')                
+        self.script_name = cl.script # Name of script    
+        script_db = JobScriptDatabase()
+        if not script_db.exists(self.script_name):
+            raise Exception('The script name is not valid: %s' % self.script_name)
+        self.script = script_db.get_script_path(self.script_name) # Path to script
+        if not os.path.isfile(self.script):
+            raise Exception('The job script does not exist: %s' % self.script)       
+
+        if cl.jobstore is None:
+            raise Exception('The job store file is a required argument.')
+        if not os.path.isfile(cl.jobstore):
+            raise Exception('The job store does not exist: %s' % cl.jobstore)
+        self.jobstore = JobStore(cl.jobstore)
+         
+        self.email = cl.email
+             
         self.debug = cl.debug
         
-        self.dryrun = cl.dryrun        
-
-        self.workdir = self.workflow.workdir
-
-        try:
-            os.stat(self.workdir)
-        except:
-            raise Exception("The work dir does not exist: " + self.workdir)
-
-        if cl.log_dir:            
-            self.log_dir = cl.log_dir[0]
-        else:
-            self.log_dir = os.getcwd()        
-        try:
-            os.stat(self.log_dir)
-        except:
+        self.log_dir = cl.log_dir
+        if not os.path.isabs(self.log_dir):
+            raise Exception('The log dir is not an abs path: %s' % self.log_dir)
+        # FIXME: This probably shouldn't happen here.
+        if not os.path.exists(self.log_dir):
+            logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
-            
+                   
         self.check_output = cl.check_output
                     
         if cl.jobids:                    
@@ -79,7 +84,7 @@ class Batch:
         if cl.job_range:
             toks = cl.job_range.split(':')
             if len(toks) != 2:
-                raise ValueError("Bad format for job range: " + cl.job_range)
+                raise ValueError('Bad format for job range: ' + cl.job_range)
             self.start_job_num = int(toks[0])
             self.end_job_num = int(toks[1])
             if self.start_job_num > self.end_job_num:
@@ -89,222 +94,268 @@ class Batch:
         else:
             self.start_job_num = None
             self.end_job_num = None
-            
-        self.jobs = self.workflow.get_jobs()          
-        
-        self.nsub = cl.nsub
-        self.waittime = cl.time
-        if self.nsub > 0 and self.waittime > 0:
-            print "Job submission staggering is enabled."
-            self.enable_staggered = True
-        else:
-            print "Job submission staggering is disabled."
-            self.enable_staggered = False
+                    
+        self.queue = cl.queue
+        self.os = cl.os
 
-        if cl.queue:
-            self.queue = cl.queue[0]
-        else:
-            self.queue = "long"
-
-        if cl.job_length:
-            self.job_length = int(cl.job_length[0])
-        else:
-            self.job_length = 48
-            
-        if cl.pool_size:
-            self.pool_size = int(cl.pool_size[0])
-        else:
-            self.pool_size = 8 
+        self.job_length = cl.job_length         
+        self.memory = cl.memory
+                    
+        self.pool_size = int(cl.pool_size)
         
+        if cl.config_file:
+            self.config_files = map(os.path.abspath, cl.config_file)
+        else:
+            self.config_files = []
+                 
+        self.run_dir = cl.run_dir
+                
+        return cl
+        
+    def submit_cmd(self, job_id, job_data):
+        """
+        Submit a single batch job and return the batch ID.
+        Must be implemented by derived classes for a specific batch system.
+        """
+        return NotImplementedError
+    
     @staticmethod
-    def outputs_exist(job):
-        """Check if job outputs exist.  Returns False when first missing output is found."""
+    def _outputs_exist(job):
+        """Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].iteritems():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                print "Job %d output '%s' does not exist." % (job["job_id"], dest)
+                logger.warning('Job output does not exist: %s' % (dest))
                 return False
         return True
+    
+    def get_filtered_job_ids(self):
+        """
+        Get a list of job IDs to submit based on parsed command line options.
+        """        
+        submit_ids = self.jobstore.get_job_ids()
+        if self.start_job_num:
+            submit_ids = [id for id in submit_ids 
+                          if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
+        elif len(self.job_ids):
+            submit_ids = self.job_ids
+        return submit_ids
         
     def submit(self):
         """
-        Primary method for submitting jobs based on current command line arguments.
+        Primary public method for submitting jobs after args are parsed.
         """
-        if self.start_job_num:
-            if self.enable_staggered:
-                # Submit a specified range of job IDs, waiting between job sets.
-                self.submit_staggered(self.start_job_num, self.end_job_num)
-            else:
-                # Submit from a specified range of job IDs.
-                self.submit_job_range(self.start_job_num, self.end_job_num)
-        elif len(self.job_ids):
-            # Submit jobs from a set of specified job IDs.  Submissions staggering not usable.
-            self.submit_jobs(self.job_ids)
-        else:
-            if self.enable_staggered:
-                # Submit all jobs, waiting between job sets.
-                self.submit_staggered()
-            else:
-                # Submit all jobs in the workflow.
-                self.submit_all()
-
-    def submit_all(self):
-        """Submit all jobs in the workflow to the batch system."""        
-        for k in sorted(self.jobs):
-            self.submit_job(k, self.jobs[k])
-            
-    def submit_staggered(self, job_start = 0, job_end = sys.maxint):
-        """Submit range of jobs from the workflow to the batch system with a wait time between job sets."""
-        print "Submitting %d jobs at a time and waiting %d seconds between submissions ..." % (self.nsub, self.waittime)
-        submitted = 0
-        for k in sorted(self.jobs):            
-            job = self.jobs[k]
-            id = job["job_id"]
-            if id >= job_start and id <= job_end:
-                self.submit_job(k, self.jobs[k])
-                submitted += 1
-            if submitted == self.nsub:
-                print "Waiting for %d seconds before submitting next set of jobs ..." % self.waittime
-                time.sleep(self.waittime)
-                print "Done waiting!"
-                submitted = 0
-                    
-    def submit_job(self, name, job):
+        job_ids = self.get_filtered_job_ids()
+        logger.info('Submitting jobs: %s' % str(job_ids))
+        self._submit_jobs(job_ids)
+        
+    def _submit_job(self, job_id, job):
         """Submit a single job to the batch system."""
-        job_id = job["job_id"]
-        res = None
-        if not len(self.job_ids) or job_id in self.job_ids:
-            if not self.check_output or not Batch.outputs_exist(job):
-                batch_id = self.submit_cmd(name, job)                
-                print "Submitted <%s> with batch ID <%s>" % (name, str(batch_id))
-            else:
-                print "Outputs for <%s> already exist so submit is skipped." % name
+        batch_id = None
+        if self.check_output and Batch._outputs_exist(job):
+            logger.warning('Skipping submission for job because outputs already exist: %s' % job_id)
+        else:
+            batch_id = self.submit_cmd(job_id, job)
+            logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
+        return batch_id
     
-    def submit_jobs(self, job_ids):
+    def _submit_jobs(self, job_ids):
         """Submit the jobs with the specified job IDs to the batch system."""
-        for k in self.jobs:        
-            if self.jobs[k]["job_id"] in self.job_ids:
-                j = self.jobs[k]
-                self.submit_job(k, j)
-                
-    def submit_job_range(self, start_job_num, end_job_num):
-        """Submit jobs using a range of job IDs."""
-        for k in sorted(self.jobs):            
-            job = self.jobs[k]
-            id = job["job_id"]
-            if id >= self.start_job_num and id <= self.end_job_num:
-                self.submit_job(k, job)
-    
-    def submit_cmd(name, jobparams):
+        for job_id in job_ids:
+            if not self.jobstore.has_job_id(job_id):
+                raise Exception('Job ID was not found in job store: %s' % job_id)
+            job_data = self.jobstore.get_job(job_id)
+            self._submit_job(job_id, job_data)
+                    
+    def build_cmd(self, job_id, job_params, set_job_dir=True):
         """
-        Submit a single batch job and return the batch ID.
-        Must be implemented by derived classes.
+        Create the command to run a single job.
+        
+        This generically creates the command to run the job locally but subclasses
+        may override if necessary.
         """
-        raise NotImplementedError
-     
-    def check_outputs(self):
-        """Checks if job outputs exist and prints the results."""
-        for k in sorted(self.jobs):
-            j = self.jobs[k]
-            job_id = j["job_id"]
-            if not outputs_exist(j):
-                print "Job <%d> outputs do not exist." % job_id
-                
-    def get_job_file_path(self, job_name):
-        return os.path.join(self.workdir, job_name + ".json")
-    
+        cmd = ['python', run_script, 'run']
+        cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
+                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
+                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
+                    ])
+        if set_job_dir:
+            job_dir = os.path.join(self.run_dir, str(job_id))
+            cmd.extend(['-d', job_dir])
+        if len(self.config_files):
+            for cfg in self.config_files:
+                cmd.extend(['-c', cfg])
+        if self.job_steps > 0:
+            cmd.extend(['--job-steps', str(self.job_steps)])
+        cmd.extend(['-i', str(job_id)])
+        cmd.append(self.script)
+        cmd.append(os.path.abspath(self.jobstore.path))
+        logger.debug("Job command: %s" % " ".join(cmd))
+        return cmd  
+            
 class LSF(Batch):
-    """Manage LSF batch jobs."""
+    """Submit LSF batch jobs."""
     
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
-        self.sys = 'LSF'
         
-    def parse_args(self):
-        Batch.parse_args(self)
+    def parse_args(self, args):
+        Batch.parse_args(self, args)
         if self.email:
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
     def build_cmd(self, name, job_params):
-        param_file = os.path.join(self.workdir, name + ".json")
-        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        cmd = ["bsub", "-W", str(self.job_length) + ":0", "-q", self.queue, "-o",  log_file, "-e",  log_file]
-        #cmd.extend(["python", self.script, "-o", "job.out", "-e", "job.err", os.path.abspath(param_file)])
-        cmd.extend(["python", self.script])        
-        if self.job_steps > 0:
-            cmd.extend(["--job-steps", str(self.job_steps)])
-        cmd.append(os.path.abspath(param_file))
-        #job_params["output_files"]["job.out"] = name+".out"
-        #job_params["output_files"]["job.err"] = name+".err"
-        with open(param_file, "w") as jobfile:
-            json.dump(job_params, jobfile, indent=2, sort_keys=True)
+        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
+        
+        queue = self.queue
+        if queue is None:
+            queue = 'long'
+        
+        if self.os is not None:
+            lsf_os = self.os
+        else:
+            lsf_os = 'centos7'
+        
+        cmd = ['bsub', 
+               '-W', str(self.job_length) + ':0', 
+               '-q', queue,
+               '-R', lsf_os, 
+               '-o', log_file,
+               '-e', log_file]
+        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))        
+        
         return cmd
 
     def submit_cmd(self, name, job_params): 
         cmd = self.build_cmd(name, job_params)
-        print ' '.join(cmd)
-        if not self.dryrun:
-            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            out,err = proc.communicate()
-            if err != None and len(err):
-                raise Exception("Submit error '%s'." % err)
-            tokens = out.split(' ')
-            if tokens[0] != 'Job':
-                raise Exception("Unexpected output '%s' from bsub command." % out)
-            batch_id = int(tokens[1].replace('<', '').replace('>', ''))
-            return batch_id
-        else:
-            return None
-    
+        logger.info('Submitting job %s to LSF with command: %s' % (name, ' '.join(cmd)))
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out,err = proc.communicate()
+        if err != None and len(err):
+            logger.warning(err)
+        tokens = out.split(' ')
+        if tokens[0] != 'Job':
+            raise Exception('Unexpected output from bsub command: %s' % out)
+        batch_id = int(tokens[1].replace('<', '').replace('>', ''))
+        return batch_id
+
 class Auger(Batch):
-    """Manage Auger batch jobs."""
+    """Submit Auger batch jobs."""
 
     def __init__(self):
         self.setup_script = find_executable('hps-mc-env.csh') 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
-        self.sys = 'Auger'
-   
-    def build_job_files(self, name, job_params):
 
-        param_file = os.path.join(self.workdir, name + ".json")
+    def submit(self):
+        """Primary batch submission method for Auger."""
 
+        job_ids = self.get_filtered_job_ids()
+        logger.info('Submitting jobs: %s' % str(job_ids))
+        req = self._create_req(self.script_name) # create request XML header
+        for job_id in job_ids:
+            if not self.jobstore.has_job_id(job_id):
+                raise Exception('Job ID was not found in job store: %s' % job_id)
+            job_params = self.jobstore.get_job(job_id)
+            if self.check_output and Batch._outputs_exist(job_params):
+                logger.warning("Skipping Auger submission for job " 
+                               "because outputs already exist: %d" % job_id)
+            else:
+                self._add_job(req, job_params) # add job to request
+        xml_filename = self._write_req(req)    # write request to file
+        auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
+        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
+
+    def _jsub(self, xml_filename):
+        cmd = ['jsub', '-xml', xml_filename]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        out, err = proc.communicate()
+        auger_ids = self._get_auger_ids(out)
+        return auger_ids 
+
+    def _get_auger_ids(self, out):
+        auger_ids = []
+        for line in out.splitlines():
+            if line.strip().startswith('<jsub>'):
+                j = ET.fromstring(line)
+                for req in j.getchildren():
+                    for child in req.getchildren():
+                        if child.tag == 'jobIndex':
+                            auger_id = int(child.text)
+                            auger_ids.append(auger_id)
+                        elif child.tag == 'error':
+                            # Submission failed so raise an exception with the error msg
+                            raise Exception(child.text)
+                break
+        return auger_ids
+
+    def _write_req(self, req, filename='temp.xml'):
+        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
+        with open(filename, 'w') as f:
+            f.write(pretty)
+            return f.name
+
+    def _create_req(self, req_name):
         req = ET.Element("Request")
-        req_name = ET.SubElement(req, "Name")
-        req_name.set("name", name)
+        name_elem = ET.SubElement(req, "Name")
+        name_elem.set("name", req_name)
         prj = ET.SubElement(req, "Project")
         prj.set("name", "hps")
         trk = ET.SubElement(req, "Track")
         if self.debug:
+            # Queue arg is not used when debug flag is active.
             trk.set("name", "debug")
         else:
-            trk.set("name", "simulation")
+            # Queue name is used to set job track.
+            queue = 'simulation'
+            if self.queue is not None:
+                queue = self.queue
+            trk.set("name", queue)
         if self.email:
             email = ET.SubElement(req, "Email")
             email.set("email", self.email)
             email.set("request", "true")
             email.set("job", "true")
         mem = ET.SubElement(req, "Memory")
-        mem.set("space", "2000")
+        mem.set("space", str(self.memory))
         mem.set("unit", "MB")
-        limit = ET.SubElement(req, "TimeLimit")
-        if self.debug:
-            limit.set("time", "4")
-        else:
-            limit.set("time", "24")
+        limit = ET.SubElement(req, "TimeLimit")        
+        limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
-        os_elem.set("name", "centos7")
+        if self.os is not None:
+            auger_os = self.os
+        else:
+            auger_os = 'general'
+        os_elem.set("name", auger_os) 
+        return req
 
+    def build_cmd(self, job_id, job_params):
+        cmd = ['python', run_script, 'run']
+        #cmd.extend(['-d', '/scratch/%d' % job_id])
+        if len(self.config_files):
+            for cfg in self.config_files:
+                cmd.extend(['-c', cfg])
+        if self.job_steps > 0:
+            cmd.extend(['--job-steps', str(self.job_steps)])
+        cmd.extend(['-i', str(job_id)])
+        cmd.append(self.script)
+        cmd.append(os.path.abspath(self.jobstore.path))
+        logger.debug("Job command: %s" % " ".join(cmd))
+        return cmd  
+  
+    def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
-        inputfiles = job_params["input_files"]
-        for dest,src in inputfiles.iteritems():
-            input_elem = ET.SubElement(job, "Input")
-            input_elem.set("dest", dest)
-            if src.startswith("/mss"):
-                src_file = "mss:%s" % src
-            else:
-                src_file = src
-            input_elem.set("src", src_file)
+        job_id = job_params['job_id']
+        if 'input_files' in job_params.keys():
+            inputfiles = job_params['input_files']
+            for src,dest in inputfiles.iteritems():
+                input_elem = ET.SubElement(job, "Input")
+                input_elem.set("dest", dest)
+                if src.startswith("/mss"):
+                    src_file = "mss:%s" % src
+                else:
+                    src_file = src
+                input_elem.set("src", src_file)
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
         outputdir = os.path.realpath(outputdir)
@@ -316,145 +367,163 @@ class Auger(Batch):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
         job_err = ET.SubElement(job, "Stderr")
-        log_file = os.path.abspath(os.path.join(self.log_dir, name+".log"))
-        job_err.set("dest", log_file)
+        stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
+        stderr_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.err" % job_id))
+        job_err.set("dest", stderr_file)
         job_out = ET.SubElement(job, "Stdout")
-        job_out.set("dest", log_file)
+        job_out.set("dest", stdout_file)
                 
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
+        cmd_lines.append('pwd')
+        cmd_lines.append('\n')
         cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
-        job_cmd = "python %s %s" % (os.path.realpath(self.script), os.path.join(os.getcwd(), param_file))
+        cmd_lines.append('\n')
+
+        job_cmd = self.build_cmd(job_id, job_params)
+        
         if self.job_steps > 0:
             job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
-        cmd_lines.append(job_cmd)
+        cmd_lines.extend(job_cmd)
+       
+        cmd_lines.append('\n')
+        cmd_lines.append('ls -lah .')
+
         cmd_lines.append("]]>")
-        cmd.text = '\n'.join(cmd_lines)
-
-        with open(param_file, "w") as jobfile:
-             json.dump(job_params, jobfile, indent=2, sort_keys=True)
-        print "Wrote job param file <%s>" % (param_file)
-
-        pretty = unescape(minidom.parseString(ET.tostring(req)).toprettyxml(indent = "  "))
-        xml_file = os.path.join(self.workdir, name+".xml")
-        with open(xml_file, "w") as f:
-            f.write(pretty)
-        print "Wrote Auger XML <%s>" % xml_file
-
-        return param_file, xml_file
-
-    def submit_cmd(self, name, job_params):
-        param_file,xml_file = self.build_job_files(name, job_params)
-        cmd = ['jsub', '-xml', xml_file]
-        print ' '.join(cmd)
-        if not self.dryrun:
-            proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
-            out, err = proc.communicate()
-            print out
-            jobid = None
-            if "<jobIndex>" in out:
-                jobid = int(out[out.find("<jobIndex>")+10:out.find("</jobIndex>")].strip())
-            return jobid
-        else:
-            print "Job <%s> was not submitted." % name
-            return None
-        print        
+        #print(cmd_lines)
+        cmd.text = ' '.join(cmd_lines)
 
 class Local(Batch):
-    """Run a local batch job on the current system."""
-    
-    def __init__(self):
-        self.sys = 'local'
-        
-    def parse_args(self):
-        Batch.parse_args(self)
-
-    def build_cmd(self, name, job_params):
-        param_file = os.path.join(self.workdir, name + ".json")
-        with open(param_file, "w") as jobfile:
-            json.dump(job_params, jobfile, indent=2, sort_keys=True)
-        cmd = ["python", self.script, os.path.abspath(param_file)]
-        if self.job_steps > 0:
-            cmd.extend(["--job-steps", str(self.job_steps)])
-        return cmd
+    """Run a local batch jobs sequentially."""
+            
+    def parse_args(self, args):
+        Batch.parse_args(self, args)
 
     def submit_cmd(self, name, job_params):
         """Run a single job locally."""
-        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
+#        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
         cmd = self.build_cmd(name, job_params)
         if self.submit:
-            print "Executing local job <%s>" % name
-            proc = subprocess.Popen(cmd, shell=False, stdout=log_out, stderr=log_out)
+            logger.info("Executing local job %s" % name)
+            proc = subprocess.Popen(cmd, shell=False)
             proc.communicate()
-            log_out.close()
+#            log_out.close()
             if proc.returncode:
-               print "ERROR: Local execution of <%s> returned error code: %d" + (name, proc.returncode)
-            raise Exception("Local job execution failed.")
-        else:
-            return None
-                
-def run_job_pool(args):
-    run_job_pool_args(*args)
-    
-def run_job_pool_args(job_name, script, param_file, job_dir):
-    #logger.info("Running job %s" % job_name)
-    if not os.path.isdir(job_dir):
-        logger.info("Creating job dir '%s" % job_dir)
-        os.mkdir(job_dir)
-    log_file = os.path.join(job_dir, "%s.log" % job_name)
-    cmd = ["python", script, "-d", job_dir, "-o", log_file, "-e", log_file, param_file]
-    sys.stdout.flush()
-    #returncode = subprocess.call(cmd, stdout=log, stderr=log)
-    returncode = subprocess.call(cmd)
-    try:   
+                logger.error("Local execution of '%s' returned error code: %d" % (name, proc.returncode))
+
+# Queue used to keep track of processes created by batch pool.
+mp_queue = Queue()
+
+def run_job_pool(cmd):
+    """Run the command in a new process which is added to a global MP queue."""
+    try:
         sys.stdout.flush()
-        returncode = subprocess.call(cmd,stdout=log,stderr=log)
-    except CalledProcessError as e:
-        print(str(e))
+        proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
+        mp_queue.put(proc)
+        proc.wait()
+        returncode = proc.returncode
+    except subprocess.CalledProcessError as e:
+        logger.error(str(e))
         sys.stdout.flush()
         pass
     return returncode
+
+class KillProcessQueue():
+    """Kills process objects from an MP queue after exit from a with statement."""
+    
+    def __init__(self, mp_queue):
+        self.mp_queue = mp_queue
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, type, val, tb):
+        logger.debug('Killing %d processes in queue ...' % mp_queue.qsize())
+        while True:
+            proc = mp_queue.get()
+            logger.debug('Checking process %d' % proc.pid)
+            if proc.returncode is None:
+                try:
+                    parent = psutil.Process(proc.pid)
+                    for child in parent.children(recursive=True):
+                        logger.debug('Killing child process %d' % child.pid)
+                        child.kill()
+                    logger.debug('Killing parent process %s' % parent.pid)
+                    parent.kill()
+                except:
+                    pass
+            else:
+                logger.debug('Process %d already finished with returncode %d' % (proc.pid, proc.returncode))
+                                
+            if mp_queue.empty():
+                break
+            
+        logger.debug('Done killing processes!')
                 
 class Pool(Batch):
     """
-    Run a set of jobs in a local pool using Python's multiprocessing module.
+    Run a set of jobs in a local pool using Python's multiprocessing module.    
     """
-    
-    def __init__(self):
-        self.sys = 'pool'
-                    
-    def submit(self):        
-        params = []
-        for job_name in sorted(self.jobs):
-            job_params = self.jobs[job_name]
-            param_file = self.get_job_file_path(job_name)
-            job_dir = os.path.join(os.getcwd(), job_name)
-            params.append([job_name, self.script, param_file, job_dir])
-        print(params)
+                            
+    def submit(self):
+        """Submit jobs to a local processing pool.
+        
+        This method will not return until all jobs are finished or execution
+        is interrupted.
+        """
                 
-        original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
-        pool = multiprocessing.Pool(self.pool_size)
-        signal.signal(signal.SIGINT, original_sigint_handler)      
-        try:
-            res = pool.map_async(run_job_pool, params)
-            # timeout must be properly set, otherwise tasks will crash
-            logger.info("Pool results: " + str(res.get(sys.maxint)))
-            logger.info("Normal termination")
-            pool.close()
-            pool.join()
-        except KeyboardInterrupt:
-            logger.fatal("Caught KeyboardInterrupt, terminating workers")
-            pool.terminate()
-        except Exception as e:
-            logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
-            pool.terminate()
-        except: # catch *all* exceptions
-            e = sys.exc_info()[0]
-            logger.fatal("Caught non-Python Exception '%s'" % (e))
-            pool.terminate()
+        cmds = []
+        for job_id in self.get_filtered_job_ids():
+            job_data = self.jobstore.get_job(job_id)
+            cmd = self.build_cmd(job_id, job_data)            
+            cmds.append(cmd)
+        logger.debug('Running job commands in pool ...')
+        logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
+     
+        if not len(cmds):
+            raise Exception('No job IDs found to submit')
 
-if __name__ == "__main__":
-    batch = LSF()
-    batch.parse_args()
-    batch.submit() 
+        # Run jobs in an MP pool and cleanup child processes on exit        
+        with KillProcessQueue(mp_queue):
+            original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
+            pool = multiprocessing.Pool(self.pool_size)
+            signal.signal(signal.SIGINT, original_sigint_handler)      
+            try:
+                logger.info("Running %d jobs in pool ..." % len(cmds))
+                res = pool.map_async(run_job_pool, cmds)
+                # timeout must be properly set, otherwise tasks will crash
+                logger.info("Pool results: " + str(res.get(sys.maxint)))
+                logger.info("Normal termination")
+                pool.close()
+                pool.join()
+            except KeyboardInterrupt:
+                logger.fatal("Caught KeyboardInterrupt, terminating workers")
+                pool.terminate()
+            except Exception as e:
+                logger.fatal("Caught Exception '%s', terminating workers" % (str(e)))
+                pool.terminate()
+            except: # catch *all* exceptions
+                e = sys.exc_info()[0]
+                logger.fatal("Caught non-Python Exception '%s'" % (e))
+                pool.terminate()
+
+if __name__ == '__main__':
+    system_dict = {
+        "lsf": LSF,
+        "auger": Auger,
+        "local": Local,
+        "pool": Pool
+    }
+    if len(sys.argv) > 1:
+         system = sys.argv[1].lower()
+         if system not in system_dict.keys():
+             raise Exception("The batch system '%s' is not valid." % system)
+         batch = system_dict[system]()
+         args = sys.argv[2:]
+         batch.parse_args(args)
+         batch.submit()
+    else:
+        print("Usage: batch.py [system] [args]")
+        print("    available systems: %s" % ', '.join(system_dict.keys()))
+           

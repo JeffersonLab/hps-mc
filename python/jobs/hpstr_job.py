@@ -1,30 +1,11 @@
-from hpsmc.job import Job
 from hpsmc.tools import HPSTR 
 
-# Initialize the job.
-job = Job(name="HPSTR job")
-job.initialize()
+job.description = 'HPSTR recon and analysis'
 
-params = job.params
-input_files = params.input_files
-output_files = params.output_files
+# Convert LCIO to ROOT
+cnv = HPSTR(cfg='recon')
 
-# Figure out input and output file lists depending on whether 
-# JSON data is a dict or list.
-if isinstance(params.input_files, dict):
-    infiles = params.input_files.keys()
-else:
-    infiles = params.input_files
-if isinstance(params.output_files, dict):
-    outfiles = params.output_files.keys()
-else:
-    outfiles = params.output_files
+# Run an analysis on the ROOT file
+ana = HPSTR(cfg='ana')
 
-hpstr = HPSTR(cfg="recoTuple_cfg.py",
-              run_mode=params.run_mode,
-              inputs=infiles,
-              outputs=outfiles)
-
-job.components.append(hpstr)
-
-job.run()
+job.add([cnv, ana])

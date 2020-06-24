@@ -1,5 +1,9 @@
-import gzip
+"""Miscellaneous math functions."""
+
+import gzip, logging
 from hpsmc.run_params import RunParameters
+
+logger = logging.getLogger("hpsmc.func")
 
 """
 Calculate integrated luminosity.
@@ -13,6 +17,9 @@ def lint(run_params, density = 6.306e-2):
 Extract cross-section from gzipped LHE file.
 """
 def csection(filename):
+    
+    logger.info("Using gzip to open '%s'" % filename)
+    
     with gzip.open(filename, 'rb') as in_file:
         lines = in_file.readlines()
 

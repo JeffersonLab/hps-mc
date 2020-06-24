@@ -1,0 +1,11 @@
+{
+    "input_files": {
+        "/work/slac/hps-mc/examples/wab_beam/output/wab_sampled_1.stdhep": "wab_sampled.stdhep",
+        "/work/slac/hps-mc/examples/beam_sample/output/beam_sampled_1.stdhep": "beam_sampled.stdhep"
+    },
+    "output_files": {
+        "wab-beam.stdhep": "wab-beam_1.stdhep"
+    },
+    "output_dir": "output",
+    "output_name": "wab-beam"
+}
