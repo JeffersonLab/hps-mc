@@ -135,14 +135,17 @@ class JobStore:
                 mapping['job_id'] = str(job_id).zfill(self.pad)
                 mapping['sequence'] = r + 1
                 
+                
                 file_vars = self.list_reader.read_next()
                 for name,path in file_vars.iteritems():
                     mapping[name] = path   
+                    mapping[name + '_basename'] = os.path.splitext(os.path.basename(path))[0]
                     
                 for glob_reader in self.glob_readers:
                     file_vars = glob_reader.read_next()
                     for name,path in file_vars.iteritems():
                         mapping[name] = path
+                        mapping[name + '_basename'] = os.path.splitext(os.path.basename(path))[0]
                                 
                 job_str = tmpl.substitute(mapping)
                 job_json = json.loads(job_str)
