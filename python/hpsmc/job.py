@@ -455,7 +455,7 @@ class Job(object):
                 logger.debug("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.input_files.values())))
                 if not len(c.inputs):
-            c.inputs = self.input_files.values()
+                    c.inputs = self.input_files.values()
             elif i > -1:
                 logger.debug("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.components[i - 1].output_files())))
