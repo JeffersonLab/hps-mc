@@ -226,7 +226,7 @@ class JobManager(Component):
         return ['steering_files']
     
     def optional_parameters(self):
-        return ['detector', 'run_number', 'defs']
+        return ['detector', 'run_number', 'defs', 'event_print_interval']
 
 class HPSTR(Component):
     """
@@ -687,19 +687,19 @@ class FilterBunches(JavaTool):
     Space MC events and apply energy filters to process before readout.
     """
     
-    """
-    The nevents parameter is not settable from JSON in this class. It should
-    be supplied as an init argument in the job script if it needs to be
-    customized (the default nevents and event_interval used to apply spacing 
-    should usually not need to be changed by the user).
-    """
-    
     def __init__(self, **kwargs):
         
-        # FIXME: hard-coded defaults
-        self.ecal_hit_ecut = 0.05        
-        self.event_interval = 250
-                
+        # Default ecal hit cut energy
+        self.filter_ecal_hit_ecut = 0.05        
+        
+        # Default event filtering interval
+        self.filter_event_interval = 250
+        
+        # Default values for other params
+        self.filter_nevents_read = -1
+        self.filter_nevents_write = -1
+        self.filter_no_cuts = False
+                        
         JavaTool.__init__(self, 
                           name='filter_bunches',
                           java_class='org.hps.util.FilterMCBunches',
@@ -709,21 +709,30 @@ class FilterBunches(JavaTool):
     def cmd_args(self):        
         args = JavaTool.cmd_args(self)
         args.append("-e")
-        args.append(str(self.event_interval))
+        args.append(str(self.filter_event_interval))
         for i in self.input_files():
             args.append(i)
         args.append(self.output_files()[0])
-        if self.ecal_hit_ecut > 0:
+        if self.filter_ecal_hit_ecut > 0:
             args.append("-d")
             args.append("-E")
-            args.append(str(self.ecal_hit_ecut))
-        if self.nevents > 0:
-            args.append("-w")
-            args.append(str(self.nevents))
+            args.append(str(self.filter_ecal_hit_ecut))
+        if self.filter_nevents_read > 0:
+            args.append('-n')
+            args.append(str(self.filter_nevents_read))
+        if self.filter_nevents_write > 0:
+            args.append('-w')
+            args.append(str(self.filter_nevents_write))
+        if self.filter_no_cuts:
+            args.append('-a')
         return args
 
     def optional_parameters(self):
-        return ['ecal_hit_ecut', 'event_interval']
+        return ['filter_ecal_hit_ecut',
+                'filter_event_interval',
+                'filter_nevents_read',
+                'filter_nevents_write',
+                'filter_no_cuts']
 
 class ExtractEventsWithHitAtHodoEcal(JavaTool):
     """
