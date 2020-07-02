@@ -226,7 +226,7 @@ class JobManager(Component):
         return ['steering_files']
     
     def optional_parameters(self):
-        return ['detector', 'run_number', 'defs', 'event_print_interval']
+        return ['detector', 'run_number', 'defs']
 
 class HPSTR(Component):
     """
