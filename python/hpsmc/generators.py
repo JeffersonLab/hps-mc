@@ -75,8 +75,11 @@ class EGS5(EventGenerator):
 class StdHepConverter(EGS5):
     """Convert LHE files to StdHep using EGS5."""
 
-    def __init__(self, **kwargs):
-        EGS5.__init__(self, "lhe_v1", **kwargs)
+    def __init__(self, name="lhe_v1", **kwargs):
+        EGS5.__init__(self, name, **kwargs)
+
+        if self.name not in ["lhe_v1", "lhe_rad", "lhe_prompt", "lhe_uniform", "lhe_exponential"]:
+            raise Exception("The name '%s' is not valid for StdHepConverter tools." % self.name)
   
     def config(self, parser):
         EGS5.config(self, parser)
@@ -275,9 +278,9 @@ class MG5(MG):
                "tritrig" : "tritrig",
                "simp"    : "simp"}
 
-    def __init__(self, name=None, **kwargs):
+    def __init__(self, name='tritrig', **kwargs):
                 
-        MG.__init__(self, name='tritrig', **kwargs)
+        MG.__init__(self, name, **kwargs)
         
         if self.name not in MG5.dir_map:
             raise Exception("The name '%s' is not valid for MG5." % self.name)

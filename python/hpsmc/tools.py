@@ -343,7 +343,7 @@ class StdHepTool(Component):
             raise Exception("Too many outputs specified for StdHepTool.")
         
         if len(self.input_files()):
-            for i in self.inputs:
+            for i in self.inputs[::-1]:
                 args.insert(0, i)
         else:
             raise Exception("No inputs specified for StdHepTool.")
@@ -483,20 +483,20 @@ class AddMother(StdHepTool):
 class AddMotherFullTruth(StdHepTool):
 
     def __init__(self, **kwargs):
-	if len(self.inputs) != 2: 
-		raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
-	input_file_1 = self.inputs[0]
-	base,ext = os.path.splitext(input_file_1)
-	if ext != '.stdhep':
-		raise Exception("The first input file must be a stdhep file")
-        input_file_2 = self.inputs[1]
-        base,ext = os.path.splitext(input_file_2)
-	if ext != '.lhe':
-		raise Exception("The second input file must be a lhe file")
         StdHepTool.__init__(self,
                             'add_mother_full_truth',
                             append_tok='mom_full_truth',
                             **kwargs)
+        if len(self.inputs) != 2: 
+            raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
+        input_file_1 = self.inputs[0]
+        base,ext = os.path.splitext(input_file_1)
+        if ext != '.stdhep':
+            raise Exception("The first input file must be a stdhep file")
+        input_file_2 = self.inputs[1]
+        base,ext = os.path.splitext(input_file_2)
+        if ext != '.lhe':
+            raise Exception("The second input file must be a lhe file")
         
 class MergePoisson(StdHepTool):
     """
@@ -739,14 +739,14 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
 
     def __init__(self, **kwargs):
 
-    	if "num_hodo_hits" in kwargs:
-    	    self.num_hodo_hits = kwargs['num_hodo_hits']
-    	else:
+        if "num_hodo_hits" in kwargs:
+            self.num_hodo_hits = kwargs['num_hodo_hits']
+        else:
             self.num_hodo_hits = 0
-    
-    	if "event_interval" in kwargs:
-    	    self.event_interval = kwargs['event_interval']
-    	else:
+
+        if "event_interval" in kwargs:
+            self.event_interval = kwargs['event_interval']
+        else:
             self.event_interval = 250
 
         JavaTool.__init__(self,

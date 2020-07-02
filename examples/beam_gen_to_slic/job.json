@@ -8,7 +8,7 @@
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
     "output_files": {
         "beam.stdhep": "stdhep/beam.stdhep",
-	"beam_rot_sampled.slcio": "slic/beam.slcio"
+        "beam_rot_sampled.slcio": "slic/beam.slcio"
     },
     "output_dir": "output/2019/pass0"
 }
