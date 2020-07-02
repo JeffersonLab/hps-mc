@@ -55,8 +55,7 @@ slic = SLIC(inputs=rot.output_files(),
             outputs=['%s.slcio' % tritrig_name])
 
 # Space signal events before merging
-filter_bunches = FilterBunches(nevents=2000000,
-                               inputs=slic.output_files(),
+filter_bunches = FilterBunches(inputs=slic.output_files(),
                                outputs=['%s_filt.slcio' % tritrig_name])
 
 # Count filtered events
