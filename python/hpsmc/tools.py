@@ -121,8 +121,6 @@ class JobManager(Component):
         self.detector = None
         self.event_print_interval = None
         self.defs = None
-        self.readout_steering = None
-        self.recon_steering = None
         self.java_args = None
         self.logging_config_file = None
         self.lcsim_cache_dir = None
