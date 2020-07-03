@@ -12,7 +12,7 @@ else:
     nevents = 250000
 
 # Generate beam
-egs5 = EGS5(name="beam_v7_4pt55")
+egs5 = EGS5(name="beam_v7_%s" % job.params['run_params'])
 
 # Rotate events into beam coordinates
 rot = BeamCoords()
