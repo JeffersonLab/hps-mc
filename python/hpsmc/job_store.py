@@ -135,7 +135,6 @@ class JobStore:
                 mapping['job_id'] = str(job_id).zfill(self.pad)
                 mapping['sequence'] = r + 1
                 
-                
                 file_vars = self.list_reader.read_next()
                 for name,path in file_vars.iteritems():
                     mapping[name] = path   
