@@ -22,7 +22,7 @@ rot = BeamCoords()
 slic = SLIC()
 
 # insert empty bunches expected by pile-up simulation
-filter_bunches = FilterBunches(nevents=2000000)
+filter_bunches = FilterBunches()
 
 # Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
