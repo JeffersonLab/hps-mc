@@ -686,12 +686,24 @@ class FilterBunches(JavaTool):
     """
     
     def __init__(self, **kwargs):
+
+        if 'filter_no_cuts' in kwargs:
+            self.filter_no_cuts = kwargs['filter_no_cuts']
+        else:
+            # By default cuts are on           
+            self.filter_no_cuts = False
+
+        if 'filter_ecal_pairs' in kwargs:
+            self.filter_ecal_pairs = kwargs['filter_ecal_pairs']
+        else:
+            self.filter_ecal_pairs = False
         
         if 'filter_ecal_hit_ecut' in kwargs:
             self.filter_ecal_hit_ecut = kwargs['filter_ecal_hit_ecut']
         else:
-            # Default ecal hit cut energy
-            self.filter_ecal_hit_ecut = 0.05
+            # No default ecal hit cut energy (negative val to be ignored)
+            self.filter_ecal_hit_ecut = -1.0
+            #self.filter_ecal_hit_ecut = 0.05
         
         if 'filter_event_interval' in kwargs:
             self.filter_event_interval = kwargs['filter_event_interval']
@@ -711,11 +723,6 @@ class FilterBunches(JavaTool):
             # Default is no maximum nevents to write        
             self.filter_nevents_write = -1
             
-        if 'filter_no_cuts' in kwargs:
-            self.filter_no_cuts = kwargs['filter_no_cuts']
-        else:
-            # By default cuts are on           
-            self.filter_no_cuts = False
                         
         JavaTool.__init__(self, 
                           name='filter_bunches',
@@ -730,8 +737,9 @@ class FilterBunches(JavaTool):
         for i in self.input_files():
             args.append(i)
         args.append(self.output_files()[0])
-        if self.filter_ecal_hit_ecut > 0:
+        if self.filter_ecal_pairs:
             args.append("-d")
+        if self.filter_ecal_hit_ecut > 0:
             args.append("-E")
             args.append(str(self.filter_ecal_hit_ecut))
         if self.filter_nevents_read > 0:
