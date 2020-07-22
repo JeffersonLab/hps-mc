@@ -564,7 +564,7 @@ class Job(object):
         """
         if not tag in self.ptags.keys():
             self.ptags[tag] = filename
-            logger.info("Added ptag '%s' to file '%s'" % (tag, filename))
+            logger.info("Added ptag %s -> %s" % (tag, filename))
         else:
             raise Exception('The ptag already exists: %s' % tag)
         
