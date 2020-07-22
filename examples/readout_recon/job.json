@@ -1,4 +1,10 @@
 { 
+    "filter_nevents_read": 10000,
+    "filter_nevents_write": 2000000,
+    "filter_ecal_hit_ecut": 0.04,
+    "filter_event_iterval": 200,
+    "filter_no_cuts": false,
+    "event_print_interval": 1000,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
@@ -7,7 +13,7 @@
         "/work/slac/data/tritrig_2016.slcio": "tritrig.slcio"
     },
     "output_files": {
-        "tritrig_recon.slcio": "tritrig_2016_recon_1.slcio"
+        "tritrig_filt_readout_recon.slcio": "tritrig_2016_recon_1.slcio"
     },
     "output_dir": "output"
 }
