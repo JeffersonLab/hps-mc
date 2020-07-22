@@ -366,6 +366,7 @@ class Auger(Batch):
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
+
         job_err = ET.SubElement(job, "Stderr")
         stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
         stderr_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.err" % job_id))
@@ -376,22 +377,29 @@ class Auger(Batch):
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
-        cmd_lines.append('pwd')
-        cmd_lines.append('\n')
-        cmd_lines.append("source %s" % os.path.realpath(self.setup_script))
-        cmd_lines.append('\n')
+       
+        cmd_lines.append('pwd\n')
+        cmd_lines.append("source %s\n" % os.path.realpath(self.setup_script))
+        cmd_lines.append('env | sort\n')
 
         job_cmd = self.build_cmd(job_id, job_params)
-        
-        if self.job_steps > 0:
-            job_cmd = job_cmd + " --job-steps " + str(self.job_steps)
+
+        # Write log file locally so it can be copied back with Output element
+        log_file = 'job.%d.log' % job_id
+        job_cmd.extend(['-l', '$PWD/%s' % log_file])
+        log_out_elem = ET.SubElement(job, "Output")
+        log_out_elem.set('src', log_file)
+        log_out_elem.set('dest', os.path.join(self.log_dir, log_file))
+
         cmd_lines.extend(job_cmd)
-       
         cmd_lines.append('\n')
-        cmd_lines.append('ls -lah .')
+
+        cmd_lines.append('ls -lah .\n')
 
         cmd_lines.append("]]>")
-        #print(cmd_lines)
+
+        #logger.debug(cmd_lines)
+
         cmd.text = ' '.join(cmd_lines)
 
 class Local(Batch):
