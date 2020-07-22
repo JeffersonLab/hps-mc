@@ -68,3 +68,5 @@ log.mcfio.*
 
 examples/*/output
 examples/*/scratch
+
+temp.xml
