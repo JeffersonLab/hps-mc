@@ -687,16 +687,35 @@ class FilterBunches(JavaTool):
     
     def __init__(self, **kwargs):
         
-        # Default ecal hit cut energy
-        self.filter_ecal_hit_ecut = 0.05        
+        if 'filter_ecal_hit_ecut' in kwargs:
+            self.filter_ecal_hit_ecut = kwargs['filter_ecal_hit_ecut']
+        else:
+            # Default ecal hit cut energy
+            self.filter_ecal_hit_ecut = 0.05
         
-        # Default event filtering interval
-        self.filter_event_interval = 250
+        if 'filter_event_interval' in kwargs:
+            self.filter_event_interval = kwargs['filter_event_interval']
+        else:
+            # Default event filtering interval
+            self.filter_event_interval = 250
         
-        # Default values for other params
-        self.filter_nevents_read = -1
-        self.filter_nevents_write = -1
-        self.filter_no_cuts = False
+        if 'filter_nevents_read' in kwargs:
+            self.filter_nevents_read = kwargs['filter_nevents_read']
+        else:
+            # Default is no maximum nevents to read
+            self.filter_nevents_read = -1
+        
+        if 'filter_nevents_write' in kwargs:
+            self.filter_nevents_write = kwargs['filter_nevents_write']
+        else:
+            # Default is no maximum nevents to write        
+            self.filter_nevents_write = -1
+            
+        if 'filter_no_cuts' in kwargs:
+            self.filter_no_cuts = kwargs['filter_no_cuts']
+        else:
+            # By default cuts are on           
+            self.filter_no_cuts = False
                         
         JavaTool.__init__(self, 
                           name='filter_bunches',
