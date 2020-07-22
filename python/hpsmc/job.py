@@ -240,7 +240,7 @@ class Job(object):
                 # Load data from a JSON file with a single job definition.
                 logger.info('Loading job parameters from file: %s' % self.param_file)
                 params = load_json_data(self.param_file)
-                if not isinstance(params, list):
+                if not isinstance(params, dict):
                     raise Exception('Job ID must be provided when running from a job store.')
 
             self.__load_params(params)
