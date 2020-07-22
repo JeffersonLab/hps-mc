@@ -8,9 +8,6 @@
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
-    "ecal_hit_ecut": 0.05,
-    "enable_ecal_energy_filter": true,
-    "event_interval": 250,
     "output_files": {
         "recon": "tritrig_recon_1.slcio"
     },
