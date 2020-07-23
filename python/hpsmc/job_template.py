@@ -3,13 +3,19 @@ import os
 import itertools
 import copy
 import json
+import argparse
 
 from jinja2 import Template, Environment, FileSystemLoader
 
 def basename(path):
+    """Filter to return a file base name stripped of dir and extension. 
+    
+    Useful for using base names of input files in the output file names within jinja2 template.
+    """
     return os.path.splitext(os.path.basename(path))[0]
     
 class JobData(object):
+    """Very simple key-value object for storing data for each job."""
     
     def __init__(self):
         self.input_files = {}
@@ -18,6 +24,16 @@ class JobData(object):
         setattr(self, name, value)
 
 class JobTemplate:
+    """Template engine for transforming input job template into JSON job store.
+    
+    Accepts a set of iteration variables of which all combinations will be turned into jobs.
+    
+    Also accepts lists of input files with a unique key from which one or more can be read
+    per job.
+    
+    The user's template should be a JSON dict with jinja2 markup, which can use the 'job' variable 
+    to access job params for a particular job.
+    """
     
     def __init__(self, template_file=None, output_file='jobs.json'):
         self.template_file = template_file
@@ -26,7 +42,6 @@ class JobTemplate:
         self.job_id_start = 0;
         self.input_files = {}
         self.itervars = {}
-        self.repeat = -1
         self.output_file = output_file
         
     def add_input_files(self, key, file_list, nreads=1):
@@ -40,8 +55,8 @@ class JobTemplate:
         self.itervars[name] = vals
         
     def add_itervars(self, d):
-        for k,v in d:
-            add_itervar(k, v)
+        for k,v in d.iteritems():
+            self.add_itervar(k, v)
             
     def add_itervars_json(self, json_file):
         add_itervars(json.load(json_file))
@@ -62,7 +77,7 @@ class JobTemplate:
     def run(self):
         self.template = self.env.get_template(self.template_file)
         jobs = []
-        for job in self.create_jobs():
+        for job in self._create_jobs():
             vars = {'job': job}
             s = self.template.render(vars)
             #print(s)
@@ -73,26 +88,40 @@ class JobTemplate:
         with open(self.output_file, 'w') as f:
             json.dump(jobs, f, indent=4)
             print('Wrote %d jobs to: %s' % (len(jobs), self.output_file))
+            
+    def _get_max_iterations(self):
+        max_iter = -1
+        for input_name in self.input_files.keys():
+            nreads = self.input_files[input_name][1]
+            flist = self.input_files[input_name][0]
+            n_iter = len(flist) / nreads
+            if n_iter > max_iter:
+                max_iter = n_iter
+        return max_iter
  
-    def create_jobs(self):
+    def _create_jobs(self):
         
         jobs = []
         
         var_names, var_vals = self.get_itervars()
         nvars = len(var_names)
+        print("Number of var combinations: %d" % len(var_vals))
                 
         job_id = self.job_id_start
         
         # loop over itervars
+        repeat = self._get_max_iterations()
+        print("Max iterations: %d" % repeat)
+        if repeat < 1:
+            repeat = 1
         for var_index in range(len(var_vals)):
             jobdata = JobData()
             vars = var_vals[var_index]
             for j in range(nvars):
                 jobdata.set(var_names[j], var_vals[var_index][j])
             input_files = copy.deepcopy(self.input_files)
-            # repeat N times
-            for r in range(self.repeat):
-                job_input_files = []    
+            for r in range(repeat): # TODO: allow settable repeat param here
+                job_input_files = []
                 for input_name in input_files.keys():
                     nreads = input_files[input_name][1]
                     flist = input_files[input_name][0]
@@ -105,75 +134,70 @@ class JobTemplate:
                 jobs.append(jobdata_copy)
                 job_id += 1
         return jobs
- 
-    """
-    def parse_args(self):
-        
-        parser = argparse.ArgumentParser(description="Create a job store with multiple jobs")
+    
+    def _read_input_file_list(self, input_file_list):
+        """Read the input file list from arg parsing."""
+        for f in input_file_list:
+            name = f[0]
+            if name in self.input_files.keys():
+                raise Exception('Duplicate input file list name: %s' % name)
+            file = f[1]
+            nreads = int(f[2])
+            input_file_list = []
+            with open(file, 'r') as f:
+                lines = f.readlines()
+                for line in lines:
+                    if len(line.strip()):
+                        input_file_list.append(line.strip())
+                if not len(input_file_list):
+                    raise Exception('Failed to read any input files from file: %s' % file)
+                self.input_files[name] = (input_file_list, nreads)
 
+    def parse_args(self):
+        """Parse arguments for template engine."""        
+        
+        parser = argparse.ArgumentParser(description="Create a JSON job store from a jinja2 template")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
-        
-        parser.add_argument("-p", "--pad", nargs="?", type=int, 
-                            help="Number of padding spaces for job IDs (default is 0 for no padding)", default=0)
-        
-        parser.add_argument("-i", "--input-file-list", action='append', nargs=2, 
-                            metavar=('FILE', 'N_READS'), help="Input file list and N reads per event")
-        
-        parser.add_argument("-g", "--glob", action='append', nargs=3,
-                            metavar=('NAME', 'GLOB', 'NREADS'),
-                            help="Glob pattern to read input files (use '\\\\*' for wildcard character)")
-        
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
+        parser.add_argument("-i", "--input-file-list", action='append', nargs=3, 
+                            metavar=('NAME', 'FILE', 'N_READS'), help="Unique name of input file list, path on disk, number of reads per job")
+        parser.add_argument("template_file", help="Job template in JSON format with jinja2 markup")
+        parser.add_argument("output_file", help="Output file containing the generated JSON job store")
         
- #       parser.add_argument("-r", "--repeat", type=int, help="Repeat each iteration N times", default=1)
-        
-        parser.add_argument("json_template_file", help="Job template in JSON format")
-        
-        parser.add_argument("job_store", help="Output file containing the JSON job store")
+        # TODO:
+        # - add repeat CL arg
+        # - add max num jobs arg
         
         cl = parser.parse_args()
         
-        self.json_template_file = cl.json_template_file
-        if not os.path.isfile(self.json_template_file):
-            raise Exception('The JSON template file does not exist: %s' % self.json_template_file)
+        self.job_id_start = cl.job_start
         
-        self.job_store = cl.job_store
-                        
-        self.job_start = cl.job_start
-        self.pad = cl.pad
-        self.seed = cl.seed
+        self.template_file = cl.template_file
+        if not os.path.isfile(self.template_file):
+            raise Exception('The template file does not exist: %s' % self.json_template_file)
         
-        self.input_lists = [] 
+        self.output_file = cl.output_file
+        
+        self.input_files = {}
         if cl.input_file_list is not None:
-            for f in cl.input_file_list:
-                self.input_lists.append([f[0], int(f[1])])
-        self.list_reader = FileListReader(self.input_lists)
+            self._read_input_file_list(cl.input_file_list)
                 
         if cl.var_file:
             var_file = cl.var_file
-            print("Iteration variables will be read from file: %s" % var_file)
             if not os.path.exists(var_file):
                 raise Exception('The var file does not exist: %s' % var_file)
             with open(var_file, 'r') as f:
-                self.itervars = json.load(f)
-        else:
-            self.itervars = None
-
-        self.repeat = cl.repeat
-        if self.repeat < 1:
-            raise Exception('Bad value for repeat argument: %d' % self.repeat)
-        
-        self.glob_readers = [] 
-        if cl.glob is not None:
-            for g in cl.glob:
-                name = g[0]
-                wildcard = g[1]
-                nreads = int(g[2])
-                self.glob_readers.append(GlobReader(name, wildcard, nreads))
-    """
+                self.add_itervars(json.load(f))
+                print("Loaded iter vars from file: %s" % var_file)
+                print(self.itervars)
         
 if __name__ == '__main__':
-    
+    job_tmpl = JobTemplate()
+    job_tmpl.parse_args()
+    job_tmpl.run()
+
+"""
+def _old_main():
     if len(sys.argv) < 2:
         raise Exception('Missing name of template file')
     
@@ -184,26 +208,11 @@ if __name__ == '__main__':
     job_tmpl.add_itervar('detector', ['HPS-PhysicsRun2019-v2-4pt5'])
     
     # test input events
-    job_tmpl.add_input_files('test_events', ['/fake/path/events_1.stdhep', '/fake/path/events_2.stdhep'])
-    
-    # test repeat
-    job_tmpl.repeat = 2
-        
+    nfiles = 10
+    input_files = []
+    for i_file in range(nfiles):
+        input_files.append('/fake/path/events_%d.stdhep' % (i_file+1))
+    job_tmpl.add_input_files('test_events', input_files)
+            
     job_tmpl.run()
-
-### Example input template 
-"""
-{
-    "job_id": {{ job.job_id }},
-    "seed": {{ job.job_id + 1000000 }},
-    "run_number": {{ job.run_number }},
-    "detector": "{{ job.detector }}",
-    "input_files": {
-        "{{ job.input_files['test_events'][0] }}": "events.stdhep"
-    },
-    "output_files": {
-        "fake_output_events.slcio": "{{ job.input_files['test_events'][0] | basename }}.slcio"    
-    }
-}
-
 """
