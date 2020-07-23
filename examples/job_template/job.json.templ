@@ -4,10 +4,14 @@
     "run_number": {{ job.run_number }},
     "detector": "{{ job.detector }}",
     "input_files": {
-        "{{ job.input_files['events'][0] }}": "events.stdhep"
+        "{{ job.input_files['events'][0] }}": "events_1.stdhep",
+        "{{ job.input_files['events'][1] }}": "events_2.stdhep"
     },
     "output_files": {
-        "fake_output_events.slcio": "{{ job.input_files['events'][0] | basename }}.slcio"    
-    }
+        "events_job.slcio": "events_job_{{ job.job_id }}.slcio",
+        "events_1.slcio": "{{ job.input_files['events'][0] | basename }}.slcio",
+        "events_2.slcio": "{{ job.input_files['events'][1] | basename }}.slcio"
+    },
+    "output_dir": "output/{{ job.detector }}"
 }
 
