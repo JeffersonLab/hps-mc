@@ -90,7 +90,8 @@ class Job(object):
                      'enable_ptags',
                      'enable_env_config']
 
-    _ptag_prefix = 'ptag'
+    # Prefix to indicate ptag in job param file.
+    _ptag_prefix = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
                     
