@@ -9,6 +9,7 @@ from job_store import JobStore
 from util import convert_config_value, config_logging, load_json_data
 
 logger = logging.getLogger('hpsmc.job')
+logger.setLevel(logging.DEBUG)
 
 class JobConfig(object):
     """Wrapper for accessing config information from parser."""
@@ -239,6 +240,9 @@ class Job(object):
                 # Load data from a JSON file with a single job definition.
                 logger.info('Loading job parameters from file: %s' % self.param_file)
                 params = load_json_data(self.param_file)
+                if not isinstance(params, dict):
+                    raise Exception('Job ID must be provided when running from a job store.')
+
             self.__load_params(params)
                   
     def __load_params(self, params):
@@ -560,7 +564,7 @@ class Job(object):
         """
         if not tag in self.ptags.keys():
             self.ptags[tag] = filename
-            logger.info("Added ptag '%s' to file '%s'" % (tag, filename))
+            logger.info("Added ptag %s -> %s" % (tag, filename))
         else:
             raise Exception('The ptag already exists: %s' % tag)
         
