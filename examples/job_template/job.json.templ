@@ -1,0 +1,13 @@
+{
+    "job_id": {{ job.job_id }},
+    "seed": {{ job.job_id + 1000000 }},
+    "run_number": {{ job.run_number }},
+    "detector": "{{ job.detector }}",
+    "input_files": {
+        "{{ job.input_files['events'][0] }}": "events.stdhep"
+    },
+    "output_files": {
+        "fake_output_events.slcio": "{{ job.input_files['events'][0] | basename }}.slcio"    
+    }
+}
+
