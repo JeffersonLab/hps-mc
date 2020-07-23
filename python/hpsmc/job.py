@@ -68,6 +68,7 @@ class JobConfig(object):
             raise Exception("Missing required config section '%s'" % section)
         else:
             logger.warning('Config section not found: %s' % section)
+
         
 class Job(object):
     """
@@ -88,6 +89,9 @@ class Job(object):
                      'enable_file_chaining',
                      'enable_ptags',
                      'enable_env_config']
+
+    # Prefix to indicate ptag in job param file.
+    _ptag_prefix = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
                     
@@ -376,13 +380,14 @@ class Job(object):
             elapsed = stop_time - start_time
             logger.info("Job execution took %f seconds" % elapsed)
                         
-            # Copy by actual output file name
-            if self.enable_copy_output_files:
-                self.__copy_output_files()
-            
+
             # Copy by key set in the job script
             if self.enable_ptags:
                 self.__copy_ptag_output_files()
+            
+            # Copy by file path
+            if self.enable_copy_output_files:
+                self.__copy_output_files()
             
             # Perform job cleanup.
             self.__cleanup()
@@ -497,13 +502,14 @@ class Job(object):
             os.makedirs(self.output_dir, 0755)
         
         for src,dest in self.output_files.iteritems():
-            self.__copy_output_file(src, dest)
+            if not Job._is_ptag(src):
+                self.__copy_output_file(src, dest)
                                          
     def __copy_output_file(self, src, dest):
         """
         Copy an output file from src to dest.
         """
-                    
+
         src_file = os.path.join(self.rundir, src)
         dest_file = os.path.join(self.output_dir, dest)
         
@@ -571,17 +577,30 @@ class Job(object):
     def __copy_ptag_output_files(self):
         if len(self.ptags):
             for src,dest in self.output_files.iteritems():
-                if src in self.ptags.keys():
-                    src_file = self.ptags[src]
-                    logger.info("Copying ptag '%s' from '%s' to '%s'" % (src, src_file, dest))
-                    self.__copy_output_file(src_file, dest)
+                if Job._is_ptag(src):
+                    ptag_src = Job._get_ptag_src(src)
+                    if ptag_src in self.ptags.keys():
+                        src_file = self.ptags[ptag_src]
+                        logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
+                        self.__copy_output_file(src_file, dest)
+                    else:
+                        raise Exception('Invalid ptag in job params: %s' % ptag_src)
+
+    @staticmethod
+    def _is_ptag(src):
+        return src.startswith(Job._ptag_prefix)
+
+    @staticmethod
+    def _get_ptag_src(src):
+        if src.startswith(Job._ptag_prefix):
+            return src[len(Job._ptag_prefix):]
         else:
-            logger.warning('Requested to copy ptag output files but none defined.')      
+            raise Exception('File src is not a ptag: %s' % src)
                                         
 cmds = {
-    'run':   'Run a job script',
+    'run': 'Run a job script',
     'avail': 'Print available job names',
-    'components':  'Print detailed help for all components (or provide component name)'}
+    'components': 'Print detailed help for all components (or provide component name)'}
 
 def print_usage():
     print("Usage: job.py [command] [args]")
