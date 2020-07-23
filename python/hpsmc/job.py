@@ -593,7 +593,7 @@ class Job(object):
     @staticmethod
     def _get_ptag_src(src):
         if src.startswith(Job._ptag_prefix):
-            return str[len(Job._ptag_prefix):]
+            return src[len(Job._ptag_prefix):]
         else:
             raise Exception('File src is not a ptag: %s' % src)
                                         
