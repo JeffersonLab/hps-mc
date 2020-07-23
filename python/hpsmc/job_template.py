@@ -13,6 +13,21 @@ def basename(path):
     Useful for using base names of input files in the output file names within jinja2 template.
     """
     return os.path.splitext(os.path.basename(path))[0]
+
+def extension(path):
+    """Filter to get file extension from string."""
+    return os.path.splitext(path)[1]
+
+def dirname(path):
+    """Filter to get dir name from string."""
+    return os.path.dirname(path)
+
+# TODO:
+# filenum filter - try to get file num by looking for _%d in file name
+# filetype filter - return type of file e.g. 'lcio', 'root', etc.
+
+#def pwd():
+#    return os.getcwd()
     
 class JobData(object):
     """Very simple key-value object for storing data for each job."""
@@ -75,6 +90,9 @@ class JobTemplate:
         return var_names,list(prod)
             
     def run(self):
+        """
+        Generate the JSON jobs from processing the template and write to file.
+        """
         self.template = self.env.get_template(self.template_file)
         jobs = []
         for job in self._create_jobs():
@@ -84,7 +102,6 @@ class JobTemplate:
             job_json = json.loads(s)
             jobs.append(job_json)
         #print(json.dumps(job_list, indent=4, sort_keys=True))
-        # Dump the results to a file
         with open(self.output_file, 'w') as f:
             json.dump(jobs, f, indent=4)
             print('Wrote %d jobs to: %s' % (len(jobs), self.output_file))
@@ -130,9 +147,11 @@ class JobTemplate:
                         job_input_files.append(input_file)
                 jobdata.input_files[input_name] = job_input_files
                 jobdata.set('job_id', job_id)
+                #jobdata.set('sequence', sequence)
                 jobdata_copy = copy.deepcopy(jobdata)
                 jobs.append(jobdata_copy)
                 job_id += 1
+                #sequence += 1
         return jobs
     
     def _read_input_file_list(self, input_file_list):
@@ -160,13 +179,13 @@ class JobTemplate:
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)
         parser.add_argument("-a", "--var-file", help="Variables in JSON format for iteration")
         parser.add_argument("-i", "--input-file-list", action='append', nargs=3, 
-                            metavar=('NAME', 'FILE', 'N_READS'), help="Unique name of input file list, path on disk, number of reads per job")
+                            metavar=('NAME', 'FILE', 'NREADS'), help="Unique name of input file list, path on disk, number of files to read per job")
         parser.add_argument("template_file", help="Job template in JSON format with jinja2 markup")
         parser.add_argument("output_file", help="Output file containing the generated JSON job store")
         
         # TODO:
-        # - add repeat CL arg
-        # - add max num jobs arg
+        # - add repeat CL arg (for event gen or can override default from input files)
+        # - add max num jobs arg (job generation should quit once it reaches this num of jobs)
         
         cl = parser.parse_args()
         
