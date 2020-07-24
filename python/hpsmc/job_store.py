@@ -136,13 +136,13 @@ class JobStore:
                 mapping['sequence'] = r + 1
                 
                 file_vars = self.list_reader.read_next()
-                for name,path in file_vars.iteritems():
+                for name,path in file_vars.items():
                     mapping[name] = path   
                     mapping[name + '_basename'] = os.path.splitext(os.path.basename(path))[0]
                     
                 for glob_reader in self.glob_readers:
                     file_vars = glob_reader.read_next()
-                    for name,path in file_vars.iteritems():
+                    for name,path in file_vars.items():
                         mapping[name] = path
                         mapping[name + '_basename'] = os.path.splitext(os.path.basename(path))[0]
                                 
@@ -190,7 +190,7 @@ class JobStore:
     
     def has_job_id(self, job_id):
         """Return true if the job ID exists in the store."""
-        return job_id in self.data.keys()
+        return job_id in list(self.data.keys())
 
 class FileListReader:
     
@@ -201,14 +201,14 @@ class FileListReader:
     def open(self):
         for flist,nread in self.flists:
             list_name = os.path.splitext(os.path.basename(flist))[0]
-            if self.fhandles.has_key(list_name):
+            if list_name in self.fhandles:
                 raise Exception('Duplicate file list name: %s' % list_name)
             f = open(flist, 'r')
             self.fhandles[list_name] = [f, nread]
                 
     def read_next(self):
         file_vars = {}
-        for name,f in self.fhandles.iteritems():
+        for name,f in self.fhandles.items():
             for i in range(f[1]):
                 line = f[0].readline().strip()
                 if line is None or len(line) == 0:
@@ -217,7 +217,7 @@ class FileListReader:
         return file_vars
     
     def close(self):
-        for name,f in self.fhandles.iteritems():
+        for name,f in self.fhandles.items():
             try:
                 f.close()
             except:
