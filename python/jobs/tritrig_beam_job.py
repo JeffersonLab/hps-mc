@@ -3,7 +3,7 @@ from hpsmc.tools import BeamCoords, AddMother, MergePoisson, RandomSample, Merge
 from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR, LCIOCount, LCIOMerge, StdHepCount
 
 # Get job input file targets
-inputs = job.input_files.values()
+inputs = list(job.input_files.values())
 
 job.description = 'tritrig beam'
 

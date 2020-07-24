@@ -87,7 +87,7 @@ class ParameterSet(object):
     
     def add(self, *args):
         for param in args:
-            if param.get_name() in self.parameters.keys():
+            if param.get_name() in list(self.parameters.keys()):
                 raise Exception("Parameter with name '%s' already exists." % parameter.get_name())
         
     def get(self, name):
@@ -96,13 +96,13 @@ class ParameterSet(object):
         return self.parameters[name]
     
     def has(self, name):
-        return name in self.parameters.keys()
+        return name in list(self.parameters.keys())
     
     def parameters(self):
         return self.parameters
     
     def parameter_names(self):
-        return self.parameters.keys()
+        return list(self.parameters.keys())
             
 if __name__ == '__main__':
     p = Parameter('myparam', 'this does a thing', optional=False, value='foobarbaz', default_value='wut')

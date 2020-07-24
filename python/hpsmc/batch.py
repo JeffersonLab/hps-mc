@@ -1,13 +1,22 @@
 """Provides a set of scripts for submitting batch jobs including support for
 local running, a multiprocessing pool, LSF, and Auger."""
 
-import argparse, json, os, subprocess, getpass, sys, time, logging, signal, multiprocessing
+import os
+import argparse
+import json
+import subprocess
+import getpass
+import sys
+import time
+import logging
+import signal
+import multiprocessing
 import psutil
+
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
-from multiprocessing import Queue
 
 from job_store import JobStore
 from script_db import JobScriptDatabase
@@ -75,7 +84,7 @@ class Batch:
         self.check_output = cl.check_output
                     
         if cl.jobids:                    
-            self.job_ids = map(int, cl.jobids)
+            self.job_ids = list(map(int, cl.jobids))
         else:
             self.job_ids = []
         
@@ -104,7 +113,7 @@ class Batch:
         self.pool_size = int(cl.pool_size)
         
         if cl.config_file:
-            self.config_files = map(os.path.abspath, cl.config_file)
+            self.config_files = list(map(os.path.abspath, cl.config_file))
         else:
             self.config_files = []
                  
@@ -122,7 +131,7 @@ class Batch:
     @staticmethod
     def _outputs_exist(job):
         """Check if job outputs exist.  Return False when first missing output is found."""
-        for src,dest in job["output_files"].iteritems():
+        for src,dest in job["output_files"].items():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
                 logger.warning('Job output does not exist: %s' % (dest))
                 return False
@@ -346,9 +355,9 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
-        if 'input_files' in job_params.keys():
+        if 'input_files' in list(job_params.keys()):
             inputfiles = job_params['input_files']
-            for src,dest in inputfiles.iteritems():
+            for src,dest in inputfiles.items():
                 input_elem = ET.SubElement(job, "Input")
                 input_elem.set("dest", dest)
                 if src.startswith("/mss"):
@@ -359,7 +368,7 @@ class Auger(Batch):
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
         outputdir = os.path.realpath(outputdir)
-        for src,dest in outputfiles.iteritems():
+        for src,dest in outputfiles.items():
             output_elem = ET.SubElement(job, "Output")
             output_elem.set("src", src)
             dest_file = os.path.join(outputdir, dest)
@@ -421,14 +430,14 @@ class Local(Batch):
                 logger.error("Local execution of '%s' returned error code: %d" % (name, proc.returncode))
 
 # Queue used to keep track of processes created by batch pool.
-mp_queue = Queue()
+mp_queue = multiprocessing.Queue()
 
 def run_job_pool(cmd):
-    """Run the command in a new process which is added to a global MP queue."""
+    """Run the command in a new process whose PID is added to a global MP queue."""
     try:
         sys.stdout.flush()
         proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
-        mp_queue.put(proc)
+        mp_queue.put(proc.pid)
         proc.wait()
         returncode = proc.returncode
     except subprocess.CalledProcessError as e:
@@ -436,6 +445,12 @@ def run_job_pool(cmd):
         sys.stdout.flush()
         pass
     return returncode
+
+def is_running(proc):
+    return proc.status() in [psutil.STATUS_RUNNING, 
+                             psutil.STATUS_SLEEPING, 
+                             psutil.STATUS_DISK_SLEEP,
+                             psutil.STATUS_IDLE]
 
 class KillProcessQueue():
     """Kills process objects from an MP queue after exit from a with statement."""
@@ -447,32 +462,33 @@ class KillProcessQueue():
         return self
     
     def __exit__(self, type, val, tb):
-        logger.debug('Killing %d processes in queue ...' % mp_queue.qsize())
+        """Kill processes on exit."""
         while True:
-            proc = mp_queue.get()
-            logger.debug('Checking process %d' % proc.pid)
-            if proc.returncode is None:
-                try:
-                    parent = psutil.Process(proc.pid)
-                    for child in parent.children(recursive=True):
-                        logger.debug('Killing child process %d' % child.pid)
+            pid = mp_queue.get()
+            try:
+                parent = psutil.Process(pid)
+                for child in parent.children(recursive=True):
+                    if is_running(child):
+                        print('Killing running process: %d' % child.pid)
                         child.kill()
-                    logger.debug('Killing parent process %s' % parent.pid)
+                if is_running(parent):
                     parent.kill()
-                except:
-                    pass
-            else:
-                logger.debug('Process %d already finished with returncode %d' % (proc.pid, proc.returncode))
-                                
+            except Exception as e:
+                # This probably just means it already finished.
+                pass                
+            
             if mp_queue.empty():
                 break
             
-        logger.debug('Done killing processes!')
+        print('Done killing processes!')
                 
 class Pool(Batch):
     """
     Run a set of jobs in a local pool using Python's multiprocessing module.    
     """
+    
+    # Max wait in seconds when getting results
+    max_wait = 999999
                             
     def submit(self):
         """Submit jobs to a local processing pool.
@@ -501,7 +517,7 @@ class Pool(Batch):
                 logger.info("Running %d jobs in pool ..." % len(cmds))
                 res = pool.map_async(run_job_pool, cmds)
                 # timeout must be properly set, otherwise tasks will crash
-                logger.info("Pool results: " + str(res.get(sys.maxint)))
+                logger.info("Pool results: " + str(res.get(Pool.max_wait)))
                 logger.info("Normal termination")
                 pool.close()
                 pool.join()
@@ -525,7 +541,7 @@ if __name__ == '__main__':
     }
     if len(sys.argv) > 1:
          system = sys.argv[1].lower()
-         if system not in system_dict.keys():
+         if system not in list(system_dict.keys()):
              raise Exception("The batch system '%s' is not valid." % system)
          batch = system_dict[system]()
          args = sys.argv[2:]
@@ -533,5 +549,5 @@ if __name__ == '__main__':
          batch.submit()
     else:
         print("Usage: batch.py [system] [args]")
-        print("    available systems: %s" % ', '.join(system_dict.keys()))
+        print("    available systems: %s" % ', '.join(list(system_dict.keys())))
            

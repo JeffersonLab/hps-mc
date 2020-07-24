@@ -4,7 +4,7 @@ from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 job.description = 'Filter bunches, run readout, hps-java recon, and then a HPSTR analysis'
 
 # Assign ptags for output
-input_files = job.input_files.values()
+input_files = list(job.input_files.values())
 if len(input_files) > 1:
     raise Exception('This script accepts only one input file.')
 output_base = os.path.splitext(os.path.basename(input_files[0]))[0]

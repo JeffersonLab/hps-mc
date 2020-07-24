@@ -198,7 +198,7 @@ class JobManager(Component):
             args.append("outputFile=" + os.path.splitext(self.output_files()[0])[0])
         
         if self.defs:
-            for k,v in self.defs.iteritems():
+            for k,v in self.defs.items():
                 args.append("-D")
                 args.append(k+"="+str(v))
     
@@ -938,10 +938,9 @@ class MoveFiles(Component):
         if len(self.inputs) != len(self.outputs):
             raise Exception("Input and output lists are not the same length!")
         for io in zip(self.inputs, self.outputs):
-            print io
             src = io[0]
             dest = io[1] 
-            logger.info("Moving '%s' to '%s'" % (src, dest))
+            logger.info("Moving %s -> %s" % (src, dest))
             shutil.move(src, dest)
         return 0          
 

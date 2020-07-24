@@ -11,7 +11,7 @@ def check(j):
         output_dir = data["output_dir"]
     if "output_files" in data:
         outputfiles = data["output_files"]
-        for k,v in outputfiles.iteritems():
+        for k,v in outputfiles.items():
             fpath = v
             if not os.path.isabs(v):
                 fpath = output_dir + os.path.sep + v

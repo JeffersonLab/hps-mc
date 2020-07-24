@@ -9,7 +9,7 @@ _ignore = ('Component', 'EventGenerator', 'StdHepTool', 'JavaTool', 'MG')
 def print_component(v):
     """Accepts Component class and prints info about it."""
     try:
-        if isinstance(v, basestring):
+        if isinstance(v, str):
             obj = eval(v)()
             v = obj.__class__
         else:

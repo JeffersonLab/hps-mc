@@ -1,7 +1,7 @@
 """Primary class for running and managing HPSMC jobs defined by a set of components."""
 
 import os, sys, time, shutil, argparse, getpass, json, logging, subprocess, collections
-import ConfigParser as configparser
+import configparser as configparser
 from os.path import expanduser
 from component import Component
 from script_db import JobScriptDatabase
@@ -143,7 +143,7 @@ class Job(object):
         """
         Public method for adding components to the job.
         """
-        if isinstance(component, collections.Sequence) and not isinstance(component, basestring):
+        if isinstance(component, collections.Sequence) and not isinstance(component, str):
             self.components.extend(component)
         else:
             self.components.append(component)
@@ -154,7 +154,7 @@ class Job(object):
         
         This method can be used in job scripts to define default values.
         """
-        for k,v in params.iteritems():
+        for k,v in params.items():
             if k in self.params:
                 logger.debug("Setting new value '%s' for parameter '%s' with existing value '%s'."
                              % (str(v), str(k), params[k]))
@@ -216,7 +216,7 @@ class Job(object):
                 logger.info('Changed stderr file to abs path: %s' % self.err_file)
         
         if cl.config_file:
-            self.config_files = map(os.path.abspath, cl.config_file)
+            self.config_files = list(map(os.path.abspath, cl.config_file))
         else:
             self.config_files = []
                 
@@ -323,7 +323,7 @@ class Job(object):
         logger.debug('Loading job script: %s' % script_path)
 
         globals = {'job': self}       
-        execfile(script_path, globals)
+        exec(compile(open(script_path, "rb").read(), script_path, 'exec'), globals)
                        
     def run(self):
         """
@@ -462,9 +462,9 @@ class Job(object):
             logger.debug("Configuring file IO for component '%s' with order %d" % (c. name, i))
             if i == 0:
                 logger.debug("Setting inputs on '%s' to: %s"
-                            % (c.name, str(self.input_files.values())))
+                            % (c.name, str(list(self.input_files.values()))))
                 if not len(c.inputs):
-                    c.inputs = self.input_files.values()
+                    c.inputs = list(self.input_files.values())
             elif i > -1:
                 logger.debug("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.components[i - 1].output_files())))
@@ -499,10 +499,11 @@ class Job(object):
         
         if not os.path.exists(self.output_dir):
             logger.debug('Creating output dir: %s' % self.output_dir)
-            os.makedirs(self.output_dir, 0755)
+            os.makedirs(self.output_dir, 0o755)
         
-        for src,dest in self.output_files.iteritems():
+        for src,dest in self.output_files.items():
             if not Job._is_ptag(src):
+                logger.info('Copying output file: %s -> %s' % (src, dest))
                 self.__copy_output_file(src, dest)
                                          
     def __copy_output_file(self, src, dest):
@@ -516,7 +517,7 @@ class Job(object):
         # Create directory if not exists; this allows relative path segments
         # in output file strings.
         if not os.path.exists(os.path.dirname(dest_file)):
-            os.makedirs(os.path.dirname(dest_file), 0755)
+            os.makedirs(os.path.dirname(dest_file), 0o755)
         
         # Check if the file is already there and does not need copying (e.g. if running in local dir)
         samefile = False
@@ -543,7 +544,7 @@ class Job(object):
         """
         Copy input files to the run dir.
         """        
-        for src,dest in self.input_files.iteritems():
+        for src,dest in self.input_files.items():
             if not os.path.isabs(src):
                 # FIXME: Could try and convert to abspath here.
                 raise Exception("The input source file '%s' is not an absolute path." % src)            
@@ -556,7 +557,7 @@ class Job(object):
         """
         Symlink input files.
         """
-        for src,dest in self.input_files.iteritems():
+        for src,dest in self.input_files.items():
             if not os.path.isabs(src):
                 raise Exception('The input source file is not an absolute path: %s' % src)            
             if os.path.dirname(dest):
@@ -568,7 +569,7 @@ class Job(object):
         """
         Map a key to an output file name so a user can reference it in their job params.
         """
-        if not tag in self.ptags.keys():
+        if not tag in list(self.ptags.keys()):
             self.ptags[tag] = filename
             logger.info("Added ptag %s -> %s" % (tag, filename))
         else:
@@ -576,10 +577,10 @@ class Job(object):
         
     def __copy_ptag_output_files(self):
         if len(self.ptags):
-            for src,dest in self.output_files.iteritems():
+            for src,dest in self.output_files.items():
                 if Job._is_ptag(src):
                     ptag_src = Job._get_ptag_src(src)
-                    if ptag_src in self.ptags.keys():
+                    if ptag_src in list(self.ptags.keys()):
                         src_file = self.ptags[ptag_src]
                         logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
                         self.__copy_output_file(src_file, dest)
@@ -605,13 +606,13 @@ cmds = {
 def print_usage():
     print("Usage: job.py [command] [args]")
     print("    command:")
-    for name,descr in cmds.iteritems():
+    for name,descr in cmds.items():
         print("        %s: %s" % (name,descr))
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        if cmd not in cmds.keys():
+        if cmd not in list(cmds.keys()):
             print_usage()
             raise Exception('The job command is not valid: %s' % cmd)
         args = sys.argv[2:]
