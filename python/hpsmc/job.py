@@ -91,7 +91,7 @@ class Job(object):
                      'enable_env_config']
 
     # Prefix to indicate ptag in job param file.
-    _ptag_prefix = 'ptag:'
+    PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
                     
@@ -247,16 +247,16 @@ class Job(object):
                 if not isinstance(params, dict):
                     raise Exception('Job ID must be provided when running from a job store.')
 
-            self.__load_params(params)
+            self._load_params(params)
                   
-    def __load_params(self, params):
+    def _load_params(self, params):
         """
         Load the job parameters from JSON data.
         """
     
         self.set_parameters(params)
         
-        logger.info(json.dumps(self.params, indent=4, sort_keys=False))
+        #logger.info(json.dumps(self.params, indent=4, sort_keys=False))
         
         if 'output_dir' in self.params:
             self.output_dir = self.params['output_dir']
@@ -266,6 +266,11 @@ class Job(object):
         
         if 'job_id' in self.params:
             self.job_id = self.params['job_id']
+
+        if 'input_files' in self.params:
+            self.input_files = self.params['input_files']
+        if 'output_files' in self.params:
+            self.output_files = self.params['output_files']
   
     def __initialize(self):
         """
@@ -287,12 +292,7 @@ class Job(object):
             self.log_out = open(self.out_file, 'w')
         if self.err_file:
             self.log_err = open(self.err_file, 'w')
-        
-        if 'input_files' in self.params:
-            self.input_files = self.params['input_files']
-        if 'output_files' in self.params:
-            self.output_files = self.params['output_files']
-    
+
     def __configure(self):
         # Configure job class
         self.job_config = JobConfig(config_files=self.config_files)
@@ -588,15 +588,21 @@ class Job(object):
                         raise Exception('Invalid ptag in job params: %s' % ptag_src)
 
     @staticmethod
-    def _is_ptag(src):
-        return src.startswith(Job._ptag_prefix)
+    def is_ptag(src):
+        return src.startswith(Job.PTAG_PREFIX)
 
     @staticmethod
-    def _get_ptag_src(src):
-        if src.startswith(Job._ptag_prefix):
-            return src[len(Job._ptag_prefix):]
+    def get_ptag_from_src(src):
+        if src.startswith(Job.PTAG_PREFIX):
+            return src[len(Job.PTAG_PREFIX):]
         else:
             raise Exception('File src is not a ptag: %s' % src)
+
+    def resolve_output_src(self, src):
+        if Job.is_ptag(src):
+            return self.ptags[Job.get_ptag_from_src(src)]
+        else:
+            return src
                                         
 cmds = {
     'run': 'Run a job script',
