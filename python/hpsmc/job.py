@@ -502,7 +502,7 @@ class Job(object):
             os.makedirs(self.output_dir, 0o755)
         
         for src,dest in self.output_files.items():
-            if not Job._is_ptag(src):
+            if not Job.is_ptag(src):
                 logger.info('Copying output file: %s -> %s' % (src, dest))
                 self.__copy_output_file(src, dest)
                                          
@@ -578,8 +578,8 @@ class Job(object):
     def __copy_ptag_output_files(self):
         if len(self.ptags):
             for src,dest in self.output_files.items():
-                if Job._is_ptag(src):
-                    ptag_src = Job._get_ptag_src(src)
+                if Job.is_ptag(src):
+                    ptag_src = Job.get_ptag_from_src(src)
                     if ptag_src in list(self.ptags.keys()):
                         src_file = self.ptags[ptag_src]
                         logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
