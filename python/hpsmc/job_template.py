@@ -4,6 +4,7 @@ import itertools
 import copy
 import json
 import argparse
+import math
 
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -111,7 +112,7 @@ class JobTemplate:
         for input_name in list(self.input_files.keys()):
             nreads = self.input_files[input_name][1]
             flist = self.input_files[input_name][0]
-            n_iter = len(flist) / nreads
+            n_iter = int(math.floor(len(flist) / nreads))
             if n_iter > max_iter:
                 max_iter = n_iter
         return max_iter
