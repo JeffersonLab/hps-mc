@@ -95,12 +95,9 @@ class StdHepConverter(EGS5):
         if ext == ".lhe":
             os.symlink(input_file, "egs5job.inp")
         elif ext == ".gz":
-            infile = open("egs5job.inp", 'w')
-            f = gzip.open(self.inputs[0], 'r')
-            for line in f:
-                infile.write(line)
-            f.close()
-            infile.close()
+            with open("egs5job.inp", 'wb') as outfile:
+                with gzip.open(self.inputs[0], 'rb') as infile:
+                    outfile.write(infile.read())                
         else:
             raise Exception('Input file has an unknown extension: %s' % input_file)
         return EGS5.execute(self, log_out, log_err)

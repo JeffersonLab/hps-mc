@@ -2,20 +2,19 @@ cmake_minimum_required(VERSION 3.0)
 
 project(hps-mc VERSION 2.0.0)
 
+# Find Python 3 executable
+find_package(PythonInterp)
+if(${PYTHON_VERSION_MAJOR} LESS 3)
+    message(FATAL_ERROR "Python 3 is required.")
+endif() 
+set(PYTHON ${PYTHON_EXECUTABLE})
+
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran)
 if(GFORTRAN-NOTFOUND)
     message(FATAL_ERROR "gfortran was not found")
 else()
     message(STATUS "gfortran was found at: ${GFORTRAN}")
-endif()
-
-# Check for python
-find_program(PYTHON python)
-if(PYTHON-NOTFOUND)
-    message(FATAL_ERROR "python was not found")
-else()
-    message(STATUS "python was found at: ${PYTHON}")
 endif()
 
 # Check for Java
@@ -25,14 +24,6 @@ if(JAVA-NOTFOUND)
 else()
     message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
     message(STATUS "java version: ${Java_VERSION}")
-endif()
-
-# Check for gunzip
-find_program(GUNZIP gunzip)
-if(GUNZIP-NOTFOUND)
-    message(FATAL_ERROR "gunzip was not found")
-else()
-    message(STATUS "gunzip found at: ${GUNZIP}")
 endif()
 
 # Check for GSL

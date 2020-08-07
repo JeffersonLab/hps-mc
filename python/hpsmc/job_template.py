@@ -60,17 +60,17 @@ class JobTemplate:
         self.output_file = output_file
         
     def add_input_files(self, key, file_list, nreads=1):
-        if self.input_files.has_key(key):
+        if key in self.input_files:
             raise Exception('Input file key already exists: %s' % key)
         self.input_files[key] = (file_list, nreads)
     
     def add_itervar(self, name, vals):
-        if self.itervars.has_key(name):
+        if name in self.itervars:
             raise Exception('The iter var already exists: %s' % name)
         self.itervars[name] = vals
         
     def add_itervars(self, d):
-        for k,v in d.iteritems():
+        for k,v in d.items():
             self.add_itervar(k, v)
             
     def add_itervars_json(self, json_file):
@@ -108,7 +108,7 @@ class JobTemplate:
             
     def _get_max_iterations(self):
         max_iter = -1
-        for input_name in self.input_files.keys():
+        for input_name in list(self.input_files.keys()):
             nreads = self.input_files[input_name][1]
             flist = self.input_files[input_name][0]
             n_iter = len(flist) / nreads
@@ -139,7 +139,7 @@ class JobTemplate:
             input_files = copy.deepcopy(self.input_files)
             for r in range(repeat): # TODO: allow settable repeat param here
                 job_input_files = []
-                for input_name in input_files.keys():
+                for input_name in list(input_files.keys()):
                     nreads = input_files[input_name][1]
                     flist = input_files[input_name][0]
                     for iread in range(nreads):
@@ -158,7 +158,7 @@ class JobTemplate:
         """Read the input file list from arg parsing."""
         for f in input_file_list:
             name = f[0]
-            if name in self.input_files.keys():
+            if name in list(self.input_files.keys()):
                 raise Exception('Duplicate input file list name: %s' % name)
             file = f[1]
             nreads = int(f[2])
