@@ -20,6 +20,7 @@ from distutils.spawn import find_executable
 
 from job_store import JobStore
 from script_db import JobScriptDatabase
+from job import Job
 
 logger = logging.getLogger("hpsmc.batch")
 logger.setLevel(logging.DEBUG)
@@ -62,6 +63,7 @@ class Batch:
         self.script = script_db.get_script_path(self.script_name) # Path to script
         if not os.path.isfile(self.script):
             raise Exception('The job script does not exist: %s' % self.script)       
+
 
         if cl.jobstore is None:
             raise Exception('The job store file is a required argument.')
@@ -200,7 +202,7 @@ class Batch:
         cmd.append(os.path.abspath(self.jobstore.path))
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd  
-            
+
 class LSF(Batch):
     """Submit LSF batch jobs."""
     
@@ -284,7 +286,7 @@ class Auger(Batch):
     def _get_auger_ids(self, out):
         auger_ids = []
         for line in out.splitlines():
-            if line.strip().startswith('<jsub>'):
+            if line.strip().startswith(b'<jsub>'):
                 j = ET.fromstring(line)
                 for req in j.getchildren():
                     for child in req.getchildren():
@@ -351,6 +353,14 @@ class Auger(Batch):
         cmd.append(os.path.abspath(self.jobstore.path))
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd  
+
+    def _create_job(self, params):
+        """Needed for resolving ptag output sources."""
+        j = Job()
+        j.script = self.script
+        j._load_params(params)
+        j._load_script()
+        return j
   
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
@@ -368,9 +378,11 @@ class Auger(Batch):
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
         outputdir = os.path.realpath(outputdir)
+        j = self._create_job(job_params)
         for src,dest in outputfiles.items():
             output_elem = ET.SubElement(job, "Output")
-            output_elem.set("src", src)
+            res_src = j.resolve_output_src(src)
+            output_elem.set("src", j.resolve_output_src(src))
             dest_file = os.path.join(outputdir, dest)
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
