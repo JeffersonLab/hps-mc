@@ -18,7 +18,7 @@ class JobScriptDatabase:
         return self.scripts[name]
         
     def get_script_names(self):
-        return self.scripts.keys()
+        return list(self.scripts.keys())
     
     def get_scripts(self):
         return self.scripts

@@ -4,7 +4,7 @@ from hpsmc.tools import BeamCoords, AddMother, SLIC
 job.description = 'wab from generation to slic'
 
 # Get job input file targets
-inputs = job.input_files.values()
+inputs = list(job.input_files.values())
 
 if 'nevents' in job.params:
     nevents = job.params['nevents']

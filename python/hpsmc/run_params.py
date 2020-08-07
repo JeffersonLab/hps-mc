@@ -63,4 +63,4 @@ if __name__ == "__main__":
     param_name = sys.argv[1]
     key = sys.argv[2]
 
-    print rp.get_run_params(param_name, key)
+    print(rp.get_run_params(param_name, key))

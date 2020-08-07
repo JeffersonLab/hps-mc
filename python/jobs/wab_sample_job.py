@@ -18,7 +18,7 @@ rot = BeamCoords()
 
 # Sample wabs using poisson distribution, calculating mu from provided LHE file
 sample = MergePoisson(input_filter='wab',
-                      lhe_file=job.input_files.iteritems().next()[1],
+                      lhe_file=iter(job.input_files.items()).next()[1],
                       nevents=500000)
 
 # Add components

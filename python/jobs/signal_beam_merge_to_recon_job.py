@@ -3,7 +3,7 @@ from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, JobManager, LCIOCount, L
 job.description = 'signal-beam from merge to recon'
 
 # Get job input file targets
-inputs = job.input_files.values()
+inputs = list(job.input_files.values())
 
 # Input signal events (slcio format)
 signal_file_name = [] 
