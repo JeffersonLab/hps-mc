@@ -1,5 +1,5 @@
 include ../../Source/make_opts
-FFLAGS+= -w
+FFLAGS+= -w -std=legacy
 
 # Load additional dependencies of the bias module, if present
 ifeq (,$(wildcard ../bias_dependencies))
