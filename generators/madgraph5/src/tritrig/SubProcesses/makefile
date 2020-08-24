@@ -1,5 +1,5 @@
 include ../../Source/make_opts
-FFLAGS+= -w
+FFLAGS+= -w -std=legacy 
 
 # Definitions
 
