@@ -184,7 +184,7 @@ class Batch:
         This generically creates the command to run the job locally but subclasses
         may override if necessary.
         """
-        cmd = ['python', run_script, 'run']
+        cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
                     '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
@@ -341,7 +341,7 @@ class Auger(Batch):
         return req
 
     def build_cmd(self, job_id, job_params):
-        cmd = ['python', run_script, 'run']
+        cmd = [sys.executable, run_script, 'run']
         #cmd.extend(['-d', '/scratch/%d' % job_id])
         if len(self.config_files):
             for cfg in self.config_files:
