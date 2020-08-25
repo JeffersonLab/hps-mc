@@ -1,14 +1,13 @@
 {
-    "nevents": 10,
-    "seed": 67890,
+    "nevents": 1000,
+    "seed": 123456789,
     "run_number": 7984,
     "detector": "HPS-PhysicsRun2016-Pass2",
-    "macros": ["/work/slac/hps-mc/examples/slic/test.mac"],
     "input_files": {
-        "/work/slac/data/stdhep/tritrig_1.stdhep": "tritrig.stdhep"
+        "/work/slac/git/hps-mc/examples/tritrig_gen/output/tritrig_events_1.lhe.gz": "tritrig.stdhep"
     },
     "output_files": {
-        "tritrig.slcio": "tritrig_2016.slcio"
+        "tritrig.slcio": "tritrig_1.slcio"
     },
     "output_dir": "output"
 }
