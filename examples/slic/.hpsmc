@@ -3,6 +3,6 @@ dry_run = False
 enable_copy_input_files = True
 
 [SLIC]
-slic_dir = /work/slac/sim/slic/install-geant4-v10_06_p01
-hps_fieldmaps_dir = /work/slac/hps-fieldmaps
-detector_dir = /work/slac/hps-java/hps-java/detector-data/detectors
+slic_dir = /work/slac/git/slic/install/
+hps_fieldmaps_dir = /work/slac/git/hps-fieldmaps/
+detector_dir = /work/slac/git/hps-java/detector-data/detectors/
