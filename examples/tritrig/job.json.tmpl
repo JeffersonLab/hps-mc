@@ -1,4 +1,5 @@
 {
+    "job_id": {{ job.job_id }},
     "nevents": 1000,
     "run_params": "2pt3",
     "target_z": -4.3,
@@ -9,7 +10,7 @@
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
     "output_files": {
-        "recon": "tritrig_recon_${job_id}.slcio"
+        "recon": "tritrig_recon_{{ job.job_id }}.slcio"
     },
     "output_dir": "output"
 }
