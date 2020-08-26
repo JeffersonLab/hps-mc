@@ -1,92 +1,38 @@
 [
     {
-        "nevents": 10000, 
-        "job_id": 1, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
+        "job_id": 1,
+        "nevents": 10000,
+        "run_params": "1pt05",
         "output_files": {
             "tritrig_events.lhe.gz": "tritrig_events_1.lhe.gz"
-        }
-    }, 
+        },
+        "output_dir": "output"
+    },
     {
-        "nevents": 10000, 
-        "job_id": 2, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
+        "job_id": 2,
+        "nevents": 10000,
+        "run_params": "1pt05",
         "output_files": {
             "tritrig_events.lhe.gz": "tritrig_events_2.lhe.gz"
-        }
-    }, 
+        },
+        "output_dir": "output"
+    },
     {
-        "nevents": 10000, 
-        "job_id": 3, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
+        "job_id": 3,
+        "nevents": 10000,
+        "run_params": "1pt05",
         "output_files": {
             "tritrig_events.lhe.gz": "tritrig_events_3.lhe.gz"
-        }
-    }, 
+        },
+        "output_dir": "output"
+    },
     {
-        "nevents": 10000, 
-        "job_id": 4, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
+        "job_id": 4,
+        "nevents": 10000,
+        "run_params": "1pt05",
         "output_files": {
             "tritrig_events.lhe.gz": "tritrig_events_4.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 5, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_5.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 6, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_6.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 7, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_7.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 8, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_8.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 9, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_9.lhe.gz"
-        }
-    }, 
-    {
-        "nevents": 10000, 
-        "job_id": 10, 
-        "output_dir": "output", 
-        "run_params": "1pt05", 
-        "output_files": {
-            "tritrig_events.lhe.gz": "tritrig_events_10.lhe.gz"
-        }
+        },
+        "output_dir": "output"
     }
 ]

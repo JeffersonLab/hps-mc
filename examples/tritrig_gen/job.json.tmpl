@@ -1,8 +1,11 @@
 {
+    "job_id": {{ job.job_id }},
     "nevents": 10000,
-    "run_params": "1pt05",
+    "run_params": "2pt3",
+    "target_z": -4.3,
     "output_files": {
-        "tritrig_events.lhe.gz": "tritrig_events_${job_id}.lhe.gz"
+        "tritrig_events.lhe.gz": "tritrig_events_{{ job.job_id }}.lhe.gz",
+        "tritrig_events.stdhep": "tritrig_events_{{ job.job_id }}.stdhep"
     },
     "output_dir": "output"
 }
