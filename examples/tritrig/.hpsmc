@@ -5,19 +5,19 @@ enable_ptags = True
 enable_copy_output_files = False
 
 [MG5]
-madgraph_dir = /work/slac/hps-mc/generators/madgraph5/src
+madgraph_dir = /work/slac/git/hps-mc/generators/madgraph5/src
 
 [StdHepConverter]
-egs5_dir = /work/slac/hps-mc/generators/egs5
+egs5_dir = /work/slac/git/hps-mc/generators/egs5
 
 [SLIC]
-slic_dir = /work/slac/sim/slic/install-geant4-v10_06_p01
-hps_fieldmaps_dir = /work/slac/hps-fieldmaps
-detector_dir = /work/slac/hps-java/hps-java/detector-data/detectors
+slic_dir = /work/slac/git/slic/install
+hps_fieldmaps_dir = /work/slac/git/hps-fieldmaps
+detector_dir = /work/slac/git/hps-java/detector-data/detectors
 
 [JobManager]
-hps_java_bin_jar = /home/jermc/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
+hps_java_bin_jar = /home/jeremy/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
 java_args = -Xmx1g -XX:+UseSerialGC
 
 [FilterBunches]
-hps_java_bin_jar = /home/jermc/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
+hps_java_bin_jar = /home/jeremy/.m2/repository/org/hps/hps-distribution/4.5-SNAPSHOT/hps-distribution-4.5-SNAPSHOT-bin.jar
