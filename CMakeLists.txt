@@ -3,11 +3,8 @@ cmake_minimum_required(VERSION 3.0)
 project(hps-mc VERSION 2.0.0)
 
 # Find Python 3 executable
-find_package(PythonInterp)
-if(${PYTHON_VERSION_MAJOR} LESS 3)
-    message(FATAL_ERROR "Python 3 is required.")
-endif() 
-set(PYTHON ${PYTHON_EXECUTABLE})
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+set(PYTHON ${Python3_EXECUTABLE})
 
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran)
