@@ -1,17 +1,14 @@
 {
-    "nevents": 5000,
-    "run_params": "4pt55",
-    "target_z": -7.2,
     "run_number": 10666,
+    "nevents": 1000,
+    "run_params": "4pt55",
+    "target_z": -7.51,
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
-    "steering_files": {
-        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSingles.lcsim",
-        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
-    },
     "output_files": {
-        "ptag:sim": "tritrig_sim.slcio",
-        "ptag:readout": "tritrig_readout.slcio",
-        "ptag:recon": "tritrig_recon.slcio"
+	    "tritrig_unweighted_events.lhe.gz": "lhe/tritrig.lhe.gz",
+        "tritrig_unweighted_events.stdhep": "egs5/tritrig.stdhep",
+        "tritrig_unweighted_events_mom.stdhep": "stdhep/tritrig.stdhep",
+        "tritrig_unweighted_events_mom_rot.slcio": "slic/tritrig.slcio"
     },
-    "output_dir": "output"
+    "output_dir": "output/2019/pass0"
 }
