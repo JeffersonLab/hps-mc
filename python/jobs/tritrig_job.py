@@ -33,7 +33,9 @@ recon = JobManager(steering='recon')
 #, append_tok='recon'
 
 # Set persistency tag for final output file
-job.ptag('recon', 'tritrig_events_mom_rot_filt_readout_recon.slcio')
+job.ptag('sim', 'tritrig_unweighted_events_mom_rot.slcio')
+job.ptag('readout', 'tritrig_unweighted_events_mom_rot_filt_readout.slcio')
+job.ptag('recon', 'tritrig_unweighted_events_mom_rot_filt_readout_recon.slcio')
  
 # Add job components
 job.add([mg, cnv, mom, rot, slic, filter_bunches, readout, recon])
