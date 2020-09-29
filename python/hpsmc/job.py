@@ -332,8 +332,7 @@ class Job(object):
 
         logger.debug('Loading job script: %s' % script_path)
 
-        globals = {'job': self}
-        exec(compile(open(script_path, "rb").read(), script_path, 'exec'), globals)
+        exec(compile(open(script_path, "rb").read(), script_path, 'exec'), {'job': self})
 
     def run(self):
         """
@@ -436,12 +435,12 @@ class Job(object):
 
     def __setup(self):
 
-         # Create run dir if it does not exist
+        # Create run dir if it does not exist
         if not os.path.exists(self.rundir):
             logger.info('Creating run dir: %s' % self.rundir)
             os.makedirs(self.rundir)
 
-         # Change to run dir
+        # Change to run dir
         logger.debug('Changing to run dir: %s' % self.rundir)
         os.chdir(self.rundir)
 
@@ -616,8 +615,8 @@ class Job(object):
 
 cmds = {
     'run': 'Run a job script',
-    'avail': 'Print available job names',
-    'components': 'Print detailed help for all components (or provide component name)'}
+    'script': 'Show list of available job scripts (provide script name for detailed info)',
+    'component': 'Show list of available components (provide component name for detailed info)'}
 
 def print_usage():
     print("Usage: job.py [command] [args]")
@@ -636,15 +635,20 @@ if __name__ == '__main__':
             job = Job(args)
             job.parse_args()
             job.run()
-        elif cmd == 'avail':
-            scriptdb = JobScriptDatabase()
-            print("Available job scripts: ")
-            for name in sorted(scriptdb.get_script_names()):
-                print('    %s: %s' % (name, scriptdb.get_script_path(name)))
-        elif cmd == 'components':
+        elif cmd == 'script':
             if len(sys.argv) > 2:
-                component_name = sys.argv[2]
+                script = sys.argv[2]
+                from hpsmc.help import print_job_script
+                print_job_script(script)
+            else:
+                scriptdb = JobScriptDatabase()
+                print("AVAILABLE JOB SCRIPTS: ")
+                for name in sorted(scriptdb.get_script_names()):
+                    print('    %s: %s' % (name, scriptdb.get_script_path(name)))
+        elif cmd == 'component':
+            if len(sys.argv) > 2:
                 from hpsmc.help import print_component
+                component_name = sys.argv[2]
                 print_component(component_name)
             else:
                 from hpsmc.help import print_components
