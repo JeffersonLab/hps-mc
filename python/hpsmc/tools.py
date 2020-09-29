@@ -409,6 +409,7 @@ class RandomSample(StdHepTool):
                             name='random_sample', 
                             append_tok='sampled',
                             **kwargs)
+        self.mu = None
         
     def cmd_args(self):
         
@@ -421,6 +422,9 @@ class RandomSample(StdHepTool):
         
         if self.nevents is not None:
             args.extend(["-n", str(self.nevents)])
+
+        if self.mu is not None:
+            args.extend(["-m", str(self.mu)])
         
         if len(self.output_files()):
             args.insert(0, os.path.splitext(self.output_files()[0])[0])
@@ -434,6 +438,9 @@ class RandomSample(StdHepTool):
             raise Exception("No inputs were provided.")
         
         return args
+
+    def optional_parameters(self):
+        return ['mu']   
     
     def execute(self, log_out, log_err):
         r = Component.execute(self, log_out, log_err)
