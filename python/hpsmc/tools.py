@@ -440,7 +440,7 @@ class RandomSample(StdHepTool):
         return args
 
     def optional_parameters(self):
-        return ['mu']   
+        return ['nevents','mu']   
     
     def execute(self, log_out, log_err):
         r = Component.execute(self, log_out, log_err)
