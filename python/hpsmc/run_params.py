@@ -1,6 +1,6 @@
 """Data with physics run parameters by beam energy."""
 
-import os, sys, json
+import sys
 
 run_params = {
     "aprime_mass": {
@@ -49,7 +49,7 @@ class RunParameters:
 
     def __init__(self, key, json_filename = None):
         self.key = key
-        
+
     def get(self, param_name):
         return run_params[param_name][self.key]
 
