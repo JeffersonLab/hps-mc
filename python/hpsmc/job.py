@@ -351,10 +351,10 @@ class Job(object):
             raise Exception("Job has no components to execute.")
 
         # Print list of job components
-        logger.info("Job components: " % [c.name for c in self.components])
+        logger.info("Job components: %s" % ([c.name for c in self.components]))
 
         # Print job parameters.
-        logger.info("Job parameters: " + str(self.params))
+        logger.info("Job parameters: %s" % str(self.params))
 
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
