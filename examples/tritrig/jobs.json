@@ -12,7 +12,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_1.slcio"
+            "ptag:recon": "tritrig_recon_1.slcio"
         },
         "output_dir": "output"
     },
@@ -29,7 +29,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_2.slcio"
+            "ptag:recon": "tritrig_recon_2.slcio"
         },
         "output_dir": "output"
     },
@@ -46,7 +46,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_3.slcio"
+            "ptag:recon": "tritrig_recon_3.slcio"
         },
         "output_dir": "output"
     },
@@ -63,7 +63,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_4.slcio"
+            "ptag:recon": "tritrig_recon_4.slcio"
         },
         "output_dir": "output"
     },
@@ -80,7 +80,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_5.slcio"
+            "ptag:recon": "tritrig_recon_5.slcio"
         },
         "output_dir": "output"
     },
@@ -97,7 +97,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_6.slcio"
+            "ptag:recon": "tritrig_recon_6.slcio"
         },
         "output_dir": "output"
     },
@@ -114,7 +114,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_7.slcio"
+            "ptag:recon": "tritrig_recon_7.slcio"
         },
         "output_dir": "output"
     },
@@ -131,7 +131,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_8.slcio"
+            "ptag:recon": "tritrig_recon_8.slcio"
         },
         "output_dir": "output"
     },
@@ -148,7 +148,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_9.slcio"
+            "ptag:recon": "tritrig_recon_9.slcio"
         },
         "output_dir": "output"
     },
@@ -165,7 +165,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_10.slcio"
+            "ptag:recon": "tritrig_recon_10.slcio"
         },
         "output_dir": "output"
     }
