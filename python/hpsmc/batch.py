@@ -153,6 +153,7 @@ class Batch:
             logger.info('Checking output files...')
             submit_ids = [job_id for job_id in submit_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
             logger.info('Done checking output files!')
+            logger.debug('Job list after output check: {}'.format(str(submit_ids)))
         return submit_ids
         
     def submit(self):
