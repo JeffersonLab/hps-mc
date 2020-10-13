@@ -1,5 +1,5 @@
-F77   = f77
-FFLAGS= -O -ffixed-line-length-132
+F77   = gfortran
+FFLAGS= -O -ffixed-line-length-132 -std=legacy
 #FFLAGS= -O 
 LIBDIR= ../lib/
 BINDIR= ../bin/

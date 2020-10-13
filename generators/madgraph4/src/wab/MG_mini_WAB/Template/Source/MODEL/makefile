@@ -6,8 +6,8 @@
 # ----------------------------------------------------------------------------
 
 
-F77           = f77
-FFLAGS        = -O -ffixed-line-length-132
+F77           = gfortran
+FFLAGS        = -O -ffixed-line-length-132 -std=legacy
 LIBRARY	      = ../libmodel.a
 LIBDIR        = ../../lib/
 MODEL         = printout.o couplings.o
