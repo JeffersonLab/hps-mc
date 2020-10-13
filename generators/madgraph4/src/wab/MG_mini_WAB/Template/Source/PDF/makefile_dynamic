@@ -6,8 +6,8 @@
 # ----------------------------------------------------------------------------
 
 
-F77           = f77
-FFLAGS        = -O -fPIC
+F77           = gfortran
+FFLAGS        = -O -fPIC -std=legacy
 LIBRARY	      = ../libpdf.so
 LIBDIR        = ../../lib/
 PDF           = Ctq4Fn.o Ctq5Par.o Ctq5Pdf.o Partonx5.o Ctq6Pdf.o cteq3.o \
