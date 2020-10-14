@@ -111,7 +111,7 @@ int main(int argc,char** argv)
                         }
                 }
                 if (!found_event) {
-			close_read(istream);
+                        close_read(istream);
                         fclose(in_file);
                         close_write(ostream);
                         return(0);
@@ -138,7 +138,7 @@ int main(int argc,char** argv)
                                 flag_id_611 = true;
                         }
                         else if(flag_id_611 == false && temp.idhep == 11) temp3 = temp;
-			else if(temp.idhep == -611){
+                        else if(temp.idhep == -611){
                                 temp4 = temp;
                                 flag_id_m611 = true;
                         }
@@ -154,27 +154,27 @@ int main(int argc,char** argv)
                                         for (int j=0;j<4;j++)
                                                 new_event[1].vhep[j] = new_event[i].vhep[j];
                                 }
-				new_event[1].phep[0] = temp3.phep[0] + temp4.phep[0];
-				new_event[1].phep[1] = temp3.phep[1] + temp4.phep[1];
+                                new_event[1].phep[0] = temp3.phep[0] + temp4.phep[0];
+                                new_event[1].phep[1] = temp3.phep[1] + temp4.phep[1];
                                 new_event[1].phep[2] = temp3.phep[2] + temp4.phep[2];
                                 new_event[1].phep[3] = temp3.phep[3] + temp4.phep[3];
                                 new_event[1].phep[4] = sqrt(pow(new_event[1].phep[3], 2) - pow(new_event[1].phep[2], 2) - pow(new_event[1].phep[1], 2) - pow(new_event[1].phep[0], 2));
 
                                 new_event[1].jdahep[1] = i+1;
                         }
-			else if (new_event[i].jmohep[0] == 0){ 
-				new_event[i].jmohep[0] = 1;
-				if (new_event[0].jdahep[0]==0) new_event[0].jdahep[0] = i+1;
-				new_event[0].jdahep[1] = i+1;
-			}
+                        else if (new_event[i].jmohep[0] == 0){ 
+                                new_event[i].jmohep[0] = 1;
+                                if (new_event[0].jdahep[0]==0) new_event[0].jdahep[0] = i+1;
+                                new_event[0].jdahep[1] = i+1;
+                        }
 		}
 
-		write_stdhep(&new_event,nevhep);
-		write_file(ostream);
-		nevhep++;
-		
-		delete temp1;
-		delete temp2;
-	}
+                write_stdhep(&new_event,nevhep);
+                write_file(ostream);
+                nevhep++;
+
+                delete temp1;
+                delete temp2;
+        }
 }
 
