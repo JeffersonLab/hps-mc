@@ -11,7 +11,7 @@ import re
 ##                          PARAMETER
 ############################################################################
 
-def fuse_f77_files(list_input,output):
+def fuse_gfortran_files(list_input,output):
 
     Pattern=re.compile(r'''^\s*subroutine\s*(?P<name>\w*)\s*''',re.I)
     comment_line='C*****************************************************\

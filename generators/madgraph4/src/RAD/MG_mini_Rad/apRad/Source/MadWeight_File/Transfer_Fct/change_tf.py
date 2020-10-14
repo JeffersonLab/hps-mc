@@ -11,7 +11,7 @@ from Cards import Card
 
 ###dico:
 dico={"j":"p_jet","b":"p_bjet","g":"p_gjet","e":"p_elec","m":"p_muon","t":"p_tau","x":"p_init"}
-###f77 forbiden term
+###gfortran forbiden term
 forbiden=["goto","return","stop","call","write","read","do","while","end ","continue","asign","pause","print","rewind","backspace","endfile","open","close","inquire","entry","optional","save","equivalence","intent","target","rule","compute","system","enddo"]
 
 

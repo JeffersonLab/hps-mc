@@ -308,7 +308,7 @@ class MG_diagram(diagram_class.MG_diagram):
         write_main=template.dico['INTRO_FOR_MAIN']
         write_main+=template.dico['START_ROUTINE']
         write_data=template.dico['INTRO_FOR_DATA']
-        write_data+=self.write_f77_parameter()
+        write_data+=self.write_gfortran_parameter()
         write_data+=template.dico['COMMON_DEF']        
         for i in range(0,len(self.code)):
             write_main+=self.code[i][0]
@@ -322,8 +322,8 @@ class MG_diagram(diagram_class.MG_diagram):
         
 
 
-    def write_f77_parameter(self):
-        """ define the f77 parameter for the data file """
+    def write_gfortran_parameter(self):
+        """ define the gfortran parameter for the data file """
         
 #        text=' integer nb_inv_part\n'                    
 #        text+=' parameter (nb_inv_part='+str(self.num_neut)+')\n'

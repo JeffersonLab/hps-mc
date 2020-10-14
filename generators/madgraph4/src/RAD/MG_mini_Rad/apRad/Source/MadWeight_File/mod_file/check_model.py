@@ -50,6 +50,6 @@ if(__name__=="__main__"):
     if not os.path.exists("Source/MODEL/lha_reading.f"):
         os.system("cp Source/MadWeight_File/copy_file/lha_reading.f Source/MODEL/")
     else:
-        fuse_f77_files(["Source/MODEL/lha_reading.f","Source/MadWeight_File/copy_file/lha_reading.f"],"Source/MODEL/lha_reading_new.f")
+        fuse_gfortran_files(["Source/MODEL/lha_reading.f","Source/MadWeight_File/copy_file/lha_reading.f"],"Source/MODEL/lha_reading_new.f")
         os.system("mv Source/MODEL/lha_reading_new.f   Source/MODEL/lha_reading.f")
     mod_model_make("Source/MODEL/makefile")

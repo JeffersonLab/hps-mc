@@ -5,7 +5,7 @@
 #
 # ----------------------------------------------------------------------------
 
-F77           = f77
+F77           = gfortran
 FFLAGS        = -O -fPIC -ffixed-line-length-132
 LIBRARY       = ../libmodel.so
 LIBDIR        = ../../lib/

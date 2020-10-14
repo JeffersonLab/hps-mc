@@ -20,15 +20,15 @@
 ##    Instructions:							##
 ##									##
 ##	- This program  create transfer functions in THETA/PHI/E        ##
-##	- Those functions must be defined in f77 standard		##
+##	- Those functions must be defined in gfortran standard		##
 ##		remind that comment must start with !			##
 ##	- Those definitions must be placed between the TAG LINE		##
 ##		BEGIN ...						##
 ##		END   ...						##
 ##		DONT EDIT THOSE LINES!! THEY ARE TAGS			##
-##	- You can use all standard f77 functions. (All variables are	##
+##	- You can use all standard gfortran functions. (All variables are	##
 ##		in double precision format). 				##
-##	- You can not use any f77 reserved statement except the         ##
+##	- You can not use any gfortran reserved statement except the         ##
 ##		IF ... THEN ...ELSEIF ... ELSE ... ENDIF statements     ##
 ##	- The experimental event is  defined by the variable pexp(i) 	##
 ##		i=0->4 (0->E,1->Px,2->Py,3->Pz)				##

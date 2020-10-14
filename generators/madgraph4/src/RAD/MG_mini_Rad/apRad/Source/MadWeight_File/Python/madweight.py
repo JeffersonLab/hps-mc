@@ -73,7 +73,7 @@ def     compile_SubProcesses(process_list):
         os.chdir("./"+name)
         #os.system(" rm madweight")
         exit_status=os.system("make > /dev/null")
-        if  os.path.isfile("./f77_madweight") and exit_status==0 :
+        if  os.path.isfile("./gfortran_madweight") and exit_status==0 :
             os.chdir("..")
         else:
             print "fortran compilation error"
@@ -92,7 +92,7 @@ def     compile_P_SubProcesses(process_list):
         os.system("make gensym > /dev/null")
         os.system("./gensym > /dev/null")
         exit_status=os.system("make > /dev/null")
-        if  os.path.isfile("./f77_madevent") and exit_status==0:
+        if  os.path.isfile("./gfortran_madevent") and exit_status==0:
             os.chdir("..")
         else:
             print "fortran compilation error"

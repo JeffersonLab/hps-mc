@@ -6,7 +6,7 @@
 # ----------------------------------------------------------------------------
 
 
-F77           = f77
+F77           = gfortran
 FFLAGS        = -O -ffixed-line-length-132
 LIBDIR        = ../../../lib/
 CLASS = class_a.o class_b.o class_c.o class_d.o class_e.o class_f.o class_g.o

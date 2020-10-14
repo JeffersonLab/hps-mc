@@ -1,9 +1,9 @@
-F77   = f77
+F77   = gfortran
 FFLAGS= -O -ffixed-line-length-132
 #FFLAGS = -g -ffixed-line-length-132
 LIBDIR = ../../lib/
 BINDIR = ../../bin/
-PROG   = f77_madweight
+PROG   = gfortran_madweight
 LINKLIBS =  -L../../lib/ -ldhelas3 -lmodel -lgeneric_mw -lpdf -lblocks -ltools -lTF -lMWPS
 LIBS = $(LIBDIR)libdhelas3.a $(LIBDIR)libgeneric_mw.a $(LIBDIR)libpdf.a $(LIBDIR)libmodel.a $(LIBDIR)libblocks.a $(LIBDIR)libtools.a $(LIBDIR)libTF.a $(LIBDIR)libMWPS.a
 

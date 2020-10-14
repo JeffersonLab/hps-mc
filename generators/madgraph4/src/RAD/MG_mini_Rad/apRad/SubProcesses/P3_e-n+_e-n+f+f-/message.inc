@@ -1,1 +1,2 @@
-../message.inc
+      integer mlevel
+      parameter (mlevel=0)

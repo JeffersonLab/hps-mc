@@ -60,9 +60,9 @@ class single_machine(cluster):
         def one(self,directory,nb1,nb2,dir_type):
             name=self.MWparam.name
             if dir_type=='M':
-                prog='../../f77_madweight'
+                prog='../../gfortran_madweight'
             elif dir_type=='P':
-                prog='../../f77_madevent'
+                prog='../../gfortran_madevent'
                 
             os.chdir('./SubProcesses/'+directory+'/'+name+'/'+name+'_'+str(nb1)+'_'+str(nb2)+'/')
             os.system(prog)
@@ -87,9 +87,9 @@ class condor(cluster):
 			
             pos=os.path.abspath('./SubProcesses/'+directory) #to check
             if dir_type=='P':
-                prog='f77_madevent'
+                prog='gfortran_madevent'
             elif dir_type=='M':
-                prog='f77_madweight'
+                prog='gfortran_madweight'
             dir_name=self.MWparam.name
 		
             text= 'Executable   = '+pos+'/'+prog+'\n'
@@ -138,9 +138,9 @@ class condor(cluster):
                                             			
             pos=os.path.abspath('./SubProcesses/'+directory) #to check
             if dir_type=='P':
-                prog='f77_madevent'
+                prog='gfortran_madevent'
             elif dir_type=='M':
-                prog='f77_madweight'
+                prog='gfortran_madweight'
             dir_name=self.MWparam.name
 		
             text= 'Executable   = '+pos+'/'+prog+'\n'
@@ -223,9 +223,9 @@ class SGE(cluster):
             text+="\n"
             text+="date\n"
             if dir_type=='P':
-                text+="../../f77_madevent\n"
+                text+="../../gfortran_madevent\n"
             elif dir_type=='M':
-                text+="../../f77_madweight\n"
+                text+="../../gfortran_madweight\n"
             text+="date\n"
 
             self.mother.submission_file.write(directory,text)
@@ -376,9 +376,9 @@ class Bsub(cluster):
             text+="\n"
             text+="date\n"
             if dir_type=='P':
-                text+="../../f77_madevent\n"
+                text+="../../gfortran_madevent\n"
             elif dir_type=='M':
-                text+="../../f77_madweight\n"
+                text+="../../gfortran_madweight\n"
             text+="date\n"
 
             self.mother.submission_file.write(directory,text)
