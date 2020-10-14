@@ -117,26 +117,32 @@ int main(int argc,char** argv)
                         return(0);
                 }		
 
-		struct stdhep_entry *temp3 = new struct stdhep_entry;
-		struct stdhep_entry *temp4 = new struct stdhep_entry;
+		struct stdhep_entry temp3; 
+		struct stdhep_entry temp4; 
                 int nup;
                 fgets(line,1000,in_file);
                 sscanf(line,"%d %*d %*f %*f %*f %*f",&nup);
+                bool flag_id_611 = false;
+                bool flag_id_m611 = false;
                 for (int i=0;i<nup;i++) {
-                        struct stdhep_entry *temp = new struct stdhep_entry;
+                        struct stdhep_entry temp; 
                         fgets(line,1000,in_file);
-                        int icolup0,icolup1;
-                        double phep0 = 100.0;
-                        char blah[1000];
-                        sscanf(line,"%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f",&(temp->idhep),&(temp->isthep),&(temp->jmohep[0]),&(temp->jmohep[1]),&(temp->phep[0]),&(temp->phep[1]),&(temp->phep[2]),&(temp->phep[3]),&(temp->phep[4]));
+                        sscanf(line,"%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f",&(temp.idhep),&(temp.isthep),&(temp.jmohep[0]),&(temp.jmohep[1]),&(temp.phep[0]),&(temp.phep[1]),&(temp.phep[2]),&(temp.phep[3]),&(temp.phep[4]));
 
-			// nup == 6 && temp->idhep == 11 for electron/pair of rad
-			// nup == 7 && temp->idhep == 611 for electron/pair of ap
-			if( (nup == 6 && temp->idhep == 11) || (nup == 7 && temp->idhep == 611)) temp3 = temp;
-			// nup == 6 && temp->idhep == -11 for positron/pair of rad
-			// nup == 7 && temp->idhep == -611 for positron/pair of ap
-			else if( (nup == 6 && temp->idhep == -11) || (nup == 7 && temp->idhep == -611)) temp4 = temp;
-			else delete temp;
+                        // temp.idhep == 611 for electron/pair of rad_mu and ap
+                        // temp.idhep == -611 for positron/pair of rad_mu and ap
+                        // temp.idhep == 11 for electron/pair of rad
+                        // temp.idhep == -11 for positron/pair of rad
+                        if(temp.idhep == 611) {
+                                temp3 = temp;
+                                flag_id_611 = true;
+                        }
+                        else if(flag_id_611 == false && temp.idhep == 11) temp3 = temp;
+			else if(temp.idhep == -611){
+                                temp4 = temp;
+                                flag_id_m611 = true;
+                        }
+                        else if(flag_id_m611 == false && temp.idhep == -11) temp4 = temp;
                 }
 		
 		////// Building truth for mother particles
@@ -148,10 +154,10 @@ int main(int argc,char** argv)
                                         for (int j=0;j<4;j++)
                                                 new_event[1].vhep[j] = new_event[i].vhep[j];
                                 }
-				new_event[1].phep[0] = temp3->phep[0] + temp4->phep[0];
-				new_event[1].phep[1] = temp3->phep[1] + temp4->phep[1];
-                                new_event[1].phep[2] = temp3->phep[2] + temp4->phep[2];
-                                new_event[1].phep[3] = temp3->phep[3] + temp4->phep[3];
+				new_event[1].phep[0] = temp3.phep[0] + temp4.phep[0];
+				new_event[1].phep[1] = temp3.phep[1] + temp4.phep[1];
+                                new_event[1].phep[2] = temp3.phep[2] + temp4.phep[2];
+                                new_event[1].phep[3] = temp3.phep[3] + temp4.phep[3];
                                 new_event[1].phep[4] = sqrt(pow(new_event[1].phep[3], 2) - pow(new_event[1].phep[2], 2) - pow(new_event[1].phep[1], 2) - pow(new_event[1].phep[0], 2));
 
                                 new_event[1].jdahep[1] = i+1;
@@ -169,8 +175,6 @@ int main(int argc,char** argv)
 		
 		delete temp1;
 		delete temp2;
-		delete temp3;
-		delete temp4;
 	}
 }
 
