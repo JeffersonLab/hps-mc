@@ -14,78 +14,78 @@ using namespace std;
 // takes input stdhep file and lhe file, adds new particles and makes them mothers of parentless particles, and writes to a new stdhep file
 int main(int argc,char** argv)
 {
-	int nevhep;             /* The event number */
-	vector<stdhep_entry> new_event;
+        int nevhep;             /* The event number */
+        vector<stdhep_entry> new_event;
 
-	int id_beam = 623;
-	int id_pair = 622;
+        int id_beam = 623;
+        int id_pair = 622;
 
-	double mass = 0.1;
-	double energy = 0.1;
+        double mass = 0.1;
+        double energy = 0.1;
 
-	int c;
+        int c;
 
-	while ((c = getopt(argc,argv,"hi1:i2:")) !=-1)
-		switch (c)
-		{
-			case 'h':
-				printf("-h: print this help\n");
-				printf("-i: PDG ID of mother\n");
-				return(0);
-				break;
-			case 'i1':
-				id_beam = atoi(optarg);
-				break;
+        while ((c = getopt(argc,argv,"hi1:i2:")) !=-1)
+                switch (c)
+                {
+                        case 'h':
+                                printf("-h: print this help\n");
+                                printf("-i: PDG ID of mother\n");
+                                return(0);
+                                break;
+                        case 'i1':
+                                id_beam = atoi(optarg);
+                                break;
                         case 'i2':
                                 id_pair = atoi(optarg);
                                 break;
-			case '?':
-				printf("Invalid option or missing option argument; -h to list options\n");
-				return(1);
-			default:
-				abort();
-		}
+                        case '?':
+                                printf("Invalid option or missing option argument; -h to list options\n");
+                                return(1);
+                        default:
+                                abort();
+                }
 
-	if ( argc-optind < 3 )
-	{
-		printf("<input stdhep filename> <input lhe filename>  <output stdhep filename>\n");
-		return 1;
-	}
+        if ( argc-optind < 3 )
+        {
+                printf("<input stdhep filename> <input lhe filename>  <output stdhep filename>\n");
+                return 1;
+        }
 
-	int n_events;
-	int istream = 0;
-	int ostream = 1;
+        int n_events;
+        int istream = 0;
+        int ostream = 1;
 
-	n_events = open_read(argv[optind],istream);
+        n_events = open_read(argv[optind],istream);
 
-	open_write(argv[optind+2],ostream,n_events);
+        open_write(argv[optind+2],ostream,n_events);
 
         FILE * in_file = fopen(argv[optind+1],"r");
 
-	while (true) {
+        while (true) {
 
-		////// read event from stdhep file
-		if (!read_next(istream)) {
-			close_read(istream);
-			fclose(in_file);
-			close_write(ostream);
-			return(0);
-		}
+                ////// read event from stdhep file
+                if (!read_next(istream)) {
+                        close_read(istream);
+                        fclose(in_file);
+                        close_write(ostream);
+                        return(0);
+                }
 
-		////// build event
-		// entry 1: mother particle 1
-		// entry 2: mother particle 2
-		// other entries: copy of input stdhep event 
-		struct stdhep_entry *temp1 = new struct stdhep_entry;
-		temp1->isthep = 3; //documentation particle
-		temp1->idhep = id_beam;
-		for (int j=0;j<2;j++) temp1->jmohep[j] = 0;
-		for (int j=0;j<2;j++) temp1->jdahep[j] = 0;
-		for (int j=0;j<5;j++) temp1->phep[j] = 0.0;
-		temp1->phep[3]+= energy;
-		temp1->phep[4]+= mass;
-		for (int j=0;j<4;j++) temp1->vhep[j] = 0.0;
-		new_event.push_back(*temp1);
+                ////// build event
+                // entry 1: mother particle 1
+                // entry 2: mother particle 2
+                // other entries: copy of input stdhep event 
+                struct stdhep_entry *temp1 = new struct stdhep_entry;
+                temp1->isthep = 3; //documentation particle
+                temp1->idhep = id_beam;
+                for (int j=0;j<2;j++) temp1->jmohep[j] = 0;
+                for (int j=0;j<2;j++) temp1->jdahep[j] = 0;
+                for (int j=0;j<5;j++) temp1->phep[j] = 0.0;
+                temp1->phep[3]+= energy;
+                temp1->phep[4]+= mass;
+                for (int j=0;j<4;j++) temp1->vhep[j] = 0.0;
+                new_event.push_back(*temp1);
 
                 struct stdhep_entry *temp2 = new struct stdhep_entry;
                 temp2->isthep = 2; //documentation particle
@@ -98,10 +98,10 @@ int main(int argc,char** argv)
                 for (int j=0;j<4;j++) temp2->vhep[j] = 0.0;
                 new_event.push_back(*temp2);
 
-		nevhep = read_stdhep(&new_event);
-		int offset = 2;
+                nevhep = read_stdhep(&new_event);
+                int offset = 2;
 
-		////// read event from lhe file
+                ////// read event from lhe file
                 char line[1000];
                 bool found_event = false;
                 while (fgets(line,1000,in_file)!=NULL) {
@@ -117,8 +117,8 @@ int main(int argc,char** argv)
                         return(0);
                 }		
 
-		struct stdhep_entry temp3; 
-		struct stdhep_entry temp4; 
+                struct stdhep_entry temp3; 
+                struct stdhep_entry temp4; 
                 int nup;
                 fgets(line,1000,in_file);
                 sscanf(line,"%d %*d %*f %*f %*f %*f",&nup);
@@ -145,8 +145,8 @@ int main(int argc,char** argv)
                         else if(flag_id_m611 == false && temp.idhep == -11) temp4 = temp;
                 }
 		
-		////// Building truth for mother particles
-		for (int i=2;i<new_event.size();i++) {
+                ////// Building truth for mother particles
+                for (int i=2;i<new_event.size();i++) {
                         if (new_event[i].jmohep[0] == 1 + offset){
                                 new_event[i].jmohep[0] = 2;
                                 if (new_event[1].jdahep[0] == 0){
@@ -167,7 +167,7 @@ int main(int argc,char** argv)
                                 if (new_event[0].jdahep[0]==0) new_event[0].jdahep[0] = i+1;
                                 new_event[0].jdahep[1] = i+1;
                         }
-		}
+                }
 
                 write_stdhep(&new_event,nevhep);
                 write_file(ostream);
