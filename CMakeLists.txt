@@ -8,6 +8,7 @@ if(${PYTHON_VERSION_MAJOR} LESS 3)
     message(FATAL_ERROR "Python 3 is required.")
 endif() 
 set(PYTHON ${PYTHON_EXECUTABLE})
+message(STATUS "Python executable found at: ${PYTHON_EXECUTABLE}")
 
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran)
