@@ -145,10 +145,15 @@ class Batch:
         """        
         submit_ids = self.jobstore.get_job_ids()
         if self.start_job_num:
-            submit_ids = [id for id in submit_ids 
-                          if int(id) >= self.start_job_num and int(id) <= self.end_job_num]
+            submit_ids = [job_id for job_id in submit_ids 
+                          if int(job_id) >= self.start_job_num and int(job_id) <= self.end_job_num]
         elif len(self.job_ids):
             submit_ids = self.job_ids
+        if self.check_output:
+            logger.info('Checking output files...')
+            submit_ids = [job_id for job_id in submit_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
+            logger.info('Done checking output files!')
+            logger.debug('Job list after output check: {}'.format(str(submit_ids)))
         return submit_ids
         
     def submit(self):
@@ -162,11 +167,8 @@ class Batch:
     def _submit_job(self, job_id, job):
         """Submit a single job to the batch system."""
         batch_id = None
-        if self.check_output and Batch._outputs_exist(job):
-            logger.warning('Skipping submission for job because outputs already exist: %s' % job_id)
-        else:
-            batch_id = self.submit_cmd(job_id, job)
-            logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
+        batch_id = self.submit_cmd(job_id, job)
+        logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
         return batch_id
     
     def _submit_jobs(self, job_ids):

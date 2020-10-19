@@ -1,6 +1,7 @@
 [
     {
         "job_id": 1,
+        "seed": 1000001,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -11,12 +12,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_1.slcio"
+            "ptag:recon": "tritrig_recon_1.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 2,
+        "seed": 1000002,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -27,12 +29,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_2.slcio"
+            "ptag:recon": "tritrig_recon_2.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 3,
+        "seed": 1000003,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -43,12 +46,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_3.slcio"
+            "ptag:recon": "tritrig_recon_3.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 4,
+        "seed": 1000004,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -59,12 +63,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_4.slcio"
+            "ptag:recon": "tritrig_recon_4.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 5,
+        "seed": 1000005,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -75,12 +80,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_5.slcio"
+            "ptag:recon": "tritrig_recon_5.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 6,
+        "seed": 1000006,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -91,12 +97,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_6.slcio"
+            "ptag:recon": "tritrig_recon_6.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 7,
+        "seed": 1000007,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -107,12 +114,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_7.slcio"
+            "ptag:recon": "tritrig_recon_7.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 8,
+        "seed": 1000008,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -123,12 +131,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_8.slcio"
+            "ptag:recon": "tritrig_recon_8.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 9,
+        "seed": 1000009,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -139,12 +148,13 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_9.slcio"
+            "ptag:recon": "tritrig_recon_9.slcio"
         },
         "output_dir": "output"
     },
     {
         "job_id": 10,
+        "seed": 1000010,
         "nevents": 1000,
         "run_params": "2pt3",
         "target_z": -4.3,
@@ -155,7 +165,7 @@
             "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
         },
         "output_files": {
-            "recon": "tritrig_recon_10.slcio"
+            "ptag:recon": "tritrig_recon_10.slcio"
         },
         "output_dir": "output"
     }
