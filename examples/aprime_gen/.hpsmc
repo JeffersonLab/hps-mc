@@ -1,2 +1,2 @@
-[MG4]
-madgraph_dir = /work/slac/hps-mc/generators/madgraph4/src
+#[MG4]
+#madgraph_dir = /work/slac/git/hps-mc/generators/madgraph4/src
