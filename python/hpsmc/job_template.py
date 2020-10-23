@@ -148,6 +148,10 @@ class JobTemplate:
                     jobdata.set(var_names[j], var_vals[var_index][j])
                 input_files = copy.deepcopy(self.input_files)
                 for r in range(max_iter):
+                    #print("job id: {}".format(job_id))
+                    jobdata.set('job_id', job_id)
+                    #print("sequence = {}".format(r))
+                    jobdata.set('sequence', r)
                     if (len(input_files.keys())):
                         job_input_files = []
                         for input_name in list(input_files.keys()):
@@ -156,12 +160,9 @@ class JobTemplate:
                                 input_file = input_files[input_name][0].pop(0)
                                 job_input_files.append(input_file)
                             jobdata.input_files[input_name] = job_input_files
-
-                    jobdata.set('job_id', job_id)
                     jobdata_copy = copy.deepcopy(jobdata)
                     jobs.append(jobdata_copy)
                     job_id += 1
-
                     njobs += 1
                     if njobs >= self.max_jobs:
                         raise MaxJobsException(self.max_jobs)
