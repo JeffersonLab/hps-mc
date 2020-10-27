@@ -1,0 +1,8 @@
+{
+    "bunches": [25000],
+    "nevents": [25000],
+    "run_params": ["4pt55"],
+    "detector": ["HPS-PhysicsRun2019-v2-4pt5"],
+    "target_z": [-7.51],
+    "run_number": [10666]
+}

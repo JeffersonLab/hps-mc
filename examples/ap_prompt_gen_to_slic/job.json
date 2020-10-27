@@ -1,0 +1,15 @@
+{
+    "run_number": 10666,
+    "nevents": 1000,
+    "run_params": "4pt55",
+   "apmass": 100.0,
+    "target_z": -7.51,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "output_files": {
+        "ap_unweighted_events.lhe.gz": "lhe/ap.lhe.gz",
+        "ap_unweighted_events.stdhep": "egs5/ap.stdhep",
+        "ap_mom.stdhep": "stdhep/ap.stdhep",
+        "ap.slcio": "slic/ap.slcio"
+    },
+    "output_dir": "output/2019/pass0"
+}

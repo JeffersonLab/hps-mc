@@ -1,0 +1,12 @@
+{
+    "run_number": 10666,
+    "bunches": 250000,
+    "nevents": 250000,
+    "seed": 1001002,
+    "run_params": "4pt55",
+    "target_z": -7.51,
+    "output_files": {
+        "beam.stdhep": "beam.stdhep"
+    },
+    "output_dir": "output"
+}
