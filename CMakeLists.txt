@@ -6,7 +6,7 @@ project(hps-mc VERSION 2.0.0)
 find_package(PythonInterp)
 if(${PYTHON_VERSION_MAJOR} LESS 3)
     message(FATAL_ERROR "Python 3 is required.")
-endif() 
+endif()
 set(PYTHON ${PYTHON_EXECUTABLE})
 message(STATUS "Python executable found at: ${PYTHON_EXECUTABLE}")
 
@@ -47,8 +47,11 @@ foreach(SCRIPT_IN ${SCRIPTS_IN})
     string(REPLACE ".in" "" SCRIPT_OUT ${SCRIPT_IN_FILE})
     configure_file(${SCRIPT_IN} ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} @ONLY)
     install(FILES ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} DESTINATION bin
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)   
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endforeach()
+
+# Recursively install all generator files.
+install(DIRECTORY generators DESTINATION share)
 
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)

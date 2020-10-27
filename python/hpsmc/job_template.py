@@ -104,8 +104,8 @@ class JobTemplate:
         for job in self._create_jobs():
             job_vars = {'job': job}
             s = self.template.render(job_vars)
-            #print(s)
             job_json = json.loads(s)
+            job_json['job_id'] = job.job_id
             jobs.append(job_json)
         #print(json.dumps(job_list, indent=4, sort_keys=True))
         with open(self.output_file, 'w') as f:
