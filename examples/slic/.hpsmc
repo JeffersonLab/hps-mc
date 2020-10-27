@@ -1,8 +1,3 @@
 [Job]
 dry_run = False
 enable_copy_input_files = True
-
-[SLIC]
-slic_dir = /work/slac/git/slic/install/
-hps_fieldmaps_dir = /work/slac/git/hps-fieldmaps/
-detector_dir = /work/slac/git/hps-java/detector-data/detectors/
