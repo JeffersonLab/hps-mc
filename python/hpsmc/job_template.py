@@ -35,9 +35,14 @@ class JobData(object):
 
     def __init__(self):
         self.input_files = {}
+        self.params = {}
+        self.job_id = 0
 
     def set(self, name, value):
         setattr(self, name, value)
+
+    def set_param(self, name, value):
+        self.params[name] = value
 
 class MaxJobsException(Exception):
 
@@ -103,9 +108,13 @@ class JobTemplate:
         jobs = []
         for job in self._create_jobs():
             job_vars = {'job': job}
+            for k,v in job.params.items():
+                print("Setting {} = {}".format(k, v))
+                job_vars[k] = v
             s = self.template.render(job_vars)
             job_json = json.loads(s)
             job_json['job_id'] = job.job_id
+
             jobs.append(job_json)
         #print(json.dumps(job_list, indent=4, sort_keys=True))
         with open(self.output_file, 'w') as f:
@@ -145,7 +154,7 @@ class JobTemplate:
             for var_index in range(len(var_vals)):
                 jobdata = JobData()
                 for j in range(nvars):
-                    jobdata.set(var_names[j], var_vals[var_index][j])
+                    jobdata.set_param(var_names[j], var_vals[var_index][j])
                 input_files = copy.deepcopy(self.input_files)
                 for r in range(max_iter):
                     #print("job id: {}".format(job_id))
