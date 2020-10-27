@@ -14,16 +14,29 @@ class EventGenerator(Component):
     def required_parameters(self):
         return ['nevents']
 
+    def get_install_dir(self):
+        if os.getenv("HPSMC_DIR") is None:
+            raise Exception("HPSMC_DIR is not set!")
+        return "{}/share/generators".format(os.getenv("HPSMC_DIR", None))
+
 class EGS5(EventGenerator):
     """Run the EGS5 event generator to produce a StdHep file."""
 
     def __init__(self, name='', **kwargs):
         self.bunches = 5e5
         self.target_thickness = None
+        self.egs5_dir = None
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
+
+    def get_install_dir(self):
+        return EventGenerator.get_install_dir(self) + "/egs5"
 
     def setup(self):
         EventGenerator.setup(self)
+
+        if self.egs5_dir is None:
+            self.egs5_dir = self.get_install_dir()
+            logger.info("Using EGS5 from install dir: " + self.egs5_dir)
 
         self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
         self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
@@ -75,8 +88,8 @@ class EGS5(EventGenerator):
     def optional_parameters(self):
         return ['bunches', 'target_thickness']
 
-    def required_config(self):
-        return ['egs5_dir']
+    #def required_config(self):
+    #    return ['egs5_dir']
 
 class StdHepConverter(EGS5):
     """Convert LHE files to StdHep using EGS5."""
@@ -117,6 +130,9 @@ class MG(EventGenerator):
     """
     def __init__(self, name, **kwargs):
 
+        # Install dir or user config will be used for this.
+        self.madgraph_dir = None
+
         # Default name of param card
         self.param_card = "param_card.dat"
 
@@ -155,8 +171,8 @@ class MG(EventGenerator):
     def optional_parameters(self):
         return ['seed', 'param_card', 'apmass']
 
-    def required_config(self):
-        return ['madgraph_dir']
+    #def required_config(self):
+    #    return ['madgraph_dir']
 
     def make_run_card(self, run_card):
 
@@ -209,6 +225,10 @@ class MG(EventGenerator):
 
         EventGenerator.setup(self)
 
+        if self.madgraph_dir is None:
+            self.madgraph_dir = self.get_install_dir()
+            logger.info("Using Madgraph from install dir: " + self.madgraph_dir)
+
         if self.name is 'ap' and self.apmass is None:
             raise Exception("Missing apmass param for AP generation.")
 
@@ -230,6 +250,9 @@ class MG4(MG):
 
         if self.name not in MG4.dir_map:
             raise Exception("The name '%s' is not valid for MG4." % self.name)
+
+    def get_install_dir(self):
+        return EventGenerator.get_install_dir(self) + "/madgraph4/src"
 
     def setup(self):
 
@@ -287,6 +310,9 @@ class MG5(MG):
 
         if self.name not in MG5.dir_map:
             raise Exception("The name '%s' is not valid for MG5." % self.name)
+
+    def get_install_dir(self):
+        return EventGenerator.get_install_dir(self) + "/madgraph5/src"
 
     def setup(self):
 
