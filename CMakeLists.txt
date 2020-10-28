@@ -51,7 +51,7 @@ foreach(SCRIPT_IN ${SCRIPTS_IN})
 endforeach()
 
 # Recursively install all generator files.
-install(DIRECTORY generators DESTINATION share)
+install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
 
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
