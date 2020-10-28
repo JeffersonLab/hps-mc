@@ -1,17 +1,16 @@
 {
-    "job_id": {{ job.job_id }},
-    "seed": {{ job.job_id + 1000000 }},
-    "run_number": {{ job.run_number }},
-    "detector": "{{ job.detector }}",
+    "job_id": {{ job_id }},
+    "seed": {{ job_id + 1000000 }},
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
     "input_files": {
         "{{ job.input_files['events'][0] }}": "events_1.stdhep",
         "{{ job.input_files['events'][1] }}": "events_2.stdhep"
     },
     "output_files": {
-        "events_job.slcio": "events_job_{{ job.job_id }}.slcio",
-        "events_1.slcio": "{{ job.input_files['events'][0] | basename }}.slcio",
-        "events_2.slcio": "{{ job.input_files['events'][1] | basename }}.slcio"
+        "events_1.slcio": "{{ input_files['events'][0] | basename }}.slcio",
+        "events_2.slcio": "{{ input_files['events'][1] | basename }}.slcio"
     },
-    "output_dir": "output/{{ job.detector }}"
+    "output_dir": "output/{{ detector }}"
 }
 
