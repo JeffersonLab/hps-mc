@@ -1,1 +1,1 @@
-hps-mc-job run -d $PWD/scratch -c .hpsmc data_cnv job.json
+hps-mc-job run -d $PWD/scratch data_cnv job.json
