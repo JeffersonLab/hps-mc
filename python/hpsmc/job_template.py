@@ -122,14 +122,11 @@ class JobTemplate:
                 if k in job_vars:
                     raise Exception("Illegal variable name: {}".format(k))
                 job_vars[k] = v
-            #print(job_vars)
             s = self.template.render(job_vars)
-            #print(s)
             job_json = json.loads(s)
             job_json['job_id'] = job.job_id
 
             jobs.append(job_json)
-        #print(json.dumps(job_list, indent=4, sort_keys=True))
         with open(self.output_file, 'w') as f:
             json.dump(jobs, f, indent=4)
             print('Wrote %d jobs to: %s' % (len(jobs), self.output_file))
@@ -170,9 +167,7 @@ class JobTemplate:
                     jobdata.set_param(var_names[j], var_vals[var_index][j])
                 input_files = copy.deepcopy(self.input_files)
                 for r in range(max_iter):
-                    #print("job id: {}".format(job_id))
                     jobdata.set('job_id', job_id)
-                    #print("sequence = {}".format(r))
                     jobdata.set('sequence', r)
                     if (len(input_files.keys())):
                         job_input_files = []
@@ -248,8 +243,6 @@ class JobTemplate:
                 raise Exception('The var file does not exist: %s' % var_file)
             with open(var_file, 'r') as f:
                 self.add_itervars(json.load(f))
-                print("Loaded iter vars from file: %s" % var_file)
-                print(self.itervars)
 
 if __name__ == '__main__':
     job_tmpl = JobTemplate()
