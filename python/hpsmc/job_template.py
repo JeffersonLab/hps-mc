@@ -5,14 +5,12 @@ import copy
 import json
 import argparse
 import math
+import uuid as _uuid
 
 from jinja2 import Template, Environment, FileSystemLoader
 
 def basename(path):
-    """Filter to return a file base name stripped of dir and extension.
-
-    Useful for using base names of input files in the output file names within jinja2 template.
-    """
+    """Filter to return a file base name stripped of dir and extension."""
     return os.path.splitext(os.path.basename(path))[0]
 
 def extension(path):
@@ -22,6 +20,14 @@ def extension(path):
 def dirname(path):
     """Filter to get dir name from string."""
     return os.path.dirname(path)
+
+def pad(num, npad=4):
+    """Filter to pad a number."""
+    return format(num, format(npad, '02'))
+
+def uuid():
+    """Function to get a uuid within a template."""
+    return str(_uuid.uuid4())[:8]
 
 # TODO:
 # filenum filter - try to get file num by looking for _%d in file name
@@ -57,14 +63,14 @@ class JobTemplate:
     Also accepts lists of input files with a unique key from which one or more can be read
     per job.
 
-    The user's template should be a JSON dict with jinja2 markup, which can use the 'job' variable
-    to access job params for a particular job.
+    The user's template should be a JSON dict with jinja2 markup.
     """
 
     def __init__(self, template_file=None, output_file='jobs.json'):
         self.template_file = template_file
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
+        self.env.filters['pad'] = pad
         self.job_id_start = 0;
         self.input_files = {}
         self.itervars = {}
@@ -105,13 +111,20 @@ class JobTemplate:
         Generate the JSON jobs from processing the template and write to file.
         """
         self.template = self.env.get_template(self.template_file)
+        self.template.globals['uuid'] = uuid
         jobs = []
         for job in self._create_jobs():
-            job_vars = {'job': job}
+            job_vars = {'job': job,
+                        'job_id': job.job_id,
+                        'sequence': job.sequence,
+                        'input_files': job.input_files }
             for k,v in job.params.items():
-                print("Setting {} = {}".format(k, v))
+                if k in job_vars:
+                    raise Exception("Illegal variable name: {}".format(k))
                 job_vars[k] = v
+            #print(job_vars)
             s = self.template.render(job_vars)
+            #print(s)
             job_json = json.loads(s)
             job_json['job_id'] = job.job_id
 
