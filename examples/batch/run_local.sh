@@ -1,2 +1,2 @@
 #!/bin/sh
-hps-mc-batch local -d $PWD/scratch -c .hpsmc slic jobs.json
+hps-mc-batch local -d $PWD/scratch slic jobs.json

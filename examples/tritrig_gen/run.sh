@@ -1,1 +1,1 @@
-hps-mc-job run -d $PWD/scratch -c .hpsmc tritrig_gen job.json
+hps-mc-job run -d $PWD/scratch tritrig_gen job.json
