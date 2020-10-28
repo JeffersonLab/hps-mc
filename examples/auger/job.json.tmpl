@@ -1,13 +1,13 @@
 {
-    "seed": ${seed},
-    "nevents": ${nevents},
-    "run_number": ${run_number},
-    "detector": "${detector}",
+    "seed": {{ job_id + 1000000 }},
+    "nevents": {{ nevents }},
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
     "input_files": {
-        "${events_1}": "events.stdhep"
+        "{{ input_files['events'][0] }}": "events.stdhep"
     },
     "output_files": {
-      "events.slcio": "events_${detector}_${run_number}_${job_id}_${nevents}.slcio"
+      "events.slcio": "{{ detector }}_run_{{ run_number }}_{{ sequence|pad(5) }}.slcio"
     },
-    "output_dir": "output/${detector}"
+    "output_dir": "output/{{ detector }}"
 }
