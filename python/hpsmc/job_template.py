@@ -5,14 +5,12 @@ import copy
 import json
 import argparse
 import math
+import uuid as _uuid
 
 from jinja2 import Template, Environment, FileSystemLoader
 
 def basename(path):
-    """Filter to return a file base name stripped of dir and extension.
-
-    Useful for using base names of input files in the output file names within jinja2 template.
-    """
+    """Filter to return a file base name stripped of dir and extension."""
     return os.path.splitext(os.path.basename(path))[0]
 
 def extension(path):
@@ -22,6 +20,14 @@ def extension(path):
 def dirname(path):
     """Filter to get dir name from string."""
     return os.path.dirname(path)
+
+def pad(num, npad=4):
+    """Filter to pad a number."""
+    return format(num, format(npad, '02'))
+
+def uuid():
+    """Function to get a uuid within a template."""
+    return str(_uuid.uuid4())[:8]
 
 # TODO:
 # filenum filter - try to get file num by looking for _%d in file name
@@ -35,9 +41,14 @@ class JobData(object):
 
     def __init__(self):
         self.input_files = {}
+        self.params = {}
+        self.job_id = 0
 
     def set(self, name, value):
         setattr(self, name, value)
+
+    def set_param(self, name, value):
+        self.params[name] = value
 
 class MaxJobsException(Exception):
 
@@ -52,14 +63,14 @@ class JobTemplate:
     Also accepts lists of input files with a unique key from which one or more can be read
     per job.
 
-    The user's template should be a JSON dict with jinja2 markup, which can use the 'job' variable
-    to access job params for a particular job.
+    The user's template should be a JSON dict with jinja2 markup.
     """
 
     def __init__(self, template_file=None, output_file='jobs.json'):
         self.template_file = template_file
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
+        self.env.filters['pad'] = pad
         self.job_id_start = 0;
         self.input_files = {}
         self.itervars = {}
@@ -100,14 +111,22 @@ class JobTemplate:
         Generate the JSON jobs from processing the template and write to file.
         """
         self.template = self.env.get_template(self.template_file)
+        self.template.globals['uuid'] = uuid
         jobs = []
         for job in self._create_jobs():
-            job_vars = {'job': job}
+            job_vars = {'job': job,
+                        'job_id': job.job_id,
+                        'sequence': job.sequence,
+                        'input_files': job.input_files }
+            for k,v in job.params.items():
+                if k in job_vars:
+                    raise Exception("Illegal variable name: {}".format(k))
+                job_vars[k] = v
             s = self.template.render(job_vars)
-            #print(s)
             job_json = json.loads(s)
+            job_json['job_id'] = job.job_id
+
             jobs.append(job_json)
-        #print(json.dumps(job_list, indent=4, sort_keys=True))
         with open(self.output_file, 'w') as f:
             json.dump(jobs, f, indent=4)
             print('Wrote %d jobs to: %s' % (len(jobs), self.output_file))
@@ -145,12 +164,10 @@ class JobTemplate:
             for var_index in range(len(var_vals)):
                 jobdata = JobData()
                 for j in range(nvars):
-                    jobdata.set(var_names[j], var_vals[var_index][j])
+                    jobdata.set_param(var_names[j], var_vals[var_index][j])
                 input_files = copy.deepcopy(self.input_files)
                 for r in range(max_iter):
-                    #print("job id: {}".format(job_id))
                     jobdata.set('job_id', job_id)
-                    #print("sequence = {}".format(r))
                     jobdata.set('sequence', r)
                     if (len(input_files.keys())):
                         job_input_files = []
@@ -226,8 +243,6 @@ class JobTemplate:
                 raise Exception('The var file does not exist: %s' % var_file)
             with open(var_file, 'r') as f:
                 self.add_itervars(json.load(f))
-                print("Loaded iter vars from file: %s" % var_file)
-                print(self.itervars)
 
 if __name__ == '__main__':
     job_tmpl = JobTemplate()
