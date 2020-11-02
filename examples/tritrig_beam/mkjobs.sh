@@ -1,1 +1,4 @@
-hps-mc-jobstore -i beam_files.txt 1 -i tritrig_files.txt 1 -j 1 -r 10 -a vars.json job.json.tmpl jobs.json
+hps-mc-job-template \
+    -i beam beam_files.txt 1 \
+    -i tritrig tritrig_files.txt 1 \
+    -j 1 -a vars.json job.json.tmpl jobs.json

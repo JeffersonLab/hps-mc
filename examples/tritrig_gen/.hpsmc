@@ -1,5 +1,0 @@
-[MG5]
-madgraph_dir = /work/slac/git/hps-mc/generators/madgraph5/src
-
-[StdHepConverter]
-egs5_dir = /work/slac/git/hps-mc/generators/egs5

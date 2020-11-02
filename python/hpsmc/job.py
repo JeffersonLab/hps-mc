@@ -94,7 +94,6 @@ class Job(object):
                      'delete_rundir',
                      'dry_run',
                      'ignore_return_codes',
-                     'job_id_pad',
                      'check_output_files',
                      'enable_file_chaining',
                      'enable_ptags',
@@ -129,7 +128,6 @@ class Job(object):
         self.job_id = None
 
         # These are all settable by config file.
-        self.job_id_pad = 4
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
         self.delete_existing = False

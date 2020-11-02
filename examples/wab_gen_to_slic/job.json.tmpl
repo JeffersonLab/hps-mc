@@ -1,14 +1,14 @@
 {
-    "nevents": ${nevents},
-    "run_params": "${run_params}",
-    "target_z": ${target_z},
-    "run_number": ${run_number},
-    "detector": "${detector}",
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
     "output_files": {
-        "wab_unweighted_events.lhe.gz": "lhe/wab_${job_id}.lhe.gz",
-        "wab_unweighted_events.stdhep": "egs5/wab_${job_id}.stdhep",
-        "wab_unweighted_events_mom.stdhep": "stdhep/wab_${job_id}.stdhep",
-        "wab_unweighted_events_mom_rot.slcio": "slic/wab_${job_id}.slcio"
+        "wab_unweighted_events.lhe.gz": "lhe/wab_{{ job_id }}.lhe.gz",
+        "wab_unweighted_events.stdhep": "egs5/wab_{{ job_id }}.stdhep",
+        "wab_unweighted_events_mom.stdhep": "stdhep/wab_{{ job_id }}.stdhep",
+        "wab_unweighted_events_mom_rot.slcio": "slic/wab_{{ job_id }}.slcio"
     },
     "output_dir": "output/2019/pass0"
 }
