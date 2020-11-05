@@ -245,7 +245,7 @@ class LSF(Batch):
         out,err = proc.communicate()
         if err != None and len(err):
             logger.warning(err)
-        tokens = out.split(' ')
+        tokens = out.decode().split(" ")
         if tokens[0] != 'Job':
             raise Exception('Unexpected output from bsub command: %s' % out)
         batch_id = int(tokens[1].replace('<', '').replace('>', ''))
