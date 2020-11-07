@@ -4,7 +4,7 @@
     "run_number": 7984,
     "detector": "HPS-PhysicsRun2016-Pass2",
     "input_files": {
-        "/work/slac/git/hps-mc/examples/tritrig_gen/output/tritrig_events_1.lhe.gz": "tritrig.stdhep"
+        "../../tritrig_gen/output/tritrig_1.stdhep": "tritrig.stdhep"
     },
     "output_files": {
         "tritrig.slcio": "tritrig_1.slcio"
