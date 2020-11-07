@@ -72,6 +72,12 @@ if(ENABLE_INSTALL_FIELDMAPS)
     include(InstallFieldmaps)
 endif()
 
+# Install detector data
+option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
+if(ENABLE_INSTALL_DETECTORS)
+    include(InstallDetectorData)
+endif()
+
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
 
