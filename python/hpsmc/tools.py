@@ -25,6 +25,9 @@ class SLIC(Component):
         # To be set from config or install dir
         self.hps_fieldmaps_dir = None
 
+        # To be set from config or install dir
+        self.detector_dir = None
+
         Component.__init__(self,
                            name='slic',
                            command='slic',
@@ -43,8 +46,8 @@ class SLIC(Component):
 
         if len(self.macros):
             for macro in self.macros:
-                if macro == "run_number.mac":
-                    raise Exception("Macro name '%s' is not allowed." % macro)
+                #if macro == "run_number.mac":
+                #    raise Exception("Macro name '%s' is not allowed." % macro)
                 if not os.path.isabs(macro):
                     raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
@@ -64,6 +67,11 @@ class SLIC(Component):
         return args
 
     def __detector_file(self):
+
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            logger.info("Using detector dir from install: {}".format(self.detector_dir))
+
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def __particle_tbl(self):
@@ -80,9 +88,7 @@ class SLIC(Component):
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
-            if os.getenv("HPSMC_DIR") is None:
-                raise Exception("HPSMC_DIR is not set!")
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(os.getenv("HPSMC_DIR", None))
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
             logger.info("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
