@@ -2,6 +2,13 @@ cmake_minimum_required(VERSION 3.12)
 
 project(hps-mc VERSION 2.0.0)
 
+# cmake macros
+include(ExternalProject)
+include(FindPackageHandleStandardArgs)
+
+# cmake macros for this project
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
 # Find Python 3
 find_package(Python3 COMPONENTS Interpreter REQUIRED)
 message(STATUS "Python3 executable found at: ${Python3_EXECUTABLE}")
@@ -20,13 +27,9 @@ else()
 endif()
 
 # Check for Java
-find_package(Java)
-if(JAVA-NOTFOUND)
-    message(FATAL_ERROR "java was not found")
-else()
-    message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
-    message(STATUS "java version: ${Java_VERSION}")
-endif()
+find_package(Java REQUIRED)
+message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
+message(STATUS "java version: ${Java_VERSION}")
 
 # Check for GSL
 find_package(GSL REQUIRED)
@@ -51,7 +54,6 @@ foreach(SCRIPT_IN ${SCRIPTS_IN})
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endforeach()
 
-
 # Recursively install all generator files
 option(ENABLE_INSTALL_GENERATORS "Install physics generators (EGS5, Madgraph)" ON)
 if(ENABLE_INSTALL_GENERATORS)
@@ -59,6 +61,15 @@ if(ENABLE_INSTALL_GENERATORS)
     install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
 else()
     message(STATUS "Installation of physics generators is disabled.")
+endif()
+
+# External projects will be added to this target
+add_custom_target(external)
+
+# Install magnetic field maps
+option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
+if(ENABLE_INSTALL_FIELDMAPS)
+    include(InstallFieldmaps)
 endif()
 
 # Install python scripts
