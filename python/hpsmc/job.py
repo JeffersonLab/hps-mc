@@ -552,9 +552,9 @@ class Job(object):
         Copy input files to the run dir.
         """
         for src,dest in self.input_files.items():
-            if not os.path.isabs(src):
+            #if not os.path.isabs(src):
                 # FIXME: Could try and convert to abspath here.
-                raise Exception("The input source file '%s' is not an absolute path." % src)
+            #    raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Copying input file: %s -> %s" % (src, os.path.join(self.rundir, dest)))
