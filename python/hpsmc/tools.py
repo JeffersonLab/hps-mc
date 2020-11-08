@@ -114,9 +114,9 @@ class SLIC(Component):
         return ['detector']
 
     def required_config(self):
-        return ['slic_dir', 'detector_dir']
+        return ['slic_dir']
 
-    #'hps_fieldmaps_dir',
+    #'hps_fieldmaps_dir', 'detector_dir'
 
     def execute(self, log_out, log_err):
 
