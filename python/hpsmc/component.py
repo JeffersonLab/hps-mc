@@ -64,6 +64,7 @@ class Component(object):
 
         cl = [self.command]
         cl.extend(self.cmd_args())
+
         logger.info("Executing '%s' with command: %s" % (self.name, ' '.join(cl)))
         proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
@@ -98,8 +99,6 @@ class Component(object):
         """Automatically load attributes from config by reading in values from
         the section with the same name as the class in the config file and
         assigning them to class attributes with the same name.
-
-        Components should not need to override this method.
         """
         section_name = self.__class__.__name__
         if parser.has_section(section_name):
@@ -159,7 +158,9 @@ class Component(object):
         """Raise an exception on the first missing config setting for this component."""
         for c in self.required_config():
             if not hasattr(self, c):
-                raise Exception('Missing required config: %s:%s' % (self.__class__.__name__, c))
+                raise Exception('Missing required config attribute: %s:%s' % (self.__class__.__name__, c))
+            if getattr(self, c) is None:
+                raise Exception('Config was not set: %s:%s' % (self.__class__.__name__, c))
 
     def input_files(self):
         """Get a list of input files for this component."""
