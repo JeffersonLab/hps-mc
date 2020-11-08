@@ -66,28 +66,33 @@ endif()
 # External projects will be added to this target
 add_custom_target(external)
 
-# Install magnetic field maps
-option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
-if(ENABLE_INSTALL_FIELDMAPS)
-    include(InstallFieldmaps)
-endif()
+option(ENABLE_INSTALL_EXTERNAL ON)
+if(ENABLE_INSTALL_EXTERNAL)
 
-# Install detector data
-option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
-if(ENABLE_INSTALL_DETECTORS)
-    include(InstallDetectorData)
-endif()
+    # Install magnetic field maps
+    option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
+    if(ENABLE_INSTALL_FIELDMAPS)
+        include(InstallFieldmaps)
+    endif()
 
-# Install LCIO
-option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
-if(ENABLE_INSTALL_LCIO)
-    include(InstallLCIO)
-endif()
+    # Install detector data
+    option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
+    if(ENABLE_INSTALL_DETECTORS)
+        include(InstallDetectorData)
+    endif()
 
-# Install HPS Java
-option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
-if(ENABLE_INSTALL_HPSJAVA)
-    include(InstallHpsJava)
+    # Install LCIO
+    option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
+    if(ENABLE_INSTALL_LCIO)
+        include(InstallLCIO)
+    endif()
+
+    # Install HPS Java
+    option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
+    if(ENABLE_INSTALL_HPSJAVA)
+        include(InstallHpsJava)
+    endif()
+
 endif()
 
 # Install python scripts
