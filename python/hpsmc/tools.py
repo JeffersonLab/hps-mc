@@ -650,18 +650,18 @@ class EvioToLcio(JavaTool):
 
     def __init__(self, steering=None, **kwargs):
 
-       self.detector = None
-       self.steering = None
-       self.run_number = None
-       self.skip_events = None
-       self.event_print_interval = None
-       self.steering = steering
+        self.detector = None
+        self.steering = None
+        self.run_number = None
+        self.skip_events = None
+        self.event_print_interval = None
+        self.steering = steering
 
-       JavaTool.__init__(self,
-                         name='evio_to_lcio',
-                         java_class='org.hps.evio.EvioToLcio',
-                         output_ext='.slcio',
-                         **kwargs)
+        JavaTool.__init__(self,
+                          name='evio_to_lcio',
+                          java_class='org.hps.evio.EvioToLcio',
+                          output_ext='.slcio',
+                          **kwargs)
 
     def required_parameters(self):
         return ['detector', 'steering_files']
@@ -857,23 +857,31 @@ class Unzip(Component):
         return 0
 
 class LCIODumpEvent(Component):
+
     """
     Dump LCIO event information.
     """
 
     def __init__(self, **kwargs):
+
+        self.lcio_dir = None
+
         Component.__init__(self,
                            name='lcio_dump_event',
                            command='dumpevent',
                            **kwargs)
+
         if "event_num" in kwargs:
             self.event_num = kwargs["event_num"]
         else:
             self.event_num = 1
 
+    def config(self, parser):
+        super().config(parser)
+        if self.lcio_dir is None:
+            self.lcio_dir = self.hpsmc_dir
+
     def setup(self):
-        if not hasattr(self, "lcio_dir"):
-            raise Exception("Missing required config lcio_dir")
         self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
@@ -883,6 +891,9 @@ class LCIODumpEvent(Component):
         args.append(self.input_files()[0])
         args.append(str(self.event_num))
         return args
+
+    def required_config(self):
+        return ['lcio_dir']
 
     def required_parameters(self):
         return []
@@ -976,17 +987,23 @@ class LCIOTool(Component):
     Generic component for LCIO tools.
     """
 
-    def __init__(self, name='', **kwargs):
+    def __init__(self, name=None, **kwargs):
+
+        self.lcio_bin_jar = None
+
         Component.__init__(self,
                            name,
                            command='java',
                            **kwargs)
 
+    def config(self, parser):
+        super().config(parser)
+        if self.lcio_bin_jar is None:
+            self.config_from_environ()
+        logger.info('lcio_bin_jar = {}'.format(self.lcio_bin_jar))
+
     def cmd_args(self):
-        args = []
-        args = ['-jar', self.lcio_bin_jar]
-        args.append(self.name)
-        return args
+        return ['-jar', self.lcio_bin_jar, self.name]
 
     def required_config(self):
         return ['lcio_bin_jar']
@@ -1020,8 +1037,10 @@ class LCIOCount(LCIOTool):
     Count events in LCIO files.
     """
 
-    def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
-        self.minevents = minevents
+    # fail_on_underflow=False,
+    # minevents=0,
+    def __init__(self, **kwargs):
+        #self.minevents = minevents
         LCIOTool.__init__(self,
                           name='count',
                           **kwargs)
@@ -1033,6 +1052,7 @@ class LCIOCount(LCIOTool):
         args.extend(["-f", self.inputs[0]])
         return args
 
+    """
     def execute(self, log_out, log_err):
 
         cl = [self.command]
@@ -1041,18 +1061,18 @@ class LCIOCount(LCIOTool):
         proc = subprocess.Popen(cl, stdout=PIPE)
         (output, err) = proc.communicate()
 
-        nevents = int(output.split()[1])
+        #nevents = int(output.split()[1])
+        #logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents))
 
-        logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents))
+        #if nevents < self.minevents:
+        #    msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
+        #    if self.fail_on_underflow:
+        #        raise Exception(msg)
+        #    else:
+        #        logger.warning(msg)
 
-        if nevents < self.minevents:
-            msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
-            if self.fail_on_underflow:
-                raise Exception(msg)
-            else:
-                logger.warning(msg)
-
-        return proc.returncode
+        #return proc.returncode
+    """
 
     def required_parameters(self):
         return []
