@@ -52,16 +52,6 @@ add_subdirectory(generators/egs5)
 add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
 
-# Install configured scripts
-file(GLOB SCRIPTS_IN scripts/*.in)
-foreach(SCRIPT_IN ${SCRIPTS_IN})
-    get_filename_component(SCRIPT_IN_FILE ${SCRIPT_IN} NAME)
-    string(REPLACE ".in" "" SCRIPT_OUT ${SCRIPT_IN_FILE})
-    configure_file(${SCRIPT_IN} ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} @ONLY)
-    install(FILES ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} DESTINATION bin
-        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
-endforeach()
-
 # Recursively install all generator files
 option(ENABLE_INSTALL_GENERATORS "Install physics generators (EGS5, Madgraph)" ON)
 if(ENABLE_INSTALL_GENERATORS)
@@ -94,6 +84,16 @@ endif()
 
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
+
+# Install configured scripts
+file(GLOB SCRIPTS_IN scripts/*.in)
+foreach(SCRIPT_IN ${SCRIPTS_IN})
+    get_filename_component(SCRIPT_IN_FILE ${SCRIPT_IN} NAME)
+    string(REPLACE ".in" "" SCRIPT_OUT ${SCRIPT_IN_FILE})
+    configure_file(${SCRIPT_IN} ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} @ONLY)
+    install(FILES ${CMAKE_BINARY_DIR}/${SCRIPT_OUT} DESTINATION bin
+        PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+endforeach()
 
 # Print install dir
 message(STATUS "HPSMC will be installed at: ${CMAKE_INSTALL_PREFIX}")
