@@ -1000,7 +1000,6 @@ class LCIOTool(Component):
         super().config(parser)
         if self.lcio_bin_jar is None:
             self.config_from_environ()
-        logger.info('lcio_bin_jar = {}'.format(self.lcio_bin_jar))
 
     def cmd_args(self):
         return ['-jar', self.lcio_bin_jar, self.name]
