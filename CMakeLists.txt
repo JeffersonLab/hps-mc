@@ -31,6 +31,14 @@ find_package(Java REQUIRED)
 message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
 message(STATUS "java version: ${Java_VERSION}")
 
+# Check for Maven
+find_program(MAVEN mvn)
+if(MAVEN-NOTFOUND)
+    message(FATAL_ERROR "Maven was not found")
+else()
+    message(STATUS("Maven executable found at: ${MAVEN}"))
+endif()
+
 # Check for GSL
 find_package(GSL REQUIRED)
 message(STATUS "GSL found with version: ${GSL_VERSION}")
@@ -76,6 +84,12 @@ endif()
 option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
 if(ENABLE_INSTALL_DETECTORS)
     include(InstallDetectorData)
+endif()
+
+# Install LCIO
+option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
+if(ENABLE_INSTALL_LCIO)
+    include(InstallLCIO)
 endif()
 
 # Install python scripts
