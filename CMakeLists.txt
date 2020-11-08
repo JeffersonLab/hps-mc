@@ -55,44 +55,65 @@ add_subdirectory(generators/madgraph4)
 add_subdirectory(generators/madgraph5)
 
 # Recursively install all generator files
-option(ENABLE_INSTALL_GENERATORS "Install physics generators (EGS5, Madgraph)" ON)
-if(ENABLE_INSTALL_GENERATORS)
-    message(STATUS "Physics generators will be installed automatically.")
-    install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
-else()
-    message(STATUS "Installation of physics generators is disabled.")
-endif()
 
 # External projects will be added to this target
 add_custom_target(external)
 
-option(ENABLE_INSTALL_EXTERNAL ON)
+# enable installation of generator files to installation dir
+option(ENABLE_INSTALL_GENERATORS "Install physics generators" ON)
+
+# enable installation of external software and data
+option(ENABLE_INSTALL_EXTERNAL "Install external tools" ON)
+
+# enable specific external software packages
+option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
+option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
+option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
+option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
+
+if(ENABLE_INSTALL_GENERATORS)
+    message(STATUS "Physics generators will be installed automatically")
+    install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
+else()
+    message(STATUS "Installation of physics generators is disabled")
+endif()
+
 if(ENABLE_INSTALL_EXTERNAL)
 
+    message(STATUS "External installation is enabled")
+
     # Install magnetic field maps
-    option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
     if(ENABLE_INSTALL_FIELDMAPS)
         include(InstallFieldmaps)
+    else()
+        message(STATUS "Fieldmaps installation is disabled")
     endif()
 
     # Install detector data
-    option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
     if(ENABLE_INSTALL_DETECTORS)
         include(InstallDetectorData)
+    else()
+        message(STATUS "DetectorData installation is disabled")
     endif()
 
     # Install LCIO
-    option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
     if(ENABLE_INSTALL_LCIO)
         include(InstallLCIO)
+    else()
+        message(STATUS "LCIO installation is disabled")
     endif()
 
     # Install HPS Java
-    option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
     if(ENABLE_INSTALL_HPSJAVA)
         include(InstallHpsJava)
+    else()
+        message(STATUS "HpsJava installation is disabled")
     endif()
 
+    # TODO: sqlite conditions db
+
+else()
+    message(STATUS "Installation of all external tools is disabled")
 endif()
 
 # Install python scripts
