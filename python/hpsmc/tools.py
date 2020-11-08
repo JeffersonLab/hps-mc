@@ -149,6 +149,8 @@ class JobManager(Component):
         self.conditions_url = None
         self.steering = steering
 
+        self.hps_java_bin_jar = None
+
         Component.__init__(self,
                            name='job_manager',
                            command='java',
@@ -159,7 +161,12 @@ class JobManager(Component):
         # Automatically append steering file key to output file name
         if self.append_tok is None:
             self.append_tok = self.steering
-            logger.debug("Append tok for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
+            logger.debug("Append token for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
+
+    def config(self, parser):
+        super().config(parser)
+        if self.hps_java_bin_jar is None:
+            self.config_from_environ()
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -750,12 +757,18 @@ class FilterBunches(JavaTool):
             # Default is no maximum nevents to write
             self.filter_nevents_write = -1
 
+        self.hps_java_bin_jar = None
 
         JavaTool.__init__(self,
                           name='filter_bunches',
                           java_class='org.hps.util.FilterMCBunches',
                           append_tok='filt',
                           **kwargs)
+
+    def config(self, parser):
+        super().config(parser)
+        if self.hps_java_bin_jar is None:
+            self.config_from_environ()
 
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
