@@ -14,7 +14,6 @@ externalproject_add(
     INSTALL_DIR      ${LCIO_INSTALL_DIR}
     SOURCE_DIR       ${LCIO_BUILD_DIR}
 
-    UPDATE_COMMAND   git pull
     PATCH_COMMAND    ""
 
     CMAKE_ARGS       -DINSTALL_DOC=OFF -DBUILD_ROOTDICT=OFF
@@ -24,7 +23,7 @@ externalproject_add(
 
     #BUILD_COMMAND     ${CMAKE_COMMAND} --build <BINARY_DIR> --config Release --target INSTALL
 
-    BUILD_COMMAND    ${CMAKE_MAKE_PROGRAM} -j4 && cd ${LCIO_BUILD_DIR} && ${MAVEN} clean install -DskipTests
+    BUILD_COMMAND    ${CMAKE_MAKE_PROGRAM} -j4 && cd ${LCIO_BUILD_DIR} && ${MAVEN_BUILD_COMMAND}
 
     INSTALL_COMMAND  ${CMAKE_MAKE_PROGRAM} install && cp ${LCIO_BUILD_DIR}/target/${LCIO_JAR_NAME} ${LCIO_INSTALL_DIR}/lib
 )

@@ -7,7 +7,6 @@ externalproject_add(
     GIT_SHALLOW       ON
     SOURCE_DIR        ${CMAKE_BINARY_DIR}/${DETECTOR_DATA}
     BUILD_COMMAND     ""
-    UPDATE_COMMAND    git pull
     INSTALL_COMMAND   ""
     CONFIGURE_COMMAND ""
 )
@@ -21,4 +20,4 @@ install(DIRECTORY ${SOURCE_DIR}/detector-data/detectors DESTINATION ${INSTALL_DI
         FILES_MATCHING PATTERN "*.lcdd"
         PATTERN "SamplingFractions" EXCLUDE)
 
-message(STATUS "${DETECTOR_DATA} will be installed to: ${INSTALL_DIR}")
+message(STATUS "${DETECTOR_DATA} will be installed to: ${INSTALL_DIR}/detectors")

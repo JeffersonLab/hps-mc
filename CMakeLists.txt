@@ -39,6 +39,8 @@ else()
     message(STATUS("Maven executable found at: ${MAVEN}"))
 endif()
 
+set(MAVEN_BUILD_COMMAND ${MAVEN} clean install -DskipTests -T 4 -q)
+
 # Check for GSL
 find_package(GSL REQUIRED)
 message(STATUS "GSL found with version: ${GSL_VERSION}")
@@ -80,6 +82,12 @@ endif()
 option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
 if(ENABLE_INSTALL_LCIO)
     include(InstallLCIO)
+endif()
+
+# Install HPS Java
+option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
+if(ENABLE_INSTALL_HPSJAVA)
+    include(InstallHpsJava)
 endif()
 
 # Install python scripts
