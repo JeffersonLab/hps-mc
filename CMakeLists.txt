@@ -1,14 +1,15 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.12)
 
 project(hps-mc VERSION 2.0.0)
 
-# Find Python 3 executable
-find_package(PythonInterp)
-if(${PYTHON_VERSION_MAJOR} LESS 3)
-    message(FATAL_ERROR "Python 3 is required.")
-endif()
-set(PYTHON ${PYTHON_EXECUTABLE})
-message(STATUS "Python executable found at: ${PYTHON_EXECUTABLE}")
+# Find Python 3
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+message(STATUS "Python3 executable found at: ${Python3_EXECUTABLE}")
+set(PYTHON ${Python3_EXECUTABLE})
+
+# Find Python 2
+#find_package(Python2 COMPONENTS Interpreter REQUIRED)
+#message(STATUS "Python2 executable found at: ${Python2_EXECUTABLE}")
 
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran)
@@ -50,8 +51,15 @@ foreach(SCRIPT_IN ${SCRIPTS_IN})
         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
 endforeach()
 
-# Recursively install all generator files.
-install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
+
+# Recursively install all generator files
+option(ENABLE_INSTALL_GENERATORS "Install physics generators (EGS5, Madgraph)" ON)
+if(ENABLE_INSTALL_GENERATORS)
+    message(STATUS "Physics generators will be installed automatically.")
+    install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
+else()
+    message(STATUS "Installation of physics generators is disabled.")
+endif()
 
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
