@@ -165,8 +165,15 @@ class JobManager(Component):
 
     def config(self, parser):
         super().config(parser)
+        # if installed these are set in the environment script...
         if self.hps_java_bin_jar is None:
-            self.config_from_environ()
+            if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
+                self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
+                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+        if self.conditions_url is None:
+            if os.getenv("CONDITIONS_URL", None) is not None:
+                self.conditions_url = os.getenv("CONDITIONS_URL", None)
+                logger.info('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -768,7 +775,9 @@ class FilterBunches(JavaTool):
     def config(self, parser):
         super().config(parser)
         if self.hps_java_bin_jar is None:
-            self.config_from_environ()
+            if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
+                self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
+                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
