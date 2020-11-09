@@ -70,6 +70,8 @@ class SLIC(Component):
 
         if self.detector_dir is None:
             self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
             logger.info("Using detector dir from install: {}".format(self.detector_dir))
 
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
