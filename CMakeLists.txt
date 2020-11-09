@@ -66,10 +66,11 @@ option(ENABLE_INSTALL_GENERATORS "Install physics generators" ON)
 option(ENABLE_INSTALL_EXTERNAL "Install external tools" ON)
 
 # enable specific external software packages
-option(ENABLE_INSTALL_FIELDMAPS "Install fieldmaps" ON)
-option(ENABLE_INSTALL_DETECTORS "Install detector data" ON)
-option(ENABLE_INSTALL_LCIO "Install LCIO" ON)
-option(ENABLE_INSTALL_HPSJAVA "Install HPS Java" ON)
+option(ENABLE_INSTALL_FIELDMAPS  "Install fieldmaps" ON)
+option(ENABLE_INSTALL_DETECTORS  "Install detector data" ON)
+option(ENABLE_INSTALL_LCIO       "Install LCIO" ON)
+option(ENABLE_INSTALL_HPSJAVA    "Install HPS Java" ON)
+option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" ON)
 
 if(ENABLE_INSTALL_GENERATORS)
     message(STATUS "Physics generators will be installed automatically")
@@ -110,7 +111,12 @@ if(ENABLE_INSTALL_EXTERNAL)
         message(STATUS "HpsJava installation is disabled")
     endif()
 
-    # TODO: sqlite conditions db
+    # Install local conditions database
+    if(ENABLE_INSTALL_CONDITIONS)
+        include(InstallConditions)
+    else()
+        message(STATUS "Conditions installation is disabled")
+    endif()
 
 else()
     message(STATUS "Installation of all external tools is disabled")
