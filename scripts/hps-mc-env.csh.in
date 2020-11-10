@@ -11,7 +11,8 @@ if (! $?LD_LIBRARY_PATH) then
 endif
 setenv LD_LIBRARY_PATH @CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
 
-setenv CONDITIONS_URL jdbc:sqlite:@CONDITIONS_FILE@
+# local conditions db
+export CONDITIONS_URL @CONDITIONS_URL@
 
 # locations of bin jars
 setenv LCIO_BIN_JAR @LCIO_BIN_JAR@

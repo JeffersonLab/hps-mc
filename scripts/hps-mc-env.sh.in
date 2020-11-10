@@ -6,7 +6,7 @@ export LD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
 export PYTHONPATH=@CMAKE_INSTALL_PREFIX@/lib/python:$PYTHONPATH
 
 # local conditions db
-export CONDITIONS_URL=jdbc:sqlite:@CONDITIONS_FILE@
+export CONDITIONS_URL=@CONDITIONS_URL@
 
 # locations of bin jars
 export LCIO_BIN_JAR=@LCIO_BIN_JAR@
