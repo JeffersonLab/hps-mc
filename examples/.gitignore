@@ -1,0 +1,10 @@
+# Local JSON job store files
+*/jobs.json
+
+# Example log files
+job.*.out
+job.*.err
+job.*.log
+job.out
+job.err
+job.log

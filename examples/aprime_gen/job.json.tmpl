@@ -1,12 +1,12 @@
 {
+    "seed": {{ job_id + 1000000 }},
     "nevents": 1000,
-    "run_params": "${run_params}",
-    "apmass": ${apmass},
+    "run_params": "{{ run_params }}",
+    "apmass": {{ apmass }},
     "ctau": 1.0,
     "target_z": -5.0,
-    "seed": ${seed},
     "output_files": {
-        "ap_unweighted_events_rot.stdhep": "aprime_${apmass}_${run_params}_${sequence}.stdhep"
+        "ap_unweighted_events_rot.stdhep": "aprime_{{ run_params }}_{{ apmass }}_{{ sequence }}.stdhep"
     },
-    "output_dir": "output/${run_params}/${apmass}"
+    "output_dir": "output/{{ run_params }}/{{ apmass }}"
 }

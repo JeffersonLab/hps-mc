@@ -1,1 +1,1 @@
-hps-mc-job run -d $PWD/scratch -c .hpsmc aprime_gen job.json
+hps-mc-job run -d $PWD/scratch aprime_gen job.json

@@ -5,5 +5,4 @@ delete_existing = False
 delete_rundir = False
 dry_run = False
 ignore_return_codes = True
-job_id_pad = 2
 check_output_files = False
