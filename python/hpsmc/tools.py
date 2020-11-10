@@ -46,8 +46,8 @@ class SLIC(Component):
 
         if len(self.macros):
             for macro in self.macros:
-                #if macro == "run_number.mac":
-                #    raise Exception("Macro name '%s' is not allowed." % macro)
+                if macro == "run_number.mac":
+                    raise Exception("Macro name '%s' is not allowed." % macro)
                 if not os.path.isabs(macro):
                     raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
@@ -72,7 +72,7 @@ class SLIC(Component):
             self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
-            logger.info("Using detector dir from install: {}".format(self.detector_dir))
+            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
 
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
@@ -116,9 +116,7 @@ class SLIC(Component):
         return ['detector']
 
     def required_config(self):
-        return ['slic_dir']
-
-    #'hps_fieldmaps_dir', 'detector_dir'
+        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
 
     def execute(self, log_out, log_err):
 
@@ -1063,10 +1061,7 @@ class LCIOCount(LCIOTool):
     Count events in LCIO files.
     """
 
-    # fail_on_underflow=False,
-    # minevents=0,
     def __init__(self, **kwargs):
-        #self.minevents = minevents
         LCIOTool.__init__(self,
                           name='count',
                           **kwargs)
@@ -1077,28 +1072,6 @@ class LCIOCount(LCIOTool):
             raise Exception("Missing an input file.")
         args.extend(["-f", self.inputs[0]])
         return args
-
-    """
-    def execute(self, log_out, log_err):
-
-        cl = [self.command]
-        cl.extend(self.cmd_args())
-
-        proc = subprocess.Popen(cl, stdout=PIPE)
-        (output, err) = proc.communicate()
-
-        #nevents = int(output.split()[1])
-        #logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents))
-
-        #if nevents < self.minevents:
-        #    msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
-        #    if self.fail_on_underflow:
-        #        raise Exception(msg)
-        #    else:
-        #        logger.warning(msg)
-
-        #return proc.returncode
-    """
 
     def required_parameters(self):
         return []
