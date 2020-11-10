@@ -810,6 +810,9 @@ class FilterBunches(JavaTool):
                 'filter_nevents_write',
                 'filter_no_cuts']
 
+    def required_config(self):
+        return ['hps_java_bin_jar']
+
 class ExtractEventsWithHitAtHodoEcal(JavaTool):
     """
     Apply hodo-hit filter and space MC events to process before readout.
