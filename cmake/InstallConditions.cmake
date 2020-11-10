@@ -3,6 +3,7 @@ set(CONDITIONS_BUILD_DIR    ${CMAKE_BINARY_DIR}/${CONDITIONS})
 set(CONDITIONS_VERSION      2020_11_06)
 set(CONDITIONS_FILE         hps_conditions_${CONDITIONS_VERSION}.db)
 set(CONDITIONS_INSTALL_DIR  ${CMAKE_INSTALL_PREFIX}/share/conditions)
+set(CONDITIONS_URL          jdbc:sqlite:${CONDITIONS_INSTALL_DIR}/${CONDITIONS_FILE})
 
 externalproject_add(
 
