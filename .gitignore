@@ -1,72 +1,12 @@
-*.png
-*.pdf
-*.root
-*.err
-*.out
-*.swp
-
 # Compiled Python files
-*.py[cod]
+*.pyc
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Build and install dirs
+build/
+install/
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Random
-*.ajob1
-index.html
-
-*~
-
-build
-install
-
+# Eclipse project files
 .cproject
 .project
 .pydevproject
 .settings
-
-*.pyc
-
-# Log files
-*.log
-
-# Generated files
-*.slcio
-*.lhe.gz
-*.lhe
-*.stdhep
-
-# The stdhep-lib build creates this
-log.mcfio.*
-
-examples/*/output
-examples/*/scratch
-
-temp.xml

@@ -22,6 +22,12 @@ class SLIC(Component):
         # Run number to set on output file (optional)
         self.run_number = None
 
+        # To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+
+        # To be set from config or install dir
+        self.detector_dir = None
+
         Component.__init__(self,
                            name='slic',
                            command='slic',
@@ -40,8 +46,8 @@ class SLIC(Component):
 
         if len(self.macros):
             for macro in self.macros:
-                if macro == "run_number.mac":
-                    raise Exception("Macro name '%s' is not allowed." % macro)
+                #if macro == "run_number.mac":
+                #    raise Exception("Macro name '%s' is not allowed." % macro)
                 if not os.path.isabs(macro):
                     raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
@@ -61,6 +67,13 @@ class SLIC(Component):
         return args
 
     def __detector_file(self):
+
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.info("Using detector dir from install: {}".format(self.detector_dir))
+
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def __particle_tbl(self):
@@ -75,7 +88,16 @@ class SLIC(Component):
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
 
-        logger.info('Setting fieldmap link to: %s' % self.hps_fieldmaps_dir)
+        # Set fieldmap dir to install location if not provided in config
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.info("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.info("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+        logger.info('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
@@ -94,11 +116,11 @@ class SLIC(Component):
         return ['detector']
 
     def required_config(self):
-        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
+        return ['slic_dir']
+
+    #'hps_fieldmaps_dir', 'detector_dir'
 
     def execute(self, log_out, log_err):
-
-        args = self.cmd_args()
 
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
@@ -129,6 +151,8 @@ class JobManager(Component):
         self.conditions_url = None
         self.steering = steering
 
+        self.hps_java_bin_jar = None
+
         Component.__init__(self,
                            name='job_manager',
                            command='java',
@@ -139,7 +163,19 @@ class JobManager(Component):
         # Automatically append steering file key to output file name
         if self.append_tok is None:
             self.append_tok = self.steering
-            logger.debug("Append tok for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
+            logger.debug("Append token for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
+
+    def config(self, parser):
+        super().config(parser)
+        # if installed these are set in the environment script...
+        if self.hps_java_bin_jar is None:
+            if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
+                self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
+                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+        if self.conditions_url is None:
+            if os.getenv("CONDITIONS_URL", None) is not None:
+                self.conditions_url = os.getenv("CONDITIONS_URL", None)
+                logger.info('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -440,8 +476,8 @@ class RandomSample(StdHepTool):
         return args
 
     def optional_parameters(self):
-        return ['nevents','mu']   
-    
+        return ['nevents','mu']
+
     def execute(self, log_out, log_err):
         r = Component.execute(self, log_out, log_err)
 
@@ -630,18 +666,18 @@ class EvioToLcio(JavaTool):
 
     def __init__(self, steering=None, **kwargs):
 
-       self.detector = None
-       self.steering = None
-       self.run_number = None
-       self.skip_events = None
-       self.event_print_interval = None
-       self.steering = steering
+        self.detector = None
+        self.steering = None
+        self.run_number = None
+        self.skip_events = None
+        self.event_print_interval = None
+        self.steering = steering
 
-       JavaTool.__init__(self,
-                         name='evio_to_lcio',
-                         java_class='org.hps.evio.EvioToLcio',
-                         output_ext='.slcio',
-                         **kwargs)
+        JavaTool.__init__(self,
+                          name='evio_to_lcio',
+                          java_class='org.hps.evio.EvioToLcio',
+                          output_ext='.slcio',
+                          **kwargs)
 
     def required_parameters(self):
         return ['detector', 'steering_files']
@@ -730,12 +766,20 @@ class FilterBunches(JavaTool):
             # Default is no maximum nevents to write
             self.filter_nevents_write = -1
 
+        self.hps_java_bin_jar = None
 
         JavaTool.__init__(self,
                           name='filter_bunches',
                           java_class='org.hps.util.FilterMCBunches',
                           append_tok='filt',
                           **kwargs)
+
+    def config(self, parser):
+        super().config(parser)
+        if self.hps_java_bin_jar is None:
+            if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
+                self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
+                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
@@ -765,6 +809,9 @@ class FilterBunches(JavaTool):
                 'filter_nevents_read',
                 'filter_nevents_write',
                 'filter_no_cuts']
+
+    def required_config(self):
+        return ['hps_java_bin_jar']
 
 class ExtractEventsWithHitAtHodoEcal(JavaTool):
     """
@@ -837,23 +884,31 @@ class Unzip(Component):
         return 0
 
 class LCIODumpEvent(Component):
+
     """
     Dump LCIO event information.
     """
 
     def __init__(self, **kwargs):
+
+        self.lcio_dir = None
+
         Component.__init__(self,
                            name='lcio_dump_event',
                            command='dumpevent',
                            **kwargs)
+
         if "event_num" in kwargs:
             self.event_num = kwargs["event_num"]
         else:
             self.event_num = 1
 
+    def config(self, parser):
+        super().config(parser)
+        if self.lcio_dir is None:
+            self.lcio_dir = self.hpsmc_dir
+
     def setup(self):
-        if not hasattr(self, "lcio_dir"):
-            raise Exception("Missing required config lcio_dir")
         self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
@@ -863,6 +918,9 @@ class LCIODumpEvent(Component):
         args.append(self.input_files()[0])
         args.append(str(self.event_num))
         return args
+
+    def required_config(self):
+        return ['lcio_dir']
 
     def required_parameters(self):
         return []
@@ -956,17 +1014,22 @@ class LCIOTool(Component):
     Generic component for LCIO tools.
     """
 
-    def __init__(self, name='', **kwargs):
+    def __init__(self, name=None, **kwargs):
+
+        self.lcio_bin_jar = None
+
         Component.__init__(self,
                            name,
                            command='java',
                            **kwargs)
 
+    def config(self, parser):
+        super().config(parser)
+        if self.lcio_bin_jar is None:
+            self.config_from_environ()
+
     def cmd_args(self):
-        args = []
-        args = ['-jar', self.lcio_bin_jar]
-        args.append(self.name)
-        return args
+        return ['-jar', self.lcio_bin_jar, self.name]
 
     def required_config(self):
         return ['lcio_bin_jar']
@@ -1000,8 +1063,10 @@ class LCIOCount(LCIOTool):
     Count events in LCIO files.
     """
 
-    def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
-        self.minevents = minevents
+    # fail_on_underflow=False,
+    # minevents=0,
+    def __init__(self, **kwargs):
+        #self.minevents = minevents
         LCIOTool.__init__(self,
                           name='count',
                           **kwargs)
@@ -1013,6 +1078,7 @@ class LCIOCount(LCIOTool):
         args.extend(["-f", self.inputs[0]])
         return args
 
+    """
     def execute(self, log_out, log_err):
 
         cl = [self.command]
@@ -1021,18 +1087,18 @@ class LCIOCount(LCIOTool):
         proc = subprocess.Popen(cl, stdout=PIPE)
         (output, err) = proc.communicate()
 
-        nevents = int(output.split()[1])
+        #nevents = int(output.split()[1])
+        #logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents))
 
-        logger.info("LCIO file '%s' has %d events." % (self.inputs[0], nevents))
+        #if nevents < self.minevents:
+        #    msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
+        #    if self.fail_on_underflow:
+        #        raise Exception(msg)
+        #    else:
+        #        logger.warning(msg)
 
-        if nevents < self.minevents:
-            msg = "LCIO file '%s' does not contain the minimum %d events." % (self.inputs[0], nevents)
-            if self.fail_on_underflow:
-                raise Exception(msg)
-            else:
-                logger.warning(msg)
-
-        return proc.returncode
+        #return proc.returncode
+    """
 
     def required_parameters(self):
         return []
