@@ -83,7 +83,7 @@ class EGS5(EventGenerator):
         shutil.copy(src, dest)
 
     def required_parameters(self):
-        return ['run_params']
+        return ['seed', 'run_params']
 
     def optional_parameters(self):
         return ['bunches', 'target_thickness']
