@@ -38,11 +38,13 @@ class Batch:
         parser.add_argument("-c", "--config-file", nargs='?', help="Config file", action='append')
         parser.add_argument("-l", "--log-dir", nargs='?', help="Log file output dir", required=False, default=os.getcwd())
         parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (ignored for Auger and LSF)")
+        parser.add_argument("-S", "--sh-dir", nargs='?', help="Dir to hold sh scripts to submit jobs via Slurm", default="./sh")
         parser.add_argument("-q", "--queue", nargs='?', help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)", required=False)
         parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
         parser.add_argument("-p", "--pool-size", type=int, help="Job pool size (only applicable when running pool)", required=False, default=multiprocessing.cpu_count())
         parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
+        parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)   
         parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
@@ -70,12 +72,16 @@ class Batch:
         if not os.path.isfile(cl.jobstore):
             raise Exception('The job store does not exist: %s' % cl.jobstore)
         self.jobstore = JobStore(cl.jobstore)
-         
+        
+        if cl.env:
+            self.env = cl.env 
+        
         self.email = cl.email
              
         self.debug = cl.debug
         
         self.log_dir = cl.log_dir
+        self.sh_dir = cl.sh_dir
         if not os.path.isabs(self.log_dir):
             raise Exception('The log dir is not an abs path: %s' % self.log_dir)
         # FIXME: This probably shouldn't happen here.
@@ -249,6 +255,55 @@ class LSF(Batch):
         if tokens[0] != 'Job':
             raise Exception('Unexpected output from bsub command: %s' % out)
         batch_id = int(tokens[1].replace('<', '').replace('>', ''))
+        return batch_id
+
+class Slurm(Batch):
+    """Submit Slurm batch jobs."""
+    
+    def __init__(self):
+        os.environ["LSB_JOB_REPORT_MAIL"] = "N"
+        
+    def parse_args(self, args):
+        Batch.parse_args(self, args)
+        if self.email:
+            os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
+
+    def build_cmd(self, name, job_params):
+        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
+        
+        queue = self.queue
+        if queue is None:
+            queue = 'hps'
+        
+        cmd = ['sbatch', 
+               '--time=%s'%(str(self.job_length)+':00:00'), 
+               '--partition=%s'%queue,
+               '--mem=%sM'%self.memory,
+               '--job-name=hps%i'%(job_params['job_id']),
+               '--output=%s.out'%log_file]
+        sh_filename = self.sh_dir + '/job.%i.sh'%job_params['job_id']
+        sh_file = open(sh_filename,'w')
+        sh_file.write('#!/bin/bash\n')
+        sh_file.write('source '+self.env+'\n')
+        sh_file.write('mkdir -p %s/%i\n'%(self.run_dir, job_params['job_id']))
+        sh_file.write('cd %s/%i\n'%(self.run_dir, job_params['job_id']))
+        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=False)) + '\n')        
+        sh_file.close()
+        cmd.append(sh_filename)
+        
+        return cmd
+
+    def submit_cmd(self, name, job_params): 
+        cmd = self.build_cmd(name, job_params)
+        logger.info('Submitting job %s to Slurm with command: %s' % (name, ' '.join(cmd)))
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out,err = proc.communicate()
+        if err != None and len(err):
+            logger.warning(err)
+        tokens = out.decode().split(" ")
+        if tokens[0] != 'Submitted':
+            raise Exception('Unexpected output from sbatch command: %s' % out)
+        batch_id = int(tokens[3].replace('<', '').replace('>', ''))
         return batch_id
 
 class Auger(Batch):
@@ -549,6 +604,7 @@ class Pool(Batch):
 if __name__ == '__main__':
     system_dict = {
         "lsf": LSF,
+        "slurm": Slurm,
         "auger": Auger,
         "local": Local,
         "pool": Pool
