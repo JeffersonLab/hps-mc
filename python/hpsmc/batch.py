@@ -287,7 +287,7 @@ class Slurm(Batch):
         sh_file.write('source '+self.env+'\n')
         sh_file.write('mkdir -p %s/%i\n'%(self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n'%(self.run_dir, job_params['job_id']))
-        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=False)) + '\n')        
+        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')        
         sh_file.close()
         cmd.append(sh_filename)
         
