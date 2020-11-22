@@ -1,11 +1,11 @@
 {
     "job_id": {{ job_id }},
     "nevents": 10000,
-    "run_params": "2pt3",
-    "target_z": -4.3,
+    "run_params": "4pt55",
+    "target_z": -7.51,
+    "seed": {{ 10399311 + job_id }},
     "output_files": {
-        "tritrig_events.lhe.gz": "tritrig_events_{{ job_id|pad }}.lhe.gz",
-        "tritrig_events.stdhep": "tritrig_events_{{ job_id|pad }}.stdhep"
+        "tritrig_mom_rot.stdhep": "tritrig_20um_rot_{{ job_id }}.stdhep"
     },
-    "output_dir": "output"
+    "output_dir": "/sdf/group/hps/users/bravo/src/hps-mc/examples/tritrig_gen/output"
 }
