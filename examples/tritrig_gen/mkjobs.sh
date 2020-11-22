@@ -1,1 +1,1 @@
-hps-mc-job-template --max-jobs 4 --repeat 8 -j 1 job.json.tmpl jobs.json
+hps-mc-job-template --repeat 10000 -j 1 job.json.tmpl jobs.json
