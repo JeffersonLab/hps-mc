@@ -1,0 +1,36 @@
+{
+    "nevents": {{nevents}},
+    "run_params": "{{run_params}}",
+    "target_z": {{target_z}},
+    "run_number": {{run_number}},
+    "detector": "{{detector}}",
+    "ecal_hit_ecut": 0.05,
+    "seed": {{14302100 + job_id}},
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSingles.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    },
+    "run_mode": 0,
+    "config_files": {
+        "recon": "kalTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "output_files": {
+        "tritrig-beam_recon.slcio": "tritrig/beamRecon/tritrig_beam_recon_{{job_id}}.slcio"
+    },
+    "input_files": {
+        "/data/users/bravo/hps/mc/4pt55GeV/tritrig/8umW/stdhep/tritrig_4pt55_8um_{{job_id}}.stdhep": "tritrig_events.stdhep",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-9}}.slcio": "beam_1.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-8}}.slcio": "beam_2.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-7}}.slcio": "beam_3.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-6}}.slcio": "beam_4.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-5}}.slcio": "beam_5.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-4}}.slcio": "beam_6.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-3}}.slcio": "beam_7.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-2}}.slcio": "beam_8.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10-1}}.slcio": "beam_9.slcio",
+        "/data/users/bravo/hps/mc/4pt55GeV/beam/8umW/beamBunches_100nA_8um_{{job_id*10}}.slcio": "beam_10.slcio"
+
+    },
+    "output_dir": "/data/users/bravo/hps/mc/{{run_params}}GeV"
+}

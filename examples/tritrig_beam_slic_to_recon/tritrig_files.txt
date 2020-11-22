@@ -1,0 +1,10 @@
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_1.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_2.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_3.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_4.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_5.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_6.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_7.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_8.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_9.lhe.gz
+/work/slac/hps-mc/examples/tritrig_gen/output/tritrig_events_10.lhe.gz
