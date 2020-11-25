@@ -107,6 +107,10 @@ endif()
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
 
+# Custom target to only install the python scripts (must be executed manually)
+add_custom_target(InstallPythonScripts
+                  COMMAND mkdir -p ${CMAKE_INSTALL_PREFIX}/lib && cp -R ${PROJECT_SOURCE_DIR}/python ${CMAKE_INSTALL_PREFIX}/lib)
+
 # Install configured scripts
 file(GLOB SCRIPTS_IN scripts/*.in)
 foreach(SCRIPT_IN ${SCRIPTS_IN})
