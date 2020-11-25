@@ -60,17 +60,17 @@ add_subdirectory(generators/madgraph5)
 add_custom_target(external)
 
 # enable installation of generator files to installation dir
-option(ENABLE_INSTALL_GENERATORS "Install physics generators" ON)
+option(ENABLE_INSTALL_GENERATORS "Install physics generators" OFF)
 
 # enable installation of external software and data
-option(ENABLE_INSTALL_EXTERNAL "Install external tools" ON)
+option(ENABLE_INSTALL_EXTERNAL "Install external tools" OFF)
 
 # enable specific external software packages
 option(ENABLE_INSTALL_FIELDMAPS  "Install fieldmaps" ON)
 option(ENABLE_INSTALL_DETECTORS  "Install detector data" ON)
 option(ENABLE_INSTALL_LCIO       "Install LCIO" ON)
 option(ENABLE_INSTALL_HPSJAVA    "Install HPS Java" ON)
-option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" ON)
+option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" OFF)
 
 if(ENABLE_INSTALL_GENERATORS)
     message(STATUS "Physics generators will be installed automatically")
