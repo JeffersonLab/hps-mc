@@ -96,6 +96,15 @@ class EGS5(EventGenerator):
         logger.info("Copying '%s' to '%s'" % (src, dest))
         shutil.copy(src, dest)
 
+    def required_parameters(self):
+        return ['seed', 'run_params']
+
+    def optional_parameters(self):
+        return ['bunches', 'target_thickness']
+
+    #def required_config(self):
+    #    return ['egs5_dir']
+
 class StdHepConverter(EGS5):
     """Convert LHE files to StdHep using EGS5."""
 
