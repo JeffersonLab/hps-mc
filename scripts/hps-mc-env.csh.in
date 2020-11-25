@@ -12,10 +12,17 @@ endif
 setenv LD_LIBRARY_PATH @CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
 
 # local conditions db
-export CONDITIONS_URL @CONDITIONS_URL@
+if ( "@CONDITIONS_URL@" != "" )
+    setenv CONDITIONS_URL @CONDITIONS_URL@
+endif
 
 # locations of bin jars
-setenv LCIO_BIN_JAR @LCIO_BIN_JAR@
-setenv HPS_JAVA_BIN_JAR @HPSJAVA_BIN_JAR@
+if ( "@LCIO_BIN_JAR@" != "" )
+    setenv LCIO_BIN_JAR @LCIO_BIN_JAR@
+endif
+
+if ( "@HPSJAVA_BIN_JAR@" != "" )
+    setenv HPS_JAVA_BIN_JAR @HPSJAVA_BIN_JAR@
+endif
 
 setenv MALLOC_CHECK_ 1
