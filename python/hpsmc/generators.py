@@ -4,6 +4,9 @@ import os, shutil, glob, gzip, logging
 from component import Component
 from run_params import RunParameters
 
+from config import ConfigItem
+from parameters import IntParameter, Parameter, FloatParameter
+
 logger = logging.getLogger("hpsmc.generators")
 
 class EventGenerator(Component):
@@ -11,35 +14,42 @@ class EventGenerator(Component):
     def __init__(self, name, command=None, **kwargs):
         Component.__init__(self, name, command=command, description='', **kwargs)
 
-    def required_parameters(self):
-        return ['nevents']
-
-    def get_install_dir(self):
-        if os.getenv("HPSMC_DIR") is None:
-            raise Exception("HPSMC_DIR is not set!")
-        return "{}/share/generators".format(os.getenv("HPSMC_DIR", None))
+        self.add_parameters(Parameter('run_params', description='physics run parameters',
+                                      optional=False, default_value=None, read_from_args=True, read_from_dict=True))
+#                            IntParameter('nevents', description='number of events to generate',
+#                                         optional=False, default=10000, read_from_args=True, read_from_dict=True))
 
 class EGS5(EventGenerator):
     """Run the EGS5 event generator to produce a StdHep file."""
 
     def __init__(self, name='', **kwargs):
-        self.bunches = 5e5
-        self.target_thickness = None
-        self.egs5_dir = None
-        EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
-    def get_install_dir(self):
-        return EventGenerator.get_install_dir(self) + "/egs5"
+        EventGenerator.__init__(self,
+                                name,
+                                "egs5_" + name,
+                                **kwargs)
+
+        self.add_parameters(IntParameter('bunches', description='number of electron bunches',
+                                         optional=False, default_value=5e5, read_from_args=True, read_from_dict=True),
+                            FloatParameter('target_thickness', description='thickness of target',
+                                           optional=False, default_value=None, read_from_args=True, read_from_dict=True))
+
+        self.add_config_items(ConfigItem('egs5_dir', description='EGS5 source dir',
+                                         default='{}/share/generators/egs5'.format(self.get_config_item('hpsmc_dir').value),
+                                         optional=False, read_from_config=True, read_from_env=False))
+
+        self._params.load_from_args(**kwargs)
+
 
     def setup(self):
+
         EventGenerator.setup(self)
 
-        if self.egs5_dir is None:
-            self.egs5_dir = self.get_install_dir()
-            logger.info("Using EGS5 from install dir: " + self.egs5_dir)
+        egs5_dir = self.get_config_item('egs5_dir').value
+        logger.info('egs5_dir={}'.format(egs5_dir))
 
-        self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
-        self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
+        self.egs5_data_dir = os.path.join(egs5_dir, "data")
+        self.egs5_config_dir = os.path.join(egs5_dir, "config")
 
         logger.info("egs5_data_dir=%s" % self.egs5_data_dir)
         logger.info("egs5_config_dir=%s" % self.egs5_config_dir)
@@ -52,11 +62,12 @@ class EGS5(EventGenerator):
             os.unlink("pgs5job.pegs5inp")
         os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
 
-        logger.info("Reading run parameters: {}".format(self.run_params))
-        self.run_param_data = RunParameters(self.run_params)
+        run_params = self.get_parameter('run_params').value
+        logger.info("Reading run parameters: {}".format(run_params))
+        self.run_param_data = RunParameters(run_params)
 
         # Set target thickness from job parameter or use the default from run parameters
-        if self.target_thickness is not None:
+        if self.get_parameter('target_thickness').is_set():
             self.target_z = self.target_thickness
             logger.info("Target thickness set from job param: {}".format(self.target_z))
         else:
@@ -64,9 +75,12 @@ class EGS5(EventGenerator):
             logger.info("Target thickness set from run_params: {}".format(self.target_z))
 
         ebeam = self.run_param_data.get("beam_energy")
-        electrons = self.run_param_data.get("num_electrons") * self.bunches
+        electrons = self.run_param_data.get("num_electrons") * self.get_parameter('bunches').value
 
-        seed_data = "%d %f %f %d" % (self.seed, self.target_z, ebeam, electrons)
+        seed_data = "%d %f %f %d" % (self.get_parameter('seed').value,
+                                     self.target_z,
+                                     ebeam,
+                                     electrons)
         logger.info("Seed data (seed, target_z, ebeam, electrons): {}".format(seed_data))
         seed_file = open("seed.dat", 'w')
         seed_file.write(seed_data)
@@ -81,15 +95,6 @@ class EGS5(EventGenerator):
         dest = os.path.join(self.rundir, self.output_files()[0])
         logger.info("Copying '%s' to '%s'" % (src, dest))
         shutil.copy(src, dest)
-
-    def required_parameters(self):
-        return ['run_params']
-
-    def optional_parameters(self):
-        return ['bunches', 'target_thickness']
-
-    #def required_config(self):
-    #    return ['egs5_dir']
 
 class StdHepConverter(EGS5):
     """Convert LHE files to StdHep using EGS5."""
@@ -130,12 +135,18 @@ class MG(EventGenerator):
     """
     def __init__(self, name, **kwargs):
 
-        # Install dir or user config will be used for this.
-        self.madgraph_dir = None
+        EventGenerator.__init__(self, name, **kwargs)
 
-        # Default name of param card
-        self.param_card = "param_card.dat"
+        #hpsmc_dir = self.get_config_item('hpsmc_dir').value
 
+        self.add_config_items(ConfigItem('madgraph_dir', optional=False))
+
+        self.add_parameters(Parameter('param_card', optional=True, default_value="param_card.dat"))
+
+        self.add_parameters(FloatParameter('apmass'),
+                            FloatParameter('map'),
+                            FloatParameter('mpid'),
+                            FloatParameter('mrhod'))
         # Extra parameters for param card:
         # map = mass of the A-prime
         # mpid = mass of the dark pion
@@ -150,7 +161,6 @@ class MG(EventGenerator):
         else:
             self.event_types = ['unweighted', 'weighted']
 
-        EventGenerator.__init__(self, name, **kwargs)
 
     def output_files(self):
         o = []
@@ -160,10 +170,9 @@ class MG(EventGenerator):
             o.append(self.name + "_events.lhe.gz")
         return o
 
-    def set_parameters(self, params):
-        Component.set_parameters(self, params)
-        self.run_card = "run_card_" + self.run_params + ".dat"
-        logger.info("Set run card to '%s'" % self.run_card)
+    #def set_parameters(self, params):
+    #    Component.set_parameters(self, params)
+    #
 
     def required_parameters(self):
         return ['nevents', 'run_params']

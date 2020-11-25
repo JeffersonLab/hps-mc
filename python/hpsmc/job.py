@@ -307,9 +307,10 @@ class Job(object):
 
         # Configure each of the job components
         for c in self.components:
+            c.config_from_defaults()
             c.config(self.job_config.parser) # Configure from supplied config files
-            if self.enable_env_config:
-                c.config_from_environ()      # Configure from env vars, if enabled
+            #if self.enable_env_config:
+            #    c.config_from_environ()      # Configure from env vars, if enabled
             # TODO: catch exception here...
             c.check_config()                 # Check that the config is acceptable
 
@@ -481,6 +482,7 @@ class Job(object):
         Push JSON job parameters to components.
         """
         for c in self.components:
+            c.load_default_parameters()
             c.set_parameters(self.params)
 
     def __cleanup(self):

@@ -4,6 +4,6 @@ job.description = 'SLIC'
 
 job.add(SLIC())
 
-job.add(LCIOCount())
+#job.add(LCIOCount())
 
-job.add(LCIODumpEvent())
+#job.add(LCIODumpEvent())

@@ -1,1 +1,1 @@
-rm -rf output scratch fieldmap &> /dev/null
+rm -rf output scratch fieldmap *.err *.out *.log &> /dev/null

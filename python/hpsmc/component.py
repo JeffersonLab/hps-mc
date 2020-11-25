@@ -1,7 +1,13 @@
 """Defines the base interface that component classes should extend."""
 
-import os, subprocess, sys, shutil, argparse, getpass, json, logging, time, re
+import os
+import subprocess
+import logging
+
 from util import convert_config_value
+
+from parameters import ParameterSet, IntParameter
+from config import Config, ConfigItem
 
 logger = logging.getLogger("hpsmc.component")
 
@@ -16,15 +22,15 @@ class Component(object):
         self.name = name
         self.command = command
 
-        if 'nevents' in kwargs:
-            self.nevents = kwargs['nevents']
-        else:
-            self.nevents = None
+        #if 'nevents' in kwargs:
+        #    self.nevents = kwargs['nevents']
+        #else:
+        #    self.nevents = None
 
-        if 'seed' in kwargs:
-            self.seed = kwargs['seed']
-        else:
-            self.seed = 1
+        #if 'seed' in kwargs:
+        #    self.seed = kwargs['seed']
+        #else:
+        #    self.seed = 1
 
         if 'inputs' in kwargs:
             self.inputs = kwargs['inputs']
@@ -47,14 +53,55 @@ class Component(object):
             self.output_ext = None
 
         # FIXME: This is hacky.
-        if 'ignore_job_params' in kwargs:
-            self.ignore_job_params = kwargs['ignore_job_params']
-        else:
-            self.ignore_job_params = []
+        #if 'ignore_job_params' in kwargs:
+        #    self.ignore_job_params = kwargs['ignore_job_params']
+        #else:
+        #    self.ignore_job_params = []
 
-        self.hpsmc_dir = os.getenv("HPSMC_DIR", None)
-        if self.hpsmc_dir is None:
-            raise Exception("The HPSMC_DIR is not set!")
+        #self.hpsmc_dir = os.getenv("HPSMC_DIR", None)
+        #if self.hpsmc_dir is None:
+        #    raise Exception("The HPSMC_DIR is not set!")
+
+        self._params = ParameterSet(IntParameter('nevents',
+                                                 description='max number of events to process',
+                                                 optional=True,
+                                                 default_value=None,
+                                                 read_from_dict=True,
+                                                 read_from_args=True),
+                                     IntParameter('seed',
+                                                  description='random number seed',
+                                                  optional=True,
+                                                  default_value=1,
+                                                  read_from_dict=True,
+                                                  read_from_args=True))
+
+        self._config = Config(name)
+        self._config.add_item(ConfigItem('hpsmc_dir',
+                                         description='path to HPS MC installation',
+                                         optional=False,
+                                         default=None,
+                                         read_from_env=True,
+                                         read_from_config=False))
+        self._config.load_from_env()
+
+    def get_config_item(self, name):
+        return self._config.get_item(name)
+
+    def get_parameter(self, name):
+        return self._params.get(name)
+
+    def add_parameters(self, *args):
+        self._params.add(*args)
+
+    def add_config_items(self, *args):
+        for item in args:
+            self._config.add_item(item)
+
+    def config_from_defaults(self):
+        self._config.load_defaults()
+
+    def load_default_parameters(self):
+        self._params.load_defaults()
 
     def execute(self, log_out, log_err):
         """Generic component execution method.
@@ -65,7 +112,7 @@ class Component(object):
         cl = [self.command]
         cl.extend(self.cmd_args())
 
-        logger.info("Executing '%s' with command: %s" % (self.name, ' '.join(cl)))
+        logger.info("Executing '%s' with command: %s" % (self.command, ' '.join(cl)))
         proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -109,12 +156,18 @@ class Component(object):
                                              getattr(self, name).__class__.__name__,
                                              getattr(self, name)))
 
-    def set_parameters(self, params):
-        """Set class attributes for the component based on JSON parameters.
+        # New way...
+        print(">>>> testing new config load...")
+        self._config.load(parser)
+        print(">>>> Done!")
 
-        Components should not need to override this method.
+    def set_parameters(self, params):
+        """Set component parameters from dict.
         """
 
+        self._params.load_from_dict(params)
+
+        """
         # Set required parameters.
         for p in self.required_parameters():
             if p not in params:
@@ -130,12 +183,13 @@ class Component(object):
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
-                if p not in self.ignore_job_params:
-                    setattr(self, p, params[p])
-                    logger.info("%s:%s=%s [optional]"
-                                % (self.name, p, params[p]))
-                else:
-                    logger.info("Ignored job param '%s'" % p)
+                #if p not in self.ignore_job_params:
+                setattr(self, p, params[p])
+                logger.info("%s:%s=%s [optional]"
+                            % (self.name, p, params[p]))
+                #else:
+                #    logger.info("Ignored job param '%s'" % p)
+        """
 
     def required_parameters(self):
         """Return a list of required parameters.
@@ -211,4 +265,3 @@ class DummyComponent(Component):
     def execute(self, log_out, log_err):
         logger.info("DummComponent.execute - inputs %s and outputs %s"
                     % (str(self.input_files()), str(self.output_files())))
-
