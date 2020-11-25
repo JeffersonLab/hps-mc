@@ -24,13 +24,19 @@ externalproject_add(
     GIT_REPOSITORY    "https://github.com/JeffersonLab/hps-java"
     GIT_TAG           ${HPSJAVA_TAG}
     GIT_SHALLOW       ON
+    GIT_REMOTE_UPDATE_STRATEGY CHECKOUT
 
+    UPDATE_COMMAND    cd ${HPSJAVA_BUILD_DIR} && git checkout ${HPSJAVA_TAG} && git pull
     CONFIGURE_COMMAND ""
     BUILD_COMMAND     cd ${HPSJAVA_BUILD_DIR} && ${MAVEN_BUILD_COMMAND}
     INSTALL_COMMAND   mkdir -p ${HPSJAVA_INSTALL_DIR} && cp ${HPSJAVA_BUILD_DIR}/distribution/target/${HPSJAVA_JAR_NAME} ${HPSJAVA_INSTALL_DIR}
 )
 
 add_dependencies(external ${HPSJAVA})
+
+install(DIRECTORY ${HPSJAVA_BUILD_DIR}/detector-data/detectors DESTINATION ${CMAKE_INSTALL_PREFIX}/share
+        FILES_MATCHING PATTERN "*.lcdd"
+        PATTERN "SamplingFractions" EXCLUDE)
 
 message(STATUS "Using HPS Java tag: ${HPSJAVA_TAG}")
 message(STATUS "Using HPS Java version: ${HPSJAVA_VERSION}")
