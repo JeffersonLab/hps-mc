@@ -6,10 +6,17 @@ export LD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
 export PYTHONPATH=@CMAKE_INSTALL_PREFIX@/lib/python:$PYTHONPATH
 
 # local conditions db
-export CONDITIONS_URL=@CONDITIONS_URL@
+if [ -n "@CONDITIONS_URL@" ]; then
+    export CONDITIONS_URL=@CONDITIONS_URL@
+fi
 
 # locations of bin jars
-export LCIO_BIN_JAR=@LCIO_BIN_JAR@
-export HPS_JAVA_BIN_JAR=@HPSJAVA_BIN_JAR@
+if [ -n "@LCIO_BIN_JAR@" ]; then
+    export LCIO_BIN_JAR=@LCIO_BIN_JAR@
+fi
+
+if [ -n "@HPSJAVA_BIN_JAR@" ]; then
+    export HPS_JAVA_BIN_JAR=@HPSJAVA_BIN_JAR@
+fi
 
 export MALLOC_CHECK_=1

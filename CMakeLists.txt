@@ -60,17 +60,14 @@ add_subdirectory(generators/madgraph5)
 add_custom_target(external)
 
 # enable installation of generator files to installation dir
-option(ENABLE_INSTALL_GENERATORS "Install physics generators" ON)
+option(ENABLE_INSTALL_GENERATORS "Install physics generators" OFF)
 
-# enable installation of external software and data
-option(ENABLE_INSTALL_EXTERNAL "Install external tools" ON)
 
 # enable specific external software packages
-option(ENABLE_INSTALL_FIELDMAPS  "Install fieldmaps" ON)
-option(ENABLE_INSTALL_DETECTORS  "Install detector data" ON)
-option(ENABLE_INSTALL_LCIO       "Install LCIO" ON)
-option(ENABLE_INSTALL_HPSJAVA    "Install HPS Java" ON)
-option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" ON)
+option(ENABLE_INSTALL_FIELDMAPS  "Install fieldmaps" OFF)
+option(ENABLE_INSTALL_LCIO       "Install LCIO" OFF)
+option(ENABLE_INSTALL_HPSJAVA    "Install HPS Java" OFF)
+option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" OFF)
 
 if(ENABLE_INSTALL_GENERATORS)
     message(STATUS "Physics generators will be installed automatically")
@@ -79,51 +76,40 @@ else()
     message(STATUS "Installation of physics generators is disabled")
 endif()
 
-if(ENABLE_INSTALL_EXTERNAL)
-
-    message(STATUS "External installation is enabled")
-
-    # Install magnetic field maps
-    if(ENABLE_INSTALL_FIELDMAPS)
-        include(InstallFieldmaps)
-    else()
-        message(STATUS "Fieldmaps installation is disabled")
-    endif()
-
-    # Install detector data
-    if(ENABLE_INSTALL_DETECTORS)
-        include(InstallDetectorData)
-    else()
-        message(STATUS "DetectorData installation is disabled")
-    endif()
-
-    # Install LCIO
-    if(ENABLE_INSTALL_LCIO)
-        include(InstallLCIO)
-    else()
-        message(STATUS "LCIO installation is disabled")
-    endif()
-
-    # Install HPS Java
-    if(ENABLE_INSTALL_HPSJAVA)
-        include(InstallHpsJava)
-    else()
-        message(STATUS "HpsJava installation is disabled")
-    endif()
-
-    # Install local conditions database
-    if(ENABLE_INSTALL_CONDITIONS)
-        include(InstallConditions)
-    else()
-        message(STATUS "Conditions installation is disabled")
-    endif()
-
+# Install magnetic field maps
+if(ENABLE_INSTALL_FIELDMAPS)
+    include(InstallFieldmaps)
 else()
-    message(STATUS "Installation of all external tools is disabled")
+    message(STATUS "Fieldmaps installation is disabled")
+endif()
+
+# Install LCIO
+if(ENABLE_INSTALL_LCIO)
+    include(InstallLCIO)
+else()
+    message(STATUS "LCIO installation is disabled")
+endif()
+
+# Install HPS Java
+if(ENABLE_INSTALL_HPSJAVA)
+    include(InstallHpsJava)
+else()
+    message(STATUS "HpsJava installation is disabled")
+endif()
+
+# Install local conditions database
+if(ENABLE_INSTALL_CONDITIONS)
+    include(InstallConditions)
+else()
+    message(STATUS "Conditions installation is disabled")
 endif()
 
 # Install python scripts
 install(DIRECTORY python DESTINATION lib)
+
+# Custom target to only install the python scripts (must be executed manually)
+add_custom_target(InstallPythonScripts
+                  COMMAND mkdir -p ${CMAKE_INSTALL_PREFIX}/lib && cp -R ${PROJECT_SOURCE_DIR}/python ${CMAKE_INSTALL_PREFIX}/lib)
 
 # Install configured scripts
 file(GLOB SCRIPTS_IN scripts/*.in)

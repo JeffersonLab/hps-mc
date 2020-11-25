@@ -67,26 +67,20 @@ class SLIC(Component):
         return args
 
     def __detector_file(self):
-
-        if self.detector_dir is None:
-            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
-            if not os.path.isdir(self.detector_dir):
-                raise Exception('Failed to find valid detector_dir')
-            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
-
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def __particle_tbl(self):
         return os.path.join(self.slic_dir, "share", "particle.tbl")
 
-    def setup(self):
+    def config(self, parser):
 
-        if not os.path.exists(self.slic_dir):
-            raise Exception("slic_dir does not exist: %s" % self.slic_dir)
-
-        self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
-        if not os.path.exists(self.env_script):
-            raise Exception('SLIC setup script does not exist: %s' % self.name)
+        super().config(parser)
+        
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
@@ -96,6 +90,15 @@ class SLIC(Component):
             logger.info("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
             logger.info("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+    def setup(self):
+
+        if not os.path.exists(self.slic_dir):
+            raise Exception("slic_dir does not exist: %s" % self.slic_dir)
+
+        self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
+        if not os.path.exists(self.env_script):
+            raise Exception('SLIC setup script does not exist: %s' % self.name)
 
         logger.info('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
