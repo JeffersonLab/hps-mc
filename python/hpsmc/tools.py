@@ -67,20 +67,20 @@ class SLIC(Component):
         return args
 
     def __detector_file(self):
-
-        if self.detector_dir is None:
-            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
-            if not os.path.isdir(self.detector_dir):
-                raise Exception('Failed to find valid detector_dir')
-            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
-
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def __particle_tbl(self):
         return os.path.join(self.slic_dir, "share", "particle.tbl")
 
     def config(self, parser):
-        super.config(parser)
+
+        super().config(parser)
+        
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
