@@ -4,7 +4,7 @@ import os
 import subprocess
 import logging
 
-from util import convert_config_value
+#from util import convert_config_value
 
 from parameters import ParameterSet, IntParameter
 from config import Config, ConfigItem
@@ -82,13 +82,23 @@ class Component(object):
                                          default=None,
                                          read_from_env=True,
                                          read_from_config=False))
-        self._config.load_from_env()
+        self._config.load_from_env() # Need to set the HPSMC dir here for child class access
 
     def get_config_item(self, name):
         return self._config.get_item(name)
 
+    def get_config_value(self, name):
+        if not self._config.has_item(name):
+            raise Exception('Config item does not exist: {}'.format(name))
+        return self._config.get_item(name).value
+
     def get_parameter(self, name):
         return self._params.get(name)
+
+    def get_parameter_value(self, name):
+        if not self._params.has(name):
+            raise Exception('Parameter does not exist: {}'.format(name))
+        return self._params.get(name).value
 
     def add_parameters(self, *args):
         self._params.add(*args)
@@ -147,49 +157,11 @@ class Component(object):
         the section with the same name as the class in the config file and
         assigning them to class attributes with the same name.
         """
-        section_name = self.__class__.__name__
-        if parser.has_section(section_name):
-            for name, value in parser.items(section_name):
-                setattr(self, name, convert_config_value(value))
-                logger.info("%s:%s:%s=%s" % (self.name,
-                                             name,
-                                             getattr(self, name).__class__.__name__,
-                                             getattr(self, name)))
-
-        # New way...
-        print(">>>> testing new config load...")
         self._config.load(parser)
-        print(">>>> Done!")
 
     def set_parameters(self, params):
-        """Set component parameters from dict.
-        """
-
+        """Set component parameters from dict."""
         self._params.load_from_dict(params)
-
-        """
-        # Set required parameters.
-        for p in self.required_parameters():
-            if p not in params:
-                raise Exception("Required parameter '%s' is missing for component '%s'"
-                                % (p, self.name))
-            else:
-                if p not in self.ignore_job_params:
-                    setattr(self, p, params[p])
-                    logger.info("%s:%s=%s [required]" % (self.name, p, params[p]))
-                else:
-                    logger.info("Ignored job param '%s'" % p)
-
-        # Set optional parameters.
-        for p in self.optional_parameters():
-            if p in params:
-                #if p not in self.ignore_job_params:
-                setattr(self, p, params[p])
-                logger.info("%s:%s=%s [optional]"
-                            % (self.name, p, params[p]))
-                #else:
-                #    logger.info("Ignored job param '%s'" % p)
-        """
 
     def required_parameters(self):
         """Return a list of required parameters.
@@ -246,8 +218,11 @@ class Component(object):
         return outputs
 
     def config_from_environ(self):
+        self._config.load_from_env()
+
         """Configure component from environment variables which are just upper case
         versions of the required config names set in the shell environment."""
+        """
         for c in self.required_config():
             logger.debug("Setting config '%s' from environ" % c)
             if c.upper() in os.environ:
@@ -255,6 +230,7 @@ class Component(object):
                 logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
+        """
 
 class DummyComponent(Component):
     """A dummy component that just prints some information instead of executing a program."""

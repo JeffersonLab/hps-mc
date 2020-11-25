@@ -300,6 +300,7 @@ class Job(object):
             self.log_err = open(self.err_file, 'w')
 
     def __configure(self):
+
         # Configure job class
         self.job_config = JobConfig(config_files=self.config_files)
         self.job_config.config(self, require_section=False)
@@ -307,12 +308,22 @@ class Job(object):
 
         # Configure each of the job components
         for c in self.components:
+
+            logger.info('Configuring component: {}'.format(c.name))
+
+            # Set default config values
             c.config_from_defaults()
+
+            # Set config values from the environment
+            c.config_from_environ()
+
+            # Load config values from configparser
             c.config(self.job_config.parser) # Configure from supplied config files
-            #if self.enable_env_config:
-            #    c.config_from_environ()      # Configure from env vars, if enabled
-            # TODO: catch exception here...
-            c.check_config()                 # Check that the config is acceptable
+
+            # Check that the config is acceptable
+            c.check_config()
+
+            logger.info('Loaded config: '.format(str(c._config)))
 
     def _load_script(self):
         if not self.script.endswith('.py'):
