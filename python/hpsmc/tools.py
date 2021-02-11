@@ -824,7 +824,7 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         if self.num_hodo_hits > 0:
             args.append("-M")
             args.append(str(self.num_hodo_hits))
-        if self.nevents > 0:
+        if self.nevents:
             args.append("-w")
             args.append(str(self.nevents))
         return args
