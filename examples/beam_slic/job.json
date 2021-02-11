@@ -1,0 +1,12 @@
+{
+    "run_number": 10666,
+    "nevents": 250000,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "input_files": {
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_1.stdhep": "beam.stdhep"
+    },
+    "output_files": {
+        "beam.slcio": "beam_4pt55_20um120uA_1.slcio"
+    },
+    "output_dir": "output"
+}
