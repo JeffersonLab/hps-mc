@@ -5,6 +5,7 @@
     },
     "run_mode": 0,
     "nevents": 50,
+    "year": 2016,
     "input_files": {
         "/work/slac/hps-mc/examples/readout_recon/output/tritrig_2016_recon_1.slcio": "recon_events.slcio"
     },
