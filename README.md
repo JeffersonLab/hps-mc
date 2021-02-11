@@ -9,6 +9,7 @@ There are a number of required programs and tools you must have installed on you
 - Maven - at least version 3.0
 - python - tested with Python 2.7.13
 - Java - tested with Java 1.8
+- GSL - use [version 1.16](https://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz)
 
 The [slic](https://github.com/slaclab/slic) program should be pre-installed and avialable in the system path.
 
@@ -22,7 +23,7 @@ To build the project:
 
 ```
 cd hps-mc; mkdir build; cd build
-cmake -DCMAKE_INSTALL_PREFIX=../install ..
+cmake -DCMAKE_INSTALL_PREFIX=../install -DGSL_ROOT_DIR=$GSL_ROOT_DIR ..
 make install
 ```
 
