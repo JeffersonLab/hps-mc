@@ -11,6 +11,7 @@
 *.lhe.gz
 *.lhe
 *.stdhep
+*.root
 
 # Generated example directories
 */output
