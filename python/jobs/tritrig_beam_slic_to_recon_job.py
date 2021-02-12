@@ -30,8 +30,8 @@ for i in range(1,11):
 # Check for expected input file targets
 if tritrig_file_name not in inputs:
     raise Exception("Missing required input file '%s'" % tritrig_file_name)
-if beam_slic_file_names[1] not in inputs:
-    raise Exception("Missing required input file '%s'" % beam_slic_file_names[1])
+if beam_file_names[1] not in inputs:
+    raise Exception("Missing required input file '%s'" % beam_file_names[1])
 
 # Base name of intermediate tritrig files
 tritrig_name = 'tritrig'
@@ -93,7 +93,7 @@ recon = JobManager(steering='recon',
  
 # Add the components
 comps = [slic_tt, filter_bunches_tt]
-#for i in range(len(slic_beams)): comps.append(slic_beams[i])
+for i in range(len(slic_beams)): comps.append(slic_beams[i])
 comps.extend([slic_beam_cat, merge, readout, recon])
 job.add(comps)
 
