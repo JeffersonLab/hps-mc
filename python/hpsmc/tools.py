@@ -655,6 +655,9 @@ class JavaTool(Component):
         if self.java_args is not None:
             logger.debug("Setting java_args from config: %s" + self.java_args)
             args.append(self.java_args)
+        if self.conditions_url is not None:
+            logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
+            args.append('-Dorg.hps.conditions.url=%s' % self.conditions_url)
         args.append("-cp")
         args.append(self.hps_java_bin_jar)
         args.append(self.java_class)
@@ -666,26 +669,27 @@ class EvioToLcio(JavaTool):
     """
 
     def __init__(self, steering=None, **kwargs):
-
-        self.detector = None
-        self.steering = None
-        self.run_number = None
-        self.skip_events = None
-        self.event_print_interval = None
-        self.steering = steering
-
-        JavaTool.__init__(self,
-                          name='evio_to_lcio',
-                          java_class='org.hps.evio.EvioToLcio',
-                          output_ext='.slcio',
-                          **kwargs)
-
+       
+       self.detector = None
+       self.steering = None
+       self.run_number = None
+       self.skip_events = None
+       self.event_print_interval = None
+       self.conditions_url = None
+       self.steering = steering
+       
+       JavaTool.__init__(self, 
+                         name='evio_to_lcio', 
+                         java_class='org.hps.evio.EvioToLcio', 
+                         output_ext='.slcio',
+                         **kwargs)
+    
     def required_parameters(self):
         return ['detector', 'steering_files']
 
     def optional_parameters(self):
-        return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
-
+        return ['run_number', 'skip_events', 'nevents', 'event_print_interval', 'conditions_url']
+    
     def setup(self):
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
