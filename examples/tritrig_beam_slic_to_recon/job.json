@@ -1,0 +1,39 @@
+{
+    "run_number": 10666, 
+    "job_id": 66, 
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSingles.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    }, 
+    "input_files": {
+        "/sdf/group/hps/mc/4pt55GeV/tritrig/20um120nA/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep", 
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_651.stdhep": "beam_1.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_652.stdhep": "beam_2.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_653.stdhep": "beam_3.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_654.stdhep": "beam_4.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_655.stdhep": "beam_5.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_656.stdhep": "beam_6.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_657.stdhep": "beam_7.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_658.stdhep": "beam_8.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_659.stdhep": "beam_9.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_660.stdhep": "beam_10.stdhep"
+    }, 
+    "target_z": -7.51, 
+    "nevents": 10000, 
+    "output_dir": "output", 
+    "run_params": "4pt55", 
+    "detector": "HPS-PhysicsRun2019-v2-4pt5", 
+    "output_files": {
+        "beam_1.slcio": "beam/beamBunches_100nA_8um_651.slcio",
+        "beam_2.slcio": "beam/beamBunches_100nA_8um_652.slcio",
+        "beam_3.slcio": "beam/beamBunches_100nA_8um_653.slcio",
+        "beam_4.slcio": "beam/beamBunches_100nA_8um_654.slcio",
+        "beam_5.slcio": "beam/beamBunches_100nA_8um_655.slcio",
+        "beam_6.slcio": "beam/beamBunches_100nA_8um_656.slcio",
+        "beam_7.slcio": "beam/beamBunches_100nA_8um_657.slcio",
+        "beam_8.slcio": "beam/beamBunches_100nA_8um_658.slcio",
+        "beam_9.slcio": "beam/beamBunches_100nA_8um_659.slcio",
+        "beam_10.slcio": "beam/beamBunches_100nA_8um_660.slcio",
+        "tritrig-beam_recon.slcio": "tritrig-beam_recon_66.slcio"
+    }
+} 
