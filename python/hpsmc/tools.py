@@ -531,15 +531,33 @@ class AddMotherFullTruth(StdHepTool):
                             **kwargs)
         if len(self.inputs) != 2:
             raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
-        input_file_1 = self.inputs[0]
-        base,ext = os.path.splitext(input_file_1)
+        self.input_file_1 = self.inputs[0]
+        base,ext = os.path.splitext(self.input_file_1)
         if ext != '.stdhep':
             raise Exception("The first input file must be a stdhep file")
-        input_file_2 = self.inputs[1]
-        base,ext = os.path.splitext(input_file_2)
+        self.input_file_2 = self.inputs[1]
+        base,ext = os.path.splitext(self.input_file_2)
         if ext != '.lhe':
             raise Exception("The second input file must be a lhe file")
+ 
+    def cmd_args(self):
+         
+        args = []
+          
+        if self.name in StdHepTool.seed_names:
+            args.extend(["-s", str(self.seed)])
+        
+        if len(self.output_files()):
+            args.insert(0, self.output_files()[0])
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for StdHepTool.")
+        
+        args.insert(0, self.input_file_2)
+        args.insert(0, self.input_file_1)
+        
+        return args
 
+        
 class MergePoisson(StdHepTool):
     """
     Merge StdHep files, applying poisson sampling.
@@ -858,7 +876,7 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         if self.num_hodo_hits > 0:
             args.append("-M")
             args.append(str(self.num_hodo_hits))
-        if self.nevents > 0:
+        if self.nevents:
             args.append("-w")
             args.append(str(self.nevents))
         return args
