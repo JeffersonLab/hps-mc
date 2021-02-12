@@ -96,7 +96,6 @@ class Job(object):
                      'ignore_return_codes',
                      'check_output_files',
                      'enable_file_chaining',
-                     'enable_ptags',
                      'enable_env_config']
 
     # Prefix to indicate ptag in job param file.
@@ -137,7 +136,6 @@ class Job(object):
         self.check_output_files = True
         self.check_commands = False
         self.enable_file_chaining = True
-        self.enable_ptags = False
         self.enable_env_config = False
 
         self.param_file = None
@@ -304,13 +302,15 @@ class Job(object):
     def __configure(self):
         # Configure job class
         self.job_config = JobConfig(config_files=self.config_files)
-        self.job_config.config(self, allowed_names=Job._config_names, require_section=False)
+        self.job_config.config(self, require_section=False)
+        #allowed_names=Job._config_names,
 
         # Configure each of the job components
         for c in self.components:
             c.config(self.job_config.parser) # Configure from supplied config files
             if self.enable_env_config:
                 c.config_from_environ()      # Configure from env vars, if enabled
+            # TODO: catch exception here...
             c.check_config()                 # Check that the config is acceptable
 
     def _load_script(self):
@@ -387,14 +387,13 @@ class Job(object):
             elapsed = stop_time - start_time
             logger.info("Job execution took %f seconds" % elapsed)
 
-
-            # Copy by key set in the job script
-            if self.enable_ptags:
-                self.__copy_ptag_output_files()
-
-            # Copy by file path
+            # Copy by file path or ptag
             if self.enable_copy_output_files:
+                # TODO: combine these methods
                 self.__copy_output_files()
+                #self.__copy_ptag_output_files()
+            else:
+                logger.warning('Copy output files is disabled! No output files copied.')
 
             # Perform job cleanup.
             self.__cleanup()
@@ -501,7 +500,7 @@ class Job(object):
 
     def __copy_output_files(self):
         """
-        Copy output files to output directory.
+        Copy output files to output directory, handling ptags if necessary.
         """
 
         if not os.path.exists(self.output_dir):
@@ -509,9 +508,16 @@ class Job(object):
             os.makedirs(self.output_dir, 0o755)
 
         for src,dest in self.output_files.items():
-            if not Job.is_ptag(src):
-                logger.info('Copying output file: %s -> %s' % (src, dest))
-                self.__copy_output_file(src, dest)
+            src_file = src
+            if Job.is_ptag(src):
+                ptag_src = Job.get_ptag_from_src(src)
+                if ptag_src in list(self.ptags.keys()):
+                    src_file = self.ptags[ptag_src]
+                    logger.info("Resolved ptag: {} -> {}".format(ptag_src, src_file))
+                else:
+                    raise Exception('Undefined ptag used in job params: %s' % ptag_src)
+            logger.info('Copying output file: %s -> %s' % (src_file, dest))
+            self.__copy_output_file(src_file, dest)
 
     def __copy_output_file(self, src, dest):
         """
@@ -552,9 +558,9 @@ class Job(object):
         Copy input files to the run dir.
         """
         for src,dest in self.input_files.items():
-            if not os.path.isabs(src):
+            #if not os.path.isabs(src):
                 # FIXME: Could try and convert to abspath here.
-                raise Exception("The input source file '%s' is not an absolute path." % src)
+            #    raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Copying input file: %s -> %s" % (src, os.path.join(self.rundir, dest)))
