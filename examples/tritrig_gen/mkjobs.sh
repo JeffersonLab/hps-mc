@@ -1,1 +1,1 @@
-hps-mc-job-template --repeat 10000 -j 1 job.json.tmpl jobs.json
+hps-mc-job-template -j 1 -r 100 -a vars.json job.json.tmpl jobs.json
