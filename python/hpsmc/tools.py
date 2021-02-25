@@ -660,6 +660,7 @@ class JavaTool(Component):
     def __init__(self, name, java_class, **kwargs):
         self.java_class = java_class
         self.java_args = None
+        self.conditions_url = None
         Component.__init__(self,
                            name,
                            "java",
@@ -693,7 +694,6 @@ class EvioToLcio(JavaTool):
        self.run_number = None
        self.skip_events = None
        self.event_print_interval = None
-       self.conditions_url = None
        self.steering = steering
        
        JavaTool.__init__(self, 
@@ -706,7 +706,7 @@ class EvioToLcio(JavaTool):
         return ['detector', 'steering_files']
 
     def optional_parameters(self):
-        return ['run_number', 'skip_events', 'nevents', 'event_print_interval', 'conditions_url']
+        return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
     
     def setup(self):
         if self.steering not in self.steering_files:
