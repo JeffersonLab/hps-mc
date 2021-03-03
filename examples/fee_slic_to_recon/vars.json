@@ -1,0 +1,7 @@
+{
+    "nevents": [10000],
+    "run_params": ["4pt55"],
+    "detector": ["HPS_Nominal_iter0"],
+    "target_z": [-7.51],
+    "run_number": [1194550]
+}
