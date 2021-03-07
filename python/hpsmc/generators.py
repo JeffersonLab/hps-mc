@@ -169,7 +169,7 @@ class MG(EventGenerator):
         return ['nevents', 'run_params']
 
     def optional_parameters(self):
-        return ['seed', 'param_card', 'apmass']
+        return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod']
 
     #def required_config(self):
     #    return ['madgraph_dir']
