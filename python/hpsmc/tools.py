@@ -354,6 +354,7 @@ class StdHepTool(Component):
                   'beam_coords_old',
                   'lhe_tridents',
                   'lhe_tridents_displacetime',
+                  'lhe_tridents_displaceuni',
                   'merge_poisson',
                   'mix_signal',
                   'random_sample']
@@ -499,6 +500,27 @@ class DisplaceTime(StdHepTool):
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displacetime',
+                            output_ext='.stdhep',
+                            **kwargs)
+
+    def cmd_args(self):
+        args = StdHepTool.cmd_args(self)
+        if self.ctau is not None:
+            args.extend(["-l", str(self.ctau)])
+        return args
+
+    def optional_parameters(self):
+        return ['ctau']
+
+class DisplaceUni(StdHepTool):
+    """
+    Convert LHE files to StdHep, displacing the time by given ctau.
+    """
+
+    def __init__(self, **kwargs):
+        self.ctau = None
+        StdHepTool.__init__(self,
+                            name='lhe_tridents_displaceuni',
                             output_ext='.stdhep',
                             **kwargs)
 
