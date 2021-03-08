@@ -1,19 +1,21 @@
 {
     "nevents": 10000,
     "run_params": "2pt3",
-    "target_z": 0.5,
+    "target_z": -4.3,
     "map": 100,
-    "mpid": 10,
-    "mrhod": 10,
-    "run_number": 5772,
-    "detector": "HPS-PhysicsRun2016-v5-3-fieldmap_globalAlign",
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 7984,
+    "seed": 879483,
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "filter_ecal_hit_ecut": 0.02,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
     "output_files": {
-        "simp.slcio": "simp.slcio",
-        "simp_recon.slcio": "simp_recon.slcio"
+        "simp_rot.slcio": "simp.slcio",
+        "simp_rot_filt_readout_recon.slcio": "simp_recon.slcio"
     },
     "output_dir": "output"
 }

@@ -50,21 +50,13 @@ void displace_vertex(vector<stdhep_entry> *event, gsl_rng *r, double decay_lengt
     int ap_id = -1;
     double vx[4];
     for (int i=0;i<event->size();i++) {
-        if (event->at(i).idhep==622) {
+        if (event->at(i).idhep==625) {
             if (ap_id!=-1) {
                 printf("multiple A' found\n");
                 break;
             }
             ap_id = i;
-            double gamma = event->at(i).phep[3]/event->at(i).phep[4];
-            double beta = sqrt(1-pow(gamma,-2.0));
-            double p = 0.0;
-            for (int j=0;j<3;j++) p += event->at(i).phep[j]*event->at(i).phep[j];
-            p = sqrt(p);
-            double proper_time = gsl_ran_exponential(r,decay_length);
-            double distance = gamma*beta*proper_time;
-            for (int j=0;j<3;j++) vx[j] = distance * event->at(i).phep[j]/p;
-            vx[3] = gamma*proper_time;
+            vx[3] = decay_length*gsl_rng_uniform(r);
             //printf("gamma=%f p=%f distance=%f vx=%f,%f,%f\n",gamma,p,distance,vx[0],vx[1],vx[2]);
         }
     }
@@ -84,7 +76,7 @@ int main(int argc,char** argv)
 
     int rseed = 0;
 
-    double decay_length = -1.0;
+    double decay_length = 150.0;
 
     int c;
 
@@ -187,7 +179,7 @@ int main(int argc,char** argv)
         }
         remove_nulls(&new_event);
         set_jdahep(&new_event);
-        if (decay_length>0) displace_vertex(&new_event,r,decay_length);
+        displace_vertex(&new_event,r,decay_length);
         write_stdhep(&new_event,nevhep);
         write_file(ostream);
         nevhep++;

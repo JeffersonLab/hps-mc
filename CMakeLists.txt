@@ -27,7 +27,7 @@ else()
 endif()
 
 # Check for Java
-find_package(Java REQUIRED)
+find_package(Java COMPONENTS Runtime REQUIRED)
 message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
 message(STATUS "java version: ${Java_VERSION}")
 

@@ -1,5 +1,5 @@
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool, MoveFiles, BeamCoords
+from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool, MoveFiles, BeamCoords, Unzip, AddMotherFullTruth, DisplaceUni, DisplaceTime
 
 job.description = 'SIMP generation to recon'
 
@@ -10,12 +10,14 @@ mg = MG5(name='simp',
          event_types=['unweighted'])
 
 # Move LHE file
-# TODO: remove this step
 mv = MoveFiles(inputs=['simp_unweighted_events.lhe.gz'],
                outputs=['simp.lhe.gz'])
 
+# Unzip LHE file
+unzip = Unzip(inputs=['simp.lhe.gz'], outputs=['simp.lhe'])
+
 # Convert LHE output to stdhep
-cnv = StdHepConverter()
+cnv = DisplaceUni(inputs=['simp.lhe'], outputs=['simp.stdhep'])
 
 # Rotate into beam coords
 rot = BeamCoords()
@@ -33,4 +35,4 @@ readout = JobManager(steering='readout')
 recon = JobManager(steering='recon')
  
 # Run the job
-job.add([mg, mv, cnv, rot, slic, filter_bunches, readout, recon])
+job.add([mg, mv, unzip, cnv, rot, slic, filter_bunches, readout, recon])
