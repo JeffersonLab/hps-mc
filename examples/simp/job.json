@@ -11,7 +11,7 @@
     "filter_ecal_hit_ecut": 0.02,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim",
-        "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
+        "recon": "/org/hps/steering/recon/PhysicsRun2016FullRecon_Kalman_simps_noClustersRequired.lcsim"
     },
     "output_files": {
         "simp_rot.slcio": "simp.slcio",

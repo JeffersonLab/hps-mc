@@ -56,13 +56,19 @@ void displace_vertex(vector<stdhep_entry> *event, gsl_rng *r, double decay_lengt
                 break;
             }
             ap_id = i;
-            vx[3] = decay_length*gsl_rng_uniform(r);
+            double gamma = event->at(i).phep[3]/event->at(i).phep[4];
+            double beta = sqrt(1-pow(gamma,-2.0));
+            double p = 0.0;
+            for (int j=0;j<3;j++) p = sqrt(p*p + event->at(i).phep[j]*event->at(i).phep[j]);
+            double distance = decay_length*gsl_rng_uniform(r);;
+            for (int j=0;j<3;j++) vx[j] = distance * event->at(i).phep[j]/p;
+            vx[3] = distance/beta;
             //printf("gamma=%f p=%f distance=%f vx=%f,%f,%f\n",gamma,p,distance,vx[0],vx[1],vx[2]);
         }
     }
     if (ap_id<0) printf("no A' found\n");
     else for (int i=0;i<event->size();i++) {
-        if (event->at(i).jmohep[0]==ap_id+1 || event->at(i).jmohep[1]==ap_id+1) {
+        if (event->at(i).jmohep[0]==ap_id+1 || event->at(i).jmohep[1]==ap_id+1 || event->at(i).idhep==625 || event->at(i).idhep==622) {
             for (int j=0;j<4;j++) event->at(i).vhep[j] = vx[j];
         }
     }
