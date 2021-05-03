@@ -12,28 +12,34 @@
 void rotate_entry(stdhep_entry *entry, double theta_x, double theta_y)
 {
 	double px = entry->phep[0];
-        double py = entry->phep[1];
+    double py = entry->phep[1];
 	double pz = entry->phep[2];
 	double vx = entry->vhep[0];
-        double vy = entry->vhep[1];
+    double vy = entry->vhep[1];
 	double vz = entry->vhep[2];
 
 
-        // rotate about x-axis (rotation in y-z)
-        entry->phep[1] = py*cos(theta_x) - pz*sin(theta_x);
-        entry->phep[2] = py*sin(theta_x) + pz*cos(theta_x);
+    // rotate about x-axis (rotation in y-z)
+    entry->phep[1] = py*cos(theta_x) - pz*sin(theta_x);
+    entry->phep[2] = py*sin(theta_x) + pz*cos(theta_x);
 
-        // rotate about y-axis (rotation in z-x)
-        entry->phep[0] = px*cos(theta_y) + pz*sin(theta_y);
-        entry->phep[2] = pz*cos(theta_y) - px*sin(theta_y);        
-       
-        // rotate about x-axis (rotation in y-z)
-        entry->vhep[1] = vy*cos(theta_x) + vz*sin(theta_x);
-        entry->vhep[2] = vy*sin(theta_x) - vz*cos(theta_x);        
+    py = entry->phep[1];
+	pz = entry->phep[2];
 
-        // rotate about y-axis (rotation in z-x)
-        entry->vhep[0] = vx*cos(theta_y) + vz*sin(theta_y);
-        entry->vhep[2] = vz*cos(theta_y) - vx*sin(theta_y); 
+    // rotate about y-axis (rotation in z-x)
+    entry->phep[0] = px*cos(theta_y) + pz*sin(theta_y);
+    entry->phep[2] = pz*cos(theta_y) - px*sin(theta_y);
+
+    // rotate about x-axis (rotation in y-z)
+    entry->vhep[1] = vy*cos(theta_x) + vz*sin(theta_x);
+    entry->vhep[2] = vy*sin(theta_x) - vz*cos(theta_x);
+
+    vy = entry->vhep[1];
+	vz = entry->vhep[2];
+
+    // rotate about y-axis (rotation in z-x)
+    entry->vhep[0] = vx*cos(theta_y) + vz*sin(theta_y);
+    entry->vhep[2] = vz*cos(theta_y) - vx*sin(theta_y);
 
 }
 
@@ -45,14 +51,14 @@ int main(int argc,char** argv)
 
 	int rseed = 0;
 
-        double theta_x = 0;
-        double theta_y = 0.0305; //radian
-        double theta_z = 0; 
-        double sigma_x = 0;
-        double sigma_y = 0;
-        double target_x = 0;
-        double target_y = 0;
-        double target_z = 0;
+    double theta_x = 0;
+    double theta_y = 0.0305; //radian
+    double theta_z = 0;
+    double sigma_x = 0;
+    double sigma_y = 0;
+    double target_x = 0;
+    double target_y = 0;
+    double target_z = 0;
 
 	int c;
 
