@@ -5,5 +5,5 @@
     "rmpid": [33.3],
     "rmrhod": [60],
     "mrhod": [60, 90, 120, 150, 180, 210],
-    "numofmasspoints": [6]
+    "numofjobseachmass": [500]
 }
