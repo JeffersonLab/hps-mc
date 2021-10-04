@@ -564,8 +564,8 @@ class Job(object):
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Copying input file: %s -> %s" % (src, os.path.join(self.rundir, dest)))
-            os.chmod(dest, 0o666)
             shutil.copyfile(src, os.path.join(self.rundir, dest))
+            os.chmod(dest, 0o666)
 
     def __symlink_input_files(self):
         """
