@@ -1,0 +1,47 @@
+[
+    {
+        "job_id": 1,
+        "run_number": 14419,
+        "layer": 0,
+        "input_files": {
+            "/sdf/group/hps/users/alspellm/src/hps-mc/examples/evio_offline_baselines/test/14419_rawsvthits_2dhistos_hadd.root": "histos.root"
+        },
+        "output_files": {
+            "histos_fit.root": "hps_14419_offline_baseline_layer_0.root"
+        },
+        "output_dir": "test",
+        "config_files": {
+            "fit": "fitBL_cfg.py"
+        }
+    },
+    {
+        "job_id": 2,
+        "run_number": 14419,
+        "layer": 1,
+        "input_files": {
+            "/sdf/group/hps/users/alspellm/src/hps-mc/examples/evio_offline_baselines/test/14419_rawsvthits_2dhistos_hadd.root": "histos.root"
+        },
+        "output_files": {
+            "histos_fit.root": "hps_14419_offline_baseline_layer_1.root"
+        },
+        "output_dir": "test",
+        "config_files": {
+            "fit": "fitBL_cfg.py"
+        }
+    },
+    {
+        "job_id": 3,
+        "run_number": 14419,
+        "layer": 2,
+        "input_files": {
+            "/sdf/group/hps/users/alspellm/src/hps-mc/examples/evio_offline_baselines/test/14419_rawsvthits_2dhistos_hadd.root": "histos.root"
+        },
+        "output_files": {
+            "histos_fit.root": "hps_14419_offline_baseline_layer_2.root"
+        },
+        "output_dir": "test",
+        "config_files": {
+            "fit": "fitBL_cfg.py"
+        }
+    }
+]

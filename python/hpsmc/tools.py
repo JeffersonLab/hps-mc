@@ -263,12 +263,28 @@ class JobManager(Component):
     def optional_parameters(self):
         return ['detector', 'run_number', 'defs']
 
+class Hadd(Component):
+    """
+    Hadd output root files
+    """
+    def __init__(self, **kwargs):
+        
+        Component.__init__(self,
+                           name='hadd',
+                           command='hadd',
+                           **kwargs)
+    def cmd_args(self):
+        args = [self.output_files()[0]]
+        args.extend(self.input_files())
+        return args
+
+
 class HPSTR(Component):
     """
     Run the hpstr analysis tool.
     """
 
-    def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
+    def __init__(self, cfg=None, run_mode=0, year=None, layer=None, **kwargs):
 
         self.cfg = cfg
         self.run_mode = run_mode
@@ -309,7 +325,7 @@ class HPSTR(Component):
         return ['config_files']
 
     def optional_parameters(self):
-        return ['year', 'run_mode', 'nevents']
+        return ['year', 'run_mode', 'nevents', 'layer']
 
     def required_config(self):
         return ['hpstr_install_dir', 'hpstr_base']
@@ -323,6 +339,8 @@ class HPSTR(Component):
             args.extend(["-n", str(self.nevents)])
         if self.year is not None:
             args.extend(["-y", str(self.year)])
+        if self.layer is not None:
+            args.extend(["-l", str(self.layer)])
         return args
 
     def output_files(self):

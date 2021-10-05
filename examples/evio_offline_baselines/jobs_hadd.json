@@ -1,0 +1,11 @@
+[
+    {
+        "job_id": 1,
+        "infile_dir": "/sdf/group/hps/users/alspellm/src/hps-mc/examples/evio_offline_baselines/test",
+        "output_files": {
+            "2dhistos_hadd.root" : "14419_rawsvthits_2dhistos_hadd.root"      
+         },
+        "output_dir": "test",
+        "run_number": 14419
+    }
+]
