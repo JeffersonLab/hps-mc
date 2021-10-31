@@ -503,8 +503,6 @@ class Job(object):
                 logger.info("Inputs: %s" % str(c.input_files()))
                 logger.info("Outputs: %s" % str(c.output_files()))
 
-                start = time.time()
-
                 # Print header to stdout
                 self.out.write('================ Component: %s ================\n' % c.name)
                 self.out.flush()
@@ -514,6 +512,7 @@ class Job(object):
                     self.err.write('================ Component: %s ================\n' % c.name)
                     self.err.flush()
 
+                start = time.time()
                 returncode = c.execute(self.out, self.err)
                 end = time.time()
                 elapsed = end - start
