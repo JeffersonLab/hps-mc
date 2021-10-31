@@ -296,12 +296,6 @@ class Job(object):
         config_logging(stream=self.log, level=self.log_level, logname='hpsmc.tools')
         config_logging(stream=self.log, level=self.log_level, logname='hpsmc.generators')
 
-        logger.info('Job ID: ' + str(self.job_id))
-        logger.info('Description: %s' % self.description)
-
-        # Print config to the log
-        logger.info(str(self.job_config))
-
         # Set file for stdout from components
         if cl.out:
             out_file = cl.out
@@ -342,7 +336,7 @@ class Job(object):
             if cl.job_id:
                 # Load data from a job store containing multiple jobs.
                 self.job_id = cl.job_id
-                logger.info("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
+                logger.debug("Loading job with ID %d from job store '%s'" % (self.job_id, self.param_file))
                 jobstore = JobStore(self.param_file)
                 if jobstore.has_job_id(self.job_id):
                     params = jobstore.get_job(self.job_id)
@@ -370,7 +364,7 @@ class Job(object):
             self.output_dir = self.params['output_dir']
         if not os.path.isabs(self.output_dir):
             self.output_dir = os.path.abspath(self.output_dir)
-            logger.info("Changed output dir to abs path: %s" % self.output_dir)
+            logger.debug("Changed output dir to abs path: %s" % self.output_dir)
 
         if 'job_id' in self.params:
             self.job_id = self.params['job_id']
@@ -433,7 +427,11 @@ class Job(object):
         This is the primary execution method for running the job.
         """
 
-        logger.info("Running job: %s" % self.description)
+        logger.info('Job ID: ' + str(self.job_id))
+        logger.info('Description: %s' % self.description)
+
+        # Print config to the log
+        logger.info(str(self.job_config))
 
         # Initialize after CL parameters were parsed.
         self.__initialize()
