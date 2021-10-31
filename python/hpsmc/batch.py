@@ -157,10 +157,10 @@ class Batch:
         elif len(self.job_ids):
             submit_ids = self.job_ids
         if self.check_output:
-            logger.info('Checking output files...')
+            logger.debug('Checking output files...')
             submit_ids = [job_id for job_id in submit_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
-            logger.info('Done checking output files!')
-            logger.debug('Job list after output check: {}'.format(str(submit_ids)))
+            logger.debug('Done checking output files!')
+            logger.info('Job IDs after checking output files: {}'.format(str(submit_ids)))
         return submit_ids
 
     def submit(self):
@@ -208,7 +208,7 @@ class Batch:
         cmd.extend(['-i', str(job_id)])
         cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
-        logger.info("Job command: %s" % " ".join(cmd))
+        logger.debug("Job command: %s" % " ".join(cmd))
         return cmd
 
 class LSF(Batch):
@@ -572,8 +572,8 @@ class Pool(Batch):
             cmd = self.build_cmd(job_id, job_data)
             cmds.append(cmd)
 
-        logger.debug('Running job commands in pool ...')
-        logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
+        #logger.debug('Running job commands in pool ...')
+        #logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
 
         if not len(cmds):
             raise Exception('No job IDs found to submit')

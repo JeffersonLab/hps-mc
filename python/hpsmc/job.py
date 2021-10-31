@@ -214,7 +214,10 @@ class Job(object):
         config_logging(stream=self.log, level=self.log_level, logname='hpsmc.tools')
         config_logging(stream=self.log, level=self.log_level, logname='hpsmc.generators')
 
-        # Print config to log
+        logger.info('Job ID: ' + str(self.job_id))
+        logger.info('Description: %s' % self.description)
+
+        # Print config to the log
         logger.info(str(self.job_config))
 
         # Set file for stdout from components
