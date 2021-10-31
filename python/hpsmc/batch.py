@@ -3,11 +3,8 @@ local running, a multiprocessing pool, LSF, and Auger."""
 
 import os
 import argparse
-import json
 import subprocess
-import getpass
 import sys
-import time
 import logging
 import signal
 import multiprocessing
@@ -18,9 +15,7 @@ from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
-from job_store import JobStore
-from script_db import JobScriptDatabase
-from job import Job
+from job import Job, JobStore, JobScriptDatabase
 
 from hpsmc.util import config_logging
 

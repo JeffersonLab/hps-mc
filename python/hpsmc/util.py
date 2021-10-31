@@ -1,10 +1,7 @@
 """Miscellaneous utility functions."""
 
-import json, sys, logging
-
-def load_json_data(filename):
-    rawdata = open(filename, 'r').read()
-    return json.loads(rawdata)
+import sys
+import logging
 
 def convert_config_value(val):
     if val == 'True' or val == 'true':

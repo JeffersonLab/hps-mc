@@ -1,6 +1,12 @@
 """Tools that can be used in HPSMC jobs."""
 
-import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
+import os
+import gzip
+import shutil
+import logging
+import subprocess
+import tarfile
+
 from subprocess import PIPE
 
 from component import Component
@@ -594,6 +600,7 @@ class MergePoisson(StdHepTool):
 
     def setup(self):
         self.run_param_data = RunParameters(self.run_params)
+        # TODO: this function could just be inlined here
         self.mu = func.mu(self.lhe_file, self.run_param_data)
 
     def required_parameters(self):

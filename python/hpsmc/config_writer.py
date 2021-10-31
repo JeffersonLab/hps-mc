@@ -27,7 +27,7 @@ def write_config(filename, component_names, include_defaults, fail_on_missing):
                 for c in obj.required_config():
                     env_var = c.upper()
                     if env_var in os.environ:
-                        s = '%s = %s\n' % (c, os.environ[env_var]) 
+                        s = '%s = %s\n' % (c, os.environ[env_var])
                         lines += s
                     elif fail_on_missing:
                         raise Exception('Missing env var: %s' % env_var)
@@ -37,7 +37,7 @@ def write_config(filename, component_names, include_defaults, fail_on_missing):
     with open(filename, 'w') as f:
         f.writelines(lines)
     print('Wrote config: %s' % filename)
-                    
+
 def write_config_for_job(job_script, filename, include_defaults, fail_on_missing):
     """Write a config file for a specific job script."""
     j = Job()
@@ -45,36 +45,35 @@ def write_config_for_job(job_script, filename, include_defaults, fail_on_missing
     j._load_script()
     component_names = [c.__class__.__name__ for c in j.components]
     write_config('job.cfg', component_names, include_defaults, fail_on_missing)
-    
+
 def _get_job_defaults():
     """Get default job class settings."""
-    
+
     lines = []
     lines += '[Job]\n'
-    j = Job()    
+    j = Job()
     for cj in j._config_names:
         v = getattr(j, cj)
         lines += '%s = %s\n' % (cj, v)
     lines += '\n'
     return lines
-                    
+
 if __name__ == '__main__':
-   
+
     parser = argparse.ArgumentParser("config_writer.py")
     parser.add_argument('-I', '--ignore-missing', action='store_true', help='Do not crash if env var is missing.')
     parser.add_argument('-J', '--job-defaults', action='store_true', help="Add job defaults to the config")
     parser.add_argument('script', nargs='?', help="Job script")
     parser.add_argument('config', nargs='?', help="Config file")
-    
+
     cl = parser.parse_args()
-    
+
     if not cl.script:
         raise Exception('Missing required job script argument.')
-    
+
     if cl.config:
         config = cl.config
     else:
         config = 'job.cfg'
-        
-    write_config_for_job(cl.script, config, cl.job_defaults, (not cl.ignore_missing))  
-    
+
+    write_config_for_job(cl.script, config, cl.job_defaults, (not cl.ignore_missing))
