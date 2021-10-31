@@ -426,12 +426,12 @@ class Job(object):
                 start = time.time()
 
                 # Print header to stdout
-                self.out.write('============ Component: %s ============\n' % c.name)
+                self.out.write('================ Component: %s ================\n' % c.name)
                 self.out.flush()
 
                 # Print header to stderr
                 if self.out != self.err:
-                    self.err.write('============ Component: %s ============\n' % c.name)
+                    self.err.write('================ Component: %s ================\n' % c.name)
                     self.err.flush()
 
                 returncode = c.execute(self.out, self.err)
