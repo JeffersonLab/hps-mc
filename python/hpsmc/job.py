@@ -619,7 +619,6 @@ class Job(object):
                     logger.info("Resolved ptag: {} -> {}".format(ptag_src, src_file))
                 else:
                     raise Exception('Undefined ptag used in job params: %s' % ptag_src)
-            logger.info('Copying output file: %s -> %s' % (src_file, dest))
             self.__copy_output_file(src_file, dest)
 
     def __copy_output_file(self, src, dest):
