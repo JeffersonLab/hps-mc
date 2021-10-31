@@ -1,5 +1,5 @@
 [Job]
-log_level = DEBUG
+log_level = INFO
 dry_run = False
 ignore_return_codes = True
 enable_copy_output_files = True
