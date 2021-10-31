@@ -1,3 +1,5 @@
+"""Expand a Jinja job template into a full list of jobs in JSON format."""
+
 import sys
 import os
 import itertools

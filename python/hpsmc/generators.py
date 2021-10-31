@@ -1,6 +1,11 @@
 """Event generation tools."""
 
-import os, shutil, glob, gzip, logging
+import os
+import shutil
+import glob
+import gzip
+import logging
+
 from component import Component
 from run_params import RunParameters
 

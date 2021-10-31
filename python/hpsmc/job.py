@@ -2,23 +2,46 @@
 
 import os
 import sys
+import json
 import time
 import shutil
 import argparse
 import getpass
 import logging
 import configparser
+import glob
 
 from collections.abc import Sequence
 from os.path import expanduser
 
-from script_db import JobScriptDatabase
-from job_store import JobStore
-from util import convert_config_value, config_logging, load_json_data
+from util import convert_config_value, config_logging
 
 # Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
 logger.setLevel(logging.INFO)
+
+# Unused
+def check(j):
+    jsonfile = j.application.args[1]
+    with open(jsonfile) as datafile:
+        data = json.load(datafile)
+    output_dir = ""
+    if "output_dir" in data:
+        output_dir = data["output_dir"]
+    if "output_files" in data:
+        outputfiles = data["output_files"]
+        for k,v in outputfiles.items():
+            fpath = v
+            if not os.path.isabs(v):
+                fpath = output_dir + os.path.sep + v
+            if not os.path.exists(fpath):
+                return False
+    return True
+
+
+def load_json_data(filename):
+    rawdata = open(filename, 'r').read()
+    return json.loads(rawdata)
 
 class JobConfig(object):
     """Wrapper for accessing config information from parser."""
@@ -84,6 +107,65 @@ class JobConfig(object):
         else:
             logger.warning('Config section not found: %s' % section)
 
+class JobStore:
+    """
+    Simple JSON based store of job data.
+    """
+
+    def __init__(self, path=None):
+        self.path = path
+        if path:
+            #logger.info("Initializing job store from: {}".format(self.path))
+            self.load(path)
+
+    def load(self, json_store):
+        """Load raw JSON data into this job store."""
+        with open(json_store, 'r') as f:
+            json_data = json.loads(f.read())
+        self.data = {}
+        for j in json_data:
+            self.data[j['job_id']] = j
+        #logger.info("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
+
+    def get_job(self, job_id):
+        """Get a job by its job ID."""
+        return self.data[int(job_id)]
+
+    def get_job_data(self):
+        """Get the raw dict containing all the job data."""
+        return self.data
+
+    def get_job_ids(self):
+        """Get a sorted list of job IDs."""
+        return sorted(self.data.keys())
+
+    def has_job_id(self, job_id):
+        """Return true if the job ID exists in the store."""
+        return job_id in list(self.data.keys())
+
+class JobScriptDatabase:
+
+    def __init__(self):
+        if 'HPSMC_DIR' not in os.environ:
+            raise Exception('HPSMC_DIR is not set in the environ.')
+        hps_mc_dir = os.environ['HPSMC_DIR']
+        script_dir = os.path.join(hps_mc_dir, 'lib', 'python', 'jobs')
+        self.scripts = {}
+        for f in glob.glob(os.path.join(script_dir, '*_job.py')):
+            script_name = os.path.splitext(os.path.basename(f))[0].replace('_job', '')
+            self.scripts[script_name] = f
+
+    def get_script_path(self, name):
+        return self.scripts[name]
+
+    def get_script_names(self):
+        return list(self.scripts.keys())
+
+    def get_scripts(self):
+        return self.scripts
+
+    def exists(self, name):
+        return name in self.scripts
 
 class Job(object):
     """
