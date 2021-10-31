@@ -509,8 +509,8 @@ class Job(object):
                 self.out.write('================ Component: %s ================\n' % c.name)
                 self.out.flush()
 
-                # Print header to stderr
-                if self.out != self.err:
+                # Print header to stderr if output is going to a file
+                if self.err != sys.stderr:
                     self.err.write('================ Component: %s ================\n' % c.name)
                     self.err.flush()
 
