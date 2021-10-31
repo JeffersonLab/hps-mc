@@ -5,7 +5,7 @@ import logging
 
 from util import config_logging
 
-logger = config_logging("hpsmc.job_store")
+logger = config_logging(logname="hpsmc.job_store")
 
 class JobStore:
     """
@@ -15,7 +15,7 @@ class JobStore:
     def __init__(self, path=None):
         self.path = path
         if path:
-            logger.info("Initializing job store from: {}".format(self.path))
+            #logger.info("Initializing job store from: {}".format(self.path))
             self.load(path)
 
     def load(self, json_store):
@@ -25,7 +25,7 @@ class JobStore:
         self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
-        logger.info("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
+        #logger.info("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
 
     def get_job(self, job_id):
         """Get a job by its job ID."""
