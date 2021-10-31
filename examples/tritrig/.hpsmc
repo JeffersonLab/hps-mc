@@ -1,4 +1,5 @@
 [Job]
+log_level = DEBUG
 dry_run = False
 ignore_return_codes = True
 enable_copy_output_files = True
