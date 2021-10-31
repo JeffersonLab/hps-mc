@@ -1,9 +1,20 @@
 """Defines the base interface that component classes should extend."""
 
-import os, subprocess, sys, shutil, argparse, getpass, json, logging, time, re
+import os
+import subprocess
+import sys
+import shutil
+import argparse
+import getpass
+import json
+#import logging
+import time
+import re
+
 from util import convert_config_value
 
-logger = logging.getLogger("hpsmc.component")
+# Logging disabled; job should be used instead
+#logger = logging.getLogger("hpsmc.component")
 
 class Component(object):
     """Base class for components in a job."""
@@ -56,17 +67,17 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
+    def cmd_line_str(self):
+        cl = [self.command]
+        cl.extend(self.cmd_args())
+        return ' '.join(cl)
+
     def execute(self, log_out, log_err):
         """Generic component execution method.
 
         Individual components may override this if specific behavior is required.
         """
-
-        cl = [self.command]
-        cl.extend(self.cmd_args())
-
-        logger.info("Executing '%s' with command: %s" % (self.name, ' '.join(cl)))
-        proc = subprocess.Popen(' '.join(cl), shell=True, stdout=log_out, stderr=log_err)
+        proc = subprocess.Popen(self.cmd_line_str(), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
 
@@ -104,10 +115,10 @@ class Component(object):
         if parser.has_section(section_name):
             for name, value in parser.items(section_name):
                 setattr(self, name, convert_config_value(value))
-                logger.info("%s:%s:%s=%s" % (self.name,
-                                             name,
-                                             getattr(self, name).__class__.__name__,
-                                             getattr(self, name)))
+                #logger.info("%s:%s:%s=%s" % (self.name,
+                #                             name,
+                #                             getattr(self, name).__class__.__name__,
+                #                             getattr(self, name)))
 
     def set_parameters(self, params):
         """Set class attributes for the component based on JSON parameters.
@@ -123,19 +134,20 @@ class Component(object):
             else:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.info("%s:%s=%s [required]" % (self.name, p, params[p]))
-                else:
-                    logger.info("Ignored job param '%s'" % p)
+                    #logger.info("%s:%s=%s [required]" % (self.name, p, params[p]))
+                #else:
+                #    logger.info("Ignored job param '%s'" % p)
 
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.info("%s:%s=%s [optional]"
-                                % (self.name, p, params[p]))
+                    #logger.info("%s:%s=%s [optional]"
+                    #            % (self.name, p, params[p]))
                 else:
-                    logger.info("Ignored job param '%s'" % p)
+                    pass
+                    #logger.info("Ignored job param '%s'" % p)
 
     def required_parameters(self):
         """Return a list of required parameters.
@@ -195,10 +207,10 @@ class Component(object):
         """Configure component from environment variables which are just upper case
         versions of the required config names set in the shell environment."""
         for c in self.required_config():
-            logger.debug("Setting config '%s' from environ" % c)
+            #logger.debug("Setting config '%s' from environ" % c)
             if c.upper() in os.environ:
                 setattr(self, c, os.environ[c.upper()])
-                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+                #logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
 
@@ -209,6 +221,5 @@ class DummyComponent(Component):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
 
     def execute(self, log_out, log_err):
-        logger.info("DummComponent.execute - inputs %s and outputs %s"
-                    % (str(self.input_files()), str(self.output_files())))
+        pass
 

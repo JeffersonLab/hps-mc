@@ -229,7 +229,7 @@ class MG(EventGenerator):
             self.madgraph_dir = self.get_install_dir()
             logger.info("Using Madgraph from install dir: " + self.madgraph_dir)
 
-        if self.name is 'ap' and self.apmass is None:
+        if self.name == 'ap' and self.apmass is None:
             raise Exception("Missing apmass param for AP generation.")
 
 class MG4(MG):

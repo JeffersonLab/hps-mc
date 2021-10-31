@@ -3,7 +3,9 @@
 import json
 import logging
 
-logger = logging.getLogger("hpsmc.job_store")
+from util import config_logging
+
+logger = config_logging("hpsmc.job_store")
 
 class JobStore:
     """
@@ -23,7 +25,7 @@ class JobStore:
         self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
-        logger.debug("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
+        logger.info("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
 
     def get_job(self, job_id):
         """Get a job by its job ID."""

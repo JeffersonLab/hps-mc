@@ -22,17 +22,18 @@ from job_store import JobStore
 from script_db import JobScriptDatabase
 from job import Job
 
-logger = logging.getLogger("hpsmc.batch")
-logger.setLevel(logging.DEBUG)
+from hpsmc.util import config_logging
+
+logger = config_logging(stream=sys.stdout, level=logging.INFO, logname='hpsmc.batch')
 
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
 class Batch:
     """Generic interface to a batch system."""
-    
+
     def parse_args(self, args):
         """Parse command line arguments and perform setup."""
-        
+
         parser = argparse.ArgumentParser("batch.py",
                                          epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
         parser.add_argument("-c", "--config-file", nargs='?', help="Config file", action='append')
@@ -45,7 +46,7 @@ class Batch:
         parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
         parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
-        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)   
+        parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)
         parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
@@ -53,18 +54,18 @@ class Batch:
         parser.add_argument("script", nargs='?', help="Name of job script")
         parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
-            
+
         cl = parser.parse_args(args)
- 
+
         if cl.script is None:
-            raise Exception('The script is a required argument.')                
-        self.script_name = cl.script # Name of script    
+            raise Exception('The script is a required argument.')
+        self.script_name = cl.script # Name of script
         script_db = JobScriptDatabase()
         if not script_db.exists(self.script_name):
             raise Exception('The script name is not valid: %s' % self.script_name)
         self.script = script_db.get_script_path(self.script_name) # Path to script
         if not os.path.isfile(self.script):
-            raise Exception('The job script does not exist: %s' % self.script)       
+            raise Exception('The job script does not exist: %s' % self.script)
 
 
         if cl.jobstore is None:
@@ -72,14 +73,14 @@ class Batch:
         if not os.path.isfile(cl.jobstore):
             raise Exception('The job store does not exist: %s' % cl.jobstore)
         self.jobstore = JobStore(cl.jobstore)
-        
+
         if cl.env:
-            self.env = cl.env 
-        
+            self.env = cl.env
+
         self.email = cl.email
-             
+
         self.debug = cl.debug
-        
+
         self.log_dir = cl.log_dir
         self.sh_dir = cl.sh_dir
         if not os.path.isabs(self.log_dir):
@@ -88,16 +89,16 @@ class Batch:
         if not os.path.exists(self.log_dir):
             logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
-                   
+
         self.check_output = cl.check_output
-                    
-        if cl.jobids:                    
+
+        if cl.jobids:
             self.job_ids = list(map(int, cl.jobids))
         else:
             self.job_ids = []
-        
+
         self.job_steps = cl.job_steps
-        
+
         if cl.job_range:
             toks = cl.job_range.split(':')
             if len(toks) != 2:
@@ -111,47 +112,47 @@ class Batch:
         else:
             self.start_job_num = None
             self.end_job_num = None
-                    
+
         self.queue = cl.queue
         self.os = cl.os
 
-        self.job_length = cl.job_length         
+        self.job_length = cl.job_length
         self.memory = cl.memory
-                    
+
         self.pool_size = int(cl.pool_size)
-        
+
         if cl.config_file:
             self.config_files = list(map(os.path.abspath, cl.config_file))
         else:
             self.config_files = []
-                 
+
         self.run_dir = cl.run_dir
-                
+
         return cl
-        
+
     def submit_cmd(self, job_id, job_data):
         """
         Submit a single batch job and return the batch ID.
         Must be implemented by derived classes for a specific batch system.
         """
         return NotImplementedError
-    
+
     @staticmethod
     def _outputs_exist(job):
         """Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].items():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                logger.warning('Job output does not exist: %s' % (dest))
+                #logger.warning('Job output does not exist: %s' % (dest))
                 return False
         return True
-    
+
     def get_filtered_job_ids(self):
         """
         Get a list of job IDs to submit based on parsed command line options.
-        """        
+        """
         submit_ids = self.jobstore.get_job_ids()
         if self.start_job_num:
-            submit_ids = [job_id for job_id in submit_ids 
+            submit_ids = [job_id for job_id in submit_ids
                           if int(job_id) >= self.start_job_num and int(job_id) <= self.end_job_num]
         elif len(self.job_ids):
             submit_ids = self.job_ids
@@ -161,7 +162,7 @@ class Batch:
             logger.info('Done checking output files!')
             logger.debug('Job list after output check: {}'.format(str(submit_ids)))
         return submit_ids
-        
+
     def submit(self):
         """
         Primary public method for submitting jobs after args are parsed.
@@ -169,14 +170,14 @@ class Batch:
         job_ids = self.get_filtered_job_ids()
         logger.info('Submitting jobs: %s' % str(job_ids))
         self._submit_jobs(job_ids)
-        
+
     def _submit_job(self, job_id, job):
         """Submit a single job to the batch system."""
         batch_id = None
         batch_id = self.submit_cmd(job_id, job)
         logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
         return batch_id
-    
+
     def _submit_jobs(self, job_ids):
         """Submit the jobs with the specified job IDs to the batch system."""
         for job_id in job_ids:
@@ -184,19 +185,18 @@ class Batch:
                 raise Exception('Job ID was not found in job store: %s' % job_id)
             job_data = self.jobstore.get_job(job_id)
             self._submit_job(job_id, job_data)
-                    
+
     def build_cmd(self, job_id, job_params, set_job_dir=True):
         """
         Create the command to run a single job.
-        
+
         This generically creates the command to run the job locally but subclasses
         may override if necessary.
         """
         cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
-                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
-                    ])
+                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)])
         if set_job_dir:
             job_dir = os.path.join(self.run_dir, str(job_id))
             cmd.extend(['-d', job_dir])
@@ -208,15 +208,15 @@ class Batch:
         cmd.extend(['-i', str(job_id)])
         cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
-        logger.debug("Job command: %s" % " ".join(cmd))
-        return cmd  
+        logger.info("Job command: %s" % " ".join(cmd))
+        return cmd
 
 class LSF(Batch):
     """Submit LSF batch jobs."""
-    
+
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
-        
+
     def parse_args(self, args):
         Batch.parse_args(self, args)
         if self.email:
@@ -224,27 +224,27 @@ class LSF(Batch):
 
     def build_cmd(self, name, job_params):
         log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
-        
+
         queue = self.queue
         if queue is None:
             queue = 'long'
-        
+
         if self.os is not None:
             lsf_os = self.os
         else:
             lsf_os = 'centos7'
-        
-        cmd = ['bsub', 
-               '-W', str(self.job_length) + ':0', 
+
+        cmd = ['bsub',
+               '-W', str(self.job_length) + ':0',
                '-q', queue,
-               '-R', lsf_os, 
+               '-R', lsf_os,
                '-o', log_file,
                '-e', log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))        
-        
+        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))
+
         return cmd
 
-    def submit_cmd(self, name, job_params): 
+    def submit_cmd(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
         logger.info('Submitting job %s to LSF with command: %s' % (name, ' '.join(cmd)))
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -259,10 +259,10 @@ class LSF(Batch):
 
 class Slurm(Batch):
     """Submit Slurm batch jobs."""
-    
+
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
-        
+
     def parse_args(self, args):
         Batch.parse_args(self, args)
         if self.email:
@@ -270,13 +270,13 @@ class Slurm(Batch):
 
     def build_cmd(self, name, job_params):
         log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
-        
+
         queue = self.queue
         if queue is None:
             queue = 'hps'
-        
-        cmd = ['sbatch', 
-               '--time=%s'%(str(self.job_length)+':00:00'), 
+
+        cmd = ['sbatch',
+               '--time=%s'%(str(self.job_length)+':00:00'),
                '--partition=%s'%queue,
                '--mem=%sM'%self.memory,
                '--job-name=hps%i'%(job_params['job_id']),
@@ -287,13 +287,13 @@ class Slurm(Batch):
         sh_file.write('source '+self.env+'\n')
         sh_file.write('mkdir -p %s/%i\n'%(self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n'%(self.run_dir, job_params['job_id']))
-        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')        
+        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
         sh_file.close()
         cmd.append(sh_filename)
-        
+
         return cmd
 
-    def submit_cmd(self, name, job_params): 
+    def submit_cmd(self, name, job_params):
         cmd = self.build_cmd(name, job_params)
         logger.info('Submitting job %s to Slurm with command: %s' % (name, ' '.join(cmd)))
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -310,7 +310,7 @@ class Auger(Batch):
     """Submit Auger batch jobs."""
 
     def __init__(self):
-        self.setup_script = find_executable('hps-mc-env.csh') 
+        self.setup_script = find_executable('hps-mc-env.csh')
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
 
@@ -325,7 +325,7 @@ class Auger(Batch):
                 raise Exception('Job ID was not found in job store: %s' % job_id)
             job_params = self.jobstore.get_job(job_id)
             if self.check_output and Batch._outputs_exist(job_params):
-                logger.warning("Skipping Auger submission for job " 
+                logger.warning("Skipping Auger submission for job "
                                "because outputs already exist: %d" % job_id)
             else:
                 self._add_job(req, job_params) # add job to request
@@ -338,7 +338,7 @@ class Auger(Batch):
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
         out, err = proc.communicate()
         auger_ids = self._get_auger_ids(out)
-        return auger_ids 
+        return auger_ids
 
     def _get_auger_ids(self, out):
         auger_ids = []
@@ -386,7 +386,7 @@ class Auger(Batch):
         mem = ET.SubElement(req, "Memory")
         mem.set("space", str(self.memory))
         mem.set("unit", "MB")
-        limit = ET.SubElement(req, "TimeLimit")        
+        limit = ET.SubElement(req, "TimeLimit")
         limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
         os_elem = ET.SubElement(req, "OS")
@@ -394,7 +394,7 @@ class Auger(Batch):
             auger_os = self.os
         else:
             auger_os = 'general'
-        os_elem.set("name", auger_os) 
+        os_elem.set("name", auger_os)
         return req
 
     def build_cmd(self, job_id, job_params):
@@ -409,7 +409,7 @@ class Auger(Batch):
         cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
         logger.debug("Job command: %s" % " ".join(cmd))
-        return cmd  
+        return cmd
 
     def _create_job(self, params):
         """Needed for resolving ptag output sources."""
@@ -418,7 +418,7 @@ class Auger(Batch):
         j._load_params(params)
         j._load_script()
         return j
-  
+
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
@@ -451,11 +451,11 @@ class Auger(Batch):
         job_err.set("dest", stderr_file)
         job_out = ET.SubElement(job, "Stdout")
         job_out.set("dest", stdout_file)
-                
+
         cmd = ET.SubElement(job, "Command")
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
-       
+
         cmd_lines.append('pwd\n')
         cmd_lines.append("source %s\n" % os.path.realpath(self.setup_script))
         cmd_lines.append('env | sort\n')
@@ -482,7 +482,7 @@ class Auger(Batch):
 
 class Local(Batch):
     """Run a local batch jobs sequentially."""
-            
+
     def parse_args(self, args):
         Batch.parse_args(self, args)
 
@@ -516,20 +516,20 @@ def run_job_pool(cmd):
     return returncode
 
 def is_running(proc):
-    return proc.status() in [psutil.STATUS_RUNNING, 
-                             psutil.STATUS_SLEEPING, 
+    return proc.status() in [psutil.STATUS_RUNNING,
+                             psutil.STATUS_SLEEPING,
                              psutil.STATUS_DISK_SLEEP,
                              psutil.STATUS_IDLE]
 
 class KillProcessQueue():
     """Kills process objects from an MP queue after exit from a with statement."""
-    
+
     def __init__(self, mp_queue):
         self.mp_queue = mp_queue
-    
+
     def __enter__(self):
         return self
-    
+
     def __exit__(self, type, val, tb):
         """Kill processes on exit."""
         while True:
@@ -544,44 +544,45 @@ class KillProcessQueue():
                     parent.kill()
             except Exception as e:
                 # This probably just means it already finished.
-                pass                
-            
+                pass
+
             if mp_queue.empty():
                 break
-            
-        print('Done killing processes!')
-                
+
+        #print('Done killing processes!')
+
 class Pool(Batch):
     """
-    Run a set of jobs in a local pool using Python's multiprocessing module.    
+    Run a set of jobs in a local pool using Python's multiprocessing module.
     """
-    
+
     # Max wait in seconds when getting results
     max_wait = 999999
-                            
+
     def submit(self):
         """Submit jobs to a local processing pool.
-        
+
         This method will not return until all jobs are finished or execution
         is interrupted.
         """
-                
+
         cmds = []
         for job_id in self.get_filtered_job_ids():
             job_data = self.jobstore.get_job(job_id)
-            cmd = self.build_cmd(job_id, job_data)            
+            cmd = self.build_cmd(job_id, job_data)
             cmds.append(cmd)
+
         logger.debug('Running job commands in pool ...')
         logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
-     
+
         if not len(cmds):
             raise Exception('No job IDs found to submit')
 
-        # Run jobs in an MP pool and cleanup child processes on exit        
+        # Run jobs in an MP pool and cleanup child processes on exit
         with KillProcessQueue(mp_queue):
             original_sigint_handler = signal.signal(signal.SIGINT, signal.SIG_IGN)
             pool = multiprocessing.Pool(self.pool_size)
-            signal.signal(signal.SIGINT, original_sigint_handler)      
+            signal.signal(signal.SIGINT, original_sigint_handler)
             try:
                 logger.info("Running %d jobs in pool ..." % len(cmds))
                 res = pool.map_async(run_job_pool, cmds)
@@ -610,14 +611,14 @@ if __name__ == '__main__':
         "pool": Pool
     }
     if len(sys.argv) > 1:
-         system = sys.argv[1].lower()
-         if system not in list(system_dict.keys()):
-             raise Exception("The batch system '%s' is not valid." % system)
-         batch = system_dict[system]()
-         args = sys.argv[2:]
-         batch.parse_args(args)
-         batch.submit()
+        system = sys.argv[1].lower()
+        if system not in list(system_dict.keys()):
+            raise Exception("The batch system '%s' is not valid." % system)
+        batch = system_dict[system]()
+        args = sys.argv[2:]
+        batch.parse_args(args)
+        batch.submit()
     else:
         print("Usage: batch.py [system] [args]")
         print("    available systems: %s" % ', '.join(list(system_dict.keys())))
-           
+
