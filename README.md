@@ -7,7 +7,7 @@ There are a number of required programs and tools you must have installed on you
 - wget
 - git
 - gcc >= 4.8
-- CMake >= 3.0
+- CMake >= 3.18
 - Maven >= 3.0
 - python >= 3.6
 - Java =1.8
@@ -17,6 +17,12 @@ Most of these dependencies can be installed on Ubuntu using:
 
 ```
 sudo apt-get install build-essential maven gfortran cmake python3 libgsl-dev git wget
+```
+
+A few Python libraries need to be installed as well:
+
+```
+pip install psutil jinja2
 ```
 
 The [slic](https://github.com/slaclab/slic) program should be pre-installed and available in the system path.
