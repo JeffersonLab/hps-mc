@@ -4,6 +4,7 @@
 
 There are a number of required programs and tools you must have installed on your system to build and run hps-mc.
 
+- git - any version should be fine
 - gcc - at least version 4.8
 - CMake - at least version 3.0
 - Maven - at least version 3.0
@@ -11,7 +12,13 @@ There are a number of required programs and tools you must have installed on you
 - Java - tested with Java 1.8
 - GSL - use [version 1.16](https://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz)
 
-The [slic](https://github.com/slaclab/slic) program should be pre-installed and avialable in the system path.
+Most of these dependencies can be installed on Ubuntu using:
+
+```
+sudo apt-get install build-essential maven gfortran cmake python3 libgsl-dev git
+```
+
+The [slic](https://github.com/slaclab/slic) program should be pre-installed and available in the system path.
 
 Some scripts may also require that the [DST Maker](https://github.com/JeffersonLab/hps-dst) is installed and available in the system path.
 
