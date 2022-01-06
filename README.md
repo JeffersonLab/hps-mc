@@ -6,12 +6,12 @@ There are a number of required programs and tools you must have installed on you
 
 - wget
 - git
-- gcc - at least version 4.8
-- CMake - at least version 3.0
-- Maven - at least version 3.0
-- python - tested with Python 2.7.13
-- Java - tested with Java 1.8
-- GSL - use [version 1.16](https://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz)
+- gcc - >= 4.8
+- CMake - >= 3.0
+- Maven - >= 3.0
+- python - >= 3.6
+- Java - =1.8
+- GSL - =[1.16](https://ftp.gnu.org/gnu/gsl/gsl-1.16.tar.gz)
 
 Most of these dependencies can be installed on Ubuntu using:
 
