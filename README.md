@@ -4,7 +4,8 @@
 
 There are a number of required programs and tools you must have installed on your system to build and run hps-mc.
 
-- git - any version should be fine
+- wget
+- git
 - gcc - at least version 4.8
 - CMake - at least version 3.0
 - Maven - at least version 3.0
@@ -15,7 +16,7 @@ There are a number of required programs and tools you must have installed on you
 Most of these dependencies can be installed on Ubuntu using:
 
 ```
-sudo apt-get install build-essential maven gfortran cmake python3 libgsl-dev git
+sudo apt-get install build-essential maven gfortran cmake python3 libgsl-dev git wget
 ```
 
 The [slic](https://github.com/slaclab/slic) program should be pre-installed and available in the system path.
