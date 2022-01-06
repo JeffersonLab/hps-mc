@@ -19,6 +19,8 @@ Most of these dependencies can be installed on Ubuntu using:
 sudo apt-get install build-essential maven gfortran cmake python3 libgsl-dev git wget
 ```
 
+You may want to [download](https://cmake.org/download/) and install the latest version of CMake instead of using the one from your package manager so that it is up to date.
+
 A few Python libraries need to be installed as well:
 
 ```
