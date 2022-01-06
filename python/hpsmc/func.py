@@ -1,7 +1,7 @@
 """Miscellaneous math functions."""
 
-import gzip, logging
-from hpsmc.run_params import RunParameters
+import gzip
+import logging
 
 logger = logging.getLogger("hpsmc.func")
 
@@ -9,7 +9,7 @@ logger = logging.getLogger("hpsmc.func")
 Calculate integrated luminosity.
 """
 def lint(run_params, density = 6.306e-2):
-    w = run_params.get("target_z")    
+    w = run_params.get("target_z")
     ne = run_params.get("num_electrons")
     return density*w*ne
 
@@ -17,15 +17,15 @@ def lint(run_params, density = 6.306e-2):
 Extract cross-section from gzipped LHE file.
 """
 def csection(filename):
-    
+
     logger.info("Using gzip to open '%s'" % filename)
-    
+
     with gzip.open(filename, 'rb') as in_file:
         lines = in_file.readlines()
 
     for line in lines:
         if "Integrated weight" in line:
-            xs = float(line[line.rfind(":")+1:].strip())          
+            xs = float(line[line.rfind(":")+1:].strip())
             break
 
     if "xs" not in locals():
@@ -43,10 +43,10 @@ def mu(filename, run_params):
 Read number of events in file from LHE header and optionally confirm by counting <event> blocks.
 """
 def nevents(filename, confirm = False):
-    
+
     with gzip.open(filename, 'rb') as in_file:
         lines = in_file.readlines()
-        
+
     for line in lines:
         if "nevents" in line:
             nevents = int(line.split()[0])
@@ -71,7 +71,7 @@ def nbunches(filename, run_params):
     n = nevents(filename)
     m = mu(filename, run_params)
     return int(n/m)
-            
+
 # TODO: wab LHE file fixup
 """
 echo "Transmuting A's to photons..."
