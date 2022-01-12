@@ -632,7 +632,8 @@ if __name__ == '__main__':
         "slurm": Slurm,
         "auger": Auger,
         "local": Local,
-        "pool": Pool
+        "pool": Pool,
+        "swif": Swif
     }
     if len(sys.argv) > 1:
         system = sys.argv[1].lower()
