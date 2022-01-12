@@ -493,13 +493,13 @@ class Swif(Auger):
         xml_filename = self._create_job_xml()
 
         # Add job to swif2 workflow using Auger XML file
-        cmd = ['swif', 'add-jsub', self.workflow, '-script', xml_filename]
+        cmd = ['swif2', 'add-jsub', self.workflow, '-script', xml_filename]
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = proc.communicate()[0]
         print('{}'.format(out))
 
         # Run the workflow
-        run_cmd = ['swif', 'run', self.workflow]
+        run_cmd = ['swif2', 'run', self.workflow]
         proc = subprocess.Popen(run_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = proc.communicate()[0]
         print('{}'.format(out))
