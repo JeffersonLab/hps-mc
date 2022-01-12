@@ -72,9 +72,9 @@ class JobTemplate:
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
         self.env.filters['pad'] = pad
-        self.env.filter['uuid'] = uuid
-        self.env.filter['extension'] = extension
-        self.env.filter['dirname'] = dirname
+        self.env.filters['uuid'] = uuid
+        self.env.filters['extension'] = extension
+        self.env.filters['dirname'] = dirname
         self.job_id_start = 0;
         self.input_files = {}
         self.itervars = {}
