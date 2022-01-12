@@ -46,6 +46,7 @@ class Batch:
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
         parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
+        parser.add_argument("-w", "--workflow", nargs='?', help="Name of workflow (swif2)", required=False)
         parser.add_argument("script", nargs='?', help="Name of job script")
         parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
@@ -80,7 +81,7 @@ class Batch:
         self.sh_dir = cl.sh_dir
         if not os.path.isabs(self.log_dir):
             raise Exception('The log dir is not an abs path: %s' % self.log_dir)
-        # FIXME: This probably shouldn't happen here.
+        # FIXME: This directory creation probably shouldn't happen here.
         if not os.path.exists(self.log_dir):
             logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
@@ -122,6 +123,9 @@ class Batch:
             self.config_files = []
 
         self.run_dir = cl.run_dir
+
+        if cl.workflow:
+            self.workflow = cl.workflow
 
         return cl
 
@@ -311,7 +315,11 @@ class Auger(Batch):
 
     def submit(self):
         """Primary batch submission method for Auger."""
+        xml_filename = self._create_job_xml() # write request to XML file
+        auger_ids = self._jsub(xml_filename) # execute jsub to submit jobs
+        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
 
+    def _create_job_xml(self):
         job_ids = self.get_filtered_job_ids()
         logger.info('Submitting jobs: %s' % str(job_ids))
         req = self._create_req(self.script_name) # create request XML header
@@ -324,9 +332,7 @@ class Auger(Batch):
                                "because outputs already exist: %d" % job_id)
             else:
                 self._add_job(req, job_params) # add job to request
-        xml_filename = self._write_req(req)    # write request to file
-        auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
-        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
+        return self._write_req(req)    # write request to file
 
     def _jsub(self, xml_filename):
         cmd = ['jsub', '-xml', xml_filename]
@@ -474,6 +480,29 @@ class Auger(Batch):
         #logger.debug(cmd_lines)
 
         cmd.text = ' '.join(cmd_lines)
+
+class Swif(Auger):
+    """Submit to swif2 at JLAB using an Auger file"""
+
+    def submit(self):
+
+        if self.workflow is None:
+            raise Exception("Workflow name is required for swif2 submission")
+
+         # Write request to XML file
+        xml_filename = self._create_job_xml()
+
+        # Add job to swif2 workflow using Auger XML file
+        cmd = ['swif', 'add-jsub', self.workflow, '-script', xml_filename]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print('{}'.format(out))
+
+        # Run the workflow
+        run_cmd = ['swif', 'run', self.workflow]
+        proc = subprocess.Popen(run_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print('{}'.format(out))
 
 class Local(Batch):
     """Run a local batch jobs sequentially."""
