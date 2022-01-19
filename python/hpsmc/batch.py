@@ -126,6 +126,8 @@ class Batch:
 
         if cl.workflow:
             self.workflow = cl.workflow
+        else:
+            self.workflow = self.script_name 
 
         return cl
 
@@ -435,12 +437,12 @@ class Auger(Batch):
                 input_elem.set("src", src_file)
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
-        outputdir = os.path.realpath(outputdir)
+        #outputdir = os.path.realpath(outputdir)
         j = self._create_job(job_params)
         for src,dest in outputfiles.items():
             output_elem = ET.SubElement(job, "Output")
             res_src = j.resolve_output_src(src)
-            output_elem.set("src", j.resolve_output_src(src))
+            output_elem.set("src", res_src)
             dest_file = os.path.join(outputdir, dest)
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
@@ -486,8 +488,9 @@ class Swif(Auger):
 
     def submit(self):
 
-        if self.workflow is None:
-            raise Exception("Workflow name is required for swif2 submission")
+        #if self.workflow is None:
+        #    raise Exception("Workflow name is required for swif2 submission")
+        logger.info("Submitting swif workflow: {}".format(self.workflow))
 
          # Write request to XML file
         xml_filename = self._create_job_xml()
@@ -496,13 +499,15 @@ class Swif(Auger):
         cmd = ['swif2', 'add-jsub', self.workflow, '-script', xml_filename]
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = proc.communicate()[0]
-        print('{}'.format(out))
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
 
         # Run the workflow
         run_cmd = ['swif2', 'run', self.workflow]
         proc = subprocess.Popen(run_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = proc.communicate()[0]
-        print('{}'.format(out))
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
 
 class Local(Batch):
     """Run a local batch jobs sequentially."""
