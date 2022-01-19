@@ -1,0 +1,13 @@
+{
+    "job_id": {{ job_id }},
+    "nevents": 1000,
+    "seed": {{ 1000000 + job_id }},
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "output_files": {
+        "events.slcio": "slic_events.slcio" 
+    },
+    "output_dir": "/volatile/hallb/hps/jeremym/hps-mc-test/output",
+    "input_files": {
+        "/volatile/hallb/hps/jeremym/data/stdhep/egs5_beam_v5_1pt05.stdhep": "events.stdhep"
+    }
+}
