@@ -459,9 +459,10 @@ class Auger(Batch):
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
 
-        cmd_lines.append('pwd\n')
-        cmd_lines.append("source %s\n" % os.path.realpath(self.setup_script))
-        cmd_lines.append('env | sort\n')
+        #cmd_lines.append('pwd\n')
+        cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
+        #cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
+        #cmd_lines.append('env | sort\n')
 
         job_cmd = self.build_cmd(job_id, job_params)
 
@@ -475,7 +476,7 @@ class Auger(Batch):
         cmd_lines.extend(job_cmd)
         cmd_lines.append('\n')
 
-        cmd_lines.append('ls -lah .\n')
+        #cmd_lines.append('ls -lah .\n')
 
         cmd_lines.append("]]>")
 
