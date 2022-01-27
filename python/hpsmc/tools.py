@@ -284,12 +284,13 @@ class HPSTR(Component):
     Run the hpstr analysis tool.
     """
 
-    def __init__(self, cfg=None, run_mode=0, year=None, layer=None, apvThresholds=None, **kwargs):
+    def __init__(self, cfg=None, run_mode=0, year=None, layer=None, thresh=None, **kwargs):
 
         self.cfg = cfg
         self.run_mode = run_mode
         self.year = year
         self.layer = None
+        self.thresh = None
 
         Component.__init__(self,
                            name='hpstr',
@@ -326,7 +327,7 @@ class HPSTR(Component):
         return ['config_files']
 
     def optional_parameters(self):
-        return ['year', 'run_mode', 'nevents', 'layer', 'apvThresholds']
+        return ['year', 'run_mode', 'nevents', 'layer', 'thresh'
 
     def required_config(self):
         return ['hpstr_install_dir', 'hpstr_base']
@@ -342,8 +343,8 @@ class HPSTR(Component):
             args.extend(["-y", str(self.year)])
         if self.layer is not None:
             args.extend(["-l", str(self.layer)])
-        if self.apvThresholds is not None:
-            args.extend(["-thresh", str(self.apvThresholds)])
+        if self.thresh is not None:
+            args.extend(["-thresh", str(self.thresh)])
         return args
 
     def output_files(self):
