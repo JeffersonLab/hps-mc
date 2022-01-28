@@ -1,6 +1,12 @@
 """Tools that can be used in HPSMC jobs."""
 
-import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
+import os
+import gzip
+import shutil
+import logging
+import subprocess
+import tarfile
+
 from subprocess import PIPE
 
 from component import Component
@@ -75,21 +81,21 @@ class SLIC(Component):
     def config(self, parser):
 
         super().config(parser)
-        
+
         if self.detector_dir is None:
             self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
-            logger.info("Using detector_dir from install: {}".format(self.detector_dir))
+            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            logger.info("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
-            logger.info("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
 
@@ -100,7 +106,7 @@ class SLIC(Component):
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
 
-        logger.info('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
@@ -126,7 +132,7 @@ class SLIC(Component):
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
 
-        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        #logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -172,11 +178,11 @@ class JobManager(Component):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
         if self.conditions_url is None:
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
-                logger.info('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -316,7 +322,7 @@ class HPSTR(Component):
         else:
             # Assume the cfg file is within the hpstr base dir.
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
-        logger.info('Set config path: %s' % self.cfg_path)
+        logger.debug('Set config path: %s' % self.cfg_path)
 
         # For ROOT output, automatically append the cfg key from the job params.
         if os.path.splitext(self.input_files()[0])[1] == '.root':
@@ -359,7 +365,7 @@ class HPSTR(Component):
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
 
-        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        logger.debug("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -583,25 +589,25 @@ class AddMotherFullTruth(StdHepTool):
         base,ext = os.path.splitext(self.input_file_2)
         if ext != '.lhe':
             raise Exception("The second input file must be a lhe file")
- 
+
     def cmd_args(self):
-         
+
         args = []
-          
+
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
-        
+
         if len(self.output_files()):
             args.insert(0, self.output_files()[0])
         elif len(self.output_files()) > 1:
             raise Exception("Too many outputs specified for StdHepTool.")
-        
+
         args.insert(0, self.input_file_2)
         args.insert(0, self.input_file_1)
-        
+
         return args
 
-        
+
 class MergePoisson(StdHepTool):
     """
     Merge StdHep files, applying poisson sampling.
@@ -616,6 +622,7 @@ class MergePoisson(StdHepTool):
 
     def setup(self):
         self.run_param_data = RunParameters(self.run_params)
+        # TODO: this function could just be inlined here
         self.mu = func.mu(self.lhe_file, self.run_param_data)
 
     def required_parameters(self):
@@ -692,7 +699,7 @@ class StdHepCount(Component):
         (output, err) = proc.communicate()
 
         nevents = int(output.split()[1])
-        logger.info("StdHep file '%s' has %d events." % (self.input_files()[0], nevents))
+        print("StdHep file '%s' has %d events." % (self.input_files()[0], nevents))
 
         return proc.returncode
 
@@ -732,26 +739,26 @@ class EvioToLcio(JavaTool):
     """
 
     def __init__(self, steering=None, **kwargs):
-       
+
        self.detector = None
        self.steering = None
        self.run_number = None
        self.skip_events = None
        self.event_print_interval = None
        self.steering = steering
-       
-       JavaTool.__init__(self, 
-                         name='evio_to_lcio', 
-                         java_class='org.hps.evio.EvioToLcio', 
+
+       JavaTool.__init__(self,
+                         name='evio_to_lcio',
+                         java_class='org.hps.evio.EvioToLcio',
                          output_ext='.slcio',
                          **kwargs)
-    
+
     def required_parameters(self):
         return ['detector', 'steering_files']
 
     def optional_parameters(self):
         return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
-    
+
     def setup(self):
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
@@ -846,7 +853,7 @@ class FilterBunches(JavaTool):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
@@ -947,7 +954,7 @@ class Unzip(Component):
             outputfile = os.path.splitext(inputfile)[0]
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
                 shutil.copyfileobj(in_file, out_file)
-                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+                logger.debug("Unzipped '%s' to '%s'" % (inputfile, outputfile))
         return 0
 
 class LCIODumpEvent(Component):
@@ -1020,7 +1027,7 @@ class LHECount(Component):
                 if "<event>" in l:
                     nevents += 1
 
-            logger.info("LHE file '%s' has %d events." % (i, nevents))
+            print("LHE file '%s' has %d events." % (i, nevents))
 
             if nevents < self.minevents:
                 msg = "LHE file '%s' does not contain the minimum %d events." % (i, nevents)
@@ -1044,10 +1051,10 @@ class TarFiles(Component):
         return True
 
     def execute(self, log_out, log_err):
-        logger.info("Opening '%s' for writing ..." % self.outputs[0])
+        logger.debug("Opening '%s' for writing ..." % self.outputs[0])
         tar = tarfile.open(self.outputs[0], "w")
         for i in self.inputs:
-            logger.info("Adding '%s' to archive" % i)
+            logger.debug("Adding '%s' to archive" % i)
             tar.add(i)
         tar.close()
         logger.info("Wrote archive '%s'" % self.outputs[0])

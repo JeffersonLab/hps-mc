@@ -1,3 +1,5 @@
+"""Expand a Jinja job template into a full list of jobs in JSON format."""
+
 import sys
 import os
 import itertools
@@ -31,7 +33,6 @@ def uuid():
 
 # TODO:
 # filenum filter - try to get file num by looking for _%d in file name
-# filetype filter - return type of file e.g. 'lcio', 'root', etc.
 
 #def pwd():
 #    return os.getcwd()
@@ -71,6 +72,9 @@ class JobTemplate:
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
         self.env.filters['pad'] = pad
+        self.env.filters['uuid'] = uuid
+        self.env.filters['extension'] = extension
+        self.env.filters['dirname'] = dirname
         self.job_id_start = 0;
         self.input_files = {}
         self.itervars = {}
