@@ -327,7 +327,7 @@ class HPSTR(Component):
         return ['config_files']
 
     def optional_parameters(self):
-        return ['year', 'run_mode', 'nevents', 'layer', 'thresh'
+        return ['year', 'run_mode', 'nevents', 'layer', 'thresh']
 
     def required_config(self):
         return ['hpstr_install_dir', 'hpstr_base']
