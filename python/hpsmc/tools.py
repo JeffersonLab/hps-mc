@@ -1272,8 +1272,6 @@ class Sim(SimBase):
 
         # TODO: Set run number (no Geant4 built-in for this?)
 
-        print("Macro file: \n{}".format(str(macro_lines)))
-
         with open(macro_name, 'wt', encoding='utf-8') as run_macro:
             run_macro.write('\n'.join(macro_lines))
 
