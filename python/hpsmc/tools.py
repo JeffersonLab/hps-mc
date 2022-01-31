@@ -1158,7 +1158,7 @@ class LCIOMerge(LCIOTool):
 
 class SimBase(Component):
     """
-    Base class for sim config
+    Generic base class for shared Geant4 sim config
     TODO: Make SLIC extend this, too.
     """
 
@@ -1279,15 +1279,3 @@ class Sim(SimBase):
 
     def required_config(self):
         return ['hps_sim_dir', 'hps_fieldmaps_dir', 'detector_dir']
-
-    def execute(self, log_out, log_err):
-
-        # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
-        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
-
-        #logger.info("Executing '%s' with command: %s" % (self.name, cl))
-        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
-        proc.communicate()
-        proc.wait()
-
-        return proc.returncode
