@@ -18,5 +18,8 @@ mom = AddMotherFullTruth(inputs=[cnv.output_files()[0], unzip.output_files()[0]]
 # Rotate events into beam coords
 rot = BeamCoords()
 
-# run the job
+# Add ptag for gen file
+job.ptag('gen', 'tritrig_mom_rot.stdhep')
+
+# Run the job
 job.add([mg, unzip, cnv, mom, rot])
