@@ -30,7 +30,8 @@ readout = JobManager(steering='readout')
 # Run physics reconstruction
 recon = JobManager(steering='recon')
 
-# Set persistency tag for final output file
+# Set persistency tags for output files
+job.ptag('gen', 'tritrig_unweighted_events_mom_rot.stdhep')
 job.ptag('sim', 'tritrig_unweighted_events_mom_rot.slcio')
 job.ptag('readout', 'tritrig_unweighted_events_mom_rot_filt_readout.slcio')
 job.ptag('recon', 'tritrig_unweighted_events_mom_rot_filt_readout_recon.slcio')
