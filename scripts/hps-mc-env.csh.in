@@ -1,7 +1,7 @@
 #!/bin/csh
 
 setenv HPSMC_DIR @CMAKE_INSTALL_PREFIX@
-setenv PATH @CMAKE_INSTALL_PREFIX@/bin:$PATH
+setenv PATH $HPSMC_DIR@/bin:$PATH
 if (! $?PYTHONPATH) then
     setenv PYTHONPATH ""
 endif
@@ -12,16 +12,16 @@ endif
 setenv LD_LIBRARY_PATH @CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
 
 # local conditions db
-if ( "@CONDITIONS_URL@" != "" )
+if ( "x@CONDITIONS_URL@" != "x" )
     setenv CONDITIONS_URL @CONDITIONS_URL@
 endif
 
 # locations of bin jars
-if ( "@LCIO_BIN_JAR@" != "" )
+if ( "x@LCIO_BIN_JAR@" != "x" )
     setenv LCIO_BIN_JAR @LCIO_BIN_JAR@
 endif
 
-if ( "@HPSJAVA_BIN_JAR@" != "" )
+if ( "@HPSJAVA_BIN_JAR@" != "x" )
     setenv HPS_JAVA_BIN_JAR @HPSJAVA_BIN_JAR@
 endif
 
