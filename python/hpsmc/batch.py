@@ -461,7 +461,7 @@ class Auger(Batch):
 
         #cmd_lines.append('pwd\n')
         cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
-        #cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
+        cmd_lines.append("source %s/bin/jlab-env.sh;\n" % os.getenv('HPSMC_DIR'))
         #cmd_lines.append('env | sort\n')
 
         job_cmd = self.build_cmd(job_id, job_params)
