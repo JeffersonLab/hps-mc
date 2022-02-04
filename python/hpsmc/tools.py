@@ -73,7 +73,7 @@ class SLIC(Component):
         return args
 
     def __detector_file(self):
-        return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
+        return os.path.join(self.detector_dir, self.detector, self.detector)
 
     def __particle_tbl(self):
         return os.path.join(self.slic_dir, "share", "particle.tbl")
@@ -297,6 +297,8 @@ class HPSTR(Component):
         self.year = year
         self.layer = None
         self.thresh = None
+        self.chNum = None
+        self.names = None
 
         Component.__init__(self,
                            name='hpstr',
@@ -324,8 +326,14 @@ class HPSTR(Component):
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
         logger.debug('Set config path: %s' % self.cfg_path)
 
+        print(self.input_files())
         # For ROOT output, automatically append the cfg key from the job params.
         if os.path.splitext(self.input_files()[0])[1] == '.root':
+            self.append_tok = self.cfg
+            logger.debug('Automatically appending token to output file: %s' % self.append_tok)
+
+        # For evio input, automatically append the cfg key from the job params.
+        if os.path.splitext(self.input_files()[0])[1] == '.evio':
             self.append_tok = self.cfg
             logger.debug('Automatically appending token to output file: %s' % self.append_tok)
 
@@ -333,7 +341,7 @@ class HPSTR(Component):
         return ['config_files']
 
     def optional_parameters(self):
-        return ['year', 'run_mode', 'nevents', 'layer', 'thresh']
+        return ['year', 'run_mode', 'nevents', 'layer', 'names', 'chNum', 'thresh']
 
     def required_config(self):
         return ['hpstr_install_dir', 'hpstr_base']
@@ -349,6 +357,10 @@ class HPSTR(Component):
             args.extend(["-y", str(self.year)])
         if self.layer is not None:
             args.extend(["-l", str(self.layer)])
+        if self.names is not None:
+            args.extend(["-N", str(self.names)])
+        if self.chNum is not None:
+            args.extend(["-c", str(self.chNum)])
         if self.thresh is not None:
             args.extend(["-thresh", str(self.thresh)])
         return args
