@@ -67,6 +67,18 @@ else()
     message(STATUS "Madgraph is disabled")
 endif()
 
+option(HPSMC_ENABLE_ROOT "Enable ROOT (requires ROOTSYS set in the environment)" OFF)
+if (HPSMC_ENABLE_ROOT)
+    if(DEFINED ENV{ROOTSYS})
+        set(ROOTSYS $ENV{ROOTSYS})
+        message(STATUS "ROOTSYS set to: ${ROOTSYS}")
+    else()
+        message(FATAL_ERROR "ROOT was enabled but ROOTSYS is not set in the environment")
+    endif()
+else()
+    message(STATUS "ROOT is disabled")
+endif()
+
 # External projects will be added to this target
 add_custom_target(external)
 
