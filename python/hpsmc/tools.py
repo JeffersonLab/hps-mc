@@ -1257,6 +1257,9 @@ class Sim(SimBase):
 
         macro_lines.append("/run/initialize")
 
+        if self.seed is not None:
+            macro_lines.append("/random/seed {}".format(self.seed))
+
         # TODO: Support LHE files, too
         macro_lines.append("/hps/generators/create StdHepGen STDHEP")
         for input_file in self.input_files():
