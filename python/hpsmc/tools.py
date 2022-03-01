@@ -1155,3 +1155,128 @@ class LCIOMerge(LCIOTool):
         if self.nevents is not None:
             args.extend(['-n', str(self.nevents)])
         return args
+
+class SimBase(Component):
+    """
+    Generic base class for shared Geant4 sim config
+    TODO: Make SLIC extend this, too.
+    """
+
+    def detector_file(self):
+        return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
+
+    def optional_parameters(self):
+        return ['nevents', 'macros', 'run_number']
+
+    def required_parameters(self):
+        return ['detector']
+
+    def execute(self, log_out, log_err):
+
+        # Program needs to be run inside bash to make the Geant4 setup script happy.
+        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
+
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+
+        return proc.returncode
+
+class Sim(SimBase):
+    """
+    Run the hps-sim Geant4 simulation.
+    """
+
+    def __init__(self, **kwargs):
+
+        # List of macros to run (optional)
+        self.macros = []
+
+        # Run number to set on output file (optional)
+        self.run_number = None
+
+        # To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+
+        # To be set from config or install dir
+        self.detector_dir = None
+
+        Component.__init__(self,
+                           name='hps-sim',
+                           command='hps-sim',
+                           output_ext='.slcio',
+                           **kwargs)
+
+    def cmd_args(self):
+
+        if not len(self.input_files()):
+            raise Exception("No inputs were provided for Sim.")
+
+        return ['./run.macro']
+
+    def config(self, parser):
+
+        super().config(parser)
+
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
+
+        # Set fieldmap dir to install location if not provided in config
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+    def setup(self):
+
+        if not os.path.exists(self.hps_sim_dir):
+            raise Exception("hps_sim_dir does not exist: %s" % self.slic_dir)
+
+        self.env_script = self.hps_sim_dir + os.sep + "bin" + os.sep + "hps-sim-env.sh"
+        if not os.path.exists(self.env_script):
+            raise Exception('hps-sim setup script does not exist: %s' % self.name)
+
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            logger.warning('Link to fieldmap dir already exists!')
+
+        self.write_run_macro()
+
+    def write_run_macro(self, macro_name='./run.macro'):
+
+        macro_lines = []
+        macro_lines.append("/lcdd/url {}".format(self.detector_file()))
+
+        macro_lines.append("/run/initialize")
+
+        if self.seed is not None:
+            macro_lines.append("/random/seed {}".format(self.seed))
+
+        # TODO: Support LHE files, too
+        macro_lines.append("/hps/generators/create StdHepGen STDHEP")
+        for input_file in self.input_files():
+            macro_lines.append("/hps/generators/StdHepGen/file {}".format(input_file))
+
+        for macro in self.macros:
+            macro_lines.append("/control/execute {}".format(macro))
+
+        macro_lines.append("/hps/lcio/recreate")
+        macro_lines.append("/hps/lcio/file {}".format(self.output_files()[0]))
+        
+        macro_lines.append("/run/beamOn {}".format(self.nevents))
+
+        # TODO: Set run number (no Geant4 built-in for this?)
+
+        with open(macro_name, 'wt', encoding='utf-8') as run_macro:
+            run_macro.write('\n'.join(macro_lines))
+
+    def required_config(self):
+        return ['hps_sim_dir', 'hps_fieldmaps_dir', 'detector_dir']

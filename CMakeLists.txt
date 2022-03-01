@@ -1,10 +1,14 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.22)
 
 project(hps-mc VERSION 2.0.0)
 
 # cmake macros
 include(ExternalProject)
 include(FindPackageHandleStandardArgs)
+
+# languages
+enable_language(Fortran)
+enable_language(C)
 
 # cmake macros for this project
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -67,16 +71,24 @@ else()
     message(STATUS "Madgraph is disabled")
 endif()
 
+option(HPSMC_ENABLE_ROOT "Enable ROOT setup" OFF)
+if (HPSMC_ENABLE_ROOT)
+    if(DEFINED ENV{ROOTSYS})
+        set(ROOTSYS $ENV{ROOTSYS})
+        message(STATUS "ROOTSYS set to: ${ROOTSYS}")
+    else()
+        message(FATAL_ERROR "ROOT was enabled but ROOTSYS is not set in the environment")
+    endif()
+else()
+    message(STATUS "ROOT is disabled")
+endif()
+
 # External projects will be added to this target
 add_custom_target(external)
 
-# Enable specific external software packages and data files
-option(HPSMC_ENABLE_FIELDMAPS  "Install fieldmaps" OFF)
-option(HPSMC_ENABLE_LCIO       "Install LCIO" OFF)
-option(HPSMC_ENABLE_HPSJAVA    "Install HPS Java" OFF)
-option(HPSMC_ENABLE_CONDITIONS "Install local conditions database" OFF)
 
 # Install magnetic field maps
+option(HPSMC_ENABLE_FIELDMAPS "Install fieldmaps" OFF)
 if(HPSMC_ENABLE_FIELDMAPS)
     include(InstallFieldmaps)
 else()
@@ -84,6 +96,7 @@ else()
 endif()
 
 # Install LCIO
+option(HPSMC_ENABLE_LCIO "Install LCIO" OFF)
 if(HPSMC_ENABLE_LCIO)
     include(InstallLCIO)
 else()
@@ -91,6 +104,7 @@ else()
 endif()
 
 # Install HPS Java
+option(HPSMC_ENABLE_HPSJAVA "Install HPS Java" OFF)
 if(HPSMC_ENABLE_HPSJAVA)
     include(InstallHpsJava)
 else()
@@ -98,6 +112,7 @@ else()
 endif()
 
 # Install local conditions database
+option(HPSMC_ENABLE_CONDITIONS "Install local conditions database" OFF)
 if(HPSMC_ENABLE_CONDITIONS)
     include(InstallConditions)
 else()
