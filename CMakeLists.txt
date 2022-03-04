@@ -10,6 +10,11 @@ include(FindPackageHandleStandardArgs)
 enable_language(Fortran)
 enable_language(C)
 
+# enable in source build since default is not writable from a non-root account
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "..." FORCE)
+endif()
+
 # cmake macros for this project
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
