@@ -3,7 +3,7 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, AddMother, 
 
 import os
 
-job.description = 'Run hps-sim with preexisting tritrig stdhep files'
+job.description = 'Run slic with preexisting tritrig stdhep files'
 
 # generate events in slic
 sim = SLIC()
