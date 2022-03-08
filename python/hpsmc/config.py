@@ -25,13 +25,13 @@ class ConfigItem:
         self.read_from_config = read_from_config
 
     def set_from_default(self):
-        #print('Setting value from default: {} = {}'.format(self.name, self.default))
+        print('Setting value from default: {} = {}'.format(self.name, self.default))
         self.value = self.default
 
     def set_from_env(self):
         if os.environ.get(self.env_name) is not None and self.read_from_env:
             self.value = os.environ.get(self.env_name, None)
-            #print('Set value from env: {} = {}'.format(self.env_name, self.value))
+            print('Set value from env: {} = {}'.format(self.env_name, self.value))
 
     def is_required(self):
         return not self.optional

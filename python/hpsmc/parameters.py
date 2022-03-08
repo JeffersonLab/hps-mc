@@ -1,7 +1,7 @@
 class Parameter(object):
 
     """
-    Class for holding information about a component parameter
+    Class for holding information about a component parameter (not used yet)
     """
 
     def __init__(self,
@@ -20,19 +20,36 @@ class Parameter(object):
         self.read_from_dict = read_from_dict
         self.read_from_args = read_from_args
 
+    def get_description(self):
+        return self.description
+
+    def get_env_name(self):
+        return self.name.upper()
+
+    def get_name(self):
+        return self.name
+
     def get_type(self):
         return type('')
 
-    def str_value(self):
+    def get_value(self):
+        return self.value
+
+    def get_str_value(self):
         return str(self.value)
+
+    def get_default_value(self):
+        return self.default_value
 
     def set_value_from_default(self):
         if self.default_value is not None:
             self.value = self.default_value
-            print('Set parameter from default: {} = {}'.format(self.name, self.value))
 
     def set_value(self, value):
         self.value = self.convert_value(value)
+
+    def is_optional(self):
+        return self.optional
 
     def is_required(self):
         return not self.optional
@@ -90,14 +107,6 @@ class BoolParameter(Parameter):
         else:
             return True
 
-class ListParameter(Parameter):
-
-    def get_type(self):
-        return type([])
-
-    def convert_value(self, value):
-        return list(value)
-
 class ParameterSet(object):
 
     def __init__(self, *args):
@@ -106,9 +115,9 @@ class ParameterSet(object):
 
     def add(self, *args):
         for param in args:
-            if self.has(param.name):
-                raise Exception("Parameter already exists: {}".format(param.name))
-            self.parameters[param.name] = param
+            if self.has(param.get_name()):
+                raise Exception("Parameter already exists: {}".format(param.get_name()))
+            self.parameters[param.get_name()] = param
 
     def get(self, name):
         if not self.has(name):
@@ -118,10 +127,13 @@ class ParameterSet(object):
     def has(self, name):
         return name in list(self.parameters.keys())
 
+    def parameter_names(self):
+        return list(self.parameters.keys())
+
     def __str__(self):
         return str([p.to_dict() for p in self.parameters.values()])
 
-    def load_defaults(self):
+    def set_defaults(self):
         for param in self.parameters.values():
             param.set_value_from_default()
 
@@ -131,17 +143,17 @@ class ParameterSet(object):
                 p = self.get(k)
                 if p.read_from_dict:
                     self.get(k).set_value(v)
-                    #print('load from dict: {} = {}'.format(k, v))
+                    print('load from dict: {} = {}'.format(k, v))
 
     def load_from_args(self, **kwargs):
-        #print('load from args: {}'.format(kwargs))
+        print('load from args: {}'.format(kwargs))
         for k,v in kwargs.items():
             if self.has(k):
                 p = self.get(k)
-                #print('found param: {}'.format(k))
+                print('found param: {}'.format(k))
                 if p.read_from_args:
                     p.set_value(v)
-                    #print('load from args: {} = {}'.format(k, v))
+                    print('load from args: {} = {}'.format(k, v))
 
     def validate(self):
         return len(self.get_invalid_parameters()) > 0
@@ -175,8 +187,6 @@ if __name__ == '__main__':
     print("Initial parameters...")
     print(params)
 
-    params.load_defaults()
-
     example_dict = {'myparam': 'bongle',
                     'float': 5.678,
                     'int': 5678,
@@ -184,9 +194,9 @@ if __name__ == '__main__':
                     'boolfromstr': 'True',
                     'intfromstr': '5678'}
     params.load_from_dict(example_dict)
-
     print("Parameters after load...")
     print(params)
 
+    params.set_defaults()
 
     params.validate()
