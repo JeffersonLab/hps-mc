@@ -3,11 +3,8 @@ local running, a multiprocessing pool, LSF, and Auger."""
 
 import os
 import argparse
-import json
 import subprocess
-import getpass
 import sys
-import time
 import logging
 import signal
 import multiprocessing
@@ -18,12 +15,11 @@ from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
-from job_store import JobStore
-from script_db import JobScriptDatabase
-from job import Job
+from job import Job, JobStore, JobScriptDatabase
 
-logger = logging.getLogger("hpsmc.batch")
-logger.setLevel(logging.DEBUG)
+from hpsmc.util import config_logging
+
+logger = config_logging(stream=sys.stdout, level=logging.INFO, logname='hpsmc.batch')
 
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
@@ -50,6 +46,7 @@ class Batch:
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
         parser.add_argument("-r", "--job-range", nargs='?', help="Submit jobs numbers within range (e.g. '1:100')", required=False)
         parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
+        parser.add_argument("-w", "--workflow", nargs='?', help="Name of workflow (swif2)", required=False)
         parser.add_argument("script", nargs='?', help="Name of job script")
         parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
@@ -84,7 +81,7 @@ class Batch:
         self.sh_dir = cl.sh_dir
         if not os.path.isabs(self.log_dir):
             raise Exception('The log dir is not an abs path: %s' % self.log_dir)
-        # FIXME: This probably shouldn't happen here.
+        # FIXME: This directory creation probably shouldn't happen here.
         if not os.path.exists(self.log_dir):
             logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
@@ -127,6 +124,11 @@ class Batch:
 
         self.run_dir = cl.run_dir
 
+        if cl.workflow:
+            self.workflow = cl.workflow
+        else:
+            self.workflow = self.script_name 
+
         return cl
 
     def submit_cmd(self, job_id, job_data):
@@ -141,7 +143,7 @@ class Batch:
         """Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].items():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                logger.warning('Job output does not exist: %s' % (dest))
+                #logger.warning('Job output does not exist: %s' % (dest))
                 return False
         return True
 
@@ -156,10 +158,10 @@ class Batch:
         elif len(self.job_ids):
             submit_ids = self.job_ids
         if self.check_output:
-            logger.info('Checking output files...')
+            logger.debug('Checking output files...')
             submit_ids = [job_id for job_id in submit_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
-            logger.info('Done checking output files!')
-            logger.debug('Job list after output check: {}'.format(str(submit_ids)))
+            logger.debug('Done checking output files!')
+            logger.info('Job IDs after checking output files: {}'.format(str(submit_ids)))
         return submit_ids
 
     def submit(self):
@@ -195,8 +197,7 @@ class Batch:
         cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
-                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)
-                    ])
+                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)])
         if set_job_dir:
             job_dir = os.path.join(self.run_dir, str(job_id))
             cmd.extend(['-d', job_dir])
@@ -283,7 +284,7 @@ class Slurm(Batch):
                '--output=%s.out'%log_file]
         sh_filename = self.sh_dir + '/job.%i.sh'%job_params['job_id']
         sh_file = open(sh_filename,'w')
-        sh_file.write('#!/bin/bash\n')
+        sh_file.write('#!/usr/bin/scl enable devtoolset-8 -- /bin/bash\n')
         sh_file.write('source '+self.env+'\n')
         sh_file.write('mkdir -p %s/%i\n'%(self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n'%(self.run_dir, job_params['job_id']))
@@ -316,7 +317,11 @@ class Auger(Batch):
 
     def submit(self):
         """Primary batch submission method for Auger."""
+        xml_filename = self._create_job_xml() # write request to XML file
+        auger_ids = self._jsub(xml_filename) # execute jsub to submit jobs
+        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
 
+    def _create_job_xml(self):
         job_ids = self.get_filtered_job_ids()
         logger.info('Submitting jobs: %s' % str(job_ids))
         req = self._create_req(self.script_name) # create request XML header
@@ -329,9 +334,7 @@ class Auger(Batch):
                                "because outputs already exist: %d" % job_id)
             else:
                 self._add_job(req, job_params) # add job to request
-        xml_filename = self._write_req(req)    # write request to file
-        auger_ids = self._jsub(xml_filename)   # execute jsub to submit jobs
-        logger.info("Submitted Auger jobs: %s" % str(auger_ids))
+        return self._write_req(req)    # write request to file
 
     def _jsub(self, xml_filename):
         cmd = ['jsub', '-xml', xml_filename]
@@ -434,12 +437,12 @@ class Auger(Batch):
                 input_elem.set("src", src_file)
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
-        outputdir = os.path.realpath(outputdir)
+        #outputdir = os.path.realpath(outputdir)
         j = self._create_job(job_params)
         for src,dest in outputfiles.items():
             output_elem = ET.SubElement(job, "Output")
             res_src = j.resolve_output_src(src)
-            output_elem.set("src", j.resolve_output_src(src))
+            output_elem.set("src", res_src)
             dest_file = os.path.join(outputdir, dest)
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
@@ -456,9 +459,10 @@ class Auger(Batch):
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
 
-        cmd_lines.append('pwd\n')
-        cmd_lines.append("source %s\n" % os.path.realpath(self.setup_script))
-        cmd_lines.append('env | sort\n')
+        #cmd_lines.append('pwd\n')
+        cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
+        cmd_lines.append("source %s/bin/jlab-env.csh;\n" % os.getenv('HPSMC_DIR'))
+        #cmd_lines.append('env | sort\n')
 
         job_cmd = self.build_cmd(job_id, job_params)
 
@@ -472,13 +476,39 @@ class Auger(Batch):
         cmd_lines.extend(job_cmd)
         cmd_lines.append('\n')
 
-        cmd_lines.append('ls -lah .\n')
+        #cmd_lines.append('ls -lah .\n')
 
         cmd_lines.append("]]>")
 
         #logger.debug(cmd_lines)
 
         cmd.text = ' '.join(cmd_lines)
+
+class Swif(Auger):
+    """Submit to swif2 at JLAB using an Auger file"""
+
+    def submit(self):
+
+        #if self.workflow is None:
+        #    raise Exception("Workflow name is required for swif2 submission")
+        logger.info("Submitting swif workflow: {}".format(self.workflow))
+
+         # Write request to XML file
+        xml_filename = self._create_job_xml()
+
+        # Add job to swif2 workflow using Auger XML file
+        cmd = ['swif2', 'add-jsub', self.workflow, '-script', xml_filename]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
+
+        # Run the workflow
+        run_cmd = ['swif2', 'run', self.workflow]
+        proc = subprocess.Popen(run_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
 
 class Local(Batch):
     """Run a local batch jobs sequentially."""
@@ -549,7 +579,7 @@ class KillProcessQueue():
             if mp_queue.empty():
                 break
 
-        print('Done killing processes!')
+        #print('Done killing processes!')
 
 class Pool(Batch):
     """
@@ -571,8 +601,9 @@ class Pool(Batch):
             job_data = self.jobstore.get_job(job_id)
             cmd = self.build_cmd(job_id, job_data)
             cmds.append(cmd)
-        logger.debug('Running job commands in pool ...')
-        logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
+
+        #logger.debug('Running job commands in pool ...')
+        #logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
 
         if not len(cmds):
             raise Exception('No job IDs found to submit')
@@ -607,7 +638,8 @@ if __name__ == '__main__':
         "slurm": Slurm,
         "auger": Auger,
         "local": Local,
-        "pool": Pool
+        "pool": Pool,
+        "swif": Swif
     }
     if len(sys.argv) > 1:
         system = sys.argv[1].lower()

@@ -1,9 +1,12 @@
 #!/bin/sh
 
 export HPSMC_DIR=@CMAKE_INSTALL_PREFIX@
-export PATH=@CMAKE_INSTALL_PREFIX@/bin:$PATH
-export LD_LIBRARY_PATH=@CMAKE_INSTALL_PREFIX@/lib:${LD_LIBRARY_PATH}
-export PYTHONPATH=@CMAKE_INSTALL_PREFIX@/lib/python:$PYTHONPATH
+
+export PATH=$HPSMC_DIR/bin:$PATH
+
+export LD_LIBRARY_PATH=$HPSMC_DIR/lib:$LD_LIBRARY_PATH
+
+export PYTHONPATH=$HPSMC_DIR/lib/python:$PYTHONPATH
 
 # local conditions db
 if [ -n "@CONDITIONS_URL@" ]; then

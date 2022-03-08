@@ -1,10 +1,19 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.22)
 
 project(hps-mc VERSION 2.0.0)
 
 # cmake macros
 include(ExternalProject)
 include(FindPackageHandleStandardArgs)
+
+# languages
+enable_language(Fortran)
+enable_language(C)
+
+# enable in source build since default is not writable from a non-root account
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "..." FORCE)
+endif()
 
 # cmake macros for this project
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -19,25 +28,15 @@ set(PYTHON ${Python3_EXECUTABLE})
 #message(STATUS "Python2 executable found at: ${Python2_EXECUTABLE}")
 
 # Check for Fortran compiler
-find_program(GFORTRAN gfortran)
-if(GFORTRAN-NOTFOUND)
-    message(FATAL_ERROR "gfortran was not found")
-else()
-    message(STATUS "gfortran was found at: ${GFORTRAN}")
-endif()
+find_program(GFORTRAN gfortran REQUIRED)
 
 # Check for Java
-find_package(Java REQUIRED)
+find_package(Java COMPONENTS Runtime REQUIRED)
 message(STATUS "java was found at: ${Java_JAVA_EXECUTABLE}")
 message(STATUS "java version: ${Java_VERSION}")
 
 # Check for Maven
-find_program(MAVEN mvn)
-if(MAVEN-NOTFOUND)
-    message(FATAL_ERROR "Maven was not found")
-else()
-    message(STATUS("Maven executable found at: ${MAVEN}"))
-endif()
+find_program(MAVEN mvn REQUIRED)
 
 set(MAVEN_BUILD_COMMAND ${MAVEN} clean install -DskipTests -T 4 -q)
 
@@ -45,63 +44,84 @@ set(MAVEN_BUILD_COMMAND ${MAVEN} clean install -DskipTests -T 4 -q)
 find_package(GSL REQUIRED)
 message(STATUS "GSL found with version: ${GSL_VERSION}")
 
-# Build stdhep tools
-add_subdirectory(tools/stdhep-lib)
-add_subdirectory(tools/stdhep-tools)
+# Build and install stdhep tools
+option(HPSMC_ENABLE_STDHEP "Install StdHep tools" OFF)
+if (HPSMC_ENABLE_STDHEP)
+    add_subdirectory(tools/stdhep-lib)
+    add_subdirectory(tools/stdhep-tools)
+else()
+    message(STATUS "StdHep tools are disabled")
+endif()
 
-# Build generators
-add_subdirectory(generators/egs5)
-add_subdirectory(generators/madgraph4)
-add_subdirectory(generators/madgraph5)
+# Build and install EGS5
+option(HPSMC_ENABLE_EGS5 "Install EGS5" OFF)
+if (HPSMC_ENABLE_EGS5)
+    if (NOT HPSMC_ENABLE_STDHEP)
+        message(FATAL_ERROR "StdHep must be enabled to use EGS5")
+    endif()
+    add_subdirectory(generators/egs5)
+    install(DIRECTORY generators/egs5 DESTINATION share/generators USE_SOURCE_PERMISSIONS)
+else()
+    message(STATUS "EGS5 is disabled")
+endif()
 
-# Recursively install all generator files
+# Build and install Madgraph
+option(HPSMC_ENABLE_MADGRAPH "Install Madgraph" OFF)
+if (HPSMC_ENABLE_MADGRAPH)
+    add_subdirectory(generators/madgraph4)
+    add_subdirectory(generators/madgraph5)
+    install(DIRECTORY generators/madgraph4 DESTINATION share/generators USE_SOURCE_PERMISSIONS)
+    install(DIRECTORY generators/madgraph5 DESTINATION share/generators USE_SOURCE_PERMISSIONS)
+else()
+    message(STATUS "Madgraph is disabled")
+endif()
+
+option(HPSMC_ENABLE_ROOT "Enable ROOT setup" OFF)
+if (HPSMC_ENABLE_ROOT)
+    if(DEFINED ENV{ROOTSYS})
+        set(ROOTSYS $ENV{ROOTSYS})
+        message(STATUS "ROOTSYS set to: ${ROOTSYS}")
+    else()
+        message(FATAL_ERROR "ROOT was enabled but ROOTSYS is not set in the environment")
+    endif()
+else()
+    message(STATUS "ROOT is disabled")
+endif()
 
 # External projects will be added to this target
 add_custom_target(external)
 
-# enable installation of generator files to installation dir
-option(ENABLE_INSTALL_GENERATORS "Install physics generators" OFF)
-
-
-# enable specific external software packages
-option(ENABLE_INSTALL_FIELDMAPS  "Install fieldmaps" OFF)
-option(ENABLE_INSTALL_LCIO       "Install LCIO" OFF)
-option(ENABLE_INSTALL_HPSJAVA    "Install HPS Java" OFF)
-option(ENABLE_INSTALL_CONDITIONS "Install local conditions database" OFF)
-
-if(ENABLE_INSTALL_GENERATORS)
-    message(STATUS "Physics generators will be installed automatically")
-    install(DIRECTORY generators DESTINATION share USE_SOURCE_PERMISSIONS)
-else()
-    message(STATUS "Installation of physics generators is disabled")
-endif()
 
 # Install magnetic field maps
-if(ENABLE_INSTALL_FIELDMAPS)
+option(HPSMC_ENABLE_FIELDMAPS "Install fieldmaps" OFF)
+if(HPSMC_ENABLE_FIELDMAPS)
     include(InstallFieldmaps)
 else()
-    message(STATUS "Fieldmaps installation is disabled")
+    message(STATUS "Fieldmaps are disabled")
 endif()
 
 # Install LCIO
-if(ENABLE_INSTALL_LCIO)
+option(HPSMC_ENABLE_LCIO "Install LCIO" OFF)
+if(HPSMC_ENABLE_LCIO)
     include(InstallLCIO)
 else()
-    message(STATUS "LCIO installation is disabled")
+    message(STATUS "LCIO is disabled")
 endif()
 
 # Install HPS Java
-if(ENABLE_INSTALL_HPSJAVA)
+option(HPSMC_ENABLE_HPSJAVA "Install HPS Java" OFF)
+if(HPSMC_ENABLE_HPSJAVA)
     include(InstallHpsJava)
 else()
-    message(STATUS "HpsJava installation is disabled")
+    message(STATUS "HpsJava is disabled")
 endif()
 
 # Install local conditions database
-if(ENABLE_INSTALL_CONDITIONS)
+option(HPSMC_ENABLE_CONDITIONS "Install local conditions database" OFF)
+if(HPSMC_ENABLE_CONDITIONS)
     include(InstallConditions)
 else()
-    message(STATUS "Conditions installation is disabled")
+    message(STATUS "Local conditions db is disabled")
 endif()
 
 # Install python scripts

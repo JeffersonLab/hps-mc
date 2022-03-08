@@ -1,14 +1,17 @@
 """Tools that can be used in HPSMC jobs."""
 
-import os, sys, time, socket, gzip, shutil, logging, subprocess, tarfile, sys, tempfile
+import os
+import gzip
+import shutil
+import logging
+import subprocess
+import tarfile
+
 from subprocess import PIPE
 
 from component import Component
 from run_params import RunParameters
 import hpsmc.func as func
-
-from config import ConfigItem
-from parameters import Parameter, IntParameter
 
 logger = logging.getLogger("hpsmc.tools")
 
@@ -19,137 +22,117 @@ class SLIC(Component):
 
     def __init__(self, **kwargs):
 
+        # List of macros to run (optional)
+        self.macros = []
+
+        # Run number to set on output file (optional)
+        self.run_number = None
+
+        # To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+
+        # To be set from config or install dir
+        self.detector_dir = None
+
         Component.__init__(self,
                            name='slic',
                            command='slic',
                            output_ext='.slcio',
                            **kwargs)
 
-        hpsmc_dir = self.get_config_value('hpsmc_dir')
-
-        self._config.section = 'SLIC'
-        self.add_config_items(ConfigItem('slic_dir',
-                                         description='Path to SLIC installation directory',
-                                         optional=False,
-                                         default=None,
-                                         read_from_env=False,
-                                         read_from_config=True),
-                              ConfigItem('detector_dir',
-                                         description='Path to detector data directory',
-                                         optional=False,
-                                         default="{}/share/detectors".format(hpsmc_dir),
-                                         read_from_env=False,
-                                         read_from_config=True),
-                              ConfigItem('hps_fieldmaps_dir',
-                                         description='Path to fieldmap directory',
-                                         optional=False,
-                                         default="{}/share/fieldmap".format(hpsmc_dir),
-                                         read_from_env=False,
-                                         read_from_config=True))
-
-        self.add_parameters(Parameter('detector',
-                                      description='Name of detector',
-                                      optional=False,
-                                      default_value=None,
-                                      read_from_dict=True,
-                                      read_from_args=False),
-                            IntParameter('run_number',
-                                         description='Run number for LCIO header',
-                                         optional=True,
-                                         default_value=None,
-                                         read_from_dict=True,
-                                         read_from_args=False))
-
-        self._params.load_from_args(**kwargs)
-
-        # List of macros to run (optional)
-        #self.macros = []
-
     def cmd_args(self):
 
         if not len(self.input_files()):
-            raise Exception('No inputs given for SLIC.')
+            raise Exception("No inputs given for SLIC.")
 
-        detector = self.get_parameter_value('detector')
-        assert(detector is not None)
+        args = ["-g", self.__detector_file(),
+                "-i", self.input_files()[0],
+                "-o", self.output_files()[0],
+                "-d%s" % str(self.seed)]
 
-        detector_dir = self.get_config_value('detector_dir')
-        assert(detector_dir is not None)
-        assert(os.path.isdir(detector_dir))
-
-        detector_file = os.path.join(detector_dir, detector, detector + '.lcdd')
-        assert(os.path.isfile(detector_file))
-
-        seed = self.get_parameter_value('seed')
-        assert(seed >= 0)
-
-        args = ['-g', detector_file,
-                '-i', self.input_files()[0],
-                '-o', self.output_files()[0],
-                '-d{}'.format(seed)]
-
-        """
         if len(self.macros):
             for macro in self.macros:
                 if macro == "run_number.mac":
-                    raise Exception('Macro name is not allowed: {}'.format(macro)
+                    raise Exception("Macro name '%s' is not allowed." % macro)
                 if not os.path.isabs(macro):
                     raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
-        """
 
-        nevents = self.get_parameter_value('nevents')
-        if nevents is not None:
-            assert(nevents > 0)
-            args.extend(['-r', str(nevents)])
+        if self.nevents is not None:
+            args.extend(["-r", str(self.nevents)])
 
-        run_number = self.get_parameter_value('run_number')
+        if self.run_number is not None:
+            args.extend(["-m", "run_number.mac"])
 
-        if run_number is not None:
-            assert(run_number >= 0)
-            args.extend(['-m', 'run_number.mac'])
-
-        tbl = os.path.join(self.get_config_value('slic_dir'), 'share', 'particle.tbl')
+        tbl = self.__particle_tbl()
         if os.path.exists(tbl):
-            args.extend(['-P', tbl])
+            args.extend(["-P", tbl])
         else:
-            logger.warning('SLIC particle table does not exist: {}'.format(tbl))
+            raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
 
         return args
 
+    def __detector_file(self):
+        return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
+
+    def __particle_tbl(self):
+        return os.path.join(self.slic_dir, "share", "particle.tbl")
+
+    def config(self, parser):
+
+        super().config(parser)
+
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
+
+        # Set fieldmap dir to install location if not provided in config
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
     def setup(self):
 
-        slic_dir = self.get_config_value('slic_dir')
-        assert(slic_dir != None)
-        assert(os.path.isdir(slic_dir))
+        if not os.path.exists(self.slic_dir):
+            raise Exception("slic_dir does not exist: %s" % self.slic_dir)
 
-        self.env_script = slic_dir + os.sep + 'bin' + os.sep + 'slic-env.sh'
+        self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
 
-        fieldmaps_dir = self.get_config_value('hps_fieldmaps_dir')
-        assert(fieldmaps_dir != None)
-        assert(os.path.isdir(fieldmaps_dir))
-
-        logger.info('Creating sym link to fieldmap dir: {}'.format(fieldmaps_dir))
-        if not os.path.islink(os.getcwd() + os.path.sep + 'fieldmap'):
-            os.symlink(fieldmaps_dir, 'fieldmap')
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
             logger.warning('Link to fieldmap dir already exists!')
 
-        run_number = self.get_parameter_value('run_number')
-        if run_number is not None:
-            run_number_cmd = '/lcio/runNumber {}'.format(run_number)
-            run_number_mac = open('run_number.mac', 'w')
+        if self.run_number is not None:
+            run_number_cmd = "/lcio/runNumber %d" % self.run_number
+            run_number_mac = open("run_number.mac", 'w')
             run_number_mac.write(run_number_cmd)
             run_number_mac.close()
+
+    def optional_parameters(self):
+        return ['nevents', 'macros', 'run_number']
+
+    def required_parameters(self):
+        return ['detector']
+
+    def required_config(self):
+        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
 
     def execute(self, log_out, log_err):
 
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
-        cl = 'bash -c ". {} && {} {}"'.format(self.env_script, self.command, ' '.join(self.cmd_args_str()))
+        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
 
-        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        #logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -195,11 +178,11 @@ class JobManager(Component):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
         if self.conditions_url is None:
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
-                logger.info('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
 
     def required_config(self):
         return ['hps_java_bin_jar']
@@ -321,7 +304,7 @@ class HPSTR(Component):
         else:
             # Assume the cfg file is within the hpstr base dir.
             self.cfg_path = os.path.join(self.hpstr_base, "processors",  "config", config_file)
-        logger.info('Set config path: %s' % self.cfg_path)
+        logger.debug('Set config path: %s' % self.cfg_path)
 
         # For ROOT output, automatically append the cfg key from the job params.
         if os.path.splitext(self.input_files()[0])[1] == '.root':
@@ -360,7 +343,7 @@ class HPSTR(Component):
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
 
-        logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        logger.debug("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -377,6 +360,7 @@ class StdHepTool(Component):
                   'beam_coords_old',
                   'lhe_tridents',
                   'lhe_tridents_displacetime',
+                  'lhe_tridents_displaceuni',
                   'merge_poisson',
                   'mix_signal',
                   'random_sample']
@@ -534,6 +518,27 @@ class DisplaceTime(StdHepTool):
     def optional_parameters(self):
         return ['ctau']
 
+class DisplaceUni(StdHepTool):
+    """
+    Convert LHE files to StdHep, displacing the time by given ctau.
+    """
+
+    def __init__(self, **kwargs):
+        self.ctau = None
+        StdHepTool.__init__(self,
+                            name='lhe_tridents_displaceuni',
+                            output_ext='.stdhep',
+                            **kwargs)
+
+    def cmd_args(self):
+        args = StdHepTool.cmd_args(self)
+        if self.ctau is not None:
+            args.extend(["-l", str(self.ctau)])
+        return args
+
+    def optional_parameters(self):
+        return ['ctau']
+
 class AddMother(StdHepTool):
     """
     Add mother particles for physics samples.
@@ -554,14 +559,32 @@ class AddMotherFullTruth(StdHepTool):
                             **kwargs)
         if len(self.inputs) != 2:
             raise Exception("Must have 2 input files: a stdhep file and a lhe file in order")
-        input_file_1 = self.inputs[0]
-        base,ext = os.path.splitext(input_file_1)
+        self.input_file_1 = self.inputs[0]
+        base,ext = os.path.splitext(self.input_file_1)
         if ext != '.stdhep':
             raise Exception("The first input file must be a stdhep file")
-        input_file_2 = self.inputs[1]
-        base,ext = os.path.splitext(input_file_2)
+        self.input_file_2 = self.inputs[1]
+        base,ext = os.path.splitext(self.input_file_2)
         if ext != '.lhe':
             raise Exception("The second input file must be a lhe file")
+
+    def cmd_args(self):
+
+        args = []
+
+        if self.name in StdHepTool.seed_names:
+            args.extend(["-s", str(self.seed)])
+
+        if len(self.output_files()):
+            args.insert(0, self.output_files()[0])
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for StdHepTool.")
+
+        args.insert(0, self.input_file_2)
+        args.insert(0, self.input_file_1)
+
+        return args
+
 
 class MergePoisson(StdHepTool):
     """
@@ -577,6 +600,7 @@ class MergePoisson(StdHepTool):
 
     def setup(self):
         self.run_param_data = RunParameters(self.run_params)
+        # TODO: this function could just be inlined here
         self.mu = func.mu(self.lhe_file, self.run_param_data)
 
     def required_parameters(self):
@@ -653,7 +677,7 @@ class StdHepCount(Component):
         (output, err) = proc.communicate()
 
         nevents = int(output.split()[1])
-        logger.info("StdHep file '%s' has %d events." % (self.input_files()[0], nevents))
+        print("StdHep file '%s' has %d events." % (self.input_files()[0], nevents))
 
         return proc.returncode
 
@@ -665,6 +689,7 @@ class JavaTool(Component):
     def __init__(self, name, java_class, **kwargs):
         self.java_class = java_class
         self.java_args = None
+        self.conditions_url = None
         Component.__init__(self,
                            name,
                            "java",
@@ -678,6 +703,9 @@ class JavaTool(Component):
         if self.java_args is not None:
             logger.debug("Setting java_args from config: %s" + self.java_args)
             args.append(self.java_args)
+        if self.conditions_url is not None:
+            logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
+            args.append('-Dorg.hps.conditions.url=%s' % self.conditions_url)
         args.append("-cp")
         args.append(self.hps_java_bin_jar)
         args.append(self.java_class)
@@ -690,18 +718,18 @@ class EvioToLcio(JavaTool):
 
     def __init__(self, steering=None, **kwargs):
 
-        self.detector = None
-        self.steering = None
-        self.run_number = None
-        self.skip_events = None
-        self.event_print_interval = None
-        self.steering = steering
+       self.detector = None
+       self.steering = None
+       self.run_number = None
+       self.skip_events = None
+       self.event_print_interval = None
+       self.steering = steering
 
-        JavaTool.__init__(self,
-                          name='evio_to_lcio',
-                          java_class='org.hps.evio.EvioToLcio',
-                          output_ext='.slcio',
-                          **kwargs)
+       JavaTool.__init__(self,
+                         name='evio_to_lcio',
+                         java_class='org.hps.evio.EvioToLcio',
+                         output_ext='.slcio',
+                         **kwargs)
 
     def required_parameters(self):
         return ['detector', 'steering_files']
@@ -803,7 +831,7 @@ class FilterBunches(JavaTool):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.info('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
@@ -877,7 +905,7 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         if self.num_hodo_hits > 0:
             args.append("-M")
             args.append(str(self.num_hodo_hits))
-        if self.nevents > 0:
+        if self.nevents:
             args.append("-w")
             args.append(str(self.nevents))
         return args
@@ -904,7 +932,7 @@ class Unzip(Component):
             outputfile = os.path.splitext(inputfile)[0]
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
                 shutil.copyfileobj(in_file, out_file)
-                logger.info("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+                logger.debug("Unzipped '%s' to '%s'" % (inputfile, outputfile))
         return 0
 
 class LCIODumpEvent(Component):
@@ -977,7 +1005,7 @@ class LHECount(Component):
                 if "<event>" in l:
                     nevents += 1
 
-            logger.info("LHE file '%s' has %d events." % (i, nevents))
+            print("LHE file '%s' has %d events." % (i, nevents))
 
             if nevents < self.minevents:
                 msg = "LHE file '%s' does not contain the minimum %d events." % (i, nevents)
@@ -1001,10 +1029,10 @@ class TarFiles(Component):
         return True
 
     def execute(self, log_out, log_err):
-        logger.info("Opening '%s' for writing ..." % self.outputs[0])
+        logger.debug("Opening '%s' for writing ..." % self.outputs[0])
         tar = tarfile.open(self.outputs[0], "w")
         for i in self.inputs:
-            logger.info("Adding '%s' to archive" % i)
+            logger.debug("Adding '%s' to archive" % i)
             tar.add(i)
         tar.close()
         logger.info("Wrote archive '%s'" % self.outputs[0])
@@ -1127,3 +1155,128 @@ class LCIOMerge(LCIOTool):
         if self.nevents is not None:
             args.extend(['-n', str(self.nevents)])
         return args
+
+class SimBase(Component):
+    """
+    Generic base class for shared Geant4 sim config
+    TODO: Make SLIC extend this, too.
+    """
+
+    def detector_file(self):
+        return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
+
+    def optional_parameters(self):
+        return ['nevents', 'macros', 'run_number']
+
+    def required_parameters(self):
+        return ['detector']
+
+    def execute(self, log_out, log_err):
+
+        # Program needs to be run inside bash to make the Geant4 setup script happy.
+        cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
+
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+
+        return proc.returncode
+
+class Sim(SimBase):
+    """
+    Run the hps-sim Geant4 simulation.
+    """
+
+    def __init__(self, **kwargs):
+
+        # List of macros to run (optional)
+        self.macros = []
+
+        # Run number to set on output file (optional)
+        self.run_number = None
+
+        # To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+
+        # To be set from config or install dir
+        self.detector_dir = None
+
+        Component.__init__(self,
+                           name='hps-sim',
+                           command='hps-sim',
+                           output_ext='.slcio',
+                           **kwargs)
+
+    def cmd_args(self):
+
+        if not len(self.input_files()):
+            raise Exception("No inputs were provided for Sim.")
+
+        return ['./run.macro']
+
+    def config(self, parser):
+
+        super().config(parser)
+
+        if self.detector_dir is None:
+            self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
+            if not os.path.isdir(self.detector_dir):
+                raise Exception('Failed to find valid detector_dir')
+            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
+
+        # Set fieldmap dir to install location if not provided in config
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+    def setup(self):
+
+        if not os.path.exists(self.hps_sim_dir):
+            raise Exception("hps_sim_dir does not exist: %s" % self.slic_dir)
+
+        self.env_script = self.hps_sim_dir + os.sep + "bin" + os.sep + "hps-sim-env.sh"
+        if not os.path.exists(self.env_script):
+            raise Exception('hps-sim setup script does not exist: %s' % self.name)
+
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            logger.warning('Link to fieldmap dir already exists!')
+
+        self.write_run_macro()
+
+    def write_run_macro(self, macro_name='./run.macro'):
+
+        macro_lines = []
+        macro_lines.append("/lcdd/url {}".format(self.detector_file()))
+
+        macro_lines.append("/run/initialize")
+
+        if self.seed is not None:
+            macro_lines.append("/random/seed {}".format(self.seed))
+
+        # TODO: Support LHE files, too
+        macro_lines.append("/hps/generators/create StdHepGen STDHEP")
+        for input_file in self.input_files():
+            macro_lines.append("/hps/generators/StdHepGen/file {}".format(input_file))
+
+        for macro in self.macros:
+            macro_lines.append("/control/execute {}".format(macro))
+
+        macro_lines.append("/hps/lcio/recreate")
+        macro_lines.append("/hps/lcio/file {}".format(self.output_files()[0]))
+        
+        macro_lines.append("/run/beamOn {}".format(self.nevents))
+
+        # TODO: Set run number (no Geant4 built-in for this?)
+
+        with open(macro_name, 'wt', encoding='utf-8') as run_macro:
+            run_macro.write('\n'.join(macro_lines))
+
+    def required_config(self):
+        return ['hps_sim_dir', 'hps_fieldmaps_dir', 'detector_dir']

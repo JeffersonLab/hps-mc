@@ -1,0 +1,13 @@
+{
+    "nevents": 100,
+    "seed": 123456789,
+    "run_number": 7984,
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "input_files": {
+        "../../tritrig_gen/output/tritrig_1.stdhep": "tritrig.stdhep"
+    },
+    "output_files": {
+        "tritrig.slcio": "sim_tritrig_1.slcio"
+    },
+    "output_dir": "output"
+}
