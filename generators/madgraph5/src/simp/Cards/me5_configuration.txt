@@ -221,7 +221,7 @@ automatic_html_opening = False
 # amcfast = amcfast-config
 
 
-mg5_path = /gpfs/slac/atlas/fs1/d/ssevova/MG5_aMC_v2_5_3 
+mg5_path = /Users/zym/MG5_aMC_v2_4_2 
 
 # MG5 MAIN DIRECTORY
-mg5_path = /gpfs/slac/atlas/fs1/d/ssevova/MG5_aMC_v2_5_3
+mg5_path = /Users/zym/MG5_aMC_v2_4_2
