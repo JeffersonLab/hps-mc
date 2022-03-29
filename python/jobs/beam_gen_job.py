@@ -23,3 +23,4 @@ sample = RandomSample()
 # Run the job
 #job.add([egs5, rot, sample])
 job.add([egs5, sample])
+#job.add([egs5])

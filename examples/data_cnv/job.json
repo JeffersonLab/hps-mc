@@ -1,6 +1,6 @@
 {
     "input_files": {
-        "/work/slac/data/hps_010118_10k_events.evio.00000": "data_events.evio"
+        "/sdf/group/hps/data/physrun2019/hps_10030/hps_010030.evio.00120": "data_events.evio"
     },
     "output_files": {
         "data_events.slcio": "data_events_1.slcio",
