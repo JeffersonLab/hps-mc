@@ -174,8 +174,8 @@ class JobTemplate:
                     jobdata.set('job_id', job_id)
                     jobdata.set('sequence', r)
                     if (len(input_files.keys())):
-                        job_input_files = []
                         for input_name in list(input_files.keys()):
+                            job_input_files = []
                             nreads = input_files[input_name][1]
                             for iread in range(nreads):
                                 input_file = input_files[input_name][0].pop(0)
