@@ -8,6 +8,10 @@ import sys
 import logging
 import signal
 import multiprocessing
+
+# The site-package psutil for /apps/python/3.9.5 is customizedly installed at /group/hps/hps_soft/python3.9.5/site-packages at JLab
+if os.path.isdir("/group/hps/hps_soft/python3.9.5/site-packages"):
+    sys.path.append("/group/hps/hps_soft/python3.9.5/site-packages")
 import psutil
 
 import xml.etree.ElementTree as ET

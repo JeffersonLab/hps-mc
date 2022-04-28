@@ -9,6 +9,9 @@ import argparse
 import math
 import uuid as _uuid
 
+# The package jinja2 is installed at /apps/python/3.4.3/lib/python3.4/site-packages at JLab
+if os.path.isdir("/apps/python/3.4.3/lib/python3.4/site-packages"):
+    sys.path.append("/apps/python/3.4.3/lib/python3.4/site-packages")
 from jinja2 import Template, Environment, FileSystemLoader
 
 def basename(path):

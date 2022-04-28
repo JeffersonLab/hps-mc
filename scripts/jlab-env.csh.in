@@ -1,1 +1,2 @@
 module load gcc/@CMAKE_C_COMPILER_VERSION@
+module load python/3.9.5
