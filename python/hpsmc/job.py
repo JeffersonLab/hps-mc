@@ -576,7 +576,8 @@ class Job(object):
             elif i > -1:
                 logger.debug("Setting inputs on '%s' to: %s"
                             % (c.name, str(self.components[i - 1].output_files())))
-                c.inputs = self.components[i - 1].output_files()
+                if len(c.inputs) == 0:
+                    c.inputs = self.components[i - 1].output_files()
 
     def __set_parameters(self):
         """
