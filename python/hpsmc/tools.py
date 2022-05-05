@@ -50,14 +50,6 @@ class SLIC(Component):
                 "-o", self.output_files()[0],
                 "-d%s" % str(self.seed)]
 
-        if len(self.macros):
-            for macro in self.macros:
-                if macro == "run_number.mac":
-                    raise Exception("Macro name '%s' is not allowed." % macro)
-                if not os.path.isabs(macro):
-                    raise Exception("Macro '%s' is not an absolute path." % macro)
-                args.extend(["-m", macro])
-
         if self.nevents is not None:
             args.extend(["-r", str(self.nevents)])
 
@@ -69,6 +61,16 @@ class SLIC(Component):
             args.extend(["-P", tbl])
         else:
             raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
+
+        if len(self.macros):
+            args = []
+            for macro in self.macros:
+                if macro == "run_number.mac":
+                    raise Exception("Macro name '%s' is not allowed." % macro)
+                if not os.path.isabs(macro):
+                    raise Exception("Macro '%s' is not an absolute path." % macro)
+                args.extend(["-m", macro])
+
 
         return args
 
