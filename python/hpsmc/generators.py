@@ -78,14 +78,19 @@ class EGS5(EventGenerator):
         seed_file.close()
 
     def output_files(self):
+        # Output file for Moller generation
+        if 'moller' in self.name:
+            return ['moller.stdhep']
+        # Output file for beam generation
         return ['beam.stdhep']
 
     def execute(self, log_out, log_err):
         EventGenerator.execute(self, log_out, log_err)
-        src = os.path.join(self.rundir, 'brems.stdhep')
-        dest = os.path.join(self.rundir, self.output_files()[0])
-        logger.debug("Copying '%s' to '%s'" % (src, dest))
-        shutil.copy(src, dest)
+        if 'beam' in self.name:
+            src = os.path.join(self.rundir, 'brems.stdhep')
+            dest = os.path.join(self.rundir, self.output_files()[0])
+            logger.debug("Copying '%s' to '%s'" % (src, dest))
+            shutil.copy(src, dest)
 
     def required_parameters(self):
         return ['seed', 'run_params']
