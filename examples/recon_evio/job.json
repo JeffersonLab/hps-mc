@@ -1,0 +1,14 @@
+{
+    "run_number": 14362,
+    "detector": "HPS_Run2021Pass2FEE",
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2021_pass0_recon_evio.lcsim"
+    },
+    "input_files": {
+        "/cache/hallb/hps/physrun2021/data/hpspin_014362/hpspin_014362.evio.00000": "input.evio"
+    },
+    "output_files": {
+        "recon.slcio": "recon.slcio"
+    },
+    "output_dir": "output"
+}
