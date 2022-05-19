@@ -86,7 +86,7 @@ class EGS5(EventGenerator):
 
     def execute(self, log_out, log_err):
         EventGenerator.execute(self, log_out, log_err)
-        if 'beam' in self.name:
+        if 'moller' not in self.name:
             src = os.path.join(self.rundir, 'brems.stdhep')
             dest = os.path.join(self.rundir, self.output_files()[0])
             logger.debug("Copying '%s' to '%s'" % (src, dest))
