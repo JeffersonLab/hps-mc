@@ -1,0 +1,15 @@
+{
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
+    "nevents": 100,
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2021_pass0_recon_evio.lcsim"
+    },
+    "input_files": {
+            "{{ input_files['input'][0] }}": "input.evio"
+    },
+    "output_files": {
+        "recon.slcio": "hps_{{run_number}}_{{job_id-1}}.slcio"
+    },
+    "output_dir": "/w/hallb-scshelf2102/hps/caot/experimentData/2021/recon/HPS_Run2021Pass2FEE/hps_014750/PhysicsRun2021_pass0_recon_evio/recon"
+}
