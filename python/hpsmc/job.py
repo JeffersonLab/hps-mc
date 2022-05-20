@@ -666,6 +666,10 @@ class Job(object):
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
             logger.info("Copying input file: %s -> %s" % (src, os.path.join(self.rundir, dest)))
+            if '/mss/' in src:
+                src = src.replace('/mss/', '/cache/')
+            if os.path.exists(os.path.join(self.rundir, dest)):
+                os.chmod(os.path.join(self.rundir, dest), 0o666)
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 
