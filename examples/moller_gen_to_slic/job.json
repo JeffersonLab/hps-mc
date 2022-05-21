@@ -1,14 +1,14 @@
 {
-    "run_number": 10666,
+    "run_number": 14362,
     "bunches": 25000,
     "nevents": 25000,
     "seed": 1001002,
-    "run_params": "4pt55",
-    "target_z": -7.51,
-    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "run_params": "3pt7",
+    "target_z": 0,
+    "detector": "HPS-v2019-3pt7GeV",
     "output_files": {
         "moller.stdhep": "stdhep/moller.stdhep",
         "moller_rot.slcio": "slic/moller.slcio"
     },
-    "output_dir": "output/2019/pass0"
+    "output_dir": "output"
 }
