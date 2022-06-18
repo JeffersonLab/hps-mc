@@ -439,14 +439,15 @@ class Auger(Batch):
         outputdir = job_params["output_dir"]
         #outputdir = os.path.realpath(outputdir)
         j = self._create_job(job_params)
-        for src,dest in outputfiles.items():
-            output_elem = ET.SubElement(job, "Output")
-            res_src = j.resolve_output_src(src)
-            output_elem.set("src", res_src)
-            dest_file = os.path.join(outputdir, dest)
-            if dest_file.startswith("/mss"):
-                dest_file = "mss:%s" % dest_file
-            output_elem.set("dest", dest_file)
+        if j.enable_copy_output_files == False:
+            for src,dest in outputfiles.items():
+                output_elem = ET.SubElement(job, "Output")
+                res_src = j.resolve_output_src(src)
+                output_elem.set("src", res_src)
+                dest_file = os.path.join(outputdir, dest)
+                if dest_file.startswith("/mss"):
+                    dest_file = "mss:%s" % dest_file
+                output_elem.set("dest", dest_file)
 
         job_err = ET.SubElement(job, "Stderr")
         stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
