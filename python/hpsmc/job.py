@@ -595,9 +595,12 @@ class Job(object):
             c.cleanup()
         if self.delete_rundir:
             logger.debug('Deleting run dir: %s' % self.rundir)
-            for f in os.listdir(self.rundir):
-                if ('.log' not in f) and ('__swif_' not in f):
-                    os.system('rm -r %s' % f)
+            if os.path.exists("%s/__swif_env__" % self.rundir):
+                for f in os.listdir(self.rundir):
+                    if ('.log' not in f) and ('__swif_' not in f):
+                        os.system('rm -r %s' % f)
+            else:
+                shutil.rmtree(self.rundir)
         if self.out != sys.stdout:
             self.out.close()
         if self.err != sys.stderr:
