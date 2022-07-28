@@ -10,3 +10,7 @@ install/
 .project
 .pydevproject
 .settings
+
+# Doxygen
+html/
+latex/
