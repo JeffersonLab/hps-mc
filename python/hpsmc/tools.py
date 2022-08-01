@@ -266,6 +266,7 @@ class JobManager(Component):
             args.append(input_file)
 
         if self.overlay_file is not None:
+            args.append("-D")
             args.append("overlayFile=" + os.path.splitext(self.overlay_file)[0])
 
         return args
