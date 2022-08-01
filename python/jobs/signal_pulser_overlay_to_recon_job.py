@@ -8,7 +8,7 @@ inputs = list(job.input_files.values())
 # Input signal events (slcio format)
 signal_file_name = []
 
-# Input pulser events (slcio format)
+# Input pulser events (evio format)
 pulser_file_name = []
 
 for input in inputs:
