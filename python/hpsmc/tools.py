@@ -162,7 +162,10 @@ class JobManager(Component):
 
         self.hps_java_bin_jar = None
 
-        self.overlay_file = None
+        if 'overlay_file' in kwargs:
+            self.overlay_file = kwargs['overlay_file']
+        else:
+            self.overlay_file = None
 
         Component.__init__(self,
                            name='job_manager',
@@ -744,19 +747,11 @@ class EvioToLcioConversion(JavaTool):
     def optional_parameters(self):
         return ['run_number', 'nevents']
 
-    def setup(self):
-        if self.steering not in self.steering_files:
-            raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
-        self.steering_file = self.steering_files[self.steering]
-
     def cmd_args(self):
         args = JavaTool.cmd_args(self)
-
-        args.append('org.hps.evio.EvioToLcio')
-
         if not len(self.output_files()):
             raise Exception('No output files were provided.')
-        args.append('-l', self.output_files()[0])
+        args.extend(['-l', self.output_files()[0]])
 
         args.extend(['-d', self.detector])
 

@@ -41,16 +41,16 @@ filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name,
 count_filter = LCIOCount(inputs=filter_events.output_files())
 
 # Convert evio to lcio for raw pulser data
-lcio_to_evio = EvioToLcioConversion(inputs=pulser_file_name, output=['%s.slcio' % pulser_name])
+evio_to_lcio = EvioToLcioConversion(inputs=pulser_file_name, output=['%s.slcio' % pulser_name])
 
 # Count pulser events
-count_pulser = LCIOCount(inputs=lcio_to_evio.output_files())
+count_pulser = LCIOCount(inputs=evio_to_lcio.output_files())
 
 # Overlay signal with pulser data
 overlay = JobManager(steering='overlay',
                      inputs=filter_events.output_files(),
-                     overlay_file=lcio_to_evio.output_files()[0],
-                     outputs=['%s_readout.slcio' % signal_pulser_name])
+                     overlay_file=evio_to_lcio.output_files()[0],
+                     outputs=['%s.slcio' % signal_pulser_name])
 
 # Space overlaid events
 space_overlay = FilterBunches(inputs=overlay.output_files(),
@@ -78,5 +78,5 @@ recon = JobManager(steering='recon',
 count_recon = LCIOCount(inputs=recon.output_files())
 
 # Add the components
-job.add([filter_events, count_filter, lcio_to_evio, count_pulser, overlay, space_overlay,
+job.add([filter_events, count_filter, evio_to_lcio, count_pulser, overlay, space_overlay,
          count_space_overlay, readout, count_readout, recon, count_recon])
