@@ -99,6 +99,10 @@ python hps-mc/python/test/egs5_test.py
 
 In the above command insert the full path to your hps-mc installation instead of `hps-mc` or you can copy the python script to the scratch directory.
 
+## Documentation
+Documentation of the hps-source code can be found at https://www.slac.stanford.edu/~hpsprod/html/index.html.
+
+
 ## Quick Start Guide
 
 The first step to setting up an system to run jobs via hps-mc is first producing `~/.hpsmc` which will set all of the system level configuration parameters for all types of jobs. An example of what a system level .hpsmc file should look like is provided at `config/bravo_sdf.cfg`. One can simply copy this to `~/.hpsmc` of the system and update the paths to point to the relevant locations on that particular system.
