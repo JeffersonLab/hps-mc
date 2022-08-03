@@ -26,7 +26,12 @@ class EventGenerator(Component):
         return "{}/share/generators".format(os.getenv("HPSMC_DIR", None))
 
 class EGS5(EventGenerator):
-    """! Run the EGS5 event generator to produce a StdHep file."""
+    """!
+    Run the EGS5 event generator to produce a StdHep file.
+    
+    Required parameters are **seed**, **run_parameters** \n 
+    Optional parameters are: **bunches**, **target_thickness**
+    """
 
     def __init__(self, name='', **kwargs):
         self.bunches = 5e5  ## \todo is this the number of bunches or the number of particles per bunch?
@@ -105,11 +110,19 @@ class EGS5(EventGenerator):
             shutil.copy(src, dest)
 
     def required_parameters(self):
-        """! Return required parameters."""
+        """!
+        Return required parameters.
+
+        Required parameters are **seed**, **run_parameters**
+        """
         return ['seed', 'run_params']
 
     def optional_parameters(self):
-        """! Return optional parameters."""
+        """!
+        Return optional parameters.
+
+        Optional parameters are: **bunches**, **target_thickness**
+        """
         return ['bunches', 'target_thickness']
 
     #def required_config(self):
@@ -161,6 +174,9 @@ class StdHepConverter(EGS5):
 class MG(EventGenerator):
     """!
     Abstract class for MadGraph generators.
+
+    Required parameters are: **nevents**, **run_params** \n
+    Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod** 
     """
     def __init__(self, name, **kwargs):
 
@@ -202,11 +218,19 @@ class MG(EventGenerator):
         logger.debug("Set run card to '%s'" % self.run_card)
 
     def required_parameters(self):
-        """! Return required parameters."""
+        """!
+        Return required parameters.
+
+        Required parameters are: **nevents**, **run_params**
+        """
         return ['nevents', 'run_params']
 
     def optional_parameters(self):
-        """! Return optional parameters."""
+        """!
+        Return optional parameters.
+
+        Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod**
+        """
         return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod']
 
     #def required_config(self):

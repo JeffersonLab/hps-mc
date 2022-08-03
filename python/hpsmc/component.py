@@ -13,7 +13,11 @@ logger = logging.getLogger("hpsmc.component")
 
 
 class Component(object):
-    """! Base class for components in a job."""
+    """!
+    Base class for components in a job.
+    
+    Optional parameters are: **nevents**, **seed**
+    """
 
     def __init__(self,
                  name,
@@ -157,18 +161,25 @@ class Component(object):
                     logger.debug("Ignored job param '%s'" % p)
 
     def required_parameters(self):
-        """! Return a list of required parameters.
+        """!
+        Return a list of required parameters.
 
         The job will fail if these are not present in the JSON file.
         """
         return []
 
     def optional_parameters(self):
-        """! Return a list of optional parameters."""
+        """!
+        Return a list of optional parameters.
+
+        Optional parameters are: **nevents**, **seed**
+        """
         return ['nevents', 'seed']
 
     def required_config(self):
-        """! Return a list of required configuration settings.
+        """!
+        Return a list of required configuration settings.
+
         There are none by default.
         """
         return []

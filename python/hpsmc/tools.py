@@ -18,6 +18,10 @@ logger = logging.getLogger("hpsmc.tools")
 class SLIC(Component):
     """!
     Run the SLIC Geant4 simulation.
+
+    Optional parameters are: **nevents**, **macros**, **run_number** \n 
+    Required parameters are: **detector** \n 
+    Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
     """
 
     def __init__(self, **kwargs):
@@ -121,7 +125,7 @@ class SLIC(Component):
         """!
         Return list of optional parameters.
 
-        Optional parameters are: nevents, macros, run_number
+        Optional parameters are: **nevents**, **macros**, **run_number**
         @return  list of optional parameters
         """
         return ['nevents', 'macros', 'run_number']
@@ -130,7 +134,7 @@ class SLIC(Component):
         """!
         Return list of required parameters.
 
-        Required parameters are: detector
+        Required parameters are: **detector**
         @return  list of required parameters
         """
         return ['detector']
@@ -139,7 +143,7 @@ class SLIC(Component):
         """!
         Return list of required configurations.
         
-        Required configurations are: slic_dir, hps_fieldmaps_dir, detector_dir
+        Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
         @return  list of required configurations
         """
         return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
@@ -165,6 +169,9 @@ class SLIC(Component):
 class JobManager(Component):
     """!
     Run the hps-java JobManager class.
+
+    Required parameters are: **steering_files** \n 
+    Optional parameters are: **detector**, **run_number**, **defs**
     """
 
     def __init__(self, steering=None, **kwargs):
@@ -301,7 +308,7 @@ class JobManager(Component):
         """!
         Return list of required parameters.
 
-        Required parameters are: steering_files
+        Required parameters are: **steering_files**
         @return  list of required parameters
         """
         return ['steering_files']
@@ -310,7 +317,7 @@ class JobManager(Component):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: detector, run_number, defs
+        Optional parameters are: **detector**, **run_number**, **defs**
         @return list of optional parameters
         """
         return ['detector', 'run_number', 'defs']
@@ -318,6 +325,10 @@ class JobManager(Component):
 class HPSTR(Component):
     """!
     Run the hpstr analysis tool.
+
+    Required parameters are: **config_files** \n 
+    Optional parameters are: **year**, **run_mode**, **nevents** \n 
+    Required configs are: **hpstr_install_dir**, **hpstr_base**
     """
 
     def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
@@ -362,7 +373,7 @@ class HPSTR(Component):
         """!
         Return list of required parameters.
 
-        Required parameters are: config_files
+        Required parameters are: **config_files**
         @return  list of required parameters
         """
         return ['config_files']
@@ -371,7 +382,7 @@ class HPSTR(Component):
         """!
         Return list of optional parameters.
 
-        Optional parameters are: year, run_mode, nevents
+        Optional parameters are: **year**, **run_mode**, **nevents**
         @return  list of optional parameters
         """
         return ['year', 'run_mode', 'nevents']
@@ -380,7 +391,7 @@ class HPSTR(Component):
         """!
         Return list of required configs.
 
-        Required configs are: hpstr_install_dir, hpstr_base
+        Required configs are: **hpstr_install_dir**, **hpstr_base**
         @return  list of required configs
         """
         return ['hpstr_install_dir', 'hpstr_base']
@@ -470,6 +481,9 @@ class StdHepTool(Component):
 class BeamCoords(StdHepTool):
     """!
     Transform StdHep events into beam coordinates.
+
+    Optional parameters are: **beam_sigma_x**, **beam_sigma_y**, **beam_rot_x**,
+    **beam_rot_y**, **beam_rot_z**, **target_x**, **target_y**, **target_z**
     """
 
     def __init__(self, **kwargs):
@@ -520,8 +534,8 @@ class BeamCoords(StdHepTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: beam_sigma_x, beam_sigma_y, beam_rot_x,
-        beam_rot_y, beam_rot_z, target_x, target_y, target_z
+        Optional parameters are: **beam_sigma_x**, **beam_sigma_y**, **beam_rot_x**,
+        **beam_rot_y**, **beam_rot_z**, **target_x**, **target_y**, **target_z**
         @return list of optional parameters
         """
         return['beam_sigma_x', 'beam_sigma_y', 'beam_rot_x',
@@ -531,6 +545,8 @@ class BeamCoords(StdHepTool):
 class RandomSample(StdHepTool):
     """!
     Randomly sample StdHep events into a new file.
+
+    Optional parameters are: **nevents**, **mu**
     """
 
     def __init__(self, **kwargs):
@@ -575,7 +591,7 @@ class RandomSample(StdHepTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: nevents, mu
+        Optional parameters are: **nevents**, **mu**
         @return list of optional parameters
         """
         return ['nevents','mu']
@@ -595,6 +611,8 @@ class RandomSample(StdHepTool):
 class DisplaceTime(StdHepTool):
     """!
     Convert LHE files to StdHep, displacing the time by given ctau.
+
+    Optional parameters are: **ctau**
     """
 
     def __init__(self, **kwargs):
@@ -618,7 +636,7 @@ class DisplaceTime(StdHepTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: ctau
+        Optional parameters are: **ctau**
         @return list of optional parameters
         """
         return ['ctau']
@@ -626,6 +644,8 @@ class DisplaceTime(StdHepTool):
 class DisplaceUni(StdHepTool):
     """!
     Convert LHE files to StdHep, displacing the time by given ctau.
+
+    Optional parameters are: **ctau**
     """
 
     def __init__(self, **kwargs):
@@ -649,7 +669,7 @@ class DisplaceUni(StdHepTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: ctau
+        Optional parameters are: **ctau**
         @return list of optional parameters
         """
         return ['ctau']
@@ -706,6 +726,8 @@ class AddMotherFullTruth(StdHepTool):
 class MergePoisson(StdHepTool):
     """!
     Merge StdHep files, applying poisson sampling.
+
+    Required parameters are: **run_params**
     """
 
     def __init__(self, lhe_file=None, **kwargs):
@@ -725,7 +747,7 @@ class MergePoisson(StdHepTool):
         """!
         Return list of required parameters.
         
-        Required parameters are: run_params
+        Required parameters are: **run_params**
         @return list of required parameters
         """
         return ['run_params']
@@ -770,6 +792,9 @@ class MergePoisson(StdHepTool):
 class MergeFiles(StdHepTool):
     """!
     Merge StdHep files.
+
+    Optional parameters are: none \n 
+    Required parameters are: none
     """
 
     def __init__(self, **kwargs):
@@ -842,7 +867,7 @@ class JavaTool(Component):
         """!
         Return list of required config.
         
-        Required config are: hps_java_bin_jar
+        Required config are: **hps_java_bin_jar**
         @return list of required config
         """
         return ['hps_java_bin_jar']
@@ -867,6 +892,9 @@ class JavaTool(Component):
 class EvioToLcio(JavaTool):
     """!
     Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
+
+    Required parameters are: **detector**, **steering_files** \n 
+    Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**
     """
     def __init__(self, steering=None, **kwargs):
        self.detector = None  ## detector name
@@ -886,7 +914,7 @@ class EvioToLcio(JavaTool):
         """!
         Return list of required parameters.
         
-        Required parameters are: detector, steering_files
+        Required parameters are: **detector**, **steering_files**
         @return list of required parameters
         """
         return ['detector', 'steering_files']
@@ -895,7 +923,7 @@ class EvioToLcio(JavaTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: run_number, skip_events, nevents, event_print_interval
+        Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**
         @return list of optional parameters
         """
         return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
@@ -946,6 +974,10 @@ class EvioToLcio(JavaTool):
 class FilterBunches(JavaTool):
     """!
     Space MC events and apply energy filters to process before readout.
+
+    Optional parameters are: **filter_ecal_hit_ecut**, **filter_event_interval**,
+    **filter_nevents_read**, **filter_nevents_write**, **filter_no_cuts** \n 
+    Required config are: **hps_java_bin_jar**
     """
     def __init__(self, **kwargs):
         if 'filter_no_cuts' in kwargs:
@@ -1030,8 +1062,8 @@ class FilterBunches(JavaTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: filter_ecal_hit_ecut, filter_event_interval,
-        filter_nevents_read, filter_nevents_write, filter_no_cuts
+        Optional parameters are: **filter_ecal_hit_ecut**, **filter_event_interval**,
+        **filter_nevents_read**, **filter_nevents_write**, **filter_no_cuts** \n 
         @return list of optional parameters
         """
         return ['filter_ecal_hit_ecut',
@@ -1044,7 +1076,7 @@ class FilterBunches(JavaTool):
         """!
         Return list of required config.
         
-        Required config are: hps_java_bin_jar
+        Required config are: **hps_java_bin_jar**
         @return list of required config
         """
         return ['hps_java_bin_jar']
@@ -1056,7 +1088,9 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
     The nevents parameter is not settable from JSON in this class. It should
     be supplied as an init argument in the job script if it needs to be
     customized (the default nevents and event_interval used to apply spacing
-    should usually not need to be changed by the user).
+    should usually not need to be changed by the user). \n 
+
+    Optional parameters are: **num_hodo_hits**, **event_interval**
     """
     def __init__(self, **kwargs):
         if "num_hodo_hits" in kwargs:
@@ -1098,7 +1132,7 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: num_hodo_hits, event_interval
+        Optional parameters are: **num_hodo_hits**, **event_interval**
         @return list of optional parameters
         """
         return ['num_hodo_hits', 'event_interval']
@@ -1129,6 +1163,9 @@ class Unzip(Component):
 class LCIODumpEvent(Component):
     """!
     Dump LCIO event information.
+
+    Required parameters are: none \n 
+    Required config are: **lcio_dir**
     """
     def __init__(self, **kwargs):
 
@@ -1169,7 +1206,7 @@ class LCIODumpEvent(Component):
         """!
         Return list of required config.
         
-        Required config are: lcio_dir
+        Required config are: **lcio_dir**
         @return list of required config
         """
         return ['lcio_dir']
@@ -1283,6 +1320,9 @@ class MoveFiles(Component):
 class LCIOTool(Component):
     """!
     Generic component for LCIO tools.
+
+    Required parameters are: none \n 
+    Required config are: **lcio_bin_jar**
     """
     def __init__(self, name=None, **kwargs):
 
@@ -1309,7 +1349,7 @@ class LCIOTool(Component):
         """!
         Return list of required config.
         
-        Required config are: lcio_bin_jar
+        Required config are: **lcio_bin_jar**
         @return list of required config
         """
         return ['lcio_bin_jar']
@@ -1350,6 +1390,9 @@ class LCIOConcat(LCIOTool):
 class LCIOCount(LCIOTool):
     """!
     Count events in LCIO files.
+
+    Required parameters are: none \n 
+    Optional parameters are: none
     """
     def __init__(self, **kwargs):
         LCIOTool.__init__(self,
@@ -1415,6 +1458,9 @@ class SimBase(Component):
     """!
     Generic base class for shared Geant4 sim config
     \todo Make SLIC extend this, too.
+
+    Optional parameters are: **nevents**, **macros**, **run_number** \n 
+    Required parameters are: **detector**
     """
 
     def detector_file(self):
@@ -1425,7 +1471,7 @@ class SimBase(Component):
         """!
         Return list of optional parameters.
         
-        Optional parameters are: nevents, macros, run_number
+        Optional parameters are: **nevents**, **macros**, **run_number**
         @return list of optional parameters
         """
         return ['nevents', 'macros', 'run_number']
@@ -1434,7 +1480,7 @@ class SimBase(Component):
         """!
         Return list of required parameters.
         
-        Required parameters are: detector
+        Required parameters are: **detector**
         @return list of required parameters
         """
         return ['detector']
@@ -1453,6 +1499,8 @@ class SimBase(Component):
 class Sim(SimBase):
     """!
     Run the hps-sim Geant4 simulation.
+
+    Required config are: **hps_sim_dir**, **hps_fieldmaps_dir**, **detector_dir**
     """
     def __init__(self, **kwargs):
         self.macros = []  ## List of macros to run (optional)
@@ -1543,7 +1591,7 @@ class Sim(SimBase):
         """!
         Return list of required config.
         
-        Required config are: hps_sim_dir, hps_fieldmaps_dir, detector_dir
+        Required config are: **hps_sim_dir**, **hps_fieldmaps_dir**, **detector_dir**
         @return list of required config
         """
         return ['hps_sim_dir', 'hps_fieldmaps_dir', 'detector_dir']
