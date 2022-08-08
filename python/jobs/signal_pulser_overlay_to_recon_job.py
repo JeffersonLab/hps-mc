@@ -1,4 +1,4 @@
-from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcioConversion, JobManager, FilterBunches, LCIOCount
+from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount
 
 job.description = 'signal-pulse from overlay to recon'
 
@@ -41,7 +41,7 @@ filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name,
 count_filter = LCIOCount(inputs=filter_events.output_files())
 
 # Convert evio to lcio for raw pulser data
-evio_to_lcio = EvioToLcioConversion(inputs=pulser_file_name, output=['%s.slcio' % pulser_name])
+evio_to_lcio = EvioToLcio(steering='evio_to_lcio', inputs=pulser_file_name, output=['%s.slcio' % pulser_name])
 
 # Count pulser events
 count_pulser = LCIOCount(inputs=evio_to_lcio.output_files())
