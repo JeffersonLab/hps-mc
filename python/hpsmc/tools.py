@@ -722,53 +722,6 @@ class JavaTool(Component):
         args.append(self.java_class)
         return args
 
-class EvioToLcioConversion(JavaTool):
-    """
-    Convert EVIO events to LCIO using the hps-java EvioToLciocommand line tool.
-    """
-
-    def __init__(self, steering=None, **kwargs):
-
-       self.detector = None
-       self.run_number = None
-       self.skip_events = None
-       self.event_print_interval = None
-       self.steering = steering
-
-       JavaTool.__init__(self,
-                         name='evio_to_lcio',
-                         java_class='org.hps.evio.EvioToLcio',
-                         output_ext='.slcio',
-                         **kwargs)
-
-    def required_parameters(self):
-        return ['detector']
-
-    def optional_parameters(self):
-        return ['run_number', 'nevents']
-
-    def cmd_args(self):
-        args = JavaTool.cmd_args(self)
-        if not len(self.output_files()):
-            raise Exception('No output files were provided.')
-        args.extend(['-l', self.output_files()[0]])
-
-        args.extend(['-d', self.detector])
-
-        if self.run_number is not None:
-            args.extend(['-R', str(self.run_number)])
-
-        if self.nevents is not None:
-            args.extend(['-n', str(self.nevents)])
-
-        args.append('-b')
-
-        for inputfile in self.input_files():
-            args.append(inputfile)
-
-        return args
-
-
 class EvioToLcio(JavaTool):
     """
     Convert EVIO events to LCIO using the hps-java EvioToLciocommand line tool and run a steering file job.
