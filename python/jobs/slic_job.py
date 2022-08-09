@@ -8,3 +8,5 @@ job.add(SLIC())
 #job.add(LCIOCount())
 
 #job.add(LCIODumpEvent())
+
+## \todo cleanup

@@ -1,4 +1,4 @@
-"""Utility script for printing help about component classes."""
+"""! Utility script for printing help about component classes."""
 
 from component import Component
 from job import Job
@@ -11,7 +11,7 @@ from generators import *
 _ignore = ('Component', 'EventGenerator', 'StdHepTool', 'JavaTool', 'MG')
 
 def print_component(v):
-    """Accepts Component class and prints info about it."""
+    """! Accepts Component class and prints info about it."""
     try:
         if isinstance(v, str):
             obj = eval(v)()
@@ -48,7 +48,7 @@ def print_component(v):
         print(e)
 
 def print_components():
-    """Print info for all Component classes."""
+    """! Print info for all Component classes."""
     print("AVAILABLE COMPONENTS: ")
     for k in sorted(globals().keys()):
         v = globals()[k]

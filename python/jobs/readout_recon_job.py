@@ -1,9 +1,12 @@
+"""!
+Filter bunches, run readout, hps-java recon, and then a HPSTR analysis.
+"""
 import os
 from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 
 job.description = 'Filter bunches, run readout, hps-java recon, and then a HPSTR analysis'
 
-# Assign ptags for output
+## Assign ptags for output
 input_files = list(job.input_files.values())
 if len(input_files) > 1:
     raise Exception('This script accepts only one input file.')
@@ -16,17 +19,17 @@ job.ptag('lcio_recon', '%s_filt_readout_recon.slcio' % output_base)
 
 count_input = LCIOCount()
 
-# Insert empty bunches expected by pile-up simulation
+## Insert empty bunches expected by pile-up simulation
 filter_bunches = FilterBunches()
 
 count_filt = LCIOCount()
 
-# Run simulated events in readout to generate triggers
+## Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
 
 count_readout = LCIOCount()
 
-# Run physics reconstruction
+## Run physics reconstruction
 reco = JobManager(steering='recon')
 
 count_reco = LCIOCount()
