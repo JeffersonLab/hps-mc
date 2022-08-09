@@ -1,0 +1,5 @@
+/mss/hallb/hps/production/mcData/2019/pass0/slic/HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig/4pt55/tritrig_1.slcio
+/mss/hallb/hps/production/mcData/2019/pass0/slic/HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig/4pt55/tritrig_2.slcio
+/mss/hallb/hps/production/mcData/2019/pass0/slic/HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig/4pt55/tritrig_3.slcio
+/mss/hallb/hps/production/mcData/2019/pass0/slic/HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig/4pt55/tritrig_4.slcio
+/mss/hallb/hps/production/mcData/2019/pass0/slic/HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig/4pt55/tritrig_5.slcio

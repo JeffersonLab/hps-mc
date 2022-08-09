@@ -162,6 +162,11 @@ class JobManager(Component):
 
         self.hps_java_bin_jar = None
 
+        if 'overlay_file' in kwargs:
+            self.overlay_file = kwargs['overlay_file']
+        else:
+            self.overlay_file = None
+
         Component.__init__(self,
                            name='job_manager',
                            command='java',
@@ -262,6 +267,10 @@ class JobManager(Component):
         for input_file in self.input_files():
             args.append("-i")
             args.append(input_file)
+
+        if self.overlay_file is not None:
+            args.append("-D")
+            args.append("overlayFile=" + os.path.splitext(self.overlay_file)[0])
 
         return args
 
@@ -715,7 +724,7 @@ class JavaTool(Component):
 
 class EvioToLcio(JavaTool):
     """
-    Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
+    Convert EVIO events to LCIO using the hps-java EvioToLciocommand line tool and run a steering file job.
     """
 
     def __init__(self, steering=None, **kwargs):
