@@ -1,8 +1,11 @@
+"""!
+Simulation of beam signals in detector using SLIC.
+"""
 from hpsmc.tools import SLIC
 
 job.description = 'beam detector sim via slic'
 
-# Get job input file targets
+## Get job input file targets
 inputs = list(job.input_files.values())
 
 if 'nevents' in job.params:
@@ -10,8 +13,8 @@ if 'nevents' in job.params:
 else:
     nevents = 250000
 
-# Simulate events
+## Simulate events
 slic = SLIC(nevents=nevents+1)
 
-# Run the job
+## Run the job
 job.add([slic])

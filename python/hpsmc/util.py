@@ -1,9 +1,10 @@
-"""Miscellaneous utility functions."""
+"""! Miscellaneous utility functions."""
 
 import sys
 import logging
 
 def convert_config_value(val):
+    """! Convert config value to Python readable value."""
     if val == 'True' or val == 'true':
         return True
     elif val == 'False' or val == 'false':
@@ -22,7 +23,7 @@ def convert_config_value(val):
     return val
 
 def config_logging(stream=sys.stdout, level=logging.DEBUG, logname='hpsmc'):
-    """
+    """!
     Configure logging by setting an output stream and level (both optional).
     Any handlers already registered will be replaced by calling this method.
     """

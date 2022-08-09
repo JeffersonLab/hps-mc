@@ -9,10 +9,12 @@
 
 #include <unistd.h>
 
-// randomly replace at most 1 event in a background file with a selected event from a signal file
+/*
+ * Randomly replace at most 1 event in a background file with a selected event from a signal file.
+ */
 int main(int argc,char** argv)
 {
-	int nevhep;             /* The event number */
+	int nevhep;             //!< The event number
 	vector<stdhep_entry> new_event;
 	vector<stdhep_entry> sig_event;
 
@@ -20,13 +22,10 @@ int main(int argc,char** argv)
 	int n_events = 500000;
 
 	int signal_n = 1;
-
-
 	int rseed = 0;
-
 	int c;
 
-	while ((c = getopt(argc,argv,"hm:s:n:")) !=-1)
+	while ((c = getopt(argc,argv,"hm:s:n:")) != -1)
 		switch (c)
 		{
 			case 'h':
@@ -52,9 +51,9 @@ int main(int argc,char** argv)
 				abort();
 		}
 
-	printf("Mixing in the %dth signal event, with probability %f\n",signal_n,signal_prob);
+	printf("Mixing in the %dth signal event, with probability %f\n", signal_n, signal_prob);
 
-	if ( argc-optind != 3 )
+	if (argc - optind != 3)
 	{
 		printf("<input background stdhep filename> <input signal stdhep filename> <output stdhep filename>\n");
 		return 1;
@@ -67,17 +66,15 @@ int main(int argc,char** argv)
 
 	T = gsl_rng_mt19937;
 	r = gsl_rng_alloc (T);
-	gsl_rng_set(r,rseed);
-
+	gsl_rng_set(r, rseed);
 
 	int bkgd_stream = 0;
 	int sig_stream = 1;
 	int ostream = 2;
 	int ilbl;
 
-
-	open_read(argv[optind+1],sig_stream);
-	for (int i=0;i<signal_n;i++) {
+	open_read(argv[optind+1], sig_stream);
+	for (int i = 0; i < signal_n; i++) {
 		if (!read_next(sig_stream)) {
 			close_read(sig_stream);
 			return(1);
@@ -86,24 +83,23 @@ int main(int argc,char** argv)
 	read_stdhep(&sig_event);
 	close_read(sig_stream);
 
-	open_read(argv[optind],bkgd_stream);
-	open_write(argv[optind+2],ostream,n_events);
+	open_read(argv[optind], bkgd_stream);
+	open_write(argv[optind+2], ostream, n_events);
 	bool sig_used = false;
 
 	int evcount = 0;
 	while (read_next(bkgd_stream)) {
 		nevhep = read_stdhep(&new_event);
-		if (!sig_used && gsl_rng_uniform(r)<signal_prob) {
-			write_stdhep(&sig_event,nevhep);
+		if (!sig_used && gsl_rng_uniform(r) < signal_prob) {
+			write_stdhep(&sig_event, nevhep);
 			sig_used = true;
 		} else {
-			write_stdhep(&new_event,nevhep);
+			write_stdhep(&new_event, nevhep);
 		}
 		evcount++;
 		write_file(ostream);
 	}
 	close_read(bkgd_stream);
 	close_write(ostream);
-	printf("Counted %d events\n",evcount);
+	printf("Counted %d events\n", evcount);
 }
-
