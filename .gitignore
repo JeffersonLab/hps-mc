@@ -14,3 +14,6 @@ install/
 # Doxygen
 html/
 latex/
+
+!docs/html/
+docs/html/*
