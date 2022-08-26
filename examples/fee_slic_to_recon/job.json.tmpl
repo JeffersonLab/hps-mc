@@ -11,8 +11,8 @@
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
     },
     "output_files": {
-        "fee_readout.slcio": "fee_readout_20um120nA_{{job_id}}.slcio",
-        "fee_recon.slcio": "fee_recon_20um120nA_{{job_id}}.slcio"
+        "readout.slcio": "fee_readout_20um120nA_{{job_id}}.slcio",
+        "recon.slcio": "fee_recon_20um120nA_{{job_id}}.slcio"
     },
     "nbeams": 5,
     "input_files": {
@@ -22,5 +22,5 @@
         "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_{{job_id*10-1}}.stdhep": "beam_4.stdhep",
         "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_{{job_id*5}}.stdhep": "beam_5.stdhep"
     },
-    "output_dir": "/sdf/home/b/bravo/sdf/src/hps-mc/examples/fee_slic_to_recon/output"
+    "output_dir": "output/{{run_params}}"
 }

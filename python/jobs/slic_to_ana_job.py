@@ -2,8 +2,7 @@
 Run slic with preexisting tritrig stdhep files.
 """
 import os
-from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, AddMother, HPSTR
+from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR
 
 job.description = 'Run slic with preexisting tritrig stdhep files'
 

@@ -1,0 +1,9 @@
+{
+    "run_params": "2pt3",
+    "bunches": 500000,
+    "seed": 1001001,
+    "output_dir": "output",
+    "output_files": {
+        "beam.stdhep": "egs5_beam_2pt3.stdhep"
+    }
+}

@@ -18,7 +18,7 @@
     "run_params": "4pt55", 
     "detector": "HPS_Nominal_iter0", 
     "output_files": {
-        "fee_readout.slcio": "fee_readout_20um120nA_31.slcio",
-        "tritrig-beam_recon.slcio": "fee_recon_20um120nA_31.slcio"
+        "readout.slcio": "fee_readout_20um120nA_31.slcio",
+        "recon.slcio": "fee_recon_20um120nA_31.slcio"
     }
 } 
