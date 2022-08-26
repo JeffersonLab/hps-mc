@@ -4,7 +4,7 @@ Simulation of radiative events and detector signals (using SLIC).
 from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import Unzip, BeamCoords, AddMotherFullTruth, SLIC
 
-job.description = 'rad from generation to slic'
+job.description = 'rad generation'
 
 ## Get job input file targets
 inputs = list(job.input_files.values())

@@ -1,0 +1,2 @@
+find better solution for .hpsmc EvioToLcio java_bin_jar thingy
+replace input file by working file

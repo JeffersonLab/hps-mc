@@ -7,16 +7,16 @@
     }, 
     "nbeams": 4,
     "input_files": {
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_301.stdhep": "beam_1.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_302.stdhep": "beam_2.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_303.stdhep": "beam_3.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_304.stdhep": "beam_4.stdhep"
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_301.stdhep": "beam_1.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_302.stdhep": "beam_2.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_303.stdhep": "beam_3.stdhep",
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_304.stdhep": "beam_4.stdhep"
     }, 
     "target_z": -7.51, 
     "nevents": 10000, 
     "output_dir": "output", 
     "run_params": "4pt55", 
-    "detector": "HPS_Nominal_iter0", 
+    "detector": "HPS_Run2021Pass0_v0", 
     "output_files": {
         "readout.slcio": "fee_readout_20um120nA_31.slcio",
         "recon.slcio": "fee_recon_20um120nA_31.slcio"
