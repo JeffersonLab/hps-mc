@@ -21,5 +21,6 @@
     "output_files": {
         "tritrig-beam_recon.slcio": "recon/tritrig-beam_recon_1.slcio"
     }, 
-    "run_mode": 0
+    "run_mode": 0,
+    "seed": 265962032
 } 

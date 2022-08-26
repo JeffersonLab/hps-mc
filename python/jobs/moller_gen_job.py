@@ -4,7 +4,7 @@ Simulation of Moller scattering events and detector signals (using SLIC).
 from hpsmc.generators import EGS5
 from hpsmc.tools import BeamCoords, RandomSample, SLIC
 
-job.description = 'Moller from generation to slic'
+job.description = 'Moller generation'
 
 ## Get job input file targets
 inputs = list(job.input_files.values())

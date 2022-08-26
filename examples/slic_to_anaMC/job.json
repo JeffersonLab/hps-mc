@@ -11,7 +11,7 @@
     "nevents": 10000,
     "output_dir": "output", 
     "run_params": "4pt55", 
-    "detector": "HPS_Nominal_iter0", 
+    "detector": "HPS-PhysicsRun2016-Pass2", 
     "output_files": {
         "tritrig_events.slcio": "tritrig_sim.slcio",
         "tritrig_events.root": "tritrig_sim.root",
