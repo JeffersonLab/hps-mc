@@ -1,1 +1,1 @@
-replace input files by working files
+remove once tritrig beam is updated

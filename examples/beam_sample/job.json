@@ -5,10 +5,10 @@
     "target_z": 0.0,
     "beam_rot_y": 0.0305,
     "input_files": {
-        "/work/slac/data/stdhep/egsv5_1.stdhep": "beam.stdhep"
+        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_60.stdhep": "beam.stdhep"
     },
     "output_files": {
-        "beam_sampled.stdhep": "beam_sampled_1.stdhep"
+        "beam_rot_sampled.stdhep": "beam_sampl.stdhep"
     },
     "output_dir": "output"
 }

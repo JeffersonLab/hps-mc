@@ -1,0 +1,11 @@
+{
+    "nevents": 100,
+    "run_params": "1pt05",
+    "param_card": "MG_mini_WAB/AP_6W_XSec2_HallB/Cards/param_card.dat",
+    "output_files": {
+        "wab_unweighted_events.lhe.gz": "wab_unweighted_events_1.lhe.gz",
+        "wab_unweighted_events_rot.stdhep": "wab_unweighted_events_rot_1.stdhep"
+    },
+    "output_dir": "output",
+    "seed": 7614876
+}
