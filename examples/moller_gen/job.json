@@ -1,7 +1,7 @@
 {
     "run_number": 14362,
-    "bunches": 25000,
-    "nevents": 25000,
+    "bunches": 250,
+    "nevents": 250,
     "seed": 1001002,
     "run_params": "3pt7",
     "target_z": 0,

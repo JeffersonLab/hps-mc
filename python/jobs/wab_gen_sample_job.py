@@ -5,21 +5,24 @@ The output events can be used as input to 'merge_job.py' with a beam StdHep file
 wab-beam sample file.
 """
 
+from hpsmc.generators import MG4
 from hpsmc.tools import BeamCoords, MergePoisson
 from hpsmc.generators import StdHepConverter
 
-job.description = 'WAB sampling'
+job.description = 'WAB gen and sampling'
+
+## generate tritrig in MG4
+mg = MG4(name="wab")
 
 ## Convert wab events to stdhep
-cnv = StdHepConverter()
+cnv = StdHepConverter(inputs=mg.output_files(), outputs=['wab_events.stdhep'])
 
 ## Rotate WAB events into beam coordinates
 rot = BeamCoords()
 
 ## Sample wabs using poisson distribution, calculating mu from provided LHE file
 sample = MergePoisson(input_filter='wab',
-                      lhe_file=next(iter(job.input_files.values())),
-                      nevents=500000)
+                      input_files=['wab_unweighted_events_rot.stdhep'], output_files=['wab_unweighted_events_rot_sampled.stdhep'], lhe_file='some_file.lhe.gz')
 
 ## Add components
-job.add([cnv, rot, sample])
+job.add([mg, cnv, rot])
