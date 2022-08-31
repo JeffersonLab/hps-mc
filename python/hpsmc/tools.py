@@ -739,8 +739,8 @@ class MergePoisson(StdHepTool):
     Required parameters are: **run_params**
     """
 
-    def __init__(self, lhe_file=None, **kwargs):
-        self.lhe_file = lhe_file  ## lhe file
+    def __init__(self, xsec=0, **kwargs):
+        self.xsec = xsec  ## cross section in pb
         StdHepTool.__init__(self,
                             name='merge_poisson',
                             append_tok='sampled',
@@ -750,7 +750,12 @@ class MergePoisson(StdHepTool):
         """! Setup MergePoisson component."""
         self.run_param_data = RunParameters(self.run_params)
         ## \todo: this function could just be inlined here
-        self.mu = func.mu(self.lhe_file, self.run_param_data)
+        if self.xsec>0:
+            self.mu = func.lint(self.run_param_data) * self.xsec
+        else:
+            raise Exception("Cross section is missing.")
+        logger.info("mu is %f", self.mu)
+        
 
     def required_parameters(self):
         """!
@@ -767,7 +772,7 @@ class MergePoisson(StdHepTool):
         @return  list of arguments
         """
         args = []
-
+        #self.mu = func.mu(self.lhe_file, self.run_param_data)
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 

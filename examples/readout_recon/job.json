@@ -10,7 +10,7 @@
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
     "input_files": {
-        "/work/slac/data/tritrig_2016.slcio": "tritrig.slcio"
+        "/sdf/group/hps/users/sgaiser/src/hps-mc/examples/readout_recon/tritrig_sim.slcio": "tritrig.slcio"
     },
     "output_files": {
         "tritrig_filt_readout_recon.slcio": "tritrig_2016_recon_1.slcio"

@@ -5,11 +5,12 @@ import logging
 
 logger = logging.getLogger("hpsmc.func")
 
-def lint(run_params, density = 6.306e-2):
+def lint(run_params, density = 6.306e-14):
     """!
     Calculate integrated luminosity.
     @param run_params  run parameter
-    @param density  tbd
+    @param density  1/(cm*pb), default value is for tungsten
+    @return integrated luminosity in N_e/pb
     """
     w = run_params.get("target_z")
     ne = run_params.get("num_electrons")
@@ -41,7 +42,7 @@ def mu(filename, run_params):
     @param filename  name of input LHE input file containing cross section
     @param run_params  run parameters to calculate integrated luminosity from
     """
-    return lint(run_params) * 1e-12 * csection(filename)
+    return lint(run_params) * csection(filename)
 
 def nevents(filename, confirm = False):
     """!

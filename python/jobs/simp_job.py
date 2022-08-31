@@ -2,7 +2,7 @@
 Simulation of SIMPs, detector signals, and readout, followed by reconstruction. 
 """
 from hpsmc.generators import MG5
-from hpsmc.tools import SLIC, JobManager, FilterBunches, MoveFiles, BeamCoords, Unzip, DisplaceUni
+from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, DisplaceUni
 
 job.description = 'SIMP generation to recon'
 

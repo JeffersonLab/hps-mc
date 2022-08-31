@@ -1,1 +1,1 @@
-figure out error in hpstr
+works, add documentation

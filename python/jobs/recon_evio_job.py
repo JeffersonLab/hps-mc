@@ -1,7 +1,6 @@
 """!
 Run hps-java reconstruction.
 """
-import os
 from hpsmc.tools import EvioToLcio
 
 job.description = 'hps-java recon'
