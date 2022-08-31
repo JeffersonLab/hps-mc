@@ -16,7 +16,7 @@
     },
     "output_dir": "output",
     "config_files": {
-        "recon": "recoTuple_cfg.py",
+        "recon": "kalSimpTuple_cfg.py",
         "ana": "anaVtxTuple_cfg.py"
     }
 }

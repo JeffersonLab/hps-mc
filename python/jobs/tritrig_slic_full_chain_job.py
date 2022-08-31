@@ -18,10 +18,6 @@ mom = AddMother()
 ## Rotate events into beam coords
 rot = BeamCoords()
 
-## \cleanup
-# Print results
-#p = StdHepTool(name="print_stdhep")
-
 ## generate events in slic
 sim = SLIC()
 

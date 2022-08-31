@@ -14,6 +14,9 @@ job.description = 'WAB gen and sampling'
 ## generate tritrig in MG4
 mg = MG4(name="wab")
 
+## check that at least 80% of the requested events were generated or fail the job
+# check = LHECount(minevents=params.nevents*0.8, inputs=["wab_unweighted_events.lhe.gz"])
+
 ## Convert wab events to stdhep
 cnv = StdHepConverter(inputs=mg.output_files(), outputs=['wab_events.stdhep'])
 
@@ -22,7 +25,9 @@ rot = BeamCoords()
 
 ## Sample wabs using poisson distribution, calculating mu from provided LHE file
 sample = MergePoisson(input_filter='wab',
-                      input_files=['wab_unweighted_events_rot.stdhep'], output_files=['wab_unweighted_events_rot_sampled.stdhep'], lhe_file='some_file.lhe.gz')
+                      input_files=['wab_unweighted_events_rot.stdhep'],
+                      output_files=['wab_unweighted_events_rot_sampled.stdhep'],
+                      xsec=7.55e10)
 
-## Add components
-job.add([mg, cnv, rot])
+## Add components -> add check and sample as needed
+job.add([mg, cnv, rot, sample])
