@@ -1,5 +1,5 @@
 {
-    "nevents": 10000,
+    "nevents": 100,
     "run_params": "3pt7",
     "target_z": -0.01,
     "map": 100,

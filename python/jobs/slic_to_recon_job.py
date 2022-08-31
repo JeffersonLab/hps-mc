@@ -2,9 +2,7 @@
 Simulation of beam signals in detector (using SLIC) and readout.
 The simulation is followed by reconstruction of the events.
 """
-from hpsmc.generators import StdHepConverter
-from hpsmc.tools import BeamCoords, AddMother, MergePoisson, RandomSample, MergeFiles
-from hpsmc.tools import SLIC, JobManager, ExtractEventsWithHitAtHodoEcal, HPSTR, LCIOCount, LCIOMerge, StdHepCount
+from hpsmc.tools import SLIC, JobManager, ExtractEventsWithHitAtHodoEcal
 
 ## Get job input file targets
 inputs = list(job.input_files.values())

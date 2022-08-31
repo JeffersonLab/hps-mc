@@ -2,7 +2,7 @@
 Simulation of beam.
 """
 from hpsmc.generators import EGS5
-from hpsmc.tools import BeamCoords, RandomSample, SLIC, ExtractEventsWithHitAtHodoEcal, JobManager
+from hpsmc.tools import BeamCoords, RandomSample
 
 job.description = 'beam from generation to slic'
 

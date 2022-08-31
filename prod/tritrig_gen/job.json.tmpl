@@ -1,0 +1,11 @@
+{
+    "job_id": {{ job_id }},
+    "nevents": {{nevents}},
+    "run_params": "{{run_params}}",
+    "target_z": {{target_z}},
+    "seed": {{ 10399311 + job_id }},
+    "output_files": {
+        "tritrig_mom_rot.stdhep": "tritrig_20um_rot_{{ job_id }}.stdhep"
+    },
+    "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/tritrig_gen/output_{{run_params}}_{{target_z}}"
+}

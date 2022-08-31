@@ -1,0 +1,2 @@
+works as is
+-> add information on how to modify to use other options given in ap_gen_to_slic_job.py

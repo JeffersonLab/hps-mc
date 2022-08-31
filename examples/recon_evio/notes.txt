@@ -1,1 +1,2 @@
-check if this is still relevant and if so, check how to use
+works, but no idea what it does
+find better solution for evio thingy

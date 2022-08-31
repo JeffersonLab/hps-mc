@@ -1,0 +1,15 @@
+{
+    "run_number": 14750,
+    "detector": "HPS_Run2021Pass2FEE",
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2021_pass0_recon_evio.lcsim"
+    },
+    "input_files": {
+        "/sdf/group/hps/data/physrun2019/hps_010104/hps_010104.evio.00114": "input.evio"
+    },
+    "output_files": {
+        "recon.slcio": "hps_14750_0.slcio"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}

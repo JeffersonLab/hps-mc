@@ -1,8 +1,8 @@
 """!
 Simulation of SIMPs, detector signals, and readout, followed by reconstruction. 
 """
-from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import SLIC, JobManager, FilterBunches, StdHepTool, MoveFiles, BeamCoords, Unzip, AddMotherFullTruth, DisplaceUni, DisplaceTime
+from hpsmc.generators import MG5
+from hpsmc.tools import SLIC, JobManager, FilterBunches, MoveFiles, BeamCoords, Unzip, DisplaceUni
 
 job.description = 'SIMP generation to recon'
 
@@ -12,12 +12,8 @@ mg = MG5(name='simp',
          param_card='param_card.dat',
          event_types=['unweighted'])
 
-## Move LHE file
-mv = MoveFiles(inputs=['simp_unweighted_events.lhe.gz'],
-               outputs=['simp.lhe.gz'])
-
 ## Unzip LHE file
-unzip = Unzip(inputs=['simp.lhe.gz'], outputs=['simp.lhe'])
+unzip = Unzip(inputs=['simp_unweighted_events.lhe.gz'], outputs=['simp.lhe'])
 
 ## Convert LHE output to stdhep
 cnv = DisplaceUni(inputs=['simp.lhe'], outputs=['simp.stdhep'])
@@ -38,4 +34,4 @@ readout = JobManager(steering='readout')
 recon = JobManager(steering='recon')
  
 ## Run the job
-job.add([mg, mv, unzip, cnv, rot, slic, filter_bunches, readout, recon])
+job.add([mg, unzip, cnv, rot, slic, filter_bunches, readout, recon])

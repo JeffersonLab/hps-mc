@@ -1,8 +1,8 @@
 """!
-Simulation of radiative events and detector signals (using SLIC).
+Simulation of radiative events.
 """
 from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import Unzip, BeamCoords, AddMotherFullTruth, SLIC
+from hpsmc.tools import Unzip, BeamCoords, AddMotherFullTruth
 
 job.description = 'rad generation'
 

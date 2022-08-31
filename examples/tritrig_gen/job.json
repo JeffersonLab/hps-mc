@@ -1,5 +1,5 @@
 {
-    "nevents": 10000,
+    "nevents": 1000,
     "run_params": "4pt55",
     "target_z": -7.51,
     "seed": 10299311,

@@ -1,12 +1,13 @@
 {
-    "run_number": 10031,
-    "bunches": 250000,
-    "nevents": 250000,
-    "seed": 1001002,
+    "bunches": 2500,
+    "nevents": 2500,
     "run_params": "4pt55",
     "target_z": -7.51,
+    "run_number": 10666,
+    "seed": 61029002,
     "output_files": {
-        "beam.stdhep": "beam.stdhep"
+        "beam_rot_sampled.stdhep": "beam_4pt55_20um120uA_1.stdhep"
     },
-    "output_dir": "output"
+    "output_dir": "output",
+    "job_id": 1
 }
