@@ -2,7 +2,7 @@
 Job script to generate beam events.
 """
 from hpsmc.generators import EGS5
-from hpsmc.tools import BeamCoords, RandomSample, SLIC
+from hpsmc.tools import BeamCoords, RandomSample
 
 job.description = 'beam generation'
 

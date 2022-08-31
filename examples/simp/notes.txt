@@ -1,1 +1,2 @@
-something is broken, come back to this later
+works, but no idea what it's doing
+rebuild and replace full path by short name in run

@@ -14,8 +14,8 @@ output_base = os.path.splitext(os.path.basename(input_files[0]))[0]
 job.ptag('filt', '%s_filt.slcio' % output_base)
 job.ptag('readout', '%s_filt_readout.slcio' % output_base)
 job.ptag('lcio_recon', '%s_filt_readout_recon.slcio' % output_base)
-#job.ptag('hpstr_recon', '%s_filt_readout_recon.root' % output_base)
-#job.ptag('hpstr_ana', '%s_filt_readout_recon_ana.root' % output_base)
+job.ptag('hpstr_recon', '%s_filt_readout_recon.root' % output_base)
+job.ptag('hpstr_ana', '%s_filt_readout_recon_ana.root' % output_base)
 
 count_input = LCIOCount()
 
@@ -34,11 +34,11 @@ reco = JobManager(steering='recon')
 
 count_reco = LCIOCount()
 
-# Convert LCIO to ROOT
-#cnv = HPSTR(cfg='recon')
+## Convert LCIO to ROOT
+cnv = HPSTR(cfg='recon')
 
-# Run an analysis on the ROOT file
-#ana = HPSTR(cfg='ana')
+## Run an analysis on the ROOT file
+ana = HPSTR(cfg='ana')
 
 job.add([count_input, filter_bunches, count_filt, readout, count_readout, reco, count_reco])
 #, cnv, ana])

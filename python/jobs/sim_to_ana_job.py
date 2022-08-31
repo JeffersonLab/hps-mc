@@ -2,8 +2,7 @@
 Run hps-sim with preexisting tritrig stdhep files.
 """
 import os
-from hpsmc.generators import MG5, StdHepConverter
-from hpsmc.tools import Sim, JobManager, FilterBunches, BeamCoords, AddMother, HPSTR
+from hpsmc.tools import Sim, JobManager, FilterBunches, HPSTR
 
 job.description = 'Run hps-sim with preexisting tritrig stdhep files'
 

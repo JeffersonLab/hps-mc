@@ -1,1 +1,2 @@
 works, add explanations
+hpstr broken rn, most likely external source, ask cam

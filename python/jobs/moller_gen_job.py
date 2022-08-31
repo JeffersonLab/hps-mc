@@ -1,8 +1,8 @@
 """!
-Simulation of Moller scattering events and detector signals (using SLIC).
+Simulation of Moller scattering events.
 """
 from hpsmc.generators import EGS5
-from hpsmc.tools import BeamCoords, RandomSample, SLIC
+from hpsmc.tools import BeamCoords
 
 job.description = 'Moller generation'
 

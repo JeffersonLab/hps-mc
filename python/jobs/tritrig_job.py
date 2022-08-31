@@ -19,9 +19,6 @@ mom = AddMother()
 ## Rotate events into beam coords
 rot = BeamCoords()
 
-# Print results
-#p = StdHepTool(name="print_stdhep")
-
 ## generate events in slic
 slic = SLIC()
 
@@ -30,11 +27,9 @@ filter_bunches = FilterBunches()
 
 ## Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
-#, append_tok='readout'
 
 ## Run physics reconstruction
 recon = JobManager(steering='recon')
-#, append_tok='recon'
 
 ## Set persistency tag for final output file
 job.ptag('sim', 'tritrig_unweighted_events_mom_rot.slcio')

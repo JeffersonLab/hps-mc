@@ -1,0 +1,172 @@
+[
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936429,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_1.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_1.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_1.stdhep",
+            "ap.slcio": "slic/ap_1.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 1
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936430,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_2.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_2.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_2.stdhep",
+            "ap.slcio": "slic/ap_2.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 2
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936431,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_3.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_3.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_3.stdhep",
+            "ap.slcio": "slic/ap_3.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 3
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936432,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_4.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_4.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_4.stdhep",
+            "ap.slcio": "slic/ap_4.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 4
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936433,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_5.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_5.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_5.stdhep",
+            "ap.slcio": "slic/ap_5.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 5
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936434,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_6.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_6.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_6.stdhep",
+            "ap.slcio": "slic/ap_6.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 6
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936435,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_7.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_7.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_7.stdhep",
+            "ap.slcio": "slic/ap_7.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 7
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936436,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_8.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_8.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_8.stdhep",
+            "ap.slcio": "slic/ap_8.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 8
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936437,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_9.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_9.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_9.stdhep",
+            "ap.slcio": "slic/ap_9.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 9
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "target_z": -7.51,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "seed": 7936438,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "lhe/ap_10.lhe.gz",
+            "ap_unweighted_events.stdhep": "egs5/ap_10.stdhep",
+            "ap_mom.stdhep": "stdhep/ap_10.stdhep",
+            "ap.slcio": "slic/ap_10.slcio"
+        },
+        "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/ap_gen_to_slic/output/4pt55",
+        "job_id": 10
+    }
+]

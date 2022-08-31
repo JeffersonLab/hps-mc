@@ -12,5 +12,5 @@
         "ap_mom.stdhep": "stdhep/ap.stdhep",
         "ap.slcio": "slic/ap.slcio"
     },
-    "output_dir": "output/2019/pass0"
+    "output_dir": "output/2019/"
 }
