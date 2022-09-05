@@ -1,7 +1,8 @@
 """!
-Simulation of beam signals in detector (using SLIC) and readout.
+Simulation of signals in detector (using SLIC) and readout.
 The simulation is followed by reconstruction of the events.
 """
+import os
 from hpsmc.tools import SLIC, JobManager, ExtractEventsWithHitAtHodoEcal
 
 ## Get job input file targets
@@ -9,61 +10,57 @@ inputs = list(job.input_files.values())
 
 job.description = 'slic to recon'
 
+# event_int needs to be set to 250 for beam files; should be = 1 for signal files
 if 'event_interval' in job.params:
     event_int = job.params['event_interval']
 else:
-    event_int = 250
+    event_int = 1
 
 if 'nevents' in job.params:
     nevents = job.params['nevents']
 else:
     nevents = 10000
 
-if 'nbeams' in job.params:
-    nbeams = job.params['nbeams']
+if 'base_name' in job.params:
+    base_name = job.params['base_name']
 else:
-    nbeams = 2
+    base_name = ''
 
 ## Input beam events (StdHep format)
-beam_file_names = []
-beam_slic_file_names = []
-for i in range(1,nbeams+1):
-    beam_file_names.append('beam_%i.stdhep'%i)
-    beam_slic_file_names.append('beam_%i.slcio'%i)
-
-## Check for expected input file targets
-if beam_file_names[nbeams-1] not in inputs:
-    raise Exception("Missing required input file '%s'" % beam_file_names[nbeams-1])
-
-## Base name of intermediate beam files
-beam_name = 'beam'
+slic_file_names = []
+for i in range(len(inputs)):
+    filename, file_extension = os.path.splitext(inputs[i])
+    slic_file = filename + '.slcio'
+    slic_file_names.append(slic_file)
 
 ## Simulate beam events
-slic_beams = [] 
-for i in range(len(beam_file_names)):
-    slic_beams.append(SLIC(inputs=[beam_file_names[i]],
-                      outputs=[beam_slic_file_names[i]],
+slic_comps = [] 
+for i in range(len(inputs)):
+    slic_comps.append(SLIC(inputs=[inputs[i]],
+                      outputs=[slic_file_names[i]],
                       nevents=nevents*event_int,
-                      ignore_job_params=['nevents'] )
+                      ignore_job_params=['nevents'])
                      )
 
-## concatonate beam events before merging
-slic_beam_cat = ExtractEventsWithHitAtHodoEcal(inputs=beam_slic_file_names,
-                                                   outputs=['beam_cat.slcio'],
-                                                   event_interval=0, num_hodo_hits=0)
+## concatenate beam events before merging
+cat_out_name = base_name + '_slic_cat.slcio'
+slic_cat = ExtractEventsWithHitAtHodoEcal(inputs=slic_file_names,
+                                          outputs=[cat_out_name],
+                                          event_interval=0, num_hodo_hits=0)
 
 ## Run simulated events in readout to generate triggers
+readout_out_name = base_name + '_readout.slcio'
 readout = JobManager(steering='readout',
-                     inputs=slic_beam_cat.output_files(),
-                     outputs=['readout.slcio'])
+                     inputs=slic_cat.output_files(),
+                     outputs=[readout_out_name])
 
 ## Run physics reconstruction
+recon_out_name = base_name + '_recon.slcio'
 recon = JobManager(steering='recon',
                    inputs=readout.output_files(),
-                   outputs=['recon.slcio'])
+                   outputs=[recon_out_name])
  
 ## Add the components
-comps = []
-for i in range(len(slic_beams)): comps.append(slic_beams[i])
-comps.extend([slic_beam_cat, readout, recon])
+comps = slic_comps
+comps.extend([slic_cat, readout, recon])
 job.add(comps)

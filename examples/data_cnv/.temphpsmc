@@ -1,3 +1,0 @@
-[EvioToLcio]
-hps_java_bin_jar = /sdf/group/hps/users/sgaiser/src/hps-java/distribution/target/hps-distribution-5.1-SNAPSHOT-bin.jar
-conditions_url = jdbc:sqlite:/sdf/group/hps/users/bravo/db/hps_conditions_test.db

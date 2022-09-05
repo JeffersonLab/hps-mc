@@ -1,2 +1,0 @@
-add explanation on how to use slic to recon job
-input to fee slic to recon is just beam file, so fee gen job = beam gen job? -> there is a fee_gen_job.py maybe create example for this as well?

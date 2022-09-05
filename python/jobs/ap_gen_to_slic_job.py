@@ -1,12 +1,15 @@
 """!
-Job script to generate displaced A-prime events, convert to StdHep, apply transformations,
+Job script to generate A-prime events, convert to StdHep, apply transformations,
 and resulting simulate signal events using SLIC.
+
+There are options to generate prompt and displaced events.
+You can use them by adjusting the StdHepConverter options as seen below.
 """
 
 from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import DisplaceTime, Unzip, BeamCoords, AddMotherFullTruth, SLIC
 
-job.description = 'ap-displaced from generation to slic'
+job.description = 'ap from generation to slic'
 
 ## Get job input file targets
 inputs = list(job.input_files.values())

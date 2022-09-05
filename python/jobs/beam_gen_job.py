@@ -1,5 +1,5 @@
 """!
-Job script to generate beam events.
+Generate beam events, transform them to beam coodinates and randomly sample them.
 """
 from hpsmc.generators import EGS5
 from hpsmc.tools import BeamCoords, RandomSample

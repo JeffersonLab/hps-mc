@@ -1,10 +1,10 @@
 """!
-Filter bunches, run readout, hps-java recon, and then a HPSTR analysis.
+Simulate pile-up, run readout, hps-java recon, and analysis.
 """
 import os
 from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 
-job.description = 'Filter bunches, run readout, hps-java recon, and then a HPSTR analysis'
+job.description = 'Simulate pile-up, run readout, hps-java recon, and analysis'
 
 ## Assign ptags for output
 input_files = list(job.input_files.values())

@@ -1,5 +1,5 @@
 """!
-Run slic with preexisting tritrig stdhep files.
+Run slic to analysis on stdhep file.
 """
 import os
 from hpsmc.tools import SLIC, JobManager, FilterBunches, HPSTR
@@ -31,5 +31,3 @@ job.ptag('ana', '{}_filt_readout_recon_ana.root'.format(base_name))
 
 ## Add job components
 job.add([sim, filter_bunches, readout, recon, root_cnv, ana])
-
-## \todo cleanup imports

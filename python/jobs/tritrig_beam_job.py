@@ -1,6 +1,7 @@
 """!
 Merge tritrig and beam events, simulate signal events, and detector readout.
 """
+import os
 from hpsmc.tools import SLIC, JobManager, LCIOCount, LCIOMerge, ExtractEventsWithHitAtHodoEcal
 
 ## Get job input file targets
@@ -18,17 +19,13 @@ tritrig_file_name = 'tritrig_events.stdhep'
 
 ## Input beam events (StdHep format)
 beam_file_names = []
-#beam_rot_file_names = []
 beam_slic_file_names = []
-for i in range(1,11):
-    beam_file_names.append('beam_%i.stdhep'%i)
-    beam_slic_file_names.append('beam_%i.slcio'%i)
-
-## Check for expected input file targets
-if tritrig_file_name not in inputs:
-    raise Exception("Missing required input file '%s'" % tritrig_file_name)
-if beam_file_names[1] not in inputs:
-    raise Exception("Missing required input file '%s'" % beam_file_names[1])
+for i in range(len(inputs)):
+    if inputs[i] != tritrig_file_name:
+        beam_file_names.append(inputs[i])
+        filename, file_extension = os.path.splitext(inputs[i])
+        beam_slic_file = filename + '.slcio'
+        beam_slic_file_names.append(beam_slic_file)
 
 ## Base name of intermediate tritrig files
 tritrig_name = 'tritrig'
@@ -45,8 +42,8 @@ slic = SLIC(inputs=[tritrig_file_name],
 
 ## Space signal events before merging
 filter_bunches = ExtractEventsWithHitAtHodoEcal(inputs=slic.output_files(),
-                                                   outputs=['%s_filt.slcio' % tritrig_name],
-                                                   event_interval=250, num_hodo_hits=0)
+                                                outputs=['%s_filt.slcio' % tritrig_name],
+                                                event_interval=250, num_hodo_hits=0)
 
 ## Count filtered events
 count_filter = LCIOCount(inputs=filter_bunches.output_files())

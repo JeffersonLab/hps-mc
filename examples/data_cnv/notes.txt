@@ -1,1 +1,0 @@
-find better solution for .hpsmc EvioToLcio java_bin_jar thingy

@@ -15,7 +15,7 @@ mg = MG5(name='simp',
 ## Unzip LHE file
 unzip = Unzip(inputs=['simp_unweighted_events.lhe.gz'], outputs=['simp.lhe'])
 
-## Convert LHE output to stdhep
+## Convert LHE output to stdhep (no displacement here because no ctau given)
 cnv = DisplaceUni(inputs=['simp.lhe'], outputs=['simp.stdhep'])
 
 ## Rotate into beam coords

@@ -1,5 +1,5 @@
 """!
-Apply transforms to input StdHep events.
+Transform events in the input stdhep file to beam coordinates.
 """
 from hpsmc.tools import BeamCoords
 
