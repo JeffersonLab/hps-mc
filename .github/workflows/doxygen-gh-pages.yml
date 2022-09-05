@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - cleanup_examples
 
 jobs:
   deploy:
