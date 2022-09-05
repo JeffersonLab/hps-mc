@@ -10,7 +10,7 @@ def lint(run_params, density = 6.306e-14):
     Calculate integrated luminosity.
     @param run_params  run parameter
     @param density  1/(cm*pb), default value is for tungsten
-    @return integrated luminosity in N_e/pb
+    @return integrated luminosity in 1/pb
     """
     w = run_params.get("target_z")
     ne = run_params.get("num_electrons")
@@ -19,6 +19,9 @@ def lint(run_params, density = 6.306e-14):
 def csection(filename):
     """!
     Extract cross-section from gzipped LHE file.
+    WARNING: This function does not work!
+
+    \todo remove or replace by more useful function
     @param filename  name of input file 
     """
     logger.info("Using gzip to open '%s'" % filename)
@@ -39,8 +42,11 @@ def csection(filename):
 def mu(filename, run_params):
     """!
     Calculate mu = number of events per bunch.
+    WARNING: This function does not work properly because csection() is broken!
+
     @param filename  name of input LHE input file containing cross section
     @param run_params  run parameters to calculate integrated luminosity from
+    @return number of events per bunch (L_int[1/pb] * xsec[pb])
     """
     return lint(run_params) * csection(filename)
 

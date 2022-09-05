@@ -23,7 +23,7 @@ cnv = StdHepConverter(inputs=mg.output_files(), outputs=['wab_events.stdhep'])
 ## Rotate WAB events into beam coordinates
 rot = BeamCoords()
 
-## Sample wabs using poisson distribution, calculating mu from provided LHE file
+## Sample wabs using poisson distribution, calculating mu from provided cross section
 sample = MergePoisson(input_filter='wab',
                       input_files=['wab_unweighted_events_rot.stdhep'],
                       output_files=['wab_unweighted_events_rot_sampled.stdhep'],

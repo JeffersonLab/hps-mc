@@ -1,2 +1,0 @@
-works, but no idea what it's doing
-rebuild and replace full path by short name in run

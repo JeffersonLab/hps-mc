@@ -170,6 +170,8 @@ class JobManager(Component):
     """!
     Run the hps-java JobManager class.
 
+    Input files have slcio format.
+
     Required parameters are: **steering_files** \n 
     Optional parameters are: **detector**, **run_number**, **defs**
     """
@@ -907,6 +909,7 @@ class EvioToLcio(JavaTool):
     """!
     Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
 
+    Input files have evio format (format used by DAQ system).
 
     Required parameters are: **detector**, **steering_files** \n 
     Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**

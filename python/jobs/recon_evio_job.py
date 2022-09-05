@@ -1,5 +1,5 @@
 """!
-Run hps-java reconstruction.
+Run hps-java reconstruction on data files.
 """
 from hpsmc.tools import EvioToLcio
 
