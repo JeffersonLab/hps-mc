@@ -1,4 +1,6 @@
 """!
+@file slic_to_anaMC_job.py
+
 Run SLIC to analysis using mcTuple.
 """
 from hpsmc.tools import SLIC, HPSTR

@@ -1,4 +1,6 @@
 """!
+@file tritrig_beam_job.py
+
 Merge tritrig and beam events, simulate signal events, and detector readout.
 """
 import os

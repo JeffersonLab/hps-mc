@@ -1,4 +1,6 @@
 """!
+@file bea,_gen_job.py
+
 Generate beam events, transform them to beam coodinates and randomly sample them.
 """
 from hpsmc.generators import EGS5

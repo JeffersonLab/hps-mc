@@ -1,4 +1,6 @@
 """!
+@file ap_gen_to_slic_job.py
+
 Job script to generate A-prime events, convert to StdHep, apply transformations,
 and resulting simulate signal events using SLIC.
 

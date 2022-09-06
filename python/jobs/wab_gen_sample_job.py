@@ -1,4 +1,6 @@
 """!
+@file wab_gen_sample_job.py
+
 Python script for generating sampled WAB events in StdHep format from an input LHE file.
 
 The output events can be used as input to 'merge_job.py' with a beam StdHep file to for creating a

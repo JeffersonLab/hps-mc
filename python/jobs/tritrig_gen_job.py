@@ -1,4 +1,6 @@
 """!
+@file tritrig_gen_job.py
+
 Simulate tritrig events.
 """
 from hpsmc.generators import MG5, StdHepConverter

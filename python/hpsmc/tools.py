@@ -25,11 +25,14 @@ class SLIC(Component):
     """
 
     def __init__(self, **kwargs):
-
-        self.macros = []  ## List of macros to run (optional)
-        self.run_number = None  ## Run number to set on output file (optional)
-        self.hps_fieldmaps_dir = None  ## To be set from config or install dir
-        self.detector_dir = None  ## To be set from config or install dir
+        ## List of macros to run (optional)
+        self.macros = []
+        ## Run number to set on output file (optional)
+        self.run_number = None
+        ## To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+        ## To be set from config or install dir
+        self.detector_dir = None
 
         Component.__init__(self,
                            name='slic',
@@ -178,19 +181,30 @@ class JobManager(Component):
 
     def __init__(self, steering=None, **kwargs):
         ## \todo verify these definitions
-        self.run_number = None  ## run number
-        self.detector = None  ## detector name
-        self.event_print_interval = None  ## event print interval
-        self.defs = None  ## \todo what is this?
-        self.java_args = None  ## java arguments
-        self.logging_config_file = None  ## file for config logging
-        self.lcsim_cache_dir = None  ## lcsim cache directory
-        self.conditions_user = None ## no idea
-        self.conditions_password = None  ## no idea
-        self.conditions_url = None  ## no idea
-        self.steering = steering  ## steering file
-
-        self.hps_java_bin_jar = None  ## location of hps-java installation?
+        ## run number
+        self.run_number = None
+        ## detector name
+        self.detector = None
+        ## event print interval
+        self.event_print_interval = None
+        ## \todo what is this?
+        self.defs = None
+        ## java arguments
+        self.java_args = None
+        ## file for config logging
+        self.logging_config_file = None
+        ## lcsim cache directory
+        self.lcsim_cache_dir = None
+        ## no idea
+        self.conditions_user = None
+        ## no idea
+        self.conditions_password = None
+        ## no idea
+        self.conditions_url = None
+        ## steering file
+        self.steering = steering
+        ## location of hps-java installation?
+        self.hps_java_bin_jar = None
 
         if 'overlay_file' in kwargs:
             self.overlay_file = kwargs['overlay_file']
@@ -343,10 +357,12 @@ class HPSTR(Component):
     """
 
     def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
-
-        self.cfg = cfg  ## configuration
-        self.run_mode = run_mode  ## run mode
-        self.year = year  ## year
+        ## configuration
+        self.cfg = cfg
+        ## run mode
+        self.run_mode = run_mode
+        ## year
+        self.year = year
 
         Component.__init__(self,
                            name='hpstr',
@@ -499,14 +515,22 @@ class BeamCoords(StdHepTool):
 
     def __init__(self, **kwargs):
         ## \todo clarify these
-        self.beam_sigma_x = None  ## beam sigma in x
-        self.beam_sigma_y = None  ## beam sigma in y
-        self.target_x = None  ## target x position
-        self.target_y = None  ## target y position
-        self.target_z = None  ## target z position
-        self.beam_rot_x = None  ## beam rotation in x?
-        self.beam_rot_y = None  ## beam rotation in y?
-        self.beam_rot_z = None  ## beam rotation in z?
+        ## beam sigma in x
+        self.beam_sigma_x = None
+        ## beam sigma in y
+        self.beam_sigma_y = None
+        ## target x position
+        self.target_x = None
+        ## target y position
+        self.target_y = None
+        ## target z position
+        self.target_z = None
+        ## beam rotation in x?
+        self.beam_rot_x = None
+        ## beam rotation in y?
+        self.beam_rot_y = None
+        ## beam rotation in z?
+        self.beam_rot_z = None
 
         StdHepTool.__init__(self,
                             name='beam_coords',
@@ -565,7 +589,8 @@ class RandomSample(StdHepTool):
                             name='random_sample',
                             append_tok='sampled',
                             **kwargs)
-        self.mu = None  ## median of distribution?
+        ## median of distribution?
+        self.mu = None
 
     def cmd_args(self):
         """!
@@ -627,7 +652,8 @@ class DisplaceTime(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        self.ctau = None  ## time shift
+        ## time shift
+        self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displacetime',
                             output_ext='.stdhep',
@@ -660,7 +686,8 @@ class DisplaceUni(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        self.ctau = None  ## time shift
+        ## time shift
+        self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displaceuni',
                             output_ext='.stdhep',
@@ -742,7 +769,8 @@ class MergePoisson(StdHepTool):
     """
 
     def __init__(self, xsec=0, **kwargs):
-        self.xsec = xsec  ## cross section in pb
+        ## cross section in pb
+        self.xsec = xsec
         StdHepTool.__init__(self,
                             name='merge_poisson',
                             append_tok='sampled',
@@ -871,9 +899,12 @@ class JavaTool(Component):
     Generic base class for Java based tools.
     """
     def __init__(self, name, java_class, **kwargs):
-        self.java_class = java_class  ## java class
-        self.java_args = None  ## java arguments
-        self.conditions_url = None  ## tbd
+        ## java class
+        self.java_class = java_class
+        ## java arguments
+        self.java_args = None
+        ## tbd
+        self.conditions_url = None
         Component.__init__(self,
                            name,
                            "java",
@@ -915,12 +946,18 @@ class EvioToLcio(JavaTool):
     Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**
     """
     def __init__(self, steering=None, **kwargs):
-       self.detector = None  ## detector name
-       self.steering = None  ## steering file
-       self.run_number = None  ## run number
-       self.skip_events = None  ## number of events that are skipped
-       self.event_print_interval = None  ## event print interval
-       self.steering = steering  ## \todo is it necessary to set this twice?
+        ## detector name
+       self.detector = None
+       ## steering file
+       self.steering = None
+       ## run number
+       self.run_number = None
+       ## number of events that are skipped
+       self.skip_events = None
+       ## event print interval
+       self.event_print_interval = None
+       ## \todo is it necessary to set this twice?
+       self.steering = steering
 
        JavaTool.__init__(self,
                          name='evio_to_lcio',
@@ -1186,8 +1223,8 @@ class LCIODumpEvent(Component):
     Required config are: **lcio_dir**
     """
     def __init__(self, **kwargs):
-
-        self.lcio_dir = None  ## lcio directory
+        ## lcio directory
+        self.lcio_dir = None
         Component.__init__(self,
                            name='lcio_dump_event',
                            command='dumpevent',
@@ -1343,8 +1380,8 @@ class LCIOTool(Component):
     Required config are: **lcio_bin_jar**
     """
     def __init__(self, name=None, **kwargs):
-
-        self.lcio_bin_jar = None  ## lcio bin jar (whatever this is)
+        ## lcio bin jar (whatever this is)
+        self.lcio_bin_jar = None
         Component.__init__(self,
                            name,
                            command='java',
@@ -1521,10 +1558,14 @@ class Sim(SimBase):
     Required config are: **hps_sim_dir**, **hps_fieldmaps_dir**, **detector_dir**
     """
     def __init__(self, **kwargs):
-        self.macros = []  ## List of macros to run (optional)
-        self.run_number = None  ## Run number to set on output file (optional)
-        self.hps_fieldmaps_dir = None  ## To be set from config or install dir
-        self.detector_dir = None  ## To be set from config or install dir
+        ## List of macros to run (optional)
+        self.macros = []
+        ## Run number to set on output file (optional)
+        self.run_number = None
+        ## To be set from config or install dir
+        self.hps_fieldmaps_dir = None
+        ## To be set from config or install dir
+        self.detector_dir = None
         Component.__init__(self,
                            name='hps-sim',
                            command='hps-sim',

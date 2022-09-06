@@ -1,3 +1,9 @@
+"""!
+@file signal_pulser_overlay_to_recon_job.py
+
+No idea what this is supposed to do.
+"""
+
 from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount
 
 job.description = 'signal-pulse from overlay to recon'

@@ -1,4 +1,6 @@
 """!
+@file moller_gen_job.py
+
 Simulation of Moller scattering events.
 """
 from hpsmc.generators import EGS5
