@@ -1,4 +1,6 @@
 """!
+@file slic_job.py
+
 Simulation of signals in detector using SLIC.
 """
 import os

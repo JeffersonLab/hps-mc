@@ -12,9 +12,6 @@ install/
 .settings
 
 # Doxygen
-html/
-latex/
-
 !docs/html/
 docs/html/*
 

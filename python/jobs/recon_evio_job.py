@@ -1,4 +1,6 @@
 """!
+@file recon_evio_job.py
+
 Run hps-java reconstruction on data files.
 """
 from hpsmc.tools import EvioToLcio

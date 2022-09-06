@@ -1,4 +1,6 @@
 """!
+@file tritrig_slic_full_chain_job.py
+
 Tritrig signal generation using SLIC to recon using hps-sim with no beam background.
 """
 from hpsmc.generators import MG5, StdHepConverter

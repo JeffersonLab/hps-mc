@@ -1,4 +1,6 @@
 """!
+@file slic_to_ana_job.py
+
 Run slic to analysis on stdhep file.
 """
 import os

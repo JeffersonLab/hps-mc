@@ -1,4 +1,6 @@
 """!
+@file readout_recon_job.py
+
 Simulate pile-up, run readout, hps-java recon, and analysis.
 """
 import os

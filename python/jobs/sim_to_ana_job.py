@@ -1,4 +1,6 @@
 """!
+@file sim_to_ana_job.py
+
 Run hps-sim with preexisting tritrig stdhep files.
 """
 import os

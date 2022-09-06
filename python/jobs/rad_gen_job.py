@@ -1,4 +1,6 @@
 """!
+@file rad_gen_job.py
+
 Simulation of radiative events.
 """
 from hpsmc.generators import MG5, StdHepConverter

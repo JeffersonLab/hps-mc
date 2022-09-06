@@ -1,4 +1,6 @@
 """!
+@file slic_to_recon_job.py
+
 Simulation of signals in detector (using SLIC) and readout.
 The simulation is followed by reconstruction of the events.
 """

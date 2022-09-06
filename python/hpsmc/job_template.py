@@ -67,17 +67,22 @@ class JobTemplate:
     """
 
     def __init__(self, template_file=None, output_file='jobs.json'):
-        self.template_file = template_file  ## template file from which parameters are read
+        ## template file from which parameters are read
+        self.template_file = template_file
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
         self.env.filters['pad'] = pad
         self.env.filters['uuid'] = uuid
         self.env.filters['extension'] = extension
         self.env.filters['dirname'] = dirname
-        self.job_id_start = 0;  ## start ID for jobs
-        self.input_files = {}  ## dict of input files
-        self.itervars = {}  ## dict of iteration variables
-        self.output_file = output_file  ## name of output file
+        ## start ID for jobs
+        self.job_id_start = 0
+        ## dict of input files
+        self.input_files = {}
+        ## dict of iteration variables
+        self.itervars = {}
+        ## name of output file
+        self.output_file = output_file
 
     def add_input_files(self, key, file_list, nreads=1):
         """! Add new input files to dict of input files.

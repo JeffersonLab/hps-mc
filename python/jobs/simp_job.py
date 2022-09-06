@@ -1,4 +1,6 @@
 """!
+@file simp_job.py
+
 Simulation of SIMPs, detector signals, and readout, followed by reconstruction. 
 """
 from hpsmc.generators import MG5
