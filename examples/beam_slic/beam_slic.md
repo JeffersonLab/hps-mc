@@ -9,5 +9,5 @@ There are no special run parameters that need to be set for this job other than 
 
 | param         |                                                                                                                                  |
 |---------------|----------------------------------------------------------------------------------------------------------------------------------|
-| input\_files  | list of stdhep input files:<br>"path/to/input\_1.stdhep": "beam\_1.stdhep"<br>...<br>"path/to/input\_n.stdhep": "beam\_n.stdhep" |
-| output\_files | list of slcio ouput files:<br>"beam\_1.slcio":"output\_1.slcio"<br>...<br>"beam\_n.slcio":"output\_n.slcio"                      |
+| input\_files  | list of stdhep input files:<br>"path/to/input_1.stdhep": "beam_1.stdhep"<br>...<br>"path/to/input_n.stdhep": "beam_n.stdhep" |
+| output\_files | list of slcio ouput files:<br>"beam_1.slcio":"output_1.slcio"<br>...<br>"beam_n.slcio":"output_n.slcio"                      |

@@ -36,7 +36,7 @@ tritrig_name = 'tritrig'
 beam_name = 'beam'
 
 ## Base name of merged files
-tritrig_beam_name = 'tritrig-beam'
+tritrig_beam_name = 'tritrig_beam'
 
 ## Simulate signal events
 slic = SLIC(inputs=[tritrig_file_name],

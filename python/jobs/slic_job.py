@@ -6,7 +6,7 @@ Simulation of signals in detector using SLIC.
 import os
 from hpsmc.tools import SLIC
 
-job.description = 'beam detector sim via slic'
+job.description = 'detector sim via slic'
 
 ## Get job input file targets
 inputs = list(job.input_files.values())

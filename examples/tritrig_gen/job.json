@@ -4,7 +4,7 @@
     "target_z": -7.51,
     "seed": 10299311,
     "output_files": {
-        "tritrig_mom_rot.stdhep": "tritrig_1.stdhep"
+        "tritrig_mom_rot.stdhep": "tritrig_4pt55.stdhep"
     },
     "output_dir": "output"
 }

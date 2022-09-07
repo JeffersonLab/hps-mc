@@ -11,4 +11,4 @@ This table contains parameters special to the hpstr job. The general parameters 
 | config\_files | configuration files for recon and ana                                                                    |
 | run\_mode     | ?                                                                                                        |
 | input\_files  | "path/to/input.slcio": "recon_events.slcio"                                                              |
-| output\_files | "recon\_files.root": "your\_reco\_filename.root"<br>"recon\_files\_ana.root": "your\_ana\_filename.root" |
+| output\_files | "recon_files.root": "your_reco_filename.root"<br>"recon_files_ana.root": "your_ana_filename.root"        |

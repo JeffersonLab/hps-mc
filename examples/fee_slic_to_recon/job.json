@@ -10,13 +10,13 @@
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
     },
     "output_files": {
-        "fee_readout.slcio": "fee_readout_20um120nA.slcio",
-        "fee_recon.slcio": "fee_recon_20um120nA.slcio"
+        "fee_readout.slcio": "fee_beam_4pt55_20um120nA_readout.slcio",
+        "fee_recon.slcio": "fee_beam_4pt55_20um120nA_recon.slcio"
     },
     "base_name": "fee",
     "input_files": {
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_301.stdhep": "beam_1.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_302.stdhep": "beam_2.stdhep"
+        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
+        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep"
     }, 
     "output_dir": "output/4pt55",
     "job_id": 1,
