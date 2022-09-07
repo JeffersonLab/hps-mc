@@ -9,10 +9,10 @@
     "target_y": -0.08,
     "target_z": -4.3,
     "input_files": {
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120nA_60.stdhep": "beam.stdhep"
+        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_2pt3_4um200nA.stdhep": "beam.stdhep"
     },
     "output_files": {
-        "beam_rot.stdhep": "beam_rot_1.stdhep"
+        "beam_rot.stdhep": "beam_2pt3_4um200nA_rot.stdhep"
     },
     "output_dir": "output"
 }

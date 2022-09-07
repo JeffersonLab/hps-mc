@@ -8,7 +8,7 @@ This table contains parameters special to the simp job. The general parameters a
  
 | param            |                                           |
 |------------------|-------------------------------------------|
-| map              | ?                                         |
+| map              | A-prime mass                              |
 | mpid             | dark pi mass                              |
 | mrhod            | dark rho mass                             |
 | filter\_no\_cuts | ?                                         |

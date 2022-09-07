@@ -3,9 +3,9 @@
     "run_params": "3pt7",
     "param_card": "MG_mini_WAB/AP_6W_XSec2_HallB/Cards/param_card.dat",
     "output_files": {
-        "wab_unweighted_events.lhe.gz": "wab_unweighted_events_1.lhe.gz",
-        "wab_unweighted_events_rot.stdhep": "wab_unweighted_events_rot_1.stdhep",
-        "wab_unweighted_events_rot_sampled.stdhep": "wab_unweighted_events_rot_sampled_1.stdhep"
+        "wab_unweighted_events.lhe.gz": "wab_unweighted_events_3pt7.lhe.gz",
+        "wab_unweighted_events_rot.stdhep": "wab_unweighted_events_3pt7_rot.stdhep",
+        "wab_unweighted_events_rot_sampled.stdhep": "wab_unweighted_events_3pt7_rot_sampled.stdhep"
     },
     "output_dir": "output",
     "seed": 7614876

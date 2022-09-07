@@ -7,11 +7,11 @@
     "nevents": 50,
     "year": 2021,
     "input_files": {
-        "/sdf/group/hps/mc/3pt7GeV/HPS_Run2021Pass2FEE/tritrig_beam_13_singles23/recon/tritrig-beam_997.slcio": "recon_events.slcio"
+        "https://www.slac.stanford.edu/~hpsprod/example_files/tritrig/tritrig_beam13_singles23_3pt7_Pass2FEE.slcio": "recon_events.slcio"
     },
     "output_files": {
-        "recon_events.root": "recon_events.root",
-        "recon_events_ana.root": "tritrig_ana.root"
+        "recon_events.root": "tritrig_beam13_singles23_3pt7_Pass2FEE.root",
+        "recon_events_ana.root": "tritrig_beam13_singles23_3pt7_Pass2FEE_ana.root"
     },
     "output_dir": "output"
 }

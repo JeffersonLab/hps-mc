@@ -6,7 +6,7 @@
     "run_number": 10666,
     "seed": 61029002,
     "output_files": {
-        "beam_rot_sampled.stdhep": "beam_4pt55_20um120uA_1.stdhep"
+        "beam_rot_sampled.stdhep": "beam_4pt55_20um120nA_1.stdhep"
     },
     "output_dir": "output",
     "job_id": 1

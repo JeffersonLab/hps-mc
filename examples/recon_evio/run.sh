@@ -1,1 +1,0 @@
-hps-mc-job run -d $PWD/scratch recon_evio job.json

@@ -10,11 +10,11 @@
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
     },
     "output_files": {
-        "ptag:sim": "tritrig_sim.slcio",
-        "ptag:readout": "tritrig_readout.slcio",
-        "ptag:recon": "tritrig_recon.slcio"
+        "ptag:sim": "tritrig_4pt55_sim.slcio",
+        "ptag:readout": "tritrig_4pt55_readout.slcio",
+        "ptag:recon": "tritrig_4pt55_recon.slcio"
     },
-    "output_dir": "output",
+    "output_dir": "output/HPS-PhysicsRun2019-v2-4pt5",
     "config_files": {
         "recon": "kalSimpTuple_cfg.py",
         "ana": "anaVtxTuple_cfg.py"

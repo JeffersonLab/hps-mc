@@ -12,6 +12,7 @@ import getpass
 import logging
 import configparser
 import glob
+import subprocess
 
 from collections.abc import Sequence
 from os.path import expanduser
@@ -412,8 +413,28 @@ class Job(object):
 
         if 'input_files' in self.params:
             self.input_files = self.params['input_files']
+
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
+
+
+    def __set_input_files(self):
+        """!
+        Prepare dictionary of input files.
+        
+        If a link to a download location is given as input, the file is downloaded into the run directory before the file name is added to the input_files dict. If a regular file is provided, it is added to the dict without any additional action.
+        """
+        input_files_dict = {}
+        for file_key, file_name in self.input_files.items():
+            if 'https' in file_key:
+                logger.info("Downloading input file from %s" % file_key)
+                file_name_path = self.rundir + "/" + file_name
+                subprocess.check_output(['wget', '-O', file_name_path, file_key])
+                input_files_dict.update({file_name: file_name})
+            else:
+                input_files_dict.update({file_key: file_name})
+        self.input_files = input_files_dict
+
 
     def __initialize(self):
         """!
@@ -430,6 +451,12 @@ class Job(object):
             self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
             logger.info('Set run dir for LSF: %s' % self.rundir)
             self.delete_rundir = True
+
+        # Create run dir if it does not exist
+        if not os.path.exists(self.rundir):
+            logger.info('Creating run dir: %s' % self.rundir)
+            os.makedirs(self.rundir)
+
 
     def __configure(self):
         """!
@@ -498,6 +525,9 @@ class Job(object):
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
         self.__configure()
+
+        # This (re)sets the input correctly
+        self.__set_input_files()
 
         # Set component parameters from job JSON file.
         self.__set_parameters()
@@ -588,10 +618,6 @@ class Job(object):
         """!
         Necessary setup before job can be executed.
         """
-        # Create run dir if it does not exist
-        if not os.path.exists(self.rundir):
-            logger.info('Creating run dir: %s' % self.rundir)
-            os.makedirs(self.rundir)
 
         # Change to run dir
         logger.debug('Changing to run dir: %s' % self.rundir)
@@ -728,7 +754,9 @@ class Job(object):
             if '/mss/' in src:
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
+                logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
+                return
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 

@@ -99,7 +99,7 @@ python hps-mc/python/test/egs5_test.py
 In the above command insert the full path to your hps-mc installation instead of `hps-mc` or you can copy the python script to the scratch directory.
 
 ### Documentation
-The source code documentation can be sound [here](https://jeffersonlab.github.io/hps-mc/). For additional information of how to use the job scripts, refer to the examples directory and the comments in there.
+The source code documentation can be found [here](https://jeffersonlab.github.io/hps-mc/). For additional information of how to use the job scripts, refer to the examples directory and the comments in there.
 
 
 ### Quick Start Guide

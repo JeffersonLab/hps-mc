@@ -5,10 +5,10 @@
     "target_z": -7.51,
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
     "output_files": {
-        "RAD_unweighted_events.lhe.gz": "lhe/rad.lhe.gz",
-        "RAD_unweighted_events.stdhep": "egs5/rad.stdhep",
-        "rad_mom.stdhep": "stdhep/rad.stdhep",
-        "rad_rot.stdhep": "stdhep/rad_rot.stdhep"
+        "RAD_unweighted_events.lhe.gz": "lhe/rad_4pt55.lhe.gz",
+        "RAD_unweighted_events.stdhep": "egs5/rad_4pt55.stdhep",
+        "rad_mom.stdhep": "stdhep/rad_4pt55.stdhep",
+        "rad_rot.stdhep": "stdhep/rad_4pt55_rot.stdhep"
     },
     "output_dir": "output/2019/pass0",
     "seed": 8736452
