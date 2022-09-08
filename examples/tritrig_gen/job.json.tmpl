@@ -1,0 +1,11 @@
+{
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "seed": {{ 10399311 + job_id }},
+    "run_number": {{ run_number }},
+    "output_files": {
+        "tritrig_mom_rot.stdhep": "tritrig_{{ run_params }}_{{ target_and_current }}_rot_{{ job_id }}.stdhep"
+    },
+    "output_dir": "output"
+}

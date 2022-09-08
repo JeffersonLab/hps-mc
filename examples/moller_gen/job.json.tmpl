@@ -1,0 +1,13 @@
+{
+    "run_number": {{ run_number }},
+    "bunches": {{ bunches }},
+    "nevents": {{ nevents }},
+    "seed": {{ 1001001 + job_id }},
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "output_files": {
+        "moller.stdhep": "moller_{{ run_params }}_targetz_{{ target_z }}_{{ job_id }}.stdhep",
+        "moller_rot.stdhep": "moller_{{ run_params }}_targetz_{{ target_z }}_rot_{{ job_id }}.stdhep"
+    },
+    "output_dir": "output"
+}

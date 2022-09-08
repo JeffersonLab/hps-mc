@@ -1,0 +1,6 @@
+{
+    "nevents": [1000],
+    "run_params": ["3pt7"],
+    "param_card": ["MG_mini_WAB/AP_6W_XSec2_HallB/Cards/param_card.dat"],
+    "year": [2019]
+}

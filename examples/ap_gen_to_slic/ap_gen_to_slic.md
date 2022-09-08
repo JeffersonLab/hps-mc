@@ -10,3 +10,6 @@ This table contains parameters special to the ap\_gen\_to\_slic job. The general
 |----------|------------------------------|
 | apmass   | A-prime mass in MeV?         |
 | detector | detector setup used for slic |
+
+#### Job template
+This example includes a job template. The variables used in this template mostly have the same name and meaning as the job parameters above. Their values are set in `vars.json`. In addition to the job parameters, `vars.json` contains the variable apmass\_for\_name which is only used to name the output files in a consistent and informative way.

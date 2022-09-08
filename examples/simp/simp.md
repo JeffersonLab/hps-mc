@@ -14,3 +14,7 @@ This table contains parameters special to the simp job. The general parameters a
 | filter\_no\_cuts | ?                                         |
 | steering\_files  | readout and reconstruction steering files |
 | output\_files    | signal and reco output slcio files        |
+
+#### Job template
+This example includes a job template. The variables used in this template mostly have the same name and meaning as the job parameters above. Their values are set in `vars.json`.
+The `mkjobs.sh` script will create a set of jobs for 6 different dark rho masses which are specified in `vars.json`.

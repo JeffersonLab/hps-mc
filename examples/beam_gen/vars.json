@@ -1,0 +1,8 @@
+{
+    "bunches": [2500],
+    "nevents": [2500],
+    "run_params": ["4pt55"],
+    "target_z": [-7.51],
+    "run_number": [10666],
+    "target_and_current": ["20um120nA"]
+}
