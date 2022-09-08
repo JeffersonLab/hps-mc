@@ -1,14 +1,14 @@
 {
     "run_number": 14362,
-    "bunches": 250,
-    "nevents": 250,
+    "bunches": 2500,
+    "nevents": 2500,
     "seed": 1001002,
     "run_params": "3pt7",
     "target_z": 0,
-    "detector": "HPS-v2019-3pt7GeV",
     "output_files": {
-        "moller.stdhep": "stdhep/moller.stdhep",
-        "moller_rot.stdhep": "stdhep/moller_rot.slcio"
+        "moller.stdhep": "moller_3pt7_targetz_0_1.stdhep",
+        "moller_rot.stdhep": "moller_3pt7_targetz_0_rot_1.stdhep"
     },
-    "output_dir": "output"
+    "output_dir": "output",
+    "job_id": 1
 }

@@ -2,7 +2,7 @@
     "nevents": 2500,
     "run_params": "3pt7",
     "target_z": -0.01,
-    "map": 100,
+    "map": 100.0,
     "mpid": 33.3,
     "mrhod": 60,
     "run_number": 1194550,
@@ -14,8 +14,9 @@
         "recon": "/org/hps/steering/recon/TriggerTuning2021MCRecon_targetAt0_0_0.lcsim"
     },
     "output_files": {
-        "simp_rot.slcio": "simp_3pt7.slcio",
-        "simp_rot_filt_readout_recon.slcio": "simp_3pt7_recon.slcio"
+        "simp_rot.slcio": "mrhod_60/simp_3pt7_1.slcio",
+        "simp_rot_filt_readout_recon.slcio": "mrhod_60/recon/simp_3pt7_recon_1.slcio"
     },
-    "output_dir": "output/HPS-v2019-3pt7GeV"
+    "output_dir": "output/HPS-v2019-3pt7GeV",
+    "job_id": 1
 }

@@ -2,9 +2,11 @@
     "nevents": 1000,
     "run_params": "4pt55",
     "target_z": -7.51,
-    "seed": 10299311,
+    "seed": 10399312,
+    "run_number": 10666,
     "output_files": {
-        "tritrig_mom_rot.stdhep": "tritrig_4pt55.stdhep"
+        "tritrig_mom_rot.stdhep": "tritrig_4pt55_20um120nA_rot_1.stdhep"
     },
-    "output_dir": "output"
+    "output_dir": "output",
+    "job_id": 1
 }

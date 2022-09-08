@@ -1,0 +1,12 @@
+{
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "param_card": "{{ param_card }}",
+    "seed": {{ 7614875 + job_id }},
+    "output_files": {
+        "wab_unweighted_events.stdhep": "wab_unweighted_events_{{ run_params }}_{{ job_id }}.stdhep",
+        "wab_unweighted_events_rot.stdhep": "wab_unweighted_events_{{ run_params }}_rot_{{ job_id }}.stdhep",
+        "wab_unweighted_events_rot_sampled.stdhep": "wab_unweighted_events_{{ run_params }}_rot_sampled_{{ job_id }}.stdhep"
+    },
+    "output_dir": "output/{{ year }}/"
+}
