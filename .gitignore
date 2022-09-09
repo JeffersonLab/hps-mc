@@ -15,5 +15,3 @@ install/
 !docs/html/
 docs/html/*
 
-# Prod output
-prod/*/output*

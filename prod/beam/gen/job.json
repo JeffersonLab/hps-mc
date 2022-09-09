@@ -7,6 +7,6 @@
     "output_files": {
         "beam.stdhep": "beam_4pt55_1.stdhep"
     },
-    "output_dir": "/sdf/group/hps/mc/beam/gen/4pt55",
+    "output_dir": "output",
     "job_id": 1
 }

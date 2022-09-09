@@ -1,7 +1,7 @@
 Tritrig and beam files -- merge to reconstruction pipline {#tritrigbeam}
 =========================================================
 
-tritrig_beam_job.py is used to combine simulated tritrig and beam data. It takes multiple stdhep beam files and a tritrig stdhep files as input (all in beam coords). Then slic is used to simulate the detector response to the beam and tritrig events separately before the files are merged into one slcio file. Lastly, the detector readout is simualted and the hps-java reconstruction is run.
+tritrig_beam_slic_to_reco_job.py is used to combine simulated tritrig and beam data. It takes multiple stdhep beam files and a tritrig stdhep files as input (all in beam coords). Then slic is used to simulate the detector response to the beam and tritrig events separately before the files are merged into one slcio file. Lastly, the detector readout is simualted and the hps-java reconstruction is run.
 Usually, 10 beam files are used per tritrig file to use all the tritrig events while still maintaining the correct ratio of trittrig to beam data. In this example, we only use three beam files to speed up the runtime of the example.
 
 #### Job parameters

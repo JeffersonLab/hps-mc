@@ -11,6 +11,6 @@
     "output_files": {
         "tritrig_mom_rot.slcio": "tritrig_4pt55_20um120nA_rot_1.slcio"
     },
-    "output_dir": "/sdf/group/hps/mc/tritrig/slic/4pt55/HPS-PhysicsRun2019-v2-4pt5",
+    "output_dir": "output",
     "job_id": 1
 }
