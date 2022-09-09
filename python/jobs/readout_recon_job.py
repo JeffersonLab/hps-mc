@@ -3,10 +3,18 @@
 
 Simulate pile-up, run readout, hps-java recon, and analysis.
 """
-import os
+import os, logging
 from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 
+## Initialize logger with default level
+logger = logging.getLogger('hpsmc.job')
+
 job.description = 'Simulate pile-up, run readout, hps-java recon, and analysis'
+
+if 'filter_bunches' in job.params:
+    filter_bunches = job.params['filter_bunches']
+else:
+    filter_bunches = False
 
 ## Assign ptags for output
 input_files = list(job.input_files.values())
@@ -19,12 +27,10 @@ job.ptag('lcio_recon', '%s_filt_readout_recon.slcio' % output_base)
 job.ptag('hpstr_recon', '%s_filt_readout_recon.root' % output_base)
 job.ptag('hpstr_ana', '%s_filt_readout_recon_ana.root' % output_base)
 
-count_input = LCIOCount()
-
 ## Insert empty bunches expected by pile-up simulation
-filter_bunches = FilterBunches()
-
-count_filt = LCIOCount()
+if filter_bunches:
+    filtered = FilterBunches()
+    job.add([filtered])
 
 ## Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
@@ -42,5 +48,5 @@ cnv = HPSTR(cfg='recon')
 ## Run an analysis on the ROOT file
 ana = HPSTR(cfg='ana')
 
-job.add([count_input, filter_bunches, count_filt, readout, count_readout, reco, count_reco])
-#, cnv, ana])
+job.add([readout, count_readout, reco, count_reco, cnv])
+#, ana])

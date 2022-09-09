@@ -13,6 +13,6 @@
         "ap_rot.stdhep": "ap_4pt55_ap100MeV_mom_rot_1.stdhep",
         "ap.slcio": "ap_4pt55_ap100MeV_1.slcio"
     },
-    "output_dir": "/sdf/group/hps/mc/ap/slic/4pt55/HPS-PhysicsRun2019-v2-4pt5/ap100MeV/lhe_uniform",
+    "output_dir": "output",
     "job_id": 1
 }

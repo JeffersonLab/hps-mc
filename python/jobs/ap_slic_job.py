@@ -23,7 +23,6 @@ else:
     nevents = 10000
 
 if 'ap_decay_dist' in job.params:
-    print(job.params['ap_decay_dist'])
     ap_decay_dist = job.params['ap_decay_dist']
 else:
     ap_decay_dist = "lhe_uniform"

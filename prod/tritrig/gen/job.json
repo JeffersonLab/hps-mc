@@ -5,6 +5,6 @@
     "output_files": {
         "tritrig_unweighted_events.lhe.gz": "tritrig_4pt55_1.lhe.gz"
     },
-    "output_dir": "/sdf/group/hps/mc/tritrig/gen/4pt55",
+    "output_dir": "output",
     "job_id": 1
 }

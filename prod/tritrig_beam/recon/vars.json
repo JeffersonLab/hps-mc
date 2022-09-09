@@ -1,0 +1,11 @@
+{
+    "run_params": ["4pt55"],
+    "detector": ["HPS-PhysicsRun2019-v2-4pt5"],
+    "target_z": [-7.51],
+    "run_number": [10666],
+    "event_interval": [250],
+    "ecal_hit_ecut": [0.05],
+    "target_and_current": ["20um120nA"],
+    "steering_readout": ["/org/hps/steering/readout/PhysicsRun2019TrigMultiSingles.lcsim"],
+    "steering_recon": ["/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"]
+}

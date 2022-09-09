@@ -1,0 +1,26 @@
+{
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
+    "event_interval": {{ event_interval }},
+    "ecal_hit_ecut": {{ ecal_hit_ecut }},
+    "run_mode": 0,
+    "filter_bunches": true,
+    "steering_files": {
+        "readout": "{{ steering_readout }}",
+        "recon": "{{ steering_recon }}"
+    },
+    "config_files": {
+        "recon": "recoTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "input_files": {
+        "/sdf/group/hps/mc/tritrig/slic/{{ run_params }}/{{ detector }}/tritrig_{{ run_params }}_{{ target_and_current }}_rot_{{ job_id }}.slcio": "tritrig.slcio"
+    },
+    "output_files": {
+        "tritrig_filt_readout_recon.slcio": "tritrig_readout_recon_{{ run_params }}_{{ target_and_current }}_{{ job_id }}.slcio",
+        "tritrig_filt_readout_recon.root": "tritrig_readout_recon_{{ run_params }}_{{ target_and_current }}_{{ job_id }}.root"
+    },
+    "output_dir": "/sdf/group/hps/mc/tritrig/slic/recon/{{ run_params }}/{{ detector }}"
+}
