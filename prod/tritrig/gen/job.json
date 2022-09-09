@@ -1,0 +1,10 @@
+{
+    "nevents": 100,
+    "run_params": "4pt55",
+    "seed": 10399312,
+    "output_files": {
+        "tritrig_unweighted_events.lhe.gz": "tritrig_4pt55_1.lhe.gz"
+    },
+    "output_dir": "/sdf/group/hps/mc/tritrig/gen/4pt55",
+    "job_id": 1
+}
