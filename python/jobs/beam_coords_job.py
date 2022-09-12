@@ -1,5 +1,7 @@
 """!
-Apply transforms to input StdHep events.
+@file beam_coords_job.py
+
+Transform events in the input stdhep file to beam coordinates.
 """
 from hpsmc.tools import BeamCoords
 

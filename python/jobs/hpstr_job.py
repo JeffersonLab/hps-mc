@@ -1,4 +1,6 @@
 """!
+@file hpstr_job.py
+
 HPSTR reconstruction and analysis.
 """
 from hpsmc.tools import HPSTR 

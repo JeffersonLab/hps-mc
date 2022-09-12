@@ -1,4 +1,6 @@
 """!
+@file tritrig_slic_full_chain_job.py
+
 Tritrig signal generation using SLIC to recon using hps-sim with no beam background.
 """
 from hpsmc.generators import MG5, StdHepConverter
@@ -17,10 +19,6 @@ mom = AddMother()
 
 ## Rotate events into beam coords
 rot = BeamCoords()
-
-## \cleanup
-# Print results
-#p = StdHepTool(name="print_stdhep")
 
 ## generate events in slic
 sim = SLIC()

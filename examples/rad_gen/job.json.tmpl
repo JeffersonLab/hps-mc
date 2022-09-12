@@ -1,0 +1,14 @@
+{
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "run_number": {{ run_number }},
+    "seed": {{ 8736451 + job_id }},
+    "output_files": {
+        "RAD_unweighted_events.lhe.gz": "lhe/rad_{{ run_params }}_{{ job_id }}.lhe.gz",
+        "RAD_unweighted_events.stdhep": "egs5/rad_{{ run_params }}_{{ job_id }}.stdhep",
+        "rad_mom.stdhep": "stdhep/rad_{{ run_params }}_{{ job_id }}.stdhep",
+        "rad_rot.stdhep": "stdhep/rad_{{ run_params }}_rot_{{ job_id }}.stdhep"
+    },
+    "output_dir": "output"
+}

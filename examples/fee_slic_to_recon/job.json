@@ -1,24 +1,24 @@
 {
-    "run_number": 1194550, 
-    "job_id": 31, 
+    "nevents": 10,
+    "run_params": "4pt55",
+    "target_z": -7.51,
+    "run_number": 1194550,
+    "detector": "HPS_Run2021Pass0_v0",
+    "ecal_hit_ecut": 0.05,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2019TrigFEE.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
-    }, 
-    "nbeams": 4,
-    "input_files": {
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_301.stdhep": "beam_1.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_302.stdhep": "beam_2.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_303.stdhep": "beam_3.stdhep",
-        "/sdf/group/hps/mc/4pt55GeV/beam/20um120nA/beam_4pt55_20um120uA_304.stdhep": "beam_4.stdhep"
-    }, 
-    "target_z": -7.51, 
-    "nevents": 10000, 
-    "output_dir": "output", 
-    "run_params": "4pt55", 
-    "detector": "HPS_Nominal_iter0", 
+    },
     "output_files": {
-        "fee_readout.slcio": "fee_readout_20um120nA_31.slcio",
-        "tritrig-beam_recon.slcio": "fee_recon_20um120nA_31.slcio"
-    }
+        "fee_readout.slcio": "fee_beam_4pt55_20um120nA_readout.slcio",
+        "fee_recon.slcio": "fee_beam_4pt55_20um120nA_recon.slcio"
+    },
+    "base_name": "fee",
+    "input_files": {
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep"
+    }, 
+    "output_dir": "output/4pt55",
+    "job_id": 1,
+    "event_interval": 250
 } 

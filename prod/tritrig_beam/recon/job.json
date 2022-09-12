@@ -1,0 +1,26 @@
+{
+    "run_params": "4pt55",
+    "target_z": -7.51,
+    "run_number": 10666,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "event_interval": 250,
+    "ecal_hit_ecut": 0.05,
+    "run_mode": 0,
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigMultiSingles.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    },
+    "config_files": {
+        "recon": "recoTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "input_files": {
+        "/sdf/group/hps/mc/tritrig_beam/4pt55/HPS-PhysicsRun2019-v2-4pt5/tritrig_beam_4pt55_20um120nA_1.slcio": "tritrig_beam.slcio"
+    },
+    "output_files": {
+        "tritrig_beam_readout_recon.slcio": "tritrig_beam_readout_recon_4pt55_20um120nA_1.slcio",
+        "tritrig_beam_readout_recon.root": "tritrig_beam_readout_recon_4pt55_20um120nA_1.root"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}
