@@ -2,7 +2,7 @@
     "run_number": 1194550, 
     "job_id": 66, 
     "input_files": {
-        "https://www.slac.stanford.edu/~hpsprod/example_files/tritrig/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep" 
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/tritrig/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep" 
     }, 
     "config_files": {
         "mcTuple": "mcTuple_cfg.py",
