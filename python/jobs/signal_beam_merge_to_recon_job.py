@@ -1,4 +1,6 @@
 """!
+@file signal_beam_merge_to_recon_job.py
+
 Merging of signal and beam events, simulation of readout,
 and reconstruction of events.
 """

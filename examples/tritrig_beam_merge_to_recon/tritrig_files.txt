@@ -1,2 +1,0 @@
-/u/group/hps/users/caot/test/hps-mc/examples/tritrig_gen_to_slic/output/2019/pass0/slic/tritrig_1.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/tritrig_gen_to_slic/output/2019/pass0/slic/tritrig_2.slcio

@@ -1,0 +1,6 @@
+{
+    "nevents": [1000],
+    "run_params": ["4pt55"],
+    "apmass": [100.0],
+    "apmass_for_name": ["ap100MeV"]
+}

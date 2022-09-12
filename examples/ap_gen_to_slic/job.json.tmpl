@@ -1,0 +1,16 @@
+{
+    "run_number": {{ run_number }},
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "apmass": {{ apmass }},
+    "seed": {{ job_id + 749238 }},
+    "target_z": {{ target_z }},
+    "detector": "{{ detector }}",
+    "output_files": {
+        "ap_unweighted_events.lhe.gz": "lhe/ap_{{ run_params }}_apm{{ apmass_for_name }}_{{ job_id }}.lhe.gz",
+        "ap_unweighted_events.stdhep": "egs5/ap_{{ run_params }}_apm{{ apmass_for_name }}_{{ job_id }}.stdhep",
+        "ap_mom.stdhep": "stdhep/ap_{{ run_params }}_apm{{ apmass_for_name }}_{{ job_id }}.stdhep",
+        "ap.slcio": "slic/ap_{{ run_params }}_apm{{ apmass_for_name }}_{{ job_id }}.slcio"
+    },
+    "output_dir": "output/{{ detector }}/"
+}

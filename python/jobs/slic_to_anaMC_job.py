@@ -1,9 +1,9 @@
 """!
+@file slic_to_anaMC_job.py
+
 Run SLIC to analysis using mcTuple.
 """
-from hpsmc.generators import StdHepConverter
-from hpsmc.tools import BeamCoords, AddMother, MergePoisson, RandomSample, MergeFiles
-from hpsmc.tools import SLIC, JobManager, ExtractEventsWithHitAtHodoEcal, HPSTR, LCIOCount, LCIOMerge, StdHepCount
+from hpsmc.tools import SLIC, HPSTR
 
 job.description = 'slic to anaMC'
 
@@ -18,5 +18,3 @@ ana = HPSTR(cfg='ana')
  
 ## Add the components
 job.add([slic, tuple, ana])
-
-## \todo cleanup imports

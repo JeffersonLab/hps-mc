@@ -12,8 +12,8 @@ install/
 .settings
 
 # Doxygen
-html/
-latex/
-
 !docs/html/
 docs/html/*
+
+# vscode config (makes Sarah's life easier)
+.vscode

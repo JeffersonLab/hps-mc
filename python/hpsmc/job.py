@@ -12,6 +12,7 @@ import getpass
 import logging
 import configparser
 import glob
+import subprocess
 
 from collections.abc import Sequence
 from os.path import expanduser
@@ -53,7 +54,8 @@ class JobConfig(object):
 
     #, include_default_locations=True
     def __init__(self, config_files=[], include_default_locations=True):
-        self.config_files = []  ## list of config files
+        ## list of config files
+        self.config_files = []
         if include_default_locations:
             self.config_files.extend([os.path.join(expanduser("~"), ".hpsmc"),
                                           os.path.abspath(".hpsmc")])
@@ -70,7 +72,8 @@ class JobConfig(object):
         """! Load config from the list of possible locations."""
 
         # Read in config files and crash if none are found from list
-        self.parser = configparser.ConfigParser()  ## configuration parser
+        ## configuration parser
+        self.parser = configparser.ConfigParser()
         #logger.debug("Checking for config files: %s" % str(self.config_files))
         #parsed =
         self.parser.read(self.config_files)
@@ -134,7 +137,8 @@ class JobStore:
         """
         with open(json_store, 'r') as f:
             json_data = json.loads(f.read())
-        self.data = {} ## dict of jobs, sorted by job id
+        ## dict of jobs, sorted by job id
+        self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
         #logger.info("Loaded %d jobs from job store: %s" % (len(self.data), json_store))
@@ -165,7 +169,8 @@ class JobScriptDatabase:
             raise Exception('HPSMC_DIR is not set in the environ.')
         hps_mc_dir = os.environ['HPSMC_DIR']
         script_dir = os.path.join(hps_mc_dir, 'lib', 'python', 'jobs')
-        self.scripts = {}  ## dict of paths to job scripts sorted by name
+        ## dict of paths to job scripts sorted by name
+        self.scripts = {}
         for f in glob.glob(os.path.join(script_dir, '*_job.py')):
             script_name = os.path.splitext(os.path.basename(f))[0].replace('_job', '')
             self.scripts[script_name] = f
@@ -216,25 +221,36 @@ class Job(object):
     PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
+        ## (passed) job arguments
+        self.args = args
+        ## short description of job, should be overridden by the job script
+        self.description = "HPS MC Job"
+        ## job ID
+        self.job_id = None
+        ## path to parameter file
+        self.param_file = None
+        ## list of components in job
+        self.components = []
+        ## rundir is current working directory
+        self.rundir = os.getcwd()
+        ## dict of parameters
+        self.params = {}
+        ## output_dir is current working directory
+        self.output_dir = os.getcwd()
+        ## dict of input files
+        self.input_files = {}
+        ## dict of output files
+        self.output_files = {}
+        ## dict with keys to output filenames
+        self.ptags = {}
+        ## log output
+        self.log = sys.stdout
+        ## system output
+        self.out = sys.stdout
+        ## error output
+        self.err = sys.stderr
 
-        self.args = args  ## (passed) job arguments
-
-        self.description = "HPS MC Job"  ## short description of job, should be overridden by the job script
-        self.job_id = None  ## job ID
-        self.param_file = None  ## path to parameter file
-        self.components = []  ## list of components in job
-        self.rundir = os.getcwd()  ## rundir is current working directory
-        self.params = {}  ## dict of parameters
-        self.output_dir = os.getcwd()  ## output_dir is current working directory
-        self.input_files = {}  ## dict of input files
-        self.output_files = {}  ## dict of output files
-        self.ptags = {}  ## dict with keys to output filenames
-
-        self.log = sys.stdout  ## log output
-        self.out = sys.stdout  ## system output
-        self.err = sys.stderr  ## error output
-
-        ## These attributes can all be set in the config file.
+        # These attributes can all be set in the config file.
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
         self.delete_existing = False
@@ -350,7 +366,8 @@ class Job(object):
         self.job_steps = cl.job_steps
 
         if cl.script:
-            self.script = cl.script  ## name of or path to script
+            ## name of or path to script
+            self.script = cl.script
         else:
             raise Exception('Missing required script name or location.')
 
@@ -396,8 +413,28 @@ class Job(object):
 
         if 'input_files' in self.params:
             self.input_files = self.params['input_files']
+
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
+
+
+    def __set_input_files(self):
+        """!
+        Prepare dictionary of input files.
+        
+        If a link to a download location is given as input, the file is downloaded into the run directory before the file name is added to the input_files dict. If a regular file is provided, it is added to the dict without any additional action.
+        """
+        input_files_dict = {}
+        for file_key, file_name in self.input_files.items():
+            if 'https' in file_key:
+                logger.info("Downloading input file from %s" % file_key)
+                file_name_path = self.rundir + "/" + file_name
+                subprocess.check_output(['wget', '-O', file_name_path, file_key])
+                input_files_dict.update({file_name: file_name})
+            else:
+                input_files_dict.update({file_key: file_name})
+        self.input_files = input_files_dict
+
 
     def __initialize(self):
         """!
@@ -414,6 +451,12 @@ class Job(object):
             self.rundir = os.path.join("/scratch", getpass.getuser(), os.environ["LSB_JOBID"])
             logger.info('Set run dir for LSF: %s' % self.rundir)
             self.delete_rundir = True
+
+        # Create run dir if it does not exist
+        if not os.path.exists(self.rundir):
+            logger.info('Creating run dir: %s' % self.rundir)
+            os.makedirs(self.rundir)
+
 
     def __configure(self):
         """!
@@ -482,6 +525,9 @@ class Job(object):
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
         self.__configure()
+
+        # This (re)sets the input correctly
+        self.__set_input_files()
 
         # Set component parameters from job JSON file.
         self.__set_parameters()
@@ -572,10 +618,6 @@ class Job(object):
         """!
         Necessary setup before job can be executed.
         """
-        # Create run dir if it does not exist
-        if not os.path.exists(self.rundir):
-            logger.info('Creating run dir: %s' % self.rundir)
-            os.makedirs(self.rundir)
 
         # Change to run dir
         logger.debug('Changing to run dir: %s' % self.rundir)
@@ -712,7 +754,9 @@ class Job(object):
             if '/mss/' in src:
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
+                logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
+                return
             shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 

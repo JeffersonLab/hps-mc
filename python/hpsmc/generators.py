@@ -34,9 +34,12 @@ class EGS5(EventGenerator):
     """
 
     def __init__(self, name='', **kwargs):
-        self.bunches = 5e5  ## \todo is this the number of bunches or the number of particles per bunch?
-        self.target_thickness = None  ## target thickness in $\mu$m, \todo is this correct?
-        self.egs5_dir = None  ## egs5 installation directory
+        ## \todo is this the number of bunches or the number of particles per bunch?
+        self.bunches = 5e5
+        ## target thickness in $\mu$m, \todo is this correct?
+        self.target_thickness = None
+        ## egs5 installation directory
+        self.egs5_dir = None
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
     def get_install_dir(self):
@@ -190,13 +193,18 @@ class MG(EventGenerator):
         # map = mass of the A-prime
         # mpid = mass of the dark pion
         # mrhod = mass of the dark rho
-        self.apmass = None  ## A-prime mass? \todo apmass or map is A-prime mass?
-        self.map = None  ## A-prime mass? \todo apmass or map is A-prime mass?
-        self.mpid = None  ## dark pion mass
-        self.mrhod = None  ## dark rho mass
+        ## A-prime mass? \todo apmass or map is A-prime mass?
+        self.apmass = None
+        ## A-prime mass? \todo apmass or map is A-prime mass?
+        self.map = None
+        ## dark pion mass
+        self.mpid = None
+        ## dark rho mass
+        self.mrhod = None
 
         if 'event_types' in kwargs:
-            self.event_types = kwargs['event_types']  ## event types: weighted or unweighted
+            ## event types: weighted or unweighted
+            self.event_types = kwargs['event_types']
         else:
             self.event_types = ['unweighted', 'weighted']
 

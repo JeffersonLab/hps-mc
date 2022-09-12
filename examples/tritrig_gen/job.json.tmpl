@@ -1,11 +1,11 @@
 {
-    "job_id": {{ job_id }},
-    "nevents": {{nevents}},
-    "run_params": "{{run_params}}",
-    "target_z": {{target_z}},
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
     "seed": {{ 10399311 + job_id }},
+    "run_number": {{ run_number }},
     "output_files": {
-        "tritrig_mom_rot.stdhep": "tritrig_20um_rot_{{ job_id }}.stdhep"
+        "tritrig_mom_rot.stdhep": "tritrig_{{ run_params }}_{{ target_and_current }}_rot_{{ job_id }}.stdhep"
     },
-    "output_dir": "/sdf/group/hps/users/bravo/src/hps-mc/examples/tritrig_gen/output"
+    "output_dir": "output"
 }
