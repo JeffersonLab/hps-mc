@@ -1,5 +1,0 @@
-{
-  "python.linting.enabled": false,
-"fortran.fortls.disabled": true,
-"git.ignoreLimitWarning": true
-}
