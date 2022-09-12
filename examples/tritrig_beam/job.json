@@ -19,10 +19,10 @@
         "tritrig_beam_recon.slcio": "HPS_PhysicsRun2019-v2-FEE-Pass0/tritrig_beam_4pt55_recon.slcio"
     },
     "input_files": {
-        "https://www.slac.stanford.edu/~hpsprod/example_files/tritrig/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep",
-        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
-        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep",
-        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_3.stdhep": "beam_3.stdhep"
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/tritrig/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep",
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep",
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_3.stdhep": "beam_3.stdhep"
     },
     "seed": 10399312,
     "output_dir": "output",

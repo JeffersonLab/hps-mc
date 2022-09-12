@@ -15,8 +15,8 @@
     },
     "base_name": "fee",
     "input_files": {
-        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
-        "https://www.slac.stanford.edu/~hpsprod/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep"
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_1.stdhep",
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_2.stdhep": "beam_2.stdhep"
     }, 
     "output_dir": "output/4pt55",
     "job_id": 1,

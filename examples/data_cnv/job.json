@@ -1,6 +1,6 @@
 {
     "input_files": {
-        "https://www.slac.stanford.edu/~hpsprod/example_files/data/hps_010104.evio.00114": "data_events.evio"
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/data/hps_010104.evio.00114": "data_events.evio"
     },
     "output_files": {
         "data_events.slcio": "data_events.slcio",

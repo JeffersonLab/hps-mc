@@ -6,12 +6,16 @@
     "filter_no_cuts": false,
     "filter_bunches": true,
     "event_print_interval": 1000,
+    "config_files": {
+        "recon": "kalSimpTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
     },
     "input_files": {
-        "https://www.slac.stanford.edu/~hpsprod/example_files/tritrig/tritrig_8um_rot_1510_slic.slcio": "tritrig.slcio"
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/tritrig/tritrig_8um_rot_1510_slic.slcio": "tritrig.slcio"
     },
     "output_files": {
         "tritrig_filt_readout_recon.slcio": "tritrig_8um_rot_1510_recon.slcio"
