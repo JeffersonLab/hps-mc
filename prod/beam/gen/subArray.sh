@@ -18,3 +18,5 @@ mkdir -p $RUNDIR
 cd $RUNDIR
 
 /bin/python3 $HPSMC_DIR/lib/python/hpsmc/job.py run -o $RUNDIR/../logs/job.${JOB_ID}.out -e $RUNDIR/../logs/job.${JOB_ID}.err -l $RUNDIR/../logs/job.${JOB_ID}.log -d $RUNDIR -c $JOBDIR/.hpsmc -i ${JOB_ID} beam_gen $JOBDIR/jobs.json
+
+# HPSMC points to hps-mc directory. You might need to set this variable before running this script.
