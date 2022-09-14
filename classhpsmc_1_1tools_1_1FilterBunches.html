@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('classhpsmc_1_1tools_1_1FilterBunches.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1FilterBunches.html">FilterBunches</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -161,12 +187,13 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a9d7a98b382018c02a5f9cc287df0c4fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhpsmc_1_1tools_1_1JavaTool')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html">JavaTool</a></td></tr>
 <tr class="memitem:a19311e7a45121090424110b348514ec6 inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html#a19311e7a45121090424110b348514ec6">java_class</a></td></tr>
+<tr class="memdesc:a19311e7a45121090424110b348514ec6 inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="mdescLeft">&#160;</td><td class="mdescRight">java class  <a href="classhpsmc_1_1tools_1_1JavaTool.html#a19311e7a45121090424110b348514ec6">More...</a><br /></td></tr>
 <tr class="separator:a19311e7a45121090424110b348514ec6 inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1c32a6f57706d69f98cdf26038cf50a inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html#ae1c32a6f57706d69f98cdf26038cf50a">java_args</a></td></tr>
-<tr class="memdesc:ae1c32a6f57706d69f98cdf26038cf50a inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="mdescLeft">&#160;</td><td class="mdescRight">java class  <a href="classhpsmc_1_1tools_1_1JavaTool.html#ae1c32a6f57706d69f98cdf26038cf50a">More...</a><br /></td></tr>
+<tr class="memdesc:ae1c32a6f57706d69f98cdf26038cf50a inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="mdescLeft">&#160;</td><td class="mdescRight">java arguments  <a href="classhpsmc_1_1tools_1_1JavaTool.html#ae1c32a6f57706d69f98cdf26038cf50a">More...</a><br /></td></tr>
 <tr class="separator:ae1c32a6f57706d69f98cdf26038cf50a inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43c7c241dddadb8d1158fe9bbf1dca5f inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html#a43c7c241dddadb8d1158fe9bbf1dca5f">conditions_url</a></td></tr>
-<tr class="memdesc:a43c7c241dddadb8d1158fe9bbf1dca5f inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="mdescLeft">&#160;</td><td class="mdescRight">java arguments  <a href="classhpsmc_1_1tools_1_1JavaTool.html#a43c7c241dddadb8d1158fe9bbf1dca5f">More...</a><br /></td></tr>
+<tr class="memdesc:a43c7c241dddadb8d1158fe9bbf1dca5f inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="mdescLeft">&#160;</td><td class="mdescRight">tbd  <a href="classhpsmc_1_1tools_1_1JavaTool.html#a43c7c241dddadb8d1158fe9bbf1dca5f">More...</a><br /></td></tr>
 <tr class="separator:a43c7c241dddadb8d1158fe9bbf1dca5f inherit pub_attribs_classhpsmc_1_1tools_1_1JavaTool"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhpsmc_1_1component_1_1Component"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhpsmc_1_1component_1_1Component')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhpsmc_1_1component_1_1Component.html">Component</a></td></tr>
 <tr class="memitem:ab74e6bf80237ddc4109968cedc58c151 inherit pub_attribs_classhpsmc_1_1component_1_1Component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1component_1_1Component.html#ab74e6bf80237ddc4109968cedc58c151">name</a></td></tr>
@@ -199,7 +226,7 @@ Public Attributes</h2></td></tr>
 <p>Optional parameters are: <b>filter_ecal_hit_ecut</b>, <b>filter_event_interval</b>, <b>filter_nevents_read</b>, <b>filter_nevents_write</b>, <b>filter_no_cuts</b> <br  />
  Required config are: <b>hps_java_bin_jar</b> </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00984">984</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01029">1029</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aae7af906a32c4f8bb123982f38866c42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae7af906a32c4f8bb123982f38866c42">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -227,7 +254,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00992">992</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01037">1037</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -253,7 +280,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html#af16e86fb81fbbc18f79fde1156e45ddc">JavaTool</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01045">1045</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01090">1090</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -287,7 +314,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#a778de97a2205357ace12a31e944ca3d8">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01037">1037</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01082">1082</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -313,7 +340,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#aa030092c6097b91c3d451b195bc498cb">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01071">1071</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01116">1116</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -338,7 +365,7 @@ Public Attributes</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1tools_1_1JavaTool.html#a0f2f5067bb76f32ee6fd3097c021983b">JavaTool</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01085">1085</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01130">1130</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -355,7 +382,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01005">1005</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01050">1050</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -371,7 +398,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01000">1000</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01045">1045</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -387,7 +414,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01012">1012</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01057">1057</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -403,7 +430,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01018">1018</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01063">1063</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -419,7 +446,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01024">1024</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01069">1069</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -435,7 +462,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00994">994</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01039">1039</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -451,7 +478,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01029">1029</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l01074">1074</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -459,11 +486,15 @@ Public Attributes</h2></td></tr>
 <li>python/hpsmc/<a class="el" href="tools_8py_source.html">tools.py</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1FilterBunches.html">FilterBunches</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

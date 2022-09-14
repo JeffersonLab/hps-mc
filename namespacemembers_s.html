@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,17 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
-</div><!-- top -->
+$(document).ready(function(){initNavTree('namespacemembers_s.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -65,14 +95,10 @@ $(function() {
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>sample
-: <a class="el" href="namespacebeam__gen__job.html#a6ad492ae3f3437963b8df4ab045165f1">beam_gen_job</a>
-, <a class="el" href="namespacebeam__gen__to__slic__job.html#a6ad492ae3f3437963b8df4ab045165f1">beam_gen_to_slic_job</a>
-, <a class="el" href="namespacebeam__sample__job.html#a6ad492ae3f3437963b8df4ab045165f1">beam_sample_job</a>
+: <a class="el" href="namespacebeam__gen__sample__job.html#a6ad492ae3f3437963b8df4ab045165f1">beam_gen_sample_job</a>
+, <a class="el" href="namespacebeam__prep__and__slic__job.html#a6ad492ae3f3437963b8df4ab045165f1">beam_prep_and_slic_job</a>
 , <a class="el" href="namespacefee__gen__to__recon__job.html#a6ad492ae3f3437963b8df4ab045165f1">fee_gen_to_recon_job</a>
-, <a class="el" href="namespacewab__sample__job.html#a6ad492ae3f3437963b8df4ab045165f1">wab_sample_job</a>
-</li>
-<li>sample_beam
-: <a class="el" href="namespacetritrig__beam__job.html#af0eb2a7c3e482f5f325369a26c4e0d89">tritrig_beam_job</a>
+, <a class="el" href="namespacewab__gen__sample__job.html#a6ad492ae3f3437963b8df4ab045165f1">wab_gen_sample_job</a>
 </li>
 <li>script
 : <a class="el" href="namespacehpsmc_1_1job.html#a52387f82090b097f98a1a44fa72ac060">hpsmc.job</a>
@@ -101,33 +127,37 @@ $(function() {
 , <a class="el" href="namespacetritrig__slic__full__chain__job.html#a9ce7d8135916f3d4dcc638c7b8279419">tritrig_slic_full_chain_job</a>
 </li>
 <li>slic
-: <a class="el" href="namespaceap__displaced__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">ap_displaced_gen_to_slic_job</a>
-, <a class="el" href="namespaceap__prompt__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">ap_prompt_gen_to_slic_job</a>
-, <a class="el" href="namespacebeam__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">beam_gen_to_slic_job</a>
-, <a class="el" href="namespacebeam__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">beam_slic_job</a>
+: <a class="el" href="namespaceap__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">ap_gen_to_slic_job</a>
+, <a class="el" href="namespaceap__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">ap_slic_job</a>
+, <a class="el" href="namespacebeam__prep__and__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">beam_prep_and_slic_job</a>
 , <a class="el" href="namespacefee__gen__to__recon__job.html#abaa485babeb1ee67ebdaadec53822fe6">fee_gen_to_recon_job</a>
-, <a class="el" href="namespacemoller__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">moller_gen_to_slic_job</a>
-, <a class="el" href="namespacerad__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">rad_gen_to_slic_job</a>
 , <a class="el" href="namespacesimp__job.html#abaa485babeb1ee67ebdaadec53822fe6">simp_job</a>
 , <a class="el" href="namespaceslic__to__anaMC__job.html#abaa485babeb1ee67ebdaadec53822fe6">slic_to_anaMC_job</a>
-, <a class="el" href="namespacetritrig__beam__job.html#abaa485babeb1ee67ebdaadec53822fe6">tritrig_beam_job</a>
-, <a class="el" href="namespacetritrig__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">tritrig_gen_to_slic_job</a>
-, <a class="el" href="namespacetritrig__job.html#abaa485babeb1ee67ebdaadec53822fe6">tritrig_job</a>
+, <a class="el" href="namespacetritrig__beam__slic__to__reco__job.html#abaa485babeb1ee67ebdaadec53822fe6">tritrig_beam_slic_to_reco_job</a>
+, <a class="el" href="namespacetritrig__prep__and__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">tritrig_prep_and_slic_job</a>
 , <a class="el" href="namespacewab__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">wab_gen_to_slic_job</a>
 </li>
-<li>slic_beam
-: <a class="el" href="namespacetritrig__beam__job.html#a3c21d4dc1c7e8d6da86c11ffca6b89d1">tritrig_beam_job</a>
-</li>
 <li>slic_beam_cat
-: <a class="el" href="namespacefee__slic__to__recon__job.html#a2323dc11620d7478791746ce4f6d661a">fee_slic_to_recon_job</a>
-, <a class="el" href="namespacetritrig__beam__slic__to__recon__job.html#a2323dc11620d7478791746ce4f6d661a">tritrig_beam_slic_to_recon_job</a>
+: <a class="el" href="namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a">tritrig_beam_job</a>
+, <a class="el" href="namespacetritrig__beam__slic__to__reco__job.html#a2323dc11620d7478791746ce4f6d661a">tritrig_beam_slic_to_reco_job</a>
 </li>
 <li>slic_beams
-: <a class="el" href="namespacefee__slic__to__recon__job.html#aee4592eef02a5201f1e90ff6cf517f54">fee_slic_to_recon_job</a>
-, <a class="el" href="namespacetritrig__beam__slic__to__recon__job.html#aee4592eef02a5201f1e90ff6cf517f54">tritrig_beam_slic_to_recon_job</a>
+: <a class="el" href="namespacetritrig__beam__slic__to__reco__job.html#aee4592eef02a5201f1e90ff6cf517f54">tritrig_beam_slic_to_reco_job</a>
 </li>
-<li>slic_tt
-: <a class="el" href="namespacetritrig__beam__slic__to__recon__job.html#a144f9755096649e665b0f9cc3bf54133">tritrig_beam_slic_to_recon_job</a>
+<li>slic_cat
+: <a class="el" href="namespaceslic__to__recon__job.html#ad7ce7216ef5eaeee97223aca2af0d8b1">slic_to_recon_job</a>
+</li>
+<li>slic_comps
+: <a class="el" href="namespaceslic__to__recon__job.html#abf6aeaed519fd5be73fa0a19583ac455">slic_to_recon_job</a>
+</li>
+<li>slic_file
+: <a class="el" href="namespaceslic__to__recon__job.html#a641eb6472ec27c3dac2615f88dfefc2d">slic_to_recon_job</a>
+</li>
+<li>slic_file_names
+: <a class="el" href="namespaceslic__to__recon__job.html#af9957ed1f3a1b74b9312c72a46048392">slic_to_recon_job</a>
+</li>
+<li>slic_outs
+: <a class="el" href="namespaceslic__job.html#a2e599b4ba87ed463e8e672e24558a9b6">slic_job</a>
 </li>
 <li>space_events
 : <a class="el" href="namespacefee__gen__to__recon__job.html#aaa7516918134a1698997111a8868161e">fee_gen_to_recon_job</a>
@@ -147,11 +177,14 @@ $(function() {
 </li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

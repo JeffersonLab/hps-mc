@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('namespacesimp__job.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
@@ -75,14 +105,11 @@ Variables</h2></td></tr>
 <tr class="memitem:adaa4bf1b4d0978fa034ada89161a23c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#adaa4bf1b4d0978fa034ada89161a23c4">mg</a></td></tr>
 <tr class="memdesc:adaa4bf1b4d0978fa034ada89161a23c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate tritrig in MG5.  <a href="namespacesimp__job.html#adaa4bf1b4d0978fa034ada89161a23c4">More...</a><br /></td></tr>
 <tr class="separator:adaa4bf1b4d0978fa034ada89161a23c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6cf9855bbf9a46e5926c2f4db673450"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#ad6cf9855bbf9a46e5926c2f4db673450">mv</a></td></tr>
-<tr class="memdesc:ad6cf9855bbf9a46e5926c2f4db673450"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move LHE file.  <a href="namespacesimp__job.html#ad6cf9855bbf9a46e5926c2f4db673450">More...</a><br /></td></tr>
-<tr class="separator:ad6cf9855bbf9a46e5926c2f4db673450"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=['simp.lhe.gz'], outputs=['simp.lhe'])</td></tr>
+<tr class="memitem:ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=['simp_unweighted_events.lhe.gz'], outputs=['simp.lhe'])</td></tr>
 <tr class="memdesc:ada93bbf7295ab03a07435e4999845526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unzip LHE file.  <a href="namespacesimp__job.html#ada93bbf7295ab03a07435e4999845526">More...</a><br /></td></tr>
 <tr class="separator:ada93bbf7295ab03a07435e4999845526"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a> = <a class="el" href="classhpsmc_1_1tools_1_1DisplaceUni.html">DisplaceUni</a>(inputs=['simp.lhe'], outputs=['simp.stdhep'])</td></tr>
-<tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep.  <a href="namespacesimp__job.html#ac2353b13f43ff77203d94b47953aa942">More...</a><br /></td></tr>
+<tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep (no displacement here because no ctau given)  <a href="namespacesimp__job.html#ac2353b13f43ff77203d94b47953aa942">More...</a><br /></td></tr>
 <tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1db2ab3d82c6029ee441423308802a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesimp__job.html#a1db2ab3d82c6029ee441423308802a74">rot</a> = <a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a>()</td></tr>
 <tr class="memdesc:a1db2ab3d82c6029ee441423308802a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate into beam coords.  <a href="namespacesimp__job.html#a1db2ab3d82c6029ee441423308802a74">More...</a><br /></td></tr>
@@ -100,9 +127,7 @@ Variables</h2></td></tr>
 <tr class="memdesc:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run physics reconstruction.  <a href="namespacesimp__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">More...</a><br /></td></tr>
 <tr class="separator:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Simulation of SIMPs, detector signals, and readout, followed by reconstruction. </p>
-</div><h2 class="groupheader">Variable Documentation</h2>
+<h2 class="groupheader">Variable Documentation</h2>
 <a id="ac2353b13f43ff77203d94b47953aa942"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac2353b13f43ff77203d94b47953aa942">&#9670;&nbsp;</a></span>cnv</h2>
 
@@ -115,9 +140,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Convert LHE output to stdhep. </p>
+<p>Convert LHE output to stdhep (no displacement here because no ctau given) </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00023">23</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00021">21</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -133,7 +158,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00007">7</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00009">9</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -151,7 +176,7 @@ Variables</h2></td></tr>
 
 <p>Insert empty bunches expected by pile-up simulation. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00032">32</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00030">30</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -173,27 +198,7 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 <p>Generate tritrig in MG5. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00010">10</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
-
-</div>
-</div>
-<a id="ad6cf9855bbf9a46e5926c2f4db673450"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6cf9855bbf9a46e5926c2f4db673450">&#9670;&nbsp;</a></span>mv</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">mv</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  MoveFiles(inputs=[<span class="stringliteral">&#39;simp_unweighted_events.lhe.gz&#39;</span>],</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;               outputs=[<span class="stringliteral">&#39;simp.lhe.gz&#39;</span>])</div>
-</div><!-- fragment -->
-<p>Move LHE file. </p>
-
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00016">16</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00012">12</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -211,7 +216,7 @@ Variables</h2></td></tr>
 
 <p>Run simulated events in readout to generate triggers. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00035">35</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00033">33</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -229,7 +234,7 @@ Variables</h2></td></tr>
 
 <p>Run physics reconstruction. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00038">38</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00036">36</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -247,7 +252,7 @@ Variables</h2></td></tr>
 
 <p>Rotate into beam coords. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00026">26</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00024">24</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -265,7 +270,7 @@ Variables</h2></td></tr>
 
 <p>Run events in slic. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00029">29</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00027">27</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
@@ -276,23 +281,27 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unzip = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=['simp.lhe.gz'], outputs=['simp.lhe'])</td>
+          <td class="memname">unzip = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=['simp_unweighted_events.lhe.gz'], outputs=['simp.lhe'])</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Unzip LHE file. </p>
 
-<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00020">20</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="simp__job_8py_source.html#l00018">18</a> of file <a class="el" href="simp__job_8py_source.html">simp_job.py</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacesimp__job.html">simp_job</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

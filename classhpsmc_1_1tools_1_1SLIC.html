@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('classhpsmc_1_1tools_1_1SLIC.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html">SLIC</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -145,12 +171,13 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a960130d431b811c507889eb2a13bc302"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html#a960130d431b811c507889eb2a13bc302">macros</a></td></tr>
+<tr class="memdesc:a960130d431b811c507889eb2a13bc302"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of macros to run (optional)  <a href="classhpsmc_1_1tools_1_1SLIC.html#a960130d431b811c507889eb2a13bc302">More...</a><br /></td></tr>
 <tr class="separator:a960130d431b811c507889eb2a13bc302"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22ff01ebc09b017d63f5c99e92e43620"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html#a22ff01ebc09b017d63f5c99e92e43620">run_number</a></td></tr>
-<tr class="memdesc:a22ff01ebc09b017d63f5c99e92e43620"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of macros to run (optional)  <a href="classhpsmc_1_1tools_1_1SLIC.html#a22ff01ebc09b017d63f5c99e92e43620">More...</a><br /></td></tr>
+<tr class="memdesc:a22ff01ebc09b017d63f5c99e92e43620"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run number to set on output file (optional)  <a href="classhpsmc_1_1tools_1_1SLIC.html#a22ff01ebc09b017d63f5c99e92e43620">More...</a><br /></td></tr>
 <tr class="separator:a22ff01ebc09b017d63f5c99e92e43620"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a044c190f66597374c5caa9dcd7e6f0bb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html#a044c190f66597374c5caa9dcd7e6f0bb">hps_fieldmaps_dir</a></td></tr>
-<tr class="memdesc:a044c190f66597374c5caa9dcd7e6f0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run number to set on output file (optional)  <a href="classhpsmc_1_1tools_1_1SLIC.html#a044c190f66597374c5caa9dcd7e6f0bb">More...</a><br /></td></tr>
+<tr class="memdesc:a044c190f66597374c5caa9dcd7e6f0bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be set from config or install dir.  <a href="classhpsmc_1_1tools_1_1SLIC.html#a044c190f66597374c5caa9dcd7e6f0bb">More...</a><br /></td></tr>
 <tr class="separator:a044c190f66597374c5caa9dcd7e6f0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac617bf3e61557e2ed92433296f98db86"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html#ac617bf3e61557e2ed92433296f98db86">detector_dir</a></td></tr>
 <tr class="memdesc:ac617bf3e61557e2ed92433296f98db86"><td class="mdescLeft">&#160;</td><td class="mdescRight">To be set from config or install dir.  <a href="classhpsmc_1_1tools_1_1SLIC.html#ac617bf3e61557e2ed92433296f98db86">More...</a><br /></td></tr>
@@ -257,7 +284,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Return path to detector file. </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00076">76</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00079">79</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -287,7 +314,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Return path to particle table. </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00080">80</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00083">83</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -312,7 +339,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#af16e86fb81fbbc18f79fde1156e45ddc">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00040">40</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00043">43</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -346,7 +373,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#a778de97a2205357ace12a31e944ca3d8">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00084">84</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00087">87</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -387,7 +414,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#a7a0adff6665e8fb2d78385168e7c811e">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00151">151</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00154">154</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -412,7 +439,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#aa030092c6097b91c3d451b195bc498cb">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00124">124</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00127">127</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -437,7 +464,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#a0f2f5067bb76f32ee6fd3097c021983b">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00142">142</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00145">145</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -462,7 +489,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#a7cfececac3ad0536a7eea77c6ade91b9">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00133">133</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00136">136</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -486,7 +513,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#ade41f93307784822f8bc17e85964d427">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00103">103</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00106">106</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -505,7 +532,7 @@ Private Member Functions</h2></td></tr>
 
 <p>To be set from config or install dir. </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00032">32</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00035">35</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -521,7 +548,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00108">108</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00111">111</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -537,9 +564,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Run number to set on output file (optional) </p>
+<p>To be set from config or install dir. </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00031">31</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00033">33</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -554,6 +581,8 @@ Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>List of macros to run (optional) </p>
 
 <p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00029">29</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
@@ -571,9 +600,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>List of macros to run (optional) </p>
+<p>Run number to set on output file (optional) </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00030">30</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00031">31</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -581,11 +610,15 @@ Private Member Functions</h2></td></tr>
 <li>python/hpsmc/<a class="el" href="tools_8py_source.html">tools.py</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1SLIC.html">SLIC</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

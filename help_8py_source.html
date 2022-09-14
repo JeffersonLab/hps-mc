@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('help_8py_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_1644388dee67c2f7a00ed970d8334383.html">hpsmc</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">help.py</div>  </div>
@@ -156,15 +182,19 @@ $(function() {
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="namespacehpsmc_1_1help.html#aada31ae03730b6f75e215d7ed1795a1e">print_components</a>()</div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="anamespacehpsmc_1_1help_html_aada31ae03730b6f75e215d7ed1795a1e"><div class="ttname"><a href="namespacehpsmc_1_1help.html#aada31ae03730b6f75e215d7ed1795a1e">hpsmc.help.print_components</a></div><div class="ttdeci">def print_components()</div><div class="ttdoc">Print info for all Component classes.</div><div class="ttdef"><b>Definition:</b> <a href="help_8py_source.html#l00050">help.py:50</a></div></div>
 <div class="ttc" id="anamespacehpsmc_1_1help_html_a6fe053f1a8a2297c2a2ce0794b4fd07a"><div class="ttname"><a href="namespacehpsmc_1_1help.html#a6fe053f1a8a2297c2a2ce0794b4fd07a">hpsmc.help.print_job_script</a></div><div class="ttdeci">def print_job_script(script_path)</div><div class="ttdef"><b>Definition:</b> <a href="help_8py_source.html#l00059">help.py:59</a></div></div>
 <div class="ttc" id="anamespacehpsmc_1_1help_html_a12ad92474d024a37cba13ec600a24e85"><div class="ttname"><a href="namespacehpsmc_1_1help.html#a12ad92474d024a37cba13ec600a24e85">hpsmc.help.print_component</a></div><div class="ttdeci">def print_component(v)</div><div class="ttdoc">Accepts Component class and prints info about it.</div><div class="ttdef"><b>Definition:</b> <a href="help_8py_source.html#l00013">help.py:13</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1job_1_1Job_html"><div class="ttname"><a href="classhpsmc_1_1job_1_1Job.html">hpsmc.job.Job</a></div><div class="ttdoc">Primary class to run HPS jobs from a Python script.</div><div class="ttdef"><b>Definition:</b> <a href="job_8py_source.html#l00192">job.py:192</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1job_1_1Job_html"><div class="ttname"><a href="classhpsmc_1_1job_1_1Job.html">hpsmc.job.Job</a></div><div class="ttdoc">Primary class to run HPS jobs from a Python script.</div><div class="ttdef"><b>Definition:</b> <a href="job_8py_source.html#l00197">job.py:197</a></div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_1644388dee67c2f7a00ed970d8334383.html">hpsmc</a></li><li class="navelem"><a class="el" href="help_8py.html">help.py</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

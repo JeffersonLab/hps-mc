@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('classhpsmc_1_1job__template_1_1JobTemplate.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1job__template.html">job_template</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html">JobTemplate</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -107,20 +133,21 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a44533d5b11d90f5b5ad93549e12fdebd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#a44533d5b11d90f5b5ad93549e12fdebd">template_file</a></td></tr>
+<tr class="memdesc:a44533d5b11d90f5b5ad93549e12fdebd"><td class="mdescLeft">&#160;</td><td class="mdescRight">template file from which parameters are read  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#a44533d5b11d90f5b5ad93549e12fdebd">More...</a><br /></td></tr>
 <tr class="separator:a44533d5b11d90f5b5ad93549e12fdebd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a4f51a2aa1485342c48472a9124d83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#af9a4f51a2aa1485342c48472a9124d83">env</a></td></tr>
-<tr class="memdesc:af9a4f51a2aa1485342c48472a9124d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">template file from which parameters are read  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#af9a4f51a2aa1485342c48472a9124d83">More...</a><br /></td></tr>
 <tr class="separator:af9a4f51a2aa1485342c48472a9124d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6723b9401c1ba0038be3ea578d11255"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#ad6723b9401c1ba0038be3ea578d11255">job_id_start</a></td></tr>
+<tr class="memdesc:ad6723b9401c1ba0038be3ea578d11255"><td class="mdescLeft">&#160;</td><td class="mdescRight">start ID for jobs  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#ad6723b9401c1ba0038be3ea578d11255">More...</a><br /></td></tr>
 <tr class="separator:ad6723b9401c1ba0038be3ea578d11255"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27256609f574b662639e0a8cd48b8d3a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#a27256609f574b662639e0a8cd48b8d3a">input_files</a></td></tr>
-<tr class="memdesc:a27256609f574b662639e0a8cd48b8d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">start ID for jobs  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#a27256609f574b662639e0a8cd48b8d3a">More...</a><br /></td></tr>
+<tr class="memdesc:a27256609f574b662639e0a8cd48b8d3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">dict of input files  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#a27256609f574b662639e0a8cd48b8d3a">More...</a><br /></td></tr>
 <tr class="separator:a27256609f574b662639e0a8cd48b8d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab32c427c26e43e7a993b02a715d9de29"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#ab32c427c26e43e7a993b02a715d9de29">itervars</a></td></tr>
-<tr class="memdesc:ab32c427c26e43e7a993b02a715d9de29"><td class="mdescLeft">&#160;</td><td class="mdescRight">dict of input files  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#ab32c427c26e43e7a993b02a715d9de29">More...</a><br /></td></tr>
+<tr class="memdesc:ab32c427c26e43e7a993b02a715d9de29"><td class="mdescLeft">&#160;</td><td class="mdescRight">dict of iteration variables  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#ab32c427c26e43e7a993b02a715d9de29">More...</a><br /></td></tr>
 <tr class="separator:ab32c427c26e43e7a993b02a715d9de29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8691fbda845191debece7688e06e3654"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#a8691fbda845191debece7688e06e3654">output_file</a></td></tr>
-<tr class="memdesc:a8691fbda845191debece7688e06e3654"><td class="mdescLeft">&#160;</td><td class="mdescRight">dict of iteration variables  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#a8691fbda845191debece7688e06e3654">More...</a><br /></td></tr>
+<tr class="memdesc:a8691fbda845191debece7688e06e3654"><td class="mdescLeft">&#160;</td><td class="mdescRight">name of output file  <a href="classhpsmc_1_1job__template_1_1JobTemplate.html#a8691fbda845191debece7688e06e3654">More...</a><br /></td></tr>
 <tr class="separator:a8691fbda845191debece7688e06e3654"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79ce83c7ce1b58bb61a61b647deb3ecc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html#a79ce83c7ce1b58bb61a61b647deb3ecc">template</a></td></tr>
 <tr class="separator:a79ce83c7ce1b58bb61a61b647deb3ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -207,7 +234,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00165">165</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00170">170</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -237,7 +264,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Get the maximum number of iterations based on file input parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00152">152</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00157">157</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -277,7 +304,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Read the input file list from arg parsing. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00209">209</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00214">214</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -328,9 +355,9 @@ Private Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000016">Todo:</a></b></dt><dd>check if this is correct </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000017">Todo:</a></b></dt><dd>check if this is correct </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00082">82</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00087">87</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -375,7 +402,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00092">92</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00097">97</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -413,7 +440,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00101">101</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00106">106</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -451,7 +478,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00108">108</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00113">113</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -473,7 +500,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Return all combinations of the iteration variables. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00114">114</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00119">119</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -495,7 +522,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Parse arguments for template engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00227">227</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00232">232</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -517,7 +544,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Generate the JSON jobs from processing the template and write to file. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00127">127</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00132">132</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -534,9 +561,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>template file from which parameters are read </p>
-
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00071">71</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00072">72</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -552,9 +577,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>start ID for jobs </p>
+<p>dict of input files </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00078">78</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00081">81</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -570,9 +595,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>dict of input files </p>
+<p>dict of iteration variables </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00079">79</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00083">83</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -588,7 +613,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00077">77</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p>start ID for jobs </p>
+
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00079">79</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -604,7 +631,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00246">246</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00251">251</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -620,9 +647,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>dict of iteration variables </p>
+<p>name of output file </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00080">80</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00085">85</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -638,7 +665,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00244">244</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00249">249</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -654,7 +681,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00131">131</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00136">136</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -670,7 +697,9 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00070">70</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p>template file from which parameters are read </p>
+
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00071">71</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -678,11 +707,15 @@ Private Member Functions</h2></td></tr>
 <li>python/hpsmc/<a class="el" href="job__template_8py_source.html">job_template.py</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1job__template.html">job_template</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1job__template_1_1JobTemplate.html">JobTemplate</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

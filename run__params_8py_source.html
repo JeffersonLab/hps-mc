@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('run__params_8py_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_1644388dee67c2f7a00ed970d8334383.html">hpsmc</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">run_params.py</div>  </div>
@@ -74,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> sys</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a34b4194b0ed4702f0a8120bffa441e6a">    5</a></span>&#160;run_params = {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&quot;aprime_mass&quot;</span>: {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&quot;aprime_mass&quot;</span>: { <span class="comment"># MeV</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: [15, 20, 30, 40, 50, 60, 70, 80, 90],</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: [15, 20, 30, 40, 50, 60, 70, 80, 90, 100],</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: [50, 75, 100],</div>
@@ -86,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="stringliteral">&quot;4pt55&quot;</span>: [75, 90, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 160, 170, 180, 190, 200],</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="stringliteral">&quot;6pt6&quot;</span>: [50, 100, 200, 300, 400, 500, 600]</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    },</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="stringliteral">&quot;target_z&quot;</span>: {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="stringliteral">&quot;target_z&quot;</span>: { <span class="comment"># target thickness in cm</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: 0.0004062,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: 0.0008,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: 0.0004062,</div>
@@ -98,7 +124,7 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="stringliteral">&quot;4pt55&quot;</span>: 0.002,</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="stringliteral">&quot;6pt6&quot;</span>: 0.000875</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    },</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="stringliteral">&quot;beam_energy&quot;</span>: {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="stringliteral">&quot;beam_energy&quot;</span>: { <span class="comment"># GeV | MeV</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: 1100.00,</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: 1920.00,</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: 1056.00,</div>
@@ -144,15 +170,19 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    print(rp.get_run_params(param_name, key))</div>
 </div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
 <div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html">hpsmc.run_params.RunParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00056">run_params.py:56</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a8e7b929bdd73dd00e76fa22f17f5038f"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">hpsmc.run_params.RunParameters.get</a></div><div class="ttdeci">def get(self, param_name)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00061">run_params.py:61</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a7bd0a6233e6225568533932a0cfae65e"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">hpsmc.run_params.RunParameters.__init__</a></div><div class="ttdeci">def __init__(self, key, json_filename=None)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00058">run_params.py:58</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_ab0d96f9d852c2058c2546a1338e87544"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">hpsmc.run_params.RunParameters.key</a></div><div class="ttdeci">key</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00059">run_params.py:59</a></div></div>
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_1644388dee67c2f7a00ed970d8334383.html">hpsmc</a></li><li class="navelem"><a class="el" href="run__params_8py.html">run_params.py</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

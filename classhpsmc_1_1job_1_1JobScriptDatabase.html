@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('classhpsmc_1_1job_1_1JobScriptDatabase.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1job.html">job</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1job_1_1JobScriptDatabase.html">JobScriptDatabase</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -97,12 +123,13 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7849f11e82b8ea592ade76ea0817dbc2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1job_1_1JobScriptDatabase.html#a7849f11e82b8ea592ade76ea0817dbc2">scripts</a></td></tr>
+<tr class="memdesc:a7849f11e82b8ea592ade76ea0817dbc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">dict of paths to job scripts sorted by name  <a href="classhpsmc_1_1job_1_1JobScriptDatabase.html#a7849f11e82b8ea592ade76ea0817dbc2">More...</a><br /></td></tr>
 <tr class="separator:a7849f11e82b8ea592ade76ea0817dbc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Database of job scripts. </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00160">160</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00164">164</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae64f0875afe3067b97ba370b354b9213"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae64f0875afe3067b97ba370b354b9213">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -120,7 +147,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00163">163</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00167">167</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -154,7 +181,7 @@ Public Attributes</h2></td></tr>
 <p>Test if job script exists in dict. </p>
 <dl class="section return"><dt>Returns</dt><dd>True if job name is key in job dict </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00187">187</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00192">192</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -176,7 +203,7 @@ Public Attributes</h2></td></tr>
 
 <p>Get list of all script names. </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00179">179</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00184">184</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -215,7 +242,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>path to job script </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00173">173</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00178">178</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -237,7 +264,7 @@ Public Attributes</h2></td></tr>
 
 <p>Get dict containing paths to scripts sorted by script names. </p>
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00183">183</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00188">188</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -254,7 +281,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00168">168</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
+<p>dict of paths to job scripts sorted by name </p>
+
+<p class="definition">Definition at line <a class="el" href="job_8py_source.html#l00173">173</a> of file <a class="el" href="job_8py_source.html">job.py</a>.</p>
 
 </div>
 </div>
@@ -262,11 +291,15 @@ Public Attributes</h2></td></tr>
 <li>python/hpsmc/<a class="el" href="job_8py_source.html">job.py</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1job.html">job</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1job_1_1JobScriptDatabase.html">JobScriptDatabase</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

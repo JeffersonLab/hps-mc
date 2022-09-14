@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('namespaceslic__job.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
@@ -72,6 +102,23 @@ $(function() {
 Variables</h2></td></tr>
 <tr class="memitem:a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">description</a></td></tr>
 <tr class="separator:a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde3b66b6b41bd008469f366fa756e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a> = list(job.input_files.values())</td></tr>
+<tr class="memdesc:afde3b66b6b41bd008469f366fa756e54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get job input file targets.  <a href="namespaceslic__job.html#afde3b66b6b41bd008469f366fa756e54">More...</a><br /></td></tr>
+<tr class="separator:afde3b66b6b41bd008469f366fa756e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97c9be2f89e783b8598fd55e60bd6b6e"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a97c9be2f89e783b8598fd55e60bd6b6e">output_names</a> = []</td></tr>
+<tr class="memdesc:a97c9be2f89e783b8598fd55e60bd6b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">get file names  <a href="namespaceslic__job.html#a97c9be2f89e783b8598fd55e60bd6b6e">More...</a><br /></td></tr>
+<tr class="separator:a97c9be2f89e783b8598fd55e60bd6b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ff994e16bf9521154de4cf659a3b689"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a2ff994e16bf9521154de4cf659a3b689">filename</a></td></tr>
+<tr class="separator:a2ff994e16bf9521154de4cf659a3b689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dac989ba65df2d5fd881d7a69bbfeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#aa3dac989ba65df2d5fd881d7a69bbfeb">file_extension</a></td></tr>
+<tr class="separator:aa3dac989ba65df2d5fd881d7a69bbfeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e3448e9350a8c3d5e421ecb1e64ba50"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a9e3448e9350a8c3d5e421ecb1e64ba50">outname</a> = <a class="el" href="namespaceslic__job.html#a2ff994e16bf9521154de4cf659a3b689">filename</a> + '.slcio'</td></tr>
+<tr class="separator:a9e3448e9350a8c3d5e421ecb1e64ba50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5209ed8d981dc170e77bea159c5bbe48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> = job.params['nevents']</td></tr>
+<tr class="separator:a5209ed8d981dc170e77bea159c5bbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e599b4ba87ed463e8e672e24558a9b6"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__job.html#a2e599b4ba87ed463e8e672e24558a9b6">slic_outs</a> = []</td></tr>
+<tr class="memdesc:a2e599b4ba87ed463e8e672e24558a9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate events.  <a href="namespaceslic__job.html#a2e599b4ba87ed463e8e672e24558a9b6">More...</a><br /></td></tr>
+<tr class="separator:a2e599b4ba87ed463e8e672e24558a9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a2661f439a4a94ffdcd5e47ae1da0bb1d"></a>
@@ -86,16 +133,138 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00004">4</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00009">9</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="aa3dac989ba65df2d5fd881d7a69bbfeb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3dac989ba65df2d5fd881d7a69bbfeb">&#9670;&nbsp;</a></span>file_extension</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">file_extension</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00017">17</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="a2ff994e16bf9521154de4cf659a3b689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff994e16bf9521154de4cf659a3b689">&#9670;&nbsp;</a></span>filename</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">filename</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00017">17</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="afde3b66b6b41bd008469f366fa756e54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde3b66b6b41bd008469f366fa756e54">&#9670;&nbsp;</a></span>inputs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">inputs = list(job.input_files.values())</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get job input file targets. </p>
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00012">12</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="a5209ed8d981dc170e77bea159c5bbe48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5209ed8d981dc170e77bea159c5bbe48">&#9670;&nbsp;</a></span>nevents</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int nevents = job.params['nevents']</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00022">22</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="a9e3448e9350a8c3d5e421ecb1e64ba50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e3448e9350a8c3d5e421ecb1e64ba50">&#9670;&nbsp;</a></span>outname</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string outname = <a class="el" href="namespaceslic__job.html#a2ff994e16bf9521154de4cf659a3b689">filename</a> + '.slcio'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00018">18</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="a97c9be2f89e783b8598fd55e60bd6b6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97c9be2f89e783b8598fd55e60bd6b6e">&#9670;&nbsp;</a></span>output_names</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list output_names = []</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get file names </p>
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00015">15</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
+
+</div>
+</div>
+<a id="a2e599b4ba87ed463e8e672e24558a9b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e599b4ba87ed463e8e672e24558a9b6">&#9670;&nbsp;</a></span>slic_outs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">list slic_outs = []</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Simulate events. </p>
+
+<p class="definition">Definition at line <a class="el" href="slic__job_8py_source.html#l00027">27</a> of file <a class="el" href="slic__job_8py_source.html">slic_job.py</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespaceslic__job.html">slic_job</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

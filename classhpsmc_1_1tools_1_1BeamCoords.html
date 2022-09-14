@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('classhpsmc_1_1tools_1_1BeamCoords.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,11 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -150,25 +176,25 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae17ba86f64b6248e6324dc0aed8c890b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#ae17ba86f64b6248e6324dc0aed8c890b">beam_sigma_x</a></td></tr>
 <tr class="separator:ae17ba86f64b6248e6324dc0aed8c890b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28dd94bb9f36b3e79b5dfebf56bbfcec"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a28dd94bb9f36b3e79b5dfebf56bbfcec">beam_sigma_y</a></td></tr>
-<tr class="memdesc:a28dd94bb9f36b3e79b5dfebf56bbfcec"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam sigma in x  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a28dd94bb9f36b3e79b5dfebf56bbfcec">More...</a><br /></td></tr>
+<tr class="memdesc:a28dd94bb9f36b3e79b5dfebf56bbfcec"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam sigma in y  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a28dd94bb9f36b3e79b5dfebf56bbfcec">More...</a><br /></td></tr>
 <tr class="separator:a28dd94bb9f36b3e79b5dfebf56bbfcec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cc4561138013a0f41589d4006eaa6d2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a3cc4561138013a0f41589d4006eaa6d2">target_x</a></td></tr>
-<tr class="memdesc:a3cc4561138013a0f41589d4006eaa6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam sigma in y  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a3cc4561138013a0f41589d4006eaa6d2">More...</a><br /></td></tr>
+<tr class="memdesc:a3cc4561138013a0f41589d4006eaa6d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">target x position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a3cc4561138013a0f41589d4006eaa6d2">More...</a><br /></td></tr>
 <tr class="separator:a3cc4561138013a0f41589d4006eaa6d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a450449fdb553a2d213214a92ae40defb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a450449fdb553a2d213214a92ae40defb">target_y</a></td></tr>
-<tr class="memdesc:a450449fdb553a2d213214a92ae40defb"><td class="mdescLeft">&#160;</td><td class="mdescRight">target x position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a450449fdb553a2d213214a92ae40defb">More...</a><br /></td></tr>
+<tr class="memdesc:a450449fdb553a2d213214a92ae40defb"><td class="mdescLeft">&#160;</td><td class="mdescRight">target y position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a450449fdb553a2d213214a92ae40defb">More...</a><br /></td></tr>
 <tr class="separator:a450449fdb553a2d213214a92ae40defb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebb2277c02357a0cb5a51a4057da5b40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#aebb2277c02357a0cb5a51a4057da5b40">target_z</a></td></tr>
-<tr class="memdesc:aebb2277c02357a0cb5a51a4057da5b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">target y position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#aebb2277c02357a0cb5a51a4057da5b40">More...</a><br /></td></tr>
+<tr class="memdesc:aebb2277c02357a0cb5a51a4057da5b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">target z position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#aebb2277c02357a0cb5a51a4057da5b40">More...</a><br /></td></tr>
 <tr class="separator:aebb2277c02357a0cb5a51a4057da5b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f87e25b884f0e4687cf2cd89bf89ec5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a0f87e25b884f0e4687cf2cd89bf89ec5">beam_rot_x</a></td></tr>
-<tr class="memdesc:a0f87e25b884f0e4687cf2cd89bf89ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">target z position  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a0f87e25b884f0e4687cf2cd89bf89ec5">More...</a><br /></td></tr>
+<tr class="memdesc:a0f87e25b884f0e4687cf2cd89bf89ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam rotation in x?  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a0f87e25b884f0e4687cf2cd89bf89ec5">More...</a><br /></td></tr>
 <tr class="separator:a0f87e25b884f0e4687cf2cd89bf89ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95a6e3836de8efbc51a8286dcc651485"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a95a6e3836de8efbc51a8286dcc651485">beam_rot_y</a></td></tr>
-<tr class="memdesc:a95a6e3836de8efbc51a8286dcc651485"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam rotation in x?  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a95a6e3836de8efbc51a8286dcc651485">More...</a><br /></td></tr>
+<tr class="memdesc:a95a6e3836de8efbc51a8286dcc651485"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam rotation in y?  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a95a6e3836de8efbc51a8286dcc651485">More...</a><br /></td></tr>
 <tr class="separator:a95a6e3836de8efbc51a8286dcc651485"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9032d48e078e1219b54604dfa9d354b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html#a9032d48e078e1219b54604dfa9d354b8">beam_rot_z</a></td></tr>
-<tr class="memdesc:a9032d48e078e1219b54604dfa9d354b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam rotation in y?  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a9032d48e078e1219b54604dfa9d354b8">More...</a><br /></td></tr>
+<tr class="memdesc:a9032d48e078e1219b54604dfa9d354b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">beam rotation in z?  <a href="classhpsmc_1_1tools_1_1BeamCoords.html#a9032d48e078e1219b54604dfa9d354b8">More...</a><br /></td></tr>
 <tr class="separator:a9032d48e078e1219b54604dfa9d354b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhpsmc_1_1component_1_1Component"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhpsmc_1_1component_1_1Component')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhpsmc_1_1component_1_1Component.html">Component</a></td></tr>
 <tr class="memitem:ab74e6bf80237ddc4109968cedc58c151 inherit pub_attribs_classhpsmc_1_1component_1_1Component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1component_1_1Component.html#ab74e6bf80237ddc4109968cedc58c151">name</a></td></tr>
@@ -207,7 +233,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>Transform StdHep events into beam coordinates. </p>
 <p>Optional parameters are: <b>beam_sigma_x</b>, <b>beam_sigma_y</b>, <b>beam_rot_x</b>, <b>beam_rot_y</b>, <b>beam_rot_z</b>, <b>target_x</b>, <b>target_y</b>, <b>target_z</b> </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00490">490</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00508">508</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aae7af906a32c4f8bb123982f38866c42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae7af906a32c4f8bb123982f38866c42">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -235,7 +261,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00498">498</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00516">516</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -261,7 +287,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1tools_1_1StdHepTool.html#af16e86fb81fbbc18f79fde1156e45ddc">StdHepTool</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00514">514</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00540">540</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -286,7 +312,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1component_1_1Component.html#aa030092c6097b91c3d451b195bc498cb">Component</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00542">542</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00568">568</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -303,9 +329,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>target z position </p>
+<p>beam rotation in x? </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00505">505</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00529">529</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -321,9 +347,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>beam rotation in x? </p>
+<p>beam rotation in y? </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00506">506</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00531">531</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -339,9 +365,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>beam rotation in y? </p>
+<p>beam rotation in z? </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00507">507</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00533">533</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -356,9 +382,9 @@ Additional Inherited Members</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000021">Todo:</a></b></dt><dd>clarify these </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000022">Todo:</a></b></dt><dd>clarify these beam sigma in x </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00500">500</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00519">519</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -374,9 +400,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>beam sigma in x </p>
+<p>beam sigma in y </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00501">501</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00521">521</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -392,9 +418,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>beam sigma in y </p>
+<p>target x position </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00502">502</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00523">523</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -410,9 +436,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>target x position </p>
+<p>target y position </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00503">503</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00525">525</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -428,9 +454,9 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>target y position </p>
+<p>target z position </p>
 
-<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00504">504</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tools_8py_source.html#l00527">527</a> of file <a class="el" href="tools_8py_source.html">tools.py</a>.</p>
 
 </div>
 </div>
@@ -438,11 +464,15 @@ Additional Inherited Members</h2></td></tr>
 <li>python/hpsmc/<a class="el" href="tools_8py_source.html">tools.py</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1tools.html">tools</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>

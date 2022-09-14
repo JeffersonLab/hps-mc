@@ -9,9 +9,18 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -24,6 +33,21 @@
    <div id="projectname">HPS-MC
    </div>
   </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
  </tr>
  </tbody>
 </table>
@@ -35,16 +59,23 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 /* @license-end */
 </script>
-<script type="text/javascript" src="menudata.js"></script>
-<script type="text/javascript" src="menu.js"></script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(function() {
-  initMenu('',true,false,'search.php','Search');
-  $(document).ready(function() { init_search(); });
-});
-/* @license-end */</script>
-<div id="main-nav"></div>
+$(document).ready(function(){initNavTree('namespacetritrig__beam__job.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -59,7 +90,6 @@ $(function() {
 </iframe>
 </div>
 
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
@@ -77,218 +107,62 @@ Variables</h2></td></tr>
 <tr class="separator:a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbe469cbb24e10408ceddbf0048955c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#abbe469cbb24e10408ceddbf0048955c2">event_interval</a> = job.params['event_interval']</td></tr>
 <tr class="separator:abbe469cbb24e10408ceddbf0048955c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5209ed8d981dc170e77bea159c5bbe48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> = job.params['nevents']</td></tr>
-<tr class="separator:a5209ed8d981dc170e77bea159c5bbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8b460040ac41dbd3ee6864ec8f2d9b6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6">tritrig_file_name</a> = 'tritrig_events.lhe.gz'</td></tr>
-<tr class="memdesc:ad8b460040ac41dbd3ee6864ec8f2d9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input tritrig events (LHE format)  <a href="namespacetritrig__beam__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6">More...</a><br /></td></tr>
+<tr class="memitem:ad8b460040ac41dbd3ee6864ec8f2d9b6"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6">tritrig_file_name</a> = 'tritrig_events.slcio'</td></tr>
+<tr class="memdesc:ad8b460040ac41dbd3ee6864ec8f2d9b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input tritrig events (slcio format)  <a href="namespacetritrig__beam__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6">More...</a><br /></td></tr>
 <tr class="separator:ad8b460040ac41dbd3ee6864ec8f2d9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa240891d9a4dee24f52b0613e90bdc0d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#aa240891d9a4dee24f52b0613e90bdc0d">beam_file_name</a> = 'beam.stdhep'</td></tr>
-<tr class="memdesc:aa240891d9a4dee24f52b0613e90bdc0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input beam events (StdHep format)  <a href="namespacetritrig__beam__job.html#aa240891d9a4dee24f52b0613e90bdc0d">More...</a><br /></td></tr>
-<tr class="separator:aa240891d9a4dee24f52b0613e90bdc0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad90e5e78a8229f9a398a8bc694f27cd4"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ad90e5e78a8229f9a398a8bc694f27cd4">beam_file_names</a> = []</td></tr>
+<tr class="memdesc:ad90e5e78a8229f9a398a8bc694f27cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input beam events (slcio format)  <a href="namespacetritrig__beam__job.html#ad90e5e78a8229f9a398a8bc694f27cd4">More...</a><br /></td></tr>
+<tr class="separator:ad90e5e78a8229f9a398a8bc694f27cd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2fe862cabbc3d6cc1ac5f8aa87ba52ac"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac">tritrig_name</a> = 'tritrig'</td></tr>
-<tr class="memdesc:a2fe862cabbc3d6cc1ac5f8aa87ba52ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for expected input file targets.  <a href="namespacetritrig__beam__job.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac">More...</a><br /></td></tr>
+<tr class="memdesc:a2fe862cabbc3d6cc1ac5f8aa87ba52ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base name of intermediate tritrig files.  <a href="namespacetritrig__beam__job.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac">More...</a><br /></td></tr>
 <tr class="separator:a2fe862cabbc3d6cc1ac5f8aa87ba52ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a10dff35e2d38e6e7da9b09b98a47fc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a4a10dff35e2d38e6e7da9b09b98a47fc">beam_name</a> = 'beam'</td></tr>
-<tr class="memdesc:a4a10dff35e2d38e6e7da9b09b98a47fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base name of intermediate beam files.  <a href="namespacetritrig__beam__job.html#a4a10dff35e2d38e6e7da9b09b98a47fc">More...</a><br /></td></tr>
-<tr class="separator:a4a10dff35e2d38e6e7da9b09b98a47fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82645e0aa04f2488ddf7ec8680268346"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a82645e0aa04f2488ddf7ec8680268346">tritrig_beam_name</a> = 'tritrig-beam'</td></tr>
+<tr class="memitem:a82645e0aa04f2488ddf7ec8680268346"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a82645e0aa04f2488ddf7ec8680268346">tritrig_beam_name</a> = 'tritrig_beam'</td></tr>
 <tr class="memdesc:a82645e0aa04f2488ddf7ec8680268346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base name of merged files.  <a href="namespacetritrig__beam__job.html#a82645e0aa04f2488ddf7ec8680268346">More...</a><br /></td></tr>
 <tr class="separator:a82645e0aa04f2488ddf7ec8680268346"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a></td></tr>
-<tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep.  <a href="namespacetritrig__beam__job.html#ac2353b13f43ff77203d94b47953aa942">More...</a><br /></td></tr>
-<tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">mom</a></td></tr>
-<tr class="memdesc:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add mother particle to tag trident particles.  <a href="namespacetritrig__beam__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">More...</a><br /></td></tr>
-<tr class="separator:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1db2ab3d82c6029ee441423308802a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a1db2ab3d82c6029ee441423308802a74">rot</a></td></tr>
-<tr class="memdesc:a1db2ab3d82c6029ee441423308802a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate events into beam coords.  <a href="namespacetritrig__beam__job.html#a1db2ab3d82c6029ee441423308802a74">More...</a><br /></td></tr>
-<tr class="separator:a1db2ab3d82c6029ee441423308802a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaa485babeb1ee67ebdaadec53822fe6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#abaa485babeb1ee67ebdaadec53822fe6">slic</a></td></tr>
-<tr class="memdesc:abaa485babeb1ee67ebdaadec53822fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate signal events.  <a href="namespacetritrig__beam__job.html#abaa485babeb1ee67ebdaadec53822fe6">More...</a><br /></td></tr>
-<tr class="separator:abaa485babeb1ee67ebdaadec53822fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3074e3594d8071411ddd34bbbf47acd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a3074e3594d8071411ddd34bbbf47acd9">filter_bunches</a></td></tr>
 <tr class="memdesc:a3074e3594d8071411ddd34bbbf47acd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Space signal events before merging.  <a href="namespacetritrig__beam__job.html#a3074e3594d8071411ddd34bbbf47acd9">More...</a><br /></td></tr>
 <tr class="separator:a3074e3594d8071411ddd34bbbf47acd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e91f24e8243a86ee91c1ed6600f7606"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a8e91f24e8243a86ee91c1ed6600f7606">count_filter</a> = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=filter_bunches.output_files())</td></tr>
-<tr class="memdesc:a8e91f24e8243a86ee91c1ed6600f7606"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count filtered events.  <a href="namespacetritrig__beam__job.html#a8e91f24e8243a86ee91c1ed6600f7606">More...</a><br /></td></tr>
-<tr class="separator:a8e91f24e8243a86ee91c1ed6600f7606"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a764ab861848706c7a5be9d99fe73e164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a764ab861848706c7a5be9d99fe73e164">rot_beam</a></td></tr>
-<tr class="memdesc:a764ab861848706c7a5be9d99fe73e164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform beam events.  <a href="namespacetritrig__beam__job.html#a764ab861848706c7a5be9d99fe73e164">More...</a><br /></td></tr>
-<tr class="separator:a764ab861848706c7a5be9d99fe73e164"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0eb2a7c3e482f5f325369a26c4e0d89"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#af0eb2a7c3e482f5f325369a26c4e0d89">sample_beam</a></td></tr>
-<tr class="memdesc:af0eb2a7c3e482f5f325369a26c4e0d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sample the beam events.  <a href="namespacetritrig__beam__job.html#af0eb2a7c3e482f5f325369a26c4e0d89">More...</a><br /></td></tr>
-<tr class="separator:af0eb2a7c3e482f5f325369a26c4e0d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c1fa335b87137ccc06502402405726f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a1c1fa335b87137ccc06502402405726f">count_beam</a> = <a class="el" href="classhpsmc_1_1tools_1_1StdHepCount.html">StdHepCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=sample_beam.output_files())</td></tr>
-<tr class="memdesc:a1c1fa335b87137ccc06502402405726f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print number of beam sampled events.  <a href="namespacetritrig__beam__job.html#a1c1fa335b87137ccc06502402405726f">More...</a><br /></td></tr>
-<tr class="separator:a1c1fa335b87137ccc06502402405726f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c21d4dc1c7e8d6da86c11ffca6b89d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a3c21d4dc1c7e8d6da86c11ffca6b89d1">slic_beam</a></td></tr>
-<tr class="memdesc:a3c21d4dc1c7e8d6da86c11ffca6b89d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate beam events.  <a href="namespacetritrig__beam__job.html#a3c21d4dc1c7e8d6da86c11ffca6b89d1">More...</a><br /></td></tr>
-<tr class="separator:a3c21d4dc1c7e8d6da86c11ffca6b89d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2323dc11620d7478791746ce4f6d661a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a">slic_beam_cat</a></td></tr>
+<tr class="memdesc:a2323dc11620d7478791746ce4f6d661a"><td class="mdescLeft">&#160;</td><td class="mdescRight">concatonate beam events before merging  <a href="namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a">More...</a><br /></td></tr>
+<tr class="separator:a2323dc11620d7478791746ce4f6d661a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c314bbf889bccf5fbdd959da9db1006"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006">merge</a></td></tr>
 <tr class="memdesc:a2c314bbf889bccf5fbdd959da9db1006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Merge signal and beam events.  <a href="namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006">More...</a><br /></td></tr>
 <tr class="separator:a2c314bbf889bccf5fbdd959da9db1006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad86070cd1bb37ab65e0eb8e018f36830"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ad86070cd1bb37ab65e0eb8e018f36830">count_merge</a> = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=merge.output_files())</td></tr>
-<tr class="memdesc:ad86070cd1bb37ab65e0eb8e018f36830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print number of merged events.  <a href="namespacetritrig__beam__job.html#ad86070cd1bb37ab65e0eb8e018f36830">More...</a><br /></td></tr>
-<tr class="separator:ad86070cd1bb37ab65e0eb8e018f36830"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">readout</a></td></tr>
-<tr class="memdesc:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run simulated events in readout to generate triggers.  <a href="namespacetritrig__beam__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">More...</a><br /></td></tr>
-<tr class="separator:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5335cc02f651b1d910b2705947ea52bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a5335cc02f651b1d910b2705947ea52bf">count_readout</a> = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=readout.output_files())</td></tr>
-<tr class="memdesc:a5335cc02f651b1d910b2705947ea52bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print number of readout events.  <a href="namespacetritrig__beam__job.html#a5335cc02f651b1d910b2705947ea52bf">More...</a><br /></td></tr>
-<tr class="separator:a5335cc02f651b1d910b2705947ea52bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">recon</a></td></tr>
-<tr class="memdesc:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run physics reconstruction.  <a href="namespacetritrig__beam__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">More...</a><br /></td></tr>
-<tr class="separator:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae219caee644dd69bd3f281a6de26c5e2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#ae219caee644dd69bd3f281a6de26c5e2">count_recon</a> = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=recon.output_files())</td></tr>
-<tr class="memdesc:ae219caee644dd69bd3f281a6de26c5e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print number of recon events.  <a href="namespacetritrig__beam__job.html#ae219caee644dd69bd3f281a6de26c5e2">More...</a><br /></td></tr>
-<tr class="separator:ae219caee644dd69bd3f281a6de26c5e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc0773cf13b176eee1c782c41e8d1563"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacetritrig__beam__job.html#acc0773cf13b176eee1c782c41e8d1563">comps</a> = [<a class="el" href="namespacetritrig__beam__job.html#a3074e3594d8071411ddd34bbbf47acd9">filter_bunches</a>, <a class="el" href="namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a">slic_beam_cat</a>, <a class="el" href="namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006">merge</a>]</td></tr>
+<tr class="separator:acc0773cf13b176eee1c782c41e8d1563"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Merge tritrig and beam events, simulate signal events, and detector readout. </p>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="aa240891d9a4dee24f52b0613e90bdc0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa240891d9a4dee24f52b0613e90bdc0d">&#9670;&nbsp;</a></span>beam_file_name</h2>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad90e5e78a8229f9a398a8bc694f27cd4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad90e5e78a8229f9a398a8bc694f27cd4">&#9670;&nbsp;</a></span>beam_file_names</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string beam_file_name = 'beam.stdhep'</td>
+          <td class="memname">list beam_file_names = []</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Input beam events (StdHep format) </p>
+<p>Input beam events (slcio format) </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00027">27</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00022">22</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
-<a id="a4a10dff35e2d38e6e7da9b09b98a47fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a10dff35e2d38e6e7da9b09b98a47fc">&#9670;&nbsp;</a></span>beam_name</h2>
+<a id="acc0773cf13b176eee1c782c41e8d1563"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc0773cf13b176eee1c782c41e8d1563">&#9670;&nbsp;</a></span>comps</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string beam_name = 'beam'</td>
+          <td class="memname">list comps = [<a class="el" href="namespacetritrig__beam__job.html#a3074e3594d8071411ddd34bbbf47acd9">filter_bunches</a>, <a class="el" href="namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a">slic_beam_cat</a>, <a class="el" href="namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006">merge</a>]</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Base name of intermediate beam files. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00039">39</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="ac2353b13f43ff77203d94b47953aa942"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac2353b13f43ff77203d94b47953aa942">&#9670;&nbsp;</a></span>cnv</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">cnv</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  StdHepConverter(inputs=[tritrig_file_name],</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                      outputs=[<span class="stringliteral">&#39;%s.stdhep&#39;</span> % tritrig_name])</div>
-</div><!-- fragment -->
-<p>Convert LHE output to stdhep. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00045">45</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a1c1fa335b87137ccc06502402405726f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c1fa335b87137ccc06502402405726f">&#9670;&nbsp;</a></span>count_beam</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">count_beam = <a class="el" href="classhpsmc_1_1tools_1_1StdHepCount.html">StdHepCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=sample_beam.output_files())</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print number of beam sampled events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00078">78</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a8e91f24e8243a86ee91c1ed6600f7606"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e91f24e8243a86ee91c1ed6600f7606">&#9670;&nbsp;</a></span>count_filter</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">count_filter = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=filter_bunches.output_files())</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Count filtered events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00065">65</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="ad86070cd1bb37ab65e0eb8e018f36830"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad86070cd1bb37ab65e0eb8e018f36830">&#9670;&nbsp;</a></span>count_merge</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">count_merge = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=merge.output_files())</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print number of merged events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00093">93</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a5335cc02f651b1d910b2705947ea52bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5335cc02f651b1d910b2705947ea52bf">&#9670;&nbsp;</a></span>count_readout</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">count_readout = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=readout.output_files())</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print number of readout events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00101">101</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="ae219caee644dd69bd3f281a6de26c5e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae219caee644dd69bd3f281a6de26c5e2">&#9670;&nbsp;</a></span>count_recon</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">count_recon = <a class="el" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(<a class="el" href="namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=recon.output_files())</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Print number of recon events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00109">109</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00049">49</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -335,12 +209,13 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  FilterBunches(inputs=slic.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                               outputs=[<span class="stringliteral">&#39;%s_filt.slcio&#39;</span> % tritrig_name])</div>
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ExtractEventsWithHitAtHodoEcal(inputs=tritrig_file_name,</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                outputs=[<span class="stringliteral">&#39;%s_filt.slcio&#39;</span> % tritrig_name],</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                                event_interval=event_interval, num_hodo_hits=0)</div>
 </div><!-- fragment -->
 <p>Space signal events before merging. </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00061">61</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00034">34</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -374,195 +249,34 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  LCIOMerge(inputs=[filter_bunches.output_files()[0],</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                          slic_beam.output_files()[0]],</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                          slic_beam_cat.outputs[0]],</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                  outputs=[<span class="stringliteral">&#39;%s.slcio&#39;</span> % tritrig_beam_name],</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                  ignore_job_params=[<span class="stringliteral">&#39;nevents&#39;</span>])</div>
 </div><!-- fragment -->
 <p>Merge signal and beam events. </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00087">87</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00044">44</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
-<a id="a0edfd5bd129fcfa8dc6c9607d04780b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0edfd5bd129fcfa8dc6c9607d04780b7">&#9670;&nbsp;</a></span>mom</h2>
+<a id="a2323dc11620d7478791746ce4f6d661a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2323dc11620d7478791746ce4f6d661a">&#9670;&nbsp;</a></span>slic_beam_cat</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">mom</td>
+          <td class="memname">slic_beam_cat</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  AddMother(inputs=cnv.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                outputs=[<span class="stringliteral">&#39;%s_mom.stdhep&#39;</span> % tritrig_name])</div>
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ExtractEventsWithHitAtHodoEcal(inputs=beam_file_names,</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                   outputs=[<span class="stringliteral">&#39;beam_cat.slcio&#39;</span>],</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                                   event_interval=0, num_hodo_hits=0)</div>
 </div><!-- fragment -->
-<p>Add mother particle to tag trident particles. </p>
+<p>concatonate beam events before merging </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00049">49</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a5209ed8d981dc170e77bea159c5bbe48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5209ed8d981dc170e77bea159c5bbe48">&#9670;&nbsp;</a></span>nevents</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int nevents = job.params['nevents']</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00019">19</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a1820b9438d6a7ae4a4995bb66c9aa1ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1820b9438d6a7ae4a4995bb66c9aa1ab">&#9670;&nbsp;</a></span>readout</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">readout</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  JobManager(steering=<span class="stringliteral">&#39;readout&#39;</span>,</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                     inputs=merge.output_files(),</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                     outputs=[<span class="stringliteral">&#39;%s_readout.slcio&#39;</span> % tritrig_beam_name])</div>
-</div><!-- fragment -->
-<p>Run simulated events in readout to generate triggers. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00096">96</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a6b8c91e3ce53f8874c33b1d8f3a406e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b8c91e3ce53f8874c33b1d8f3a406e1">&#9670;&nbsp;</a></span>recon</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">recon</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  JobManager(steering=<span class="stringliteral">&#39;recon&#39;</span>,</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                   inputs=readout.output_files(),</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                   outputs=[<span class="stringliteral">&#39;%s_recon.slcio&#39;</span> % tritrig_beam_name])</div>
-</div><!-- fragment -->
-<p>Run physics reconstruction. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00104">104</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a1db2ab3d82c6029ee441423308802a74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1db2ab3d82c6029ee441423308802a74">&#9670;&nbsp;</a></span>rot</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">rot</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  BeamCoords(inputs=mom.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                outputs=[<span class="stringliteral">&#39;%s_rot.stdhep&#39;</span> % tritrig_name])</div>
-</div><!-- fragment -->
-<p>Rotate events into beam coords. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00053">53</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a764ab861848706c7a5be9d99fe73e164"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a764ab861848706c7a5be9d99fe73e164">&#9670;&nbsp;</a></span>rot_beam</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">rot_beam</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  BeamCoords(inputs=[beam_file_name],</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                      outputs=[<span class="stringliteral">&#39;%s_rot.stdhep&#39;</span> % beam_name])</div>
-</div><!-- fragment -->
-<p>Transform beam events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00068">68</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="af0eb2a7c3e482f5f325369a26c4e0d89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0eb2a7c3e482f5f325369a26c4e0d89">&#9670;&nbsp;</a></span>sample_beam</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sample_beam</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  RandomSample(inputs=rot_beam.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                           outputs=[<span class="stringliteral">&#39;%s_sampled.stdhep&#39;</span> % beam_name],</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                           nevents=500000,</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                           ignore_job_params=[<span class="stringliteral">&#39;nevents&#39;</span>])</div>
-</div><!-- fragment -->
-<p>Sample the beam events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00072">72</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="abaa485babeb1ee67ebdaadec53822fe6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaa485babeb1ee67ebdaadec53822fe6">&#9670;&nbsp;</a></span>slic</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">slic</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  SLIC(inputs=rot.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;            outputs=[<span class="stringliteral">&#39;%s.slcio&#39;</span> % tritrig_name])</div>
-</div><!-- fragment -->
-<p>Simulate signal events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00057">57</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
-
-</div>
-</div>
-<a id="a3c21d4dc1c7e8d6da86c11ffca6b89d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c21d4dc1c7e8d6da86c11ffca6b89d1">&#9670;&nbsp;</a></span>slic_beam</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">slic_beam</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  SLIC(inputs=sample_beam.output_files(),</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                 outputs=[<span class="stringliteral">&#39;%s.slcio&#39;</span> % beam_name],</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                 nevents=nevents*event_interval,</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                 ignore_job_params=[<span class="stringliteral">&#39;nevents&#39;</span>])</div>
-</div><!-- fragment -->
-<p>Simulate beam events. </p>
-
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00081">81</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00039">39</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -573,14 +287,14 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string tritrig_beam_name = 'tritrig-beam'</td>
+          <td class="memname">string tritrig_beam_name = 'tritrig_beam'</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Base name of merged files. </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00042">42</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00031">31</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -591,14 +305,14 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string tritrig_file_name = 'tritrig_events.lhe.gz'</td>
+          <td class="memname">string tritrig_file_name = 'tritrig_events.slcio'</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Input tritrig events (LHE format) </p>
+<p>Input tritrig events (slcio format) </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00024">24</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00019">19</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -614,19 +328,22 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Check for expected input file targets. </p>
-<p>Base name of intermediate tritrig files </p>
+<p>Base name of intermediate tritrig files. </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00036">36</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00028">28</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.17
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacetritrig__beam__job.html">tritrig_beam_job</a></li>
+    <li class="footer">Generated by
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
 </body>
 </html>
