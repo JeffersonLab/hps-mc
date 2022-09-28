@@ -11,7 +11,7 @@ export LD_LIBRARY_PATH=/sdf/group/hps/users/bravo/src/gsl-2.6/install/lib:$LD_LI
 
 export FIRST_ID=0
 export JOB_ID=$(($SLURM_ARRAY_TASK_ID+$FIRST_ID))
-export JOBDIR=$HPSMC/prod/tritrig_beam
+export JOBDIR=$HPSMC/prod/tritrig_beam/recon
 export RUNDIR=$SCRATCH/tritrig_beam/$JOB_ID
 
 mkdir -p $RUNDIR
