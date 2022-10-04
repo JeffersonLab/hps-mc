@@ -7,7 +7,7 @@ and resulting simulate signal events using SLIC.
 
 import logging
 from hpsmc.generators import StdHepConverter
-from hpsmc.tools import DisplaceTime, Unzip, BeamCoords, AddMotherFullTruth, SLIC
+from hpsmc.tools import DisplaceUni, Unzip, BeamCoords, AddMotherFullTruth, SLIC
 
 ## Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
@@ -38,7 +38,7 @@ elif ap_decay_dist == "lhe_prompt":
 elif ap_decay_dist == "displace_time": 
     if 'ctau' in job.params:
         ## Displace the time of decay using the ctau param
-        cnv = DisplaceTime(inputs=inputs)
+        cnv = DisplaceUni(inputs=inputs)
         job.add([cnv])
     else:
         logger.error("Missing parameter ctau")

@@ -9,7 +9,7 @@ You can use them by adjusting the StdHepConverter options as seen below.
 """
 
 from hpsmc.generators import MG4, StdHepConverter
-from hpsmc.tools import DisplaceTime, Unzip, BeamCoords, AddMotherFullTruth, SLIC
+from hpsmc.tools import DisplaceUni, Unzip, BeamCoords, AddMotherFullTruth, SLIC
 
 job.description = 'ap from generation to slic'
 
@@ -29,7 +29,7 @@ cnv = StdHepConverter(name="lhe_uniform", inputs=mg.output_files())
 ## for prompt signal, change the above to
 # cnv = StdHepConverter(name="lhe_prompt", inputs=mg.output_files())
 ## alternatively, on can displace the time of decay using the ctau param
-# cnv = DisplaceTime(inputs=mg.output_files())
+# cnv = DisplaceUni(inputs=mg.output_files())
 
 ## Unzip the LHE events to a local file
 unzip = Unzip(inputs=mg.output_files(), outputs=["ap.lhe"])
