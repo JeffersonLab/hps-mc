@@ -162,7 +162,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00049">49</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00050">50</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -209,7 +209,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ExtractEventsWithHitAtHodoEcal(inputs=tritrig_file_name,</div>
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ExtractEventsWithHitAtHodoEcal(inputs=[tritrig_file_name],</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                outputs=[<span class="stringliteral">&#39;%s_filt.slcio&#39;</span> % tritrig_name],</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                                event_interval=event_interval, num_hodo_hits=0)</div>
 </div><!-- fragment -->
@@ -255,7 +255,7 @@ Variables</h2></td></tr>
 </div><!-- fragment -->
 <p>Merge signal and beam events. </p>
 
-<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00044">44</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="tritrig__beam__job_8py_source.html#l00045">45</a> of file <a class="el" href="tritrig__beam__job_8py_source.html">tritrig_beam_job.py</a>.</p>
 
 </div>
 </div>
@@ -271,8 +271,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  ExtractEventsWithHitAtHodoEcal(inputs=beam_file_names,</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                                   outputs=[<span class="stringliteral">&#39;beam_cat.slcio&#39;</span>],</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                                   event_interval=0, num_hodo_hits=0)</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;                                               outputs=[<span class="stringliteral">&#39;beam_cat.slcio&#39;</span>],</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                               ignore_job_params=[<span class="stringliteral">&#39;event_interval&#39;</span>],</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                                               event_interval=0, num_hodo_hits=0)</div>
 </div><!-- fragment -->
 <p>concatonate beam events before merging </p>
 
