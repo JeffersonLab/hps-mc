@@ -1,0 +1,112 @@
+[
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749239,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_1.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 1
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749240,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_2.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 2
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749241,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_3.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 3
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749242,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_4.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 4
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749243,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_5.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 5
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749244,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_6.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 6
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749245,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_7.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 7
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749246,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_8.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 8
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749247,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_9.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 9
+    },
+    {
+        "nevents": 1000,
+        "run_params": "4pt55",
+        "apmass": 100.0,
+        "seed": 749248,
+        "output_files": {
+            "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_10.lhe.gz"
+        },
+        "output_dir": "/sdf/group/hps/mc/ap/gen/4pt55/ap100MeV",
+        "job_id": 10
+    }
+]

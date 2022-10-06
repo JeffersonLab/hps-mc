@@ -1,0 +1,12 @@
+{
+    "bunches": 250,
+    "nevents": 250,
+    "run_params": "4pt55",
+    "run_number": 10666,
+    "seed": 61029002,
+    "output_files": {
+        "beam.stdhep": "beam_4pt55_1.stdhep"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}
