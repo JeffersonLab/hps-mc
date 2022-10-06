@@ -21,21 +21,39 @@ if 'nevents' in job.params:
 else:
     nevents = 10000
 
+# if 'ap_decay_dist' in job.params:
+#     ap_decay_dist = job.params['ap_decay_dist']
+# else:
+#     ap_decay_dist = "lhe_uniform"
+
 ## Generate rad in MG4
 mg = MG4(name='ap', event_types=['unweighted'])
 
-## Convert LHE output to stdhep
-cnv = StdHepConverter(name="lhe_uniform", inputs=mg.output_files())
-## for prompt signal, change the above to
-# cnv = StdHepConverter(name="lhe_prompt", inputs=mg.output_files())
-## alternatively, on can displace the time of decay using the ctau param
-# cnv = DisplaceUni(inputs=mg.output_files())
+if 'ap_decay_dist' in job.params:
+    ap_decay_dist = job.params['ap_decay_dist']
+else:
+    ap_decay_dist = "lhe_uniform"
 
 ## Unzip the LHE events to a local file
-unzip = Unzip(inputs=mg.output_files(), outputs=["ap.lhe"])
+unzip = Unzip(inputs=["ap_unweighted_events.lhe.gz"], outputs=["ap_unweighted_events.lhe"])
+
+if ap_decay_dist == "lhe_uniform":
+    ## Convert LHE output to stdhep for uniform signal
+    cnv = StdHepConverter(name="lhe_uniform", inputs=["ap_unweighted_events.lhe"])
+elif ap_decay_dist == "lhe_prompt":
+    ## Convert LHE output to stdhep for prompt signal
+    cnv = StdHepConverter(name="lhe_prompt", inputs=["ap_unweighted_events.lhe"])
+elif ap_decay_dist == "displace_time": 
+    if 'ctau' in job.params:
+        ## Displace the time of decay using the ctau param
+        cnv = DisplaceUni(inputs=["ap_unweighted_events.lhe"])
+    else:
+        logger.error("Missing parameter ctau")
+else:
+    logger.error("Invalid ap decay distribution: ap_decay_dist = %s" % ap_decay_dist)
 
 ## Add mother particle to tag trident particles
-mom = AddMotherFullTruth(inputs=[cnv.output_files()[0], unzip.output_files()[0]], outputs=["ap_mom.stdhep"])
+mom = AddMotherFullTruth(inputs=["ap_unweighted_events.stdhep", unzip.output_files()[0]], outputs=["ap_mom.stdhep"])
 
 ## Rotate events into beam coords
 rot = BeamCoords(inputs=mom.output_files(), outputs=["ap_rot.stdhep"])
@@ -44,4 +62,4 @@ rot = BeamCoords(inputs=mom.output_files(), outputs=["ap_rot.stdhep"])
 slic = SLIC(nevents=nevents+1, inputs=rot.output_files(), outputs=["ap.slcio"])
 
 ## run the job
-job.add([mg, cnv, unzip, mom, rot, slic])
+job.add([mg, unzip, cnv, mom, rot, slic])
