@@ -30,8 +30,8 @@ void rotate_entry(stdhep_entry *entry, double theta_x, double theta_y)
   entry->phep[2] = pz*cos(theta_y) - px*sin(theta_y);
 
   // rotate about x-axis (rotation in y-z)
-  entry->vhep[1] = vy*cos(theta_x) + vz*sin(theta_x);
-  entry->vhep[2] = vy*sin(theta_x) - vz*cos(theta_x);
+  entry->vhep[1] = vy*cos(theta_x) - vz*sin(theta_x);
+  entry->vhep[2] = vy*sin(theta_x) + vz*cos(theta_x);
 
   vy = entry->vhep[1];
   vz = entry->vhep[2];
