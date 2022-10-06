@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classhpsmc_1_1job_1_1Job.html#a01e9fc0a3bb85563bdf26efa9374154a":[8,0,0,3,0,13],
 "classhpsmc_1_1job_1_1Job.html#a1dbeb68baa355575a35a1534e7026176":[8,0,0,3,0,35],
 "classhpsmc_1_1job_1_1Job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[8,0,0,3,0,30],
 "classhpsmc_1_1job_1_1Job.html#a27256609f574b662639e0a8cd48b8d3a":[8,0,0,3,0,38],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classhpsmc_1_1tools_1_1LHECount.html#ad286a22613de018ebafca798849bd52f":[8,0,0,6,16,1],
 "classhpsmc_1_1tools_1_1LHECount.html#ade41f93307784822f8bc17e85964d427":[8,0,0,6,16,3],
 "classhpsmc_1_1tools_1_1MergeFiles.html":[8,0,0,6,17],
-"classhpsmc_1_1tools_1_1MergeFiles.html#a7cfececac3ad0536a7eea77c6ade91b9":[8,0,0,6,17,2],
-"classhpsmc_1_1tools_1_1MergeFiles.html#aa030092c6097b91c3d451b195bc498cb":[8,0,0,6,17,1]
+"classhpsmc_1_1tools_1_1MergeFiles.html#a7cfececac3ad0536a7eea77c6ade91b9":[8,0,0,6,17,2]
 };

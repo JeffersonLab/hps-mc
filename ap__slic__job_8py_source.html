@@ -104,7 +104,7 @@ $(document).ready(function(){initNavTree('ap__slic__job_8py_source.html',''); in
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">import</span> logging</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">from</span> <a class="code" href="namespacehpsmc_1_1generators.html">hpsmc.generators</a> <span class="keyword">import</span> StdHepConverter</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">from</span> <a class="code" href="namespacehpsmc_1_1tools.html">hpsmc.tools</a> <span class="keyword">import</span> DisplaceTime, Unzip, BeamCoords, AddMotherFullTruth, SLIC</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">from</span> <a class="code" href="namespacehpsmc_1_1tools.html">hpsmc.tools</a> <span class="keyword">import</span> DisplaceUni, Unzip, BeamCoords, AddMotherFullTruth, SLIC</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#a0b14e488ae28d98d262453f3e9cd6e4d">   13</a></span>&#160;logger = logging.getLogger(<span class="stringliteral">&#39;hpsmc.job&#39;</span>)</div>
@@ -124,29 +124,29 @@ $(document).ready(function(){initNavTree('ap__slic__job_8py_source.html',''); in
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordflow">else</span>:</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ap_decay_dist = <span class="stringliteral">&quot;lhe_uniform&quot;</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordflow">if</span> ap_decay_dist == <span class="stringliteral">&quot;lhe_uniform&quot;</span>:</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    </div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">   32</a></span>&#160;    cnv = <a class="code" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=<span class="stringliteral">&quot;lhe_uniform&quot;</span>, inputs=inputs)</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    job.add([cnv])</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordflow">elif</span> ap_decay_dist == <span class="stringliteral">&quot;lhe_prompt&quot;</span>:</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    cnv = <a class="code" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=<span class="stringliteral">&quot;lhe_prompt&quot;</span>, inputs=inputs)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    job.add([cnv])</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordflow">elif</span> ap_decay_dist == <span class="stringliteral">&quot;displace_time&quot;</span>: </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&#39;ctau&#39;</span> <span class="keywordflow">in</span> job.params:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        cnv = <a class="code" href="classhpsmc_1_1tools_1_1DisplaceTime.html">DisplaceTime</a>(inputs=inputs)</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        job.add([cnv])</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        logger.error(<span class="stringliteral">&quot;Missing parameter ctau&quot;</span>)</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    logger.error(<span class="stringliteral">&quot;Invalid ap decay distribution: ap_decay_dist = %s&quot;</span> % ap_decay_dist)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#ada93bbf7295ab03a07435e4999845526">   49</a></span>&#160;unzip = <a class="code" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=inputs, outputs=[<span class="stringliteral">&quot;ap.lhe&quot;</span>])</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#ada93bbf7295ab03a07435e4999845526">   31</a></span>&#160;unzip = <a class="code" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(inputs=[<span class="stringliteral">&quot;ap_unweighted_events.lhe.gz&quot;</span>], outputs=[<span class="stringliteral">&quot;ap_unweighted_events.lhe&quot;</span>])</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordflow">if</span> ap_decay_dist == <span class="stringliteral">&quot;lhe_uniform&quot;</span>:</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    </div>
+<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">   35</a></span>&#160;    cnv = <a class="code" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=<span class="stringliteral">&quot;lhe_uniform&quot;</span>, inputs=[<span class="stringliteral">&quot;ap_unweighted_events.lhe&quot;</span>])</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    job.add([cnv])</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordflow">elif</span> ap_decay_dist == <span class="stringliteral">&quot;lhe_prompt&quot;</span>:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    cnv = <a class="code" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=<span class="stringliteral">&quot;lhe_prompt&quot;</span>, inputs=[<span class="stringliteral">&quot;ap_unweighted_events.lhe&quot;</span>])</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    job.add([cnv])</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordflow">elif</span> ap_decay_dist == <span class="stringliteral">&quot;displace_time&quot;</span>: </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&#39;ctau&#39;</span> <span class="keywordflow">in</span> job.params:</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        cnv = <a class="code" href="classhpsmc_1_1tools_1_1DisplaceUni.html">DisplaceUni</a>(inputs=[<span class="stringliteral">&quot;ap_unweighted_events.lhe&quot;</span>])</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        job.add([cnv])</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        logger.error(<span class="stringliteral">&quot;Missing parameter ctau&quot;</span>)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    logger.error(<span class="stringliteral">&quot;Invalid ap decay distribution: ap_decay_dist = %s&quot;</span> % ap_decay_dist)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">   52</a></span>&#160;mom = <a class="code" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(inputs=[cnv.output_files()[0], unzip.output_files()[0]], outputs=[<span class="stringliteral">&quot;ap_mom.stdhep&quot;</span>])</div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">   52</a></span>&#160;mom = <a class="code" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(inputs=[<span class="stringliteral">&quot;ap_displace.stdhep&quot;</span>, unzip.output_files()[0]], outputs=[<span class="stringliteral">&quot;ap_mom.stdhep&quot;</span>])</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="namespaceap__slic__job.html#a1db2ab3d82c6029ee441423308802a74">   55</a></span>&#160;rot = <a class="code" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a>(inputs=mom.output_files(), outputs=[<span class="stringliteral">&quot;ap_rot.stdhep&quot;</span>])</div>
@@ -159,8 +159,8 @@ $(document).ready(function(){initNavTree('ap__slic__job_8py_source.html',''); in
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclasshpsmc_1_1tools_1_1Unzip_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1Unzip.html">hpsmc.tools.Unzip</a></div><div class="ttdoc">Unzip the input files to outputs.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01195">tools.py:1195</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1tools_1_1DisplaceUni_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1DisplaceUni.html">hpsmc.tools.DisplaceUni</a></div><div class="ttdoc">Convert LHE files to StdHep, displacing the time by given ctau.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00681">tools.py:681</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1tools_1_1SLIC_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1SLIC.html">hpsmc.tools.SLIC</a></div><div class="ttdoc">Run the SLIC Geant4 simulation.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00018">tools.py:18</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1tools_1_1DisplaceTime_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1DisplaceTime.html">hpsmc.tools.DisplaceTime</a></div><div class="ttdoc">Convert LHE files to StdHep, displacing the time by given ctau.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00647">tools.py:647</a></div></div>
 <div class="ttc" id="anamespacehpsmc_1_1tools_html"><div class="ttname"><a href="namespacehpsmc_1_1tools.html">hpsmc.tools</a></div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00001">tools.py:1</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1tools_1_1AddMotherFullTruth_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">hpsmc.tools.AddMotherFullTruth</a></div><div class="ttdoc">Add full truth mother particles for physics samples.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00725">tools.py:725</a></div></div>
 <div class="ttc" id="anamespacehpsmc_1_1generators_html"><div class="ttname"><a href="namespacehpsmc_1_1generators.html">hpsmc.generators</a></div><div class="ttdef"><b>Definition:</b> <a href="generators_8py_source.html#l00001">generators.py:1</a></div></div>

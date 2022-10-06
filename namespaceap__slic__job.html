@@ -112,13 +112,13 @@ Variables</h2></td></tr>
 <tr class="separator:a5209ed8d981dc170e77bea159c5bbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0efaa6dc084485ab7f3653b83121c31"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#af0efaa6dc084485ab7f3653b83121c31">ap_decay_dist</a> = job.params['ap_decay_dist']</td></tr>
 <tr class="separator:af0efaa6dc084485ab7f3653b83121c31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a> = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, inputs=<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>)</td></tr>
-<tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep for uniform signal.  <a href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">More...</a><br /></td></tr>
-<tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>, outputs=[&quot;ap.lhe&quot;])</td></tr>
+<tr class="memitem:ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe.gz&quot;], outputs=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
 <tr class="memdesc:ada93bbf7295ab03a07435e4999845526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unzip the LHE events to a local file.  <a href="namespaceap__slic__job.html#ada93bbf7295ab03a07435e4999845526">More...</a><br /></td></tr>
 <tr class="separator:ada93bbf7295ab03a07435e4999845526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">mom</a> = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[cnv.output_files()[0], unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td></tr>
+<tr class="memitem:ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a> = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, inputs=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
+<tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep for uniform signal.  <a href="namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942">More...</a><br /></td></tr>
+<tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">mom</a> = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_displace.stdhep&quot;, unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td></tr>
 <tr class="memdesc:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add mother particle to tag trident particles.  <a href="namespaceap__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">More...</a><br /></td></tr>
 <tr class="separator:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1db2ab3d82c6029ee441423308802a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__slic__job.html#a1db2ab3d82c6029ee441423308802a74">rot</a> = <a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=mom.output_files(), outputs=[&quot;ap_rot.stdhep&quot;])</td></tr>
@@ -152,7 +152,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">cnv = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, inputs=<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>)</td>
+          <td class="memname">cnv = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, inputs=[&quot;ap_unweighted_events.lhe&quot;])</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -161,7 +161,7 @@ Variables</h2></td></tr>
 <p>Displace the time of decay using the ctau param.</p>
 <p>Convert LHE output to stdhep for prompt signal. </p>
 
-<p class="definition">Definition at line <a class="el" href="ap__slic__job_8py_source.html#l00032">32</a> of file <a class="el" href="ap__slic__job_8py_source.html">ap_slic_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ap__slic__job_8py_source.html#l00035">35</a> of file <a class="el" href="ap__slic__job_8py_source.html">ap_slic_job.py</a>.</p>
 
 </div>
 </div>
@@ -224,7 +224,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">mom = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[cnv.output_files()[0], unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td>
+          <td class="memname">mom = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_displace.stdhep&quot;, unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -294,14 +294,14 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unzip = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>, outputs=[&quot;ap.lhe&quot;])</td>
+          <td class="memname">unzip = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe.gz&quot;], outputs=[&quot;ap_unweighted_events.lhe&quot;])</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Unzip the LHE events to a local file. </p>
 
-<p class="definition">Definition at line <a class="el" href="ap__slic__job_8py_source.html#l00049">49</a> of file <a class="el" href="ap__slic__job_8py_source.html">ap_slic_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ap__slic__job_8py_source.html#l00031">31</a> of file <a class="el" href="ap__slic__job_8py_source.html">ap_slic_job.py</a>.</p>
 
 </div>
 </div>

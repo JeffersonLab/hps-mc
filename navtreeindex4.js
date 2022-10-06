@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"simp.html#autotoc_md15":[14],
 "simp.html#autotoc_md16":[15],
 "simp__job_8py.html":[9,0,2,1,18],
 "simp__job_8py.html#a1820b9438d6a7ae4a4995bb66c9aa1ab":[9,0,2,1,18,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "wab__gen__to__slic__job_8py.html#a5209ed8d981dc170e77bea159c5bbe48":[9,0,2,1,31,5],
 "wab__gen__to__slic__job_8py.html#abaa485babeb1ee67ebdaadec53822fe6":[9,0,2,1,31,7],
 "wab__gen__to__slic__job_8py.html#ac2353b13f43ff77203d94b47953aa942":[9,0,2,1,31,0],
-"wab__gen__to__slic__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4":[9,0,2,1,31,3],
-"wab__gen__to__slic__job_8py.html#afde3b66b6b41bd008469f366fa756e54":[9,0,2,1,31,2]
+"wab__gen__to__slic__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4":[9,0,2,1,31,3]
 };
