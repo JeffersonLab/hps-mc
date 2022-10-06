@@ -1,6 +1,6 @@
 # Local JSON job store files
-*/jobs.json
 */*/jobs.json
+*/*/*/jobs.json
 
 # Log files
 *.out

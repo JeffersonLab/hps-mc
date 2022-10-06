@@ -1,0 +1,16 @@
+{
+    "nevents": 100,
+    "run_params": "4pt55",
+    "run_number": 10666,
+    "target_z": -7.51,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "seed": 10399312,
+    "input_files": {
+        "/sdf/group/hps/mc/tritrig/gen/4pt55/tritrig_4pt55_1.lhe.gz": "tritrig_unweighted_events.lhe.gz"
+    },
+    "output_files": {
+        "tritrig_mom_rot.slcio": "tritrig_4pt55_20um120nA_rot_1.slcio"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}
