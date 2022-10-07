@@ -27,7 +27,7 @@ Each job in hps-mc is run with a `job.json` parameter list. These configuration 
 | param         |                                                                                        |
 |---------------|----------------------------------------------------------------------------------------|
 | input_files   | input files used by job:<br>"input_file": "internal_input_name"                        |
-| output_files  | files that are written to the output_dir:<br>"internal_output_name": "output_file      |
+| output_files  | files that are written to the output_dir:<br>"internal_output_name": "output_file"     |
 | output_dir    | output directory                                                                       |
 | nevents       | number of events generated/processed                                                   |
 | bunches       | number of bunches?                                                                     |
