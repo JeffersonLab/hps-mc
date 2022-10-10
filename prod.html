@@ -95,7 +95,21 @@ $(document).ready(function(){initNavTree('prod.html',''); initResizable(); });
 <div class="title">Production scripts </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This directory is meant to document our scripts and samples in a clean way. For examples on how to use hps-mc, please refer to <a class="el" href="examples.html">Examples</a>. </p>
+<div class="textblock"><p>This directory is meant to document the scripts and samples in a clean way. For specific examples on how to use hps-mc, please refer to <a class="el" href="examples.html">Examples</a>. The production pipeline is split into three stages:</p><ul>
+<li>generation (gen): event generation using MadGraph or egs5</li>
+<li>slic: simulation of the detector response and all necessary steps leading up to this, e.g.<ul>
+<li>adding mother particles</li>
+<li>rotating into beam coordinates</li>
+<li>sampling of event</li>
+</ul>
+</li>
+<li>readout and reconstruction (recon): simulation of detector readout and subsequent reconstruction of event<ul>
+<li>includes conversion of output files to root format</li>
+<li>can be extended to include analysis</li>
+</ul>
+</li>
+</ul>
+<p>The production directory is separated into production using SLAC or JLab machines. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
