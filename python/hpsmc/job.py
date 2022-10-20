@@ -675,7 +675,8 @@ class Job(object):
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
-            shutil.copyfile(src, os.path.join(self.rundir, dest))
+            else:
+                shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 
     def __symlink_input_files(self):
