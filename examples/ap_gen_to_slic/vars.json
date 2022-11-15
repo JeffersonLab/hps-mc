@@ -1,0 +1,11 @@
+{
+    "run_number": [10666],
+    "nevents": [1000],
+    "run_params": ["4pt55"],
+    "apmass": [100.0],
+    "apmass_for_name": ["100pt0"],
+    "target_z": [-7.51],
+    "detector": ["HPS-PhysicsRun2019-v2-4pt5"],
+    "ap_decay_dist": ["displace_time"],
+    "ctau": [160]
+}

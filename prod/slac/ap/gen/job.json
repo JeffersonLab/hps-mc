@@ -1,0 +1,11 @@
+{
+    "nevents": 1000,
+    "run_params": "4pt55",
+    "apmass": 100.0,
+    "seed": 749239,
+    "output_files": {
+        "ap_unweighted_events.lhe.gz": "ap_4pt55_ap100MeV_1.lhe.gz"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}

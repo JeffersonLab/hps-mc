@@ -1,0 +1,22 @@
+{
+    "seed": 1001,
+    "nevents": 100,
+    "run_params": "4pt55",
+    "target_z": -7.51,
+    "run_number": 10666,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSingles.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    },
+    "output_files": {
+        "ptag:sim": "tritrig_4pt55_sim.slcio",
+        "ptag:readout": "tritrig_4pt55_readout.slcio",
+        "ptag:recon": "tritrig_4pt55_recon.slcio"
+    },
+    "output_dir": "output/HPS-PhysicsRun2019-v2-4pt5",
+    "config_files": {
+        "recon": "kalSimpTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    }
+}

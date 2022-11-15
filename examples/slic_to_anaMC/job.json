@@ -2,19 +2,19 @@
     "run_number": 1194550, 
     "job_id": 66, 
     "input_files": {
-        "/sdf/group/hps/mc/4pt55GeV/tritrig/20um120nA/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep" 
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/tritrig/tritrig_20um_rot_66.stdhep": "tritrig_events.stdhep" 
     }, 
     "config_files": {
         "mcTuple": "mcTuple_cfg.py",
         "ana": "anaMCTuple_cfg.py"
     },
-    "nevents": 10000,
-    "output_dir": "output", 
+    "nevents": 1000,
+    "output_dir": "output/HPS_Run2021Pass0_v0", 
     "run_params": "4pt55", 
-    "detector": "HPS_Nominal_iter0", 
+    "detector": "HPS_Run2021Pass0_v0", 
     "output_files": {
-        "tritrig_events.slcio": "tritrig_sim.slcio",
-        "tritrig_events.root": "tritrig_sim.root",
-        "tritrig_events_ana.root": "tritrig_sim_ana.root"
+        "tritrig_events.slcio": "tritrig_4pt55_sim.slcio",
+        "tritrig_events.root": "tritrig_4pt55_sim.root",
+        "tritrig_events_ana.root": "tritrig_4pt55_sim_ana.root"
     }
 } 

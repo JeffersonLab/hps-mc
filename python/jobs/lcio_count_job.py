@@ -1,3 +1,8 @@
+"""!
+@file lcio_count_job.py
+
+Job to count number of events in LCIO file.
+"""
 from hpsmc.tools import LCIOCount
 
 job.description = 'LCIO count'

@@ -1,4 +1,4 @@
-"""Utilities for writing config files for jobs from environment variables."""
+"""! Utilities for writing config files for jobs from environment variables."""
 
 import argparse
 
@@ -9,7 +9,12 @@ from job import Job
 from help import _ignore
 
 def write_config(filename, component_names, include_defaults, fail_on_missing):
-    """Write a config file from environment variables."""
+    """! Write a config file from environment variables.
+    @param filename  name of config file
+    @param component_names  list of components in job
+    @param include_defaults  set true if defaults should be included
+    @param fail_on_missing  if true: method fails if environment variable is missing
+                            if false: throws warning if environment variable is missing"""
     lines = []
     if include_defaults:
         lines.extend(_get_job_defaults())
@@ -39,7 +44,13 @@ def write_config(filename, component_names, include_defaults, fail_on_missing):
     print('Wrote config: %s' % filename)
 
 def write_config_for_job(job_script, filename, include_defaults, fail_on_missing):
-    """Write a config file for a specific job script."""
+    """! Write a config file for a specific job script.
+    @param job_script  job script
+    @param filename  currently unused
+    @param include_defaults  set true if defaults should be included
+    @param fail_on_missing  if true: method fails if environment variable is missing
+                            if false: throws warning if environment variable is missing
+    """
     j = Job()
     j.script = job_script
     j._load_script()
@@ -47,7 +58,7 @@ def write_config_for_job(job_script, filename, include_defaults, fail_on_missing
     write_config('job.cfg', component_names, include_defaults, fail_on_missing)
 
 def _get_job_defaults():
-    """Get default job class settings."""
+    """! Get default job class settings."""
 
     lines = []
     lines += '[Job]\n'

@@ -1,0 +1,19 @@
+{
+    "run_number": 10666,
+    "nevents": 1000,
+    "run_params": "4pt55",
+    "apmass": 100.0,
+    "seed": 749239,
+    "target_z": -7.51,
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "ap_decay_dist": "displace_time",
+    "ctau": 160,
+    "output_files": {
+        "ap_unweighted_events.lhe.gz": "lhe/ap_4pt55_apm100pt0_1.lhe.gz",
+        "ap_unweighted_events.stdhep": "egs5/ap_4pt55_apm100pt0_1.stdhep",
+        "ap_mom.stdhep": "stdhep/ap_4pt55_apm100pt0_1.stdhep",
+        "ap.slcio": "slic/ap_4pt55_apm100pt0_1.slcio"
+    },
+    "output_dir": "output/HPS-PhysicsRun2019-v2-4pt5/",
+    "job_id": 1
+}

@@ -10,3 +10,10 @@ install/
 .project
 .pydevproject
 .settings
+
+# Doxygen
+!docs/html/
+docs/html/*
+
+# vscode config (makes Sarah's life easier)
+.vscode
