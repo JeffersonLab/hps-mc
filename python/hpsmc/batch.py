@@ -1,5 +1,10 @@
-"""Provides a set of scripts for submitting batch jobs including support for
-local running, a multiprocessing pool, LSF, and Auger."""
+"""! 
+@package batch
+Scripts for submitting batch jobs.
+
+Provides a set of scripts for submitting batch jobs including support for
+local running, a multiprocessing pool, LSF, and Auger.
+"""
 
 import os
 import argparse
@@ -24,10 +29,10 @@ logger = config_logging(stream=sys.stdout, level=logging.INFO, logname='hpsmc.ba
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
 class Batch:
-    """Generic interface to a batch system."""
+    """! Generic interface to a batch system."""
 
     def parse_args(self, args):
-        """Parse command line arguments and perform setup."""
+        """! Parse command line arguments and perform setup."""
 
         parser = argparse.ArgumentParser("batch.py",
                                          epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
@@ -132,7 +137,7 @@ class Batch:
         return cl
 
     def submit_cmd(self, job_id, job_data):
-        """
+        """!
         Submit a single batch job and return the batch ID.
         Must be implemented by derived classes for a specific batch system.
         """
@@ -140,7 +145,7 @@ class Batch:
 
     @staticmethod
     def _outputs_exist(job):
-        """Check if job outputs exist.  Return False when first missing output is found."""
+        """! Check if job outputs exist.  Return False when first missing output is found."""
         for src,dest in job["output_files"].items():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
                 #logger.warning('Job output does not exist: %s' % (dest))
@@ -148,7 +153,7 @@ class Batch:
         return True
 
     def get_filtered_job_ids(self):
-        """
+        """!
         Get a list of job IDs to submit based on parsed command line options.
         """
         submit_ids = self.jobstore.get_job_ids()
@@ -165,7 +170,7 @@ class Batch:
         return submit_ids
 
     def submit(self):
-        """
+        """!
         Primary public method for submitting jobs after args are parsed.
         """
         job_ids = self.get_filtered_job_ids()
@@ -173,14 +178,14 @@ class Batch:
         self._submit_jobs(job_ids)
 
     def _submit_job(self, job_id, job):
-        """Submit a single job to the batch system."""
+        """! Submit a single job to the batch system."""
         batch_id = None
         batch_id = self.submit_cmd(job_id, job)
         logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
         return batch_id
 
     def _submit_jobs(self, job_ids):
-        """Submit the jobs with the specified job IDs to the batch system."""
+        """! Submit the jobs with the specified job IDs to the batch system."""
         for job_id in job_ids:
             if not self.jobstore.has_job_id(job_id):
                 raise Exception('Job ID was not found in job store: %s' % job_id)
@@ -188,7 +193,7 @@ class Batch:
             self._submit_job(job_id, job_data)
 
     def build_cmd(self, job_id, job_params, set_job_dir=True):
-        """
+        """!
         Create the command to run a single job.
 
         This generically creates the command to run the job locally but subclasses
@@ -213,7 +218,7 @@ class Batch:
         return cmd
 
 class LSF(Batch):
-    """Submit LSF batch jobs."""
+    """! Submit LSF batch jobs."""
 
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
@@ -259,7 +264,7 @@ class LSF(Batch):
         return batch_id
 
 class Slurm(Batch):
-    """Submit Slurm batch jobs."""
+    """! Submit Slurm batch jobs."""
 
     def __init__(self):
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
@@ -308,7 +313,7 @@ class Slurm(Batch):
         return batch_id
 
 class Auger(Batch):
-    """Submit Auger batch jobs."""
+    """! Submit Auger batch jobs."""
 
     def __init__(self):
         self.setup_script = find_executable('hps-mc-env.csh')
@@ -415,7 +420,7 @@ class Auger(Batch):
         return cmd
 
     def _create_job(self, params):
-        """Needed for resolving ptag output sources."""
+        """! Needed for resolving ptag output sources."""
         j = Job()
         j.script = self.script
         j._load_params(params)
@@ -486,7 +491,7 @@ class Auger(Batch):
         cmd.text = ' '.join(cmd_lines)
 
 class Swif(Auger):
-    """Submit to swif2 at JLAB using an Auger file"""
+    """! Submit to swif2 at JLAB using an Auger file"""
 
     def submit(self):
 
@@ -512,13 +517,13 @@ class Swif(Auger):
         proc.wait()
 
 class Local(Batch):
-    """Run a local batch jobs sequentially."""
+    """! Run a local batch jobs sequentially."""
 
     def parse_args(self, args):
         Batch.parse_args(self, args)
 
     def submit_cmd(self, name, job_params):
-        """Run a single job locally."""
+        """! Run a single job locally."""
 #        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
         cmd = self.build_cmd(name, job_params)
         if self.submit:
@@ -533,7 +538,7 @@ class Local(Batch):
 mp_queue = multiprocessing.Queue()
 
 def run_job_pool(cmd):
-    """Run the command in a new process whose PID is added to a global MP queue."""
+    """! Run the command in a new process whose PID is added to a global MP queue."""
     try:
         sys.stdout.flush()
         proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
@@ -553,7 +558,7 @@ def is_running(proc):
                              psutil.STATUS_IDLE]
 
 class KillProcessQueue():
-    """Kills process objects from an MP queue after exit from a with statement."""
+    """! Kills process objects from an MP queue after exit from a with statement."""
 
     def __init__(self, mp_queue):
         self.mp_queue = mp_queue
@@ -562,7 +567,7 @@ class KillProcessQueue():
         return self
 
     def __exit__(self, type, val, tb):
-        """Kill processes on exit."""
+        """! Kill processes on exit."""
         while True:
             pid = mp_queue.get()
             try:
@@ -583,7 +588,7 @@ class KillProcessQueue():
         #print('Done killing processes!')
 
 class Pool(Batch):
-    """
+    """!
     Run a set of jobs in a local pool using Python's multiprocessing module.
     """
 
@@ -591,7 +596,7 @@ class Pool(Batch):
     max_wait = 999999
 
     def submit(self):
-        """Submit jobs to a local processing pool.
+        """! Submit jobs to a local processing pool.
 
         This method will not return until all jobs are finished or execution
         is interrupted.

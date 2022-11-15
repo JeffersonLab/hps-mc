@@ -1,4 +1,0 @@
-/u/scratch/jeremym/data/stdhep/beam_egs_v3_2pt3_1.stdhep
-/u/scratch/jeremym/data/stdhep/beam_egs_v3_2pt3_2.stdhep
-/u/scratch/jeremym/data/stdhep/beam_egs_v3_2pt3_3.stdhep
-/u/scratch/jeremym/data/stdhep/beam_egs_v3_2pt3_4.stdhep

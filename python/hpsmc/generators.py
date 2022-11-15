@@ -1,4 +1,5 @@
-"""Event generation tools."""
+"""! @package generators
+Event generation tools."""
 
 import os
 import shutil
@@ -12,7 +13,7 @@ from run_params import RunParameters
 logger = logging.getLogger("hpsmc.generators")
 
 class EventGenerator(Component):
-
+    """! Event generator base class."""
     def __init__(self, name, command=None, **kwargs):
         Component.__init__(self, name, command=command, description='', **kwargs)
 
@@ -25,25 +26,37 @@ class EventGenerator(Component):
         return "{}/share/generators".format(os.getenv("HPSMC_DIR", None))
 
 class EGS5(EventGenerator):
-    """Run the EGS5 event generator to produce a StdHep file."""
+    """!
+    Run the EGS5 event generator to produce a StdHep file.
+    
+    Required parameters are **seed**, **run_parameters** \n 
+    Optional parameters are: **bunches**, **target_thickness**
+    """
 
     def __init__(self, name='', **kwargs):
+        ## \todo is this the number of bunches or the number of particles per bunch?
         self.bunches = 5e5
+        ## target thickness in $\mu$m, \todo is this correct?
         self.target_thickness = None
+        ## egs5 installation directory
         self.egs5_dir = None
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
     def get_install_dir(self):
+        """! Get installation directory."""
         return EventGenerator.get_install_dir(self) + "/egs5"
 
     def setup(self):
+        """! Setup of egs5 event generator."""
         EventGenerator.setup(self)
 
         if self.egs5_dir is None:
             self.egs5_dir = self.get_install_dir()
             logger.debug("Using EGS5 from install dir: " + self.egs5_dir)
 
+        ## data directory
         self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
+        ## config directory
         self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
 
         logger.debug("egs5_data_dir=%s" % self.egs5_data_dir)
@@ -58,6 +71,7 @@ class EGS5(EventGenerator):
         os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
 
         logger.debug("Reading run parameters: {}".format(self.run_params))
+        ## run parameters
         self.run_param_data = RunParameters(self.run_params)
 
         # Set target thickness from job parameter or use the default from run parameters
@@ -78,6 +92,8 @@ class EGS5(EventGenerator):
         seed_file.close()
 
     def output_files(self):
+        """! Generate output file name.
+        @return moller.stdhep if name of generator contains moller; beam.stdhep else"""
         # Output file for Moller generation
         if 'moller' in self.name:
             return ['moller.stdhep']
@@ -85,6 +101,10 @@ class EGS5(EventGenerator):
         return ['beam.stdhep']
 
     def execute(self, log_out, log_err):
+        """! Execute event generator.
+        @param log_out  name of log file for output
+        @param log_err  name of log file for error
+        """
         EventGenerator.execute(self, log_out, log_err)
         if 'moller' not in self.name:
             src = os.path.join(self.rundir, 'brems.stdhep')
@@ -93,16 +113,26 @@ class EGS5(EventGenerator):
             shutil.copy(src, dest)
 
     def required_parameters(self):
+        """!
+        Return required parameters.
+
+        Required parameters are **seed**, **run_parameters**
+        """
         return ['seed', 'run_params']
 
     def optional_parameters(self):
+        """!
+        Return optional parameters.
+
+        Optional parameters are: **bunches**, **target_thickness**
+        """
         return ['bunches', 'target_thickness']
 
     #def required_config(self):
     #    return ['egs5_dir']
 
 class StdHepConverter(EGS5):
-    """Convert LHE files to StdHep using EGS5."""
+    """! Convert LHE files to StdHep using EGS5."""
 
     def __init__(self, name="lhe_v1", **kwargs):
         EGS5.__init__(self, name, **kwargs)
@@ -114,11 +144,20 @@ class StdHepConverter(EGS5):
         EGS5.config(self, parser)
 
     def setup(self):
+        """! Setup egs5 generator.
+        Throws exception if input LHE file is missing."""
         EGS5.setup(self)
         if not len(self.inputs):
             raise Exception("Missing required input LHE file.")
 
     def execute(self, log_out, log_err):
+        """! Execute converter.
+        Calls egs5 generator.
+
+        @param log_out  name of log file for output
+        @param log_err  name of log file for error
+        @return egs5 error code
+        """
         input_file = self.inputs[0]
         base,ext = os.path.splitext(input_file)
         if ext == ".lhe":
@@ -132,30 +171,39 @@ class StdHepConverter(EGS5):
         return EGS5.execute(self, log_out, log_err)
 
     def output_files(self):
+        """! Converts *.lhe.gz and *.lhe to *.stdhep files."""
         return [self.input_files()[0].replace(".lhe.gz", ".stdhep").replace(".lhe", ".stdhep")]
 
 class MG(EventGenerator):
-    """
+    """!
     Abstract class for MadGraph generators.
+
+    Required parameters are: **nevents**, **run_params** \n
+    Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod** 
     """
     def __init__(self, name, **kwargs):
 
-        # Install dir or user config will be used for this.
+        ## Install dir or user config will be used for this.
         self.madgraph_dir = None
 
-        # Default name of param card
+        ## Default name of param card
         self.param_card = "param_card.dat"
 
         # Extra parameters for param card:
         # map = mass of the A-prime
         # mpid = mass of the dark pion
         # mrhod = mass of the dark rho
+        ## A-prime mass? \todo apmass or map is A-prime mass?
         self.apmass = None
+        ## A-prime mass? \todo apmass or map is A-prime mass?
         self.map = None
+        ## dark pion mass
         self.mpid = None
+        ## dark rho mass
         self.mrhod = None
 
         if 'event_types' in kwargs:
+            ## event types: weighted or unweighted
             self.event_types = kwargs['event_types']
         else:
             self.event_types = ['unweighted', 'weighted']
@@ -163,6 +211,7 @@ class MG(EventGenerator):
         EventGenerator.__init__(self, name, **kwargs)
 
     def output_files(self):
+        """! Generate output file name."""
         o = []
         if 'unweighted' in self.event_types:
             o.append(self.name + "_unweighted_events.lhe.gz")
@@ -171,21 +220,33 @@ class MG(EventGenerator):
         return o
 
     def set_parameters(self, params):
+        """! Set parameters."""
         Component.set_parameters(self, params)
         self.run_card = "run_card_" + self.run_params + ".dat"
         logger.debug("Set run card to '%s'" % self.run_card)
 
     def required_parameters(self):
+        """!
+        Return required parameters.
+
+        Required parameters are: **nevents**, **run_params**
+        """
         return ['nevents', 'run_params']
 
     def optional_parameters(self):
+        """!
+        Return optional parameters.
+
+        Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod**
+        """
         return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod']
 
     #def required_config(self):
     #    return ['madgraph_dir']
 
     def make_run_card(self, run_card):
-
+        """! Make run card."""
+        ## \todo explain what run card is
         logger.info("Making run card '%s' with nevents=%d, seed=%d" % (run_card, self.nevents, self.seed))
 
         with open(run_card, 'r') as cardin:
@@ -203,7 +264,8 @@ class MG(EventGenerator):
             cardout.writelines(data)
 
     def make_param_card(self, param_card):
-
+        """! Make parameter card."""
+        ## \todo explain what param card is
         logger.debug("Making param card '%s'" % param_card)
 
         with open(param_card, 'r') as paramin:
@@ -224,15 +286,21 @@ class MG(EventGenerator):
             paramout.writelines(data)
 
     def cmd_args(self):
+        """! Return command arguments."""
         return ["0", self.name]
 
     def execute(self, log_out, log_err):
+        """! Execute MadGraph generator.
+        @param log_out  name of log file for output
+        @param log_err  name of log file for error
+        @return  error code
+        """
         os.chdir(os.path.dirname(self.command))
         logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
         return Component.execute(self, log_out, log_err)
 
     def setup(self):
-
+        """! Setup event generator."""
         EventGenerator.setup(self)
 
         if self.madgraph_dir is None:
@@ -243,9 +311,9 @@ class MG(EventGenerator):
             raise Exception("Missing apmass param for AP generation.")
 
 class MG4(MG):
-    """Run the MadGraph 4 event generator."""
+    """! Run the MadGraph 4 event generator."""
 
-    # TODO: Put this information into a method in the MG superclass.
+    ## \todo Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH/MG_mini_BH/apBH",
                "RAD"     : "RAD/MG_mini_Rad/apRad",
                "TM"      : "TM/MG_mini/ap",
@@ -262,10 +330,11 @@ class MG4(MG):
             raise Exception("The name '%s' is not valid for MG4." % self.name)
 
     def get_install_dir(self):
+        """! Get installation directory of MadGraph4."""
         return EventGenerator.get_install_dir(self) + "/madgraph4/src"
 
     def setup(self):
-
+        """! Setup MadGraph4 generator."""
         MG.setup(self)
 
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
@@ -296,6 +365,11 @@ class MG4(MG):
         self.make_param_card(param_card_dest)
 
     def execute(self, log_out, log_err):
+        """! Execute MadGraph4 generator.
+        @param log_out  name of log file for output
+        @param log_err  name of log file for error
+        @return  error code
+        """
         returncode = MG.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
@@ -306,9 +380,9 @@ class MG4(MG):
         return returncode
 
 class MG5(MG):
-    """Run the MadGraph 5 event generator."""
+    """! Run the MadGraph 5 event generator."""
 
-    # TODO: Put this information into a method in the MG superclass.
+    ## \todo: Put this information into a method in the MG superclass.
     dir_map = {"BH"      : "BH",
                "RAD"     : "RAD",
                "tritrig" : "tritrig",
@@ -322,10 +396,11 @@ class MG5(MG):
             raise Exception("The name '%s' is not valid for MG5." % self.name)
 
     def get_install_dir(self):
+        """! Get installation directory of MadGraph5."""
         return EventGenerator.get_install_dir(self) + "/madgraph5/src"
 
     def setup(self):
-
+        """! Setup MadGraph5 generator."""
         MG.setup(self)
 
         self.proc_dir = MG5.dir_map[self.name]
@@ -336,7 +411,7 @@ class MG5(MG):
         logger.debug("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
 
-        # FIXME: This doesn't seem to work as generate_events doesn't read the input config.
+        ## \todo FIXME: This doesn't seem to work as generate_events doesn't read the input config.
         """
         input_dir = os.path.join(self.madgraph_dir, "input")
         dest_input_dir = os.path.join(self.rundir, self.proc_dir, "input")
@@ -362,6 +437,11 @@ class MG5(MG):
         self.make_param_card(param_card_dest)
 
     def execute(self, log_out, log_err):
+        """! Execute MadGraph5 generator.
+        @param log_out  name of log file for output
+        @param log_err  name of log file for error
+        @return  error code
+        """
         returncode = MG.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:

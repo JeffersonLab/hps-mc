@@ -1,12 +1,12 @@
 {
     "input_files": {
-        "/work/slac/data/hps_010118_10k_events.evio.00000": "data_events.evio"
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/data/hps_010104.evio.00114": "data_events.evio"
     },
     "output_files": {
-        "data_events.slcio": "data_events_1.slcio",
-        "data_events.root": "data_events_1.root"
+        "data_events.slcio": "data_events.slcio",
+        "data_events.root": "data_events.root"
     },
-    "output_dir": "output",
+    "output_dir": "output/HPS-PhysicsRun2019-v2-4pt5/",
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
     "run_number": 10131,
     "skip_events": 10,

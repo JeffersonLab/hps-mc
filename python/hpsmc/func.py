@@ -1,23 +1,29 @@
-"""Miscellaneous math functions."""
+"""! Miscellaneous math functions."""
 
 import gzip
 import logging
 
 logger = logging.getLogger("hpsmc.func")
 
-"""
-Calculate integrated luminosity.
-"""
-def lint(run_params, density = 6.306e-2):
+def lint(run_params, density = 6.306e-14):
+    """!
+    Calculate integrated luminosity.
+    @param run_params  run parameter
+    @param density  1/(cm*pb), default value is for tungsten
+    @return integrated luminosity in 1/pb
+    """
     w = run_params.get("target_z")
     ne = run_params.get("num_electrons")
     return density*w*ne
 
-"""
-Extract cross-section from gzipped LHE file.
-"""
 def csection(filename):
+    """!
+    Extract cross-section from gzipped LHE file.
+    WARNING: This function does not work!
 
+    \todo remove or replace by more useful function
+    @param filename  name of input file 
+    """
     logger.info("Using gzip to open '%s'" % filename)
 
     with gzip.open(filename, 'rb') as in_file:
@@ -33,17 +39,23 @@ def csection(filename):
 
     return xs
 
-"""
-Calculate mu = number of events per bunch.
-"""
 def mu(filename, run_params):
-    return lint(run_params) * 1e-12 * csection(filename)
+    """!
+    Calculate mu = number of events per bunch.
+    WARNING: This function does not work properly because csection() is broken!
 
-"""
-Read number of events in file from LHE header and optionally confirm by counting <event> blocks.
-"""
+    @param filename  name of input LHE input file containing cross section
+    @param run_params  run parameters to calculate integrated luminosity from
+    @return number of events per bunch (L_int[1/pb] * xsec[pb])
+    """
+    return lint(run_params) * csection(filename)
+
 def nevents(filename, confirm = False):
-
+    """!
+    Read number of events in file from LHE header and optionally confirm by counting <event> blocks.
+    @param filename  name of input LHE file
+    @param confirm  set to True to confirm number of events
+    """
     with gzip.open(filename, 'rb') as in_file:
         lines = in_file.readlines()
 
@@ -64,10 +76,12 @@ def nevents(filename, confirm = False):
 
     return nevents
 
-"""
-Get the approximate number of beam bunches represented by an LHE file from its event count.
-"""
 def nbunches(filename, run_params):
+    """!
+    Get the approximate number of beam bunches represented by an LHE file from its event count.
+    @param filename  name of input LHE file
+    @param run_params  run parameter
+    """
     n = nevents(filename)
     m = mu(filename, run_params)
     return int(n/m)

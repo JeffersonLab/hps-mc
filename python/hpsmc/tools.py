@@ -1,4 +1,4 @@
-"""Tools that can be used in HPSMC jobs."""
+"""! Tools that can be used in HPSMC jobs."""
 
 import os
 import gzip
@@ -16,22 +16,22 @@ import hpsmc.func as func
 logger = logging.getLogger("hpsmc.tools")
 
 class SLIC(Component):
-    """
+    """!
     Run the SLIC Geant4 simulation.
+
+    Optional parameters are: **nevents**, **macros**, **run_number** \n 
+    Required parameters are: **detector** \n 
+    Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
     """
 
     def __init__(self, **kwargs):
-
-        # List of macros to run (optional)
+        ## List of macros to run (optional)
         self.macros = []
-
-        # Run number to set on output file (optional)
+        ## Run number to set on output file (optional)
         self.run_number = None
-
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.hps_fieldmaps_dir = None
-
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.detector_dir = None
 
         Component.__init__(self,
@@ -41,7 +41,10 @@ class SLIC(Component):
                            **kwargs)
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         if not len(self.input_files()):
             raise Exception("No inputs given for SLIC.")
 
@@ -71,17 +74,18 @@ class SLIC(Component):
                     raise Exception("Macro '%s' is not an absolute path." % macro)
                 args.extend(["-m", macro])
 
-
         return args
 
     def __detector_file(self):
+        """! Return path to detector file."""
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def __particle_tbl(self):
+        """! Return path to particle table."""
         return os.path.join(self.slic_dir, "share", "particle.tbl")
 
     def config(self, parser):
-
+        """! Configure SLIC component."""
         super().config(parser)
 
         if self.detector_dir is None:
@@ -100,7 +104,7 @@ class SLIC(Component):
             logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
-
+        """! Setup SLIC component."""
         if not os.path.exists(self.slic_dir):
             raise Exception("slic_dir does not exist: %s" % self.slic_dir)
 
@@ -121,16 +125,40 @@ class SLIC(Component):
             run_number_mac.close()
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+
+        Optional parameters are: **nevents**, **macros**, **run_number**
+        @return  list of optional parameters
+        """
         return ['nevents', 'macros', 'run_number']
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+
+        Required parameters are: **detector**
+        @return  list of required parameters
+        """
         return ['detector']
 
     def required_config(self):
+        """!
+        Return list of required configurations.
+        
+        Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
+        @return  list of required configurations
+        """
         return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
 
     def execute(self, log_out, log_err):
+        """!
+        Execute SLIC component.
 
+        Component is executed by creating command line input
+        from command and command arguments.
+        @return  return code of process
+        """
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
 
@@ -142,25 +170,46 @@ class SLIC(Component):
         return proc.returncode
 
 class JobManager(Component):
-    """
+    """!
     Run the hps-java JobManager class.
+
+    Input files have slcio format.
+
+    Required parameters are: **steering_files** \n 
+    Optional parameters are: **detector**, **run_number**, **defs**
     """
 
     def __init__(self, steering=None, **kwargs):
-
+        ## \todo verify these definitions
+        ## run number
         self.run_number = None
+        ## detector name
         self.detector = None
+        ## event print interval
         self.event_print_interval = None
+        ## \todo what is this?
         self.defs = None
+        ## java arguments
         self.java_args = None
+        ## file for config logging
         self.logging_config_file = None
+        ## lcsim cache directory
         self.lcsim_cache_dir = None
+        ## no idea
         self.conditions_user = None
+        ## no idea
         self.conditions_password = None
+        ## no idea
         self.conditions_url = None
+        ## steering file
         self.steering = steering
-
+        ## location of hps-java installation?
         self.hps_java_bin_jar = None
+
+        if 'overlay_file' in kwargs:
+            self.overlay_file = kwargs['overlay_file']
+        else:
+            self.overlay_file = None
 
         Component.__init__(self,
                            name='job_manager',
@@ -175,6 +224,7 @@ class JobManager(Component):
             logger.debug("Append token for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
 
     def config(self, parser):
+        """! Configure JobManager component."""
         super().config(parser)
         # if installed these are set in the environment script...
         if self.hps_java_bin_jar is None:
@@ -187,9 +237,16 @@ class JobManager(Component):
                 logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
 
     def required_config(self):
+        """!
+        Return list of required configurations.
+        
+        Required configurations are: hps_java_bin_jar
+        @retun list of required configurations.
+        """
         return ['hps_java_bin_jar']
 
     def setup(self):
+        """! Setup JobManager component."""
         if not len(self.input_files()):
             raise Exception("No inputs provided to hps-java.")
 
@@ -198,7 +255,10 @@ class JobManager(Component):
         self.steering_file = self.steering_files[self.steering]
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
 
         if self.java_args is not None:
@@ -263,23 +323,45 @@ class JobManager(Component):
             args.append("-i")
             args.append(input_file)
 
+        if self.overlay_file is not None:
+            args.append("-D")
+            args.append("overlayFile=" + os.path.splitext(self.overlay_file)[0])
+
         return args
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+
+        Required parameters are: **steering_files**
+        @return  list of required parameters
+        """
         return ['steering_files']
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **detector**, **run_number**, **defs**
+        @return list of optional parameters
+        """
         return ['detector', 'run_number', 'defs']
 
 class HPSTR(Component):
-    """
+    """!
     Run the hpstr analysis tool.
+
+    Required parameters are: **config_files** \n 
+    Optional parameters are: **year**, **run_mode**, **nevents** \n 
+    Required configs are: **hpstr_install_dir**, **hpstr_base**
     """
 
     def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
-
+        ## configuration
         self.cfg = cfg
+        ## run mode
         self.run_mode = run_mode
+        ## year
         self.year = year
 
         Component.__init__(self,
@@ -288,6 +370,7 @@ class HPSTR(Component):
                            **kwargs)
 
     def setup(self):
+        """! Setup HPSTR component."""
         if not os.path.exists(self.hpstr_install_dir):
             raise Exception('hpstr_install_dir does not exist: %s' % self.hpstr_install_dir)
         self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
@@ -314,15 +397,37 @@ class HPSTR(Component):
             logger.debug('Automatically appending token to output file: %s' % self.append_tok)
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+
+        Required parameters are: **config_files**
+        @return  list of required parameters
+        """
         return ['config_files']
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+
+        Optional parameters are: **year**, **run_mode**, **nevents**
+        @return  list of optional parameters
+        """
         return ['year', 'run_mode', 'nevents']
 
     def required_config(self):
+        """!
+        Return list of required configs.
+
+        Required configs are: **hpstr_install_dir**, **hpstr_base**
+        @return  list of required configs
+        """
         return ['hpstr_install_dir', 'hpstr_base']
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = [self.cfg_path,
                 "-t", str(self.run_mode),
                 "-i", self.input_files()[0],
@@ -334,6 +439,7 @@ class HPSTR(Component):
         return args
 
     def output_files(self):
+        """! Adjust names of output files."""
         f,ext = os.path.splitext(self.input_files()[0])
         if '.slcio' in ext:
             return ['%s.root' % f]
@@ -341,6 +447,7 @@ class HPSTR(Component):
             return ['%s_%s.root' % (f, self.append_tok)]
 
     def execute(self, log_out, log_err):
+        """! Execute HPSTR component."""
         args = self.cmd_args()
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
@@ -352,12 +459,13 @@ class HPSTR(Component):
 
         return proc.returncode
 
+## \todo split this over several files -> move stdheptools in separate package
 class StdHepTool(Component):
-    """
+    """!
     Generic class for StdHep tools.
     """
 
-    # List of commands which accept a 'seed' argument.
+    ## List of commands which accept a 'seed' argument.
     seed_names = ['beam_coords',
                   'beam_coords_old',
                   'lhe_tridents',
@@ -375,7 +483,10 @@ class StdHepTool(Component):
                            **kwargs)
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
 
         if self.name in StdHepTool.seed_names:
@@ -395,19 +506,30 @@ class StdHepTool(Component):
         return args
 
 class BeamCoords(StdHepTool):
-    """
+    """!
     Transform StdHep events into beam coordinates.
+
+    Optional parameters are: **beam_sigma_x**, **beam_sigma_y**, **beam_rot_x**,
+    **beam_rot_y**, **beam_rot_z**, **target_x**, **target_y**, **target_z**
     """
 
     def __init__(self, **kwargs):
-
+        ## \todo clarify these
+        ## beam sigma in x
         self.beam_sigma_x = None
+        ## beam sigma in y
         self.beam_sigma_y = None
+        ## target x position
         self.target_x = None
+        ## target y position
         self.target_y = None
+        ## target z position
         self.target_z = None
+        ## beam rotation in x?
         self.beam_rot_x = None
+        ## beam rotation in y?
         self.beam_rot_y = None
+        ## beam rotation in z?
         self.beam_rot_z = None
 
         StdHepTool.__init__(self,
@@ -416,7 +538,10 @@ class BeamCoords(StdHepTool):
                             **kwargs)
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = StdHepTool.cmd_args(self)
 
         if self.beam_sigma_x is not None:
@@ -441,13 +566,22 @@ class BeamCoords(StdHepTool):
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **beam_sigma_x**, **beam_sigma_y**, **beam_rot_x**,
+        **beam_rot_y**, **beam_rot_z**, **target_x**, **target_y**, **target_z**
+        @return list of optional parameters
+        """
         return['beam_sigma_x', 'beam_sigma_y', 'beam_rot_x',
                'beam_rot_y', 'beam_rot_z',
                'target_x', 'target_y', 'target_z']
 
 class RandomSample(StdHepTool):
-    """
+    """!
     Randomly sample StdHep events into a new file.
+
+    Optional parameters are: **nevents**, **mu**
     """
 
     def __init__(self, **kwargs):
@@ -455,10 +589,14 @@ class RandomSample(StdHepTool):
                             name='random_sample',
                             append_tok='sampled',
                             **kwargs)
+        ## median of distribution?
         self.mu = None
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
 
         if self.name in StdHepTool.seed_names:
@@ -486,10 +624,17 @@ class RandomSample(StdHepTool):
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **nevents**, **mu**
+        @return list of optional parameters
+        """
         return ['nevents','mu']
 
     def execute(self, log_out, log_err):
-        r = Component.execute(self, log_out, log_err)
+        """! Execute RandomSample component"""
+        returncode = Component.execute(self, log_out, log_err)
 
         # Move file to proper output file location.
         src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
@@ -497,14 +642,17 @@ class RandomSample(StdHepTool):
         logger.debug("Moving '%s' to '%s'" % (src, dest))
         shutil.move(src, dest)
 
-        return r
+        return returncode
 
 class DisplaceTime(StdHepTool):
-    """
+    """!
     Convert LHE files to StdHep, displacing the time by given ctau.
+
+    Optional parameters are: **ctau**
     """
 
     def __init__(self, **kwargs):
+        ## time shift
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displacetime',
@@ -512,20 +660,33 @@ class DisplaceTime(StdHepTool):
                             **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = StdHepTool.cmd_args(self)
         if self.ctau is not None:
             args.extend(["-l", str(self.ctau)])
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **ctau**
+        @return list of optional parameters
+        """
         return ['ctau']
 
 class DisplaceUni(StdHepTool):
-    """
+    """!
     Convert LHE files to StdHep, displacing the time by given ctau.
+
+    Optional parameters are: **ctau**
     """
 
     def __init__(self, **kwargs):
+        ## time shift
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displaceuni',
@@ -533,19 +694,28 @@ class DisplaceUni(StdHepTool):
                             **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = StdHepTool.cmd_args(self)
         if self.ctau is not None:
             args.extend(["-l", str(self.ctau)])
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **ctau**
+        @return list of optional parameters
+        """
         return ['ctau']
 
 class AddMother(StdHepTool):
-    """
+    """!
     Add mother particles for physics samples.
     """
-
     def __init__(self, **kwargs):
         StdHepTool.__init__(self,
                             name='add_mother',
@@ -553,7 +723,7 @@ class AddMother(StdHepTool):
                             **kwargs)
 
 class AddMotherFullTruth(StdHepTool):
-
+    """! Add full truth mother particles for physics samples"""
     def __init__(self, **kwargs):
         StdHepTool.__init__(self,
                             'add_mother_full_truth',
@@ -571,7 +741,10 @@ class AddMotherFullTruth(StdHepTool):
             raise Exception("The second input file must be a lhe file")
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
 
         if self.name in StdHepTool.seed_names:
@@ -589,29 +762,47 @@ class AddMotherFullTruth(StdHepTool):
 
 
 class MergePoisson(StdHepTool):
-    """
+    """!
     Merge StdHep files, applying poisson sampling.
+
+    Required parameters are: **run_params**
     """
 
-    def __init__(self, lhe_file=None, **kwargs):
-        self.lhe_file = lhe_file
+    def __init__(self, xsec=0, **kwargs):
+        ## cross section in pb
+        self.xsec = xsec
         StdHepTool.__init__(self,
                             name='merge_poisson',
                             append_tok='sampled',
                             **kwargs)
 
     def setup(self):
+        """! Setup MergePoisson component."""
         self.run_param_data = RunParameters(self.run_params)
-        # TODO: this function could just be inlined here
-        self.mu = func.mu(self.lhe_file, self.run_param_data)
+        ## \todo: this function could just be inlined here
+        if self.xsec>0:
+            self.mu = func.lint(self.run_param_data) * self.xsec
+        else:
+            raise Exception("Cross section is missing.")
+        logger.info("mu is %f", self.mu)
+        
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: **run_params**
+        @return list of required parameters
+        """
         return ['run_params']
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
-
+        #self.mu = func.mu(self.lhe_file, self.run_param_data)
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 
@@ -631,7 +822,8 @@ class MergePoisson(StdHepTool):
         return args
 
     def execute(self, log_out, log_err):
-        r = Component.execute(self, log_out, log_err)
+        """! Execute MergePoisson component."""
+        returncode = Component.execute(self, log_out, log_err)
 
         # Move file from tool to proper output file location.
         src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
@@ -639,11 +831,14 @@ class MergePoisson(StdHepTool):
         logger.debug("Moving '%s' to '%s'" % (src, dest))
         shutil.move(src, dest)
 
-        return r
+        return returncode
 
 class MergeFiles(StdHepTool):
-    """
+    """!
     Merge StdHep files.
+
+    Optional parameters are: none \n 
+    Required parameters are: none
     """
 
     def __init__(self, **kwargs):
@@ -652,13 +847,25 @@ class MergeFiles(StdHepTool):
                             **kwargs)
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: none
+        @return list of optional parameters
+        """
         return []
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: none
+        @return list of required parameters
+        """
         return []
 
 class StdHepCount(Component):
-    """
+    """!
     Count number of events in a StdHep file.
     """
 
@@ -669,10 +876,14 @@ class StdHepCount(Component):
                            **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         return [self.input_files()[0]]
 
     def execute(self, log_out, log_err):
-
+        """! Execute StdHepCount component."""
         cl = [self.command]
         cl.extend(self.cmd_args())
         proc = subprocess.Popen(cl, stdout=PIPE)
@@ -684,13 +895,15 @@ class StdHepCount(Component):
         return proc.returncode
 
 class JavaTool(Component):
-    """
+    """!
     Generic base class for Java based tools.
     """
-
     def __init__(self, name, java_class, **kwargs):
+        ## java class
         self.java_class = java_class
+        ## java arguments
         self.java_args = None
+        ## tbd
         self.conditions_url = None
         Component.__init__(self,
                            name,
@@ -698,9 +911,19 @@ class JavaTool(Component):
                            **kwargs)
 
     def required_config(self):
+        """!
+        Return list of required config.
+        
+        Required config are: **hps_java_bin_jar**
+        @return list of required config
+        """
         return ['hps_java_bin_jar']
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = []
         if self.java_args is not None:
             logger.debug("Setting java_args from config: %s" + self.java_args)
@@ -714,17 +937,26 @@ class JavaTool(Component):
         return args
 
 class EvioToLcio(JavaTool):
-    """
+    """!
     Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
+
+    Input files have evio format (format used by DAQ system).
+
+    Required parameters are: **detector**, **steering_files** \n 
+    Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**
     """
-
     def __init__(self, steering=None, **kwargs):
-
+        ## detector name
        self.detector = None
+       ## steering file
        self.steering = None
+       ## run number
        self.run_number = None
+       ## number of events that are skipped
        self.skip_events = None
+       ## event print interval
        self.event_print_interval = None
+       ## \todo is it necessary to set this twice?
        self.steering = steering
 
        JavaTool.__init__(self,
@@ -734,17 +966,34 @@ class EvioToLcio(JavaTool):
                          **kwargs)
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: **detector**, **steering_files**
+        @return list of required parameters
+        """
         return ['detector', 'steering_files']
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **run_number**, **skip_events**, **nevents**, **event_print_interval**
+        @return list of optional parameters
+        """
         return ['run_number', 'skip_events', 'nevents', 'event_print_interval']
 
     def setup(self):
+        """! Setup EvioToLcio component."""
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = JavaTool.cmd_args(self)
         if not len(self.output_files()):
             raise Exception('No output files were provided.')
@@ -778,12 +1027,14 @@ class EvioToLcio(JavaTool):
         return args
 
 class FilterBunches(JavaTool):
-    """
+    """!
     Space MC events and apply energy filters to process before readout.
+
+    Optional parameters are: **filter_ecal_hit_ecut**, **filter_event_interval**,
+    **filter_nevents_read**, **filter_nevents_write**, **filter_no_cuts** \n 
+    Required config are: **hps_java_bin_jar**
     """
-
     def __init__(self, **kwargs):
-
         if 'filter_no_cuts' in kwargs:
             self.filter_no_cuts = kwargs['filter_no_cuts']
         else:
@@ -829,6 +1080,7 @@ class FilterBunches(JavaTool):
                           **kwargs)
 
     def config(self, parser):
+        """! Configure FilterBunches component."""
         super().config(parser)
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
@@ -836,6 +1088,10 @@ class FilterBunches(JavaTool):
                 logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = JavaTool.cmd_args(self)
         args.append("-e")
         args.append(str(self.filter_event_interval))
@@ -858,6 +1114,13 @@ class FilterBunches(JavaTool):
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **filter_ecal_hit_ecut**, **filter_event_interval**,
+        **filter_nevents_read**, **filter_nevents_write**, **filter_no_cuts** \n 
+        @return list of optional parameters
+        """
         return ['filter_ecal_hit_ecut',
                 'filter_event_interval',
                 'filter_nevents_read',
@@ -865,22 +1128,26 @@ class FilterBunches(JavaTool):
                 'filter_no_cuts']
 
     def required_config(self):
+        """!
+        Return list of required config.
+        
+        Required config are: **hps_java_bin_jar**
+        @return list of required config
+        """
         return ['hps_java_bin_jar']
 
 class ExtractEventsWithHitAtHodoEcal(JavaTool):
-    """
+    """!
     Apply hodo-hit filter and space MC events to process before readout.
-    """
-
-    """
+    
     The nevents parameter is not settable from JSON in this class. It should
     be supplied as an init argument in the job script if it needs to be
     customized (the default nevents and event_interval used to apply spacing
-    should usually not need to be changed by the user).
+    should usually not need to be changed by the user). \n 
+
+    Optional parameters are: **num_hodo_hits**, **event_interval**
     """
-
     def __init__(self, **kwargs):
-
         if "num_hodo_hits" in kwargs:
             self.num_hodo_hits = kwargs['num_hodo_hits']
         else:
@@ -898,6 +1165,10 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
                           **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = JavaTool.cmd_args(self)
         args.append("-e")
         args.append(str(self.event_interval))
@@ -913,13 +1184,18 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         return args
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **num_hodo_hits**, **event_interval**
+        @return list of optional parameters
+        """
         return ['num_hodo_hits', 'event_interval']
 
 class Unzip(Component):
-    """
+    """!
     Unzip the input files to outputs.
     """
-
     def __init__(self, **kwargs):
         Component.__init__(self,
                            name='unzip',
@@ -927,9 +1203,11 @@ class Unzip(Component):
                            **kwargs)
 
     def output_files(self):
+        """! Return list of output files."""
         return [os.path.splitext(i)[0] for i in self.input_files()]
 
     def execute(self, log_out, log_err):
+        """! Execute Unzip component."""
         for inputfile in self.input_files():
             outputfile = os.path.splitext(inputfile)[0]
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
@@ -938,15 +1216,15 @@ class Unzip(Component):
         return 0
 
 class LCIODumpEvent(Component):
-
-    """
+    """!
     Dump LCIO event information.
+
+    Required parameters are: none \n 
+    Required config are: **lcio_dir**
     """
-
     def __init__(self, **kwargs):
-
+        ## lcio directory
         self.lcio_dir = None
-
         Component.__init__(self,
                            name='lcio_dump_event',
                            command='dumpevent',
@@ -958,14 +1236,20 @@ class LCIODumpEvent(Component):
             self.event_num = 1
 
     def config(self, parser):
+        """! Configure LCIODumpEvent component."""
         super().config(parser)
         if self.lcio_dir is None:
             self.lcio_dir = self.hpsmc_dir
 
     def setup(self):
+        """! Setup LCIODumpEvent component."""
         self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         if not len(self.input_files()):
             raise Exception("Missing required inputs for LCIODumpEvent.")
         args = []
@@ -974,16 +1258,27 @@ class LCIODumpEvent(Component):
         return args
 
     def required_config(self):
+        """!
+        Return list of required config.
+        
+        Required config are: **lcio_dir**
+        @return list of required config
+        """
         return ['lcio_dir']
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: none
+        @return list of required parameters
+        """
         return []
 
 class LHECount(Component):
-    """
+    """!
     Count events in an LHE file.
     """
-
     def __init__(self, minevents=0, fail_on_underflow=False, **kwargs):
         self.minevents = minevents
         Component.__init__(self,
@@ -991,13 +1286,19 @@ class LHECount(Component):
                            **kwargs)
 
     def setup(self):
+        """! Setup LHECount component."""
         if not len(self.input_files()):
             raise Exception("Missing at least one input file.")
 
     def cmd_exists(self):
+        """! 
+        Check if command exists.
+        @return True if command exists
+        """
         return True
 
     def execute(self, log_out, log_err):
+        """! Execute LHECount component."""
         for i in self.inputs:
             with gzip.open(i, 'rb') as in_file:
                 lines = in_file.readlines()
@@ -1018,19 +1319,23 @@ class LHECount(Component):
         return 0
 
 class TarFiles(Component):
-    """
+    """!
     Tar files into an archive.
     """
-
     def __init__(self, **kwargs):
         Component.__init__(self,
                            name='tar_files',
                            **kwargs)
 
     def cmd_exists(self):
+        """! 
+        Check if command exists.
+        @return True if command exists
+        """
         return True
 
     def execute(self, log_out, log_err):
+        """! Execute TarFiles component."""
         logger.debug("Opening '%s' for writing ..." % self.outputs[0])
         tar = tarfile.open(self.outputs[0], "w")
         for i in self.inputs:
@@ -1041,19 +1346,23 @@ class TarFiles(Component):
         return 0
 
 class MoveFiles(Component):
-    """
+    """!
     Move input files to new locations.
     """
-
     def __init__(self, **kwargs):
         Component.__init__(self,
                            name='move_files',
                            **kwargs)
 
     def cmd_exists(self):
+        """! 
+        Check if command exists.
+        @return True if command exists
+        """
         return True
 
     def execute(self, log_out, log_err):
+        """! Execute TarFiles component."""
         if len(self.inputs) != len(self.outputs):
             raise Exception("Input and output lists are not the same length!")
         for io in zip(self.inputs, self.outputs):
@@ -1064,44 +1373,65 @@ class MoveFiles(Component):
         return 0
 
 class LCIOTool(Component):
-    """
+    """!
     Generic component for LCIO tools.
+
+    Required parameters are: none \n 
+    Required config are: **lcio_bin_jar**
     """
-
     def __init__(self, name=None, **kwargs):
-
+        ## lcio bin jar (whatever this is)
         self.lcio_bin_jar = None
-
         Component.__init__(self,
                            name,
                            command='java',
                            **kwargs)
 
     def config(self, parser):
+        """! Configure LCIOTool component."""
         super().config(parser)
         if self.lcio_bin_jar is None:
             self.config_from_environ()
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         return ['-jar', self.lcio_bin_jar, self.name]
 
     def required_config(self):
+        """!
+        Return list of required config.
+        
+        Required config are: **lcio_bin_jar**
+        @return list of required config
+        """
         return ['lcio_bin_jar']
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: none
+        @return list of required parameters
+        """
         return []
 
 class LCIOConcat(LCIOTool):
-    """
+    """!
     Concatenate LCIO files together.
     """
-
     def __init__(self, **kwargs):
         LCIOTool.__init__(self,
                           name='concat',
                           **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = LCIOTool.cmd_args(self)
         if not len(self.input_files()):
             raise Exception("Missing at least one input file.")
@@ -1113,16 +1443,22 @@ class LCIOConcat(LCIOTool):
         return args
 
 class LCIOCount(LCIOTool):
-    """
+    """!
     Count events in LCIO files.
-    """
 
+    Required parameters are: none \n 
+    Optional parameters are: none
+    """
     def __init__(self, **kwargs):
         LCIOTool.__init__(self,
                           name='count',
                           **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = LCIOTool.cmd_args(self)
         if not len(self.inputs):
             raise Exception("Missing an input file.")
@@ -1130,22 +1466,37 @@ class LCIOCount(LCIOTool):
         return args
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: none
+        @return list of required parameters
+        """
         return []
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: none
+        @return list of optional parameters
+        """
         return []
 
 class LCIOMerge(LCIOTool):
-    """
+    """!
     Merge LCIO files.
     """
-
     def __init__(self, **kwargs):
         LCIOTool.__init__(self,
                           name='merge',
                           **kwargs)
 
     def cmd_args(self):
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         args = LCIOTool.cmd_args(self)
         if not len(self.input_files()):
             raise Exception("Missing at least one input file.")
@@ -1159,22 +1510,38 @@ class LCIOMerge(LCIOTool):
         return args
 
 class SimBase(Component):
-    """
+    """!
     Generic base class for shared Geant4 sim config
-    TODO: Make SLIC extend this, too.
+    \todo Make SLIC extend this, too.
+
+    Optional parameters are: **nevents**, **macros**, **run_number** \n 
+    Required parameters are: **detector**
     """
 
     def detector_file(self):
+        """! Get path to detector file."""
         return os.path.join(self.detector_dir, self.detector, self.detector + ".lcdd")
 
     def optional_parameters(self):
+        """!
+        Return list of optional parameters.
+        
+        Optional parameters are: **nevents**, **macros**, **run_number**
+        @return list of optional parameters
+        """
         return ['nevents', 'macros', 'run_number']
 
     def required_parameters(self):
+        """!
+        Return list of required parameters.
+        
+        Required parameters are: **detector**
+        @return list of required parameters
+        """
         return ['detector']
 
     def execute(self, log_out, log_err):
-
+        """! Execute SimBase component."""
         # Program needs to be run inside bash to make the Geant4 setup script happy.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
 
@@ -1185,24 +1552,20 @@ class SimBase(Component):
         return proc.returncode
 
 class Sim(SimBase):
-    """
+    """!
     Run the hps-sim Geant4 simulation.
+
+    Required config are: **hps_sim_dir**, **hps_fieldmaps_dir**, **detector_dir**
     """
-
     def __init__(self, **kwargs):
-
-        # List of macros to run (optional)
+        ## List of macros to run (optional)
         self.macros = []
-
-        # Run number to set on output file (optional)
+        ## Run number to set on output file (optional)
         self.run_number = None
-
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.hps_fieldmaps_dir = None
-
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.detector_dir = None
-
         Component.__init__(self,
                            name='hps-sim',
                            command='hps-sim',
@@ -1210,14 +1573,17 @@ class Sim(SimBase):
                            **kwargs)
 
     def cmd_args(self):
-
+        """!
+        Setup command arguments.
+        @return  list of arguments
+        """
         if not len(self.input_files()):
             raise Exception("No inputs were provided for Sim.")
 
         return ['./run.macro']
 
     def config(self, parser):
-
+        """! Configure Sim component."""
         super().config(parser)
 
         if self.detector_dir is None:
@@ -1236,7 +1602,7 @@ class Sim(SimBase):
             logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
-
+        """! Setup Sim component."""
         if not os.path.exists(self.hps_sim_dir):
             raise Exception("hps_sim_dir does not exist: %s" % self.slic_dir)
 
@@ -1253,7 +1619,7 @@ class Sim(SimBase):
         self.write_run_macro()
 
     def write_run_macro(self, macro_name='./run.macro'):
-
+        """! Write parameters to run macro."""
         macro_lines = []
         macro_lines.append("/lcdd/url {}".format(self.detector_file()))
 
@@ -1262,7 +1628,7 @@ class Sim(SimBase):
         if self.seed is not None:
             macro_lines.append("/random/seed {}".format(self.seed))
 
-        # TODO: Support LHE files, too
+        ## \todo: Support LHE files, too
         macro_lines.append("/hps/generators/create StdHepGen STDHEP")
         for input_file in self.input_files():
             macro_lines.append("/hps/generators/StdHepGen/file {}".format(input_file))
@@ -1275,10 +1641,16 @@ class Sim(SimBase):
         
         macro_lines.append("/run/beamOn {}".format(self.nevents))
 
-        # TODO: Set run number (no Geant4 built-in for this?)
+        ## \todo: Set run number (no Geant4 built-in for this?)
 
         with open(macro_name, 'wt', encoding='utf-8') as run_macro:
             run_macro.write('\n'.join(macro_lines))
 
     def required_config(self):
+        """!
+        Return list of required config.
+        
+        Required config are: **hps_sim_dir**, **hps_fieldmaps_dir**, **detector_dir**
+        @return list of required config
+        """
         return ['hps_sim_dir', 'hps_fieldmaps_dir', 'detector_dir']

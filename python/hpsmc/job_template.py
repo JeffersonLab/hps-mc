@@ -1,4 +1,5 @@
-"""Expand a Jinja job template into a full list of jobs in JSON format."""
+"""! @package job_template
+Expand a Jinja job template into a full list of jobs in JSON format."""
 
 import sys
 import os
@@ -12,23 +13,23 @@ import uuid as _uuid
 from jinja2 import Template, Environment, FileSystemLoader
 
 def basename(path):
-    """Filter to return a file base name stripped of dir and extension."""
+    """! Filter to return a file base name stripped of dir and extension."""
     return os.path.splitext(os.path.basename(path))[0]
 
 def extension(path):
-    """Filter to get file extension from string."""
+    """! Filter to get file extension from string."""
     return os.path.splitext(path)[1]
 
 def dirname(path):
-    """Filter to get dir name from string."""
+    """! Filter to get dir name from string."""
     return os.path.dirname(path)
 
 def pad(num, npad=4):
-    """Filter to pad a number."""
+    """! Filter to pad a number."""
     return format(num, format(npad, '02'))
 
 def uuid():
-    """Function to get a uuid within a template."""
+    """! Function to get a uuid within a template."""
     return str(_uuid.uuid4())[:8]
 
 # TODO:
@@ -38,7 +39,7 @@ def uuid():
 #    return os.getcwd()
 
 class JobData(object):
-    """Very simple key-value object for storing data for each job."""
+    """! Very simple key-value object for storing data for each job."""
 
     def __init__(self):
         self.input_files = {}
@@ -52,22 +53,21 @@ class JobData(object):
         self.params[name] = value
 
 class MaxJobsException(Exception):
-
+    """! Exception if max jobs are reached."""
     def __init__(self, max_jobs):
         super().__init__("Reached max jobs: {}".format(max_jobs))
 
 class JobTemplate:
-    """Template engine for transforming input job template into JSON job store.
+    """! Template engine for transforming input job template into JSON job store.
 
     Accepts a set of iteration variables of which all combinations will be turned into jobs.
-
     Also accepts lists of input files with a unique key from which one or more can be read
     per job.
-
     The user's template should be a JSON dict with jinja2 markup.
     """
 
     def __init__(self, template_file=None, output_file='jobs.json'):
+        ## template file from which parameters are read
         self.template_file = template_file
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
@@ -75,30 +75,49 @@ class JobTemplate:
         self.env.filters['uuid'] = uuid
         self.env.filters['extension'] = extension
         self.env.filters['dirname'] = dirname
-        self.job_id_start = 0;
+        ## start ID for jobs
+        self.job_id_start = 0
+        ## dict of input files
         self.input_files = {}
+        ## dict of iteration variables
         self.itervars = {}
+        ## name of output file
         self.output_file = output_file
 
     def add_input_files(self, key, file_list, nreads=1):
+        """! Add new input files to dict of input files.
+        @param key  key under which new input files are added
+        @param file_list  list of new input files to be added
+        @param nreads  nbr of times the input files are read \todo check if this is correct
+        """
         if key in self.input_files:
             raise Exception('Input file key already exists: %s' % key)
         self.input_files[key] = (file_list, nreads)
 
     def add_itervar(self, name, vals):
+        """! Add new iteration variable to dict of iteration variables.
+        @param name  name of new variable
+        @param vals  list of values for iteration variable
+        """
         if name in self.itervars:
             raise Exception('The iter var already exists: %s' % name)
         self.itervars[name] = vals
 
-    def add_itervars(self, d):
-        for k,v in d.items():
+    def add_itervars(self, iter_dict):
+        """! Add several iter variables at once.
+        @param iter_dict  new dict of iteration variables to be added 
+        """
+        for k,v in iter_dict.items():
             self.add_itervar(k, v)
 
     def add_itervars_json(self, json_file):
+        """! Add iter variables from json file.
+        @param json_file  name of json file
+        """
         self.add_itervars(json.load(json_file))
 
     def get_itervars(self):
-        """
+        """!
         Return all combinations of the iteration variables.
         """
         var_list = []
@@ -111,7 +130,7 @@ class JobTemplate:
         return var_names,list(prod)
 
     def run(self):
-        """
+        """!
         Generate the JSON jobs from processing the template and write to file.
         """
         self.template = self.env.get_template(self.template_file)
@@ -136,7 +155,7 @@ class JobTemplate:
             print('Wrote %d jobs to: %s' % (len(jobs), self.output_file))
 
     def _get_max_iterations(self):
-        """
+        """!
         Get the maximum number of iterations based on file input parameters.
         """
         max_iter = -1
@@ -193,7 +212,7 @@ class JobTemplate:
         return jobs
 
     def _read_input_file_list(self, input_file_list):
-        """Read the input file list from arg parsing."""
+        """! Read the input file list from arg parsing."""
         for f in input_file_list:
             name = f[0]
             if name in list(self.input_files.keys()):
@@ -211,7 +230,7 @@ class JobTemplate:
                 self.input_files[name] = (input_file_list, nreads)
 
     def parse_args(self):
-        """Parse arguments for template engine."""
+        """! Parse arguments for template engine."""
 
         parser = argparse.ArgumentParser(description="Create a JSON job store from a jinja2 template")
         parser.add_argument("-j", "--job-start", nargs="?", type=int, help="Starting job ID", default=0)

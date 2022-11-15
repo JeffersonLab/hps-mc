@@ -1,8 +1,0 @@
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_1.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_2.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_3.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_4.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_5.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_6.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_7.slcio
-/u/group/hps/users/caot/test/hps-mc/examples/beam_gen_to_slic/output/2019/pass0/slic/beam_8.slcio

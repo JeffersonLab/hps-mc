@@ -1,0 +1,23 @@
+# Local JSON job store files
+*/*/jobs.json
+
+# Log files
+*.out
+*.err
+*.log
+
+# Generated files
+*.slcio
+*.lhe.gz
+*.lhe
+*.stdhep
+*.root
+
+# Generated example directories
+*/output
+*/*/output
+*/scratch
+*/*/scratch
+
+# Auger temp file
+temp.xml

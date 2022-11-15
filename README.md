@@ -1,6 +1,5 @@
-# hps-mc
-
-## Prerequisites
+# hps-mc installation guide  {#readme}
+### Prerequisites
 
 There are a number of required programs and tools you must have installed on your system to build and run hps-mc.
 
@@ -31,7 +30,7 @@ The [slic](https://github.com/slaclab/slic) program should be pre-installed and 
 
 Some scripts may also require that the [DST Maker](https://github.com/JeffersonLab/hps-dst) is installed and available in the system path.
 
-## Installation
+### Installation
 
 You need to have CMake installed on your system as well as gcc (preferably version 4.8 or greater).
 
@@ -55,7 +54,7 @@ This should install all of the tools to `hps-mc/install`.
 
 Change `CMAKE_INSTALL_PREFIX` above if you wish to install to a different directory.
 
-## Environment Setup
+### Environment Setup
 
 Before running scripts, the environment script should be sourced.
 
@@ -82,7 +81,7 @@ which dst_maker
 
 You should also check that typing `slic` and `dst_maker` executes these commands correctly.
 
-## Running Job Scripts
+### Running Job Scripts
 
 You will want to run jobs from a scratch directory as many of components create a lot of files:
 
@@ -99,7 +98,11 @@ python hps-mc/python/test/egs5_test.py
 
 In the above command insert the full path to your hps-mc installation instead of `hps-mc` or you can copy the python script to the scratch directory.
 
-## Quick Start Guide
+### Documentation
+The source code documentation can be found [here](https://jeffersonlab.github.io/hps-mc/). For additional information of how to use the job scripts, refer to the examples directory and the comments in there.
+
+
+### Quick Start Guide
 
 The first step to setting up an system to run jobs via hps-mc is first producing `~/.hpsmc` which will set all of the system level configuration parameters for all types of jobs. An example of what a system level .hpsmc file should look like is provided at `config/bravo_sdf.cfg`. One can simply copy this to `~/.hpsmc` of the system and update the paths to point to the relevant locations on that particular system.
 
@@ -113,7 +116,7 @@ After one has generated a jobs.json file, the jobs it defines can be ran locally
 
 It is recommended to slowly build up jobs and tests them locally first before submitting a whole set to a batch system to run. This can be with commands nearly identical to the commands used to submit the jobs to a batch system (local or pool). The system is pretty abstracted so you might even find a new clever way to leverage the features of hps-mc to speed up the process of defining job sets, or even just getting the jobs ran.
 
-## Help
+### Help
 
 You can post any questions or report problems on the [HPS Slack](https://heavyphotonsearch.slack.com/) in the [montecarlo](https://heavyphotonsearch.slack.com/messages/C47LLBP5F) channel.
 
