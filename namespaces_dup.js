@@ -28,6 +28,7 @@ var namespaces_dup =
     [ "moller_gen_job", "namespacemoller__gen__job.html", null ],
     [ "rad_gen_job", "namespacerad__gen__job.html", null ],
     [ "readout_recon_job", "namespacereadout__recon__job.html", null ],
+    [ "signal_beam_merge_to_recon_2016_job", "namespacesignal__beam__merge__to__recon__2016__job.html", null ],
     [ "signal_beam_merge_to_recon_job", "namespacesignal__beam__merge__to__recon__job.html", null ],
     [ "signal_pulser_overlay_to_recon_job", "namespacesignal__pulser__overlay__to__recon__job.html", null ],
     [ "sim_to_ana_job", "namespacesim__to__ana__job.html", null ],

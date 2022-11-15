@@ -10,7 +10,7 @@ var searchData=
   ['max_5fwait_326',['max_wait',['../classhpsmc_1_1batch_1_1Pool.html#a21477e6d22ae6f8e89d3686584a60c2c',1,'hpsmc::batch::Pool']]],
   ['maxjobsexception_327',['MaxJobsException',['../classhpsmc_1_1job__template_1_1MaxJobsException.html',1,'hpsmc::job_template']]],
   ['memory_328',['memory',['../classhpsmc_1_1batch_1_1Batch.html#a61a963e6e2f81b884bc6d17c72777b42',1,'hpsmc::batch::Batch']]],
-  ['merge_329',['merge',['../namespacesignal__beam__merge__to__recon__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'signal_beam_merge_to_recon_job.merge()'],['../namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'tritrig_beam_job.merge()'],['../namespacetritrig__beam__slic__to__reco__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'tritrig_beam_slic_to_reco_job.merge()']]],
+  ['merge_329',['merge',['../namespacesignal__beam__merge__to__recon__2016__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'signal_beam_merge_to_recon_2016_job.merge()'],['../namespacesignal__beam__merge__to__recon__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'signal_beam_merge_to_recon_job.merge()'],['../namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'tritrig_beam_job.merge()'],['../namespacetritrig__beam__slic__to__reco__job.html#a2c314bbf889bccf5fbdd959da9db1006',1,'tritrig_beam_slic_to_reco_job.merge()']]],
   ['merge_5fbunches_2ecc_330',['merge_bunches.cc',['../merge__bunches_8cc.html',1,'']]],
   ['merge_5ffiles_2ecc_331',['merge_files.cc',['../merge__files_8cc.html',1,'']]],
   ['merge_5fpoisson_2ecc_332',['merge_poisson.cc',['../merge__poisson_8cc.html',1,'']]],
