@@ -15,6 +15,8 @@ var namespaces_dup =
     [ "beam_gen_job", "namespacebeam__gen__job.html", null ],
     [ "beam_gen_sample_job", "namespacebeam__gen__sample__job.html", null ],
     [ "beam_prep_and_slic_job", "namespacebeam__prep__and__slic__job.html", null ],
+    [ "build2019filenames", "namespacebuild2019filenames.html", null ],
+    [ "build2021filenames", "namespacebuild2021filenames.html", null ],
     [ "component", "namespacecomponent.html", null ],
     [ "data_cnv_job", "namespacedata__cnv__job.html", null ],
     [ "dummy_job", "namespacedummy__job.html", null ],
