@@ -1,0 +1,21 @@
+{
+    "input_files": {
+        "https://hpsweb.jlab.org/test/hps-mc/example_files/data/hps_010104.evio.00114": "data_events.evio"
+    },
+    "output_files": {
+        "data_events.slcio": "data_events.slcio",
+        "data_events.root": "data_events.root"
+    },
+    "output_dir": "output/HPS-PhysicsRun2019-v2-4pt5/",
+    "detector": "HPS-PhysicsRun2019-v2-4pt5",
+    "run_number": 10131,
+    "skip_events": 10,
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2019FullRecon.lcsim"
+    },
+    "nevents": 1000,
+    "config_files": {
+        "recon": "recoTuple_cfg.py"
+    },
+    "year": 2019
+}
