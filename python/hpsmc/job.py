@@ -756,8 +756,8 @@ class Job(object):
             if os.path.exists(os.path.join(self.rundir, dest)):
                 logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
-                return
-            shutil.copyfile(src, os.path.join(self.rundir, dest))
+            else:
+                shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 
     def __symlink_input_files(self):
