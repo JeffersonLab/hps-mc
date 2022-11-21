@@ -936,6 +936,24 @@ class JavaTool(Component):
         args.append(self.java_class)
         return args
 
+    def config(self, parser):
+        super.config(parser)
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+    def setup(self):
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            logger.warning('Link to fieldmap dir already exists!')
+
+
 class EvioToLcio(JavaTool):
     """!
     Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.
@@ -985,6 +1003,7 @@ class EvioToLcio(JavaTool):
 
     def setup(self):
         """! Setup EvioToLcio component."""
+        super.setup()
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
