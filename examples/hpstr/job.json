@@ -3,7 +3,7 @@
         "recon": "kalSimpTuple_cfg.py",
         "ana": "anaVtxTuple_cfg.py"
     },
-    "run_mode": 0,
+    "is_data": 0,
     "nevents": 50,
     "year": 2021,
     "input_files": {
