@@ -352,15 +352,15 @@ class HPSTR(Component):
     Run the hpstr analysis tool.
 
     Required parameters are: **config_files** \n 
-    Optional parameters are: **year**, **run_mode**, **nevents** \n 
+    Optional parameters are: **year**, **is_data**, **nevents** \n 
     Required configs are: **hpstr_install_dir**, **hpstr_base**
     """
 
-    def __init__(self, cfg=None, run_mode=0, year=None, **kwargs):
+    def __init__(self, cfg=None, is_data=0, year=None, **kwargs):
         ## configuration
         self.cfg = cfg
         ## run mode
-        self.run_mode = run_mode
+        self.is_data = is_data
         ## year
         self.year = year
 
@@ -409,10 +409,10 @@ class HPSTR(Component):
         """!
         Return list of optional parameters.
 
-        Optional parameters are: **year**, **run_mode**, **nevents**
+        Optional parameters are: **year**, **is_data**, **nevents**
         @return  list of optional parameters
         """
-        return ['year', 'run_mode', 'nevents']
+        return ['year', 'is_data', 'nevents']
 
     def required_config(self):
         """!
@@ -429,7 +429,7 @@ class HPSTR(Component):
         @return  list of arguments
         """
         args = [self.cfg_path,
-                "-t", str(self.run_mode),
+                "-t", str(self.is_data),
                 "-i", self.input_files()[0],
                 "-o", self.output_files()[0]]
         if self.nevents is not None:
