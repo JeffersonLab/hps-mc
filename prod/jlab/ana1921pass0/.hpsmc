@@ -1,5 +1,14 @@
+[HPSTR]
+hpstr_install_dir = /work/hallb/hps/bravo/sw/hpstr/install
+hpstr_base = /work/hallb/hps/bravo/sw/hpstr
+
+[EvioToLcio]
+hps_java_bin_jar = /u/group/hps/hps_soft/hps-java/hps-distribution-5.1-bin.jar
+java_args = -Xmx3g -XX:+UseSerialGC
+
 [Job]
 dry_run = False
-enable_file_chaining = False
 check_output_files = False
+enable_copy_output_files = False
+enable_file_chaining = True
 delete_rundir = False

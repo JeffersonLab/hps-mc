@@ -6,14 +6,14 @@
         "{{input_files['data'][0]}}": "data_events.evio"
     },
     "output_files": {
-        "data_events.slcio": "data_events.slcio",
-        "data_events.root": "data_events.root"
+        "data_events.slcio": "data_events_{{job_id}}.slcio",
+        "data_events.root": "data_events_{{job_id}}.root"
     },
-    "output_dir": "output/{{detector}}",
+    "output_dir": "/work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana1921pass0/output/{{detector}}",
     "detector": "{{detector}}",
     "run_number": {{run_number}},
     "steering_files": {
-        "recon": "/org/hps/steering/recon/PhysicsRun2021_pass0_recon_evio.lcsim"
+        "recon": "/org/hps/steering/recon/PhysicsRun2019_pass0_recon_evio.lcsim"
     },
     "config_files": {
         "recon": "recoTuple_cfg.py"

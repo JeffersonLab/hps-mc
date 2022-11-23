@@ -1,3 +1,4 @@
 module load cmake/@CMAKE_VERSION@
 module load gcc/@CMAKE_C_COMPILER_VERSION@
 module load python/@Python3_VERSION@
+source /work/hallb/hps/bravo/sw/root/buildV62202Py3/bin/thisroot.csh
