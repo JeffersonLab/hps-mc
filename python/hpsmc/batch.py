@@ -430,6 +430,10 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
+        year = ''
+        if 'year' in job_params.keys():
+            year = job_params['year']
+
         if 'input_files' in list(job_params.keys()):
             inputfiles = job_params['input_files']
             for src,dest in inputfiles.items():
@@ -452,6 +456,9 @@ class Auger(Batch):
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
+
+        job_name = ET.SubElement(job, "Name")
+        job_name.set("name", f'{year}hps{job_id}')
 
         job_err = ET.SubElement(job, "Stderr")
         stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
