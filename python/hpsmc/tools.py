@@ -235,15 +235,22 @@ class JobManager(Component):
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
                 logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def required_config(self):
         """!
         Return list of required configurations.
-        
-        Required configurations are: hps_java_bin_jar
+
+        Required configurations are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
         @retun list of required configurations.
         """
-        return ['hps_java_bin_jar']
+        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
 
     def setup(self):
         """! Setup JobManager component."""
@@ -253,6 +260,12 @@ class JobManager(Component):
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
+
+        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            logger.warning('Link to fieldmap dir already exists!')
 
     def cmd_args(self):
         """!
@@ -913,11 +926,11 @@ class JavaTool(Component):
     def required_config(self):
         """!
         Return list of required config.
-        
-        Required config are: **hps_java_bin_jar**
+
+        Required config are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
         @return list of required config
         """
-        return ['hps_java_bin_jar']
+        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
 
     def cmd_args(self):
         """!
@@ -937,7 +950,7 @@ class JavaTool(Component):
         return args
 
     def config(self, parser):
-        super.config(parser)
+        super().config(parser)
         if self.hps_fieldmaps_dir is None:
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
@@ -1003,7 +1016,7 @@ class EvioToLcio(JavaTool):
 
     def setup(self):
         """! Setup EvioToLcio component."""
-        super.setup()
+        super().setup()
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
