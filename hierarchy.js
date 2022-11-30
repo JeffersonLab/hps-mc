@@ -4,8 +4,8 @@ var hierarchy =
       [ "Auger", "classhpsmc_1_1batch_1_1Auger.html", [
         [ "Swif", "classhpsmc_1_1batch_1_1Swif.html", null ]
       ] ],
-      [ "Local", "classhpsmc_1_1batch_1_1Local.html", null ],
       [ "LSF", "classhpsmc_1_1batch_1_1LSF.html", null ],
+      [ "Local", "classhpsmc_1_1batch_1_1Local.html", null ],
       [ "Pool", "classhpsmc_1_1batch_1_1Pool.html", null ],
       [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", null ]
     ] ],
@@ -43,10 +43,10 @@ var hierarchy =
         ] ],
         [ "LHECount", "classhpsmc_1_1tools_1_1LHECount.html", null ],
         [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", null ],
+        [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", null ],
         [ "SimBase", "classhpsmc_1_1tools_1_1SimBase.html", [
           [ "Sim", "classhpsmc_1_1tools_1_1Sim.html", null ]
         ] ],
-        [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", null ],
         [ "StdHepCount", "classhpsmc_1_1tools_1_1StdHepCount.html", null ],
         [ "StdHepTool", "classhpsmc_1_1tools_1_1StdHepTool.html", [
           [ "AddMother", "classhpsmc_1_1tools_1_1AddMother.html", null ],

@@ -14,6 +14,7 @@ var classhpsmc_1_1tools_1_1JobManager =
     [ "defs", "classhpsmc_1_1tools_1_1JobManager.html#af4e0e6fc8c0067366f1234c584a4d36f", null ],
     [ "detector", "classhpsmc_1_1tools_1_1JobManager.html#a2e2cc69bf023676b0749903f295a507e", null ],
     [ "event_print_interval", "classhpsmc_1_1tools_1_1JobManager.html#ab39cdcb2e02e5b2171c5d7832f24f961", null ],
+    [ "hps_fieldmaps_dir", "classhpsmc_1_1tools_1_1JobManager.html#a044c190f66597374c5caa9dcd7e6f0bb", null ],
     [ "hps_java_bin_jar", "classhpsmc_1_1tools_1_1JobManager.html#a9d7a98b382018c02a5f9cc287df0c4fd", null ],
     [ "java_args", "classhpsmc_1_1tools_1_1JobManager.html#ae1c32a6f57706d69f98cdf26038cf50a", null ],
     [ "lcsim_cache_dir", "classhpsmc_1_1tools_1_1JobManager.html#a80913a6ffd23b3f618bd32bee8b293c9", null ],
