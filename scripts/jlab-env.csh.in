@@ -1,3 +1,5 @@
 module load cmake/@CMAKE_VERSION@
 module load gcc/@CMAKE_C_COMPILER_VERSION@
 module load python/@Python3_VERSION@
+@ROOTSYS@/bin/thisroot.csh
+

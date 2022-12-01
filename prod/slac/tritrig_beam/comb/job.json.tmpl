@@ -5,7 +5,7 @@
     "detector": "{{ detector }}",
     "event_interval": {{ event_interval }},
     "ecal_hit_ecut": {{ ecal_hit_ecut }},
-    "run_mode": 0,
+    "is_data": 0,
     "input_files": {
         "/sdf/group/hps/mc/tritrig/slic/{{ run_params }}/{{ detector }}/tritrig_{{ run_params }}_{{ target_and_current }}_rot_{{ job_id }}.slcio": "tritrig_events.slcio",
         "/sdf/group/hps/mc/beam/slic/{{ run_params }}/{{ detector }}/beam_{{ run_params }}_{{ target_and_current }}_{{ job_id*10-9 }}.slcio": "beam_1.slcio",

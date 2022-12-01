@@ -430,6 +430,10 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
+        year = ''
+        if 'year' in job_params.keys():
+            year = job_params['year']
+
         if 'input_files' in list(job_params.keys()):
             inputfiles = job_params['input_files']
             for src,dest in inputfiles.items():
@@ -444,15 +448,17 @@ class Auger(Batch):
         outputdir = job_params["output_dir"]
         #outputdir = os.path.realpath(outputdir)
         j = self._create_job(job_params)
-        if j.enable_copy_output_files == False:
-            for src,dest in outputfiles.items():
-                output_elem = ET.SubElement(job, "Output")
-                res_src = j.resolve_output_src(src)
-                output_elem.set("src", res_src)
-                dest_file = os.path.join(outputdir, dest)
-                if dest_file.startswith("/mss"):
-                    dest_file = "mss:%s" % dest_file
-                output_elem.set("dest", dest_file)
+        for src,dest in outputfiles.items():
+            output_elem = ET.SubElement(job, "Output")
+            res_src = j.resolve_output_src(src)
+            output_elem.set("src", res_src)
+            dest_file = os.path.join(outputdir, dest)
+            if dest_file.startswith("/mss"):
+                dest_file = "mss:%s" % dest_file
+            output_elem.set("dest", dest_file)
+
+        job_name = ET.SubElement(job, "Name")
+        job_name.set("name", '%ihps%i' % (year, job_id))
 
         job_err = ET.SubElement(job, "Stderr")
         stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
@@ -465,10 +471,11 @@ class Auger(Batch):
         cmd_lines = []
         cmd_lines.append("<![CDATA[")
 
-        #cmd_lines.append('pwd\n')
+        cmd_lines.append('pwd;\n')
+        cmd_lines.append('env | sort;\n')
+        cmd_lines.append('ls -lart;\n')
         cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
         cmd_lines.append("source %s/bin/jlab-env.csh;\n" % os.getenv('HPSMC_DIR'))
-        #cmd_lines.append('env | sort\n')
 
         job_cmd = self.build_cmd(job_id, job_params)
 
@@ -480,9 +487,9 @@ class Auger(Batch):
         log_out_elem.set('dest', os.path.join(self.log_dir, log_file))
 
         cmd_lines.extend(job_cmd)
-        cmd_lines.append('\n')
+        cmd_lines.append(';\n')
 
-        #cmd_lines.append('ls -lah .\n')
+        cmd_lines.append('ls -lart; \n')
 
         cmd_lines.append("]]>")
 
