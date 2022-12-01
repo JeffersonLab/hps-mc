@@ -5,7 +5,7 @@
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
     "event_interval": 250,
     "ecal_hit_ecut": 0.05,
-    "run_mode": 0,
+    "is_data": 0,
     "filter_bunches": true,
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2019TrigMultiSingles.lcsim",
