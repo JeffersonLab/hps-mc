@@ -386,7 +386,7 @@ class HPSTR(Component):
         """! Setup HPSTR component."""
         if not os.path.exists(self.hpstr_install_dir):
             raise Exception('hpstr_install_dir does not exist: %s' % self.hpstr_install_dir)
-        self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "setup.sh"
+        self.env_script = self.hpstr_install_dir + os.sep + "bin" + os.sep + "hpstr-env.sh"
 
         # The config file to use is read from a dict in the JSON parameters.
         if self.cfg not in self.config_files:
