@@ -1,0 +1,19 @@
+{
+    {% set splitPath = input_files['data'][0].split('/') %}
+    {% set run_number = splitPath[7].split('_')[1]|int %}
+    "input_files": {
+        "{{input_files['data'][0]}}": "data_events.slcio"
+    },
+    "output_files": {
+        "data_events.root": "{{splitPath[8].split(".")[0]}}.root",
+        "data_events_ana.root": "{{splitPath[8].split('.')[0]}}_anaVtx.root"
+    },
+    "output_dir": "/cache/hallb/hps/physrun2019/production/pass0/{{splitPath[7]}}",
+    "is_data": 1,
+    "run_number": {{run_number}},
+    "config_files": {
+        "recon": "recoTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "year": 2019
+}

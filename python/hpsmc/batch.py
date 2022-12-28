@@ -509,6 +509,13 @@ class Swif(Auger):
          # Write request to XML file
         xml_filename = self._create_job_xml()
 
+        # Create workflow and give it a bunch of concurrent jobs
+        cmd = ['swif2', 'create', self.workflow, '-max-concurrent', '3000']
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
+
         # Add job to swif2 workflow using Auger XML file
         cmd = ['swif2', 'add-jsub', self.workflow, '-script', xml_filename]
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
