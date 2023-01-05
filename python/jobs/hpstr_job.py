@@ -9,3 +9,4 @@ cnv = HPSTR(cfg='recon')
 ana = HPSTR(cfg='ana')
 
 job.add([cnv, ana])
+#job.add([ana])

@@ -13,7 +13,7 @@ class Component(object):
 
     def __init__(self,
                  name,
-                 command=None,
+                 command='',
                  **kwargs):
 
         self.name = name

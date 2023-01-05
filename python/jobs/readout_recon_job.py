@@ -37,5 +37,8 @@ count_reco = LCIOCount()
 # Run an analysis on the ROOT file
 #ana = HPSTR(cfg='ana')
 
-job.add([count_input, filter_bunches, count_filt, readout, count_readout, reco, count_reco])
+#job.add([count_input, filter_bunches, count_filt, readout, count_readout, reco, count_reco])
+#, cnv, ana])
+
+job.add([filter_bunches, readout, reco])
 #, cnv, ana])

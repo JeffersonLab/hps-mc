@@ -36,9 +36,10 @@ class Batch:
         parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (ignored for Auger and LSF)")
         parser.add_argument("-S", "--sh-dir", nargs='?', help="Dir to hold sh scripts to submit jobs via Slurm", default="./sh")
         parser.add_argument("-q", "--queue", nargs='?', help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)", required=False)
-        parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
+        parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=24)
         parser.add_argument("-p", "--pool-size", type=int, help="Job pool size (only applicable when running pool)", required=False, default=multiprocessing.cpu_count())
         parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
+        parser.add_argument("-n", "--ntasks", type=int, help="Number of CPUs per job", default=1)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
         parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)
@@ -79,8 +80,8 @@ class Batch:
 
         self.log_dir = cl.log_dir
         self.sh_dir = cl.sh_dir
-        if not os.path.isabs(self.log_dir):
-            raise Exception('The log dir is not an abs path: %s' % self.log_dir)
+        #if not os.path.isabs(self.log_dir):
+        #    raise Exception('The log dir is not an abs path: %s' % self.log_dir)
         # FIXME: This directory creation probably shouldn't happen here.
         if not os.path.exists(self.log_dir):
             logger.info('Creating log dir: %s' % self.log_dir)
@@ -114,6 +115,7 @@ class Batch:
 
         self.job_length = cl.job_length
         self.memory = cl.memory
+        self.ntasks = cl.ntasks
 
         self.pool_size = int(cl.pool_size)
 
@@ -186,6 +188,7 @@ class Batch:
                 raise Exception('Job ID was not found in job store: %s' % job_id)
             job_data = self.jobstore.get_job(job_id)
             self._submit_job(job_id, job_data)
+        logger.info("Submitted %i jobs"%(len(job_ids))) 
 
     def build_cmd(self, job_id, job_params, set_job_dir=True):
         """
@@ -280,6 +283,7 @@ class Slurm(Batch):
                '--time=%s'%(str(self.job_length)+':00:00'),
                '--partition=%s'%queue,
                '--mem=%sM'%self.memory,
+               '--ntasks=%i'%self.ntasks,
                '--job-name=hps%i'%(job_params['job_id']),
                '--output=%s.out'%log_file]
         sh_filename = self.sh_dir + '/job.%i.sh'%job_params['job_id']
@@ -288,6 +292,8 @@ class Slurm(Batch):
         sh_file.write('source '+self.env+'\n')
         sh_file.write('mkdir -p %s/%i\n'%(self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n'%(self.run_dir, job_params['job_id']))
+        #sh_file.write('mkdir -p $LSCRATCH/%s/%i\n'%(self.run_dir, job_params['job_id']))
+        #sh_file.write('cd $LSCRATCH/%s/%i\n'%(self.run_dir, job_params['job_id']))
         sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
         sh_file.close()
         cmd.append(sh_filename)
