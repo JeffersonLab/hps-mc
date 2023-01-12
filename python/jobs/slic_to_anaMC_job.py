@@ -15,6 +15,6 @@ tuple = HPSTR(cfg='mcTuple')
 
 ## Run an analysis on the ROOT file
 ana = HPSTR(cfg='ana')
- 
+
 ## Add the components
 job.add([slic, tuple, ana])

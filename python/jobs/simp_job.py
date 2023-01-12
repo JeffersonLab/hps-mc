@@ -1,7 +1,7 @@
 """!
 @file simp_job.py
 
-Simulation of SIMPs, detector signals, and readout, followed by reconstruction. 
+Simulation of SIMPs, detector signals, and readout, followed by reconstruction.
 """
 from hpsmc.generators import MG5
 from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, DisplaceUni
@@ -34,6 +34,6 @@ readout = JobManager(steering='readout')
 
 ## Run physics reconstruction
 recon = JobManager(steering='recon')
- 
+
 ## Run the job
 job.add([mg, unzip, cnv, rot, slic, filter_bunches, readout, recon])

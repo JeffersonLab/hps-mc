@@ -55,14 +55,14 @@ slic_beams = []
 for i in range(len(beam_file_names)):
     slic_beams.append(SLIC(inputs=[beam_file_names[i]],
                       outputs=[beam_slic_file_names[i]],
-                      nevents=nevents*250,
+                      nevents=nevents * 250,
                       ignore_job_params=['nevents'])
                       )
 
 ## concatonate beam events before merging
 slic_beam_cat = ExtractEventsWithHitAtHodoEcal(inputs=beam_slic_file_names,
-                                                   outputs=['beam_cat.slcio'],
-                                                   event_interval=0, num_hodo_hits=0)
+                                               outputs=['beam_cat.slcio'],
+                                               event_interval=0, num_hodo_hits=0)
 
 ## Merge signal and beam events
 merge = LCIOMerge(inputs=[filter_bunches.output_files()[0],
@@ -90,6 +90,7 @@ recon = JobManager(steering='recon',
 count_recon = LCIOCount(inputs=recon.output_files())
 
 comps = [slic, filter_bunches, count_filter]
-for i in range(len(slic_beams)): comps.append(slic_beams[i])
+for i in range(len(slic_beams)):
+    comps.append(slic_beams[i])
 comps.extend([slic_beam_cat, merge, count_merge, readout, count_readout, recon, count_recon])
 job.add(comps)

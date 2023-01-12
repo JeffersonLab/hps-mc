@@ -1,5 +1,5 @@
-"""! 
-@package component 
+"""!
+@package component
 Defines the base interface that component classes should extend.
 """
 
@@ -15,7 +15,7 @@ logger = logging.getLogger("hpsmc.component")
 class Component(object):
     """!
     Base class for components in a job.
-    
+
     Optional parameters are: **nevents**, **seed**
     """
 
@@ -94,7 +94,7 @@ class Component(object):
     def cmd_exists(self):
         """! Check if the component's assigned command exists."""
         return subprocess.call("type " + self.command, shell=True,
-            stdout = subprocess.PIPE, stderr=subprocess.PIPE) == 0
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
 
     def cmd_args(self):
         """! Return the command arguments of this component."""
@@ -116,7 +116,7 @@ class Component(object):
 
     def config(self, parser):
         """! Automatic configuartion
-        
+
         Automatically load attributes from config by reading in values from
         the section with the same name as the class in the config file and
         assigning them to class attributes with the same name.
@@ -126,9 +126,9 @@ class Component(object):
             for name, value in parser.items(section_name):
                 setattr(self, name, convert_config_value(value))
                 logger.debug("%s:%s:%s=%s" % (self.name,
-                                             name,
-                                             getattr(self, name).__class__.__name__,
-                                             getattr(self, name)))
+                                              name,
+                                              getattr(self, name).__class__.__name__,
+                                              getattr(self, name)))
 
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
@@ -156,7 +156,7 @@ class Component(object):
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
                     logger.debug("%s:%s=%s [optional]"
-                                % (self.name, p, params[p]))
+                                 % (self.name, p, params[p]))
                 else:
                     logger.debug("Ignored job param '%s'" % p)
 
@@ -213,12 +213,12 @@ class Component(object):
         """
         outputs = []
         for infile in self.input_files():
-            f,ext = os.path.splitext(infile)
+            f, ext = os.path.splitext(infile)
             if self.append_tok is not None:
                 f += '_%s' % self.append_tok
             if self.output_ext is not None:
                 ext = self.output_ext
-            outputs.append('%s%s' % (f,ext))
+            outputs.append('%s%s' % (f, ext))
         return outputs
 
     def config_from_environ(self):
@@ -232,6 +232,7 @@ class Component(object):
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
 
+
 class DummyComponent(Component):
     """! A dummy component that just prints some information instead of executing a program."""
 
@@ -240,4 +241,3 @@ class DummyComponent(Component):
 
     def execute(self, log_out, log_err):
         pass
-
