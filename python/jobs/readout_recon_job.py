@@ -34,12 +34,12 @@ if filter_bunches:
     job.add([filtered])
 
 ## Run simulated events in readout to generate triggers
-readout=JobManager(steering='readout')
+readout = JobManager(steering='readout')
 
-count_readout=LCIOCount()
+count_readout = LCIOCount()
 
 ## Run physics reconstruction
-reco=JobManager(steering='recon')
+reco = JobManager(steering='recon')
 
 count_reco = LCIOCount()
 
@@ -50,4 +50,4 @@ cnv = HPSTR(cfg='recon')
 ana = HPSTR(cfg='ana')
 
 job.add([readout, count_readout, reco, count_reco, cnv])
-#, ana])
+# , ana])

@@ -27,7 +27,7 @@ mom = AddMother()
 rot = BeamCoords()
 
 ## Simulate signal events
-slic = SLIC(nevents=nevents+1)
+slic = SLIC(nevents=nevents + 1)
 
 ## run the job
 job.add([mg, cnv, mom, rot, slic])

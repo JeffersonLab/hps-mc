@@ -43,7 +43,7 @@ if ap_decay_dist == "lhe_uniform":
 elif ap_decay_dist == "lhe_prompt":
     ## Convert LHE output to stdhep for prompt signal
     cnv = StdHepConverter(name="lhe_prompt", inputs=["ap_unweighted_events.lhe"])
-elif ap_decay_dist == "displace_time": 
+elif ap_decay_dist == "displace_time":
     if 'ctau' in job.params:
         ## Displace the time of decay using the ctau param
         cnv = DisplaceUni(inputs=["ap_unweighted_events.lhe"])
@@ -59,7 +59,7 @@ mom = AddMotherFullTruth(inputs=["ap_unweighted_events.stdhep", unzip.output_fil
 rot = BeamCoords(inputs=mom.output_files(), outputs=["ap_rot.stdhep"])
 
 ## Simulate signal events
-slic = SLIC(nevents=nevents+1, inputs=rot.output_files(), outputs=["ap.slcio"])
+slic = SLIC(nevents=nevents + 1, inputs=rot.output_files(), outputs=["ap.slcio"])
 
 ## run the job
 job.add([mg, unzip, cnv, mom, rot, slic])

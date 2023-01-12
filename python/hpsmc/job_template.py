@@ -12,21 +12,26 @@ import uuid as _uuid
 
 from jinja2 import Template, Environment, FileSystemLoader
 
+
 def basename(path):
     """! Filter to return a file base name stripped of dir and extension."""
     return os.path.splitext(os.path.basename(path))[0]
+
 
 def extension(path):
     """! Filter to get file extension from string."""
     return os.path.splitext(path)[1]
 
+
 def dirname(path):
     """! Filter to get dir name from string."""
     return os.path.dirname(path)
 
+
 def pad(num, npad=4):
     """! Filter to pad a number."""
     return format(num, format(npad, '02'))
+
 
 def uuid():
     """! Function to get a uuid within a template."""
@@ -35,8 +40,9 @@ def uuid():
 # TODO:
 # filenum filter - try to get file num by looking for _%d in file name
 
-#def pwd():
+# def pwd():
 #    return os.getcwd()
+
 
 class JobData(object):
     """! Very simple key-value object for storing data for each job."""
@@ -52,10 +58,13 @@ class JobData(object):
     def set_param(self, name, value):
         self.params[name] = value
 
+
 class MaxJobsException(Exception):
     """! Exception if max jobs are reached."""
+
     def __init__(self, max_jobs):
         super().__init__("Reached max jobs: {}".format(max_jobs))
+
 
 class JobTemplate:
     """! Template engine for transforming input job template into JSON job store.
@@ -105,9 +114,9 @@ class JobTemplate:
 
     def add_itervars(self, iter_dict):
         """! Add several iter variables at once.
-        @param iter_dict  new dict of iteration variables to be added 
+        @param iter_dict  new dict of iteration variables to be added
         """
-        for k,v in iter_dict.items():
+        for k, v in iter_dict.items():
             self.add_itervar(k, v)
 
     def add_itervars_json(self, json_file):
@@ -127,7 +136,7 @@ class JobTemplate:
             for k in sorted(self.itervars.keys()):
                 var_list.append(self.itervars[k])
         prod = itertools.product(*var_list)
-        return var_names,list(prod)
+        return var_names, list(prod)
 
     def run(self):
         """!
@@ -140,8 +149,8 @@ class JobTemplate:
             job_vars = {'job': job,
                         'job_id': job.job_id,
                         'sequence': job.sequence,
-                        'input_files': job.input_files }
-            for k,v in job.params.items():
+                        'input_files': job.input_files}
+            for k, v in job.params.items():
                 if k in job_vars:
                     raise Exception("Illegal variable name: {}".format(k))
                 job_vars[k] = v
@@ -267,8 +276,8 @@ class JobTemplate:
             with open(var_file, 'r') as f:
                 self.add_itervars(json.load(f))
 
+
 if __name__ == '__main__':
     job_tmpl = JobTemplate()
     job_tmpl.parse_args()
     job_tmpl.run()
-

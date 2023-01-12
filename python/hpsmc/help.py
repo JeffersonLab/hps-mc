@@ -10,6 +10,7 @@ from generators import *
 # These are all interfaces and not runnable components, which should be ignored.
 _ignore = ('Component', 'EventGenerator', 'StdHepTool', 'JavaTool', 'MG')
 
+
 def print_component(v):
     """! Accepts Component class and prints info about it."""
     try:
@@ -36,16 +37,17 @@ def print_component(v):
         print('')
         try:
             print('    APPEND TOKEN:\n        %s' % obj.append_tok)
-        except:
+        except BaseException:
             pass
         print('')
         try:
             print('    OUTPUT EXTENSION:\n        %s' % obj.output_ext)
-        except:
+        except BaseException:
             pass
         print('')
     except Exception as e:
         print(e)
+
 
 def print_components():
     """! Print info for all Component classes."""
@@ -55,6 +57,7 @@ def print_components():
         if isinstance(v, Component.__class__):
             if v.__name__ not in _ignore:
                 print('    {}'.format(v.__name__))
+
 
 def print_job_script(script_path):
 
@@ -81,6 +84,7 @@ def print_job_script(script_path):
     print('    PTAGS:')
     for ptag in job.ptags:
         print('        {}'.format(ptag))
+
 
 if __name__ == '__main__':
     print_components()
