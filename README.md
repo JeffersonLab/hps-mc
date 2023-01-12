@@ -116,6 +116,45 @@ After one has generated a jobs.json file, the jobs it defines can be ran locally
 
 It is recommended to slowly build up jobs and tests them locally first before submitting a whole set to a batch system to run. This can be with commands nearly identical to the commands used to submit the jobs to a batch system (local or pool). The system is pretty abstracted so you might even find a new clever way to leverage the features of hps-mc to speed up the process of defining job sets, or even just getting the jobs ran.
 
+
+### Code Formatting
+There is a github action ensuring proper formatting of python code in `hps-mc`. This action will fail if the pushed code does not follow the **PEP 8 style conventions**.
+
+To prevent this action from failing, you can check if your code is formatted correctly locally before pushing. This can be done using [pycodestyle](https://pycodestyle.pycqa.org/en/latest/intro.html#configuration), by navigating to the top directory of hps-mc and running
+```bash
+pycodestyle --ignore=E266,E501 --max-line-length=160 python/
+```
+which will display all formatting errors in `python/`. Before running this, make sure pycodestyle is installed on your machine. If you need to install it, you can do this by running
+```bash
+pip install --user pycodestyle
+```
+
+You can automate the style check by creating a git pre-commit hook. This will automatically check the formatting of changed and added python files upon running `git commit`. To add the pre-commit hook, navigate to the `.git/hooks/` directory in `hps-mc`, create a pre-commit hook, and make it executable. If you already have pre-commit hooks, you can skip this step.
+```bash
+cd .git/hooks
+touch pre-commit
+chmod +x pre-commit
+```
+Then, add the following lines to `pre-commit`
+```bash
+#!/bin/sh
+FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+pycodestyle --ignore=E266,E501 --max-line-length=160 ${FILES}
+```
+ 
+To fix the formatting errors, you can either do this manually by navigating to the displayed files and making the necessary changes, or you can use [autopep8](https://pypi.org/project/autopep8/#installation) as follows. First, install autopep8:
+```bash
+pip install --user --upgrade autopep8
+```
+Then run
+```bash
+autopep8 --aggressive --aggressive --ignore=E265,E501 --in-place --max-line-length=160 --recursive python/
+```
+from the top of the `hps-mc` directory. Alternatively, run `format_python_code.sh`.
+This will automatically fix (most) of the formatting issues. 
+
+To preserve the Doxygen-style comments, it is necessary to disable the automatic formatting of comment blocks which means that you might need to fix those by hand.
+
 ### Help
 
 You can post any questions or report problems on the [HPS Slack](https://heavyphotonsearch.slack.com/) in the [montecarlo](https://heavyphotonsearch.slack.com/messages/C47LLBP5F) channel.
