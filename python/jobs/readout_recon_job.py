@@ -3,7 +3,8 @@
 
 Simulate pile-up, run readout, hps-java recon, and analysis.
 """
-import os, logging
+import os
+import logging
 from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 
 ## Initialize logger with default level
@@ -33,12 +34,12 @@ if filter_bunches:
     job.add([filtered])
 
 ## Run simulated events in readout to generate triggers
-readout = JobManager(steering='readout')
+readout=JobManager(steering='readout')
 
-count_readout = LCIOCount()
+count_readout=LCIOCount()
 
 ## Run physics reconstruction
-reco = JobManager(steering='recon')
+reco=JobManager(steering='recon')
 
 count_reco = LCIOCount()
 
