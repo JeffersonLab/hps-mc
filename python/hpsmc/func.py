@@ -13,9 +13,10 @@ def lint(run_params, density=6.306e-14):
     @param density  1/(cm*pb), default value is for tungsten
     @return integrated luminosity in 1/pb
     """
-    w = run_params.get("target_z")
+    w = run_params.get("target_thickness")
     ne = run_params.get("num_electrons")
     return density * w * ne
+
 
 
 def csection(filename):
@@ -90,6 +91,7 @@ def nbunches(filename, run_params):
     n = nevents(filename)
     m = mu(filename, run_params)
     return int(n / m)
+
 
 
 # TODO: wab LHE file fixup
