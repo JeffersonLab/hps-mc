@@ -3,7 +3,8 @@
 
 Simulate pile-up, run readout, hps-java recon, and analysis.
 """
-import os, logging
+import os
+import logging
 from hpsmc.tools import JobManager, FilterBunches, LCIOCount, HPSTR
 
 ## Initialize logger with default level
@@ -49,4 +50,4 @@ cnv = HPSTR(cfg='recon')
 ana = HPSTR(cfg='ana')
 
 job.add([readout, count_readout, reco, count_reco, cnv])
-#, ana])
+# , ana])

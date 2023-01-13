@@ -25,7 +25,7 @@ rot = BeamCoords()
 sample = RandomSample()
 
 ## Simulate events
-slic = SLIC(nevents=nevents+1)
+slic = SLIC(nevents=nevents + 1)
 
 ## Space signal events
 space_events = ExtractEventsWithHitAtHodoEcal(event_interval=250, num_hodo_hits=0)

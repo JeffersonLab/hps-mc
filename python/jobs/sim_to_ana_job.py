@@ -27,9 +27,9 @@ root_cnv = HPSTR(cfg='recon')
 ana = HPSTR(cfg='ana')
 
 ## Set persistency tags for output files
-base_name,ext = os.path.splitext(list(job.input_files.values())[0])
+base_name, ext = os.path.splitext(list(job.input_files.values())[0])
 job.ptag('recon', '{}_filt_readout_recon.slcio'.format(base_name))
 job.ptag('ana', '{}_filt_readout_recon_ana.root'.format(base_name))
- 
+
 ## Add job components
 job.add([sim, filter_bunches, readout, recon, root_cnv, ana])

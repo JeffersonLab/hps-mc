@@ -8,6 +8,7 @@ from generators import *
 from job import Job
 from help import _ignore
 
+
 def write_config(filename, component_names, include_defaults, fail_on_missing):
     """! Write a config file from environment variables.
     @param filename  name of config file
@@ -23,9 +24,9 @@ def write_config(filename, component_names, include_defaults, fail_on_missing):
         if isinstance(v, Component.__class__):
             if v.__name__ not in _ignore:
                 if len(component_names) and v.__name__ not in component_names:
-                    #print('Skipping ' + v.__name__)
+                    # print('Skipping ' + v.__name__)
                     continue
-                #print('Config env for ' + v.__name__)
+                # print('Config env for ' + v.__name__)
                 obj = eval(v.__name__)()
                 section = '[%s]\n' % v.__name__
                 lines += section
@@ -43,6 +44,7 @@ def write_config(filename, component_names, include_defaults, fail_on_missing):
         f.writelines(lines)
     print('Wrote config: %s' % filename)
 
+
 def write_config_for_job(job_script, filename, include_defaults, fail_on_missing):
     """! Write a config file for a specific job script.
     @param job_script  job script
@@ -57,6 +59,7 @@ def write_config_for_job(job_script, filename, include_defaults, fail_on_missing
     component_names = [c.__class__.__name__ for c in j.components]
     write_config('job.cfg', component_names, include_defaults, fail_on_missing)
 
+
 def _get_job_defaults():
     """! Get default job class settings."""
 
@@ -68,6 +71,7 @@ def _get_job_defaults():
         lines += '%s = %s\n' % (cj, v)
     lines += '\n'
     return lines
+
 
 if __name__ == '__main__':
 

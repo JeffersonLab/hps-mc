@@ -3,7 +3,7 @@
 
 HPSTR reconstruction and analysis.
 """
-from hpsmc.tools import HPSTR 
+from hpsmc.tools import HPSTR
 
 job.description = 'HPSTR recon and analysis'
 
