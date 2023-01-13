@@ -73,16 +73,16 @@ class EGS5(EventGenerator):
             os.unlink("pgs5job.pegs5inp")
         os.symlink(self.egs5_config_dir + "/src/esa.inp", "pgs5job.pegs5inp")
 
-        logger.debug("Reading run parameters: {}".format(self.run_params))
-        ## run parameters
-        self.run_param_data = RunParameters(self.run_params)
+        logger.debug("Reading run parameters: {}".format(self.run_params))  # run_params here 3pt74, 1pt1, etc -> called run_params_key in following comments
+        # run parameters
+        self.run_param_data = RunParameters(self.run_params)  # initializing run params
 
         # Set target thickness from job parameter or use the default from run parameters
         if self.target_thickness is not None:
             self.target_z = self.target_thickness
             logger.debug("Target thickness set from job param: {}".format(self.target_z))
         else:
-            self.target_z = self.run_param_data.get("target_z")
+            self.target_z = self.run_param_data.get("target_z")  # gets target thickness: run_params["target_z"][run_params_key] (run_params here the params in run_params.py)
             logger.debug("Target thickness set from run_params: {}".format(self.target_z))
 
         ebeam = self.run_param_data.get("beam_energy")
