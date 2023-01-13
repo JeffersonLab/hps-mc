@@ -75,6 +75,10 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
+<<<<<<< HEAD
 ## Add the components
+=======
+# Add the components
+>>>>>>> fe6d0e86 (changing target_z to target_thickness where appropriate)
 job.add([filter_events, count_filter, catenate_beam, count_beam, merge,
          count_merge, readout, count_readout, recon, count_recon])
