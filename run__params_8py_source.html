@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('run__params_8py_source.html',''); init
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> sys</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a34b4194b0ed4702f0a8120bffa441e6a">    5</a></span>&#160;run_params = {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&quot;aprime_mass&quot;</span>: { <span class="comment"># MeV</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&quot;aprime_mass&quot;</span>: {  <span class="comment"># MeV</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: [15, 20, 30, 40, 50, 60, 70, 80, 90],</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: [15, 20, 30, 40, 50, 60, 70, 80, 90, 100],</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: [50, 75, 100],</div>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('run__params_8py_source.html',''); init
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="stringliteral">&quot;4pt55&quot;</span>: [75, 90, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 160, 170, 180, 190, 200],</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="stringliteral">&quot;6pt6&quot;</span>: [50, 100, 200, 300, 400, 500, 600]</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    },</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="stringliteral">&quot;target_z&quot;</span>: { <span class="comment"># target thickness in cm</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="stringliteral">&quot;target_z&quot;</span>: {  <span class="comment"># target thickness in cm</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: 0.0004062,</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: 0.0008,</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: 0.0004062,</div>
@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('run__params_8py_source.html',''); init
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="stringliteral">&quot;4pt55&quot;</span>: 0.002,</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="stringliteral">&quot;6pt6&quot;</span>: 0.000875</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    },</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="stringliteral">&quot;beam_energy&quot;</span>: { <span class="comment"># GeV | MeV</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="stringliteral">&quot;beam_energy&quot;</span>: {  <span class="comment"># GeV | MeV</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="stringliteral">&quot;1pt1&quot;</span>: 1100.00,</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="stringliteral">&quot;1pt92&quot;</span>: 1920.00,</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="stringliteral">&quot;1pt05&quot;</span>: 1056.00,</div>
@@ -153,29 +153,31 @@ $(document).ready(function(){initNavTree('run__params_8py_source.html',''); init
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html">   59</a></span>&#160;<span class="keyword">class </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html">RunParameters</a>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">   61</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">__init__</a>(self, key, json_filename = None):</div>
-<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">   62</a></span>&#160;        self.<a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">key</a>key = key</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">   64</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">get</a>(self, param_name):</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> run_params[param_name][self.<a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">key</a>key]</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html">   60</a></span>&#160;<span class="keyword">class </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html">RunParameters</a>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">   62</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">__init__</a>(self, key, json_filename=None):</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">   63</a></span>&#160;        self.<a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">key</a>key = key</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">   65</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">get</a>(self, param_name):</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> run_params[param_name][self.<a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">key</a>key]</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a3eca7195563a4c365bb41c312d8f7d3c">   69</a></span>&#160;    rp = <a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html">RunParameters</a>()</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> len(sys.argv) != 3:</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&quot;Not enough arguments.\nUSAGE: run_params [param] [key]&quot;</span>)</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a26103d305c3f4186d08953eeef8987c9">   74</a></span>&#160;    param_name = sys.argv[1]</div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#ab0d96f9d852c2058c2546a1338e87544">   75</a></span>&#160;    key = sys.argv[2]</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    print(rp.get_run_params(param_name, key))</div>
-<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html">hpsmc.run_params.RunParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00059">run_params.py:59</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a7bd0a6233e6225568533932a0cfae65e"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">hpsmc.run_params.RunParameters.__init__</a></div><div class="ttdeci">def __init__(self, key, json_filename=None)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00061">run_params.py:61</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a8e7b929bdd73dd00e76fa22f17f5038f"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">hpsmc.run_params.RunParameters.get</a></div><div class="ttdeci">def get(self, param_name)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00064">run_params.py:64</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_ab0d96f9d852c2058c2546a1338e87544"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">hpsmc.run_params.RunParameters.key</a></div><div class="ttdeci">key</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00062">run_params.py:62</a></div></div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a3eca7195563a4c365bb41c312d8f7d3c">   71</a></span>&#160;    rp = <a class="code" href="classhpsmc_1_1run__params_1_1RunParameters.html">RunParameters</a>()</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">if</span> len(sys.argv) != 3:</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&quot;Not enough arguments.\nUSAGE: run_params [param] [key]&quot;</span>)</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#a26103d305c3f4186d08953eeef8987c9">   76</a></span>&#160;    param_name = sys.argv[1]</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="namespacehpsmc_1_1run__params.html#ab0d96f9d852c2058c2546a1338e87544">   77</a></span>&#160;    key = sys.argv[2]</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    print(rp.get_run_params(param_name, key))</div>
+<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html">hpsmc.run_params.RunParameters</a></div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00060">run_params.py:60</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a7bd0a6233e6225568533932a0cfae65e"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a7bd0a6233e6225568533932a0cfae65e">hpsmc.run_params.RunParameters.__init__</a></div><div class="ttdeci">def __init__(self, key, json_filename=None)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00062">run_params.py:62</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_a8e7b929bdd73dd00e76fa22f17f5038f"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#a8e7b929bdd73dd00e76fa22f17f5038f">hpsmc.run_params.RunParameters.get</a></div><div class="ttdeci">def get(self, param_name)</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00065">run_params.py:65</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1run__params_1_1RunParameters_html_ab0d96f9d852c2058c2546a1338e87544"><div class="ttname"><a href="classhpsmc_1_1run__params_1_1RunParameters.html#ab0d96f9d852c2058c2546a1338e87544">hpsmc.run_params.RunParameters.key</a></div><div class="ttdeci">key</div><div class="ttdef"><b>Definition:</b> <a href="run__params_8py_source.html#l00063">run_params.py:63</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

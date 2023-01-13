@@ -6,7 +6,8 @@ var namespaces_dup =
     [ "Running Job Scripts", "readme.html#autotoc_md32", null ],
     [ "Documentation", "readme.html#autotoc_md33", null ],
     [ "Quick Start Guide", "readme.html#autotoc_md34", null ],
-    [ "Help", "readme.html#autotoc_md35", null ],
+    [ "Code Formatting", "readme.html#autotoc_md35", null ],
+    [ "Help", "readme.html#autotoc_md36", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
       [ "description", "namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "mg", "namespaceap__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
