@@ -36,13 +36,13 @@ for i in range(len(inputs)):
     slic_file_names.append(slic_file)
 
 ## Simulate beam events
-slic_comps = [] 
+slic_comps = []
 for i in range(len(inputs)):
     slic_comps.append(SLIC(inputs=[inputs[i]],
                       outputs=[slic_file_names[i]],
-                      nevents=nevents*event_int,
+                      nevents=nevents * event_int,
                       ignore_job_params=['nevents'])
-                     )
+                      )
 
 ## concatenate beam events before merging
 cat_out_name = base_name + '_slic_cat.slcio'
@@ -61,7 +61,7 @@ recon_out_name = base_name + '_recon.slcio'
 recon = JobManager(steering='recon',
                    inputs=readout.output_files(),
                    outputs=[recon_out_name])
- 
+
 ## Add the components
 comps = slic_comps
 comps.extend([slic_cat, readout, recon])

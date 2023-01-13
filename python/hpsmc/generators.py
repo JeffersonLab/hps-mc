@@ -12,8 +12,10 @@ from run_params import RunParameters
 
 logger = logging.getLogger("hpsmc.generators")
 
+
 class EventGenerator(Component):
     """! Event generator base class."""
+
     def __init__(self, name, command=None, **kwargs):
         Component.__init__(self, name, command=command, description='', **kwargs)
 
@@ -25,11 +27,12 @@ class EventGenerator(Component):
             raise Exception("HPSMC_DIR is not set!")
         return "{}/share/generators".format(os.getenv("HPSMC_DIR", None))
 
+
 class EGS5(EventGenerator):
     """!
     Run the EGS5 event generator to produce a StdHep file.
-    
-    Required parameters are **seed**, **run_parameters** \n 
+
+    Required parameters are **seed**, **run_parameters** \n
     Optional parameters are: **bunches**, **target_thickness**
     """
 
@@ -68,7 +71,7 @@ class EGS5(EventGenerator):
 
         if os.path.exists("pgs5job.pegs5inp"):
             os.unlink("pgs5job.pegs5inp")
-        os.symlink(self.egs5_config_dir + "/src/esa.inp",  "pgs5job.pegs5inp")
+        os.symlink(self.egs5_config_dir + "/src/esa.inp", "pgs5job.pegs5inp")
 
         logger.debug("Reading run parameters: {}".format(self.run_params))
         ## run parameters
@@ -128,8 +131,9 @@ class EGS5(EventGenerator):
         """
         return ['bunches', 'target_thickness']
 
-    #def required_config(self):
+    # def required_config(self):
     #    return ['egs5_dir']
+
 
 class StdHepConverter(EGS5):
     """! Convert LHE files to StdHep using EGS5."""
@@ -159,7 +163,7 @@ class StdHepConverter(EGS5):
         @return egs5 error code
         """
         input_file = self.inputs[0]
-        base,ext = os.path.splitext(input_file)
+        base, ext = os.path.splitext(input_file)
         if ext == ".lhe":
             os.symlink(input_file, "egs5job.inp")
         elif ext == ".gz":
@@ -174,13 +178,15 @@ class StdHepConverter(EGS5):
         """! Converts *.lhe.gz and *.lhe to *.stdhep files."""
         return [self.input_files()[0].replace(".lhe.gz", ".stdhep").replace(".lhe", ".stdhep")]
 
+
 class MG(EventGenerator):
     """!
     Abstract class for MadGraph generators.
 
     Required parameters are: **nevents**, **run_params** \n
-    Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod** 
+    Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod**
     """
+
     def __init__(self, name, **kwargs):
 
         ## Install dir or user config will be used for this.
@@ -241,7 +247,7 @@ class MG(EventGenerator):
         """
         return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod']
 
-    #def required_config(self):
+    # def required_config(self):
     #    return ['madgraph_dir']
 
     def make_run_card(self, run_card):
@@ -310,17 +316,18 @@ class MG(EventGenerator):
         if self.name == 'ap' and self.apmass is None:
             raise Exception("Missing apmass param for AP generation.")
 
+
 class MG4(MG):
     """! Run the MadGraph 4 event generator."""
 
     ## \todo Put this information into a method in the MG superclass.
-    dir_map = {"BH"      : "BH/MG_mini_BH/apBH",
-               "RAD"     : "RAD/MG_mini_Rad/apRad",
-               "TM"      : "TM/MG_mini/ap",
-               "ap"      : "ap/MG_mini/ap",
-               "trigg"   : "trigg/MG_mini_Trigg/apTri",
-               "tritrig" : "tritrig/MG_mini_Tri_W/apTri",
-               "wab"     : "wab/MG_mini_WAB/AP_6W_XSec2_HallB" }
+    dir_map = {"BH": "BH/MG_mini_BH/apBH",
+               "RAD": "RAD/MG_mini_Rad/apRad",
+               "TM": "TM/MG_mini/ap",
+               "ap": "ap/MG_mini/ap",
+               "trigg": "trigg/MG_mini_Trigg/apTri",
+               "tritrig": "tritrig/MG_mini_Tri_W/apTri",
+               "wab": "wab/MG_mini_WAB/AP_6W_XSec2_HallB"}
 
     def __init__(self, name='ap', **kwargs):
 
@@ -348,7 +355,7 @@ class MG4(MG):
             os.makedirs(self.event_dir)
 
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
-        logger.debug("Command set to '%s'"  % self.command)
+        logger.debug("Command set to '%s'" % self.command)
 
         run_card_src = os.path.join(self.madgraph_dir, proc_dirs[0], self.run_card)
         run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
@@ -379,14 +386,15 @@ class MG4(MG):
         os.chdir(self.rundir)
         return returncode
 
+
 class MG5(MG):
     """! Run the MadGraph 5 event generator."""
 
     ## \todo: Put this information into a method in the MG superclass.
-    dir_map = {"BH"      : "BH",
-               "RAD"     : "RAD",
-               "tritrig" : "tritrig",
-               "simp"    : "simp"}
+    dir_map = {"BH": "BH",
+               "RAD": "RAD",
+               "tritrig": "tritrig",
+               "simp": "simp"}
 
     def __init__(self, name='tritrig', **kwargs):
 

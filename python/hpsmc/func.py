@@ -5,7 +5,8 @@ import logging
 
 logger = logging.getLogger("hpsmc.func")
 
-def lint(run_params, density = 6.306e-14):
+
+def lint(run_params, density=6.306e-14):
     """!
     Calculate integrated luminosity.
     @param run_params  run parameter
@@ -14,7 +15,8 @@ def lint(run_params, density = 6.306e-14):
     """
     w = run_params.get("target_z")
     ne = run_params.get("num_electrons")
-    return density*w*ne
+    return density * w * ne
+
 
 def csection(filename):
     """!
@@ -22,7 +24,7 @@ def csection(filename):
     WARNING: This function does not work!
 
     \todo remove or replace by more useful function
-    @param filename  name of input file 
+    @param filename  name of input file
     """
     logger.info("Using gzip to open '%s'" % filename)
 
@@ -31,13 +33,14 @@ def csection(filename):
 
     for line in lines:
         if "Integrated weight" in line:
-            xs = float(line[line.rfind(":")+1:].strip())
+            xs = float(line[line.rfind(":") + 1:].strip())
             break
 
     if "xs" not in locals():
         raise Exception("Could not find 'Integrated weight' in LHE input file.")
 
     return xs
+
 
 def mu(filename, run_params):
     """!
@@ -50,7 +53,8 @@ def mu(filename, run_params):
     """
     return lint(run_params) * csection(filename)
 
-def nevents(filename, confirm = False):
+
+def nevents(filename, confirm=False):
     """!
     Read number of events in file from LHE header and optionally confirm by counting <event> blocks.
     @param filename  name of input LHE file
@@ -76,6 +80,7 @@ def nevents(filename, confirm = False):
 
     return nevents
 
+
 def nbunches(filename, run_params):
     """!
     Get the approximate number of beam bunches represented by an LHE file from its event count.
@@ -84,12 +89,13 @@ def nbunches(filename, run_params):
     """
     n = nevents(filename)
     m = mu(filename, run_params)
-    return int(n/m)
+    return int(n / m)
+
 
 # TODO: wab LHE file fixup
 """
 echo "Transmuting A's to photons..."
 gunzip -f wab.lhe.gz
-sed -i 's/\([:blank:]*\)622 /\1 22 /' wab.lhe
+sed -i 's/\\([:blank:]*\\)622 /\1 22 /' wab.lhe
 gzip wab.lhe
 """

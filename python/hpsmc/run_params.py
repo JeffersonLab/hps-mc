@@ -3,7 +3,7 @@
 import sys
 
 run_params = {
-    "aprime_mass": { # MeV
+    "aprime_mass": {  # MeV
         "1pt05": [15, 20, 30, 40, 50, 60, 70, 80, 90],
         "1pt1": [15, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         "1pt92": [50, 75, 100],
@@ -15,7 +15,7 @@ run_params = {
         "4pt55": [75, 90, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 160, 170, 180, 190, 200],
         "6pt6": [50, 100, 200, 300, 400, 500, 600]
     },
-    "target_z": { # target thickness in cm
+    "target_z": {  # target thickness in cm
         "1pt1": 0.0004062,
         "1pt92": 0.0008,
         "1pt05": 0.0004062,
@@ -28,7 +28,7 @@ run_params = {
         "4pt55": 0.002,
         "6pt6": 0.000875
     },
-    "beam_energy": { # GeV | MeV
+    "beam_energy": {  # GeV | MeV
         "1pt1": 1100.00,
         "1pt92": 1920.00,
         "1pt05": 1056.00,
@@ -56,13 +56,15 @@ run_params = {
     }
 }
 
+
 class RunParameters:
 
-    def __init__(self, key, json_filename = None):
+    def __init__(self, key, json_filename=None):
         self.key = key
 
     def get(self, param_name):
         return run_params[param_name][self.key]
+
 
 if __name__ == "__main__":
 

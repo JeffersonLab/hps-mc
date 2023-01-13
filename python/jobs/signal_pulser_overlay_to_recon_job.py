@@ -60,9 +60,9 @@ overlay = JobManager(steering='overlay',
 
 # Space overlaid events
 space_overlay = FilterBunches(inputs=overlay.output_files(),
-                             filter_no_cuts=True,
-                             outputs=['%s_spaced.slcio' % signal_pulser_name],
-                             filter_event_interval=250)
+                              filter_no_cuts=True,
+                              outputs=['%s_spaced.slcio' % signal_pulser_name],
+                              filter_event_interval=250)
 
 # Print number of merged events
 count_space_overlay = LCIOCount(inputs=space_overlay.output_files())

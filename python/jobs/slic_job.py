@@ -26,7 +26,7 @@ else:
 ## Simulate events
 slic_outs = []
 for i in range(len(inputs)):
-    slic_outs.append(SLIC(inputs=[inputs[i]], outputs=[output_names[i]], nevents=nevents+1))
+    slic_outs.append(SLIC(inputs=[inputs[i]], outputs=[output_names[i]], nevents=nevents + 1))
 
 ## Run the job
 job.add(slic_outs)

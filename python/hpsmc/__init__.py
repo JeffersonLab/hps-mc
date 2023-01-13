@@ -6,5 +6,4 @@ from .util import config_logging
 config_logging()
 
 # To play nice with Lustre, but only effective as of python 3.8
-shutil.COPY_BUFSIZE = 1024*1024
-
+shutil.COPY_BUFSIZE = 1024 * 1024
