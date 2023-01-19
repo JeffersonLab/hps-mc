@@ -15,18 +15,17 @@ if 'event_interval' in job.params:
 else:
     event_interval = 1
 
-# Get job input file targets
+## Get job input file targets
 inputs = list(job.input_files.values())
 
-# Rotate events into beam coordinates
+## Rotate events into beam coordinates
 rot = BeamCoords()
 
-# Sample events into new stdhep file
+## Sample events into new stdhep file
 sample = RandomSample()
 
-# Simulate detector response
-
+## Simulate detector response
 slic = SLIC(nevents=nevents * event_interval, ignore_job_params=['nevents'])
 
-# Run the job
+## Run the job
 job.add([rot, sample, slic])

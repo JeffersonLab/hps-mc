@@ -19,11 +19,11 @@ from os.path import expanduser
 
 from util import convert_config_value, config_logging
 
-# Initialize logger with default level
+## Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
 logger.setLevel(logging.INFO)
 
-# Unused, \todo remove?
+## Unused, \todo remove?
 
 
 def check(j):
@@ -57,7 +57,7 @@ class JobConfig(object):
 
     # , include_default_locations=True
     def __init__(self, config_files=[], include_default_locations=True):
-        # list of config files
+        ## list of config files
         self.config_files = []
         if include_default_locations:
             self.config_files.extend([os.path.join(expanduser("~"), ".hpsmc"),
@@ -75,7 +75,7 @@ class JobConfig(object):
         """! Load config from the list of possible locations."""
 
         # Read in config files and crash if none are found from list
-        # configuration parser
+        ## configuration parser
         self.parser = configparser.ConfigParser()
         # logger.debug("Checking for config files: %s" % str(self.config_files))
         # parsed =
@@ -141,7 +141,7 @@ class JobStore:
         """
         with open(json_store, 'r') as f:
             json_data = json.loads(f.read())
-        # dict of jobs, sorted by job id
+        ## dict of jobs, sorted by job id
         self.data = {}
         for j in json_data:
             self.data[j['job_id']] = j
@@ -175,7 +175,7 @@ class JobScriptDatabase:
             raise Exception('HPSMC_DIR is not set in the environ.')
         hps_mc_dir = os.environ['HPSMC_DIR']
         script_dir = os.path.join(hps_mc_dir, 'lib', 'python', 'jobs')
-        # dict of paths to job scripts sorted by name
+        ## dict of paths to job scripts sorted by name
         self.scripts = {}
         for f in glob.glob(os.path.join(script_dir, '*_job.py')):
             script_name = os.path.splitext(os.path.basename(f))[0].replace('_job', '')
@@ -210,8 +210,8 @@ class Job(object):
     provided by a JSON job file.
     """
 
-    # \todo is this still needed?
-    # List of config names to be read for the Job class (all optional).
+    ## \todo is this still needed?
+    ## List of config names to be read for the Job class (all optional).
     """
     _config_names = ['enable_copy_output_files',
                      'enable_copy_input_files',
@@ -228,33 +228,33 @@ class Job(object):
     PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
-        # (passed) job arguments
+        ## (passed) job arguments
         self.args = args
-        # short description of job, should be overridden by the job script
+        ## short description of job, should be overridden by the job script
         self.description = "HPS MC Job"
-        # job ID
+        ## job ID
         self.job_id = None
-        # path to parameter file
+        ## path to parameter file
         self.param_file = None
-        # list of components in job
+        ## list of components in job
         self.components = []
-        # rundir is current working directory
+        ## rundir is current working directory
         self.rundir = os.getcwd()
-        # dict of parameters
+        ## dict of parameters
         self.params = {}
-        # output_dir is current working directory
+        ## output_dir is current working directory
         self.output_dir = os.getcwd()
-        # dict of input files
+        ## dict of input files
         self.input_files = {}
-        # dict of output files
+        ## dict of output files
         self.output_files = {}
-        # dict with keys to output filenames
+        ## dict with keys to output filenames
         self.ptags = {}
-        # log output
+        ## log output
         self.log = sys.stdout
-        # system output
+        ## system output
         self.out = sys.stdout
-        # error output
+        ## error output
         self.err = sys.stderr
 
         # These attributes can all be set in the config file.
@@ -308,8 +308,8 @@ class Job(object):
         parser.add_argument("script", nargs='?', help="Path or name of job script")
         parser.add_argument("params", nargs='?', help="Job param file in JSON format")
 
-        # \todo: CL option to disable automatic copying of ouput files.
-        # The files should be symlinked if copying is disabled.
+        ## \todo: CL option to disable automatic copying of ouput files.
+        ##        The files should be symlinked if copying is disabled.
         # parser.add_argument("--no-copy-output-files", help="Disable copying of output files")
         # parser.add_argument('--feature', dest='feature', action='store_true')
         # parser.add_argument('--no-feature', dest='feature', action='store_false')
@@ -373,7 +373,7 @@ class Job(object):
         self.job_steps = cl.job_steps
 
         if cl.script:
-            # name of or path to script
+            ## name of or path to script
             self.script = cl.script
         else:
             raise Exception('Missing required script name or location.')
@@ -564,7 +564,7 @@ class Job(object):
 
             # Copy by file path or ptag
             if self.enable_copy_output_files:
-                # \todo: combine these methods
+                ## \todo: combine these methods
                 self.__copy_output_files()
             else:
                 logger.warning('Copy output files is disabled!')
@@ -750,7 +750,7 @@ class Job(object):
         """
         for src, dest in self.input_files.items():
             # if not os.path.isabs(src):
-            # \todo FIXME: Could try and convert to abspath here.
+            ## \todo FIXME: Could try and convert to abspath here.
             #    raise Exception("The input source file '%s' is not an absolute path." % src)
             if os.path.dirname(dest):
                 raise Exception("The input file destination '%s' is not valid." % dest)
