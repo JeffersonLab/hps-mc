@@ -10,7 +10,10 @@
     },
     "nevents": 1000,
     "output_dir": "output/HPS_Run2021Pass0_v0", 
-    "run_params": "4pt55", 
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
     "detector": "HPS_Run2021Pass0_v0", 
     "output_files": {
         "tritrig_events.slcio": "tritrig_4pt55_sim.slcio",

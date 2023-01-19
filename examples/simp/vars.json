@@ -1,6 +1,9 @@
 {
     "nevents": [2500],
     "run_params": ["3pt7"],
+    "target_thickness": [0.002],
+    "beam_energy": [3700.00],
+    "num_electrons": [1500],
     "target_z": [-0.01],
     "rmap": [100], 
     "rmpid": [33.3],

@@ -1,6 +1,9 @@
 {
     "nevents": 1000,
     "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
     "target_z": -7.51,
     "seed": 10399312,
     "run_number": 10666,

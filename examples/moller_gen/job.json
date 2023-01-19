@@ -4,6 +4,9 @@
     "nevents": 2500,
     "seed": 1001002,
     "run_params": "3pt7",
+    "target_thickness": 0.002,
+    "beam_energy": 3700.00,
+    "num_electrons": 1500,
     "target_z": 0,
     "output_files": {
         "moller.stdhep": "moller_3pt7_targetz_0_1.stdhep",

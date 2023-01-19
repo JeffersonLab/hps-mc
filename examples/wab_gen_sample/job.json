@@ -1,6 +1,9 @@
 {
     "nevents": 1000,
     "run_params": "3pt7",
+    "target_thickness": 0.002,
+    "beam_energy": 3700.00,
+    "num_electrons": 1500,
     "param_card": "MG_mini_WAB/AP_6W_XSec2_HallB/Cards/param_card.dat",
     "seed": 7614876,
     "output_files": {

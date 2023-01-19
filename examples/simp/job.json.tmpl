@@ -1,6 +1,9 @@
 {
     "nevents": {{ nevents }}, 
     "run_params": "{{ run_params }}",
+    "target_thickness": {{ target_thickness }},
+    "beam_energy": {{ beam_energy }},
+    "num_electrons": {{ num_electrons }},
     "target_z": {{ target_z }},
     "map": {% set map = "%0.2f"%(mrhod*rmap/rmrhod) %}{{map|float}},
     "mpid": {% set mpid = "%0.2f"%(mrhod*rmpid/rmrhod) %}{{mpid|float}},
