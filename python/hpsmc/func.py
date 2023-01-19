@@ -18,7 +18,6 @@ def lint(run_params, density=6.306e-14):
     return density * w * ne
 
 
-
 def csection(filename):
     """!
     Extract cross-section from gzipped LHE file.
@@ -91,7 +90,6 @@ def nbunches(filename, run_params):
     n = nevents(filename)
     m = mu(filename, run_params)
     return int(n / m)
-
 
 
 # TODO: wab LHE file fixup
