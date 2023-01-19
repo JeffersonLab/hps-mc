@@ -303,7 +303,6 @@ class JobManager(Component):
         args.append("-jar")
         args.append(self.hps_java_bin_jar)
 
-        # \todo add event_print_interval to optional parameters?
         if self.event_print_interval is not None:
             args.append("-e")
             args.append(str(self.event_print_interval))
@@ -333,7 +332,6 @@ class JobManager(Component):
                 raise Exception('Steering looks like a file but is not an abs path: %s' % self.steering_file)
         args.append(self.steering_file)
 
-        # \todo add nevents to optional parameters? => set this from .hpsmc
         if self.nevents is not None:
             args.append("-n")
             args.append(str(self.nevents))
@@ -514,11 +512,12 @@ class StdHepTool(Component):
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 
-        # \todo check if this should throw an exception for outputs > 1
-        if len(self.output_files()):
+        if len(self.output_files()) == 1:
             args.insert(0, self.output_files()[0])
         elif len(self.output_files()) > 1:
             raise Exception("Too many outputs specified for StdHepTool.")
+        else:
+            raise Exception("No outputs specified for StdHepTool.")
 
         if len(self.input_files()):
             for i in self.inputs[::-1]:
@@ -635,15 +634,16 @@ class RandomSample(StdHepTool):
         if self.mu is not None:
             args.extend(["-m", str(self.mu)])
 
-        # \todo check if this should throw an exception for outputs > 1
-        if len(self.output_files()):
-            args.insert(0, os.path.splitext(self.output_files()[0])[0])  # \todo why only use name and not extension here?? -> because when running the tool, it adds the extension itself
-        elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified.")
+        if len(self.output_files()) == 1:
+            # only use file name, not extension because extension is added by tool
+            args.insert(0, os.path.splitext(self.output_files()[0])[0])
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for RandomSample.")
+        else:
+            raise Exception("No outputs specified for RandomSample.")
 
-        # \todo check if ordering intentionally the other way around compared to StdHepTool.cmd_args() -> ordering is not important
         if len(self.input_files()):
-            for i in self.inputs:
+            for i in self.inputs[::-1]:
                 args.insert(0, i)
         else:
             raise Exception("No inputs were provided.")
@@ -778,22 +778,7 @@ class AddMotherFullTruth(StdHepTool):
         Setup command arguments.
         @return  list of arguments
         """
-        args = []
-        # \todo why doesn't this function call StdHepTool.cmd_args()?
-        # add_mother_full_truth isn't in list of names anyway
-        if self.name in StdHepTool.seed_names:
-            args.extend(["-s", str(self.seed)])
-
-        # \todo check if this should throw an exception for outputs > 1
-        if len(self.output_files()):
-            args.insert(0, self.output_files()[0])
-        elif len(self.output_files()) > 1:
-            raise Exception("Too many outputs specified for StdHepTool.")
-
-        args.insert(0, self.input_file_2)
-        args.insert(0, self.input_file_1)
-
-        return args
+        return super().cmd_args()
 
 
 class MergePoisson(StdHepTool):
@@ -836,21 +821,21 @@ class MergePoisson(StdHepTool):
         @return  list of arguments
         """
         args = []
-        # self.mu = func.mu(self.lhe_file, self.run_param_data)
-        # \todo why doesn't this function call StdHepTool.cmd_args()?
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 
         args.extend(["-m", str(self.mu), "-N", str(1), "-n", str(self.nevents)])
 
-        if len(self.output_files()):
-            args.insert(0, os.path.splitext(self.output_files()[0])[0])  # \todo why only use name and not extension here??
-        elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified.")
+        if len(self.output_files()) == 1:
+            # only use file name, not extension because extension is added by tool
+            args.insert(0, os.path.splitext(self.output_files()[0])[0])
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for MergePoisson.")
+        else:
+            raise Exception("No outputs specified for MergePoisson.")
 
-        # \todo check if ordering intentionally the other way around compared to StdHepTool.cmd_args()
         if len(self.input_files()):
-            for i in self.inputs:
+            for i in self.inputs[::-1]:
                 args.insert(0, i)
         else:
             raise Exception("No inputs were provided.")
@@ -918,7 +903,6 @@ class StdHepCount(Component):
         Setup command arguments.
         @return  list of arguments
         """
-        # \todo why does it only count the first input file?
         return [self.input_files()[0]]
 
     def execute(self, log_out, log_err):
@@ -1008,15 +992,13 @@ class EvioToLcio(JavaTool):
     def __init__(self, steering=None, **kwargs):
         # detector name
         self.detector = None
-        # steering file
-        self.steering = None
         # run number
         self.run_number = None
         # number of events that are skipped
         self.skip_events = None
         # event print interval
         self.event_print_interval = None
-        # \todo is it necessary to set this twice?
+        # steering file
         self.steering = steering
 
         JavaTool.__init__(self,
@@ -1478,7 +1460,8 @@ class LCIOTool(Component):
         Setup command arguments.
         @return  list of arguments
         """
-        # \todo this will print "None" for self.name if name not set
+        if not self.name:
+            raise Exception("Name required to write cmd args for LCIOTool.")
         return ['-jar', self.lcio_bin_jar, self.name]
 
     def required_config(self):
