@@ -26,7 +26,7 @@ class TestStdHepTools(unittest.TestCase):
     def test_cmd_args_too_many_outputs(self):
         stdheptool = StdHepTool(name='tool', inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output1.stdhep', 'output2.stdhep'])
         self.assertEqual(len(stdheptool.output_files()), 2)
-        # self.assertRaises(Exception, lambda: stdheptools.cmd_args())
+        self.assertRaises(Exception, lambda: stdheptools.cmd_args())
 
 
 class TestBeamCoords(unittest.TestCase):
@@ -60,7 +60,7 @@ class TestRandomSample(unittest.TestCase):
     def test_cmd_args(self):
         random_sample = RandomSample(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], seed=2)
         random_sample.set_parameters({'nevents': 100, 'mu': 1, 'seed': 2})
-        self.assertEqual(random_sample.cmd_args(), ['input2.stdhep', 'input1.stdhep', 'output', '-s', '2', '-N', '1', '-n', '100', '-m', '1'])
+        self.assertEqual(random_sample.cmd_args(), ['input1.stdhep', 'input2.stdhep', 'output', '-s', '2', '-N', '1', '-n', '100', '-m', '1'])
 
 
 class TestDisplaceTime(unittest.TestCase):
@@ -161,7 +161,7 @@ class TestMergePoisson(unittest.TestCase):
         merge_poisson = MergePoisson(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], xsec=1)
         merge_poisson.set_parameters({'run_params': '1pt1', 'mu': 1, 'seed': 2, 'nevents': 100})
         merge_poisson.setup()
-        self.assertEqual(merge_poisson.cmd_args(), ['input2.stdhep', 'input1.stdhep', 'output', '-s', '2', '-m', str(6.306e-14 * 0.0004062 * 625), '-N', '1', '-n', '100'])
+        self.assertEqual(merge_poisson.cmd_args(), ['input1.stdhep', 'input2.stdhep', 'output', '-s', '2', '-m', str(6.306e-14 * 0.0004062 * 625), '-N', '1', '-n', '100'])
 
 
 class TestMergeFiles(unittest.TestCase):
