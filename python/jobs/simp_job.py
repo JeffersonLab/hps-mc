@@ -8,32 +8,32 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, Disp
 
 job.description = 'SIMP generation to recon'
 
-## Generate tritrig in MG5
+# Generate tritrig in MG5
 mg = MG5(name='simp',
          run_card='run_card.dat',
          param_card='param_card.dat',
          event_types=['unweighted'])
 
-## Unzip LHE file
+# Unzip LHE file
 unzip = Unzip(inputs=['simp_unweighted_events.lhe.gz'], outputs=['simp.lhe'])
 
-## Convert LHE output to stdhep (no displacement here because no ctau given)
+# Convert LHE output to stdhep (no displacement here because no ctau given)
 cnv = DisplaceUni(inputs=['simp.lhe'], outputs=['simp.stdhep'])
 
-## Rotate into beam coords
+# Rotate into beam coords
 rot = BeamCoords()
 
-## Run events in slic
+# Run events in slic
 slic = SLIC()
 
-## Insert empty bunches expected by pile-up simulation
+# Insert empty bunches expected by pile-up simulation
 filter_bunches = FilterBunches()
 
-## Run simulated events in readout to generate triggers
+# Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
 
-## Run physics reconstruction
+# Run physics reconstruction
 recon = JobManager(steering='recon')
 
-## Run the job
+# Run the job
 job.add([mg, unzip, cnv, rot, slic, filter_bunches, readout, recon])

@@ -28,25 +28,25 @@ class Component(object):
         self.command = command
 
         if 'nevents' in kwargs:
-            ## number of events
+            # number of events
             self.nevents = kwargs['nevents']
         else:
             self.nevents = None
 
         if 'seed' in kwargs:
-            ## seed for simulation
+            # seed for simulation
             self.seed = kwargs['seed']
         else:
             self.seed = 1
 
         if 'inputs' in kwargs:
-            ## input files
+            # input files
             self.inputs = kwargs['inputs']
         else:
             self.inputs = []
 
         if 'outputs' in kwargs:
-            ## output files
+            # output files
             self.outputs = kwargs['outputs']
         else:
             self.outputs = None
