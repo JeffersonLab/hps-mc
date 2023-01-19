@@ -7,14 +7,14 @@ from hpsmc.tools import SLIC, HPSTR
 
 job.description = 'slic to anaMC'
 
-## Simulate signal events
+# Simulate signal events
 slic = SLIC()
 
-## Convert LCIO to ROOT
+# Convert LCIO to ROOT
 tuple = HPSTR(cfg='mcTuple')
 
-## Run an analysis on the ROOT file
+# Run an analysis on the ROOT file
 ana = HPSTR(cfg='ana')
 
-## Add the components
+# Add the components
 job.add([slic, tuple, ana])
