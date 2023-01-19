@@ -1,6 +1,9 @@
 {
     "nevents": 10,
     "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
     "target_z": -7.51,
     "run_number": 1194550,
     "detector": "HPS_Run2021Pass0_v0",

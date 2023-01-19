@@ -10,7 +10,6 @@ import tarfile
 from subprocess import PIPE
 
 from hpsmc.component import Component
-from hpsmc.run_params import RunParameters
 import hpsmc.func as func
 
 logger = logging.getLogger("hpsmc.tools")
@@ -793,12 +792,15 @@ class MergePoisson(StdHepTool):
     """!
     Merge StdHep files, applying poisson sampling.
 
-    Required parameters are: **run_params**
+    Required parameters are: **target_thickness**, **num_electrons**
     """
 
     def __init__(self, xsec=0, **kwargs):
         # cross section in pb
         self.xsec = xsec
+        self.target_thickness = None
+        self.num_electrons = None
+
         StdHepTool.__init__(self,
                             name='merge_poisson',
                             append_tok='sampled',
@@ -806,10 +808,8 @@ class MergePoisson(StdHepTool):
 
     def setup(self):
         """! Setup MergePoisson component."""
-        self.run_param_data = RunParameters(self.run_params)
-        # \todo: this function could just be inlined here
         if self.xsec > 0:
-            self.mu = func.lint(self.run_param_data) * self.xsec
+            self.mu = func.lint(self.target_thickness, self.num_electrons) * self.xsec
         else:
             raise Exception("Cross section is missing.")
         logger.info("mu is %f", self.mu)
@@ -818,10 +818,10 @@ class MergePoisson(StdHepTool):
         """!
         Return list of required parameters.
 
-        Required parameters are: **run_params**
+        Required parameters are: **target_thickness**, **num_electrons**
         @return list of required parameters
         """
-        return ['run_params']
+        return ['target_thickness', 'num_electrons']
 
     def cmd_args(self):
         """!

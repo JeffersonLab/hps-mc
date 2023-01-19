@@ -1,5 +1,8 @@
 {
     "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
     "target_z": -7.51,
     "run_number": 10666,
     "detector": "HPS-PhysicsRun2019-v2-4pt5",
