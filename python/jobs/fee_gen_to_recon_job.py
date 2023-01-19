@@ -7,7 +7,7 @@ from hpsmc.tools import BeamCoords, RandomSample, SLIC, ExtractEventsWithHitAtHo
 
 job.description = 'beam from generation to slic'
 
-## Get job input file targets
+# Get job input file targets
 inputs = list(job.input_files.values())
 
 if 'nevents' in job.params:
@@ -15,26 +15,26 @@ if 'nevents' in job.params:
 else:
     nevents = 250000
 
-## Generate beam
+# Generate beam
 egs5 = EGS5(name="beam_v7_%s" % job.params['run_params'])
 
-## Rotate events into beam coordinates
+# Rotate events into beam coordinates
 rot = BeamCoords()
 
-## Sample events into new stdhep file
+# Sample events into new stdhep file
 sample = RandomSample()
 
-## Simulate events
+# Simulate events
 slic = SLIC(nevents=nevents + 1)
 
-## Space signal events
+# Space signal events
 space_events = ExtractEventsWithHitAtHodoEcal(event_interval=250, num_hodo_hits=0)
 
-## Run simulated events in readout to generate triggers
+# Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout')
 
-## Run physics reconstruction
+# Run physics reconstruction
 recon = JobManager(steering='recon')
 
-## Run the job
+# Run the job
 job.add([egs5, rot, sample, slic, space_events, readout, recon])
