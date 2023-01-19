@@ -37,11 +37,11 @@ class EGS5(EventGenerator):
     """
 
     def __init__(self, name='', **kwargs):
-        # \todo is this the number of bunches or the number of particles per bunch?
+        ## \todo is this the number of bunches or the number of particles per bunch?
         self.bunches = 5e5
-        # target thickness in $\mu$m, \todo is this correct?
+        ## target thickness in $\mu$m, \todo is this correct?
         self.target_thickness = None
-        # egs5 installation directory
+        ## egs5 installation directory
         self.egs5_dir = None
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
@@ -57,9 +57,9 @@ class EGS5(EventGenerator):
             self.egs5_dir = self.get_install_dir()
             logger.debug("Using EGS5 from install dir: " + self.egs5_dir)
 
-        # data directory
+        ## data directory
         self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
-        # config directory
+        ## config directory
         self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
 
         logger.debug("egs5_data_dir=%s" % self.egs5_data_dir)
@@ -189,27 +189,27 @@ class MG(EventGenerator):
 
     def __init__(self, name, **kwargs):
 
-        # Install dir or user config will be used for this.
+        ## Install dir or user config will be used for this.
         self.madgraph_dir = None
 
-        # Default name of param card
+        ## Default name of param card
         self.param_card = "param_card.dat"
 
         # Extra parameters for param card:
         # map = mass of the A-prime
         # mpid = mass of the dark pion
         # mrhod = mass of the dark rho
-        # A-prime mass? \todo apmass or map is A-prime mass?
+        ## A-prime mass? \todo apmass or map is A-prime mass?
         self.apmass = None
-        # A-prime mass? \todo apmass or map is A-prime mass?
+        ## A-prime mass? \todo apmass or map is A-prime mass?
         self.map = None
-        # dark pion mass
+        ## dark pion mass
         self.mpid = None
-        # dark rho mass
+        ## dark rho mass
         self.mrhod = None
 
         if 'event_types' in kwargs:
-            # event types: weighted or unweighted
+            ## event types: weighted or unweighted
             self.event_types = kwargs['event_types']
         else:
             self.event_types = ['unweighted', 'weighted']
@@ -252,7 +252,7 @@ class MG(EventGenerator):
 
     def make_run_card(self, run_card):
         """! Make run card."""
-        # \todo explain what run card is
+        ## \todo explain what run card is
         logger.info("Making run card '%s' with nevents=%d, seed=%d" % (run_card, self.nevents, self.seed))
 
         with open(run_card, 'r') as cardin:
@@ -271,7 +271,7 @@ class MG(EventGenerator):
 
     def make_param_card(self, param_card):
         """! Make parameter card."""
-        # \todo explain what param card is
+        ## \todo explain what param card is
         logger.debug("Making param card '%s'" % param_card)
 
         with open(param_card, 'r') as paramin:
@@ -320,7 +320,7 @@ class MG(EventGenerator):
 class MG4(MG):
     """! Run the MadGraph 4 event generator."""
 
-    # \todo Put this information into a method in the MG superclass.
+    ## \todo Put this information into a method in the MG superclass.
     dir_map = {"BH": "BH/MG_mini_BH/apBH",
                "RAD": "RAD/MG_mini_Rad/apRad",
                "TM": "TM/MG_mini/ap",
@@ -390,7 +390,7 @@ class MG4(MG):
 class MG5(MG):
     """! Run the MadGraph 5 event generator."""
 
-    # \todo: Put this information into a method in the MG superclass.
+    ## \todo: Put this information into a method in the MG superclass.
     dir_map = {"BH": "BH",
                "RAD": "RAD",
                "tritrig": "tritrig",
@@ -419,7 +419,7 @@ class MG5(MG):
         logger.debug("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
 
-        # \todo FIXME: This doesn't seem to work as generate_events doesn't read the input config.
+        ## \todo FIXME: This doesn't seem to work as generate_events doesn't read the input config.
         """
         input_dir = os.path.join(self.madgraph_dir, "input")
         dest_input_dir = os.path.join(self.rundir, self.proc_dir, "input")

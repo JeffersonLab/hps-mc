@@ -26,13 +26,13 @@ class SLIC(Component):
     """
 
     def __init__(self, **kwargs):
-        # List of macros to run (optional)
+        ## List of macros to run (optional)
         self.macros = []
-        # Run number to set on output file (optional)
+        ## Run number to set on output file (optional)
         self.run_number = None
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.hps_fieldmaps_dir = None
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.detector_dir = None
 
         Component.__init__(self,
@@ -182,30 +182,30 @@ class JobManager(Component):
     """
 
     def __init__(self, steering=None, **kwargs):
-        # \todo verify these definitions
-        # run number
+        ## \todo verify these definitions
+        ## run number
         self.run_number = None
-        # detector name
+        ## detector name
         self.detector = None
-        # event print interval
+        ## event print interval
         self.event_print_interval = None
-        # \todo what is this?
+        ## \todo what is this?
         self.defs = None
-        # java arguments
+        ## java arguments
         self.java_args = None
-        # file for config logging
+        ## file for config logging
         self.logging_config_file = None
-        # lcsim cache directory
+        ## lcsim cache directory
         self.lcsim_cache_dir = None
-        # no idea
+        ## no idea
         self.conditions_user = None
-        # no idea
+        ## no idea
         self.conditions_password = None
-        # no idea
+        ## no idea
         self.conditions_url = None
-        # steering file
+        ## steering file
         self.steering = steering
-        # location of hps-java installation?
+        ## location of hps-java installation?
         self.hps_java_bin_jar = None
 
         if 'overlay_file' in kwargs:
@@ -375,11 +375,11 @@ class HPSTR(Component):
     """
 
     def __init__(self, cfg=None, is_data=0, year=None, **kwargs):
-        # configuration
+        ## configuration
         self.cfg = cfg
-        # run mode
+        ## run mode
         self.is_data = is_data
-        # year
+        ## year
         self.year = year
 
         Component.__init__(self,
@@ -477,7 +477,7 @@ class HPSTR(Component):
 
         return proc.returncode
 
-# \todo split this over several files -> move stdheptools in separate package
+## \todo split this over several files -> move stdheptools in separate package
 
 
 class StdHepTool(Component):
@@ -485,7 +485,7 @@ class StdHepTool(Component):
     Generic class for StdHep tools.
     """
 
-    # List of commands which accept a 'seed' argument.
+    ## List of commands which accept a 'seed' argument.
     seed_names = ['beam_coords',
                   'beam_coords_old',
                   'lhe_tridents',
@@ -537,22 +537,22 @@ class BeamCoords(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        # \todo clarify these
-        # beam sigma in x
+        ## \todo clarify these
+        ## beam sigma in x
         self.beam_sigma_x = None
-        # beam sigma in y
+        ## beam sigma in y
         self.beam_sigma_y = None
-        # target x position
+        ## target x position
         self.target_x = None
-        # target y position
+        ## target y position
         self.target_y = None
-        # target z position
+        ## target z position
         self.target_z = None
-        # beam rotation in x?
+        ## beam rotation in x?
         self.beam_rot_x = None
-        # beam rotation in y?
+        ## beam rotation in y?
         self.beam_rot_y = None
-        # beam rotation in z?
+        ## beam rotation in z?
         self.beam_rot_z = None
 
         StdHepTool.__init__(self,
@@ -613,7 +613,7 @@ class RandomSample(StdHepTool):
                             name='random_sample',
                             append_tok='sampled',
                             **kwargs)
-        # median of distribution?
+        ## median of distribution?
         self.mu = None
 
     def cmd_args(self):
@@ -680,7 +680,7 @@ class DisplaceTime(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        # time shift
+        ## time shift
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displacetime',
@@ -715,7 +715,7 @@ class DisplaceUni(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        # time shift
+        ## time shift
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displaceuni',
@@ -789,7 +789,7 @@ class MergePoisson(StdHepTool):
     """
 
     def __init__(self, xsec=0, **kwargs):
-        # cross section in pb
+        ## cross section in pb
         self.xsec = xsec
         StdHepTool.__init__(self,
                             name='merge_poisson',
@@ -799,7 +799,7 @@ class MergePoisson(StdHepTool):
     def setup(self):
         """! Setup MergePoisson component."""
         self.run_param_data = RunParameters(self.run_params)
-        # \todo: this function could just be inlined here
+        ## \todo: this function could just be inlined here
         if self.xsec > 0:
             self.mu = func.lint(self.run_param_data) * self.xsec
         else:
@@ -924,11 +924,11 @@ class JavaTool(Component):
     """
 
     def __init__(self, name, java_class, **kwargs):
-        # java class
+        ## java class
         self.java_class = java_class
-        # java arguments
+        ## java arguments
         self.java_args = None
-        # tbd
+        ## tbd
         self.conditions_url = None
         Component.__init__(self,
                            name,
@@ -990,15 +990,15 @@ class EvioToLcio(JavaTool):
     """
 
     def __init__(self, steering=None, **kwargs):
-        # detector name
+        ## detector name
         self.detector = None
-        # run number
+        ## run number
         self.run_number = None
-        # number of events that are skipped
+        ## number of events that are skipped
         self.skip_events = None
-        # event print interval
+        ## event print interval
         self.event_print_interval = None
-        # steering file
+        ## steering file
         self.steering = steering
 
         JavaTool.__init__(self,
@@ -1277,7 +1277,7 @@ class LCIODumpEvent(Component):
     """
 
     def __init__(self, **kwargs):
-        # lcio directory
+        ## lcio directory
         self.lcio_dir = None
         Component.__init__(self,
                            name='lcio_dump_event',
@@ -1442,7 +1442,7 @@ class LCIOTool(Component):
     """
 
     def __init__(self, name=None, **kwargs):
-        # lcio bin jar (whatever this is)
+        ## lcio bin jar (whatever this is)
         self.lcio_bin_jar = None
         Component.__init__(self,
                            name,
@@ -1631,13 +1631,13 @@ class Sim(SimBase):
     """
 
     def __init__(self, **kwargs):
-        # List of macros to run (optional)
+        ## List of macros to run (optional)
         self.macros = []
-        # Run number to set on output file (optional)
+        ## Run number to set on output file (optional)
         self.run_number = None
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.hps_fieldmaps_dir = None
-        # To be set from config or install dir
+        ## To be set from config or install dir
         self.detector_dir = None
         Component.__init__(self,
                            name='hps-sim',
@@ -1701,7 +1701,7 @@ class Sim(SimBase):
         if self.seed is not None:
             macro_lines.append("/random/seed {}".format(self.seed))
 
-        # \todo: Support LHE files, too
+        ## \todo: Support LHE files, too
         macro_lines.append("/hps/generators/create StdHepGen STDHEP")
         for input_file in self.input_files():
             macro_lines.append("/hps/generators/StdHepGen/file {}".format(input_file))
@@ -1714,7 +1714,7 @@ class Sim(SimBase):
 
         macro_lines.append("/run/beamOn {}".format(self.nevents))
 
-        # \todo: Set run number (no Geant4 built-in for this?)
+        ## \todo: Set run number (no Geant4 built-in for this?)
 
         with open(macro_name, 'wt', encoding='utf-8') as run_macro:
             run_macro.write('\n'.join(macro_lines))

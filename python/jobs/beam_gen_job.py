@@ -12,8 +12,8 @@ if 'nevents' in job.params:
 else:
     nevents = 250000
 
-# Generate beam
+## Generate beam
 egs5 = EGS5(name="beam_v7_%s" % job.params['run_params'])
 
-# Run the job
+## Run the job
 job.add([egs5])
