@@ -171,7 +171,7 @@ Code Formatting</h2>
 </div><!-- fragment --><p> Then, add the following lines to <code>pre-commit</code> </p><div class="fragment"><div class="line">#!/bin/sh</div>
 <div class="line">pycodestyle --ignore=E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/</div>
 </div><!-- fragment --><p>To fix the formatting errors, you can either do this manually by navigating to the displayed files and making the necessary changes, or you can use <a href="https://pypi.org/project/autopep8/#installation">autopep8</a> as follows. First, install autopep8: </p><div class="fragment"><div class="line">pip install --user --upgrade autopep8</div>
-</div><!-- fragment --><p> Then run </p><div class="fragment"><div class="line">autopep8 --aggressive --aggressive --ignore=E265,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --in-place --max-line-length=160 --recursive python/</div>
+</div><!-- fragment --><p> Then run </p><div class="fragment"><div class="line">autopep8 --aggressive --aggressive --ignore=E265,E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --in-place --max-line-length=160 --recursive python/</div>
 </div><!-- fragment --><p> from the top of the <code>hps-mc</code> directory. Alternatively, run <code>format_python_code.sh</code>. This will automatically fix (most) of the formatting issues.</p>
 <p>To preserve the Doxygen-style comments, it is necessary to disable the automatic formatting of comment blocks which means that you might need to fix those by hand.</p>
 <h2><a class="anchor" id="autotoc_md36"></a>
