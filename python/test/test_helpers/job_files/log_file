@@ -1,0 +1,208 @@
+hpsmc.job:DEBUG Changed stdout file to abs path: /Users/schababi/workspace/hps/hps-mc/python/test/test_helpers/job_files/out_file
+hpsmc.job:DEBUG Changed stderr file to abs path: /Users/schababi/workspace/hps/hps-mc/python/test/test_helpers/job_files/err_file
+hpsmc.job:DEBUG Loading job with ID 1 from job store '/Users/schababi/workspace/hps/hps-mc/python/test/test_helpers/job_files/job_params.json'
+hpsmc.job:DEBUG Changed output dir to abs path: /Users/schababi/workspace/hps/hps-mc/python/test/some/output_dir
+hpsmc.job:INFO SLIC:detector_dir:str=some/detector/dir
+hpsmc.job:INFO SLIC:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.job:INFO SLIC:slic_dir:str=test_helpers/slicdir
+hpsmc.job:WARNING Config section not found: HPSTR
+hpsmc.component:DEBUG hpstr:hpstr_install_dir:str=test_helpers/hpstrdir/install
+hpsmc.component:DEBUG hpstr:hpstr_base:str=test_helpers/hpstrdir
+hpsmc.component:DEBUG hpstr:config_files={'config': 'config.py'} [required]
+hpsmc.component:DEBUG hpstr:year=10 [optional]
+hpsmc.component:DEBUG hpstr:nevents=1000 [optional]
+hpsmc.tools:DEBUG Set config path: test_helpers/hpstrdir/processors/config/config.py
+hpsmc.tools:DEBUG Automatically appending token to output file: config
+hpsmc.component:DEBUG hpstr:hpstr_install_dir:str=test_helpers/hpstrdir/install
+hpsmc.component:DEBUG hpstr:hpstr_base:str=test_helpers/hpstrdir
+hpsmc.component:DEBUG hpstr:config_files={'appended_config': 'config.py'} [required]
+hpsmc.tools:DEBUG Set config path: test_helpers/hpstrdir/processors/config/config.py
+hpsmc.tools:DEBUG Automatically appending token to output file: appended_config
+hpsmc.component:DEBUG hpstr:hpstr_install_dir:str=test_helpers/hpstrdir/install
+hpsmc.component:DEBUG hpstr:hpstr_base:str=test_helpers/hpstrdir
+hpsmc.component:DEBUG hpstr:config_files={'appended_config': 'config.py'} [required]
+hpsmc.tools:DEBUG Set config path: test_helpers/hpstrdir/processors/config/config.py
+hpsmc.component:DEBUG hpstr:hpstr_install_dir:str=test_helpers/hpstrdir/install
+hpsmc.component:DEBUG hpstr:hpstr_base:str=test_helpers/hpstrdir
+hpsmc.component:DEBUG hpstr:config_files={'config': 'config.py'} [required]
+hpsmc.tools:DEBUG Set config path: test_helpers/hpstrdir/processors/config/config.py
+hpsmc.tools:DEBUG Automatically appending token to output file: config
+hpsmc.component:DEBUG evio_to_lcio:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG evio_to_lcio:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG evio_to_lcio:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG evio_to_lcio:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG evio_to_lcio:detector=detector [required]
+hpsmc.component:DEBUG evio_to_lcio:steering_files={'steering': 'steering_file'} [required]
+hpsmc.component:DEBUG evio_to_lcio:run_number=1234 [optional]
+hpsmc.component:DEBUG evio_to_lcio:skip_events=10 [optional]
+hpsmc.component:DEBUG evio_to_lcio:nevents=100 [optional]
+hpsmc.component:DEBUG evio_to_lcio:event_print_interval=10 [optional]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.tools:DEBUG Setting java_args from config: %sargs
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.tools:DEBUG Steering does not exist at 'steering_file' so assuming it is a resource.
+hpsmc.component:DEBUG evio_to_lcio:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG evio_to_lcio:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG evio_to_lcio:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG evio_to_lcio:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG evio_to_lcio:detector=detector [required]
+hpsmc.component:DEBUG evio_to_lcio:steering_files={'steering': 'steering_file'} [required]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.tools:WARNING Link to fieldmap dir already exists!
+hpsmc.component:DEBUG filter_events:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG filter_events:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG filter_events:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG filter_events:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Setting java_args from config: %sargs
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.component:DEBUG filter_bunches:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG filter_bunches:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG filter_bunches:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG filter_bunches:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Setting java_args from config: %sargs
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.component:DEBUG filter_bunches:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG filter_bunches:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG filter_bunches:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG filter_bunches:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG java_tool:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG java_tool:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG java_tool:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG java_tool:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Setting java_args from config: %sargs
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.component:DEBUG java_tool:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG java_tool:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG java_tool:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG java_tool:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG java_tool:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG java_tool:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG java_tool:conditions_url:str=http://some/path/to/conditions
+hpsmc.component:DEBUG java_tool:java_args:str=args
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.tools:WARNING Link to fieldmap dir already exists!
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'steering' from steering key.
+hpsmc.component:DEBUG job_manager:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG job_manager:conditions_url:str=http://some/path/to/conditions
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:steering_files={'steering': 'some/path/to/steering.lcsim'} [required]
+hpsmc.component:DEBUG job_manager:detector=some_detector [optional]
+hpsmc.component:DEBUG job_manager:run_number=1 [optional]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.tools:DEBUG Steering does not exist at 'some/path/to/steering.lcsim' so assuming it is a resource.
+hpsmc.tools:DEBUG Setting conditions_url from config: http://some/path/to/conditions
+hpsmc.tools:DEBUG Steering does not exist at 'some/path/to/steering.lcsim' so assuming it is a resource.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.component:DEBUG job_manager:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG job_manager:conditions_url:str=http://some/path/to/conditions
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.component:DEBUG job_manager:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'steering' from steering key.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'None' from steering key.
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'steering' from steering key.
+hpsmc.component:DEBUG job_manager:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG job_manager:conditions_url:str=http://some/path/to/conditions
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:steering_files={'steering': 'some/path/to/steering.lcsim'} [required]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.tools:WARNING Link to fieldmap dir already exists!
+hpsmc.tools:DEBUG Append token for 'job_manager' automatically set to 'invalid_steering' from steering key.
+hpsmc.component:DEBUG job_manager:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:hps_java_bin_jar:str=some/path/to/hps-java-bin.jar
+hpsmc.component:DEBUG job_manager:conditions_url:str=http://some/path/to/conditions
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG job_manager:steering_files={'steering': 'some/path/to/steering.lcsim'} [required]
+hpsmc.component:DEBUG lcio_dump_event:lcio_dir:str=test_helpers/lciodir
+hpsmc.component:DEBUG lcio_dump_event:lcio_dir:str=test_helpers/lciodir
+hpsmc.component:DEBUG lcio_dump_event:lcio_dir:str=test_helpers/lciodir
+hpsmc.component:DEBUG concat:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG concat:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG concat:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG count:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG count:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG merge:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG merge:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG merge:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG lcio_tool:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG None:lcio_bin_jar:str=some/path/to/lcio-bin.jar
+hpsmc.component:DEBUG hps-sim:hps_sim_dir:str=test_helpers/simdir
+hpsmc.component:DEBUG hps-sim:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:detector_dir:str=some/detector/dir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:hps_sim_dir:str=test_helpers/simdir
+hpsmc.component:DEBUG hps-sim:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:detector_dir:str=some/detector/dir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:detector=some_detector [required]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:hps_sim_dir:str=test_helpers/simdir
+hpsmc.component:DEBUG hps-sim:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:detector_dir:str=some/detector/dir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG hps-sim:detector=some_detector [required]
+hpsmc.component:DEBUG hps-sim:macros=['macro1.mac', 'macro2.mac'] [optional]
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.component:DEBUG sim_base:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG sim_base:detector=some_detector [required]
+hpsmc.component:DEBUG slic:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG slic:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG slic:slic_dir:str=test_helpers/slicdir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG slic:detector=some_detector [required]
+hpsmc.component:DEBUG slic:nevents=1 [optional]
+hpsmc.component:DEBUG slic:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG slic:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG slic:slic_dir:str=invalid/slicdir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG slic:detector=some_detector [required]
+hpsmc.component:DEBUG slic:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG slic:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG slic:slic_dir:str=test_helpers/slicdir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG slic:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG slic:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG slic:slic_dir:str=test_helpers/slicdir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.tools:DEBUG Creating sym link to fieldmap dir: some/fieldmaps/dir
+hpsmc.component:DEBUG slic:detector_dir:str=some/detector/dir
+hpsmc.component:DEBUG slic:hps_fieldmaps_dir:str=some/fieldmaps/dir
+hpsmc.component:DEBUG slic:slic_dir:str=invalid/slicdir
+hpsmc.tools:DEBUG Using fieldmap dir from config: some/fieldmaps/dir
+hpsmc.component:DEBUG beam_coords:beam_sigma_x=11 [optional]
+hpsmc.component:DEBUG beam_coords:beam_sigma_y=12 [optional]
+hpsmc.component:DEBUG beam_coords:beam_rot_x=21 [optional]
+hpsmc.component:DEBUG beam_coords:beam_rot_y=22 [optional]
+hpsmc.component:DEBUG beam_coords:beam_rot_z=23 [optional]
+hpsmc.component:DEBUG beam_coords:target_x=31 [optional]
+hpsmc.component:DEBUG beam_coords:target_y=32 [optional]
+hpsmc.component:DEBUG beam_coords:target_z=33 [optional]
+hpsmc.component:DEBUG lhe_tridents_displacetime:ctau=1 [optional]
+hpsmc.component:DEBUG lhe_tridents_displaceuni:ctau=1 [optional]
+hpsmc.component:DEBUG merge_poisson:run_params=1pt1 [required]
+hpsmc.component:DEBUG merge_poisson:nevents=100 [optional]
+hpsmc.component:DEBUG merge_poisson:seed=2 [optional]
+hpsmc.tools:INFO mu is 0.000000
+hpsmc.component:DEBUG merge_poisson:run_params=1pt1 [required]
+hpsmc.tools:INFO mu is 0.000000
+hpsmc.component:DEBUG merge_poisson:run_params=1pt1 [required]
+hpsmc.tools:INFO mu is 0.000000
+hpsmc.component:DEBUG merge_poisson:run_params=3pt74 [required]
+hpsmc.tools:INFO mu is 0.000000
+hpsmc.component:DEBUG random_sample:nevents=100 [optional]
+hpsmc.component:DEBUG random_sample:mu=1 [optional]

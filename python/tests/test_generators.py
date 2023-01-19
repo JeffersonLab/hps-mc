@@ -2,7 +2,6 @@ import unittest
 import os
 
 from hpsmc.generators import EventGenerator, EGS5, MG, MG4, MG5
-from hpsmc.component import Component
 from hpsmc.run_params import RunParameters
 
 
@@ -59,16 +58,16 @@ class TestEGS5(unittest.TestCase):
         with open("seed.dat", 'r') as seed_file:
             seed_vals = [line.split() for line in seed_file]
         self.assertEqual(seed_vals[0][0], str(1))
-        ## this test fails because the precision of target_z in seed.dat is not the same as in run_params!!!
-        ## for now: use %f here
+        # this test fails because the precision of target_z in seed.dat is not the same as in run_params!!!
+        # for now: use %f here
         target_thickness = '%f' % (runparameters.get("target_z"))
         self.assertEqual(seed_vals[0][1], target_thickness)
         beam_energy = '%f' % (runparameters.get("beam_energy"))
         self.assertEqual(seed_vals[0][2], beam_energy)
         self.assertEqual(seed_vals[0][3], str(runparameters.get("num_electrons") * params['bunches']))
 
-        # remove created symlinks
-        ## \todo find better solution with total path to test directory
+        # remove created symlinks and files
+        # \todo find better solution with total path to test directory
         os.remove('data')
         os.remove('pgs5job.pegs5inp')
         os.remove('seed.dat')
@@ -181,3 +180,7 @@ class test_MG5(unittest.TestCase):
     def test_get_install_dir(self):
         mg5 = MG5()
         self.assertEqual(mg5.get_install_dir(), os.getenv("HPSMC_DIR", None) + '/share/generators/madgraph5/src')
+
+
+if __name__ == '__main__':
+    unittest.main()

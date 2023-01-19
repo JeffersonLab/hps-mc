@@ -59,3 +59,7 @@ class TestLint(unittest.TestCase):
         run_params = RunParameters("6pt6")
         res = 6.306e-14 * 0.000875 * 5625
         self.assertEqual(hpsmc.func.lint(run_params), res)
+
+
+if __name__ == '__main__':
+    unittest.main()

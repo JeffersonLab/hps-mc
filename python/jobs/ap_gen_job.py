@@ -13,8 +13,8 @@ if 'nevents' in job.params:
 else:
     nevents = 10000
 
-## Generate rad in MG4
+# Generate rad in MG4
 mg = MG4(name='ap', event_types=['unweighted'])
 
-## run the job
+# run the job
 job.add([mg])
