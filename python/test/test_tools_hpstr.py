@@ -1,5 +1,6 @@
 import unittest
 import configparser
+import os
 
 from hpsmc.tools import HPSTR
 
