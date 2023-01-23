@@ -58,3 +58,7 @@ detector_dir = some/detector/dir
 hps_sim_dir = simdir
 hps_fieldmaps_dir = some/fieldmaps/dir
 detector_dir = some/detector/dir
+
+[Component]
+hps_java_bin_jar = some/path/to/hps-java-bin.jar
+lcio_bin_jar = some/path/to/lcio-bin.jar

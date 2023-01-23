@@ -67,9 +67,9 @@ class TestEGS5(unittest.TestCase):
         self.assertEqual(seed_vals[0][3], str(runparameters.get("num_electrons") * params['bunches']))
 
         # remove created symlinks and files
-        os.remove(os.getcwd() + 'data')
-        os.remove(os.getcwd() + 'pgs5job.pegs5inp')
-        os.remove(os.getcwd() + 'seed.dat')
+        os.remove(os.getcwd() + '/data')
+        os.remove(os.getcwd() + '/pgs5job.pegs5inp')
+        os.remove(os.getcwd() + '/seed.dat')
 
 
 class test_MG(unittest.TestCase):

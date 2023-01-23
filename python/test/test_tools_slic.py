@@ -1,5 +1,6 @@
 import unittest
 import configparser
+import os
 
 from hpsmc.tools import SLIC
 
@@ -71,6 +72,7 @@ class TestSLIC(unittest.TestCase):
         slic.config(parser)
         slic.setup()
         self.assertEqual(slic.env_script, "slicdir/bin/slic-env.sh")
+        os.remove(os.getcwd() + '/fieldmap')
 
 
 if __name__ == '__main__':

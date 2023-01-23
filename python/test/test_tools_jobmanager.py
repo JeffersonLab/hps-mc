@@ -1,5 +1,6 @@
 import unittest
 import configparser
+import os
 
 from hpsmc.tools import JobManager
 
@@ -61,6 +62,7 @@ class TestJobManager(unittest.TestCase):
         job_manager.setup()
         self.assertEqual(job_manager.steering_file, "some/path/to/steering.lcsim")
         self.assertEqual(job_manager.hps_fieldmaps_dir, "some/fieldmaps/dir")
+        os.remove(os.getcwd() + '/fieldmap')
 
     def test_setup_exception_steering(self):
         job_manager = JobManager(steering="invalid_steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
