@@ -28,21 +28,21 @@ class TestHPSTR(unittest.TestCase):
     def test_setup(self):
         hpstr = HPSTR(cfg='config', inputs=['some/path/to/input.root'], outputs=['some/path/to/output.root'])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         hpstr.config(parser)
         params = {'config_files': {'config': 'config.py'}}
         hpstr.set_parameters(params)
 
         hpstr.setup()
-        self.assertEqual(hpstr.env_script, 'hpstrdir/install/bin/hpstr-env.sh')
-        self.assertEqual(hpstr.cfg_path, 'hpstrdir/processors/config/config.py')
+        self.assertEqual(hpstr.env_script, 'test_helpers/hpstrdir/install/bin/hpstr-env.sh')
+        self.assertEqual(hpstr.cfg_path, 'test_helpers/hpstrdir/processors/config/config.py')
         self.assertEqual(hpstr.append_tok, 'config')
 
     def test_output_files_root(self):
         hpstr = HPSTR(cfg='appended_config', inputs=['some/path/to/input.root'], outputs=['some/path/to/output.root'])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         hpstr.config(parser)
         params = {'config_files': {'appended_config': 'config.py'}}
@@ -53,7 +53,7 @@ class TestHPSTR(unittest.TestCase):
     def test_output_files_slcio(self):
         hpstr = HPSTR(cfg='appended_config', inputs=['some/path/to/input.slcio'], outputs=['some/path/to/output.root'])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         hpstr.config(parser)
         params = {'config_files': {'appended_config': 'config.py'}}
@@ -65,14 +65,14 @@ class TestHPSTR(unittest.TestCase):
         hpstr = HPSTR(cfg='config', inputs=['some/path/to/input.root'], outputs=['some/path/to/output.root'])
 
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         hpstr.config(parser)
         params = {'config_files': {'config': 'config.py'}, 'nevents': 1000, 'year': 10}
         hpstr.set_parameters(params)
         hpstr.setup()
 
-        self.assertEqual(hpstr.cmd_args(), ["hpstrdir/processors/config/config.py", "-t", "0", "-i", "some/path/to/input.root", "-o", "some/path/to/input_config.root", "-n", "1000", "-y", "10"])
+        self.assertEqual(hpstr.cmd_args(), ["test_helpers/hpstrdir/processors/config/config.py", "-t", "0", "-i", "some/path/to/input.root", "-o", "some/path/to/input_config.root", "-n", "1000", "-y", "10"])
 
 
 if __name__ == '__main__':

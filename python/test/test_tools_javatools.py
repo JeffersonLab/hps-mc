@@ -20,7 +20,7 @@ class TestJavaTool(unittest.TestCase):
     def test_config(self):
         java_tool = JavaTool(name="java_tool", java_class="java_class")
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         java_tool.config(parser)
         self.assertEqual(java_tool.hps_fieldmaps_dir, "some/fieldmaps/dir")
@@ -30,7 +30,7 @@ class TestJavaTool(unittest.TestCase):
     def test_setup(self):
         java_tool = JavaTool(name="java_tool", java_class="java_class")
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         java_tool.config(parser)
         java_tool.setup()
@@ -40,7 +40,7 @@ class TestJavaTool(unittest.TestCase):
     def test_cmd_args(self):
         java_tool = JavaTool(name="java_tool", java_class="java_class")
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         java_tool.config(parser)
         self.assertEqual(java_tool.cmd_args(), ["args", "-Dorg.hps.conditions.url=http://some/path/to/conditions", "-cp", "some/path/to/hps-java-bin.jar", "java_class"])
@@ -66,7 +66,7 @@ class TestEvioToLcio(unittest.TestCase):
     def test_setup(self):
         evio_to_lcio = EvioToLcio(steering="steering")
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         evio_to_lcio.config(parser)
         evio_to_lcio.set_parameters({"steering_files": {"steering": "steering_file"}, "detector": "detector"})
@@ -76,7 +76,7 @@ class TestEvioToLcio(unittest.TestCase):
     def test_cmd_args(self):
         evio_to_lcio = EvioToLcio(steering="steering", inputs=["input1.evio", "input2.evio"], outputs=["output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         evio_to_lcio.config(parser)
         evio_to_lcio.set_parameters({"steering_files": {"steering": "steering_file"}, "detector": "detector", "skip_events": 10, "nevents": 100, "event_print_interval": 10, "run_number": 1234})
@@ -109,7 +109,7 @@ class TestFilterBunches(unittest.TestCase):
     def test_config(self):
         filter_bunches = FilterBunches()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         filter_bunches.config(parser)
         self.assertEqual(filter_bunches.hps_java_bin_jar, "some/path/to/hps-java-bin.jar")
@@ -117,7 +117,7 @@ class TestFilterBunches(unittest.TestCase):
     def test_cmd_args(self):
         filter_bunches = FilterBunches(inputs=["input1.slcio", "input2.slcio"], outputs=["output.slcio"], filter_no_cuts=True, filter_ecal_pairs=True, filter_ecal_hit_ecut=1.0, filter_event_interval=10, filter_nevents_read=100, filter_nevents_write=100)
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         filter_bunches.config(parser)
         self.assertEqual(filter_bunches.cmd_args(), ["args", "-Dorg.hps.conditions.url=http://some/path/to/conditions", "-cp", "some/path/to/hps-java-bin.jar", "org.hps.util.FilterMCBunches", "-e", "10", "input1.slcio", "input2.slcio", "output.slcio", "-d", "-E", "1.0", "-n", "100", "-w", "100", "-a"])
@@ -140,7 +140,7 @@ class TestExtractEventsWithHitAtHodoEcal(unittest.TestCase):
     def test_cmd_args(self):
         extract_events = ExtractEventsWithHitAtHodoEcal(inputs=["input1.slcio", "input2.slcio"], outputs=["output.slcio"], num_hodo_hits=1, event_interval=10, nevents=100)
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         extract_events.config(parser)
         self.assertEqual(extract_events.cmd_args(), ["args", "-Dorg.hps.conditions.url=http://some/path/to/conditions", "-cp", "some/path/to/hps-java-bin.jar", "org.hps.util.ExtractEventsWithHitAtHodoEcal", "-e", "10", "input1.slcio", "input2.slcio", "output.slcio", "-M", "1", "-w", "100"])

@@ -37,7 +37,7 @@ class TestJobManager(unittest.TestCase):
     def test_config(self):
         job_manager = JobManager()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         job_manager.config(parser)
         self.assertEqual(job_manager.hps_fieldmaps_dir, 'some/fieldmaps/dir')
@@ -47,14 +47,14 @@ class TestJobManager(unittest.TestCase):
     def test_config_exception_java_jar(self):
         job_manager = JobManager()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg_invalid']
+        config_file = ['test_helpers/.hpsmc_test_cfg_invalid']
         parser.read(config_file)
         self.assertRaises(Exception, lambda: job_manager.config(parser))
 
     def test_setup(self):
         job_manager = JobManager(steering="steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         job_manager.config(parser)
         params = {'steering_files': {'steering': 'some/path/to/steering.lcsim'}}
@@ -67,7 +67,7 @@ class TestJobManager(unittest.TestCase):
     def test_setup_exception_steering(self):
         job_manager = JobManager(steering="invalid_steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         job_manager.config(parser)
         params = {'steering_files': {'steering': 'some/path/to/steering.lcsim'}}
@@ -77,7 +77,7 @@ class TestJobManager(unittest.TestCase):
     def test_cmd_args(self):
         job_manager = JobManager(steering="steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         job_manager.config(parser)
         params = {'steering_files': {'steering': 'some/path/to/steering.lcsim'}, 'detector': 'some_detector', 'run_number': 1, 'event_print_interval': 10, 'nevents': 1}
