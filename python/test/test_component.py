@@ -67,7 +67,7 @@ class TestComponent(unittest.TestCase):
     def test_config(self):
         component = Component('Component')
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         component.config(parser)
         self.assertEqual(component.hps_java_bin_jar, 'some/path/to/hps-java-bin.jar')

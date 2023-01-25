@@ -18,7 +18,7 @@ class TestSimBase(unittest.TestCase):
     def test_detector_file(self):
         sim_base = SimBase(name="sim_base")
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         sim_base.config(parser)
         params = {"detector": "some_detector"}
@@ -41,30 +41,30 @@ class TestSim(unittest.TestCase):
     def test_config(self):
         sim = Sim()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         sim.config(parser)
         self.assertEqual(sim.detector_dir, "some/detector/dir")
         self.assertEqual(sim.hps_fieldmaps_dir, "some/fieldmaps/dir")
-        self.assertEqual(sim.hps_sim_dir, "simdir")
+        self.assertEqual(sim.hps_sim_dir, "test_helpers/simdir")
 
     def test_setup(self):
         sim = Sim(inputs=["some/path/to/input.stdhep"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         sim.config(parser)
         params = {"detector": "some_detector"}
         sim.set_parameters(params)
         sim.setup()
-        self.assertEqual(sim.env_script, "simdir/bin/hps-sim-env.sh")
+        self.assertEqual(sim.env_script, "test_helpers/simdir/bin/hps-sim-env.sh")
         self.assertTrue(os.path.islink(os.getcwd() + os.path.sep + "fieldmap"))
         os.unlink(os.getcwd() + "/fieldmap")
 
     def test_write_run_macro(self):
         sim = Sim(inputs=["some/path/to/input.stdhep"], outputs=["some/path/to/output.slcio"], seed=2, nevents=10)
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         sim.config(parser)
         params = {"detector": "some_detector", "macros": ["macro1.mac", "macro2.mac"]}

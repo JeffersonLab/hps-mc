@@ -382,6 +382,9 @@ class HPSTR(Component):
         ## year
         self.year = year
 
+        self.hpstr_install_dir = None
+        self.hpstr_base = None
+
         Component.__init__(self,
                            name='hpstr',
                            command='hpstr',

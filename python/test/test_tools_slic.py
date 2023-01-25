@@ -14,7 +14,7 @@ class TestSLIC(unittest.TestCase):
     def test_config(self):
         slic = SLIC()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         slic.config(parser)
         self.assertEqual(slic.detector_dir, 'some/detector/dir')
@@ -39,7 +39,7 @@ class TestSLIC(unittest.TestCase):
     def test_cmd_args_exception_particle_tbl(self):
         slic = SLIC(inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg_invalid']
+        config_file = ['test_helpers/.hpsmc_test_cfg_invalid']
         parser.read(config_file)
         slic.config(parser)
         params = {'detector': 'some_detector'}
@@ -49,17 +49,17 @@ class TestSLIC(unittest.TestCase):
     def test_cmd_args(self):
         slic = SLIC(inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         slic.config(parser)
         params = {'detector': 'some_detector', 'nevents': 1}
         slic.set_parameters(params)
-        self.assertEqual(slic.cmd_args(), ["-g", "some/detector/dir/some_detector/some_detector.lcdd", "-i", "some/path/to/input.slcio", "-o", "some/path/to/output.slcio", "-d1", "-r", str(1), "-P", "slicdir/share/particle.tbl"])
+        self.assertEqual(slic.cmd_args(), ["-g", "some/detector/dir/some_detector/some_detector.lcdd", "-i", "some/path/to/input.slcio", "-o", "some/path/to/output.slcio", "-d1", "-r", str(1), "-P", "test_helpers/slicdir/share/particle.tbl"])
 
     def test_setup_exception_slic_dir(self):
         slic = SLIC()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg_invalid']
+        config_file = ['test_helpers/.hpsmc_test_cfg_invalid']
         parser.read(config_file)
         slic.config(parser)
         self.assertRaises(Exception, lambda: slic.setup())
@@ -67,11 +67,11 @@ class TestSLIC(unittest.TestCase):
     def test_setup(self):
         slic = SLIC(inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         slic.config(parser)
         slic.setup()
-        self.assertEqual(slic.env_script, "slicdir/bin/slic-env.sh")
+        self.assertEqual(slic.env_script, "test_helpers/slicdir/bin/slic-env.sh")
         os.remove(os.getcwd() + '/fieldmap')
 
 

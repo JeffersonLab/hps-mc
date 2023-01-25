@@ -73,7 +73,7 @@ class JobConfig(object):
 
     def _load(self):
         """! Load config from the list of possible locations."""
-
+        ## \todo implement or cleanup
         # Read in config files and crash if none are found from list
         ## configuration parser
         self.parser = configparser.ConfigParser()
@@ -107,7 +107,7 @@ class JobConfig(object):
         if self.parser.has_section(section):
             # Check that required settings are there.
             for req in required_names:
-                if req not in self.parser.items(section):
+                if req not in dict(self.parser.items(section)):
                     raise Exception("Missing required config '%s'" % req)
             # Push each config item into the object by setting attribute.
             for name, value in self.parser.items(section):

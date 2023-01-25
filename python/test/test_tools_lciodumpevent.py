@@ -23,24 +23,24 @@ class TestLCIODumpEvent(unittest.TestCase):
     def test_config(self):
         lcio_dump_event = LCIODumpEvent()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         lcio_dump_event.config(parser)
-        self.assertEqual(lcio_dump_event.lcio_dir, "lciodir")
+        self.assertEqual(lcio_dump_event.lcio_dir, "test_helpers/lciodir")
 
     def test_setup(self):
         lcio_dump_event = LCIODumpEvent()
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         lcio_dump_event.config(parser)
         lcio_dump_event.setup()
-        self.assertEqual(lcio_dump_event.command, "lciodir/bin/dumpevent")
+        self.assertEqual(lcio_dump_event.command, "test_helpers/lciodir/bin/dumpevent")
 
     def test_cmd_args(self):
         lcio_dump_event = LCIODumpEvent(event_num=10, inputs=["some/path/to/input.slcio"])
         parser = configparser.ConfigParser()
-        config_file = ['.hpsmc_test_cfg']
+        config_file = ['test_helpers/.hpsmc_test_cfg']
         parser.read(config_file)
         lcio_dump_event.config(parser)
         self.assertEqual(lcio_dump_event.cmd_args(), ["some/path/to/input.slcio", "10"])
