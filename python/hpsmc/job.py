@@ -131,14 +131,16 @@ class JobStore:
 
     def __init__(self, path=None):
         self.path = path
-        if path:
+        if self.path:
             # logger.info("Initializing job store from: {}".format(self.path))
-            self.load(path)
+            self.load(self.path)
 
     def load(self, json_store):
         """! Load raw JSON data into this job store.
         @param json_store  json file containing raw job data
         """
+        if not os.path.exists(json_store):
+            raise Exception('JSON job store does not exist: {}'.format(json_store))
         with open(json_store, 'r') as f:
             json_data = json.loads(f.read())
         ## dict of jobs, sorted by job id

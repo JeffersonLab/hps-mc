@@ -5,7 +5,7 @@ import logging
 import configparser
 
 from os.path import expanduser
-from hpsmc.job import JobConfig, Job
+from hpsmc.job import JobConfig, Job, JobStore, JobScriptDatabase
 from hpsmc.tools import SLIC, HPSTR
 
 
@@ -42,6 +42,64 @@ class TestJobConfig(unittest.TestCase):
         job_config = JobConfig(config_files=['test_helpers/.hpsmc_test_cfg'], include_default_locations=False)
         component = SLIC()
         self.assertRaises(Exception, lambda: job_config.config(component, allowed_names=['not_in_config']), "Config name detector_dir is not allowed for SLIC")
+
+
+class TestJobStore(unittest.TestCase):
+
+    def test_load(self):
+        job_store = JobStore()
+        job_store.load("test_helpers/job_files/job_params.json")
+        self.assertEqual(job_store.data, {1: {"input_files": {"input1.stdhep": "path/to/input1.stdhep", "input2.stdhep": "path/to/input2.stdhep"}, "output_files": {"output.slcio": "output_file.slcio"}, "output_dir": "some/output_dir", "job_id": 1}, 2: {"input_files": {"input1.stdhep": "path/to/input1.stdhep", "input2.stdhep": "path/to/input2.stdhep"}, "output_files": {"output.slcio": "output_file.slcio"}, "output_dir": "some/output_dir", "job_id": 2}})
+
+    def test_load_file_not_exist(self):
+        job_store = JobStore()
+        self.assertRaises(Exception, lambda: job_store.load("path/does/not/exist.json"), "JSON job store does not exist: path/does/not/exist.json")
+
+    def test_init(self):
+        job_store = JobStore("test_helpers/job_files/job_params.json")
+        self.assertEqual(job_store.path, "test_helpers/job_files/job_params.json")
+        self.assertEqual(job_store.data, {1: {"input_files": {"input1.stdhep": "path/to/input1.stdhep", "input2.stdhep": "path/to/input2.stdhep"}, "output_files": {"output.slcio": "output_file.slcio"}, "output_dir": "some/output_dir", "job_id": 1}, 2: {"input_files": {"input1.stdhep": "path/to/input1.stdhep", "input2.stdhep": "path/to/input2.stdhep"}, "output_files": {"output.slcio": "output_file.slcio"}, "output_dir": "some/output_dir", "job_id": 2}})
+
+    def test_get_job(self):
+        job_store = JobStore("test_helpers/job_files/job_params.json")
+        job = job_store.get_job(1)
+        self.assertEqual(job['job_id'], 1)
+        self.assertEqual(job['output_dir'], "some/output_dir")
+        self.assertEqual(job['input_files'], {"input1.stdhep": "path/to/input1.stdhep", "input2.stdhep": "path/to/input2.stdhep"})
+        self.assertEqual(job['output_files'], {"output.slcio": "output_file.slcio"})
+
+    def test_get_job_ids(self):
+        job_store = JobStore("test_helpers/job_files/job_params.json")
+        self.assertEqual(job_store.get_job_ids(), [1, 2])
+
+    def test_has_job_id(self):
+        job_store = JobStore("test_helpers/job_files/job_params.json")
+        self.assertTrue(job_store.has_job_id(1))
+        self.assertFalse(job_store.has_job_id(3))
+
+
+class TestJobScriptDatabase(unittest.TestCase):
+
+    def test_init(self):
+        job_script_database = JobScriptDatabase()
+        self.assertEqual(len(job_script_database.scripts), 33)
+
+    def test_get_script_path(self):
+        job_script_database = JobScriptDatabase()
+        basepath = os.path.join(os.environ['HPSMC_DIR'], 'lib', 'python', 'jobs')
+        self.assertEqual(job_script_database.get_script_path("slic"), os.path.join(basepath, 'slic_job.py'))
+        self.assertEqual(job_script_database.get_script_path("tritrig_gen"), os.path.join(basepath, 'tritrig_gen_job.py'))
+
+    def test_get_script_names(self):
+        job_script_database = JobScriptDatabase()
+        job_name_list = job_script_database.get_script_names()
+        job_name_list.sort()
+        self.assertEqual(job_name_list, ["ap_gen", "ap_gen_to_slic", "ap_slic", "beam_coords", "beam_gen", "beam_gen_sample", "beam_prep_and_slic", "data_cnv", "dummy", "fee_gen_to_recon", "hpstr", "lcio_count", "moller_gen", "rad_gen", "readout_recon", "signal_beam_merge_to_recon", "signal_beam_merge_to_recon_2016", "signal_pulser_overlay_to_recon", "sim_to_ana", "simp", "slic", "slic_to_ana", "slic_to_anaMC", "slic_to_recon", "tritrig_beam", "tritrig_beam_slic_to_reco", "tritrig_gen", "tritrig_gen_to_beam_coords", "tritrig_prep_and_slic", "tritrig_sim_full_chain", "tritrig_slic_full_chain", "wab_gen_sample", "wab_gen_to_slic"])
+
+    def test_exists(self):
+        job_script_database = JobScriptDatabase()
+        self.assertTrue(job_script_database.exists("slic"))
+        self.assertFalse(job_script_database.exists("does_not_exist"))
 
 
 class TestJob(unittest.TestCase):
