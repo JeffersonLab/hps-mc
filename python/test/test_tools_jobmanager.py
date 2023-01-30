@@ -13,7 +13,7 @@ class TestJobManager(unittest.TestCase):
         self.assertEqual(job_manager.command, 'java')
 
     def test_init_with_input(self):
-        job_manager = JobManager(steering="steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"],  overlay_file="some/path/to/overlay.slcio")
+        job_manager = JobManager(steering="steering", inputs=["some/path/to/input.slcio"], outputs=["some/path/to/output.slcio"], overlay_file="some/path/to/overlay.slcio")
         self.assertEqual(job_manager.name, 'job_manager')
         self.assertEqual(job_manager.command, 'java')
         self.assertEqual(job_manager.inputs, ["some/path/to/input.slcio"])
