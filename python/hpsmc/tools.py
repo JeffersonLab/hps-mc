@@ -465,6 +465,8 @@ class HPSTR(Component):
         if '.slcio' in ext:
             return ['%s.root' % f]
         else:
+            if not self.append_tok:
+                self.append_tok = self.cfg
             return ['%s_%s.root' % (f, self.append_tok)]
 
     def execute(self, log_out, log_err):
