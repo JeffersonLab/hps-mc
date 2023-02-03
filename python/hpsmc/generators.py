@@ -84,7 +84,7 @@ class EGS5(EventGenerator):
             raise Exception("Target thickness not set!")
 
         ebeam = self.beam_energy
-        electrons = self.num_electrons * self.bunches
+        electrons = int(self.num_electrons * self.bunches)
 
         # seed_data = "%d %f %f %d" % (self.seed, self.target_dz, ebeam, electrons)
         seed_data = " ".join(str(item) for item in [self.seed, self.target_dz, ebeam, electrons])
