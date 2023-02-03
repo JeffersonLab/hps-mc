@@ -2,11 +2,11 @@
 
 import argparse
 
-from tools import *
-from generators import *
+from hpsmc.tools import *
+from hpsmc.generators import *
 
-from job import Job
-from help import _ignore
+from hpsmc.job import Job
+from hpsmc.help import _ignore
 
 
 def write_config(filename, component_names, include_defaults, fail_on_missing):

@@ -9,8 +9,8 @@ import tarfile
 
 from subprocess import PIPE
 
-from component import Component
-from run_params import RunParameters
+from hpsmc.component import Component
+from hpsmc.run_params import RunParameters
 import hpsmc.func as func
 
 logger = logging.getLogger("hpsmc.tools")

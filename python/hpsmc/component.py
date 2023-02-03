@@ -8,7 +8,7 @@ import subprocess
 import logging
 from typing import Optional
 
-from util import convert_config_value
+from hpsmc.util import convert_config_value
 
 logger = logging.getLogger("hpsmc.component")
 

@@ -1,11 +1,11 @@
 """! Utility script for printing help about component classes."""
 
-from component import Component
-from job import Job
+from hpsmc.component import Component
+from hpsmc.job import Job
 
 # These are here so all available components appear in the globals dict.
-from tools import *
-from generators import *
+from hpsmc.tools import *
+from hpsmc.generators import *
 
 # These are all interfaces and not runnable components, which should be ignored.
 _ignore = ('Component', 'EventGenerator', 'StdHepTool', 'JavaTool', 'MG')
