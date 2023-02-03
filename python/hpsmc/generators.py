@@ -7,8 +7,8 @@ import glob
 import gzip
 import logging
 
-from component import Component
-from run_params import RunParameters
+from hpsmc.component import Component
+from hpsmc.run_params import RunParameters
 
 logger = logging.getLogger("hpsmc.generators")
 

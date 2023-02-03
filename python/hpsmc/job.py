@@ -17,7 +17,7 @@ import subprocess
 from collections.abc import Sequence
 from os.path import expanduser
 
-from util import convert_config_value, config_logging
+from hpsmc.util import convert_config_value, config_logging
 
 ## Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
