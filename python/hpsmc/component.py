@@ -6,7 +6,6 @@ Defines the base interface that component classes should extend.
 import os
 import subprocess
 import logging
-from typing import Optional
 
 from hpsmc.util import convert_config_value
 
@@ -32,14 +31,14 @@ class Component(object):
     """
 
     def __init__(self,
-                 name: str,
-                 command: Optional[str] = None,
-                 nevents: Optional[int] = None,
-                 seed: int = 1,
+                 name,
+                 command=None,
+                 nevents=None,
+                 seed=1,
                  inputs=[],
                  outputs=None,
-                 append_tok: Optional[str] = None,
-                 output_ext: Optional[str] = None,
+                 append_tok=None,
+                 output_ext=None,
                  ignore_job_params=[],
                  **kwargs):
 
