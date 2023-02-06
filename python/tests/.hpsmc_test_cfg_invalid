@@ -1,7 +1,0 @@
-[SLIC]
-detector_dir = some/detector/dir
-hps_fieldmaps_dir = some/fieldmaps/dir
-slic_dir = invalid/slicdir
-
-[JobManager]
-hps_fieldmaps_dir = some/fieldmaps/dir
