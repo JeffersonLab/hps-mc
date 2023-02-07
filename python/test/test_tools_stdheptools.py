@@ -1,5 +1,4 @@
 import unittest
-import configparser
 
 from hpsmc.tools import StdHepTool, BeamCoords, RandomSample, DisplaceTime, DisplaceUni, AddMother, AddMotherFullTruth, MergePoisson, MergeFiles
 
