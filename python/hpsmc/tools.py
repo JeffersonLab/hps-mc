@@ -1259,12 +1259,15 @@ class Unzip(Component):
 
     def output_files(self):
         """! Return list of output files."""
+        if self.outputs:
+            return self.outputs
         return [os.path.splitext(i)[0] for i in self.input_files()]
 
     def execute(self, log_out, log_err):
         """! Execute Unzip component."""
-        for inputfile in self.input_files():
-            outputfile = os.path.splitext(inputfile)[0]
+        for i in range(0, len(self.input_files())):
+            inputfile = self.input_files()[i]
+            outputfile = self.output_files()[i]
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
                 shutil.copyfileobj(in_file, out_file)
                 logger.debug("Unzipped '%s' to '%s'" % (inputfile, outputfile))
