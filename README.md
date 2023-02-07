@@ -162,7 +162,10 @@ There are several ways to run the tests. Assuming you are in `python/test`, you 
   ```bash
   python3 -m unittest -v
   ```
-  The `-v` option creates a more verbose output than the standard output.
+  The `-v` option creates a more verbose output than the standard output. If you're running the tests for the first time, you might need to run:
+  ```bash
+  python3 -m unittest discover -v
+  ```
 - run a test module:
   ```bash
   python3 -m unittest -v test_some_module.py
