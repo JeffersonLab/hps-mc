@@ -51,7 +51,7 @@ class Component(object):
         self.append_tok = append_tok
         self.output_ext = output_ext
 
-        # FIXME: This is hacky.
+        ## \todo FIXME: This is hacky.
         self.ignore_job_params = ignore_job_params
 
         self.hpsmc_dir = os.getenv("HPSMC_DIR", None)

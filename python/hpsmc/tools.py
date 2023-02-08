@@ -10,7 +10,6 @@ import tarfile
 from subprocess import PIPE
 
 from hpsmc.component import Component
-from hpsmc.run_params import RunParameters
 import hpsmc.func as func
 
 logger = logging.getLogger("hpsmc.tools")
@@ -303,6 +302,7 @@ class JobManager(Component):
         args.append("-jar")
         args.append(self.hps_java_bin_jar)
 
+        ## \todo add event_print_interval to optional parameters?
         if self.event_print_interval is not None:
             args.append("-e")
             args.append(str(self.event_print_interval))
@@ -790,12 +790,17 @@ class MergePoisson(StdHepTool):
     """!
     Merge StdHep files, applying poisson sampling.
 
-    Required parameters are: **run_params**
+    Required parameters are: **target_thickness**, **num_electrons**
     """
 
     def __init__(self, xsec=0, **kwargs):
         ## cross section in pb
         self.xsec = xsec
+        ## target thickness in cm
+        self.target_thickness = None
+        ## number of electrons per bunch
+        self.num_electrons = None
+
         StdHepTool.__init__(self,
                             name='merge_poisson',
                             append_tok='sampled',
@@ -803,10 +808,8 @@ class MergePoisson(StdHepTool):
 
     def setup(self):
         """! Setup MergePoisson component."""
-        self.run_param_data = RunParameters(self.run_params)
-        ## \todo: this function could just be inlined here
         if self.xsec > 0:
-            self.mu = func.lint(self.run_param_data) * self.xsec
+            self.mu = func.lint(self.target_thickness, self.num_electrons) * self.xsec
         else:
             raise Exception("Cross section is missing.")
         logger.info("mu is %f", self.mu)
@@ -815,10 +818,10 @@ class MergePoisson(StdHepTool):
         """!
         Return list of required parameters.
 
-        Required parameters are: **run_params**
+        Required parameters are: **target_thickness**, **num_electrons**
         @return list of required parameters
         """
-        return ['run_params']
+        return ['target_thickness', 'num_electrons']
 
     def cmd_args(self):
         """!
@@ -908,6 +911,7 @@ class StdHepCount(Component):
         Setup command arguments.
         @return  list of arguments
         """
+        ## \todo why does it only count the first input file?
         return [self.input_files()[0]]
 
     def execute(self, log_out, log_err):
@@ -1088,7 +1092,7 @@ class FilterBunches(JavaTool):
         if 'filter_no_cuts' in kwargs:
             self.filter_no_cuts = kwargs['filter_no_cuts']
         else:
-            # By default cuts are on
+            ## By default cuts are on
             self.filter_no_cuts = False
 
         if 'filter_ecal_pairs' in kwargs:
@@ -1099,26 +1103,26 @@ class FilterBunches(JavaTool):
         if 'filter_ecal_hit_ecut' in kwargs:
             self.filter_ecal_hit_ecut = kwargs['filter_ecal_hit_ecut']
         else:
-            # No default ecal hit cut energy (negative val to be ignored)
+            ## No default ecal hit cut energy (negative val to be ignored)
             self.filter_ecal_hit_ecut = -1.0
             # self.filter_ecal_hit_ecut = 0.05
 
         if 'filter_event_interval' in kwargs:
             self.filter_event_interval = kwargs['filter_event_interval']
         else:
-            # Default event filtering interval
+            ## Default event filtering interval
             self.filter_event_interval = 250
 
         if 'filter_nevents_read' in kwargs:
             self.filter_nevents_read = kwargs['filter_nevents_read']
         else:
-            # Default is no maximum nevents to read
+            ## Default is no maximum nevents to read
             self.filter_nevents_read = -1
 
         if 'filter_nevents_write' in kwargs:
             self.filter_nevents_write = kwargs['filter_nevents_write']
         else:
-            # Default is no maximum nevents to write
+            ## Default is no maximum nevents to write
             self.filter_nevents_write = -1
 
         self.hps_java_bin_jar = None

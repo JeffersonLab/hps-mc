@@ -2,7 +2,6 @@ import unittest
 import os
 
 from hpsmc.generators import EventGenerator, EGS5, MG, MG4, MG5
-from hpsmc.run_params import RunParameters
 
 
 class TestEventGenerator(unittest.TestCase):
@@ -25,11 +24,11 @@ class TestEGS5(unittest.TestCase):
 
     def test_required_params(self):
         egs5 = EGS5()
-        self.assertEqual(egs5.required_parameters(), ['seed', 'run_params'])
+        self.assertEqual(egs5.required_parameters(), ['seed',  'target_thickness', 'beam_energy', 'num_electrons'])
 
     def test_optional_params(self):
         egs5 = EGS5()
-        self.assertEqual(egs5.optional_parameters(), ['bunches', 'target_thickness'])
+        self.assertEqual(egs5.optional_parameters(), ['bunches'])
 
     def test_output_files(self):
         egs5 = EGS5()
@@ -39,32 +38,29 @@ class TestEGS5(unittest.TestCase):
 
     def test_set_parameters(self):
         egs5 = EGS5()
-        params = {'seed': 1, 'run_params': '1pt1'}
+        params = {'seed': 1, 'target_thickness': 1.0, 'beam_energy': 1.0, 'num_electrons': 1}
         egs5.set_parameters(params)
         self.assertEqual(egs5.seed, 1)
+        self.assertEqual(egs5.target_thickness, 1.0)
+        self.assertEqual(egs5.beam_energy, 1.0)
+        self.assertEqual(egs5.num_electrons, 1)
 
     def test_setup(self):
         egs5 = EGS5()
-        params = {'seed': 1, 'run_params': '1pt1', 'bunches': 1}
+        params = {'seed': 1, 'bunches': 1, 'target_thickness': 0.0004062, 'beam_energy': 1100.00, 'num_electrons': 625}
         egs5.set_parameters(params)
         egs5.setup()
         egs5_dir = os.getenv("HPSMC_DIR", None) + '/share/generators/egs5'
         self.assertEqual(egs5.egs5_dir, egs5_dir)
         self.assertEqual(egs5.egs5_data_dir, egs5_dir + '/data')
         self.assertEqual(egs5.egs5_config_dir, egs5_dir + '/config')
-        runparameters = RunParameters(params['run_params'])
-        self.assertEqual(egs5.target_z, runparameters.get("target_z"))
 
         with open("seed.dat", 'r') as seed_file:
             seed_vals = [line.split() for line in seed_file]
         self.assertEqual(seed_vals[0][0], str(1))
-        # this test fails because the precision of target_z in seed.dat is not the same as in run_params!!!
-        # for now: use %f here
-        target_thickness = '%f' % (runparameters.get("target_z"))
-        self.assertEqual(seed_vals[0][1], target_thickness)
-        beam_energy = '%f' % (runparameters.get("beam_energy"))
-        self.assertEqual(seed_vals[0][2], beam_energy)
-        self.assertEqual(seed_vals[0][3], str(runparameters.get("num_electrons") * params['bunches']))
+        self.assertEqual(seed_vals[0][1], str(egs5.target_thickness))
+        self.assertEqual(seed_vals[0][2], str(egs5.beam_energy))
+        self.assertEqual(seed_vals[0][3], str(egs5.num_electrons * params['bunches']))
 
         # remove created symlinks and files
         os.remove(os.getcwd() + '/data')

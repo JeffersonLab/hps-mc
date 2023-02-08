@@ -1,6 +1,9 @@
 {
     "nevents": [1000],
     "run_params": ["4pt55"],
+    "target_thickness": [0.002],
+    "beam_energy": [4550.00],
+    "num_electrons": [1500],
     "apmass": [100.0],
     "apmass_for_name": ["ap100MeV"]
 }

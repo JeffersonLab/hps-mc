@@ -1,6 +1,9 @@
 {
     "nevents": 10000,
     "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
     "target_z": 0.0,
     "run_number": 10722,
     "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
