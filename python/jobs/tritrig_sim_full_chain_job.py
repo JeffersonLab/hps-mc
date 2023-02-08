@@ -18,10 +18,6 @@ mom = AddMother()
 ## Rotate events into beam coords
 rot = BeamCoords()
 
-## \todo cleanup
-# Print results
-# p = StdHepTool(name="print_stdhep")
-
 ## Simulate events
 sim = Sim()
 

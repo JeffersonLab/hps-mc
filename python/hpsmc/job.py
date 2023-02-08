@@ -23,8 +23,6 @@ from hpsmc.util import convert_config_value, config_logging
 logger = logging.getLogger('hpsmc.job')
 logger.setLevel(logging.INFO)
 
-## Unused, \todo remove?
-
 
 def check(j):
     jsonfile = j.application.args[1]
@@ -259,7 +257,7 @@ class Job(object):
         ## error output
         self.err = sys.stderr
 
-        # These attributes can all be set in the config file.
+        ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
         self.delete_existing = False
@@ -311,7 +309,7 @@ class Job(object):
         parser.add_argument("params", nargs='?', help="Job param file in JSON format")
 
         ## \todo: CL option to disable automatic copying of ouput files.
-        ##        The files should be symlinked if copying is disabled.
+        # The files should be symlinked if copying is disabled.
         # parser.add_argument("--no-copy-output-files", help="Disable copying of output files")
         # parser.add_argument('--feature', dest='feature', action='store_true')
         # parser.add_argument('--no-feature', dest='feature', action='store_false')
@@ -788,7 +786,8 @@ class Job(object):
         else:
             raise Exception('The ptag already exists: %s' % tag)
 
-    def __copy_ptag_output_files(self):  # \todo is this still needed?
+    ## \todo is this still needed?
+    def __copy_ptag_output_files(self):
         if len(self.ptags):
             for src, dest in self.output_files.items():
                 if Job.is_ptag(src):

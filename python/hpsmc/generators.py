@@ -8,7 +8,6 @@ import gzip
 import logging
 
 from hpsmc.component import Component
-from hpsmc.run_params import RunParameters
 
 logger = logging.getLogger("hpsmc.generators")
 
@@ -32,8 +31,8 @@ class EGS5(EventGenerator):
     """!
     Run the EGS5 event generator to produce a StdHep file.
 
-    Required parameters are **seed**, **run_parameters** \n
-    Optional parameters are: **bunches**, **target_thickness**
+    Required parameters are **seed**, **target_thickness**, **beam_energy**, **num_electrons** \n
+    Optional parameters are: **bunches**
     """
 
     def __init__(self, name='', **kwargs):
@@ -43,6 +42,10 @@ class EGS5(EventGenerator):
         self.target_thickness = None
         ## egs5 installation directory
         self.egs5_dir = None
+        ## beam energy in MeV
+        self.beam_energy = None
+        ## number of electrons
+        self.num_electrons = None
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
     def get_install_dir(self):
@@ -73,23 +76,19 @@ class EGS5(EventGenerator):
             os.unlink("pgs5job.pegs5inp")
         os.symlink(self.egs5_config_dir + "/src/esa.inp", "pgs5job.pegs5inp")
 
-        logger.debug("Reading run parameters: {}".format(self.run_params))  # run_params here 3pt74, 1pt1, etc -> called run_params_key in following comments
-        # run parameters
-        self.run_param_data = RunParameters(self.run_params)  # initializing run params
-
         # Set target thickness from job parameter or use the default from run parameters
         if self.target_thickness is not None:
-            self.target_z = self.target_thickness
-            logger.debug("Target thickness set from job param: {}".format(self.target_z))
+            self.target_dz = self.target_thickness
+            logger.debug("Target thickness set from job param: {}".format(self.target_dz))
         else:
-            self.target_z = self.run_param_data.get("target_z")  # gets target thickness: run_params["target_z"][run_params_key] (run_params here the params in run_params.py)
-            logger.debug("Target thickness set from run_params: {}".format(self.target_z))
+            raise Exception("Target thickness not set!")
 
-        ebeam = self.run_param_data.get("beam_energy")
-        electrons = self.run_param_data.get("num_electrons") * self.bunches
+        ebeam = self.beam_energy
+        electrons = int(self.num_electrons * self.bunches)
 
-        seed_data = "%d %f %f %d" % (self.seed, self.target_z, ebeam, electrons)
-        logger.debug("Seed data (seed, target_z, ebeam, electrons): {}".format(seed_data))
+        # seed_data = "%d %f %f %d" % (self.seed, self.target_dz, ebeam, electrons)
+        seed_data = " ".join(str(item) for item in [self.seed, self.target_dz, ebeam, electrons])
+        logger.debug("Seed data (seed, target_dz, ebeam, electrons): {}".format(seed_data))
         seed_file = open("seed.dat", 'w')
         seed_file.write(seed_data)
         seed_file.close()
@@ -119,17 +118,17 @@ class EGS5(EventGenerator):
         """!
         Return required parameters.
 
-        Required parameters are **seed**, **run_parameters**
+        Required parameters are **seed**, **target_thickness**, **beam_energy**, **num_electrons**
         """
-        return ['seed', 'run_params']
+        return ['seed', 'target_thickness', 'beam_energy', 'num_electrons']
 
     def optional_parameters(self):
         """!
         Return optional parameters.
 
-        Optional parameters are: **bunches**, **target_thickness**
+        Optional parameters are: **bunches**
         """
-        return ['bunches', 'target_thickness']
+        return ['bunches']
 
     # def required_config(self):
     #    return ['egs5_dir']

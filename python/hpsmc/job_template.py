@@ -37,8 +37,7 @@ def uuid():
     """! Function to get a uuid within a template."""
     return str(_uuid.uuid4())[:8]
 
-# TODO:
-# filenum filter - try to get file num by looking for _%d in file name
+## \todo: filenum filter - try to get file num by looking for _%d in file name
 
 # def pwd():
 #    return os.getcwd()
