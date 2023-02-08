@@ -37,8 +37,7 @@ def uuid():
     """! Function to get a uuid within a template."""
     return str(_uuid.uuid4())[:8]
 
-# TODO:
-# filenum filter - try to get file num by looking for _%d in file name
+## \todo: filenum filter - try to get file num by looking for _%d in file name
 
 # def pwd():
 #    return os.getcwd()
@@ -76,7 +75,7 @@ class JobTemplate:
     """
 
     def __init__(self, template_file=None, output_file='jobs.json'):
-        # template file from which parameters are read
+        ## template file from which parameters are read
         self.template_file = template_file
         self.env = Environment(loader=FileSystemLoader('.'))
         self.env.filters['basename'] = basename
@@ -84,13 +83,13 @@ class JobTemplate:
         self.env.filters['uuid'] = uuid
         self.env.filters['extension'] = extension
         self.env.filters['dirname'] = dirname
-        # start ID for jobs
+        ## start ID for jobs
         self.job_id_start = 0
-        # dict of input files
+        ## dict of input files
         self.input_files = {}
-        # dict of iteration variables
+        ## dict of iteration variables
         self.itervars = {}
-        # name of output file
+        ## name of output file
         self.output_file = output_file
 
     def add_input_files(self, key, file_list, nreads=1):
