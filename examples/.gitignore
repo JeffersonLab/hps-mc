@@ -5,6 +5,7 @@
 *.out
 *.err
 *.log
+logs/
 
 # Generated files
 *.slcio
