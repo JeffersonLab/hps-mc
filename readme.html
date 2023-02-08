@@ -175,6 +175,20 @@ Code Formatting</h2>
 </div><!-- fragment --><p> from the top of the <code>hps-mc</code> directory. Alternatively, run <code>format_python_code.sh</code>. This will automatically fix (most) of the formatting issues.</p>
 <p>To preserve the Doxygen-style comments, it is necessary to disable the automatic formatting of comment blocks which means that you might need to fix those by hand.</p>
 <h2><a class="anchor" id="autotoc_md36"></a>
+Unit tests</h2>
+<p>Unit tests for the hps-mc python modules can be found in <code>python/test</code>. There are several ways to run the tests. Assuming you are in <code>python/test</code>, you can</p><ul>
+<li>run all tests at once: <div class="fragment"><div class="line">python3 -m unittest -v</div>
+</div><!-- fragment --> The <code>-v</code> option creates a more verbose output than the standard output. If you're running the tests for the first time, you might need to run: <div class="fragment"><div class="line">python3 -m unittest discover -v</div>
+</div><!-- fragment --></li>
+<li>run a test module: <div class="fragment"><div class="line">python3 -m unittest -v test_some_module.py</div>
+</div><!-- fragment --> or <div class="fragment"><div class="line">python3 -m unittest -v test_some_module</div>
+</div><!-- fragment --></li>
+<li>run a selection of test modules: <div class="fragment"><div class="line">python3 -m unittest -v test_some_module test_another_module</div>
+</div><!-- fragment --></li>
+<li>run a specific test class or test in a module: <div class="fragment"><div class="line">python3 -m unittest -v test_some_module.TestClass.test_method</div>
+</div><!-- fragment --> More details on the python <code>unittest</code> framework can be found <a href="https://docs.python.org/3/library/unittest.html">here</a>.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Help</h2>
 <p>You can post any questions or report problems on the <a href="https://heavyphotonsearch.slack.com/">HPS Slack</a> in the <a href="https://heavyphotonsearch.slack.com/messages/C47LLBP5F">montecarlo</a> channel.</p>
 <p>The HPS software mailing list can also be used for help. </p>

@@ -105,13 +105,13 @@ $(document).ready(function(){initNavTree('signal__pulser__overlay__to__recon__jo
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">    9</a></span>&#160;job.description = <span class="stringliteral">&#39;signal-pulse from overlay to recon&#39;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"># Get job input file targets</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#afde3b66b6b41bd008469f366fa756e54">   12</a></span>&#160;inputs = list(job.input_files.values())</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"># Input signal events (slcio format)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#afbdcc914096c575778ec4502dc6e9a35">   15</a></span>&#160;signal_file_name = []</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"># Input pulser events (evio format)</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48">   18</a></span>&#160;pulser_file_name = []</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordflow">for</span> input <span class="keywordflow">in</span> inputs:</div>
@@ -120,74 +120,74 @@ $(document).ready(function(){initNavTree('signal__pulser__overlay__to__recon__jo
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> <span class="stringliteral">&quot;pulser&quot;</span> <span class="keywordflow">in</span> input:</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        pulser_file_name.append(input)</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"># Check for expected input file targets</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordflow">if</span> len(signal_file_name) == 0:</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&quot;Missing required input file(s) for signal&quot;</span>)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordflow">if</span> len(pulser_file_name) == 0:</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">raise</span> Exception(<span class="stringliteral">&quot;Missing required input file(s) for pulser data&quot;</span>)</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"># Base name of intermediate signal files</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a67794470ef410287906b999c006f1e58">   33</a></span>&#160;signal_name = <span class="stringliteral">&#39;signal&#39;</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"># Base pulser of intermediate pulser files</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a8606481dc75d9334bed08eca503e0eed">   36</a></span>&#160;pulser_name = <span class="stringliteral">&#39;pulser&#39;</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"># Base name of merged files</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a407b904ced90001e217f8b5b99e692d6">   39</a></span>&#160;signal_pulser_name = <span class="stringliteral">&#39;signal_pulser&#39;</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"># Filter signal events and catenate files before overlaying with pulser data</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a6cd7b80f6c647e8c01afbe7c94059d2d">   42</a></span>&#160;filter_events = <a class="code" href="classhpsmc_1_1tools_1_1ExtractEventsWithHitAtHodoEcal.html">ExtractEventsWithHitAtHodoEcal</a>(inputs=signal_file_name,</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                               outputs=[<span class="stringliteral">&#39;%s_filt.slcio&#39;</span> % signal_name],</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                               event_interval=0, num_hodo_hits=1)</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"># Count filtered events</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a8e91f24e8243a86ee91c1ed6600f7606">   47</a></span>&#160;count_filter = <a class="code" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(inputs=filter_events.output_files())</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"># Convert evio to lcio for raw pulser data</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#ab789864d4692c3b439fb4ad7136e0d85">   50</a></span>&#160;evio_to_lcio = <a class="code" href="classhpsmc_1_1tools_1_1EvioToLcio.html">EvioToLcio</a>(steering=<span class="stringliteral">&#39;evio_to_lcio&#39;</span>, inputs=pulser_file_name, output=[<span class="stringliteral">&#39;%s.slcio&#39;</span> % pulser_name])</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"># Count pulser events</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a09eca22d605dea1eda526496a3adb8fa">   53</a></span>&#160;count_pulser = <a class="code" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(inputs=evio_to_lcio.output_files())</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"># Overlay signal with pulser data</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#ad18735e21b9100cb298ea247556c1868">   56</a></span>&#160;overlay = <a class="code" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering=<span class="stringliteral">&#39;overlay&#39;</span>,</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                     inputs=filter_events.output_files(),</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                     overlay_file=evio_to_lcio.output_files()[0],</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                     outputs=[<span class="stringliteral">&#39;%s.slcio&#39;</span> % signal_pulser_name])</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"># Space overlaid events</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a463e4c2fef687df8ea3aae9e5bf73b78">   62</a></span>&#160;space_overlay = <a class="code" href="classhpsmc_1_1tools_1_1FilterBunches.html">FilterBunches</a>(inputs=overlay.output_files(),</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                              filter_no_cuts=<span class="keyword">True</span>,</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                              outputs=[<span class="stringliteral">&#39;%s_spaced.slcio&#39;</span> % signal_pulser_name],</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                              filter_event_interval=250)</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"># Print number of merged events</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a1b0b27a46fdfa8a792d05ac7050e23ab">   68</a></span>&#160;count_space_overlay = <a class="code" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(inputs=space_overlay.output_files())</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"># Run simulated events in readout to generate triggers</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">   71</a></span>&#160;readout = <a class="code" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering=<span class="stringliteral">&#39;readout&#39;</span>,</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                     inputs=space_overlay.output_files(),</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                     outputs=[<span class="stringliteral">&#39;%s_readout.slcio&#39;</span> % signal_pulser_name])</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"># Print number of readout events</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a5335cc02f651b1d910b2705947ea52bf">   76</a></span>&#160;count_readout = <a class="code" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(inputs=readout.output_files())</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"># Run physics reconstruction</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
 <div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">   79</a></span>&#160;recon = <a class="code" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering=<span class="stringliteral">&#39;recon&#39;</span>,</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                   inputs=readout.output_files(),</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                   outputs=[<span class="stringliteral">&#39;%s_recon.slcio&#39;</span> % signal_pulser_name])</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"># Print number of recon events</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="namespacesignal__pulser__overlay__to__recon__job.html#ae219caee644dd69bd3f281a6de26c5e2">   84</a></span>&#160;count_recon = <a class="code" href="classhpsmc_1_1tools_1_1LCIOCount.html">LCIOCount</a>(inputs=recon.output_files())</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"># Add the components</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;job.add([filter_events, count_filter, evio_to_lcio, count_pulser, overlay, space_overlay,</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;         count_space_overlay, readout, count_readout, recon, count_recon])</div>
-<div class="ttc" id="aclasshpsmc_1_1tools_1_1EvioToLcio_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1EvioToLcio.html">hpsmc.tools.EvioToLcio</a></div><div class="ttdoc">Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00986">tools.py:986</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1tools_1_1ExtractEventsWithHitAtHodoEcal_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1ExtractEventsWithHitAtHodoEcal.html">hpsmc.tools.ExtractEventsWithHitAtHodoEcal</a></div><div class="ttdoc">Apply hodo-hit filter and space MC events to process before readout.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01191">tools.py:1191</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1tools_1_1FilterBunches_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1FilterBunches.html">hpsmc.tools.FilterBunches</a></div><div class="ttdoc">Space MC events and apply energy filters to process before readout.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01079">tools.py:1079</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1tools_1_1EvioToLcio_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1EvioToLcio.html">hpsmc.tools.EvioToLcio</a></div><div class="ttdoc">Convert EVIO events to LCIO using the hps-java EvioToLcio command line tool.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00987">tools.py:987</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1tools_1_1ExtractEventsWithHitAtHodoEcal_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1ExtractEventsWithHitAtHodoEcal.html">hpsmc.tools.ExtractEventsWithHitAtHodoEcal</a></div><div class="ttdoc">Apply hodo-hit filter and space MC events to process before readout.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01190">tools.py:1190</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1tools_1_1FilterBunches_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1FilterBunches.html">hpsmc.tools.FilterBunches</a></div><div class="ttdoc">Space MC events and apply energy filters to process before readout.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01078">tools.py:1078</a></div></div>
 <div class="ttc" id="aclasshpsmc_1_1tools_1_1JobManager_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1JobManager.html">hpsmc.tools.JobManager</a></div><div class="ttdoc">Run the hps-java JobManager class.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00174">tools.py:174</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1tools_1_1LCIOCount_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1LCIOCount.html">hpsmc.tools.LCIOCount</a></div><div class="ttdoc">Count events in LCIO files.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01516">tools.py:1516</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1tools_1_1LCIOCount_html"><div class="ttname"><a href="classhpsmc_1_1tools_1_1LCIOCount.html">hpsmc.tools.LCIOCount</a></div><div class="ttdoc">Count events in LCIO files.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l01517">tools.py:1517</a></div></div>
 <div class="ttc" id="anamespacehpsmc_1_1tools_html"><div class="ttname"><a href="namespacehpsmc_1_1tools.html">hpsmc.tools</a></div><div class="ttdoc">Tools that can be used in HPSMC jobs.</div><div class="ttdef"><b>Definition:</b> <a href="tools_8py_source.html#l00001">tools.py:1</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

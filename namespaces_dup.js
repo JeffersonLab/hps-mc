@@ -7,7 +7,8 @@ var namespaces_dup =
     [ "Documentation", "readme.html#autotoc_md33", null ],
     [ "Quick Start Guide", "readme.html#autotoc_md34", null ],
     [ "Code Formatting", "readme.html#autotoc_md35", null ],
-    [ "Help", "readme.html#autotoc_md36", null ],
+    [ "Unit tests", "readme.html#autotoc_md36", null ],
+    [ "Help", "readme.html#autotoc_md37", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
       [ "description", "namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "mg", "namespaceap__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
@@ -276,6 +277,7 @@ var namespaces_dup =
       [ "slic_file", "namespaceslic__to__recon__job.html#a641eb6472ec27c3dac2615f88dfefc2d", null ],
       [ "slic_file_names", "namespaceslic__to__recon__job.html#af9957ed1f3a1b74b9312c72a46048392", null ]
     ] ],
+    [ "test", "namespacetest.html", "namespacetest" ],
     [ "tritrig_beam_job", "namespacetritrig__beam__job.html", [
       [ "beam_file_names", "namespacetritrig__beam__job.html#ad90e5e78a8229f9a398a8bc694f27cd4", null ],
       [ "comps", "namespacetritrig__beam__job.html#acc0773cf13b176eee1c782c41e8d1563", null ],
