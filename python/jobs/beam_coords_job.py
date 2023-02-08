@@ -7,8 +7,8 @@ from hpsmc.tools import BeamCoords
 
 job.description = 'Beam rotation and transform'
 
-# Apply beam transforms
+## Apply beam transforms
 rot = BeamCoords()
 
-# Run the job
+## Run the job
 job.add([rot])

@@ -9,12 +9,11 @@ logger = logging.getLogger("hpsmc.func")
 def lint(target_dz, num_electrons, density=6.306e-14):
     """!
     Calculate integrated luminosity.
-    @param run_params  run parameter
+    @param target_dz  target thickness in cm
+    @param num_electrons  number of electrons in bunch
     @param density  1/(cm*pb), default value is for tungsten
     @return integrated luminosity in 1/pb
     """
-    # w = run_params.get("target_thickness")
-    # ne = run_params.get("num_electrons")
     return density * target_dz * num_electrons
 
 
@@ -48,7 +47,8 @@ def mu(filename, target_dz, num_electrons):
     WARNING: This function does not work properly because csection() is broken!
 
     @param filename  name of input LHE input file containing cross section
-    @param run_params  run parameters to calculate integrated luminosity from
+    @param target_dz  target thickness in cm
+    @param num_electrons  number of electrons in bunch
     @return number of events per bunch (L_int[1/pb] * xsec[pb])
     """
     return lint(target_dz, num_electrons) * csection(filename)
@@ -85,14 +85,15 @@ def nbunches(filename, target_dz, num_electrons):
     """!
     Get the approximate number of beam bunches represented by an LHE file from its event count.
     @param filename  name of input LHE file
-    @param run_params  run parameter
+    @param target_dz  target thickness in cm
+    @param num_electrons  number of electrons in bunch
     """
     n = nevents(filename)
     m = mu(filename, target_dz, num_electrons)
     return int(n / m)
 
 
-# TODO: wab LHE file fixup
+## \todo TODO: wab LHE file fixup
 """
 echo "Transmuting A's to photons..."
 gunzip -f wab.lhe.gz
