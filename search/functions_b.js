@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nbunches_1120',['nbunches',['../namespacehpsmc_1_1func.html#ad4458f6b9f68c7b80054ca36ca0eb026',1,'hpsmc::func']]],
-  ['nevents_1121',['nevents',['../namespacehpsmc_1_1func.html#ade4d12178565b34af556914cf1fece8a',1,'hpsmc::func']]]
+  ['nbunches_1122',['nbunches',['../namespacehpsmc_1_1func.html#a8812c5dd3a9101f2c589352bf4f74502',1,'hpsmc::func']]],
+  ['nevents_1123',['nevents',['../namespacehpsmc_1_1func.html#ade4d12178565b34af556914cf1fece8a',1,'hpsmc::func']]]
 ];

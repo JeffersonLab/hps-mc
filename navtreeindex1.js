@@ -1,5 +1,6 @@
 var NAVTREEINDEX1 =
 {
+"classhpsmc_1_1generators_1_1MG4.html#ac0015f02e3332bae128e755f30fdd4f5":[9,0,0,2,4,6],
 "classhpsmc_1_1generators_1_1MG4.html#acbb01f18f47a609fadcb84bf7751a151":[9,0,0,2,4,2],
 "classhpsmc_1_1generators_1_1MG4.html#ade41f93307784822f8bc17e85964d427":[9,0,0,2,4,3],
 "classhpsmc_1_1generators_1_1MG5.html":[9,0,0,2,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "classhpsmc_1_1tools_1_1LCIOCount.html#aae7af906a32c4f8bb123982f38866c42":[9,0,0,6,24,0],
 "classhpsmc_1_1tools_1_1LCIOCount.html#af16e86fb81fbbc18f79fde1156e45ddc":[9,0,0,6,24,1],
 "classhpsmc_1_1tools_1_1LCIODumpEvent.html":[9,0,0,6,18],
-"classhpsmc_1_1tools_1_1LCIODumpEvent.html#a0f2f5067bb76f32ee6fd3097c021983b":[9,0,0,6,18,3],
-"classhpsmc_1_1tools_1_1LCIODumpEvent.html#a180299f23031498c0502bcc429587fbd":[9,0,0,6,18,7]
+"classhpsmc_1_1tools_1_1LCIODumpEvent.html#a0f2f5067bb76f32ee6fd3097c021983b":[9,0,0,6,18,3]
 };

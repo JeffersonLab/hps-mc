@@ -15,9 +15,9 @@ var namespacehpsmc =
     ] ],
     [ "func", "namespacehpsmc_1_1func.html", [
       [ "csection", "namespacehpsmc_1_1func.html#a099fa2b27956431d00747e396e02e21b", null ],
-      [ "lint", "namespacehpsmc_1_1func.html#af39da3fed922028a250ebbfec130c849", null ],
-      [ "mu", "namespacehpsmc_1_1func.html#a5517145401f2112ada3485f3e3cf651d", null ],
-      [ "nbunches", "namespacehpsmc_1_1func.html#ad4458f6b9f68c7b80054ca36ca0eb026", null ],
+      [ "lint", "namespacehpsmc_1_1func.html#ab73778156d0fae14b2f361980416a47a", null ],
+      [ "mu", "namespacehpsmc_1_1func.html#afc3ebee3e8bfea1925fcf048dc5f9add", null ],
+      [ "nbunches", "namespacehpsmc_1_1func.html#a8812c5dd3a9101f2c589352bf4f74502", null ],
       [ "nevents", "namespacehpsmc_1_1func.html#ade4d12178565b34af556914cf1fece8a", null ],
       [ "logger", "namespacehpsmc_1_1func.html#a0b14e488ae28d98d262453f3e9cd6e4d", null ]
     ] ],

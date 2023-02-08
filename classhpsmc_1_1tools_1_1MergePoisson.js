@@ -6,6 +6,7 @@ var classhpsmc_1_1tools_1_1MergePoisson =
     [ "required_parameters", "classhpsmc_1_1tools_1_1MergePoisson.html#a7cfececac3ad0536a7eea77c6ade91b9", null ],
     [ "setup", "classhpsmc_1_1tools_1_1MergePoisson.html#ade41f93307784822f8bc17e85964d427", null ],
     [ "mu", "classhpsmc_1_1tools_1_1MergePoisson.html#a23c1622d0f5af8a8a8cd90dd1898f3cb", null ],
-    [ "run_param_data", "classhpsmc_1_1tools_1_1MergePoisson.html#a8bdd15e05ce33a27347743eb250a1c97", null ],
+    [ "num_electrons", "classhpsmc_1_1tools_1_1MergePoisson.html#ab58fcc5cf73d39bbb52091a6347a4156", null ],
+    [ "target_thickness", "classhpsmc_1_1tools_1_1MergePoisson.html#a2c36fcc1feebf5898463108668340780", null ],
     [ "xsec", "classhpsmc_1_1tools_1_1MergePoisson.html#a94ec15c4eba22a2abf268f9afa568582", null ]
 ];
