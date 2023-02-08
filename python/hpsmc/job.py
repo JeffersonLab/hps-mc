@@ -19,7 +19,7 @@ from os.path import expanduser
 
 from hpsmc.util import convert_config_value, config_logging
 
-# Initialize logger with default level
+## Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
 logger.setLevel(logging.INFO)
 
@@ -73,7 +73,7 @@ class JobConfig(object):
         """! Load config from the list of possible locations."""
         ## \todo implement or cleanup
         # Read in config files and crash if none are found from list
-        # configuration parser
+        ## configuration parser
         self.parser = configparser.ConfigParser()
         # logger.debug("Checking for config files: %s" % str(self.config_files))
         # parsed =
@@ -224,7 +224,7 @@ class Job(object):
                      'enable_env_config']
     """
 
-    ## Prefix to indicate ptag in job param file.
+    # Prefix to indicate ptag in job param file.
     PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
@@ -564,7 +564,7 @@ class Job(object):
 
             # Copy by file path or ptag
             if self.enable_copy_output_files:
-                # \todo: combine these methods
+                ## \todo: combine these methods
                 self.__copy_output_files()
             else:
                 logger.warning('Copy output files is disabled!')

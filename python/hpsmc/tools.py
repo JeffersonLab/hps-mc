@@ -332,7 +332,6 @@ class JobManager(Component):
                 raise Exception('Steering looks like a file but is not an abs path: %s' % self.steering_file)
         args.append(self.steering_file)
 
-        ## \todo add nevents to optional parameters? => set this from .hpsmc
         if self.nevents is not None:
             args.append("-n")
             args.append(str(self.nevents))
@@ -648,7 +647,6 @@ class RandomSample(StdHepTool):
         else:
             raise Exception("No outputs specified for RandomSample.")
 
-        ## \todo check if ordering intentionally the other way around compared to StdHepTool.cmd_args() -> ordering is not important
         if len(self.input_files()):
             for i in self.inputs[::-1]:
                 args.insert(0, i)
@@ -722,7 +720,7 @@ class DisplaceUni(StdHepTool):
     """
 
     def __init__(self, **kwargs):
-        # time shift
+        ## time shift
         self.ctau = None
         StdHepTool.__init__(self,
                             name='lhe_tridents_displaceuni',
@@ -844,7 +842,6 @@ class MergePoisson(StdHepTool):
         else:
             raise Exception("No outputs specified for MergePoisson.")
 
-        ## \todo check if ordering intentionally the other way around compared to StdHepTool.cmd_args()
         if len(self.input_files()):
             for i in self.inputs[::-1]:
                 args.insert(0, i)
