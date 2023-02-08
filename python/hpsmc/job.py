@@ -17,7 +17,7 @@ import subprocess
 from collections.abc import Sequence
 from os.path import expanduser
 
-from util import convert_config_value, config_logging
+from hpsmc.util import convert_config_value, config_logging
 
 ## Initialize logger with default level
 logger = logging.getLogger('hpsmc.job')
@@ -73,7 +73,7 @@ class JobConfig(object):
 
     def _load(self):
         """! Load config from the list of possible locations."""
-
+        ## \todo implement or cleanup
         # Read in config files and crash if none are found from list
         ## configuration parser
         self.parser = configparser.ConfigParser()
@@ -107,7 +107,7 @@ class JobConfig(object):
         if self.parser.has_section(section):
             # Check that required settings are there.
             for req in required_names:
-                if req not in self.parser.items(section):
+                if req not in dict(self.parser.items(section)):
                     raise Exception("Missing required config '%s'" % req)
             # Push each config item into the object by setting attribute.
             for name, value in self.parser.items(section):
@@ -131,14 +131,16 @@ class JobStore:
 
     def __init__(self, path=None):
         self.path = path
-        if path:
+        if self.path:
             # logger.info("Initializing job store from: {}".format(self.path))
-            self.load(path)
+            self.load(self.path)
 
     def load(self, json_store):
         """! Load raw JSON data into this job store.
         @param json_store  json file containing raw job data
         """
+        if not os.path.exists(json_store):
+            raise Exception('JSON job store does not exist: {}'.format(json_store))
         with open(json_store, 'r') as f:
             json_data = json.loads(f.read())
         ## dict of jobs, sorted by job id
@@ -211,7 +213,7 @@ class Job(object):
     """
 
     ## \todo is this still needed?
-    # List of config names to be read for the Job class (all optional).
+    ## List of config names to be read for the Job class (all optional).
     """
     _config_names = ['enable_copy_output_files',
                      'enable_copy_input_files',

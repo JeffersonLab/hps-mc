@@ -25,7 +25,6 @@ rot = BeamCoords()
 sample = RandomSample()
 
 ## Simulate detector response
-
 slic = SLIC(nevents=nevents * event_interval, ignore_job_params=['nevents'])
 
 ## Run the job

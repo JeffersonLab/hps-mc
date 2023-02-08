@@ -16,7 +16,7 @@ job.description = 'WAB gen and sampling'
 ## generate tritrig in MG4
 mg = MG4(name="wab")
 
-## check that at least 80% of the requested events were generated or fail the job
+# check that at least 80% of the requested events were generated or fail the job
 # check = LHECount(minevents=params.nevents*0.8, inputs=["wab_unweighted_events.lhe.gz"])
 
 ## Convert wab events to stdhep

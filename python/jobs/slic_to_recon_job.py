@@ -12,7 +12,7 @@ inputs = list(job.input_files.values())
 
 job.description = 'slic to recon'
 
-# event_int needs to be set to 250 for beam files; should be = 1 for signal files
+## event_int needs to be set to 250 for beam files; should be = 1 for signal files
 if 'event_interval' in job.params:
     event_int = job.params['event_interval']
 else:
