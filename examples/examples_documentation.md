@@ -32,7 +32,6 @@ Each job in hps-mc is run with a `job.json` parameter list. These configuration 
 | nevents       | number of events generated/processed                                                   |
 | bunches       | number of bunches?                                                                     |
 | seed          | seed for random number generation                                                      |
-| run_params    | key for run parameter lookup in python/hpsmc/run\_params.py                            |
 | target_z      | z position of target                                                                   |
 | run_number    | ?                                                                                      |
 

@@ -133,32 +133,32 @@ class TestMergePoisson(unittest.TestCase):
 
     def test_required_parameters(self):
         merge_poisson = MergePoisson()
-        self.assertEqual(merge_poisson.required_parameters(), ['run_params'])
+        self.assertEqual(merge_poisson.required_parameters(), ['target_thickness', 'num_electrons'])
 
     def test_setup_1pt1_xsec1(self):
         merge_poisson = MergePoisson(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], xsec=1)
-        merge_poisson.set_parameters({'run_params': '1pt1'})
+        merge_poisson.set_parameters({'target_thickness': 0.0004062, 'num_electrons': 625})
         merge_poisson.setup()
         res = 6.306e-14 * 0.0004062 * 625
         self.assertEqual(merge_poisson.mu, res)
 
     def test_setup_1pt1_xsec20(self):
         merge_poisson = MergePoisson(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], xsec=20)
-        merge_poisson.set_parameters({'run_params': '1pt1'})
+        merge_poisson.set_parameters({'target_thickness': 0.0004062, 'num_electrons': 625})
         merge_poisson.setup()
         res = 6.306e-14 * 0.0004062 * 625 * 20
         self.assertEqual(merge_poisson.mu, res)
 
     def test_setup_3pt74_xsec1(self):
         merge_poisson = MergePoisson(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], xsec=1)
-        merge_poisson.set_parameters({'run_params': '3pt74'})
+        merge_poisson.set_parameters({'target_thickness': 0.000875, 'num_electrons': 625})
         merge_poisson.setup()
         res = 6.306e-14 * 0.000875 * 625
         self.assertEqual(merge_poisson.mu, res)
 
     def test_cmd_args(self):
         merge_poisson = MergePoisson(inputs=['input1.stdhep', 'input2.stdhep'], outputs=['output.stdhep'], xsec=1)
-        merge_poisson.set_parameters({'run_params': '1pt1', 'mu': 1, 'seed': 2, 'nevents': 100})
+        merge_poisson.set_parameters({'target_thickness': 0.0004062, 'num_electrons': 625, 'mu': 1, 'seed': 2, 'nevents': 100})
         merge_poisson.setup()
         self.assertEqual(merge_poisson.cmd_args(), ['input1.stdhep', 'input2.stdhep', 'output', '-s', '2', '-m', str(6.306e-14 * 0.0004062 * 625), '-N', '1', '-n', '100'])
 

@@ -97,7 +97,7 @@ class Batch:
         self.sh_dir = cl.sh_dir
         if not os.path.isabs(self.log_dir):
             raise Exception('The log dir is not an abs path: %s' % self.log_dir)
-        # FIXME: This directory creation probably shouldn't happen here.
+        ## \todo FIXME: This directory creation probably shouldn't happen here.
         if not os.path.exists(self.log_dir):
             logger.info('Creating log dir: %s' % self.log_dir)
             os.makedirs(self.log_dir)
