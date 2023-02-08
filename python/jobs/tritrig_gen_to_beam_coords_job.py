@@ -12,7 +12,7 @@ job.description = 'Generate tritrig events using MadGraph5 and convert to StdHep
 mg = MG5(name='tritrig')
 
 ## Unzip the LHE events to a local file
-unzip = Unzip(inputs=mg.output_files(), outputs=["tritrig.lhe"])
+unzip = Unzip(inputs=mg.output_files())
 
 ## Convert LHE output to stdhep
 cnv = StdHepConverter(inputs=mg.output_files(), outputs=['tritrig.stdhep'])
