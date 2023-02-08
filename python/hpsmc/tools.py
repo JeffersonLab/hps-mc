@@ -9,8 +9,8 @@ import tarfile
 
 from subprocess import PIPE
 
-from component import Component
-from run_params import RunParameters
+from hpsmc.component import Component
+from hpsmc.run_params import RunParameters
 import hpsmc.func as func
 
 logger = logging.getLogger("hpsmc.tools")
@@ -233,6 +233,8 @@ class JobManager(Component):
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
                 logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+            else:
+                raise Exception('hps_java_bin_jar not set in environment or config file!')
         if self.conditions_url is None:
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
@@ -380,6 +382,9 @@ class HPSTR(Component):
         ## year
         self.year = year
 
+        self.hpstr_install_dir = None
+        self.hpstr_base = None
+
         Component.__init__(self,
                            name='hpstr',
                            command='hpstr',
@@ -460,6 +465,8 @@ class HPSTR(Component):
         if '.slcio' in ext:
             return ['%s.root' % f]
         else:
+            if not self.append_tok:
+                self.append_tok = self.cfg
             return ['%s_%s.root' % (f, self.append_tok)]
 
     def execute(self, log_out, log_err):
@@ -510,10 +517,12 @@ class StdHepTool(Component):
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 
-        if len(self.output_files()):
+        if len(self.output_files()) == 1:
             args.insert(0, self.output_files()[0])
         elif len(self.output_files()) > 1:
             raise Exception("Too many outputs specified for StdHepTool.")
+        else:
+            raise Exception("No outputs specified for StdHepTool.")
 
         if len(self.input_files()):
             for i in self.inputs[::-1]:
@@ -630,13 +639,16 @@ class RandomSample(StdHepTool):
         if self.mu is not None:
             args.extend(["-m", str(self.mu)])
 
-        if len(self.output_files()):
+        if len(self.output_files()) == 1:
+            # only use file name, not extension because extension is added by tool
             args.insert(0, os.path.splitext(self.output_files()[0])[0])
-        elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified.")
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for RandomSample.")
+        else:
+            raise Exception("No outputs specified for RandomSample.")
 
         if len(self.input_files()):
-            for i in self.inputs:
+            for i in self.inputs[::-1]:
                 args.insert(0, i)
         else:
             raise Exception("No inputs were provided.")
@@ -771,20 +783,7 @@ class AddMotherFullTruth(StdHepTool):
         Setup command arguments.
         @return  list of arguments
         """
-        args = []
-
-        if self.name in StdHepTool.seed_names:
-            args.extend(["-s", str(self.seed)])
-
-        if len(self.output_files()):
-            args.insert(0, self.output_files()[0])
-        elif len(self.output_files()) > 1:
-            raise Exception("Too many outputs specified for StdHepTool.")
-
-        args.insert(0, self.input_file_2)
-        args.insert(0, self.input_file_1)
-
-        return args
+        return super().cmd_args()
 
 
 class MergePoisson(StdHepTool):
@@ -827,19 +826,21 @@ class MergePoisson(StdHepTool):
         @return  list of arguments
         """
         args = []
-        # self.mu = func.mu(self.lhe_file, self.run_param_data)
         if self.name in StdHepTool.seed_names:
             args.extend(["-s", str(self.seed)])
 
         args.extend(["-m", str(self.mu), "-N", str(1), "-n", str(self.nevents)])
 
-        if len(self.output_files()):
+        if len(self.output_files()) == 1:
+            # only use file name, not extension because extension is added by tool
             args.insert(0, os.path.splitext(self.output_files()[0])[0])
-        elif len(self.outputs) > 1:
-            raise Exception("Too many outputs specified.")
+        elif len(self.output_files()) > 1:
+            raise Exception("Too many outputs specified for MergePoisson.")
+        else:
+            raise Exception("No outputs specified for MergePoisson.")
 
         if len(self.input_files()):
-            for i in self.inputs:
+            for i in self.inputs[::-1]:
                 args.insert(0, i)
         else:
             raise Exception("No inputs were provided.")
@@ -996,15 +997,13 @@ class EvioToLcio(JavaTool):
     def __init__(self, steering=None, **kwargs):
         ## detector name
         self.detector = None
-        ## steering file
-        self.steering = None
         ## run number
         self.run_number = None
         ## number of events that are skipped
         self.skip_events = None
         ## event print interval
         self.event_print_interval = None
-        ## \todo is it necessary to set this twice?
+        ## steering file
         self.steering = steering
 
         JavaTool.__init__(self,
@@ -1303,7 +1302,7 @@ class LCIODumpEvent(Component):
 
     def setup(self):
         """! Setup LCIODumpEvent component."""
-        self.command = self.lcio_dir + os.path.sep + "/bin/dumpevent"
+        self.command = self.lcio_dir + "/bin/dumpevent"
 
     def cmd_args(self):
         """!
@@ -1466,6 +1465,8 @@ class LCIOTool(Component):
         Setup command arguments.
         @return  list of arguments
         """
+        if not self.name:
+            raise Exception("Name required to write cmd args for LCIOTool.")
         return ['-jar', self.lcio_bin_jar, self.name]
 
     def required_config(self):

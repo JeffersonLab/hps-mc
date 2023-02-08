@@ -7,7 +7,7 @@ import os
 import subprocess
 import logging
 
-from util import convert_config_value
+from hpsmc.util import convert_config_value
 
 logger = logging.getLogger("hpsmc.component")
 
@@ -17,55 +17,42 @@ class Component(object):
     Base class for components in a job.
 
     Optional parameters are: **nevents**, **seed**
+
+    @param name  name of the component
+    @param command  command to execute
+    @param nevents  number of events to process
+    @param seed  random seed
+    @param inputs  list of input files
+    @param outputs  list of output files
+    @param append_tok  token to append to output file names
+    @param output_ext  extension to append to output file names; format is .ext
+    @param ignore_job_params  list of parameters to ignore when setting parameters
+    @param kwargs  additional keyword arguments
     """
 
     def __init__(self,
                  name,
                  command=None,
+                 nevents=None,
+                 seed=1,
+                 inputs=[],
+                 outputs=None,
+                 append_tok=None,
+                 output_ext=None,
+                 ignore_job_params=[],
                  **kwargs):
 
         self.name = name
         self.command = command
-
-        if 'nevents' in kwargs:
-            ## number of events
-            self.nevents = kwargs['nevents']
-        else:
-            self.nevents = None
-
-        if 'seed' in kwargs:
-            ## seed for simulation
-            self.seed = kwargs['seed']
-        else:
-            self.seed = 1
-
-        if 'inputs' in kwargs:
-            ## input files
-            self.inputs = kwargs['inputs']
-        else:
-            self.inputs = []
-
-        if 'outputs' in kwargs:
-            ## output files
-            self.outputs = kwargs['outputs']
-        else:
-            self.outputs = None
-
-        if 'append_tok' in kwargs:
-            self.append_tok = kwargs['append_tok']
-        else:
-            self.append_tok = None
-
-        if 'output_ext' in kwargs:
-            self.output_ext = kwargs['output_ext']
-        else:
-            self.output_ext = None
+        self.nevents = nevents
+        self.seed = seed
+        self.inputs = inputs
+        self.outputs = outputs
+        self.append_tok = append_tok
+        self.output_ext = output_ext
 
         # FIXME: This is hacky.
-        if 'ignore_job_params' in kwargs:
-            self.ignore_job_params = kwargs['ignore_job_params']
-        else:
-            self.ignore_job_params = []
+        self.ignore_job_params = ignore_job_params
 
         self.hpsmc_dir = os.getenv("HPSMC_DIR", None)
         if self.hpsmc_dir is None:
@@ -115,11 +102,13 @@ class Component(object):
         pass
 
     def config(self, parser):
-        """! Automatic configuartion
+        """! Automatic configuration
 
         Automatically load attributes from config by reading in values from
         the section with the same name as the class in the config file and
         assigning them to class attributes with the same name.
+
+        @param parser  config parser
         """
         section_name = self.__class__.__name__
         if parser.has_section(section_name):

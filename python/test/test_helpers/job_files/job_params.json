@@ -1,0 +1,24 @@
+[
+    {
+        "input_files": {
+            "input1.stdhep": "path/to/input1.stdhep",
+            "input2.stdhep": "path/to/input2.stdhep"
+        },
+        "output_files": {
+            "output.slcio": "output_file.slcio"
+        },
+        "output_dir": "some/output_dir",
+        "job_id": 1
+    },
+    {
+        "input_files": {
+            "input1.stdhep": "path/to/input1.stdhep",
+            "input2.stdhep": "path/to/input2.stdhep"
+        },
+        "output_files": {
+            "output.slcio": "output_file.slcio"
+        },
+        "output_dir": "some/output_dir",
+        "job_id": 2
+    }
+]

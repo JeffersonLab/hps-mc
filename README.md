@@ -154,6 +154,37 @@ This will automatically fix (most) of the formatting issues.
 
 To preserve the Doxygen-style comments, it is necessary to disable the automatic formatting of comment blocks which means that you might need to fix those by hand.
 
+
+### Unit tests
+Unit tests for the hps-mc python modules can be found in `python/test`.
+There are several ways to run the tests. Assuming you are in `python/test`, you can
+- run all tests at once:
+  ```bash
+  python3 -m unittest -v
+  ```
+  The `-v` option creates a more verbose output than the standard output. If you're running the tests for the first time, you might need to run:
+  ```bash
+  python3 -m unittest discover -v
+  ```
+- run a test module:
+  ```bash
+  python3 -m unittest -v test_some_module.py
+  ```
+  or
+  ```bash
+  python3 -m unittest -v test_some_module
+  ```
+- run a selection of test modules:
+  ```bash
+  python3 -m unittest -v test_some_module test_another_module
+  ```
+- run a specific test class or test in a module:
+  ```bash
+  python3 -m unittest -v test_some_module.TestClass.test_method
+  ```
+More details on the python `unittest` framework can be found [here](https://docs.python.org/3/library/unittest.html).
+
+
 ### Help
 
 You can post any questions or report problems on the [HPS Slack](https://heavyphotonsearch.slack.com/) in the [montecarlo](https://heavyphotonsearch.slack.com/messages/C47LLBP5F) channel.

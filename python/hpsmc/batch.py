@@ -20,7 +20,7 @@ from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
-from job import Job, JobStore, JobScriptDatabase
+from hpsmc.job import Job, JobStore, JobScriptDatabase
 
 from hpsmc.util import config_logging
 
