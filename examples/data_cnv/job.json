@@ -17,5 +17,6 @@
     "config_files": {
         "recon": "recoTuple_cfg.py"
     },
+    "tracking": "GBL",
     "year": 2019
 }
