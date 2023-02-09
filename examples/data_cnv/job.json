@@ -18,5 +18,6 @@
         "recon": "recoTuple_cfg.py"
     },
     "tracking": "GBL",
+    "is_data": 1,
     "year": 2019
 }
