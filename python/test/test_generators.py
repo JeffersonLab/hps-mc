@@ -24,7 +24,7 @@ class TestEGS5(unittest.TestCase):
 
     def test_required_params(self):
         egs5 = EGS5()
-        self.assertEqual(egs5.required_parameters(), ['seed',  'target_thickness', 'beam_energy', 'num_electrons'])
+        self.assertEqual(egs5.required_parameters(), ['seed', 'target_thickness', 'beam_energy', 'num_electrons'])
 
     def test_optional_params(self):
         egs5 = EGS5()
