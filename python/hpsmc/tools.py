@@ -374,13 +374,15 @@ class HPSTR(Component):
     Required configs are: **hpstr_install_dir**, **hpstr_base**
     """
 
-    def __init__(self, cfg=None, is_data=0, year=None, **kwargs):
+    def __init__(self, cfg=None, is_data=0, year=None, tracking=None, **kwargs):
         ## configuration
         self.cfg = cfg
         ## run mode
         self.is_data = is_data
         ## year
         self.year = year
+        ## tracking option (KF, GBL, BOTH)
+        self.tracking = tracking
 
         self.hpstr_install_dir = None
         self.hpstr_base = None
@@ -433,7 +435,7 @@ class HPSTR(Component):
         Optional parameters are: **year**, **is_data**, **nevents**
         @return  list of optional parameters
         """
-        return ['year', 'is_data', 'nevents']
+        return ['year', 'is_data', 'nevents', 'tracking']
 
     def required_config(self):
         """!
@@ -457,6 +459,8 @@ class HPSTR(Component):
             args.extend(["-n", str(self.nevents)])
         if self.year is not None:
             args.extend(["-y", str(self.year)])
+        if self.tracking is not None:
+            args.extend(["-w", str(self.tracking)])
         return args
 
     def output_files(self):
