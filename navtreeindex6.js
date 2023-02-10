@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"namespacetritrig__slic__full__chain__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[8,0,48,1],
 "namespacetritrig__slic__full__chain__job.html#a3074e3594d8071411ddd34bbbf47acd9":[8,0,48,2],
 "namespacetritrig__slic__full__chain__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1":[8,0,48,6],
 "namespacetritrig__slic__full__chain__job.html#a98913e0a438f1e6376eedaef8541569b":[8,0,48,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "stdhep__util_8cpp.html#a66423f2b6106a177dfe98ed091a9aefb":[10,0,3,0,0,18,12],
 "stdhep__util_8cpp.html#a6906e4ccd8d0e49f206d030acd0c163f":[10,0,3,0,0,18,9],
 "stdhep__util_8cpp.html#a78ecdfa2981cd6b9128a6a11b2997f24":[10,0,3,0,0,18,7],
-"stdhep__util_8cpp.html#aa3af85dab900c17931ae2b337b116afa":[10,0,3,0,0,18,2],
-"stdhep__util_8cpp.html#ab5ec58d80bd8ab6158d7766f0ce6f9c2":[10,0,3,0,0,18,6]
+"stdhep__util_8cpp.html#aa3af85dab900c17931ae2b337b116afa":[10,0,3,0,0,18,2]
 };

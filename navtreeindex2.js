@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"classhpsmc_1_1tools_1_1LCIODumpEvent.html#a0f2f5067bb76f32ee6fd3097c021983b":[9,0,0,6,18,3],
 "classhpsmc_1_1tools_1_1LCIODumpEvent.html#a180299f23031498c0502bcc429587fbd":[9,0,0,6,18,7],
 "classhpsmc_1_1tools_1_1LCIODumpEvent.html#a3aafce64b1cc2c13e06a4fe619dfc7ff":[9,0,0,6,18,8],
 "classhpsmc_1_1tools_1_1LCIODumpEvent.html#a778de97a2205357ace12a31e944ca3d8":[9,0,0,6,18,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#a3d8aa208839887708bd106afc858e17e":[9,0,1,9,1,0],
 "classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#a920e07df21a4e14da669a8966f599899":[9,0,1,9,1,1],
 "classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#aaa636c3f6bd51616c46a7cd40c4709c6":[9,0,1,9,1,2],
-"classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#aceabda3b10a35a8bda6ab9c2365ea6fc":[9,0,1,9,1,3],
-"classtest_1_1test__tools__lciotools_1_1TestLCIOCount.html":[9,0,1,9,2]
+"classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#aceabda3b10a35a8bda6ab9c2365ea6fc":[9,0,1,9,1,3]
 };
