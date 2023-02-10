@@ -10,6 +10,7 @@
         "recon": "kalSimpTuple_cfg.py",
         "ana": "anaVtxTuple_cfg.py"
     },
+    "tracking": "GBL",
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1_NoTruth.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
