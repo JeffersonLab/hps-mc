@@ -7,6 +7,7 @@ import logging
 
 from .component import Component
 from ._alignment import Parameter
+from ._alignment import getBeamspotConstraintsFloatingOnly
 
 class PEDE(Component):
     """! Run pede minimizer over input bin files for alignment
@@ -109,21 +110,21 @@ class PEDE(Component):
             # survey constraints
             if self.survey_constraints :
                 PEDE.logger.info('Applying survey constraints')
+                PEDE.logger.warn('UNTESTED - not sure if this is correct (Tom E)')
+                survey_meas_tu = 0.05
                 psf.write('\n!Survey constraints tu\n')
                 for p, name in param_map.items() :
-                    if p.module_number() == 0 :
-                        continue
-                    if p.direction() == 'u' and p.type() == 't' :
-                        psf.write('\nMeasurement 0.0 %.3f\n' % survey_meas_tu)
+                    if p.module_number() == 0 and p.direction == 1 and p.trans_rot == 1 :
+                        psf.('\nMeasurement 0.0 %.3f\n' % survey_meas_tu)
                         psf.write('%s 1.0\n' & p)
                 psf.write("\n\n")
             
             # apply beamspotConstraint (This I think is not correct)
             if self.beamspot_constraints:
-                PEDE.logger.warn('Beamspot constraints not implemented, ignoring!')
-                #psf.write(buildSteering.getBeamspotConstraints(paramMap))
-                #psf.write(buildSteering.getBeamspotConstraintsFloatingOnly(pars))
-                #psf.write("\n\n")
+                PEDE.logger.error('Beamspot constraints not implemented!')
+                return -1
+                psf.write(getBeamspotConstraintsFloatingOnly(param_map))
+                psf.write("\n\n")
             
             psf.write("\n\n")
             PEDE.logger.info(f'Appending minimization settings from {self.pede_minimization}')
