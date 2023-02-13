@@ -143,7 +143,10 @@ class PEDE(Component):
         return
 
     def required_parameters(self) :
-        return ['inputs', 'to_float', 'param_map', 'pede_minimization']
+        return ['inputs', 'to_float']
+
+    def required_config(self) :
+        return ['param_map', 'pede_minimization']
 
     def optional_parameters(self) :
         return ['subito','constraint_file','previous_fit','beamspot_constraints','survey_constraints']
