@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+
+usage() {
+  cat <<\HELP
+
+  Construct a detector LCDD from a compact.xml and recompile
+  the necessary parts of hps-java.
+ 
+ USAGE:
+
+  hps-mc-construct-detector DET_PATH
+
+ ARGUMENTS:
+
+  DET_PATH : full path to detector to construct
+
+ ENV VARIABLES:
+
+  HPSJAVA_BIN_JAR : full path to hps-java jar file to run
+  HPSJAVA_OPTS : string of java options to run before jar
+  MVN_OPTS : mvn opts to run
+
+HELP
+}
+
+convert() {
+  local det_path="$1"
+  local det_name="$(basename ${det_path})"
+
+  if [ -z ${HPSJAVA_BIN_JAR} ]; then
+    echo "ERROR: environment variable HPSJAVA_BIN_JAR not set"
+    return 2
+  fi
+
+  java \
+    ${HPSJAVA_OPTS} \
+    -cp ${HPSJAVA_BIN_JAR} \
+    org.hps.detector.DetectorConverter \
+    -f lcdd \
+    -i ${det_path}/compact.xml \
+    -o ${det_path}/${det_name}.lcdd \
+    || return $?
+  echo "name: ${det_name}" > ${det_path}/detector.properties
+  return $?
+}
+
+recompile() {
+  local java_dir="$1"
+  local _old_pwd=$OLDPWD
+  local _pwd=$PWD
+  if ! cd ${java_dir}/detector-data; then
+    echo "ERROR: detector-data subdirectory of hps-java does not exist."
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! mvn ${MVN_OPTS}; then
+    echo "ERROR: Unable to recompile hps-java/detector-data"
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! cd ${java_dir}/distribution; then
+    echo "ERROR: distribution subdirectory of hps-java does not exist."
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! mvn ${MVN_OPTS}; then
+    echo "ERROR: Unable to recompile hps-java/distribution"
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  cd ${_pwd}
+  export OLDPWD=${_old_pwd}
+  return 0
+}
+
+main() {
+  local det_path=""
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -h|--help)
+        usage
+        return 0
+        ;;
+      *)
+        if [ -z ${det_path} ]; then
+          # store path without trailing slash
+          det_path="${1%/}"
+          shift
+        else
+          echo "ERROR: Already set DET_PATH to ${det_path}"
+          return -1
+        fi
+        ;;
+    esac
+  done
+
+  if [ ! -d ${det_path} ]; then
+    echo "ERROR: '${det_path}' not a directory."
+    return -2
+  fi
+  
+  if [ ! -f ${det_path}/compact.xml ]; then
+    echo "ERROR: '${det_path}/compact.xml' does not exist."
+    return -2
+  fi
+
+  convert ${det_path} || return $?
+
+  local java_dir=$(cd ${det_path}/../../ && pwd)
+
+  recompile ${java_dir} || return $?
+
+  return 0
+}
+
+main $@
