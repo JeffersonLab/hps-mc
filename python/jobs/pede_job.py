@@ -8,5 +8,5 @@ from hpsmc.tools import PEDE, ApplyPedeRes
 
 job.description = 'alignment parameter minimizatin via pede'
 
-## Run the job
-job.add( PEDE(), ApplyPedeRes() )
+job.add(PEDE())
+job.add(ApplyPedeRes())

@@ -6,5 +6,9 @@ enable_copy_output_files = True
 delete_rundir = True
 
 [PEDE]
+#command = /full/path/not/in/PATH/pede
 param_map = /export/scratch/users/eichl008/hps/alignment/mille/align/data/param_maps/hpsSvtParamMap_2019.txt
 pede_minimization = /export/scratch/users/eichl008/hps/alignment/mille/align/data/pede_steer/steer_minimization_template.txt
+
+[ApplyPedeRes]
+java_dir = /export/scratch/users/eichl008/hps/java
