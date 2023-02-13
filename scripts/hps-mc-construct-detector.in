@@ -23,25 +23,51 @@ usage() {
 HELP
 }
 
+# get detector name from the path to its directory
+#    we strip a trailing slash (if it exists) and
+#    then call basename to get that directory name
+get_det_name() {
+  echo $(basename ${1%/})
+}
+
+# get the root directory of hps-java from a detector path
+#    detector directorires are three below the root
+get_java_dir() {
+  echo $(cd ${1}/../../../ && pwd)
+}
+
 convert() {
   local det_path="$1"
-  local det_name="$(basename ${det_path})"
+  local det_name="$(get_det_name ${det_path})"
 
   if [ -z ${HPSJAVA_BIN_JAR} ]; then
     echo "ERROR: environment variable HPSJAVA_BIN_JAR not set"
     return 2
   fi
 
-  java \
+  local java_dir="$(get_java_dir ${det_path})"
+  det_path=${det_path%${java_dir}}
+  local _old_pwd=$OLDPWD
+  local _pwd=$PWD
+
+  cd ${java_dir}/detector-data
+
+  if ! java \
     ${HPSJAVA_OPTS} \
     -cp ${HPSJAVA_BIN_JAR} \
     org.hps.detector.DetectorConverter \
     -f lcdd \
     -i ${det_path}/compact.xml \
-    -o ${det_path}/${det_name}.lcdd \
-    || return $?
+    -o ${det_path}/${det_name}.lcdd; then
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+
   echo "name: ${det_name}" > ${det_path}/detector.properties
-  return $?
+  cd ${_pwd}
+  export OLDPWD=${_old_pwd}
+  return 0
 }
 
 recompile() {
@@ -109,10 +135,7 @@ main() {
   fi
 
   convert ${det_path} || return $?
-
-  local java_dir=$(cd ${det_path}/../../ && pwd)
-
-  recompile ${java_dir} || return $?
+  recompile $(get_java_dir ${det_path}) || return $?
 
   return 0
 }
