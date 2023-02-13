@@ -9,5 +9,7 @@
         "pede-steer.txt" : "pede-steer.txt"
     },
     "to_float": ["11106"],
+    "detector" : "L3TAxial_iter0",
+    "force" : true,
     "output_dir": "output"
 }

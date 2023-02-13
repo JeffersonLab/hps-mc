@@ -1,5 +1,7 @@
 """! running pede from in hps-mc jobs"""
 
+import shutil
+import re
 import os
 import logging
 
@@ -178,13 +180,13 @@ class ApplyPedeRes(Component) :
 
     def __init__(self) :
         # config
-        self.java_dir
+        self.java_dir = None
 
         # required job
-        self.res_file = None
         self.detector = None
 
         # optional job
+        self.res_file = 'millepede.res'
         self.bump = True
         self.force = False
 
@@ -194,13 +196,16 @@ class ApplyPedeRes(Component) :
         return ['java_dir']
 
     def required_parameters(self) :
-        return ['res_file','detector']
+        return ['detector']
 
     def optional_parameters(self) :
-        return ['bump','force']
+        return ['res_file','bump','force']
 
     def _detector_dir(self) :
         return os.path.join(self.java_dir, 'detector-data', 'detectors', self.detector)
+
+    def cmd_line_str(self) :
+        return 'custom python execute'
 
     def execute(self, log_out, log_err) :
         if self.bump :
@@ -241,7 +246,7 @@ class ApplyPedeRes(Component) :
             return 5
     
         # get list of parameters and their MP values
-        parameters = Parameter.parse_pede_res(pede_res, skip_nonfloat=True)
+        parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
     
         # modify file in place
         original_cp = detdesc + '.prev'
@@ -278,22 +283,15 @@ class ApplyPedeRes(Component) :
     
                             new_value = f'{value} {parameters[i].compact_value()}'
     
-                            if interactive :
-                                doit = typer.confirm(f'Update {i} from "{value}" to "{new_value}"?')
-                                if doit :
-                                    f.write(f'{pre_val}{new_value}{post_val}')
-                                    line_edited = True
-                            else :
-                                f.write(f'{pre_val}{new_value}{post_val}')
-                                line_edited = True
-    
+                            f.write(f'{pre_val}{new_value}{post_val}')
+                            line_edited = True
                             break
                     
                     if not line_edited :
                         f.write(line)
     
         # remove original copy if bumped since the previous iteration will have the previous version
-        if bump :
+        if self.bump :
             os.remove(original_cp)
             
         return 0
