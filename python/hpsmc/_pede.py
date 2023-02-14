@@ -11,10 +11,31 @@ from ._alignment import getBeamspotConstraintsFloatingOnly
 
 class PEDE(Component):
     """! Run pede minimizer over input bin files for alignment
-
     """
 
     logger = logging.getLogger('hpsmc.tools.PEDE')
+
+    # each function is a "mask" in the sense that
+    #    it takes in a Parameter and should return True
+    #    if it should be floated and False if not
+    parameter_groups = {
+        'all' : PEDE._all,
+        'allsensors' : PEDE._allsensors,
+        'tu' : PEDE._tu,
+        'rw' : PEDE._rw
+        }
+
+    def _all(p) :
+        return True
+
+    def _allsensors(p) :
+        return p.mp_layer_id < 23
+
+    def _tu(p) :
+        return (p.direction == 1 and p.trans_rot == 1)
+
+    def _rw(p) :
+        return (p.direction == 3 and p.trans_rot == 2)
 
     def __init__(self, **kwargs) :
         self._pede_steering_file = None
@@ -48,17 +69,10 @@ class PEDE(Component):
             if f.isnumeric() :
                 # string is a number, assume it is the idn
                 idn = int(f)
-            elif f.lower() == 'all' :
-                # all parameters should be floated
-                PEDE.logger.info('Floating all parameters')
+            elif f.lower() in PEDE.parameter_groups :
+                should_float = PEDE.parameter_groups[f.lower()]
                 for p in parameters.values() :
-                    p.float()
-                continue
-            elif f.lower() == 'allsensors' :
-                # all parameters for individual sensors should be floated
-                PEDE.logger.info('Floating all parameters for individual sensors')
-                for p in parameters.values() :
-                    if p.mp_layer_id < 23 :
+                    if should_float(p) :
                         p.float()
                 continue
             else:
