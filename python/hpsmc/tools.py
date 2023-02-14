@@ -15,7 +15,7 @@ import hpsmc.func as func
 logger = logging.getLogger("hpsmc.tools")
 
 # bring the PEDE tool into this namespace
-from ._pede import PEDE, ApplyPedeRes
+from ._pede import PEDE, ApplyPedeRes, ConstructDetector
 
 class SLIC(Component):
     """!
