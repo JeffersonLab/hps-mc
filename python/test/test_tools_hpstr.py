@@ -19,7 +19,7 @@ class TestHPSTR(unittest.TestCase):
 
     def test_optional_params(self):
         hpstr = HPSTR()
-        self.assertEqual(hpstr.optional_parameters(), ['year', 'is_data', 'nevents'])
+        self.assertEqual(hpstr.optional_parameters(), ['year', 'is_data', 'nevents', 'tracking'])
 
     def test_required_configs(self):
         hpstr = HPSTR()
