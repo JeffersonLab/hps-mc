@@ -1,7 +1,7 @@
 {
-    "inputs": [
-        "/export/scratch/users/eichl008/hps/alignment/data/kf/L3TAxial_iter0/millepede.bin"
-    ],
+    "input_files":  {
+        "/export/scratch/users/eichl008/hps/alignment/data/kf/L3TAxial_iter0/millepede.bin" : "millepede.bin"
+    },
     "output_files": {
         "millepede.res" : "millepede.res",
         "millepede.his" : "millepede.his",

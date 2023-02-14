@@ -82,18 +82,8 @@ class PEDE(Component):
         with open(pede_steering_file,'w') as psf :
             # write out input mille binary files
             psf.write('CFiles\n')
-            # scan each entry provided on command line,
-            #  recursively entering subdirectories and including
-            #  all '*.bin' files found
             for ipf in self.inputs :
-                ipf = os.path.realpath(ipf)
-                if os.path.isfile(ipf) and ipf.endswith('.bin') :
-                    psf.write(ipf+'\n')
-                elif os.path.isdir(ipf) :
-                    for root, dirs, files in os.walk(ipf) :
-                        for name in files :
-                            if name.endswith('.bin') :
-                                psf.write(os.path.join(root,name)+'\n')
+                psf.write(ipf+'\n')
     
             # external constraint file
             if self.constraint_file is not None :
@@ -115,7 +105,7 @@ class PEDE(Component):
                 psf.write('\n!Survey constraints tu\n')
                 for p, name in param_map.items() :
                     if p.module_number() == 0 and p.direction == 1 and p.trans_rot == 1 :
-                        psf.('\nMeasurement 0.0 %.3f\n' % survey_meas_tu)
+                        psf.write('\nMeasurement 0.0 %.3f\n' % survey_meas_tu)
                         psf.write('%s 1.0\n' & p)
                 psf.write("\n\n")
             
@@ -146,7 +136,7 @@ class PEDE(Component):
         return
 
     def required_parameters(self) :
-        return ['inputs', 'to_float']
+        return ['to_float']
 
     def required_config(self) :
         return ['param_map', 'pede_minimization']
@@ -296,3 +286,33 @@ class ApplyPedeRes(Component) :
             os.remove(original_cp)
             
         return 0
+
+class ConstructDetector(Component) :
+    """! construct an LCDD from a compact.xml and recompile necessary parts of hps-java
+    
+    This is a Component interface to the hps-mc-construct-detector script.
+    """
+
+    def __init__(self) :
+        # config
+        self.java_dir = None
+        self.hps_java_bin_jar = None
+
+        # required job
+        self.detector = None
+
+        super().__init__('ConstructDetector',
+                         command='hps-mc-construct-detector')
+
+    def required_config(self) :
+        return ['java_dir', 'hps_java_bin_jar']
+
+    def required_parameters(self) :
+        return ['detector']
+
+    def _detector_dir(self) :
+        return os.path.join(self.java_dir, 'detector-data', 'detectors', self.detector)
+
+    def cmd_args(self) :
+        return [ self.detector, '-p', self.java_dir, '-jar', self.hps_java_bin_jar ]
+
