@@ -1,0 +1,10 @@
+/fake/dir/events_1.stdhep
+/fake/dir/events_2.stdhep
+/fake/dir/events_3.stdhep
+/fake/dir/events_4.stdhep
+/fake/dir/events_5.stdhep
+/fake/dir/events_6.stdhep
+/fake/dir/events_7.stdhep
+/fake/dir/events_8.stdhep
+/fake/dir/events_9.stdhep
+/fake/dir/events_10.stdhep
