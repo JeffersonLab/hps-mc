@@ -1,0 +1,11 @@
+{
+    "detector": "{{ detector }}",
+    "input_files": {
+        "{{ job.input_files['events'][0] }}": "events_1.stdhep"
+    },
+    "output_files": {
+        "events_1.slcio": "{{ input_files['events'][0] | basename }}.slcio"
+    },
+    "output_dir": "output/{{ detector }}"
+}
+

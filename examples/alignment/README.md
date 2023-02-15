@@ -4,7 +4,8 @@ Generally, alignment occurs with several iterations of tracking and parameter op
 Below, is an outline on how to do a single iteration of this procedure.
 
 ### 1. Run Tracking
-_Insert how to run hps-java with hps-mc_
+This is done with the \ref trackingalign example in this directory.
+Edit the list of input files to include the `slcio` files you wish to use for alignment.
 
 ### 2. Run pede, Apply Parameters, and Construct Detector
 This is done within the \ref pede example in this directory.
@@ -13,5 +14,6 @@ This step runs the pede minimizer to "optimize" the alignment parameters and the
 writes a new iteration of the detector including these updated parameters.
 
 ```
+cd pede
 hps-mc-job run -d $PWD/scratch pede job.json
 ```
