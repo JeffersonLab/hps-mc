@@ -88,15 +88,31 @@ class Parameter :
         """
         return self.individual() and (self._mp_layer_id % 2 == 1)
 
+    def translation(self) :
+        """!True if Parameter represents a translation"""
+        return self.operation() == 1
+
+    def rotation(self) :
+        """!True if Parameter represents a rotation"""
+        return self.operation() == 2
+
     def top(self) :
         """!Does this parameter represent a component on the top half (True)
         or bottom (False)
         """
         return (self._half == 1)
 
-    def bot(self) :
+    def bottom(self) :
         """!True if Parameter is in bottom half, False if in top half"""
         return not self._top()
+
+    def front(self) :
+        """!True if Parameter is single sensor in front half, False otherwise"""
+        return self.individual() and (self._mp_layer_id < 9)
+
+    def back(self) :
+        """!True if Parameter is single sensor in back half, False otherwise"""
+        return self.individual() and (self._mp_layer_id > 8)
 
     def from_map_file_line(line) :
         """parse a line from the map file
