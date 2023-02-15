@@ -48,18 +48,18 @@ class TestParameterPatterns(unittest.TestCase):
         self.assertNotEqual(direction_u, Parameter.from_idn(11206))
 
     def test_match_operation(self) :
-        operation_t = Pattern('operation=t')
+        operation_t = Pattern('translation')
         self.assertEqual(operation_t, Parameter.from_idn(11106))
         self.assertNotEqual(operation_t, Parameter.from_idn(12106))
 
     def test_combine_binary(self) :
-        tu = Pattern('direction=u & operation=t')
+        tu = Pattern('direction=u & translation')
         self.assertEqual(tu, Parameter.from_idn(11106))
         self.assertNotEqual(tu, Parameter.from_idn(12106))
         self.assertNotEqual(tu, Parameter.from_idn(11206))
 
     def test_combine_binary_and_unary(self) :
-        stereo_tu = Pattern('stereo & direction=u & operation=t')
+        stereo_tu = Pattern('stereo & direction=u & translation')
         self.assertNotEqual(stereo_tu, Parameter.from_idn(11106))
         self.assertNotEqual(stereo_tu, Parameter.from_idn(12106))
         self.assertNotEqual(stereo_tu, Parameter.from_idn(11206))

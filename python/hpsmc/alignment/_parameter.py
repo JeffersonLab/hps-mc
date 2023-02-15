@@ -49,7 +49,7 @@ class Parameter :
         """!Set whether this parameter is floating/active or not"""
         self._active = yes
 
-    def module_number(self) :
+    def module(self) :
         """!Get the module number from the millepede layer number
 
         We group sensors in pairs to form modules and the layer number
@@ -58,14 +58,16 @@ class Parameter :
         """
         return self._mp_layer_id // 2
 
+    def layer(self) :
+        """!Get the human layer number
+
+        This is the module number but shifted by one since the first layer is
+        layer 1
+        """
+        return self.module() + 1
+
     def id(self) :
         return self._id
-
-    def half(self) :
-        return self._half
-
-    def operation(self) :
-        return self._trans_rot
 
     def direction(self) :
         return self._direction
@@ -75,6 +77,24 @@ class Parameter :
         or a structural component holding two or more sensors (False)
         """
         return self._mp_layer_id < 23
+
+    def translation(self) :
+        """!True if Parameter represents a translation"""
+        return self._trans_rot == 1
+
+    def rotation(self) :
+        """!True if Parameter represents a rotation"""
+        return self._trans_rot == 2
+
+    def top(self) :
+        """!Does this parameter represent a component on the top half (True)
+        or bottom (False)
+        """
+        return (self._half == 1)
+
+    def bottom(self) :
+        """!True if Parameter is in bottom half, False if in top half"""
+        return (self._half == 2)
 
     def axial(self) :
         """!Get whether this Parameter represents a single axial sensor (True)
@@ -87,24 +107,6 @@ class Parameter :
         or something else (False)
         """
         return self.individual() and (self._mp_layer_id % 2 == 1)
-
-    def translation(self) :
-        """!True if Parameter represents a translation"""
-        return self.operation() == 1
-
-    def rotation(self) :
-        """!True if Parameter represents a rotation"""
-        return self.operation() == 2
-
-    def top(self) :
-        """!Does this parameter represent a component on the top half (True)
-        or bottom (False)
-        """
-        return (self._half == 1)
-
-    def bottom(self) :
-        """!True if Parameter is in bottom half, False if in top half"""
-        return not self._top()
 
     def front(self) :
         """!True if Parameter is single sensor in front half, False otherwise"""

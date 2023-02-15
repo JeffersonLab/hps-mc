@@ -39,13 +39,39 @@ class Pattern :
     class while val is a keyword corresponding to specific options for each kw.
     """
 
+    NUM_MODULES = 6
+
+    def __validate_id(i) :
+        if Parameter.idn_str_pattern.match(i) :
+            return int(i)
+        else :
+            return NotImplemented
+
+    def __validate_module(m) :
+        try :
+          m = int(m)
+          if m < 0 or m > NUM_MODULES-1 :
+              return NotImplemented
+          return m
+        except ValueError :
+          return NotImplemented
+
+    def __validate_layer(l) :
+        try :
+          l = int(l)
+          if l < 1 or l > NUM_MODULES :
+              return NotImplemented
+          return l
+        except ValueError :
+          return NotImplemented
+
     # each one of these keywords (both binary and unary) are
     #  the names of functions in the Parameter class which return
     #  that value for the Parameter
     binary_keywords = {
-        'id' : lambda v : int(v) if Parameter.idn_str_pattern.match(v) else NotImplemented,
-        'half' : {'top' : 1, 'bot' : 2, 't' : 1, 'b' : 2 },
-        'operation' : {'t' : 1, 'translation' : 1, 'trans' : 1, 'r' : 2, 'rotation' : 2, 'rot' : 2 },
+        'id' : __validate_id,
+        'module' : __validate_module,
+        'layer' : __validate_layer,
         'direction' : {'u' : 1, 'v' : 2, 'w' : 3}
     }
     unary_keywords = [
@@ -64,8 +90,8 @@ class Pattern :
         'bot' : 'bottom',
         'trans' : 'translation',
         'rot' : 'rotation',
-        'tu' : 'direction=u & operation=t',
-        'rw' : 'direction=w & operation=r'
+        'tu' : 'direction=u & translation',
+        'rw' : 'direction=w & rotation'
     }
 
     def _add_check(self, c) :
