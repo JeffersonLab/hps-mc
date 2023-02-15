@@ -39,15 +39,25 @@ class Pattern :
     class while val is a keyword corresponding to specific options for each kw.
     """
 
-    NUM_MODULES = 6
+    NUM_MODULES = 7
 
     def __validate_id(i) :
+        """!Make sure input is a valid ID number, otherwise return NotImplemented
+        
+        A valid ID number is a 5-digit integer matching the Parameter.idn_str_pattern
+        regular expression.
+        """
         if Parameter.idn_str_pattern.match(i) :
             return int(i)
         else :
             return NotImplemented
 
     def __validate_module(m) :
+        """!Make sure input is a valid module number, otherwise return NotImplemented
+        
+        A valid module number is an index counting from 0 at the front of the detector
+        up to NUM_MODULES-1
+        """
         try :
           m = int(m)
           if m < 0 or m > NUM_MODULES-1 :
@@ -57,6 +67,11 @@ class Pattern :
           return NotImplemented
 
     def __validate_layer(l) :
+        """!Make sure input is a valid layer number, otherwise return NotImplemented
+        
+        A valid layer number is an index counting axial/stereo pairs from 1 at 
+        the front of the detector up to NUM_MODULES
+        """
         try :
           l = int(l)
           if l < 1 or l > NUM_MODULES :
@@ -82,6 +97,10 @@ class Pattern :
         'individual',
         'axial',
         'stereo',
+        'front',
+        'back',
+        'hole',
+        'slot'
     ]
 
     # aliases are just a shortening of common Pattern strings
