@@ -9,7 +9,34 @@ class Pattern :
 
     A single "pattern" is a str that is one of the unary keywords OR
     has a binary keyword followed by an "=" character followed by one
-    of that keywords values.
+    of that keywords values. All whitespace in a pattern is removed so 
+    spaces can be added for easier readability.
+
+    Syntax
+    ------
+    Each pattern is made up of one or more operations where each operation
+    is separated by an ampersand "&" to reflect that a Pattern takes the
+    logical-and of the operations listed.
+
+      'op1 & op2 & op3 ...'
+
+    Each operation can be one of three things.
+
+    1. An ID number.
+    2. A unary operation.
+    3. A binary operation.
+
+    ID numbers are the 5-digit millepede ID number for that parameter which encodes all
+    of the location information within it. It specifies a single millepede parameter.
+
+    Unary operations are special keywords that correspond to different logical grouping
+    of parameters. Some unary operations correspond to functions returning True/False
+    of the Parameter class while others are simple shortenings of common Pattern strings
+    (a.k.a. "aliases").
+
+    Binary operations are a string formatted like "kw = val" where a *single* equal
+    sign is used. kw is a keyword corresponding to select functions from the Parameter
+    class while val is a keyword corresponding to specific options for each kw.
     """
 
     # each one of these keywords (both binary and unary) are
@@ -23,15 +50,20 @@ class Pattern :
     }
     unary_keywords = [
         'top',
-        'bot',
-        'trans',
-        'rot',
+        'bottom',
+        'translation',
+        'rotation',
         'individual',
         'axial',
         'stereo',
     ]
 
+    # aliases are just a shortening of common Pattern strings
+    #    that are drop-in replacements
     aliases = {
+        'bot' : 'bottom',
+        'trans' : 'translation',
+        'rot' : 'rotation',
         'tu' : 'direction=u & operation=t',
         'rw' : 'direction=w & operation=r'
     }
@@ -51,13 +83,13 @@ class Pattern :
                 if val in possible_values.keys() :
                     self._checks.append((kw, possible_values[val]))
                 else :
-                    raise ValueError(f'Value {val} not recognized. Possible values: {possible_values.keys()}')
+                    raise ValueError(f'Value {val} for {kw} not recognized. Possible values:\n{possible_values.keys()}')
             else :
                 v = possible_values(val)
                 if v != NotImplemented :
                     self._checks.append((kw,v))
                 else :
-                    raise ValueError(f'Value {val} for {kw} is not recognized')
+                    raise ValueError(f'Value {val} for {kw} is not recognized.')
         elif kw in Pattern.unary_keywords :
             self._checks.append((kw,c[1]))
         elif kw in Pattern.aliases :
