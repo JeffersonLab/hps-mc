@@ -6,7 +6,7 @@ import os
 import logging
 
 from hpsmc.component import Component
-from ._util import Parameter
+from ._parameter import Parameter
 from ._util import getBeamspotConstraintsFloatingOnly
 
 class PEDE(Component):
@@ -52,32 +52,11 @@ class PEDE(Component):
                 skip_nonfloat = False)
 
         # define which parameters are floating
-        for f in self.to_float :
-            idn = None
-            if f.isnumeric() :
-                # string is a number, assume it is the idn
-                idn = int(f)
-            elif f.lower() in PEDE.parameter_groups :
-                should_float = PEDE.parameter_groups[f.lower()]
-                for p in parameters.values() :
-                    if should_float(p) :
-                        p.float()
-                continue
-            else:
-                # look for sensor name
-                for probe_id, p in parameters.items() :
-                    if p.name == f :
-                        idn = prob_id
-                        break
-    
-                if idn is None :
-                    raise ValueError(f'Parameter {f} not found in parameter map.')
-    
-            if idn not in parameters :
-                raise ValueError(f'Parameter {idn} not found in parameter map.')
-    
-            PEDE.logger.info(f'Floating parameter {idn}')
-            parameters[idn].float()
+        for pattern in map(Pattern,self.to_float) :
+            for p in parameters.values() : 
+                if pattern.match(p) :
+                    PEDE.logger.debug(f'Floating parameter {p}')
+                    p.float()
     
         # build steering file for pede
         pede_steering_file = 'pede-steer.txt'
