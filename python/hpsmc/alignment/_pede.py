@@ -15,16 +15,6 @@ class PEDE(Component):
 
     logger = logging.getLogger('hpsmc.tools.PEDE')
 
-    # each function is a "mask" in the sense that
-    #    it takes in a Parameter and should return True
-    #    if it should be floated and False if not
-    parameter_groups = {
-        'all' : lambda _p : True,
-        'allsensors' : lambda p : (p.mp_layer_id < 23),
-        'tu' : lambda p : (p.direction == 1 and p.trans_rot == 1),
-        'rw' : lambda p : (p.direction == 3 and p.trans_rot == 2)
-        }
-
     def __init__(self, **kwargs) :
         self._pede_steering_file = None
         self.to_float = []
@@ -52,11 +42,13 @@ class PEDE(Component):
                 skip_nonfloat = False)
 
         # define which parameters are floating
-        for pattern in map(Pattern,self.to_float) :
-            for p in parameters.values() : 
-                if pattern.match(p) :
-                    PEDE.logger.debug(f'Floating parameter {p}')
-                    p.float()
+        #    if a parameter matches any of the input patterns
+        #    it will be floated
+        patterns = list(map(Pattern, self.to_float))
+        for parameter in parameters.values() :
+            if any(pattern.match(parameter) for pattern in patterns) :
+                PEDE.logger.debug(f'Floating parameter {p}')
+                parameter.float()
     
         # build steering file for pede
         pede_steering_file = 'pede-steer.txt'
