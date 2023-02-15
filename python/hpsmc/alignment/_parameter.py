@@ -56,7 +56,10 @@ class Parameter :
         for millepede counts up from the furthest upstream sensor. Thus,
         we do integer-division by two to get the module number.
         """
-        return self._mp_layer_id // 2
+        if self._mp_layer_id < 9 :
+            return self._mp_layer_id // 2
+        else :
+            return 4 + (self._mp_layer_id - 9) // 4
 
     def layer(self) :
         """!Get the human layer number
@@ -115,6 +118,14 @@ class Parameter :
     def back(self) :
         """!True if Parameter is single sensor in back half, False otherwise"""
         return self.individual() and (self._mp_layer_id > 8)
+
+    def hole(self) :
+        """!True if Parameter is a single sensor in back half on the hole side, Flase otherwise"""
+        return self.back() and (self._mp_layer_id % 4 == 1 or self._mp_layer_id % 4 == 2)
+
+    def slot(self) :
+        """!True if Parameter is a single sensor in back half on the slot side, Flase otherwise"""
+        return self.back() and (self._mp_layer_id % 4 == 0 or self._mp_layer_id % 4 == 3)
 
     def from_map_file_line(line) :
         """parse a line from the map file
