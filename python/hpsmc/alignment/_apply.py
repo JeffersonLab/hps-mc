@@ -6,7 +6,7 @@ import os
 import logging
 
 from hpsmc.component import Component
-from ._util import Parameter
+from ._parameter import Parameter
 
 class ApplyPedeRes(Component) :
     """! Apply a millepede.res file to a detector description
