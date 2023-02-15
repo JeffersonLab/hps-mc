@@ -1,0 +1,10 @@
+{
+    "bunches": [10000],
+    "nevents": [10000],
+    "run_params": ["3pt74"],
+    "detector": ["HPS_Nominal_3pt74GeV"],
+    "target_z": [0.0],
+    "run_number": [14552],
+    "event_interval": [250],
+    "mu": [12.5702976]
+}
