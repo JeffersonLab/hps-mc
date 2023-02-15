@@ -1,0 +1,14 @@
+{
+    "bunches": {{ bunches }},
+    "nevents": {{ nevents }},
+    "run_params": "{{ run_params }}",
+    "target_thickness": {{ target_thickness }},
+    "beam_energy": {{ beam_energy }},
+    "num_electrons": {{ num_electrons }},
+    "run_number": {{ run_number }},
+    "seed": {{ 61029001 + job_id }},
+    "output_files": {
+        "beam.stdhep": "beam_{{ run_params }}_20pt0umW_{{ job_id }}.stdhep"
+    },
+    "output_dir": "/sdf/group/hps/mc/beam/gen/{{ run_params }}/20pt0umW/"
+}

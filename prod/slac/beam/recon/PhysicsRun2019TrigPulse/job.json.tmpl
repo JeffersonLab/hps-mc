@@ -1,0 +1,24 @@
+{
+    "run_params": "{{ run_params }}",
+    "target_z": {{ target_z }},
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
+    "run_mode": 0,
+    "steering_files": {
+        "readout": "{{ steering_readout }}",
+        "recon": "{{ steering_recon }}"
+    },
+    "config_files": {
+        "recon": "recoTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "input_files": {
+        "/sdf/group/hps/mc/beam/slic/{{ run_params }}/20pt0umW/HPS_Nominal_3pt74GeV/beam_{{ run_params }}_20pt0umW_rot_sampled_{{ job_id }}.slcio": "beam.slcio"
+    },
+    "output_files": {
+        "beam_readout.slcio": "readout/beam_readout_{{ run_params }}_20pt0umW_{{ job_id }}.slcio",
+        "beam_readout_recon.slcio": "beam_readout_recon_{{ run_params }}_20pt0umW_{{ job_id }}.slcio",
+        "beam_readout_recon.root": "beam_readout_recon_{{ run_params }}_20pt0umW_{{ job_id }}.root"
+    },
+    "output_dir": "/sdf/group/hps/users/sgaiser/src/hps-mc/prod/slac/beam/recon/PhysicsRun2019TrigPulse/output"
+}
