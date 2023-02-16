@@ -1,7 +1,2 @@
-#!/usr/bin/scl enable devtoolset-8 -- /bin/bash
-#SBATCH --ntasks=1
-#SBATCH --time=24:00:00
-#SBATCH --partition=shared
-#SBATCH --job-name=examples
-
+#!/bin/bash
 hps-mc-job run -d $PWD/scratch slic job.json
