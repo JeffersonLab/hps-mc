@@ -3,4 +3,4 @@ dry_run = False
 enable_file_chaining = False
 check_output_files = True
 enable_copy_output_files = True
-delete_rundir = True
+delete_rundir = False
