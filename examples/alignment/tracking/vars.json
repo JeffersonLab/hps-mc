@@ -1,4 +1,5 @@
 {
+    "steering" : ["kf"],
     "detector": ["HPS-PhysicsRun2019-v2-4pt5"],
-    "run_number": [10666, 1194500]
+    "run_number": [10666]
 }
