@@ -1,11 +1,15 @@
 {
     "detector": "{{ detector }}",
+    "steering" : "{{ steering }}",
     "input_files": {
-        "{{ job.input_files['events'][0] }}": "events_1.stdhep"
+        "{{ job.input_files['events'][0] }}": "events.slcio"
     },
     "output_files": {
-        "events_1.slcio": "{{ input_files['events'][0] | basename }}.slcio"
+        "millepede.bin": "{{ input_files['events'][0] | basename }}_mille.bin"
     },
-    "output_dir": "output/{{ detector }}"
+    "output_dir": "output/{{ steering }}/{{ detector }}",
+    "steering_files" : {
+      "kf" : "/export/scratch/users/eichl008/hps/alignment/mille/align/data/java_steer/tracking_kf_alignment.lcsim"
+    }
 }
 
