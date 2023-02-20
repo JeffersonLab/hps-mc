@@ -11,3 +11,8 @@ hps-mc-job-template -j 1 -a vars.json -i events events.txt 1 job.json.templ jobs
 ```
 hps-mc-batch slurm track_align jobs.json
 ```
+
+### Note on Steering File
+The parameter `outputFile` is provided to the steering file as the basename
+of the first output file in the `output_files` dictionary. This is important
+to remember when writing the steering file.
