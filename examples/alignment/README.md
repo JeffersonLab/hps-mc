@@ -5,7 +5,37 @@ Below, is an outline on how to do a single iteration of this procedure.
 
 ### 1. Run Tracking
 This is done with the \ref trackingalign example in this directory.
-Edit the list of input files to include the `slcio` files you wish to use for alignment.
+Edit the list of input files to include the `slcio` files you wish to use for alignment,
+the `job.json.templ` to change the steering file (or other "static" parameters),
+and the `vars.json` file to list parameter options you wish the jobs to include.
+
+First, we generate a list of jobs to run tracking over. The files are separated into
+different jobs so that they could be run in parallel on a batch system.
+```
+hps-mc-job-template \
+  -j 1 \ # one job per each combination of inputs
+  -a tracking/vars.json \ # extra variables to supply to jinja template engine
+  -i events tracking/events.txt 1 \ # inputs: NAME FILE_LIST NUM_PER_JOB
+  tracking/job.json.templ \ # template job JSON
+  tracking_jobs.json # output file to write jobs to
+```
+
+Then we run this list of jobs. In this example, there is only one file we are
+running tracking over, so we just run the single job directly.
+```
+hps-mc-job run \
+  -d $PWD/scratch \ # choose running/working/scratch directory
+  java \ # job to run
+  tracking_jobs.json \ # list of jobs to pull from
+  -i 1 # job ID number to run
+```
+
+Alternatively, the list of jobs (a.k.a. a "job store") could be provided to
+a batch system. For example, we can run the different tracking jobs via slurm
+when working at SLAC.
+```
+hps-mc-batch slurm
+```
 
 ### 2. Run pede, Apply Parameters, and Construct Detector
 This is done within the \ref pede example in this directory.
@@ -14,6 +44,8 @@ This step runs the pede minimizer to "optimize" the alignment parameters and the
 writes a new iteration of the detector including these updated parameters.
 
 ```
-cd pede
-hps-mc-job run -d $PWD/scratch pede job.json
+hps-mc-job run \
+  -c pede/.hpsmc \ # extra configuration for pede job
+  -d $PWD/scratch \ # choose scratch directory
+  pede pede/job.json
 ```
