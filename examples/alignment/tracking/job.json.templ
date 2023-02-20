@@ -6,7 +6,9 @@
         "{{ job.input_files['events'][0] }}": "events.slcio"
     },
     "output_files": {
-        "millepede.bin": "{{ input_files['events'][0] | basename }}_mille.bin"
+        "events_{{ steering }}millepede.bin": "{{ input_files['events'][0] | basename }}_mille.bin",
+        "events_{{ steering }}gblplots.root": "{{ input_files['events'][0] | basename }}_gblplots.root",
+        "mille_constraint.txt"  : "{{ input_files['events'][0] | basename }}_mille_constraint.txt"
     },
     "output_dir": "output/{{ steering }}/{{ detector }}",
     "steering_files" : {
