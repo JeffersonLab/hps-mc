@@ -18,6 +18,9 @@ input_files = list(job.input_files.values())
 if len(input_files) > 1:
     raise Exception('This script accepts only one input file.')
 
-java_run = JobManager(steering = job.params["steering"])
+java_run = JobManager(
+    steering = job.params["steering"],
+    outputs = list(job.output_files.keys())
+    )
 
 job.add([java_run])
