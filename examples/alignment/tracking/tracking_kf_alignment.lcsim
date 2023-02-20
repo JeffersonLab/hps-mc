@@ -94,7 +94,7 @@
 
         <driver name="GBLOutputDriver" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
           <nHits>6</nHits> <!-- minimum hits -->
-          <outputPlotsFilename>${outputFile}gblplots.root</outputPlotsFilename>
+          <outputPlotsFilename>${outputFile}_gblplots.root</outputPlotsFilename>
           <bsZ>-7.5</bsZ>
           <trackCollectionName>GBLTracks</trackCollectionName>
 
@@ -158,7 +158,7 @@
           <trackSide>-1</trackSide> <!--hole-->
 
           <writeMilleBinary>true</writeMilleBinary>
-          <milleBinaryFileName>${outputFile}millepede.bin</milleBinaryFileName>
+          <milleBinaryFileName>${outputFile}.bin</milleBinaryFileName>
           <writeMilleChi2Cut>5</writeMilleChi2Cut>  <!-- max Chi2/Ndf to be included -->
 
           <enableStandardCuts>false</enableStandardCuts>
@@ -171,7 +171,7 @@
         
         <driver name="GBLOutputDriverKF" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
           <nHits>0</nHits> <!-- minimum hits -->
-          <outputPlotsFilename>${outputFile}gblplots_from_kf.root</outputPlotsFilename>
+          <outputPlotsFilename>${outputFile}_gblplots_from_kf.root</outputPlotsFilename>
           <bsZ>-7.5</bsZ>
           <trackCollectionName>KalmanFullTracks</trackCollectionName>
           <trackResidualsRelColName>TrackResidualsKFtoGBLRelations</trackResidualsRelColName>

@@ -306,7 +306,7 @@
           <constrainedBSFit>false</constrainedBSFit>
           <trackSide>-1</trackSide> <!--hole-->
           <writeMilleBinary>true</writeMilleBinary>
-          <milleBinaryFileName>${outputFile}millepede.bin</milleBinaryFileName>
+          <milleBinaryFileName>${outputFile}.bin</milleBinaryFileName>
           <writeMilleChi2Cut>5</writeMilleChi2Cut>  <!-- Chi2/Ndf -->
           <enableStandardCuts>false</enableStandardCuts>
           <maxTrackChisq4hits>60.</maxTrackChisq4hits>
@@ -316,7 +316,7 @@
         
         <driver name="GBLOutputDriver" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
           <nHits>6</nHits> <!-- minimum hits -->
-          <outputPlotsFilename>${outputFile}gblplots.root</outputPlotsFilename>
+          <outputPlotsFilename>${outputFile}_gblplots.root</outputPlotsFilename>
           <bsZ>-7.5</bsZ>
           <trackCollectionName>GBLTracks</trackCollectionName>
           <chi2Cut>9999</chi2Cut>
