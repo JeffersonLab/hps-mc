@@ -2,6 +2,8 @@ import shutil
 
 from .util import config_logging
 
+from ._hadd import hadd
+
 # Enable default logging config
 config_logging()
 
