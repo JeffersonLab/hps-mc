@@ -11,8 +11,8 @@ class hadd(Component):
     """! Run ROOT's histogram/TTree merger 
     
     Required: 
-    - **input_files**: input ROOT files to merge
-    - **output_files**: *single* output file to merge into
+    - **inputs**: input ROOT files to merge
+    - **outputs**: *single* output file to merge into
     Optional:
     - **ncores**: number of cores to supply to hadd (default 1)
     """
@@ -23,9 +23,6 @@ class hadd(Component):
         self.output_ext = 'root'
         self.ncores = None
         super().__init__('hadd', command='hadd', **kwargs)
-
-    def required_parameters(self) :
-        return ['input_files']
 
     def optional_parameters(self) :
         return ['ncores']
