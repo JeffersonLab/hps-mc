@@ -1,12 +1,13 @@
 {
     "input_files":  {
-        "/export/scratch/users/eichl008/hps/alignment/data/kf/L3TAxial_iter0/millepede.bin" : "millepede.bin"
+        "/export/scratch/users/eichl008/hps/mc/examples/alignment/output/kf/HPS-PhysicsRun2019-v2-4pt5/fee_recon_20um120nA_200_mille.bin" : "millepede.bin"
     },
     "output_files": {
         "millepede.res" : "millepede.res",
         "millepede.his" : "millepede.his",
         "millepede.log" : "millepede.log",
-        "pede-steer.txt" : "pede-steer.txt"
+        "pede-steer.txt" : "pede-steer.txt",
+        "merged.root" : "merged.root"
     },
     "to_float": ["11106"],
     "detector" : "L3TAxial_iter0",
