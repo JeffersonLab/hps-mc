@@ -7,6 +7,7 @@ import logging
 
 from hpsmc.component import Component
 from ._parameter import Parameter
+from ._pattern import Pattern
 from ._util import getBeamspotConstraintsFloatingOnly
 
 class PEDE(Component):
@@ -47,7 +48,7 @@ class PEDE(Component):
         patterns = list(map(Pattern, self.to_float))
         for parameter in parameters.values() :
             if any(pattern.match(parameter) for pattern in patterns) :
-                PEDE.logger.debug(f'Floating parameter {p}')
+                PEDE.logger.debug(f'Floating parameter {parameter}')
                 parameter.float()
     
         # build steering file for pede
