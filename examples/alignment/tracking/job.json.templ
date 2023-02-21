@@ -6,14 +6,14 @@
         "{{ job.input_files['events'][0] }}": "events.slcio"
     },
     "output_files": {
-        "events_{{ steering }}millepede.bin": "{{ input_files['events'][0] | basename }}_mille.bin",
-        "events_{{ steering }}gblplots.root": "{{ input_files['events'][0] | basename }}_gblplots.root",
+        "events_{{ steering }}_mille.bin": "{{ input_files['events'][0] | basename }}_mille.bin",
+        "events_{{ steering }}_gblplots.root": "{{ input_files['events'][0] | basename }}_gblplots.root",
         "mille_constraint.txt"  : "{{ input_files['events'][0] | basename }}_mille_constraint.txt"
     },
     "output_dir": "output/{{ steering }}/{{ detector }}",
     "steering_files" : {
-      "kf" : "/export/scratch/users/eichl008/hps/mc/example/alignment/tracking/tracking_kf_alignment.lcsim"
-      "st" : "/export/scratch/users/eichl008/hps/mc/example/alignment/tracking/tracking_st_alignment.lcsim"
+      "kf" : "/sdf/group/hps/users/eichl008/hps-mc/example/alignment/tracking/tracking_kf_alignment.lcsim",
+      "st" : "/sdf/group/hps/users/eichl008/hps-mc/example/alignment/tracking/tracking_st_alignment.lcsim"
     }
 }
 

@@ -1,1 +1,3 @@
-/export/scratch/users/eichl008/hps/alignment/fee_recon_20um120nA_200.slcio
+/full/path/to/recon/events_1.slcio
+/full/path/to/recon/events_2.slcio
+/full/path/to/recon/events_3.slcio

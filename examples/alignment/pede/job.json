@@ -1,6 +1,8 @@
 {
     "input_files":  {
-        "/export/scratch/users/eichl008/hps/mc/examples/alignment/output/kf/HPS-PhysicsRun2019-v2-4pt5/fee_recon_20um120nA_200_mille.bin" : "millepede.bin"
+        "/full/path/to/step/1/output/events_1_mille.bin" : "events_1_mille.bin",
+        "/full/path/to/step/2/output/events_2_mille.bin" : "events_2_mille.bin",
+        "/full/path/to/step/3/output/events_3_mille.bin" : "events_3_mille.bin"
     },
     "output_files": {
         "millepede.res" : "millepede.res",
@@ -11,6 +13,5 @@
     },
     "to_float": ["11106"],
     "detector" : "L3TAxial_iter0",
-    "force" : true,
     "output_dir": "output"
 }
