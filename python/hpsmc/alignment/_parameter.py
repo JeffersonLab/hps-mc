@@ -127,6 +127,10 @@ class Parameter :
         """!True if Parameter is a single sensor in back half on the slot side, Flase otherwise"""
         return self.back() and (self._mp_layer_id % 4 == 0 or self._mp_layer_id % 4 == 3)
 
+    def active(self) :
+        """!True if Parameter is active (i.e. floating) and False if not"""
+        return self._active
+
     def from_map_file_line(line) :
         """parse a line from the map file
 
@@ -236,12 +240,12 @@ class Parameter :
                 if destination is None :
                     p = Parameter.from_idn(idn)
                     p.__from_res_file_line(line)
-                    if p.active or not skip_nonfloat :
+                    if p.active() or not skip_nonfloat :
                         parameters[p.id] = p
                 else :
                     if idn not in destination :
                         raise ValueError(f'Attempting to load parameter {idn} which is not in parameter map')
-                    if destination[idn].active or not skip_nonfloat :
+                    if destination[idn].active() or not skip_nonfloat :
                         destination[idn].__from_res_file_line(line)
         return parameters if destination is None else None
 
