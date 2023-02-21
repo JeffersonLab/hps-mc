@@ -34,7 +34,9 @@ Alternatively, the list of jobs (a.k.a. a "job store") could be provided to
 a batch system. For example, we can run the different tracking jobs via slurm
 when working at SLAC.
 ```
-hps-mc-batch slurm
+hps-mc-batch slurm \ # choose batch system
+  --env /sdf/path/to/hps-mc-env.sh \ # point system to your env script
+  java tracking_jobs.json # run java job with the entire job store generated
 ```
 
 ### 2. Run pede, Apply Parameters, and Construct Detector
