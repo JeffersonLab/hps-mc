@@ -12,6 +12,6 @@
         "merged.root" : "merged.root"
     },
     "to_float": ["11106"],
-    "detector" : "L3TAxial_iter0",
-    "output_dir": "output"
+    "detector" : "HPS-PhysicsRun2019-v2-4pt5",
+    "output_dir": "output/kf/HPS-PhysicsRun2019-v2-4pt5"
 }
