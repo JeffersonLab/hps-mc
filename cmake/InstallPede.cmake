@@ -3,8 +3,7 @@ externalproject_add("pede"
     # download MillepedeII tar-ball from host at JLab
     #   this also unpacks the tar archive by default
     URL               "https://hpsweb.jlab.org/test/hps-mc/tars/MillepedeII.tar.gz"
-    URL_MD5           "ab5de8ae6b1b6494899510a6cbc155cd"
-    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL_MD5           ab5de8ae6b1b6494899510a6cbc155cd
     # have the build commands run from inside source directory
     BUILD_IN_SOURCE   ON
     # update install prefix during configure command by editing the Makefile
