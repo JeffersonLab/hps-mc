@@ -20,6 +20,21 @@ from hpsmc.alignment import PEDE, ApplyPedeRes, ConstructDetector
 
 job.description = 'alignment parameter minimizatin via pede'
 
+if not isinstance(job.input_files, (str,dict)) :
+    raise ValueError('"input_files" must be a dict list of input files or a path to a text file listing the input files')
+
+if isinstance(job.input_files, str) :
+    listing = job.input_files
+    job.input_files = dict()
+    with open(listing) as lf :
+        for line in lf :
+            line = line.strip()
+            # skip empty lines or ones starting with #
+            if line == '' or line.startswith('#') :
+                continue
+            # non-empty line, have destination be just the name of the file
+            job.input_files[line] = os.path.basename(line)
+
 pede = PEDE(inputs = job.input_files.values())
 apply_res = ApplyPedeRes()
 construct_det = ConstructDetector()
