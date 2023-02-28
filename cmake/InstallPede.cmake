@@ -1,9 +1,10 @@
 externalproject_add("pede"
     PREFIX            "pede"
-    # download MillepedeII tar-ball from host at JLab
-    #   this also unpacks the tar archive by default
-    URL               "https://hpsweb.jlab.org/test/hps-mc/tars/MillepedeII.tar.gz"
-    URL_MD5           ab5de8ae6b1b6494899510a6cbc155cd
+    # download MillepedeII from its source on DESY's GitLab
+    GIT_REPOSITORY    "https://gitlab.desy.de/claus.kleinwort/millepede-ii.git"
+    GIT_TAG           "V04-12-03"
+    GIT_SHALLOW       ON
+    GIT_REMOTE_UPDATE_STRATEGY CHECKOUT
     # have the build commands run from inside source directory
     BUILD_IN_SOURCE   ON
     # update install prefix during configure command by editing the Makefile
