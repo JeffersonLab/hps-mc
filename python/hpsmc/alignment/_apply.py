@@ -155,6 +155,17 @@ class ApplyPedeRes(Component) :
         # remove original copy if bumped since the previous iteration will have the previous version
         if self.bump :
             os.remove(original_cp)
+
+        # update/create a README to log how this detector has evolved
+        with open(os.path.join(path, 'README.md'), 'a') as update_log :
+            from datetime import datetime
+            update_log.write(f"""
+            # {self.next_detector}
+            _auto-generated note on {str(datetime.now())}_
+
+            ### Parameters Floated 
+            {self.to_float} 
+            """)
             
         return 0
 
