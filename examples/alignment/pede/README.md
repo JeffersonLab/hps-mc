@@ -40,6 +40,7 @@ These parameters are optional and only some of them are tested. They are provide
 | res\_file             | name of millepede.res file (if not "millepede.res", only helpful if separate)     |
 | bump                  | if false, *do not* update the iteration number of detector when applying results  |
 | force                 | if true, ignore any existing detector when creating a new directory               |
+| next\_detector        | if set, use this name for the new iteration of the detector (with parameters applied) |
 
 ## to\_float
 The to\_float job parameter is more complicated than the others, so it deserves its own section.

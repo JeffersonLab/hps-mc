@@ -15,6 +15,21 @@ class ApplyPedeRes(Component) :
     goes line-by-line through a detector description, updating
     the lines with any parameters that have updated values in the 
     result file.
+
+    Required Config:
+    ```
+    [ApplyPedeRes]
+    java_dir = /full/path/to/hps-java
+    ```
+
+    Required Parameters:
+    - **detector**: name of detector to apply parameters to
+
+    Optional Parameters:
+    - **res\_file**: path to millepede results file (default: 'millepede.res')
+    - **bump**: generate the next detector name by incrementing the iter number of the input detector (default: True)
+    - **force**: override the next detector path (default: False)
+    - **next\_detector**: provide name of next detector, preferred over **bump** if provided (default: None)
     """
 
     logger = logging.getLogger('ApplyPedeRes')
@@ -27,6 +42,7 @@ class ApplyPedeRes(Component) :
         self.detector = None
 
         # optional job
+        self.next_detector = None
         self.res_file = 'millepede.res'
         self.bump = True
         self.force = False
@@ -40,50 +56,55 @@ class ApplyPedeRes(Component) :
         return ['detector']
 
     def optional_parameters(self) :
-        return ['res_file','bump','force']
+        return ['res_file','bump','force','next_detector']
 
-    def _detector_dir(self) :
-        return os.path.join(self.java_dir, 'detector-data', 'detectors', self.detector)
+    def _detector_dir(self, det_name) :
+        return os.path.join(self.java_dir, 'detector-data', 'detectors', det_name)
 
     def cmd_line_str(self) :
         return 'custom python execute'
 
     def execute(self, log_out, log_err) :
-        if self.bump :
+        if self.bump or self.next_detector is not None :
+            ApplyPedeRes.logger.info('Creating new detector directory.')
             # deduce source directory and check that it exists
-            src_path = self._detector_dir()
+            src_path = self._detector_dir(self.detector)
             if not os.path.isdir(src_path) :
                 ApplyPedeRes.logger.error(f'Detector {self.detector} is not in hps-java')
                 return 1
             
-            # deduce iter value, using iter0 if there is no iter suffix
-            matches = re.search('.*iter([0-9]*)', self.detector)
-            if matches is None :
-                ApplyPedeRes.logger.error('No "_iterN" suffix on detector name.')
-                return 2
-            else :
-                i = int(matches.group(1))
-                self.detector = self.detector.replace(f'_iter{i}',f'_iter{i+1}')
+            if self.next_detector is None :
+                ApplyPedeRes.logger.info('Deducing next detector name from current name')
+                # deduce iter value, using iter0 if there is no iter suffix
+                matches = re.search('.*iter([0-9]*)', self.detector)
+                if matches is None :
+                    ApplyPedeRes.logger.error('No "_iterN" suffix on detector name.')
+                    return 2
+                else :
+                    i = int(matches.group(1))
+                    self.next_detector = self.detector.replace(f'_iter{i}',f'_iter{i+1}')
+
+            ApplyPedeRes.logger.info(f'Creating new detector named "{self.next_detector}"')
     
             # deduce destination path, and make sure it does not exist
-            dest_path = self._detector_dir()
+            dest_path = self._detector_dir(self.next_detector)
             if os.path.isdir(dest_path) and not self.force :
-                ApplyPedeRes.logger.error(f'Detector {self.detector} already exists and so it cannot be created')
+                ApplyPedeRes.logger.error(f'Detector {self.next_detector} already exists and so it cannot be created')
                 return 3
     
             # make copy
             shutil.copytree(src_path, dest_path, dirs_exist_ok = True)
     
         # now we have bumped or not, so reconstruct detector path and check that it exists
-        path = self._detector_dir()
+        path = self._detector_dir(self.next_detector)
         if not os.path.isdir(path) :
-            ApplyPedeRes.logger.error(f'Detector {self.detector} is not in hps-java')
+            ApplyPedeRes.logger.error(f'Detector {self.next_detector} is not in hps-java')
             return 4
     
         # make sure compact exists
         detdesc = os.path.join(path,'compact.xml')
         if not os.path.isfile(detdesc) :
-            ApplyPedeRes.logger.error(f'Detector {self.detector} has no compact.xml in {path} to apply parameter to.')
+            ApplyPedeRes.logger.error(f'Detector {self.next_detector} has no compact.xml in {path} to apply parameter to.')
             return 5
     
         # get list of parameters and their MP values
