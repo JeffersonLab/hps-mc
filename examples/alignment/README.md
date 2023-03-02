@@ -25,7 +25,7 @@ running tracking over, so we just run the single job directly.
 ```
 hps-mc-job run \
   -d $PWD/scratch \ # choose running/working/scratch directory
-  java \ # job to run
+  track_align \ # job to run
   tracking_jobs.json \ # list of jobs to pull from
   -i 1 # job ID number to run
 ```
@@ -36,7 +36,7 @@ when working at SLAC.
 ```
 hps-mc-batch slurm \ # choose batch system
   --env /sdf/path/to/hps-mc-env.sh \ # point system to your env script
-  java tracking_jobs.json # run java job with the entire job store generated
+  track_align tracking_jobs.json # run java job with the entire job store generated
 ```
 
 ### 2. Run pede, Apply Parameters, and Construct Detector
