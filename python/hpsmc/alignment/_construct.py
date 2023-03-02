@@ -15,6 +15,9 @@ class ConstructDetector(Component) :
 
         # required job
         self.detector = None
+        
+        # optional job
+        self.next_detector = None
 
         super().__init__('ConstructDetector',
                          command='hps-mc-construct-detector')
@@ -25,9 +28,10 @@ class ConstructDetector(Component) :
     def required_parameters(self) :
         return ['detector']
 
-    def _detector_dir(self) :
-        return os.path.join(self.java_dir, 'detector-data', 'detectors', self.detector)
+    def optional_parameters(self) :
+        return ['next_detector']
 
     def cmd_args(self) :
-        return [ self.detector, '-p', self.java_dir, '-jar', self.hps_java_bin_jar ]
+        return [ self.detector if self.next_detector is not None else self.next_detector, 
+            '-p', self.java_dir, '-jar', self.hps_java_bin_jar ]
 
