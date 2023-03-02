@@ -47,6 +47,9 @@ class ApplyPedeRes(Component) :
         self.bump = True
         self.force = False
 
+        # hidden job parameters
+        self.to_float = 'UNKNOWN'
+
         super().__init__('ApplyPedeRes')
 
     def required_config(self) :
@@ -56,7 +59,7 @@ class ApplyPedeRes(Component) :
         return ['detector']
 
     def optional_parameters(self) :
-        return ['res_file','bump','force','next_detector']
+        return ['res_file','bump','force','next_detector','to_float']
 
     def _detector_dir(self, det_name) :
         return os.path.join(self.java_dir, 'detector-data', 'detectors', det_name)
@@ -157,15 +160,20 @@ class ApplyPedeRes(Component) :
             os.remove(original_cp)
 
         # update/create a README to log how this detector has evolved
-        with open(os.path.join(path, 'README.md'), 'a') as update_log :
+        log_path = os.path.join(path, 'README.md')
+        ApplyPedeRes.logger.info(f'Updating log at {log_path}')
+        with open(log_path, 'a') as log :
             from datetime import datetime
-            update_log.write(f"""
-            # {self.next_detector}
-            _auto-generated note on {str(datetime.now())}_
+            msg = f"""
+# {self.next_detector}
+_auto-generated note on {str(datetime.now())}_
 
-            ### Parameters Floated 
-            {self.to_float} 
-            """)
-            
+### Parameters Floated 
+{self.to_float} 
+"""
+            ApplyPedeRes.logger.debug(msg)
+            log.write(msg)
+            log.flush() # need manual flush since we leave after this
+        
         return 0
 
