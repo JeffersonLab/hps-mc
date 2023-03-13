@@ -4,6 +4,7 @@ import shutil
 import re
 import os
 import logging
+import json
 
 from hpsmc.component import Component
 from ._parameter import Parameter
@@ -224,7 +225,7 @@ class ApplyPedeRes(_CompactWriter) :
 Compact updated by applying results from a run of pede
 
 ### Parameters Floated
-{self.to_float}
+{json.dumps(self.to_float, indent = 2)}
 
 """)
         return 0
@@ -299,7 +300,7 @@ class WriteMisalignedDet(_CompactWriter) :
 Detector written by applying an intentional misalignment to {self.detector}.
 
 ### Misalignment Applied
-{self.parameters}
+{json.dumps(self.parameters, indent=2)}
 
 """)
 
