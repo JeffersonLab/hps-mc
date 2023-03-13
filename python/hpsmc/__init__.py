@@ -6,7 +6,7 @@ import logging
 
 from os.path import expanduser
 
-from ._logging import config_logging
+from ._logging import create_logger
 
 # To play nice with Lustre, but only effective as of python 3.8
 shutil.COPY_BUFSIZE = 1024 * 1024
@@ -31,10 +31,10 @@ if 'HPSMC' in global_config:
     if 'logfile' in global_config['HPSMC']:
         _logstream = open(global_config['HPSMC']['logfile'], 'w')
     else:
-        _logfile = sys.stdout
+        _logstream = sys.stdout
 
 # Enable default logging configuration.
-global_logger = config_logging(stream=_logstream, level=_loglevel)
+global_logger = create_logger(stream=_logstream, level=_loglevel)
 
 # Print the global config to the log.
 if len(_config_files) > 0:
