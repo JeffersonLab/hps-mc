@@ -6,15 +6,17 @@ import os
 import logging
 import json
 
+logger = logging.getLogger('alignment.apply')
+
 from hpsmc.component import Component
 from ._parameter import Parameter
 from ._pattern import Pattern
 
-class _CompactWriter(Component) :
+class _DetectorEditor(Component) :
     """! Abstract component to hold shared functionality for
-    compoents that write compact.xml files
+    compoents that edit the detectors in hps-java
 
-    **This compoent should never be used directly.**
+    **This component should never be used directly.**
 
     Required Config:
     ```
@@ -30,7 +32,7 @@ class _CompactWriter(Component) :
     - **force**: ignore if the detector we are writing to already exists
     """
 
-    def __init__(self, name) :
+    def __init__(self, name, **kwargs) :
         # config
         self.java_dir = None
 
@@ -41,7 +43,7 @@ class _CompactWriter(Component) :
         self.next_detector = None
         self.force = False
 
-        super().__init__(name)
+        super().__init__(name, **kwargs)
 
     def required_config(self) :
         return ['java_dir']
@@ -55,11 +57,33 @@ class _CompactWriter(Component) :
     def _detector_dir(self, det_name) :
         return os.path.join(self.java_dir, 'detector-data', 'detectors', det_name)
 
-    def cmd_line_str(self) :
-        return 'custom python execute'
+    def _deduce_next_detector(self, bump = False) :
+        """! deduce what the next detector should be given how the component has been configured
 
-    def execute(self) :
-        pass
+        The component parameter **bump** is an argument here since it is only
+        a valid parameter for some components inheriting from this function.
+        """
+        if bump or self.next_detector is not None :
+            logger.info('Creating new detector directory.')
+            # deduce source directory and check that it exists
+            src_path = self._detector_dir(self.detector)
+            if not os.path.isdir(src_path) :
+                raise ValueError(f'Detector {self.detector} is not in hps-java')
+            
+            if self.next_detector is None :
+                logger.info('Deducing next detector name from current name')
+                # deduce iter value, using iter0 if there is no iter suffix
+                matches = re.search('.*iter([0-9]*)', self.detector)
+                if matches is None :
+                    raise ValueError('No "_iterN" suffix on detector name.')
+                else :
+                    i = int(matches.group(1))
+                    self.next_detector = self.detector.replace(f'_iter{i}',f'_iter{i+1}')
+
+            logger.info(f'Creating new detector named "{self.next_detector}"')
+        else :
+            logger.info(f'Operating on assumed-existing detector "{self.detector}"')
+            self.next_detector = self.detector
 
     def _to_compact(parameter_set, detname, save_prev = True, prev_ext = 'prev')
         """! write the input parameter set into the input compact.xml file
@@ -83,6 +107,7 @@ class _CompactWriter(Component) :
         dest = os.path.join(self._detector_dir(detname),'compact.xml')
         if not os.path.isfile(dest) :
             raise ValueError(f'{detname} does not have a compact.xml to modify.')
+        logger.info(f'Writing compact.xml at {dest}')
         original_cp = dest + '.' + prev_ext
         shutil.copy2(dest, original_cp)
         f = open(dest,'w')
@@ -136,6 +161,7 @@ class _CompactWriter(Component) :
 
         # update/create a README to log how this detector has evolved
         log_path = os.path.join(self._detector_dir(detname), 'README.md')
+        logger.info(f'Updating README.md at {log_path}')
         with open(log_path, 'a') as log :
             from datetime import datetime
             log.write(f'# {detname}\n')
@@ -168,7 +194,6 @@ class ApplyPedeRes(_CompactWriter) :
     - **next\_detector**: provide name of next detector, preferred over **bump** if provided (default: None)
     """
 
-    logger = logging.getLogger('ApplyPedeRes')
 
     def __init__(self) :
         # optional job
@@ -183,39 +208,20 @@ class ApplyPedeRes(_CompactWriter) :
     def optional_parameters(self) :
         return super().optional_parameters().extend(['res_file','bump','to_float'])
 
-    def execute(self, log_out, log_err) :
-        if self.bump or self.next_detector is not None :
-            ApplyPedeRes.logger.info('Creating new detector directory.')
-            # deduce source directory and check that it exists
-            src_path = self._detector_dir(self.detector)
-            if not os.path.isdir(src_path) :
-                raise ValueError(f'Detector {self.detector} is not in hps-java')
-            
-            if self.next_detector is None :
-                ApplyPedeRes.logger.info('Deducing next detector name from current name')
-                # deduce iter value, using iter0 if there is no iter suffix
-                matches = re.search('.*iter([0-9]*)', self.detector)
-                if matches is None :
-                    raise ValueError('No "_iterN" suffix on detector name.')
-                else :
-                    i = int(matches.group(1))
-                    self.next_detector = self.detector.replace(f'_iter{i}',f'_iter{i+1}')
+    def cmd_line_str(self) :
+        return 'custom python execute'
 
-            ApplyPedeRes.logger.info(f'Creating new detector named "{self.next_detector}"')
-    
-            # deduce destination path, and make sure it does not exist
-            dest_path = self._detector_dir(self.next_detector)
-            if os.path.isdir(dest_path) and not self.force :
-                raise ValueError(f'Detector {self.next_detector} already exists and so it cannot be created. Use "force" to overwrite an existing detector.')
-                return 3
-    
-            # make copy
-            shutil.copytree(src_path, dest_path, dirs_exist_ok = True)
-    
-        # now we have bumped or not, so reconstruct detector path and check that it exists
-        path = self._detector_dir(self.next_detector)
-        if not os.path.isdir(path) :
-            raise ValueError(f'Detector {self.next_detector} is not in hps-java')
+    def execute(self, log_out, log_err) :
+        self._deduce_next_detector()
+
+        # deduce destination path, and make sure it does not exist
+        dest_path = self._detector_dir(self.next_detector)
+        if os.path.isdir(dest_path) and not self.force :
+            raise ValueError(f'Detector {self.next_detector} already exists and so it cannot be created. Use "force" to overwrite an existing detector.')
+
+        # make copy if the destination is not the same as the origin
+        if self.next_detector != self.detector :
+            shutil.copytree(self._detector_dir(self.detector), dest_path, dirs_exist_ok = True)
     
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
@@ -254,11 +260,16 @@ class WriteMisalignedDet(_CompactWriter) :
           # required job
           self.parameters = None
 
+          super().__init__('WriteMisalignedDet')
+
       def required_config(self) :
           return super().required_config().extend(['param_map'])
 
       def required_parameters(self) :
           return super().required_parameters().extend(['parameters'])
+
+      def cmd_line_str(self) :
+          return 'custom python execute'
 
       def execute(self) :
           # translate pattern strings from JSON into Pattern objects
@@ -276,6 +287,8 @@ class WriteMisalignedDet(_CompactWriter) :
                       parameters_to_apply[idn] = param
                       parameters_to_apply[idn].value = val_change
                       break
+
+          self._deduce_next_detector()
 
           src_det = self._detector_dir(self.detector)
           if not os.path.isdir(src_det) :
@@ -303,4 +316,58 @@ Detector written by applying an intentional misalignment to {self.detector}.
 {json.dumps(self.parameters, indent=2)}
 
 """)
+
+class ConstructDetector(Component) :
+    """! construct an LCDD from a compact.xml and recompile necessary parts of hps-java
+    
+    This is a Component interface to the hps-mc-construct-detector script.
+
+    Required Config:
+    ```
+    [ConstructDetector]
+    java_dir = /full/path/to/hps-java
+    hps_java_bin_jar = /full/path/to/hps-java/bin.jar
+    ```
+
+    Required Parameters:
+    - **detector**: name of detector to construct (unless next\_detector is provided)
+
+    Optional Parameters:
+    - **bump**: generate the next detector name by incrementing the iter number of the input detector (default: True)
+    - **force**: override the next detector path (default: False)
+    - **next\_detector**: provide name of next detector, preferred over **bump** if provided (default: None)
+    """
+
+    def __init__(self) :
+        # config
+        self.hps_java_bin_jar = None
+
+        # optional job
+        #    only used when in the same job as ApplyPedeRes
+        self.bump = True
+
+        # detector we will actuall construct
+        self.detector_to_construct = None
+
+        super().__init__('ConstructDetector',
+                         command='hps-mc-construct-detector')
+
+    def required_config(self) :
+        return super().required_config().extend(['hps_java_bin_jar'])
+
+    def optional_parameters(self) :
+        return super().optional_parameters().extend(['bump'])
+
+    def setup(self) :
+        """Called after configured but before running
+
+        We deduce which detector we will be running with,
+        attempting to mimic the logic in ApplyPedeRes.execute
+        so that we compile the same detector that pede results
+        were written into.
+        """
+        self._deduce_next_detector()
+        
+    def cmd_args(self) :
+        return [ self.next_detector, '-p', self.java_dir, '-jar', self.hps_java_bin_jar ]
 
