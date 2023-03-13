@@ -745,8 +745,8 @@ class Job(object):
             shutil.copyfile(src_file, dest_file)
             # take the time to double-check that the copy is identical to the original
             #   this catches any sneaky network-dropping related copy failures
-            if not filecmp.cmp(src_file, dest_file, shallow=False) :
-                raise Exception('Copy from '%s' to '%s' failed.' % (src_file, dest_file))
+            if not filecmp.cmp(src_file, dest_file, shallow=False):
+                raise Exception("Copy from '%s' to '%s' failed." % (src_file, dest_file))
         else:
             logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
 
