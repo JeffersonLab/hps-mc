@@ -48,7 +48,7 @@ It is a list of different so-called Pattern each of which can be an ID number of
 several different boolean operations in order to construct a group of paramters to float. If a
 single alignment parameter "matches" _any_ of the Patterns in the list, then it will be floated.
 
-More detail about the Pattern syntax is given in its documentation: hpsmc.alignment._pattern.Pattern
+More detail about the Pattern syntax is given in its documentation: `hpsmc.alignment._pattern.Pattern`
 
 #### Example Patterns
 Within each pattern, different operations are separated by `&` to reflect that all of them must be true
