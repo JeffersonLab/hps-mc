@@ -1,9 +1,9 @@
 #!/usr/bin/env csh
 
-##################################
-# Module setup script for JLab   #
-# Run using `source` from ifarm. #
-##################################
+################################################
+# Module configuration script for JLab         #
+# Setup using `source` from ifarm in csh/tcsh. #
+################################################
 
 # Unload modules
 module unload gcc
@@ -16,7 +16,7 @@ module load cmake/3.22.1
 module load maven/3.5.0
 
 # Set environment variables for CMake
-setenv  CC `which gcc`
+setenv CC `which gcc`
 setenv CXX `which g++`
 
 # Print paths to tools
