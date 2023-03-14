@@ -85,7 +85,7 @@ class _DetectorEditor(Component) :
             logger.info(f'Operating on assumed-existing detector "{self.detector}"')
             self.next_detector = self.detector
 
-    def _to_compact(parameter_set, detname, save_prev = True, prev_ext = 'prev')
+    def _to_compact(parameter_set, detname, save_prev = True, prev_ext = 'prev'):
         """! write the input parameter set into the input compact.xml file
 
         Update the millepede parameters in the destination compact.xml with the
@@ -170,7 +170,7 @@ class _DetectorEditor(Component) :
             log.flush() # need manual flush since we leave after this
         return
         
-class ApplyPedeRes(_CompactWriter) :
+class ApplyPedeRes(_DetectorEditor) :
     """! Apply a millepede.res file to a detector description
 
     This job component loads a result file into memory and the
@@ -206,7 +206,7 @@ class ApplyPedeRes(_CompactWriter) :
         super().__init__('ApplyPedeRes')
 
     def optional_parameters(self) :
-        return super().optional_parameters().extend(['res_file','bump','to_float'])
+        return super().optional_parameters() + ['res_file','bump','to_float']
 
     def cmd_line_str(self) :
         return 'custom python execute'
@@ -236,7 +236,7 @@ Compact updated by applying results from a run of pede
 """)
         return 0
 
-class WriteMisalignedDet(_CompactWriter) :
+class WriteMisalignedDet(_DetectorEditor) :
       """! write a detector intentionally misaligned relative to another one
 
       Required Config:
@@ -263,10 +263,10 @@ class WriteMisalignedDet(_CompactWriter) :
           super().__init__('WriteMisalignedDet')
 
       def required_config(self) :
-          return super().required_config().extend(['param_map'])
+          return super().required_config() + ['param_map']
 
       def required_parameters(self) :
-          return super().required_parameters().extend(['parameters'])
+          return super().required_parameters() + ['parameters']
 
       def cmd_line_str(self) :
           return 'custom python execute'
@@ -304,7 +304,7 @@ class WriteMisalignedDet(_CompactWriter) :
               dest_det = self._detector_dir(self.next_detector) 
               if not os.path.isdir(dest_det) :
                   shutil.copytree(src_det, dest_det)
-              else if not self.force :
+              elif not self.force :
                   raise ValueError('{dest_det} detector already exists. Use "force" if you want to write to an existing detector.') 
 
           self._to_compact(parameter_to_apply, dest_det, save_prev = self.force)
@@ -317,7 +317,7 @@ Detector written by applying an intentional misalignment to {self.detector}.
 
 """)
 
-class ConstructDetector(Component) :
+class ConstructDetector(_DetectorEditor) :
     """! construct an LCDD from a compact.xml and recompile necessary parts of hps-java
     
     This is a Component interface to the hps-mc-construct-detector script.
@@ -353,10 +353,10 @@ class ConstructDetector(Component) :
                          command='hps-mc-construct-detector')
 
     def required_config(self) :
-        return super().required_config().extend(['hps_java_bin_jar'])
+        return super().required_config() + ['hps_java_bin_jar']
 
     def optional_parameters(self) :
-        return super().optional_parameters().extend(['bump'])
+        return super().optional_parameters() + ['bump']
 
     def setup(self) :
         """Called after configured but before running
