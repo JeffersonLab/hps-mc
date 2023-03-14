@@ -85,7 +85,7 @@ class _DetectorEditor(Component) :
             logger.info(f'Operating on assumed-existing detector "{self.detector}"')
             self.next_detector = self.detector
 
-    def _to_compact(parameter_set, detname, save_prev = True, prev_ext = 'prev'):
+    def _to_compact(self, parameter_set, detname, save_prev = True, prev_ext = 'prev'):
         """! write the input parameter set into the input compact.xml file
 
         Update the millepede parameters in the destination compact.xml with the
@@ -212,7 +212,7 @@ class ApplyPedeRes(_DetectorEditor) :
         return 'custom python execute'
 
     def execute(self, log_out, log_err) :
-        self._deduce_next_detector()
+        self._deduce_next_detector(self.bump)
 
         # deduce destination path, and make sure it does not exist
         dest_path = self._detector_dir(self.next_detector)
@@ -232,7 +232,7 @@ class ApplyPedeRes(_DetectorEditor) :
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
 
-        self._to_compact(parameters, self.next_detector, save_prev = (not self.bump))
+        self._to_compact(parameters, self.next_detector)
         self._update_readme(self.next_detector, f"""
 Compact updated by applying results from a run of pede
 
@@ -372,7 +372,7 @@ class ConstructDetector(_DetectorEditor) :
         so that we compile the same detector that pede results
         were written into.
         """
-        self._deduce_next_detector()
+        self._deduce_next_detector(self.bump)
         
     def cmd_args(self) :
         return [ self.next_detector, '-p', self.java_dir, '-jar', self.hps_java_bin_jar ]
