@@ -250,9 +250,9 @@ class DummyComponent(Component):
         self.logger.info('Dummy component created')
         
     def execute(self, log_out=sys.stdout, log_err=sys.stderr):
-        self.logger.debug("dummy debug message")
-        self.logger.info("dummy info message")
-        self.logger.warning("dummy warn message")
-        self.logger.critical("dummy critical message")
-
+        self.logger.debug("dummy debug")
+        self.logger.info("dummy info")
+        self.logger.warning("dummy warn")
+        self.logger.critical("dummy critical")
+        self.logger.error("dummy error")
         

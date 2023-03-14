@@ -33,13 +33,20 @@ if 'HPSMC' in global_config:
     if 'logfile' in global_config['HPSMC']:
         _logstream = open(global_config['HPSMC']['logfile'], 'w')
 
-# Setup logging now that configuration has been read.
-_global_logger = create_logger(stream=_logstream, level=_loglevel)
+# Configure the global logger settings.
+global_logger = logging.getLogger("hpsmc")
+global_logger.propagate = False
+global_logger.handlers = [] 
+global_logger.setLevel(_loglevel)
+handler = logging.StreamHandler(_logstream)
+handler.setLevel(logging.DEBUG)
+handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
+global_logger.addHandler(handler)
 
 # Print the global config to the log.
 if len(_config_files) > 0:
-    _global_logger.info("Read hpsmc config: {}".format(_config_files))
-    _global_logger.info("Config settings: {}".format(\
+    global_logger.info("Read hpsmc config: {}".format(_config_files))
+    global_logger.info("Config settings: {}".format(\
         {section: dict(global_config[section]) for section in global_config}))
 else:
-    _global_logger.info("No config files were found at default locations!")
+    global_logger.info("No config files were found at default locations!")
