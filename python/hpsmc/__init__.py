@@ -12,6 +12,7 @@ from ._logging import create_logger
 shutil.COPY_BUFSIZE = 1024 * 1024
 
 # Setup the parser for loading global configuration settings.
+# It is okay to read this from other modules like job.
 global_config = configparser.ConfigParser()
 
 # By default look for files called ".hpsmc" in the user home and current directories.
@@ -34,19 +35,19 @@ if 'HPSMC' in global_config:
         _logstream = open(global_config['HPSMC']['logfile'], 'w')
 
 # Configure the global logger settings.
-global_logger = logging.getLogger("hpsmc")
-global_logger.propagate = False
-global_logger.handlers = [] 
-global_logger.setLevel(_loglevel)
-handler = logging.StreamHandler(_logstream)
-handler.setLevel(logging.DEBUG)
-handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
-global_logger.addHandler(handler)
+_global_logger = logging.getLogger("hpsmc")
+_global_logger.propagate = False
+_global_logger.handlers = [] 
+_global_logger.setLevel(_loglevel)
+_handler = logging.StreamHandler(_logstream)
+_handler.setLevel(logging.DEBUG)
+_handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
+_global_logger.addHandler(_handler)
 
 # Print the global config to the log.
 if len(_config_files) > 0:
-    global_logger.info("Read hpsmc config: {}".format(_config_files))
-    global_logger.info("Config settings: {}".format(\
-        {section: dict(global_config[section]) for section in global_config}))
+    _global_logger.info("Config files found: {}".format(_config_files))
+    #_global_logger.info("Config settings: {}".format(\
+    #    {section: dict(global_config[section]) for section in global_config}))
 else:
-    global_logger.info("No config files were found at default locations!")
+    _global_logger.info("No config files were found at default locations!")
