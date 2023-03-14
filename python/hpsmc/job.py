@@ -57,7 +57,7 @@ class JobConfig(object):
         self.parser = copy.copy(global_config)
 
     def __str__(self):
-        parser_lines = ['JobConfig:']
+        parser_lines = ['Job configuration:']
         for section in self.parser.sections():
             parser_lines.append("[" + section + "]")
             for i, v in self.parser.items(section):
@@ -83,11 +83,11 @@ class JobConfig(object):
             for name, value in self.parser.items(section):
                 if len(allowed_names) and name not in allowed_names:
                     raise Exception("Config name '%s' is not allowed for '%s'" % (name, section))
-                setattr(obj, name, convert_config_value(value))
-                logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
-                                             name,
-                                             getattr(obj, name).__class__.__name__,
-                                             getattr(obj, name)))
+                setattr(obj, name, convert_config_value(value))                
+                #logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
+                #                             name,
+                #                             getattr(obj, name).__class__.__name__,
+                #                             getattr(obj, name)))
         elif require_section:
             raise Exception("Missing required config section '%s'" % section)
         else:
@@ -294,7 +294,7 @@ class Job(object):
         # Read in job configuration files
         if cl.config_file:
             config_files = list(map(os.path.abspath, cl.config_file))
-            logger.info("Reading job config from: {}".format(config_files))
+            logger.info("Reading additional config from: {}".format(config_files))
             self.job_config.parser.read(config_files)
 
         # Set file for stdout from components
@@ -415,8 +415,6 @@ class Job(object):
         Configure job class and components.
         """
 
-        print("Job config: {}".format({section: dict(self.job_config.parser[section]) for section in self.job_config.parser}))
-
         # Configure job class
         self.job_config.config(self, require_section=False)
 
@@ -462,7 +460,7 @@ class Job(object):
         if not os.path.exists(script_path):
             raise Exception('Job script does not exist: %s' % script_path)
 
-        logger.debug('Loading job script: %s' % script_path)
+        logger.info('Loading job script: %s' % script_path)
 
         exec(compile(open(script_path, "rb").read(), script_path, 'exec'), {'job': self})
 
@@ -487,10 +485,13 @@ class Job(object):
             raise Exception("Job has no components to execute.")
 
         # Print list of job components
-        logger.info("Job components: %s" % ([c.name for c in self.components]))
+        logger.info("Job components loaded: %s" % ([c.name for c in self.components]))
 
         # Print job parameters.
-        logger.info("Job parameters: %s" % str(self.params))
+        if len(self.params) > 0:
+            logger.info("Job parameters loaded: %s" % str(self.params))
+        else:
+            logger.info("No job parameters were specified!")
 
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
@@ -552,8 +553,7 @@ class Job(object):
             for component in self.components:
 
                 logger.info("Executing '%s' with command: %s" % (component.name, component.cmd_line_str()))
-                logger.info("Inputs: %s" % str(component.input_files()))
-                logger.info("Outputs: %s" % str(component.output_files()))
+                #logger.info("Component IO: {} -> {}".format(str(component.input_files(), component.output_files())))
 
                 # Print header to stdout
                 self.component_out.write('================ Component: %s ================\n' % component.name)
@@ -568,8 +568,8 @@ class Job(object):
                 returncode = component.execute(self.component_out, self.component_err)
                 end = time.time()
                 elapsed = end - start
-                logger.info("Execution of '%s' took %f second(s)" % (component.name, elapsed))
-                logger.info("Return code of '%s' was %s" % (component.name, str(returncode)))
+                logger.info("Execution of {} took {} second(s) with return code: {}"\
+                    .format(component.name, round(elapsed, 4), str(returncode)))
 
                 if not self.ignore_return_codes and returncode:
                     raise Exception("Non-zero return code %d from '%s'" % (returncode, component.name))
@@ -590,7 +590,7 @@ class Job(object):
         """
 
         # Change to run dir
-        logger.debug('Changing to run dir: %s' % self.rundir)
+        logger.info('Changing to run dir: %s' % self.rundir)
         os.chdir(self.rundir)
 
         # Limit components according to job steps
@@ -643,10 +643,10 @@ class Job(object):
         Perform post-job cleanup.
         """
         for component in self.components:
-            logger.debug('Running cleanup for component: %s' % str(component.name))
+            logger.info('Running cleanup for component: %s' % str(component.name))
             component.cleanup()
         if self.delete_rundir:
-            logger.debug('Deleting run dir: %s' % self.rundir)
+            logger.info('Deleting run dir: %s' % self.rundir)
             if os.path.exists("%s/__swif_env__" % self.rundir):
                 for f in os.listdir(self.rundir):
                     if ('.log' not in f) and ('__swif_' not in f):

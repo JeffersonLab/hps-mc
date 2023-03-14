@@ -247,7 +247,6 @@ class DummyComponent(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
-        self.logger.info('Dummy component created')
         
     def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         self.logger.debug("dummy debug")
