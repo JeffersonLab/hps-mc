@@ -6,13 +6,11 @@ import logging
 
 from os.path import expanduser
 
-from ._logging import create_logger
-
 # To play nice with Lustre, but only effective as of python 3.8
 shutil.COPY_BUFSIZE = 1024 * 1024
 
 # Setup the parser for loading global configuration settings.
-# It is okay to read this from other modules like job.
+# It is okay to access this variable from other modules like job.
 global_config = configparser.ConfigParser()
 
 # By default look for files called ".hpsmc" in the user home and current directories.
@@ -35,6 +33,7 @@ if 'HPSMC' in global_config:
         _logstream = open(global_config['HPSMC']['logfile'], 'w')
 
 # Configure the global logger settings.
+# This object should not be accessed directly.
 _global_logger = logging.getLogger("hpsmc")
 _global_logger.propagate = False
 _global_logger.handlers = [] 
@@ -44,7 +43,7 @@ _handler.setLevel(logging.DEBUG)
 _handler.setFormatter(logging.Formatter('%(name)s:%(levelname)s %(message)s'))
 _global_logger.addHandler(_handler)
 
-# Print the global config to the log.
+# Print a log message showing what global config files were found and loaded.
 if len(_config_files) > 0:
     _global_logger.info("Config files found: {}".format(_config_files))
     #_global_logger.info("Config settings: {}".format(\
