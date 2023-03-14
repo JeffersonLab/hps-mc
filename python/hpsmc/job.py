@@ -18,12 +18,11 @@ import subprocess
 from collections.abc import Sequence
 from os.path import expanduser
 
-from hpsmc.util import convert_config_value, config_logging
+from hpsmc.util import convert_config_value
+from hpsmc import global_config
 
-## Initialize logger with default level
+## Initialize logger
 logger = logging.getLogger('hpsmc.job')
-logger.setLevel(logging.INFO)
-
 
 def check(j):
     jsonfile = j.application.args[1]
@@ -50,40 +49,11 @@ def load_json_data(filename):
     rawdata = open(filename, 'r').read()
     return json.loads(rawdata)
 
-
 class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
 
-    # , include_default_locations=True
-    def __init__(self, config_files=[], include_default_locations=True):
-        ## list of config files
-        self.config_files = []
-        if include_default_locations:
-            self.config_files.extend([os.path.join(expanduser("~"), ".hpsmc"),
-                                      os.path.abspath(".hpsmc")])
-
-        if len(config_files):
-            self.config_files.extend(config_files)
-
-        # if not len(self.config_files):
-        #    raise Exception('No config file locations provided.')
-
-        self._load()
-
-    def _load(self):
-        """! Load config from the list of possible locations."""
-        ## \todo implement or cleanup
-        # Read in config files and crash if none are found from list
-        ## configuration parser
-        self.parser = configparser.ConfigParser()
-        # logger.debug("Checking for config files: %s" % str(self.config_files))
-        # parsed =
-        self.parser.read(self.config_files)
-        # if not len(parsed):
-        #    raise Exception('No config files found in locations: %s' % str(self.config_files))
-
-        # Print detailed config info to the log
-        # if len(parsed):
+    def __init__(self):
+        self.parser = configparser.ConfigParser(global_config)
 
     def __str__(self):
         parser_lines = ['JobConfig:']
@@ -229,8 +199,11 @@ class Job(object):
     PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
+
         ## (passed) job arguments
         self.args = args
+        ## Job configuration
+        self.job_config = JobConfig()
         ## short description of job, should be overridden by the job script
         self.description = "HPS MC Job"
         ## job ID
@@ -251,13 +224,11 @@ class Job(object):
         self.output_files = {}
         ## dict with keys to output filenames
         self.ptags = {}
-        ## log output
-        self.log = sys.stdout
-        ## system output
-        self.out = sys.stdout
-        ## error output
-        self.err = sys.stderr
-
+        ### output for component printouts
+        self.component_out = sys.stdout
+        ### output for component error messages 
+        self.component_err = sys.stderr
+        
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
@@ -269,7 +240,6 @@ class Job(object):
         self.check_commands = False
         self.enable_file_chaining = True
         self.enable_env_config = False
-        self.log_level = logging.INFO
 
     def add(self, component):
         """!
@@ -300,11 +270,9 @@ class Job(object):
         parser = argparse.ArgumentParser(description=self.description)
         parser.add_argument("-c", "--config-file", help="Config file locations", action='append')
         parser.add_argument("-d", "--run-dir", nargs='?', help="Job run dir")
-        parser.add_argument("-o", "--out", nargs='?', help="File for component stdout")
-        parser.add_argument("-e", "--err", nargs='?', help="File for component stderr")
-        parser.add_argument("-l", "--log", nargs='?', help="File for logging output (default is print to terminal)")
-        parser.add_argument("-s", "--job-steps", type=int, default=-1,
-                            help="Job steps to run (single number)")
+        parser.add_argument("-o", "--out", nargs='?', help="File for component stdout (default prints to console)")
+        parser.add_argument("-e", "--err", nargs='?', help="File for component stderr (default prints to console)")
+        parser.add_argument("-s", "--job-steps", type=int, default=-1, help="Job steps to run (single number)")
         parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
         parser.add_argument("script", nargs='?', help="Path or name of job script")
         parser.add_argument("params", nargs='?', help="Job param file in JSON format")
@@ -319,38 +287,17 @@ class Job(object):
         cl = parser.parse_args(self.args)
 
         # Read in job configuration files
-        config_files = []
         if cl.config_file:
             config_files = list(map(os.path.abspath, cl.config_file))
-        self.job_config = JobConfig(config_files=config_files)
-
-        # Configure job log level
-        try:
-            self.log_level = logging.getLevelName(
-                self.job_config.parser.get('Job', 'log_level'))
-        except BaseException:
-            pass
-
-        # Configure logging stream to file
-        if cl.log:
-            log_file = cl.log
-            if not os.path.isabs(log_file):
-                log_file = os.path.abspath(log_file)
-            self.log = open(log_file, 'w')
-
-        # Configure logging from command line parameters and configuration files,
-        # including sub-modules that are used in job scripts
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.job')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.component')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.tools')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.generators')
+            logger.info("Reading job config from: {}".format(config_files))
+            self.job_config.parser.read(config_files)
 
         # Set file for stdout from components
         if cl.out:
             out_file = cl.out
             if not os.path.isabs(out_file):
                 out_file = os.path.abspath(out_file)
-                logger.debug('Changed stdout file to abs path: %s' % out_file)
+                logger.info('Job output will be written to: %s' % out_file)
             self.out = open(out_file, 'w')
 
         # Set file for stderr from components
@@ -358,20 +305,15 @@ class Job(object):
             err_file = cl.err
             if not os.path.isabs(err_file):
                 err_file = os.path.abspath(err_file)
-                logger.debug('Changed stderr file to abs path: %s' % err_file)
+                logger.info('Job error will be written to: %s' % err_file)
             self.err = open(err_file, 'w')
-
-        # if cl.level:
-        #    num_level = getattr(logging, cl.level.upper(), None)
-        #    if not isinstance(num_level, int):
-        #        raise ValueError('Invalid log level: %s' % num_level)
-        #    logging.getLogger('hpsmc').setLevel(num_level)
-        # print("Set log level of hpsmc: %s" % logging.getLevelName(logging.getLogger('hpsmc').getEffectiveLevel()))
 
         if cl.run_dir:
             self.rundir = cl.run_dir
 
         self.job_steps = cl.job_steps
+        if self.job_steps < 1:
+            raise Exception("Invalid job steps argument (must be > 0): {}".format(self.job_steps))
 
         if cl.script:
             ## name of or path to script
@@ -408,7 +350,7 @@ class Job(object):
 
         self.set_parameters(params)
 
-        # logger.info(json.dumps(self.params, indent=4, sort_keys=False))
+        #logger.info(json.dumps(self.params, indent=4, sort_keys=False))
 
         if 'output_dir' in self.params:
             self.output_dir = self.params['output_dir']
@@ -469,13 +411,15 @@ class Job(object):
         """
         # Configure job class
         self.job_config.config(self, require_section=False)
-        # allowed_names=Job._config_names,
 
         # Configure each of the job components
         for c in self.components:
             c.config(self.job_config.parser)  # Configure from supplied config files
+
+            # FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
                 c.config_from_environ()      # Configure from env vars, if enabled
+
             # TODO: catch exception here...
             c.check_config()                 # Check that the config is acceptable
 
@@ -483,6 +427,14 @@ class Job(object):
         """!
         Load the job script.
         """
+        try:
+            self.script
+        except:
+            # This might be okay if user is manually adding components for testing.
+            # No components defined in the job will raise an error later.
+            logger.warning("No job script was provided!")
+            return 
+
         if not self.script.endswith('.py'):
             # Script is a name.
             script_db = JobScriptDatabase()
@@ -591,16 +543,16 @@ class Job(object):
                 logger.info("Outputs: %s" % str(component.output_files()))
 
                 # Print header to stdout
-                self.out.write('================ Component: %s ================\n' % component.name)
-                self.out.flush()
+                self.component_out.write('================ Component: %s ================\n' % component.name)
+                self.component_out.flush()
 
                 # Print header to stderr if output is going to a file
-                if self.err != sys.stderr:
-                    self.err.write('================ Component: %s ================\n' % component.name)
-                    self.err.flush()
+                if self.component_err != sys.stderr:
+                    self.component_err.write('================ Component: %s ================\n' % component.name)
+                    self.component_err.flush()
 
                 start = time.time()
-                returncode = component.execute(self.out, self.err)
+                returncode = component.execute(self.component_out, self.component_err)
                 end = time.time()
                 elapsed = end - start
                 logger.info("Execution of '%s' took %f second(s)" % (component.name, elapsed))
@@ -629,11 +581,13 @@ class Job(object):
         os.chdir(self.rundir)
 
         # Limit components according to job steps
-        if self.job_steps > 0:
-            self.components = self.components[0:self.job_steps]
-            logger.info("Job is limited to first %d steps." % self.job_steps)
-        else:
-            logger.info("No job steps specified so full job will be run.")
+        try:
+            self.job_steps
+            if self.job_steps > 0:
+                self.components = self.components[0:self.job_steps]
+                logger.info("Job is limited to first %d steps." % self.job_steps)
+        except:
+            pass
 
         if self.enable_file_chaining:
             self.__config_file_pipeline()
@@ -686,10 +640,20 @@ class Job(object):
                         os.system('rm -r %s' % f)
             else:
                 shutil.rmtree(self.rundir)
-        if self.out != sys.stdout:
-            self.out.close()
-        if self.err != sys.stderr:
-            self.err.close()
+        if self.component_out != sys.stdout:
+            try:
+                self.component_out.flush()
+                self.component_out.close()
+            except Exception as e:
+                logger.warn(e)
+
+        if self.component_err != sys.stderr:
+            try:
+                self.component_err.flush()
+                self.component_err.close()
+            except Exception as e:
+                logger.warn(e)
+            
 
     def __copy_output_files(self):
         """!
@@ -764,7 +728,7 @@ class Job(object):
             if '/mss/' in src:
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
-                logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
+                logger.info("The input file '%s' already exists at destination '%s'" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
             else:
                 shutil.copyfile(src, os.path.join(self.rundir, dest))
@@ -792,19 +756,6 @@ class Job(object):
         else:
             raise Exception('The ptag already exists: %s' % tag)
 
-    ## \todo is this still needed?
-    def __copy_ptag_output_files(self):
-        if len(self.ptags):
-            for src, dest in self.output_files.items():
-                if Job.is_ptag(src):
-                    ptag_src = Job.get_ptag_from_src(src)
-                    if ptag_src in list(self.ptags.keys()):
-                        src_file = self.ptags[ptag_src]
-                        logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
-                        self.__copy_output_file(src_file, dest)
-                    else:
-                        raise Exception('Invalid ptag in job params: %s' % ptag_src)
-
     @staticmethod
     def is_ptag(src):
         return src.startswith(Job.PTAG_PREFIX)
@@ -827,7 +778,6 @@ cmds = {
     'run': 'Run a job script',
     'script': 'Show list of available job scripts (provide script name for detailed info)',
     'component': 'Show list of available components (provide component name for detailed info)'}
-
 
 def print_usage():
     print("Usage: job.py [command] [args]")
