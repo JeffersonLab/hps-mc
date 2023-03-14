@@ -1,5 +1,4 @@
 {
     "steering" : ["kf"],
-    "detector": ["L3TStereo_tu_50um_iter0"],
-    "run_number": [10666]
+    "detector": ["L3TStereo_tu_50um_iter0"]
 }
