@@ -13,11 +13,12 @@ from hpsmc import global_config
 
 logger = logging.getLogger("hpsmc.component")
 
+
 class Component(object):
     """!
     Base class for components in a job.
 
-    Do not perform any logging in the init method of Component subclasses, 
+    Do not perform any logging in the init method of Component subclasses,
     as this is not configured by the job manager until after the components
     are created.
 
@@ -63,7 +64,7 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
-        # Setup a logger specifically for this component. It will be configured later.        
+        # Setup a logger specifically for this component. It will be configured later.
         self.logger = logging.getLogger("hpsmc.component.{}".format(self.__class__.__name__))
 
     def cmd_line_str(self):
@@ -114,13 +115,13 @@ class Component(object):
         Configure the logging for a component.
 
         @param parser the ConfigParser object passed from the job manager
-        """            
+        """
         classname = self.__class__.__name__
         if classname in parser:
             if 'loglevel' in parser[classname]:
                 loglevel = logging.getLevelName(parser[classname]['loglevel'])
                 self.logger.setLevel(loglevel)
-                
+
     def config(self, parser):
         """! Automatic configuration
 
@@ -138,7 +139,7 @@ class Component(object):
                                               name,
                                               getattr(self, name).__class__.__name__,
                                               getattr(self, name)))
-        
+
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
 
@@ -247,11 +248,10 @@ class DummyComponent(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
-        
+
     def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         self.logger.debug("dummy debug")
         self.logger.info("dummy info")
         self.logger.warning("dummy warn")
         self.logger.critical("dummy critical")
         self.logger.error("dummy error")
-        

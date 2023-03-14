@@ -25,6 +25,7 @@ from hpsmc import global_config
 ## Initialize logger
 logger = logging.getLogger('hpsmc.job')
 
+
 def check(j):
     jsonfile = j.application.args[1]
     with open(jsonfile) as datafile:
@@ -49,6 +50,7 @@ def load_json_data(filename):
     """
     rawdata = open(filename, 'r').read()
     return json.loads(rawdata)
+
 
 class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
@@ -83,7 +85,7 @@ class JobConfig(object):
             for name, value in self.parser.items(section):
                 if len(allowed_names) and name not in allowed_names:
                     raise Exception("Config name '%s' is not allowed for '%s'" % (name, section))
-                setattr(obj, name, convert_config_value(value))                
+                setattr(obj, name, convert_config_value(value))
                 #logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
                 #                             name,
                 #                             getattr(obj, name).__class__.__name__,
@@ -227,13 +229,13 @@ class Job(object):
         self.ptags = {}
         ### output for component printouts
         self.component_out = sys.stdout
-        ### output for component error messages 
+        ### output for component error messages
         self.component_err = sys.stderr
         ## script containing component initializations
         self.script = None
         ## job steps
         self.job_steps = None
-        
+
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
@@ -425,15 +427,15 @@ class Job(object):
             component.config_logging(self.job_config.parser)
 
             # Configure the component from job configuration.
-            component.config(self.job_config.parser)  
+            component.config(self.job_config.parser)
 
             # FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
                 # Configure from env vars, if enabled.
-                component.config_from_environ()      
+                component.config_from_environ()
 
             # Check that the config is acceptable.
-            component.check_config()                   
+            component.check_config()
 
     def _load_script(self):
         """!
@@ -445,7 +447,7 @@ class Job(object):
         if self.script is None:
             logger.warning("No job script was provided!")
             return
-        
+
         if not self.script.endswith('.py'):
             # Script is a name.
             script_db = JobScriptDatabase()
@@ -527,7 +529,7 @@ class Job(object):
             # Print job timer info
             stop_time = time.time()
             elapsed = stop_time - start_time
-            logger.info("Job execution took %f seconds" % elapsed)
+            logger.info("Job execution took {} seconds".format(round(elapsed, 4)))
 
             # Copy by file path or ptag
             if self.enable_copy_output_files:
@@ -568,8 +570,8 @@ class Job(object):
                 returncode = component.execute(self.component_out, self.component_err)
                 end = time.time()
                 elapsed = end - start
-                logger.info("Execution of {} took {} second(s) with return code: {}"\
-                    .format(component.name, round(elapsed, 4), str(returncode)))
+                logger.info("Execution of {} took {} second(s) with return code: {}"
+                            .format(component.name, round(elapsed, 4), str(returncode)))
 
                 if not self.ignore_return_codes and returncode:
                     raise Exception("Non-zero return code %d from '%s'" % (returncode, component.name))
@@ -599,7 +601,7 @@ class Job(object):
             if self.job_steps > 0:
                 self.components = self.components[0:self.job_steps]
                 logger.info("Job is limited to first %d steps." % self.job_steps)
-        except:
+        except BaseException:
             pass
 
         if self.enable_file_chaining:
@@ -666,7 +668,6 @@ class Job(object):
                 self.component_err.close()
             except Exception as e:
                 logger.warn(e)
-            
 
     def __copy_output_files(self):
         """!
@@ -791,6 +792,7 @@ cmds = {
     'run': 'Run a job script',
     'script': 'Show list of available job scripts (provide script name for detailed info)',
     'component': 'Show list of available components (provide component name for detailed info)'}
+
 
 def print_usage():
     print("Usage: job.py [command] [args]")
