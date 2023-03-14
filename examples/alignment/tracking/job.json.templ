@@ -1,6 +1,6 @@
 {
     "detector": "{{ detector }}",
-    "run_number" : {{ run_number }},
+    "run_number" : {{ job.input_files['events'][0] | runnumber }},
     "steering" : "{{ steering }}",
     "input_files": {
         "{{ job.input_files['events'][0] }}": "events.slcio"
