@@ -55,7 +55,6 @@ class JobConfig(object):
 
     def __init__(self):
         self.parser = copy.copy(global_config)
-        #configparser.ConfigParser(global_config)
 
     def __str__(self):
         parser_lines = ['JobConfig:']
@@ -424,10 +423,10 @@ class Job(object):
         # Configure each of the job components
         for component in self.components:
 
-            # Configure logging.
+            # Configure logging for the component.
             component.config_logging(self.job_config.parser)
 
-            # Configure the component from global plus job settings.
+            # Configure the component from job configuration.
             component.config(self.job_config.parser)  
 
             # FIXME: This is dumb and probably shouldn't exist. --JM
@@ -442,8 +441,9 @@ class Job(object):
         """!
         Load the job script.
         """
-        # This might be okay if user is manually adding components for testing.
-        # If no components are added this will be caught later.        
+        # This might be okay if the user is manually adding components to a job for testing
+        # without the command line interface. If no components are added before the job is
+        # run, then this will be caught later.
         if self.script is None:
             logger.warning("No job script was provided!")
             return
