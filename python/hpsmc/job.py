@@ -52,7 +52,6 @@ def load_json_data(filename):
 class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
 
-    # , include_default_locations=True
     def __init__(self):
         self.parser = configparser.ConfigParser(global_config)
 
@@ -225,10 +224,10 @@ class Job(object):
         self.output_files = {}
         ## dict with keys to output filenames
         self.ptags = {}
-        ### Output for component printouts.
-        self.out = sys.stdout
-        ### Output for component error messages. 
-        self.err = sys.stderr
+        ### output for component printouts
+        self.component_out = sys.stdout
+        ### output for component error messages 
+        self.component_err = sys.stderr
         
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
@@ -412,7 +411,6 @@ class Job(object):
         """
         # Configure job class
         self.job_config.config(self, require_section=False)
-        # allowed_names=Job._config_names,
 
         # Configure each of the job components
         for c in self.components:
@@ -421,6 +419,7 @@ class Job(object):
             # FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
                 c.config_from_environ()      # Configure from env vars, if enabled
+
             # TODO: catch exception here...
             c.check_config()                 # Check that the config is acceptable
 
@@ -544,16 +543,16 @@ class Job(object):
                 logger.info("Outputs: %s" % str(component.output_files()))
 
                 # Print header to stdout
-                self.out.write('================ Component: %s ================\n' % component.name)
-                self.out.flush()
+                self.component_out.write('================ Component: %s ================\n' % component.name)
+                self.component_out.flush()
 
                 # Print header to stderr if output is going to a file
-                if self.err != sys.stderr:
-                    self.err.write('================ Component: %s ================\n' % component.name)
-                    self.err.flush()
+                if self.component_err != sys.stderr:
+                    self.component_err.write('================ Component: %s ================\n' % component.name)
+                    self.component_err.flush()
 
                 start = time.time()
-                returncode = component.execute(self.out, self.err)
+                returncode = component.execute(self.component_out, self.component_err)
                 end = time.time()
                 elapsed = end - start
                 logger.info("Execution of '%s' took %f second(s)" % (component.name, elapsed))
@@ -641,10 +640,20 @@ class Job(object):
                         os.system('rm -r %s' % f)
             else:
                 shutil.rmtree(self.rundir)
-        if self.out != sys.stdout:
-            self.out.close()
-        if self.err != sys.stderr:
-            self.err.close()
+        if self.component_out != sys.stdout:
+            try:
+                self.component_out.flush()
+                self.component_out.close()
+            except Exception as e:
+                logger.warn(e)
+
+        if self.component_err != sys.stderr:
+            try:
+                self.component_err.flush()
+                self.component_err.close()
+            except Exception as e:
+                logger.warn(e)
+            
 
     def __copy_output_files(self):
         """!
@@ -719,7 +728,7 @@ class Job(object):
             if '/mss/' in src:
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
-                logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
+                logger.info("The input file '%s' already exists at destination '%s'" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
             else:
                 shutil.copyfile(src, os.path.join(self.rundir, dest))
@@ -747,19 +756,6 @@ class Job(object):
         else:
             raise Exception('The ptag already exists: %s' % tag)
 
-    ## \todo is this still needed?
-    def __copy_ptag_output_files(self):
-        if len(self.ptags):
-            for src, dest in self.output_files.items():
-                if Job.is_ptag(src):
-                    ptag_src = Job.get_ptag_from_src(src)
-                    if ptag_src in list(self.ptags.keys()):
-                        src_file = self.ptags[ptag_src]
-                        logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
-                        self.__copy_output_file(src_file, dest)
-                    else:
-                        raise Exception('Invalid ptag in job params: %s' % ptag_src)
-
     @staticmethod
     def is_ptag(src):
         return src.startswith(Job.PTAG_PREFIX)
@@ -782,7 +778,6 @@ cmds = {
     'run': 'Run a job script',
     'script': 'Show list of available job scripts (provide script name for detailed info)',
     'component': 'Show list of available components (provide component name for detailed info)'}
-
 
 def print_usage():
     print("Usage: job.py [command] [args]")
