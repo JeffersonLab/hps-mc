@@ -9,12 +9,17 @@ import subprocess
 import logging
 
 from hpsmc.util import convert_config_value
+from hpsmc import global_config
 
 logger = logging.getLogger("hpsmc.component")
 
 class Component(object):
     """!
     Base class for components in a job.
+
+    Do not perform any logging in the init method of Component subclasses, 
+    as this is not configured by the job manager until after the components
+    are created.
 
     Optional parameters are: **nevents**, **seed**
 
@@ -58,7 +63,7 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
-        # Setup a logger specifically for this component.
+        # Setup a logger specifically for this component. It will be configured later.        
         self.logger = logging.getLogger("hpsmc.component.{}".format(self.__class__.__name__))
 
     def cmd_line_str(self):
@@ -104,6 +109,18 @@ class Component(object):
         """! Perform post-job cleanup such as deleting temporary files."""
         pass
 
+    def config_logging(self, parser):
+        """!
+        Configure the logging for a component.
+
+        @param parser the ConfigParser object passed from the job manager
+        """            
+        classname = self.__class__.__name__
+        if classname in parser:
+            if 'loglevel' in parser[classname]:
+                loglevel = logging.getLevelName(parser[classname]['loglevel'])
+                self.logger.setLevel(loglevel)
+                
     def config(self, parser):
         """! Automatic configuration
 
@@ -121,7 +138,7 @@ class Component(object):
                                               name,
                                               getattr(self, name).__class__.__name__,
                                               getattr(self, name)))
-
+        
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
 
