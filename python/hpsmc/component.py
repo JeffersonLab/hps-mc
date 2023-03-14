@@ -4,13 +4,13 @@ Defines the base interface that component classes should extend.
 """
 
 import os
+import sys
 import subprocess
 import logging
 
 from hpsmc.util import convert_config_value
 
 logger = logging.getLogger("hpsmc.component")
-
 
 class Component(object):
     """!
@@ -58,12 +58,15 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
+        # Setup a logger specifically for this component.
+        self.logger = logging.getLogger("hpsmc.component.{}".format(self.__class__.__name__))
+
     def cmd_line_str(self):
         cl = [self.command]
         cl.extend(self.cmd_args())
         return ' '.join(cl)
 
-    def execute(self, log_out, log_err):
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         """! Generic component execution method.
 
         Individual components may override this if specific behavior is required.
@@ -227,6 +230,12 @@ class DummyComponent(Component):
 
     def __init__(self, **kwargs):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
+        self.logger.info('Dummy component created')
+        
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
+        self.logger.debug("dummy debug message")
+        self.logger.info("dummy info message")
+        self.logger.warning("dummy warn message")
+        self.logger.critical("dummy critical message")
 
-    def execute(self, log_out, log_err):
-        pass
+        
