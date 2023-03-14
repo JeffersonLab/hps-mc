@@ -3,6 +3,8 @@ Tracking for Alignment {#trackingalign}
 
 1. Edit list of input files
 2. Modify non-input-file variables
+  - The current job input variables assume that the input files are 2019 MC
+    and the detector was generated using the \ref misalign example.
 3. Generate JSON enumeration of all hps-mc jobs that need to be run
 ```
 hps-mc-job-template -j 1 -a vars.json -i events events.txt 1 job.json.templ jobs.json

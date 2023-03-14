@@ -3,6 +3,16 @@ alignment {#alignment}
 Generally, alignment occurs with several iterations of tracking and parameter optimization.
 Below, is an outline on how to do a single iteration of this procedure.
 
+### 0. Intentional Misalignment
+This is step 0 since it will only occur once at the beginning and only if you wish to
+study a specific type of misalignment. In this example, we are doing an extremely simple
+misalignment where we translate a single sensor along the local `u` direction.
+
+Look at the \ref misalign example for more detail on how to run this job.
+```
+hps-mc-job run misalign misalign/job.json
+```
+
 ### 1. Run Tracking
 This is done with the \ref trackingalign example in this directory.
 Edit the list of input files to include the `slcio` files you wish to use for alignment,
