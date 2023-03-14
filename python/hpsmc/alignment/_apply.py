@@ -277,17 +277,17 @@ class WriteMisalignedDet(_DetectorEditor) :
       def cmd_line_str(self) :
           return 'custom python execute'
 
-      def execute(self) :
+      def execute(self, out, err) :
           # translate pattern strings from JSON into Pattern objects
-          patterns = {
-              Pattern(parameter_str) : val_change
-              for parameter_str, val_change in self.parameters
-              }
+          patterns = [
+              (Pattern(parameter_str), val_change)
+              for parameter_str, val_change in self.parameters.items()
+              ]
           
           full_parameters = Parameter.parse_map_file(self.param_map)
 
           parameters_to_apply = {}
-          for idn, param in full_parameters :
+          for idn, param in full_parameters.items() :
               for pattern, val_change in patterns :
                   if pattern.match(param) :
                       parameters_to_apply[idn] = param
@@ -313,7 +313,7 @@ class WriteMisalignedDet(_DetectorEditor) :
               elif not self.force :
                   raise ValueError('{dest_det} detector already exists. Use "force" if you want to write to an existing detector.') 
 
-          self._to_compact(parameter_to_apply, dest_det, save_prev = self.force)
+          self._to_compact(parameters_to_apply, dest_det, save_prev = self.force)
           self._update_readme(self.detector if dest_same_as_src else self.next_detector,
               f"""
 Detector written by applying an intentional misalignment to {self.detector}.
