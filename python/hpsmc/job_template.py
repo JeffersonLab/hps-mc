@@ -9,6 +9,8 @@ import json
 import argparse
 import math
 import uuid as _uuid
+import subprocess
+import re
 
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -37,11 +39,36 @@ def uuid():
     """! Function to get a uuid within a template."""
     return str(_uuid.uuid4())[:8]
 
-## \todo: filenum filter - try to get file num by looking for _%d in file name
+def runnumber(path) :
+    """! Filter to get a run number by inspecting first event in slcio file."""
+    event_dump = subprocess.run(
+        ["dumpevent", path, "1"], # dump the first event from the file
+        check = True, # throw exception if returns non-0 exit code
+        stdout = subprocess.PIPE, # keep the output in the object rather than printing it out
+        stderr = subprocess.PIPE
+        )
+    # search output for run number
+    match = re.search('run:\s*(\d+)', event_dump.stdout.decode('utf-8')) 
+    if not match :
+        raise ValueError(f'Unable to find run number from dump of first event in {path}')
+    # group 0 is the entire match, group 1 is what is in the parentheses above
+    return int(match.group(1))
+
+def filenum(path) :
+    """! Filter to get the trailing number of a file
+
+    This will extract the number between the last underscore and the extension.
+    For example 'file_name_is_number.root' will return 'number' if 'number' is
+    actually a integer.
+    """
+    # use our other function to remove the extention and directory
+    filename = basename(path)
+    # entries in a filename are split by '_', we take the last one (index -1),
+    #  and then attempt to convert it to an int
+    return int(filename.split('_')[-1])
 
 # def pwd():
 #    return os.getcwd()
-
 
 class JobData(object):
     """! Very simple key-value object for storing data for each job."""
@@ -83,6 +110,8 @@ class JobTemplate:
         self.env.filters['uuid'] = uuid
         self.env.filters['extension'] = extension
         self.env.filters['dirname'] = dirname
+        self.env.filters['runnumber'] = runnumber
+        self.env.filters['filenum'] = filenum
         ## start ID for jobs
         self.job_id_start = 0
         ## dict of input files
