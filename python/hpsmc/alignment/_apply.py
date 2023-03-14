@@ -216,12 +216,18 @@ class ApplyPedeRes(_DetectorEditor) :
 
         # deduce destination path, and make sure it does not exist
         dest_path = self._detector_dir(self.next_detector)
-        if os.path.isdir(dest_path) and not self.force :
+        if os.path.isdir(dest_path) and not self.force:
             raise ValueError(f'Detector {self.next_detector} already exists and so it cannot be created. Use "force" to overwrite an existing detector.')
 
         # make copy if the destination is not the same as the origin
         if self.next_detector != self.detector :
-            shutil.copytree(self._detector_dir(self.detector), dest_path, dirs_exist_ok = True)
+            # we already checked if the destination exists and the dirs_exist_ok parameter
+            #   to shutil.copytree is only available in newer python versions
+            #   so we remove the destination here now that we know (1) we can if it exists
+            #   and (2) it is not the same as the source
+            if os.path.isdir(dest_path):
+                shutil.rmtree(dest_path)
+            shutil.copytree(self._detector_dir(self.detector), dest_path)
     
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
