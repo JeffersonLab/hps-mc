@@ -15,7 +15,7 @@ global_config = configparser.ConfigParser()
 
 # By default look for files called ".hpsmc" in the user home and current directories.
 _config_files = global_config.read([
-    os.path.join(expanduser("~"), ".hpsmc"), 
+    os.path.join(expanduser("~"), ".hpsmc"),
     os.path.abspath(".hpsmc")])
 
 # Default log settings.
@@ -23,7 +23,7 @@ _loglevel = logging.INFO
 _logstream = sys.stdout
 
 # Set a new log level if one was provided in the user configuration.
-if 'HPSMC' in global_config: 
+if 'HPSMC' in global_config:
     # Get the log level from the configuration or use a default.
     if 'loglevel' in global_config['HPSMC']:
         _loglevel = logging.getLevelName(global_config['HPSMC']['loglevel'])
@@ -36,7 +36,7 @@ if 'HPSMC' in global_config:
 # This object should not be accessed directly.
 _global_logger = logging.getLogger("hpsmc")
 _global_logger.propagate = False
-_global_logger.handlers = [] 
+_global_logger.handlers = []
 _global_logger.setLevel(_loglevel)
 _handler = logging.StreamHandler(_logstream)
 _handler.setLevel(logging.DEBUG)
