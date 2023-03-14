@@ -596,13 +596,10 @@ class Job(object):
         os.chdir(self.rundir)
 
         # Limit components according to job steps
-        try:
-            self.job_steps
+        if self.job_steps is not None:
             if self.job_steps > 0:
                 self.components = self.components[0:self.job_steps]
                 logger.info("Job is limited to first %d steps." % self.job_steps)
-        except BaseException:
-            pass
 
         if self.enable_file_chaining:
             self.__config_file_pipeline()
