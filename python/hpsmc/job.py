@@ -14,6 +14,7 @@ import logging
 import configparser
 import glob
 import subprocess
+import copy
 
 from collections.abc import Sequence
 from os.path import expanduser
@@ -53,7 +54,8 @@ class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
 
     def __init__(self):
-        self.parser = configparser.ConfigParser(global_config)
+        self.parser = copy.copy(global_config)
+        #configparser.ConfigParser(global_config)
 
     def __str__(self):
         parser_lines = ['JobConfig:']
@@ -228,6 +230,10 @@ class Job(object):
         self.component_out = sys.stdout
         ### output for component error messages 
         self.component_err = sys.stderr
+        ## script containing component initializations
+        self.script = None
+        ## job steps
+        self.job_steps = None
         
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
@@ -272,7 +278,7 @@ class Job(object):
         parser.add_argument("-d", "--run-dir", nargs='?', help="Job run dir")
         parser.add_argument("-o", "--out", nargs='?', help="File for component stdout (default prints to console)")
         parser.add_argument("-e", "--err", nargs='?', help="File for component stderr (default prints to console)")
-        parser.add_argument("-s", "--job-steps", type=int, default=-1, help="Job steps to run (single number)")
+        parser.add_argument("-s", "--job-steps", type=int, default=None, help="Job steps to run (single number)")
         parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
         parser.add_argument("script", nargs='?', help="Path or name of job script")
         parser.add_argument("params", nargs='?', help="Job param file in JSON format")
@@ -312,7 +318,7 @@ class Job(object):
             self.rundir = cl.run_dir
 
         self.job_steps = cl.job_steps
-        if self.job_steps < 1:
+        if self.job_steps is not None and self.job_steps < 1:
             raise Exception("Invalid job steps argument (must be > 0): {}".format(self.job_steps))
 
         if cl.script:
@@ -409,32 +415,39 @@ class Job(object):
         """!
         Configure job class and components.
         """
+
+        print("Job config: {}".format({section: dict(self.job_config.parser[section]) for section in self.job_config.parser}))
+
         # Configure job class
         self.job_config.config(self, require_section=False)
 
         # Configure each of the job components
-        for c in self.components:
-            c.config(self.job_config.parser)  # Configure from supplied config files
+        for component in self.components:
+
+            # Configure logging.
+            component.config_logging(self.job_config.parser)
+
+            # Configure the component from global plus job settings.
+            component.config(self.job_config.parser)  
 
             # FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
-                c.config_from_environ()      # Configure from env vars, if enabled
+                # Configure from env vars, if enabled.
+                component.config_from_environ()      
 
-            # TODO: catch exception here...
-            c.check_config()                 # Check that the config is acceptable
+            # Check that the config is acceptable.
+            component.check_config()                   
 
     def _load_script(self):
         """!
         Load the job script.
         """
-        try:
-            self.script
-        except:
-            # This might be okay if user is manually adding components for testing.
-            # No components defined in the job will raise an error later.
+        # This might be okay if user is manually adding components for testing.
+        # If no components are added this will be caught later.        
+        if self.script is None:
             logger.warning("No job script was provided!")
-            return 
-
+            return
+        
         if not self.script.endswith('.py'):
             # Script is a name.
             script_db = JobScriptDatabase()
