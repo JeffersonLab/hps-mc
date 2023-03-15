@@ -86,7 +86,7 @@ class JobConfig(object):
                 if len(allowed_names) and name not in allowed_names:
                     raise Exception("Config name '%s' is not allowed for '%s'" % (name, section))
                 setattr(obj, name, convert_config_value(value))
-                #logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
+                # logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
                 #                             name,
                 #                             getattr(obj, name).__class__.__name__,
                 #                             getattr(obj, name)))
@@ -227,9 +227,9 @@ class Job(object):
         self.output_files = {}
         ## dict with keys to output filenames
         self.ptags = {}
-        ### output for component printouts
+        ## output for component printouts
         self.component_out = sys.stdout
-        ### output for component error messages
+        ## output for component error messages
         self.component_err = sys.stderr
         ## script containing component initializations
         self.script = None
@@ -357,7 +357,7 @@ class Job(object):
 
         self.set_parameters(params)
 
-        #logger.info(json.dumps(self.params, indent=4, sort_keys=False))
+        # logger.info(json.dumps(self.params, indent=4, sort_keys=False))
 
         if 'output_dir' in self.params:
             self.output_dir = self.params['output_dir']
@@ -429,7 +429,7 @@ class Job(object):
             # Configure the component from job configuration.
             component.config(self.job_config.parser)
 
-            # FIXME: This is dumb and probably shouldn't exist. --JM
+            ## \todo FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
                 # Configure from env vars, if enabled.
                 component.config_from_environ()
@@ -555,7 +555,7 @@ class Job(object):
             for component in self.components:
 
                 logger.info("Executing '%s' with command: %s" % (component.name, component.cmd_line_str()))
-                #logger.info("Component IO: {} -> {}".format(str(component.input_files(), component.output_files())))
+                # logger.info("Component IO: {} -> {}".format(str(component.input_files(), component.output_files())))
 
                 # Print header to stdout
                 self.component_out.write('================ Component: %s ================\n' % component.name)

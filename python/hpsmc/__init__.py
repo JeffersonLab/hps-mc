@@ -46,7 +46,7 @@ _global_logger.addHandler(_handler)
 # Print a log message showing what global config files were found and loaded.
 if len(_config_files) > 0:
     _global_logger.info("Config files found: {}".format(_config_files))
-    #_global_logger.info("Config settings: {}".format(\
+    # _global_logger.info("Config settings: {}".format(\
     #    {section: dict(global_config[section]) for section in global_config}))
 else:
     _global_logger.info("No config files were found at default locations!")
