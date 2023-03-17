@@ -8,7 +8,7 @@ import sys
 import subprocess
 import logging
 
-from hpsmc.util import convert_config_value
+from ._config import convert_config_value
 from hpsmc import global_config
 
 logger = logging.getLogger("hpsmc.component")
@@ -65,7 +65,7 @@ class Component(object):
             raise Exception("The HPSMC_DIR is not set!")
 
         # Setup a logger specifically for this component. It will be configured later.
-        self.logger = logging.getLogger("hpsmc.component.{}".format(self.__class__.__name__))
+        self.logger = logging.getLogger("{}.{}".format(__name__, self.__class__.__name__))
 
     def cmd_line_str(self):
         cl = [self.command]

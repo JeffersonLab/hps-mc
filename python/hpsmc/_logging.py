@@ -4,6 +4,7 @@ Global logging utilities for initialization.
 import logging
 import sys
 
+
 def _setup_logging(config):
 
     loglevel = logging.INFO
