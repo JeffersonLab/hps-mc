@@ -12,8 +12,6 @@ from subprocess import PIPE
 from hpsmc.component import Component
 import hpsmc.func as func
 
-logger = logging.getLogger("hpsmc.tools")
-
 
 class SLIC(Component):
     """!
@@ -92,16 +90,16 @@ class SLIC(Component):
             self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
-            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
+            self.logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
-            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
         """! Setup SLIC component."""
@@ -112,11 +110,11 @@ class SLIC(Component):
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
 
-        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
-            logger.warning('Link to fieldmap dir already exists!')
+            self.logger.warning('Link to fieldmap dir already exists!')
 
         if self.run_number is not None:
             run_number_cmd = "/lcio/runNumber %d" % self.run_number
@@ -162,7 +160,7 @@ class SLIC(Component):
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
 
-        # logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        # self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -222,7 +220,7 @@ class JobManager(Component):
         # Automatically append steering file key to output file name
         if self.append_tok is None:
             self.append_tok = self.steering
-            logger.debug("Append token for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
+            self.logger.debug("Append token for '%s' automatically set to '%s' from steering key." % (self.name, self.append_tok))
 
     def config(self, parser):
         """! Configure JobManager component."""
@@ -231,20 +229,20 @@ class JobManager(Component):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                self.logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
             else:
                 raise Exception('hps_java_bin_jar not set in environment or config file!')
         if self.conditions_url is None:
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
-                logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
+                self.logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
         if self.hps_fieldmaps_dir is None:
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
-            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def required_config(self):
         """!
@@ -264,11 +262,11 @@ class JobManager(Component):
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
 
-        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
-            logger.warning('Link to fieldmap dir already exists!')
+            self.logger.warning('Link to fieldmap dir already exists!')
 
     def cmd_args(self):
         """!
@@ -278,25 +276,25 @@ class JobManager(Component):
         args = []
 
         if self.java_args is not None:
-            logger.debug('Setting java_args from config: %s' % self.java_args)
+            self.logger.debug('Setting java_args from config: %s' % self.java_args)
             args.append(self.java_args)
 
         if self.logging_config_file is not None:
-            logger.debug('Setting logging_config_file from config: %s' % self.logging_config_file)
+            self.logger.debug('Setting logging_config_file from config: %s' % self.logging_config_file)
             args.append('-Djava.util.logging.config.file=%s' % self.logging_config_file)
 
         if self.lcsim_cache_dir is not None:
-            logger.debug('Setting lcsim_cache_dir from config: %s' % self.lcsim_cache_dir)
+            self.logger.debug('Setting lcsim_cache_dir from config: %s' % self.lcsim_cache_dir)
             args.append('-Dorg.lcsim.cacheDir=%s' % self.lcsim_cache_dir)
 
         if self.conditions_user is not None:
-            logger.debug('Setting conditions_user from config: %s' % self.conditions_user)
+            self.logger.debug('Setting conditions_user from config: %s' % self.conditions_user)
             args.append('-Dorg.hps.conditions.user=%s' % self.conditions_user)
         if self.conditions_password is not None:
-            logger.debug('Setting conditions_password from config (not shown)')
+            self.logger.debug('Setting conditions_password from config (not shown)')
             args.append('-Dorg.hps.conditions.password=%s' % self.conditions_password)
         if self.conditions_url is not None:
-            logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
+            self.logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
             args.append('-Dorg.hps.conditions.url=%s' % self.conditions_url)
 
         args.append("-jar")
@@ -326,7 +324,7 @@ class JobManager(Component):
 
         if not os.path.isfile(self.steering_file):
             args.append("-r")
-            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
+            self.logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
         else:
             if not os.path.isabs(self.steering_file):
                 raise Exception('Steering looks like a file but is not an abs path: %s' % self.steering_file)
@@ -412,12 +410,12 @@ class HPSTR(Component):
         else:
             # Assume the cfg file is within the hpstr base dir.
             self.cfg_path = os.path.join(self.hpstr_base, "processors", "config", config_file)
-        logger.debug('Set config path: %s' % self.cfg_path)
+        self.logger.debug('Set config path: %s' % self.cfg_path)
 
         # For ROOT output, automatically append the cfg key from the job params.
         if os.path.splitext(self.input_files()[0])[1] == '.root':
             self.append_tok = self.cfg
-            logger.debug('Automatically appending token to output file: %s' % self.append_tok)
+            self.logger.debug('Automatically appending token to output file: %s' % self.append_tok)
 
     def required_parameters(self):
         """!
@@ -479,7 +477,7 @@ class HPSTR(Component):
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
 
-        logger.debug("Executing '%s' with command: %s" % (self.name, cl))
+        self.logger.debug("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -675,7 +673,7 @@ class RandomSample(StdHepTool):
         # Move file to proper output file location.
         src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
         dest = '%s.stdhep' % os.path.splitext(self.output_files()[0])[0]
-        logger.debug("Moving '%s' to '%s'" % (src, dest))
+        self.logger.debug("Moving '%s' to '%s'" % (src, dest))
         shutil.move(src, dest)
 
         return returncode
@@ -816,7 +814,7 @@ class MergePoisson(StdHepTool):
             self.mu = func.lint(self.target_thickness, self.num_electrons) * self.xsec
         else:
             raise Exception("Cross section is missing.")
-        logger.info("mu is %f", self.mu)
+        self.logger.info("mu is %f", self.mu)
 
     def required_parameters(self):
         """!
@@ -861,7 +859,7 @@ class MergePoisson(StdHepTool):
         # Move file from tool to proper output file location.
         src = '%s_1.stdhep' % os.path.splitext(self.output_files()[0])[0]
         dest = '%s.stdhep' % os.path.splitext(self.output_files()[0])[0]
-        logger.debug("Moving '%s' to '%s'" % (src, dest))
+        self.logger.debug("Moving '%s' to '%s'" % (src, dest))
         shutil.move(src, dest)
 
         return returncode
@@ -964,10 +962,10 @@ class JavaTool(Component):
         """
         args = []
         if self.java_args is not None:
-            logger.debug("Setting java_args from config: %s" + self.java_args)
+            self.logger.debug("Setting java_args from config: %s" + self.java_args)
             args.append(self.java_args)
         if self.conditions_url is not None:
-            logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
+            self.logger.debug('Setting conditions_url from config: %s' % self.conditions_url)
             args.append('-Dorg.hps.conditions.url=%s' % self.conditions_url)
         args.append("-cp")
         args.append(self.hps_java_bin_jar)
@@ -980,16 +978,16 @@ class JavaTool(Component):
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
-            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
-        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
-            logger.warning('Link to fieldmap dir already exists!')
+            self.logger.warning('Link to fieldmap dir already exists!')
 
 
 class EvioToLcio(JavaTool):
@@ -1063,7 +1061,7 @@ class EvioToLcio(JavaTool):
 
         if not os.path.isfile(self.steering_file):
             args.append('-r')
-            logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
+            self.logger.debug("Steering does not exist at '%s' so assuming it is a resource." % self.steering_file)
         else:
             if not os.path.isabs(self.steering_file):
                 raise Exception("Steering looks like a file but is not an abs path: %s" % self.steering_file)
@@ -1143,7 +1141,7 @@ class FilterBunches(JavaTool):
         if self.hps_java_bin_jar is None:
             if os.getenv('HPS_JAVA_BIN_JAR', None) is not None:
                 self.hps_java_bin_jar = os.getenv('HPS_JAVA_BIN_JAR', None)
-                logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
+                self.logger.debug('Set HPS_JAVA_BIN_JAR from environment: {}'.format(self.hps_java_bin_jar))
 
     def cmd_args(self):
         """!
@@ -1277,7 +1275,7 @@ class Unzip(Component):
             outputfile = self.output_files()[i]
             with gzip.open(inputfile, 'rb') as in_file, open(outputfile, 'wb') as out_file:
                 shutil.copyfileobj(in_file, out_file)
-                logger.debug("Unzipped '%s' to '%s'" % (inputfile, outputfile))
+                self.logger.debug("Unzipped '%s' to '%s'" % (inputfile, outputfile))
         return 0
 
 
@@ -1384,7 +1382,7 @@ class LHECount(Component):
                 if self.fail_on_underflow:
                     raise Exception(msg)
                 else:
-                    logger.warning(msg)
+                    self.logger.warning(msg)
         return 0
 
 
@@ -1407,13 +1405,13 @@ class TarFiles(Component):
 
     def execute(self, log_out, log_err):
         """! Execute TarFiles component."""
-        logger.debug("Opening '%s' for writing ..." % self.outputs[0])
+        self.logger.debug("Opening '%s' for writing ..." % self.outputs[0])
         tar = tarfile.open(self.outputs[0], "w")
         for i in self.inputs:
-            logger.debug("Adding '%s' to archive" % i)
+            self.logger.debug("Adding '%s' to archive" % i)
             tar.add(i)
         tar.close()
-        logger.info("Wrote archive '%s'" % self.outputs[0])
+        self.logger.info("Wrote archive '%s'" % self.outputs[0])
         return 0
 
 
@@ -1441,7 +1439,7 @@ class MoveFiles(Component):
         for io in zip(self.inputs, self.outputs):
             src = io[0]
             dest = io[1]
-            logger.info("Moving %s -> %s" % (src, dest))
+            self.logger.info("Moving %s -> %s" % (src, dest))
             shutil.move(src, dest)
         return 0
 
@@ -1676,16 +1674,16 @@ class Sim(SimBase):
             self.detector_dir = "{}/share/detectors".format(self.hpsmc_dir)
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
-            logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
+            self.logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
 
         # Set fieldmap dir to install location if not provided in config
         if self.hps_fieldmaps_dir is None:
             self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
             if not os.path.isdir(self.hps_fieldmaps_dir):
                 raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
         else:
-            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def setup(self):
         """! Setup Sim component."""
@@ -1696,11 +1694,11 @@ class Sim(SimBase):
         if not os.path.exists(self.env_script):
             raise Exception('hps-sim setup script does not exist: %s' % self.name)
 
-        logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
+        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
         if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
             os.symlink(self.hps_fieldmaps_dir, "fieldmap")
         else:
-            logger.warning('Link to fieldmap dir already exists!')
+            self.logger.warning('Link to fieldmap dir already exists!')
 
         self.write_run_macro()
 
