@@ -22,8 +22,6 @@ from distutils.spawn import find_executable
 
 from hpsmc.job import Job, JobStore, JobScriptDatabase
 
-from hpsmc.util import config_logging
-
 logger = logging.getLogger("hpsmc.batch")
 
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
