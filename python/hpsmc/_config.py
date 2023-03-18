@@ -20,6 +20,7 @@ def _read_global_config():
         os.path.abspath(".hpsmc")])
     return config, config_files
 
+
 def convert_config_value(val):
     """! Convert config value to Python readable value."""
     if val == 'True' or val == 'true':
