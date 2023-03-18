@@ -120,7 +120,7 @@ class SLIC(Component):
                 self.logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
             else:
                 raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
-        
+
         if self.run_number is not None:
             run_number_cmd = "/lcio/runNumber %d" % self.run_number
             run_number_mac = open("run_number.mac", 'w')
