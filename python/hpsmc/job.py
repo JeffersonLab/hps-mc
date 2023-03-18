@@ -26,32 +26,6 @@ from hpsmc import global_config
 logger = logging.getLogger('hpsmc.job')
 
 
-def check(j):
-    jsonfile = j.application.args[1]
-    with open(jsonfile) as datafile:
-        data = json.load(datafile)
-    output_dir = ""
-    if "output_dir" in data:
-        output_dir = data["output_dir"]
-    if "output_files" in data:
-        outputfiles = data["output_files"]
-        for k, v in outputfiles.items():
-            fpath = v
-            if not os.path.isabs(v):
-                fpath = output_dir + os.path.sep + v
-            if not os.path.exists(fpath):
-                return False
-    return True
-
-
-def load_json_data(filename):
-    """! Load json data from file.
-    @param filename  name of json file
-    """
-    rawdata = open(filename, 'r').read()
-    return json.loads(rawdata)
-
-
 class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
 
@@ -344,7 +318,7 @@ class Job(object):
             else:
                 # Load data from a JSON file with a single job definition.
                 logger.info('Loading job parameters from file: %s' % self.param_file)
-                params = load_json_data(self.param_file)
+                params = json.loads(open(self.param_file, 'r').read())
                 if not isinstance(params, dict):
                     raise Exception('Job ID must be provided when running from a job store.')
 
@@ -374,7 +348,7 @@ class Job(object):
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
 
-    def __set_input_files(self):
+    def _set_input_files(self):
         """!
         Prepare dictionary of input files.
 
@@ -385,13 +359,14 @@ class Job(object):
             if 'https' in file_key:
                 logger.info("Downloading input file from %s" % file_key)
                 file_name_path = self.rundir + "/" + file_name
+                # \todo FIXME: We need to make sure wget is installed locally use a python lib like requests.
                 subprocess.check_output(['wget', '-O', file_name_path, file_key])
                 input_files_dict.update({file_name: file_name})
             else:
                 input_files_dict.update({file_key: file_name})
         self.input_files = input_files_dict
 
-    def __initialize(self):
+    def _initialize(self):
         """!
         Perform basic initialization before the job script is loaded.
         """
@@ -412,7 +387,7 @@ class Job(object):
             logger.info('Creating run dir: %s' % self.rundir)
             os.makedirs(self.rundir)
 
-    def __configure(self):
+    def _configure(self):
         """!
         Configure job class and components.
         """
@@ -478,7 +453,7 @@ class Job(object):
         logger.info(str(self.job_config))
 
         # Initialize after CL parameters were parsed.
-        self.__initialize()
+        self._initialize()
 
         # Load the job components from the script
         self._load_script()
@@ -497,31 +472,31 @@ class Job(object):
 
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
-        self.__configure()
+        self._configure()
 
         # This (re)sets the input correctly
-        self.__set_input_files()
+        self._set_input_files()
 
         # Set component parameters from job JSON file.
-        self.__set_parameters()
+        self._set_parameters()
 
         # Perform component setup to prepare for execution.
         # May use config and parameters that were set from above.
-        self.__setup()
+        self._setup()
 
         if not self.dry_run:
             if self.enable_copy_input_files:
                 # Copy input files to the run dir.
-                self.__copy_input_files()
+                self._copy_input_files()
             else:
                 # Symlink input files if copying is disabled.
-                self.__symlink_input_files()
+                self._symlink_input_files()
 
         # Save job start time
         start_time = time.time()
 
         # Execute the job.
-        self.__execute()
+        self._execute()
 
         # Copy the output files to the output dir if enabled and not in dry run.
         if not self.dry_run:
@@ -534,16 +509,16 @@ class Job(object):
             # Copy by file path or ptag
             if self.enable_copy_output_files:
                 ## \todo: combine these methods
-                self.__copy_output_files()
+                self._copy_output_files()
             else:
                 logger.warning('Copy output files is disabled!')
 
             # Perform job cleanup.
-            self.__cleanup()
+            self._cleanup()
 
         logger.info('Successfully finished running job: %s' % self.description)
 
-    def __execute(self):
+    def _execute(self):
         """!
         Execute all components in job.
 
@@ -586,7 +561,7 @@ class Job(object):
             for component in self.components:
                 logger.info("'%s' with args: %s (DRY RUN)" % (component.name, ' '.join(component.cmd_args())))
 
-    def __setup(self):
+    def _setup(self):
         """!
         Necessary setup before job can be executed.
         """
@@ -602,7 +577,7 @@ class Job(object):
                 logger.info("Job is limited to first %d steps." % self.job_steps)
 
         if self.enable_file_chaining:
-            self.__config_file_pipeline()
+            self._config_file_pipeline()
 
         # Run setup methods of each component
         for component in self.components:
@@ -612,7 +587,7 @@ class Job(object):
             if self.check_commands and not component.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (component.command, component.name))
 
-    def __config_file_pipeline(self):
+    def _config_file_pipeline(self):
         """!
         Pipe component outputs to inputs automatically.
         """
@@ -630,14 +605,14 @@ class Job(object):
                 if len(component.inputs) == 0:
                     component.inputs = self.components[i - 1].output_files()
 
-    def __set_parameters(self):
+    def _set_parameters(self):
         """!
         Push JSON job parameters to components.
         """
         for component in self.components:
             component.set_parameters(self.params)
 
-    def __cleanup(self):
+    def _cleanup(self):
         """!
         Perform post-job cleanup.
         """
@@ -666,7 +641,7 @@ class Job(object):
             except Exception as e:
                 logger.warn(e)
 
-    def __copy_output_files(self):
+    def _copy_output_files(self):
         """!
         Copy output files to output directory, handling ptags if necessary.
         """
@@ -684,9 +659,9 @@ class Job(object):
                     logger.info("Resolved ptag: {} -> {}".format(ptag_src, src_file))
                 else:
                     raise Exception('Undefined ptag used in job params: %s' % ptag_src)
-            self.__copy_output_file(src_file, dest)
+            self._copy_output_file(src_file, dest)
 
-    def __copy_output_file(self, src, dest):
+    def _copy_output_file(self, src, dest):
         """!
         Copy an output file from src to dest.
         """
@@ -725,7 +700,7 @@ class Job(object):
         else:
             logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
 
-    def __copy_input_files(self):
+    def _copy_input_files(self):
         """!
         Copy input files to the run dir.
         """
@@ -745,7 +720,7 @@ class Job(object):
                 shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 
-    def __symlink_input_files(self):
+    def _symlink_input_files(self):
         """!
         Symlink input files.
         """
