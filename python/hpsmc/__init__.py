@@ -1,10 +1,4 @@
 import shutil
-import os
-import sys
-import configparser
-import logging
-
-from os.path import expanduser
 
 from ._config import _read_global_config
 from ._logging import _setup_logging
