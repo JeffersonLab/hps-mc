@@ -357,10 +357,10 @@ class Job(object):
         input_files_dict = {}
         for file_key, file_name in self.input_files.items():
             if 'https' in file_key:
-                logger.info("Downloading input file from %s" % file_key)
+                logger.info("Downloading input file from: %s" % file_key)
                 file_name_path = self.rundir + "/" + file_name
-                # \todo FIXME: We need to make sure wget is installed locally use a python lib like requests.
-                subprocess.check_output(['wget', '-O', file_name_path, file_key])
+                # \todo FIXME: We need to make sure wget is installed locally during the build or use a python lib like requests.
+                subprocess.check_output(['wget', '-q', '-O', file_name_path, file_key])
                 input_files_dict.update({file_name: file_name})
             else:
                 input_files_dict.update({file_key: file_name})
