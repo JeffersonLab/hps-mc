@@ -1594,4 +1594,3 @@ class LCIOMerge(LCIOTool):
         if self.nevents is not None:
             args.extend(['-n', str(self.nevents)])
         return args
-    
