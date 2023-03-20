@@ -103,6 +103,45 @@ class _DetectorEditor(Component) :
             extension to add to the original compact.xml if it is being saved
         """
 
+        def _change_xml_value(line, key, new_val, append = True) :
+            """!change an XML line to have a new value
+
+            Assuming that the key and value are on the same line,
+            we can do some simple string arithmetic to find which
+            part of the string needs to be replaced.
+
+            Format:
+                
+                xml-stuff key="value" other-xml-stuff
+
+            We make the replacement by finding the location of 'key'
+            in the line, then finding the next two quote characters.
+            The stuff in between those two quote characters is replaced
+            or appended with new_val and everything else in the line 
+            is left the same.
+
+            The updated line is returned as a new string.
+            """
+
+            i_key = line.find(key)
+            pre_value = line[:i_key]
+            post_value = line[i_key:]
+
+            quote_open = post_value.find('"')+1
+            pre_value += post_value[:quote_open]
+            post_value = post_value[quote_open:]
+
+            quote_close = post_value.find('"')
+            og_value = post_value[:quote_close]
+            post_value = post_value[quote_close:]
+
+            new_value = f'{new_val}'
+            if append :
+                new_value = f'{og_value} {new_val}'
+
+            return f'{pre_value}{new_value}{post_value}'
+
+
         # modify file in place
         dest = os.path.join(self._detector_dir(detname),'compact.xml')
         if not os.path.isfile(dest) :
@@ -114,6 +153,12 @@ class _DetectorEditor(Component) :
         with open(dest,'w') as f :
             with open(original_cp) as og :
                 for line in og :
+                    if 'info name' in line :
+                        # update detector name
+                        f.write(_change_xml_value(line, 'name', detname, append = False))
+                        line_edited = True
+                        continue
+
                     if 'millepede_constant' not in line :
                         f.write(line)
                         continue
@@ -122,27 +167,9 @@ class _DetectorEditor(Component) :
                     for i in parameter_set :
                         if str(i) in line :
                             # the parameter with ID i is being set on this line
-                            # format:
-                            #   (whitespace) <millepede_constant name="<id>" value="<val>"/>
-    
-                            # get to value
-                            i_value = line.find('value')
-                            pre_val = line[:i_value]
-                            post_val = line[i_value:]
-    
-                            # get to opening "
-                            quote_open = post_val.find('"')
-                            pre_val += post_val[:quote_open+1]
-                            post_val = post_val[quote_open+1:]
-    
-                            # get to closing "
-                            quote_close = post_val.find('"')
-                            value = post_val[:quote_close]
-                            post_val = post_val[quote_close:]
-    
-                            new_value = f'{value} {parameters[i].compact_value()}'
-    
-                            f.write(f'{pre_val}{new_value}{post_val}')
+                            f.write(_change_xml_value(
+                                line, 'value', parameters[i].compact_value(), append = True
+                            ))
                             line_edited = True
                             break
                     
