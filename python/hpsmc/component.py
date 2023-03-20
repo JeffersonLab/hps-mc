@@ -12,7 +12,6 @@ from ._config import convert_config_value
 from hpsmc import global_config
 
 
-
 class Component(object):
     """!
     Base class for components in a job.
