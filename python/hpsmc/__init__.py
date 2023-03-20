@@ -18,4 +18,4 @@ _global_logger = _setup_logging(global_config)
 if len(_config_files) > 0:
     _global_logger.info("Config files found: {}".format(_config_files))
 else:
-    _global_logger.info("No config files were found at default locations!")
+    _global_logger.warn("No config files were found at default locations! (`~/.hpsmc` or `.hpsmc` in your current directory)")
