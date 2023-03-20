@@ -6,7 +6,11 @@ import sys
 
 
 def _setup_logging(config):
+    """"! setup and configure the logging using the HPSMC block of the passed config
 
+    The parameters 'loglevel' and 'logfile' are checked within the 'HPSMC' block of the config.
+    The default loglevel is INFO and the default logfile is the terminal (stdout).
+    """
     loglevel = logging.INFO
     logstream = sys.stdout
 
