@@ -11,7 +11,6 @@ import logging
 from ._config import convert_config_value
 from hpsmc import global_config
 
-logger = logging.getLogger("hpsmc.component")
 
 
 class Component(object):
