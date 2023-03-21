@@ -241,7 +241,7 @@ class Parameter :
                     p = Parameter.from_idn(idn)
                     p.__from_res_file_line(line)
                     if p.active() or not skip_nonfloat :
-                        parameters[p.id] = p
+                        parameters[p.id()] = p
                 else :
                     if idn not in destination :
                         raise ValueError(f'Attempting to load parameter {idn} which is not in parameter map')
@@ -270,7 +270,7 @@ class Parameter :
 
     def __repr__(self) :
         """! Representation of this parameter"""
-        return str(self._id)
+        return f'{self.__class__.__name__}({self._id})'
 
     def __str__(self) :
         """! Human printing of this parameter"""
