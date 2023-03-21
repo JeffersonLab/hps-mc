@@ -179,6 +179,7 @@ class _DetectorEditor(Component) :
         # remove original copy if bumped since the previous iteration will have the previous version
         if not save_prev :
             os.remove(original_cp)
+        
 
     def _update_readme(self, detname, msg) :
         """! Update the readme for the passed detector name
@@ -255,6 +256,17 @@ class ApplyPedeRes(_DetectorEditor) :
             if os.path.isdir(dest_path):
                 shutil.rmtree(dest_path)
             shutil.copytree(self._detector_dir(self.detector), dest_path)
+
+        # remove invalid copies of LCDD from next_detector path
+        for detname in (self.detector, self.next_detector) :
+            lcdd_file = os.path.join(self._detector_dir(self.next_detector), f'{detname}.lcdd')
+            if os.path.isfile(lcdd_file) :
+                os.remove(lcdd_file)
+
+        # remove invalid properties file
+        properties_file = os.path.join(self._detector_dir(self.next_detector), 'detector.properties')
+        if os.path.isfile(properties_file) :
+            os.remove(properties_file)
     
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
