@@ -155,6 +155,7 @@ class _DetectorEditor(Component) :
                 for line in og :
                     if 'info name' in line :
                         # update detector name
+                        logger.debug(f'Changing detector name to {detname}')
                         f.write(_change_xml_value(line, 'name', detname, append = False))
                         line_edited = True
                         continue
@@ -167,8 +168,9 @@ class _DetectorEditor(Component) :
                     for i in parameter_set :
                         if str(i) in line :
                             # the parameter with ID i is being set on this line
+                            logger.debug(f'Changing parameter {i}')
                             f.write(_change_xml_value(
-                                line, 'value', parameters[i].compact_value(), append = True
+                                line, 'value', parameter_set[i].compact_value(), append = True
                             ))
                             line_edited = True
                             break
@@ -270,6 +272,8 @@ class ApplyPedeRes(_DetectorEditor) :
     
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
+
+        logger.debug(f'Applying pede results: {parameters}')
 
         self._to_compact(parameters, self.next_detector)
         self._update_readme(self.next_detector, f"""
