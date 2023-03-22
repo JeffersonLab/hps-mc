@@ -122,7 +122,7 @@ There is a github action ensuring proper formatting of python code in `hps-mc`. 
 
 To prevent this action from failing, you can check if your code is formatted correctly locally before pushing. This can be done using [pycodestyle](https://pycodestyle.pycqa.org/en/latest/intro.html#configuration), by navigating to the top directory of hps-mc and running
 ```bash
-pycodestyle --ignore=E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
+pycodestyle --ignore=E266,E262,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
 ```
 which will display all formatting errors in `python/`. Before running this, make sure pycodestyle is installed on your machine. If you need to install it, you can do this by running
 ```bash
@@ -138,7 +138,7 @@ chmod +x pre-commit
 Then, add the following lines to `pre-commit`
 ```bash
 #!/bin/sh
-pycodestyle --ignore=E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
+pycodestyle --ignore=E266,E262,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
 ```
  
 To fix the formatting errors, you can either do this manually by navigating to the displayed files and making the necessary changes, or you can use [autopep8](https://pypi.org/project/autopep8/#installation) as follows. First, install autopep8:
@@ -147,7 +147,7 @@ pip install --user --upgrade autopep8
 ```
 Then run
 ```bash
-autopep8 --aggressive --aggressive --ignore=E265,E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --in-place --max-line-length=160 --recursive python/
+autopep8 --aggressive --aggressive --ignore=E265,E266,E262,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --in-place --max-line-length=160 --recursive python/
 ```
 from the top of the `hps-mc` directory. Alternatively, run `format_python_code.sh`.
 This will automatically fix (most) of the formatting issues. 

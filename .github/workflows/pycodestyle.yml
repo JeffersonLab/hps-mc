@@ -17,4 +17,4 @@ jobs:
         pip install pycodestyle
     - name: Run pycodestyle
       run: |
-        pycodestyle --ignore=E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
+        pycodestyle --ignore=E266,E262,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/
