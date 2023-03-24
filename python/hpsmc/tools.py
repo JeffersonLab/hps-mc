@@ -92,16 +92,7 @@ class SLIC(Component):
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
             self.logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
-
-        # Set fieldmap dir to install location if not provided in config
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
-
+       
     def setup(self):
         """! Setup SLIC component."""
         if not os.path.exists(self.slic_dir):
@@ -110,17 +101,7 @@ class SLIC(Component):
         self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
-
-        fieldmap_symlink = pathlib.Path(os.getcwd(), "fieldmap")
-        if not fieldmap_symlink.exists():
-            self.logger.debug("Creating symlink to fieldmap directory: {}".format(fieldmap_symlink))
-            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-        else:
-            if fieldmap_symlink.is_dir() or os.path.islink(fieldmap_symlink):
-                self.logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
-            else:
-                raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
-
+       
         if self.run_number is not None:
             run_number_cmd = "/lcio/runNumber %d" % self.run_number
             run_number_mac = open("run_number.mac", 'w')
@@ -152,7 +133,7 @@ class SLIC(Component):
         Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
         @return  list of required configurations
         """
-        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
+        return ['slic_dir', 'detector_dir']
 
     def execute(self, log_out, log_err):
         """!
