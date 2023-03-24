@@ -163,8 +163,7 @@ class Component(object):
             if p in params:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    self.logger.debug("%s:%s=%s [optional]"
-                                 % (self.name, p, params[p]))
+                    self.logger.debug("%s:%s=%s [optional]" % (self.name, p, params[p]))
                 else:
                     self.logger.debug("Ignored job param '%s'" % p)
 
