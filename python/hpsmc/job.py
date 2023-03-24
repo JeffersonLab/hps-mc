@@ -771,7 +771,7 @@ class Job(object):
         else:
             return src
 
-    def _config_fieldmap_dir(self): 
+    def _config_fieldmap_dir(self):
         """!
         Set fieldmap dir to install location if not provided in config
         """
@@ -796,6 +796,7 @@ class Job(object):
                 logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
             else:
                 raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
+
 
 cmds = {
     'run': 'Run a job script',

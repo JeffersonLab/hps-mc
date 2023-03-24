@@ -25,7 +25,7 @@ class SLIC(Component):
         ## List of macros to run (optional)
         self.macros = []
         ## Run number to set on output file (optional)
-        self.run_number = None       
+        self.run_number = None
         ## To be set from config or install dir
         self.detector_dir = None
 
@@ -88,7 +88,7 @@ class SLIC(Component):
             if not os.path.isdir(self.detector_dir):
                 raise Exception('Failed to find valid detector_dir')
             self.logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
-        
+
     def setup(self):
         """! Setup SLIC component."""
         if not os.path.exists(self.slic_dir):
@@ -218,7 +218,7 @@ class JobManager(Component):
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
                 self.logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
-        
+
     def required_config(self):
         """!
         Return list of required configurations.
@@ -943,6 +943,7 @@ class JavaTool(Component):
 
     def config(self, parser):
         super().config(parser)
+
 
 class EvioToLcio(JavaTool):
     """!
