@@ -4,8 +4,6 @@ var namespacehpsmc_1_1job =
     [ "JobStore", "classhpsmc_1_1job_1_1JobStore.html", "classhpsmc_1_1job_1_1JobStore" ],
     [ "JobScriptDatabase", "classhpsmc_1_1job_1_1JobScriptDatabase.html", "classhpsmc_1_1job_1_1JobScriptDatabase" ],
     [ "Job", "classhpsmc_1_1job_1_1Job.html", "classhpsmc_1_1job_1_1Job" ],
-    [ "check", "namespacehpsmc_1_1job.html#a446f4d12f1c6ffaee678fe2860a00729", null ],
-    [ "load_json_data", "namespacehpsmc_1_1job.html#aaa2a24651b0f26e2ea3282114499e955", null ],
     [ "print_usage", "namespacehpsmc_1_1job.html#a459662d8285a5055f000a5f34257bcbf", null ],
     [ "args", "namespacehpsmc_1_1job.html#a8187411843a6284ffb964ef3fb9fcab3", null ],
     [ "cmd", "namespacehpsmc_1_1job.html#adfc5ba7e22f5e4a6221c12a70503bef3", null ],

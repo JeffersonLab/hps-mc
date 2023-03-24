@@ -1,5 +1,35 @@
 var namespacehpsmc =
 [
+    [ "_config", "namespacehpsmc_1_1__config.html", [
+      [ "Job parameters", "apgentoslic.html#autotoc_md0", null ],
+      [ "Job template", "apgentoslic.html#autotoc_md1", null ],
+      [ "Job parameters", "beamcoords.html#autotoc_md2", null ],
+      [ "Job parameters", "beamgen.html#autotoc_md3", null ],
+      [ "Job template", "beamgen.html#autotoc_md4", null ],
+      [ "Job parameters", "beamslic.html#autotoc_md5", null ],
+      [ "Job parameters", "datacnv.html#autotoc_md6", null ],
+      [ "Job parameters", "feeslictorecon.html#autotoc_md8", null ],
+      [ "Job Parameters", "hpstr.html#autotoc_md9", null ],
+      [ "Job parameters", "mollergen.html#autotoc_md10", null ],
+      [ "Job template", "mollergen.html#autotoc_md11", null ],
+      [ "Job parameters", "radgen.html#autotoc_md12", null ],
+      [ "Job template", "radgen.html#autotoc_md13", null ],
+      [ "Job parameters", "readoutrecon.html#autotoc_md14", null ],
+      [ "Job parameters", "simp.html#autotoc_md15", null ],
+      [ "Job template", "simp.html#autotoc_md16", null ],
+      [ "Job parameters", "slictoanaMC.html#autotoc_md17", null ],
+      [ "Job parameters", "tritrigbeam.html#autotoc_md18", null ],
+      [ "Job parameters", "tritriggen.html#autotoc_md19", null ],
+      [ "Job template", "tritriggen.html#autotoc_md20", null ],
+      [ "Job parameters", "tritrigslicfullchain.html#autotoc_md21", null ],
+      [ "Job parameters", "wabgensample.html#autotoc_md22", null ],
+      [ "Job template", "wabgensample.html#autotoc_md23", null ],
+      [ "_read_global_config", "namespacehpsmc_1_1__config.html#aa5168d8de2c82a4b5bd305d73721b7c0", null ],
+      [ "convert_config_value", "namespacehpsmc_1_1__config.html#af52e60a9ea5089f880148a25ebf77189", null ]
+    ] ],
+    [ "_logging", "namespacehpsmc_1_1__logging.html", [
+      [ "_setup_logging", "namespacehpsmc_1_1__logging.html#ac86f41d761151bab7154e2784a5187d2", null ]
+    ] ],
     [ "batch", "namespacehpsmc_1_1batch.html", "namespacehpsmc_1_1batch" ],
     [ "component", "namespacehpsmc_1_1component.html", "namespacehpsmc_1_1component" ],
     [ "config_writer", "namespacehpsmc_1_1config__writer.html", [
@@ -32,9 +62,8 @@ var namespacehpsmc =
     [ "job_template", "namespacehpsmc_1_1job__template.html", "namespacehpsmc_1_1job__template" ],
     [ "run_params", "namespacehpsmc_1_1run__params.html", "namespacehpsmc_1_1run__params" ],
     [ "tools", "namespacehpsmc_1_1tools.html", "namespacehpsmc_1_1tools" ],
-    [ "util", "namespacehpsmc_1_1util.html", [
-      [ "config_logging", "namespacehpsmc_1_1util.html#ad8e63e3bdff4bf063dcce76a1ac3b3d5", null ],
-      [ "convert_config_value", "namespacehpsmc_1_1util.html#a594cfa405d9d59a5d744c7801108e8ad", null ]
-    ] ],
-    [ "COPY_BUFSIZE", "namespacehpsmc.html#a91b67a6a22e604761e4ff169a32eeb3d", null ]
+    [ "_config_files", "namespacehpsmc.html#adf5170b22a40217429951668717a6292", null ],
+    [ "_global_logger", "namespacehpsmc.html#a79e0eea484e3ef5366353ac0a26e4964", null ],
+    [ "COPY_BUFSIZE", "namespacehpsmc.html#a91b67a6a22e604761e4ff169a32eeb3d", null ],
+    [ "global_config", "namespacehpsmc.html#a4dea3ad19448cf35cbbf2373d4f97fbd", null ]
 ];

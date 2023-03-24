@@ -63,9 +63,7 @@ var annotated_dup =
         [ "LCIOTool", "classhpsmc_1_1tools_1_1LCIOTool.html", "classhpsmc_1_1tools_1_1LCIOTool" ],
         [ "LCIOConcat", "classhpsmc_1_1tools_1_1LCIOConcat.html", "classhpsmc_1_1tools_1_1LCIOConcat" ],
         [ "LCIOCount", "classhpsmc_1_1tools_1_1LCIOCount.html", "classhpsmc_1_1tools_1_1LCIOCount" ],
-        [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ],
-        [ "SimBase", "classhpsmc_1_1tools_1_1SimBase.html", "classhpsmc_1_1tools_1_1SimBase" ],
-        [ "Sim", "classhpsmc_1_1tools_1_1Sim.html", "classhpsmc_1_1tools_1_1Sim" ]
+        [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ]
       ] ]
     ] ],
     [ "test", "namespacetest.html", [

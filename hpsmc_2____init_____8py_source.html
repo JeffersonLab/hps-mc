@@ -97,14 +97,27 @@ $(document).ready(function(){initNavTree('hpsmc_2____init_____8py_source.html','
 <div class="contents">
 <a href="hpsmc_2____init_____8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno"><a class="line" href="namespacehpsmc.html">    1</a></span>&#160;<span class="keyword">import</span> shutil</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">from</span> .util <span class="keyword">import</span> config_logging</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"># Enable default logging config</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<a class="code" href="namespacehpsmc_1_1util.html#ad8e63e3bdff4bf063dcce76a1ac3b3d5">config_logging</a>()</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"># To play nice with Lustre, but only effective as of python 3.8</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="namespacehpsmc.html#a91b67a6a22e604761e4ff169a32eeb3d">    9</a></span>&#160;shutil.COPY_BUFSIZE = 1024 * 1024</div>
-<div class="ttc" id="anamespacehpsmc_1_1util_html_ad8e63e3bdff4bf063dcce76a1ac3b3d5"><div class="ttname"><a href="namespacehpsmc_1_1util.html#ad8e63e3bdff4bf063dcce76a1ac3b3d5">hpsmc.util.config_logging</a></div><div class="ttdeci">def config_logging(stream=sys.stdout, level=logging.DEBUG, logname='hpsmc')</div><div class="ttdoc">Configure logging by setting an output stream and level (both optional).</div><div class="ttdef"><b>Definition:</b> <a href="util_8py_source.html#l00027">util.py:27</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">from</span> ._config <span class="keyword">import</span> _read_global_config</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">from</span> ._logging <span class="keyword">import</span> _setup_logging</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"># To play nice with Lustre, but only effective as of python 3.8</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="namespacehpsmc.html#a91b67a6a22e604761e4ff169a32eeb3d">    7</a></span>&#160;shutil.COPY_BUFSIZE = 1024 * 1024</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"># Load the global configuration settings.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"># Accessing this variable from other modules like job is fine.</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespacehpsmc.html#adf5170b22a40217429951668717a6292">   11</a></span>&#160;global_config, _config_files = <a class="code" href="namespacehpsmc_1_1__config.html#aa5168d8de2c82a4b5bd305d73721b7c0">_read_global_config</a>()</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"># Setup global logging.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"># This should not be accessed directly from other modules.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespacehpsmc.html#a79e0eea484e3ef5366353ac0a26e4964">   15</a></span>&#160;_global_logger = <a class="code" href="namespacehpsmc_1_1__logging.html#ac86f41d761151bab7154e2784a5187d2">_setup_logging</a>(global_config)</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"># Print a log message showing what global config files were found and loaded.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordflow">if</span> len(_config_files) &gt; 0:</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    _global_logger.info(<span class="stringliteral">&quot;Config files found: {}&quot;</span>.format(_config_files))</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    _global_logger.warn(<span class="stringliteral">&quot;No config files were found at default locations! (`~/.hpsmc` or `.hpsmc` in your current directory)&quot;</span>)</div>
+<div class="ttc" id="anamespacehpsmc_1_1__config_html_aa5168d8de2c82a4b5bd305d73721b7c0"><div class="ttname"><a href="namespacehpsmc_1_1__config.html#aa5168d8de2c82a4b5bd305d73721b7c0">hpsmc._config._read_global_config</a></div><div class="ttdeci">def _read_global_config()</div><div class="ttdoc">Read global configuration files.</div><div class="ttdef"><b>Definition:</b> <a href="__config_8py_source.html#l00012">_config.py:12</a></div></div>
+<div class="ttc" id="anamespacehpsmc_1_1__logging_html_ac86f41d761151bab7154e2784a5187d2"><div class="ttname"><a href="namespacehpsmc_1_1__logging.html#ac86f41d761151bab7154e2784a5187d2">hpsmc._logging._setup_logging</a></div><div class="ttdeci">def _setup_logging(config)</div><div class="ttdef"><b>Definition:</b> <a href="__logging_8py_source.html#l00008">_logging.py:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

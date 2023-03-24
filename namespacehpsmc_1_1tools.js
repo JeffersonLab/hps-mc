@@ -25,8 +25,5 @@ var namespacehpsmc_1_1tools =
     [ "LCIOTool", "classhpsmc_1_1tools_1_1LCIOTool.html", "classhpsmc_1_1tools_1_1LCIOTool" ],
     [ "LCIOConcat", "classhpsmc_1_1tools_1_1LCIOConcat.html", "classhpsmc_1_1tools_1_1LCIOConcat" ],
     [ "LCIOCount", "classhpsmc_1_1tools_1_1LCIOCount.html", "classhpsmc_1_1tools_1_1LCIOCount" ],
-    [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ],
-    [ "SimBase", "classhpsmc_1_1tools_1_1SimBase.html", "classhpsmc_1_1tools_1_1SimBase" ],
-    [ "Sim", "classhpsmc_1_1tools_1_1Sim.html", "classhpsmc_1_1tools_1_1Sim" ],
-    [ "logger", "namespacehpsmc_1_1tools.html#a0b14e488ae28d98d262453f3e9cd6e4d", null ]
+    [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ]
 ];

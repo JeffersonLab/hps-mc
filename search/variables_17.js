@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['xdr_5finit_5fdone_1516',['xdr_init_done',['../stdhep__util_8cpp.html#a4bafdcb5a84a5fd34d0bdacfc98d1586',1,'xdr_init_done():&#160;stdhep_util.cpp'],['../stdhep__util_8hh.html#a4bafdcb5a84a5fd34d0bdacfc98d1586',1,'xdr_init_done():&#160;stdhep_util.cpp']]],
-  ['xsec_1517',['xsec',['../classhpsmc_1_1tools_1_1MergePoisson.html#a94ec15c4eba22a2abf268f9afa568582',1,'hpsmc::tools::MergePoisson']]]
+  ['workflow_1515',['workflow',['../classhpsmc_1_1batch_1_1Batch.html#a3a6cba84ae6df52c3eff41b65d0874bf',1,'hpsmc::batch::Batch']]]
 ];
