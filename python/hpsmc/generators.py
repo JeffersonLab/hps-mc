@@ -9,8 +9,6 @@ import logging
 
 from hpsmc.component import Component
 
-logger = logging.getLogger("hpsmc.generators")
-
 
 class EventGenerator(Component):
     """! Event generator base class."""
@@ -58,15 +56,15 @@ class EGS5(EventGenerator):
 
         if self.egs5_dir is None:
             self.egs5_dir = self.get_install_dir()
-            logger.debug("Using EGS5 from install dir: " + self.egs5_dir)
+            self.logger.debug("Using EGS5 from install dir: " + self.egs5_dir)
 
         ## data directory
         self.egs5_data_dir = os.path.join(self.egs5_dir, "data")
         ## config directory
         self.egs5_config_dir = os.path.join(self.egs5_dir, "config")
 
-        logger.debug("egs5_data_dir=%s" % self.egs5_data_dir)
-        logger.debug("egs5_config_dir=%s" % self.egs5_config_dir)
+        self.logger.debug("egs5_data_dir=%s" % self.egs5_data_dir)
+        self.logger.debug("egs5_config_dir=%s" % self.egs5_config_dir)
 
         if os.path.exists("data"):
             os.unlink("data")
@@ -79,7 +77,7 @@ class EGS5(EventGenerator):
         # Set target thickness from job parameter or use the default from run parameters
         if self.target_thickness is not None:
             self.target_dz = self.target_thickness
-            logger.debug("Target thickness set from job param: {}".format(self.target_dz))
+            self.logger.debug("Target thickness set from job param: {}".format(self.target_dz))
         else:
             raise Exception("Target thickness not set!")
 
@@ -88,7 +86,7 @@ class EGS5(EventGenerator):
 
         # seed_data = "%d %f %f %d" % (self.seed, self.target_dz, ebeam, electrons)
         seed_data = " ".join(str(item) for item in [self.seed, self.target_dz, ebeam, electrons])
-        logger.debug("Seed data (seed, target_dz, ebeam, electrons): {}".format(seed_data))
+        self.logger.debug("Seed data (seed, target_dz, ebeam, electrons): {}".format(seed_data))
         seed_file = open("seed.dat", 'w')
         seed_file.write(seed_data)
         seed_file.close()
@@ -111,7 +109,7 @@ class EGS5(EventGenerator):
         if 'moller' not in self.name:
             src = os.path.join(self.rundir, 'brems.stdhep')
             dest = os.path.join(self.rundir, self.output_files()[0])
-            logger.debug("Copying '%s' to '%s'" % (src, dest))
+            self.logger.debug("Copying '%s' to '%s'" % (src, dest))
             shutil.copy(src, dest)
 
     def required_parameters(self):
@@ -228,7 +226,7 @@ class MG(EventGenerator):
         """! Set parameters."""
         Component.set_parameters(self, params)
         self.run_card = "run_card_" + self.run_params + ".dat"
-        logger.debug("Set run card to '%s'" % self.run_card)
+        self.logger.debug("Set run card to '%s'" % self.run_card)
 
     def required_parameters(self):
         """!
@@ -252,17 +250,17 @@ class MG(EventGenerator):
     def make_run_card(self, run_card):
         """! Make run card."""
         ## \todo explain what run card is
-        logger.info("Making run card '%s' with nevents=%d, seed=%d" % (run_card, self.nevents, self.seed))
+        self.logger.info("Making run card '%s' with nevents=%d, seed=%d" % (run_card, self.nevents, self.seed))
 
         with open(run_card, 'r') as cardin:
             data = cardin.readlines()
 
         for i in range(0, len(data)):
             if "= nevents" in data[i]:
-                logger.debug("Setting nevents=%d in run card" % self.nevents)
+                self.logger.debug("Setting nevents=%d in run card" % self.nevents)
                 data[i] = " " + str(self.nevents) + " = nevents ! Number of unweighted events requested" + '\n'
             if "= iseed" in data[i]:
-                logger.debug("Setting seed=%d in run card" % self.seed)
+                self.logger.debug("Setting seed=%d in run card" % self.seed)
                 data[i] = " " + str(self.seed) + " = iseed   ! rnd seed (0=assigned automatically=default))" + '\n'
 
         with open(run_card, 'w') as cardout:
@@ -271,7 +269,7 @@ class MG(EventGenerator):
     def make_param_card(self, param_card):
         """! Make parameter card."""
         ## \todo explain what param card is
-        logger.debug("Making param card '%s'" % param_card)
+        self.logger.debug("Making param card '%s'" % param_card)
 
         with open(param_card, 'r') as paramin:
             data = paramin.readlines()
@@ -279,7 +277,7 @@ class MG(EventGenerator):
         for i in range(0, len(data)):
             if "APMASS" in data[i] and self.apmass is not None:
                 data[i] = "       622     %.7fe-03   # APMASS" % (self.apmass) + '\n'
-                logger.debug("APMASS in param card set to %d" % self.apmass)
+                self.logger.debug("APMASS in param card set to %d" % self.apmass)
             if "map" in data[i] and self.map is not None:
                 data[i] = "      622 %.7fe-03 # map" % (self.map) + '\n'
             if "mpid" in data[i] and self.mpid is not None:
@@ -301,7 +299,7 @@ class MG(EventGenerator):
         @return  error code
         """
         os.chdir(os.path.dirname(self.command))
-        logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
+        self.logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
         return Component.execute(self, log_out, log_err)
 
     def setup(self):
@@ -310,7 +308,7 @@ class MG(EventGenerator):
 
         if self.madgraph_dir is None:
             self.madgraph_dir = self.get_install_dir()
-            logger.debug("Using Madgraph from install dir: " + self.madgraph_dir)
+            self.logger.debug("Using Madgraph from install dir: " + self.madgraph_dir)
 
         if self.name == 'ap' and self.apmass is None:
             raise Exception("Missing apmass param for AP generation.")
@@ -346,7 +344,7 @@ class MG4(MG):
         proc_dirs = MG4.dir_map[self.name].split(os.sep)
         src = os.path.join(self.madgraph_dir, proc_dirs[0], proc_dirs[1])
         dest = proc_dirs[1]
-        logger.debug("Copying '%s' to '%s'" % (src, dest))
+        self.logger.debug("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
 
         self.event_dir = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Events")
@@ -354,18 +352,18 @@ class MG4(MG):
             os.makedirs(self.event_dir)
 
         self.command = os.path.join(os.getcwd(), proc_dirs[1], proc_dirs[2], "bin", "generate_events")
-        logger.debug("Command set to '%s'" % self.command)
+        self.logger.debug("Command set to '%s'" % self.command)
 
         run_card_src = os.path.join(self.madgraph_dir, proc_dirs[0], self.run_card)
         run_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "run_card.dat")
-        logger.debug("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
+        self.logger.debug("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         shutil.copyfile(run_card_src, run_card_dest)
 
         self.make_run_card(run_card_dest)
 
         param_card_src = os.path.join(self.madgraph_dir, proc_dirs[0], self.param_card)
         param_card_dest = os.path.join(self.rundir, proc_dirs[1], proc_dirs[2], "Cards", "param_card.dat")
-        logger.debug("Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
+        self.logger.debug("Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
 
         self.make_param_card(param_card_dest)
@@ -380,7 +378,7 @@ class MG4(MG):
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
             dest = os.path.join(self.rundir, os.path.basename(f))
-            logger.debug("Copying '%s' to '%s'" % (f, dest))
+            self.logger.debug("Copying '%s' to '%s'" % (f, dest))
             shutil.copy(f, dest)
         os.chdir(self.rundir)
         return returncode
@@ -415,30 +413,30 @@ class MG5(MG):
 
         src = os.path.join(self.madgraph_dir, self.proc_dir)
         dest = os.path.join(self.rundir, self.proc_dir)
-        logger.debug("Copying '%s' to '%s'" % (src, dest))
+        self.logger.debug("Copying '%s' to '%s'" % (src, dest))
         shutil.copytree(src, dest, symlinks=True)
 
         ## \todo FIXME: This doesn't seem to work as generate_events doesn't read the input config.
         """
         input_dir = os.path.join(self.madgraph_dir, "input")
         dest_input_dir = os.path.join(self.rundir, self.proc_dir, "input")
-        logger.info("Copying '%s' to '%s'" % (input_dir, dest_input_dir))
+        self.logger.info("Copying '%s' to '%s'" % (input_dir, dest_input_dir))
         shutil.copytree(input_dir, dest_input_dir)
         """
 
         self.command = os.path.join(dest, "bin", "generate_events")
-        logger.debug("Command set to '%s'" % self.command)
+        self.logger.debug("Command set to '%s'" % self.command)
 
         run_card_src = os.path.join(src, "Cards", self.run_card)
         run_card_dest = os.path.join(dest, "Cards", "run_card.dat")
-        logger.debug("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
+        self.logger.debug("Copying run card from '%s' to '%s'" % (run_card_src, run_card_dest))
         shutil.copyfile(run_card_src, run_card_dest)
 
         self.make_run_card(run_card_dest)
 
         param_card_src = os.path.join(src, "Cards", self.param_card)
         param_card_dest = os.path.join(dest, "Cards", "param_card.dat")
-        logger.debug("Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
+        self.logger.debug("Copying param card from '%s' to '%s'" % (param_card_src, param_card_dest))
         shutil.copyfile(param_card_src, param_card_dest)
 
         self.make_param_card(param_card_dest)
@@ -453,7 +451,7 @@ class MG5(MG):
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
             dest = os.path.join(self.rundir, '%s_%s' % (self.name, os.path.basename(f)))
-            logger.debug("Copying '%s' to '%s'" % (f, dest))
+            self.logger.debug("Copying '%s' to '%s'" % (f, dest))
             shutil.copy(f, dest)
         os.chdir(self.rundir)
         return returncode

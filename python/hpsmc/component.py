@@ -4,17 +4,21 @@ Defines the base interface that component classes should extend.
 """
 
 import os
+import sys
 import subprocess
 import logging
 
-from hpsmc.util import convert_config_value
-
-logger = logging.getLogger("hpsmc.component")
+from ._config import convert_config_value
+from hpsmc import global_config
 
 
 class Component(object):
     """!
     Base class for components in a job.
+
+    Do not perform any logging in the init method of Component subclasses,
+    as this is not configured by the job manager until after the components
+    are created.
 
     Optional parameters are: **nevents**, **seed**
 
@@ -58,12 +62,15 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
+        # Setup a logger specifically for this component. It will be configured later.
+        self.logger = logging.getLogger("{}.{}".format(__name__, self.__class__.__name__))
+
     def cmd_line_str(self):
         cl = [self.command]
         cl.extend(self.cmd_args())
         return ' '.join(cl)
 
-    def execute(self, log_out, log_err):
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         """! Generic component execution method.
 
         Individual components may override this if specific behavior is required.
@@ -100,6 +107,18 @@ class Component(object):
     def cleanup(self):
         """! Perform post-job cleanup such as deleting temporary files."""
         pass
+
+    def config_logging(self, parser):
+        """!
+        Configure the logging for a component.
+
+        @param parser the ConfigParser object passed from the job manager
+        """
+        classname = self.__class__.__name__
+        if classname in parser:
+            if 'loglevel' in parser[classname]:
+                loglevel = logging.getLevelName(parser[classname]['loglevel'])
+                self.logger.setLevel(loglevel)
 
     def config(self, parser):
         """! Automatic configuration
@@ -228,5 +247,9 @@ class DummyComponent(Component):
     def __init__(self, **kwargs):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
 
-    def execute(self, log_out, log_err):
-        pass
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
+        self.logger.debug("dummy debug")
+        self.logger.info("dummy info")
+        self.logger.warning("dummy warn")
+        self.logger.critical("dummy critical")
+        self.logger.error("dummy error")
