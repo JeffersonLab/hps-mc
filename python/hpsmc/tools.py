@@ -3,10 +3,8 @@
 import os
 import gzip
 import shutil
-import logging
 import subprocess
 import tarfile
-import pathlib
 
 from subprocess import PIPE
 
@@ -20,7 +18,7 @@ class SLIC(Component):
 
     Optional parameters are: **nevents**, **macros**, **run_number** \n
     Required parameters are: **detector** \n
-    Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
+    Required configurations are: **slic_dir**, **detector_dir**
     """
 
     def __init__(self, **kwargs):
@@ -128,7 +126,7 @@ class SLIC(Component):
         """!
         Return list of required configurations.
 
-        Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
+        Required configurations are: **slic_dir**, **detector_dir**
         @return  list of required configurations
         """
         return ['slic_dir', 'detector_dir']
@@ -220,22 +218,15 @@ class JobManager(Component):
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
                 self.logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
-
+        
     def required_config(self):
         """!
         Return list of required configurations.
 
-        Required configurations are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
+        Required configurations are: **hps_java_bin_jar**
         @retun list of required configurations.
         """
-        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
+        return ['hps_java_bin_jar']
 
     def setup(self):
         """! Setup JobManager component."""
@@ -928,10 +919,10 @@ class JavaTool(Component):
         """!
         Return list of required config.
 
-        Required config are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
+        Required config are: **hps_java_bin_jar**
         @return list of required config
         """
-        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
+        return ['hps_java_bin_jar']
 
     def cmd_args(self):
         """!
@@ -952,21 +943,6 @@ class JavaTool(Component):
 
     def config(self, parser):
         super().config(parser)
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
-
-    def setup(self):
-        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
-        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
-            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-        else:
-            self.logger.warning('Link to fieldmap dir already exists!')
-
 
 class EvioToLcio(JavaTool):
     """!
