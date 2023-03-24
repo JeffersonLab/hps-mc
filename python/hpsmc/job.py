@@ -15,6 +15,7 @@ import configparser
 import glob
 import subprocess
 import copy
+import pathlib
 
 from collections.abc import Sequence
 from os.path import expanduser
@@ -177,6 +178,10 @@ class Job(object):
 
     def __init__(self, args=sys.argv, **kwargs):
 
+        if 'HPSMC_DIR' not in os.environ:
+            raise Exception('HPSMC_DIR is not set in the environment.')
+        self.hpsmc_dir = os.environ['HPSMC_DIR']
+
         ## (passed) job arguments
         self.args = args
         ## Job configuration
@@ -209,6 +214,8 @@ class Job(object):
         self.script = None
         ## job steps
         self.job_steps = None
+        ## fieldmap dir
+        self.hps_fieldmaps_dir = None
 
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
@@ -395,6 +402,9 @@ class Job(object):
         # Configure job class
         self.job_config.config(self, require_section=False)
 
+        # Configure the location of the fieldmap directory
+        self._config_fieldmap()
+
         # Configure each of the job components
         for component in self.components:
 
@@ -569,6 +579,9 @@ class Job(object):
         # Change to run dir
         logger.info('Changing to run dir: %s' % self.rundir)
         os.chdir(self.rundir)
+              
+        # Symlink the fieldmap directory
+        self._symlink_fieldmap_dir()
 
         # Limit components according to job steps
         if self.job_steps is not None:
@@ -586,7 +599,7 @@ class Job(object):
             component.setup()
             if self.check_commands and not component.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (component.command, component.name))
-
+            
     def _config_file_pipeline(self):
         """!
         Pipe component outputs to inputs automatically.
@@ -759,6 +772,28 @@ class Job(object):
         else:
             return src
 
+    def _symlink_fieldmap_dir(self):
+        fieldmap_symlink = pathlib.Path(os.getcwd(), "fieldmap")
+        if not fieldmap_symlink.exists():
+            logger.debug("Creating symlink to fieldmap directory: {}".format(fieldmap_symlink))
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            if fieldmap_symlink.is_dir() or os.path.islink(fieldmap_symlink):
+                self.logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
+            else:
+                raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
+
+    def _config_fieldmap(self):
+        """!
+        Set fieldmap dir to install location if not provided in config
+        """
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.info("Using fieldmap dir from HPSMC installation: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.info("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
 cmds = {
     'run': 'Run a job script',
