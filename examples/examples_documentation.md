@@ -14,6 +14,7 @@ HPS-MC contains an extensive list of examples of running different components. T
 - @subpage mollergen
 - @subpage radgen
 - @subpage readoutrecon
+- @subpage runexamples
 - @subpage simp
 - @subpage slictoanaMC
 - @subpage tritrigbeam

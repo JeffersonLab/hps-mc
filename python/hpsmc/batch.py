@@ -442,7 +442,7 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
-        year = ''
+        year = ''  # /todo change to number
         if 'year' in job_params.keys():
             year = job_params['year']
 
