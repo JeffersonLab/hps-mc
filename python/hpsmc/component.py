@@ -133,10 +133,10 @@ class Component(object):
         if parser.has_section(section_name):
             for name, value in parser.items(section_name):
                 setattr(self, name, convert_config_value(value))
-                logger.debug("%s:%s:%s=%s" % (self.name,
-                                              name,
-                                              getattr(self, name).__class__.__name__,
-                                              getattr(self, name)))
+                self.logger.debug("%s:%s:%s=%s" % (self.name,
+                                                   name,
+                                                   getattr(self, name).__class__.__name__,
+                                                   getattr(self, name)))
 
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
@@ -154,19 +154,19 @@ class Component(object):
             else:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.debug("%s:%s=%s [required]" % (self.name, p, params[p]))
+                    self.logger.debug("%s:%s=%s [required]" % (self.name, p, params[p]))
                 else:
-                    logger.debug("Ignored job param '%s'" % p)
+                    self.logger.debug("Ignored job param '%s'" % p)
 
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.debug("%s:%s=%s [optional]"
+                    self.logger.debug("%s:%s=%s [optional]"
                                  % (self.name, p, params[p]))
                 else:
-                    logger.debug("Ignored job param '%s'" % p)
+                    self.logger.debug("Ignored job param '%s'" % p)
 
     def required_parameters(self):
         """!
@@ -233,10 +233,10 @@ class Component(object):
         """! Configure component from environment variables which are just upper case
         versions of the required config names set in the shell environment."""
         for c in self.required_config():
-            logger.debug("Setting config '%s' from environ" % c)
+            self.logger.debug("Setting config '%s' from environ" % c)
             if c.upper() in os.environ:
                 setattr(self, c, os.environ[c.upper()])
-                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+                self.logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
 
