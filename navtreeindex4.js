@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"jobtemplate.html":[3,18],
 "lcio__count__job_8py.html":[10,0,2,1,11],
 "lcio__count__job_8py.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[10,0,2,1,11,1],
 "lcio__count__job_8py.html#a7882aa8b39a47102a13c2630137590d8":[10,0,2,1,11,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "namespacemembers_vars_k.html":[8,1,2,11],
 "namespacemembers_vars_l.html":[8,1,2,12],
 "namespacemembers_vars_m.html":[8,1,2,13],
-"namespacemembers_vars_n.html":[8,1,2,14],
-"namespacemembers_vars_o.html":[8,1,2,15]
+"namespacemembers_vars_n.html":[8,1,2,14]
 };

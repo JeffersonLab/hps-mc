@@ -21,6 +21,7 @@ var examples =
     [ "Moller event generation", "mollergen.html", null ],
     [ "Radiative event generation", "radgen.html", null ],
     [ "Readout and reconstruction", "readoutrecon.html", null ],
+    [ "Run examples", "runexamples.html", null ],
     [ "Simp generation to reconstruction pipeline", "simp.html", null ],
     [ "SLIC to analysis pipeline for MC data", "slictoanaMC.html", null ],
     [ "Tritrig and beam files – merge to reconstruction pipline", "tritrigbeam.html", null ],
