@@ -11,7 +11,6 @@ import filecmp
 import argparse
 import getpass
 import logging
-import configparser
 import glob
 import subprocess
 import copy
