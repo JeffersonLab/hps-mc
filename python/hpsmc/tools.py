@@ -3,10 +3,8 @@
 import os
 import gzip
 import shutil
-import logging
 import subprocess
 import tarfile
-import pathlib
 
 from subprocess import PIPE
 
@@ -20,7 +18,7 @@ class SLIC(Component):
 
     Optional parameters are: **nevents**, **macros**, **run_number** \n
     Required parameters are: **detector** \n
-    Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
+    Required configurations are: **slic_dir**, **detector_dir**
     """
 
     def __init__(self, **kwargs):
@@ -28,8 +26,6 @@ class SLIC(Component):
         self.macros = []
         ## Run number to set on output file (optional)
         self.run_number = None
-        ## To be set from config or install dir
-        self.hps_fieldmaps_dir = None
         ## To be set from config or install dir
         self.detector_dir = None
 
@@ -93,15 +89,6 @@ class SLIC(Component):
                 raise Exception('Failed to find valid detector_dir')
             self.logger.debug("Using detector_dir from install: {}".format(self.detector_dir))
 
-        # Set fieldmap dir to install location if not provided in config
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
-
     def setup(self):
         """! Setup SLIC component."""
         if not os.path.exists(self.slic_dir):
@@ -110,16 +97,6 @@ class SLIC(Component):
         self.env_script = self.slic_dir + os.sep + "bin" + os.sep + "slic-env.sh"
         if not os.path.exists(self.env_script):
             raise Exception('SLIC setup script does not exist: %s' % self.name)
-
-        fieldmap_symlink = pathlib.Path(os.getcwd(), "fieldmap")
-        if not fieldmap_symlink.exists():
-            self.logger.debug("Creating symlink to fieldmap directory: {}".format(fieldmap_symlink))
-            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-        else:
-            if fieldmap_symlink.is_dir() or os.path.islink(fieldmap_symlink):
-                self.logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
-            else:
-                raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
 
         if self.run_number is not None:
             run_number_cmd = "/lcio/runNumber %d" % self.run_number
@@ -149,10 +126,10 @@ class SLIC(Component):
         """!
         Return list of required configurations.
 
-        Required configurations are: **slic_dir**, **hps_fieldmaps_dir**, **detector_dir**
+        Required configurations are: **slic_dir**, **detector_dir**
         @return  list of required configurations
         """
-        return ['slic_dir', 'hps_fieldmaps_dir', 'detector_dir']
+        return ['slic_dir', 'detector_dir']
 
     def execute(self, log_out, log_err):
         """!
@@ -241,22 +218,15 @@ class JobManager(Component):
             if os.getenv("CONDITIONS_URL", None) is not None:
                 self.conditions_url = os.getenv("CONDITIONS_URL", None)
                 self.logger.debug('Set CONDITIONS_URL from environment: {}'.format(self.hps_java_bin_jar))
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
 
     def required_config(self):
         """!
         Return list of required configurations.
 
-        Required configurations are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
+        Required configurations are: **hps_java_bin_jar**
         @retun list of required configurations.
         """
-        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
+        return ['hps_java_bin_jar']
 
     def setup(self):
         """! Setup JobManager component."""
@@ -266,12 +236,6 @@ class JobManager(Component):
         if self.steering not in self.steering_files:
             raise Exception("Steering '%s' not found in: %s" % (self.steering, self.steering_files))
         self.steering_file = self.steering_files[self.steering]
-
-        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
-        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
-            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-        else:
-            self.logger.warning('Link to fieldmap dir already exists!')
 
     def cmd_args(self):
         """!
@@ -955,10 +919,10 @@ class JavaTool(Component):
         """!
         Return list of required config.
 
-        Required config are: **hps_java_bin_jar**, **hps_fieldmaps_dir**
+        Required config are: **hps_java_bin_jar**
         @return list of required config
         """
-        return ['hps_java_bin_jar', 'hps_fieldmaps_dir']
+        return ['hps_java_bin_jar']
 
     def cmd_args(self):
         """!
@@ -979,20 +943,6 @@ class JavaTool(Component):
 
     def config(self, parser):
         super().config(parser)
-        if self.hps_fieldmaps_dir is None:
-            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
-            if not os.path.isdir(self.hps_fieldmaps_dir):
-                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
-            self.logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
-        else:
-            self.logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
-
-    def setup(self):
-        self.logger.debug('Creating sym link to fieldmap dir: {}'.format(self.hps_fieldmaps_dir))
-        if not os.path.islink(os.getcwd() + os.path.sep + "fieldmap"):
-            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
-        else:
-            self.logger.warning('Link to fieldmap dir already exists!')
 
 
 class EvioToLcio(JavaTool):
