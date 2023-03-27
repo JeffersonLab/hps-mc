@@ -12,7 +12,6 @@ var classhpsmc_1_1tools_1_1SLIC =
     [ "setup", "classhpsmc_1_1tools_1_1SLIC.html#ade41f93307784822f8bc17e85964d427", null ],
     [ "detector_dir", "classhpsmc_1_1tools_1_1SLIC.html#ac617bf3e61557e2ed92433296f98db86", null ],
     [ "env_script", "classhpsmc_1_1tools_1_1SLIC.html#a148093257009ad5b67fb0caf76285ca4", null ],
-    [ "hps_fieldmaps_dir", "classhpsmc_1_1tools_1_1SLIC.html#a044c190f66597374c5caa9dcd7e6f0bb", null ],
     [ "macros", "classhpsmc_1_1tools_1_1SLIC.html#a960130d431b811c507889eb2a13bc302", null ],
     [ "run_number", "classhpsmc_1_1tools_1_1SLIC.html#a22ff01ebc09b017d63f5c99e92e43620", null ]
 ];
