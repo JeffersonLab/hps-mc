@@ -3,7 +3,6 @@
 import shutil
 import re
 import os
-import logging
 
 from hpsmc.component import Component
 from ._parameter import Parameter
@@ -13,8 +12,6 @@ from ._util import getBeamspotConstraintsFloatingOnly
 class PEDE(Component):
     """! Run pede minimizer over input bin files for alignment
     """
-
-    logger = logging.getLogger('hpsmc.tools.PEDE')
 
     def __init__(self, **kwargs) :
         self._pede_steering_file = None
@@ -33,11 +30,11 @@ class PEDE(Component):
         super().__init__('pede', command='pede', **kwargs)
 
     def _write_pede_steering_file(self) :
-        PEDE.logger.info(f'Parameter Map: {self.param_map}')
+        self.logger.info(f'Parameter Map: {self.param_map}')
         parameters = Parameter.parse_map_file(self.param_map)
 
         if self.previous_fit is not None :
-            PEDE.logger.info(f'Loading previous fit: {self.previous_fit}')
+            self.logger.info(f'Loading previous fit: {self.previous_fit}')
             Parameter.parse_pede_res(self.previous_fit, 
                 destination = parameters, 
                 skip_nonfloat = False)
@@ -48,7 +45,7 @@ class PEDE(Component):
         patterns = list(map(Pattern, self.to_float))
         for parameter in parameters.values() :
             if any(pattern.match(parameter) for pattern in patterns) :
-                PEDE.logger.debug(f'Floating parameter {parameter}')
+                self.logger.debug(f'Floating parameter {parameter}')
                 parameter.float()
     
         # build steering file for pede
@@ -61,7 +58,7 @@ class PEDE(Component):
     
             # external constraint file
             if self.constraint_file is not None :
-                PEDE.logger.info(f'Adding constraint file {self.constraint_file}')
+                self.logger.info(f'Adding constraint file {self.constraint_file}')
                 psf.write('\n')
                 psf.write('!Constraint file\n')
                 psf.write(constraint_file+'\n')
@@ -73,8 +70,8 @@ class PEDE(Component):
     
             # survey constraints
             if self.survey_constraints :
-                PEDE.logger.info('Applying survey constraints')
-                PEDE.logger.warn('UNTESTED - not sure if this is correct (Tom E)')
+                self.logger.info('Applying survey constraints')
+                self.logger.warn('UNTESTED - not sure if this is correct (Tom E)')
                 survey_meas_tu = 0.05
                 psf.write('\n!Survey constraints tu\n')
                 for p, name in param_map.items() :
@@ -85,13 +82,13 @@ class PEDE(Component):
             
             # apply beamspotConstraint (This I think is not correct)
             if self.beamspot_constraints:
-                PEDE.logger.error('Beamspot constraints not implemented!')
+                self.logger.error('Beamspot constraints not implemented!')
                 return -1
                 psf.write(getBeamspotConstraintsFloatingOnly(param_map))
                 psf.write("\n\n")
             
             psf.write("\n\n")
-            PEDE.logger.info(f'Appending minimization settings from {self.pede_minimization}')
+            self.logger.info(f'Appending minimization settings from {self.pede_minimization}')
             # determine MP minimization settings
             with open(self.pede_minimization) as minfile :
                 for line in minfile :
@@ -103,10 +100,10 @@ class PEDE(Component):
     def _print_pede_res(self) :
         # print parameters that were floated so user can see results
         parameters = Parameter.parse_pede_res('millepede.res', skip_nonfloat=True)
-        PEDE.logger.info('Deduced Parameters')
+        self.logger.info('Deduced Parameters')
         for i, p in parameters.items() :
             if p.active :
-                PEDE.logger.info(f'  {p}')
+                self.logger.info(f'  {p}')
         return
 
     def required_parameters(self) :
