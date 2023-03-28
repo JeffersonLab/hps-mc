@@ -1,7 +1,11 @@
 """!
-@file java_job.py
+@file track_align_job.py
 
-Do a single hps-java run with a steering file.
+This job is focused on running the hps-java JobManager once. The user
+can decide which steering file to use; however, the user must know that
+this job provides many command-line definitions to be substituted into
+the SimpleGblAliDriver config parameters. Look at the steering files
+in the examples/alignment/tracking directory as an example.
 """
 
 import os
