@@ -1,6 +1,5 @@
 import shutil
 
-from ._hadd import hadd
 from ._config import _read_global_config
 from ._logging import _setup_logging
 
@@ -20,3 +19,6 @@ if len(_config_files) > 0:
     _global_logger.info("Config files found: {}".format(_config_files))
 else:
     _global_logger.warn("No config files were found at default locations! (`~/.hpsmc` or `.hpsmc` in your current directory)")
+
+# import hadd down here so global_config is defined
+from ._hadd import hadd
