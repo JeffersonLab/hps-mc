@@ -43,11 +43,11 @@ traj_ali_driver_defaults = {
     'trackSide' : -1,
     #'writeMilleBinary' : True,
     #'milleBinaryFileName' : '${outputFile}.bin',
-    'writeMilleChi2Cut' : 5,
+    'writeMilleChisqCut' : 5,
     'enableStandardCuts' : False,
-    'maxTrackChisq4hits' : 60.,
-    'maxTrackChisq5hits' : 60.,
-    'maxTrackChisq6hits' : 60.,
+    'maxTrackChisqFourHits' : 60.,
+    'maxTrackChisqFiveHits' : 60.,
+    'maxTrackChisqSixHits' : 60.,
     'inputCollectionName' : 'KalmanFullTracks'
     }
 if java_run.defs is None :
