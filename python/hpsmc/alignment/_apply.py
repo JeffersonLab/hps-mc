@@ -3,10 +3,7 @@
 import shutil
 import re
 import os
-import logging
 import json
-
-logger = logging.getLogger('alignment.apply')
 
 from hpsmc.component import Component
 from ._parameter import Parameter
@@ -64,14 +61,14 @@ class _DetectorEditor(Component) :
         a valid parameter for some components inheriting from this function.
         """
         if bump or self.next_detector is not None :
-            logger.info('Creating new detector directory.')
+            self.logger.info('Creating new detector directory.')
             # deduce source directory and check that it exists
             src_path = self._detector_dir(self.detector)
             if not os.path.isdir(src_path) :
                 raise ValueError(f'Detector {self.detector} is not in hps-java')
             
             if self.next_detector is None :
-                logger.info('Deducing next detector name from current name')
+                self.logger.info('Deducing next detector name from current name')
                 # deduce iter value, using iter0 if there is no iter suffix
                 matches = re.search('.*iter([0-9]*)', self.detector)
                 if matches is None :
@@ -80,9 +77,9 @@ class _DetectorEditor(Component) :
                     i = int(matches.group(1))
                     self.next_detector = self.detector.replace(f'_iter{i}',f'_iter{i+1}')
 
-            logger.info(f'Creating new detector named "{self.next_detector}"')
+            self.logger.info(f'Creating new detector named "{self.next_detector}"')
         else :
-            logger.info(f'Operating on assumed-existing detector "{self.detector}"')
+            self.logger.info(f'Operating on assumed-existing detector "{self.detector}"')
             self.next_detector = self.detector
 
     def _to_compact(self, parameter_set, detname, save_prev = True, prev_ext = 'prev'):
@@ -146,7 +143,7 @@ class _DetectorEditor(Component) :
         dest = os.path.join(self._detector_dir(detname),'compact.xml')
         if not os.path.isfile(dest) :
             raise ValueError(f'{detname} does not have a compact.xml to modify.')
-        logger.info(f'Writing compact.xml at {dest}')
+        self.logger.info(f'Writing compact.xml at {dest}')
         original_cp = dest + '.' + prev_ext
         shutil.copy2(dest, original_cp)
         f = open(dest,'w')
@@ -155,7 +152,7 @@ class _DetectorEditor(Component) :
                 for line in og :
                     if 'info name' in line :
                         # update detector name
-                        logger.debug(f'Changing detector name to {detname}')
+                        self.logger.debug(f'Changing detector name to {detname}')
                         f.write(_change_xml_value(line, 'name', detname, append = False))
                         line_edited = True
                         continue
@@ -168,7 +165,7 @@ class _DetectorEditor(Component) :
                     for i in parameter_set :
                         if str(i) in line :
                             # the parameter with ID i is being set on this line
-                            logger.debug(f'Changing parameter {i}')
+                            self.logger.debug(f'Changing parameter {i}')
                             f.write(_change_xml_value(
                                 line, 'value', parameter_set[i].compact_value(), append = True
                             ))
@@ -191,7 +188,7 @@ class _DetectorEditor(Component) :
 
         # update/create a README to log how this detector has evolved
         log_path = os.path.join(self._detector_dir(detname), 'README.md')
-        logger.info(f'Updating README.md at {log_path}')
+        self.logger.info(f'Updating README.md at {log_path}')
         with open(log_path, 'a') as log :
             from datetime import datetime
             log.write(f'# {detname}\n')
@@ -273,7 +270,7 @@ class ApplyPedeRes(_DetectorEditor) :
         # get list of parameters and their MP values
         parameters = Parameter.parse_pede_res(self.res_file, skip_nonfloat=True)
 
-        logger.debug(f'Applying pede results: {parameters}')
+        self.logger.debug(f'Applying pede results: {parameters}')
 
         self._to_compact(parameters, self.next_detector)
         self._update_readme(self.next_detector, f"""
