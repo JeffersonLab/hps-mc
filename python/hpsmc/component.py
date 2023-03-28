@@ -4,17 +4,21 @@ Defines the base interface that component classes should extend.
 """
 
 import os
+import sys
 import subprocess
 import logging
 
-from hpsmc.util import convert_config_value
-
-logger = logging.getLogger("hpsmc.component")
+from ._config import convert_config_value
+from hpsmc import global_config
 
 
 class Component(object):
     """!
     Base class for components in a job.
+
+    Do not perform any logging in the init method of Component subclasses,
+    as this is not configured by the job manager until after the components
+    are created.
 
     Optional parameters are: **nevents**, **seed**
 
@@ -58,12 +62,15 @@ class Component(object):
         if self.hpsmc_dir is None:
             raise Exception("The HPSMC_DIR is not set!")
 
+        # Setup a logger specifically for this component. It will be configured later.
+        self.logger = logging.getLogger("{}.{}".format(__name__, self.__class__.__name__))
+
     def cmd_line_str(self):
         cl = [self.command]
         cl.extend(self.cmd_args())
         return ' '.join(cl)
 
-    def execute(self, log_out, log_err):
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         """! Generic component execution method.
 
         Individual components may override this if specific behavior is required.
@@ -101,6 +108,18 @@ class Component(object):
         """! Perform post-job cleanup such as deleting temporary files."""
         pass
 
+    def config_logging(self, parser):
+        """!
+        Configure the logging for a component.
+
+        @param parser the ConfigParser object passed from the job manager
+        """
+        classname = self.__class__.__name__
+        if classname in parser:
+            if 'loglevel' in parser[classname]:
+                loglevel = logging.getLevelName(parser[classname]['loglevel'])
+                self.logger.setLevel(loglevel)
+
     def config(self, parser):
         """! Automatic configuration
 
@@ -114,10 +133,10 @@ class Component(object):
         if parser.has_section(section_name):
             for name, value in parser.items(section_name):
                 setattr(self, name, convert_config_value(value))
-                logger.debug("%s:%s:%s=%s" % (self.name,
-                                              name,
-                                              getattr(self, name).__class__.__name__,
-                                              getattr(self, name)))
+                self.logger.debug("%s:%s:%s=%s" % (self.name,
+                                                   name,
+                                                   getattr(self, name).__class__.__name__,
+                                                   getattr(self, name)))
 
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
@@ -135,19 +154,18 @@ class Component(object):
             else:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.debug("%s:%s=%s [required]" % (self.name, p, params[p]))
+                    self.logger.debug("%s:%s=%s [required]" % (self.name, p, params[p]))
                 else:
-                    logger.debug("Ignored job param '%s'" % p)
+                    self.logger.debug("Ignored job param '%s'" % p)
 
         # Set optional parameters.
         for p in self.optional_parameters():
             if p in params:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
-                    logger.debug("%s:%s=%s [optional]"
-                                 % (self.name, p, params[p]))
+                    self.logger.debug("%s:%s=%s [optional]" % (self.name, p, params[p]))
                 else:
-                    logger.debug("Ignored job param '%s'" % p)
+                    self.logger.debug("Ignored job param '%s'" % p)
 
     def required_parameters(self):
         """!
@@ -214,10 +232,10 @@ class Component(object):
         """! Configure component from environment variables which are just upper case
         versions of the required config names set in the shell environment."""
         for c in self.required_config():
-            logger.debug("Setting config '%s' from environ" % c)
+            self.logger.debug("Setting config '%s' from environ" % c)
             if c.upper() in os.environ:
                 setattr(self, c, os.environ[c.upper()])
-                logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+                self.logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
 
@@ -228,5 +246,9 @@ class DummyComponent(Component):
     def __init__(self, **kwargs):
         Component.__init__(self, 'dummy', 'dummy', **kwargs)
 
-    def execute(self, log_out, log_err):
-        pass
+    def execute(self, log_out=sys.stdout, log_err=sys.stderr):
+        self.logger.debug("dummy debug")
+        self.logger.info("dummy info")
+        self.logger.warning("dummy warn")
+        self.logger.critical("dummy critical")
+        self.logger.error("dummy error")

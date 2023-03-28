@@ -94,8 +94,7 @@ class TestJobScriptDatabase(unittest.TestCase):
     @unittest.skip("Test is broken")
     def test_get_script_names(self):
         job_script_database = JobScriptDatabase()
-        job_name_list = job_script_database.get_script_names()
-        job_name_list.sort()
+        job_name_list = sorted(job_script_database.get_script_names())
         self.assertEqual(job_name_list, ["ap_gen", "ap_gen_to_slic", "ap_slic", "beam_coords", "beam_gen", "beam_gen_sample", "beam_prep_and_slic", "data_cnv", "dummy", "fee_gen_to_recon", "hpstr", "lcio_count", "moller_gen", "rad_gen", "readout_recon", "signal_beam_merge_to_recon", "signal_beam_merge_to_recon_2016", "signal_pulser_overlay_to_recon", "sim_to_ana", "simp", "slic", "slic_to_ana", "slic_to_anaMC", "slic_to_recon", "tritrig_beam", "tritrig_beam_slic_to_reco", "tritrig_gen", "tritrig_gen_to_beam_coords", "tritrig_prep_and_slic", "tritrig_sim_full_chain", "tritrig_slic_full_chain", "wab_gen_sample", "wab_gen_to_slic"])
 
     def test_exists(self):
