@@ -54,9 +54,12 @@ traj_ali_driver_defaults = {
     'maxTrackChisqSixHits' : 60.,
     'inputCollectionName' : 'KalmanFullTracks'
     }
-if java_run.defs is None :
+if 'defs' not in job.params :
+    # no user-defined defs
     java_run.defs = traj_ali_driver_defaults
 else :
+    # some user defined defs, make sure others get their defaults
+    java_run.defs = job.params['defs']
     for key, val in traj_ali_driver_defaults.items() :
         if key not in java_run.defs :
             java_run.defs[key] = val
