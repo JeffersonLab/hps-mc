@@ -210,8 +210,7 @@ class Batch:
         """
         cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
-                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
-                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)])
+                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
         if set_job_dir:
             job_dir = os.path.join(self.run_dir, str(job_id))
             cmd.extend(['-d', job_dir])
