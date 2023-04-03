@@ -344,17 +344,15 @@ class WriteMisalignedDet(_DetectorEditor) :
           if dest_same_as_src and not self.force :
               raise ValueError(f'Need to explicitly use the "force" parameter if you want to write to an existing detector.')
 
-          if dest_same_as_src :
-              dest_det = src_det
-          else :
+          if not dest_same_as_src :
               dest_det = self._detector_dir(self.next_detector) 
               if not os.path.isdir(dest_det) :
                   shutil.copytree(src_det, dest_det)
               elif not self.force :
                   raise ValueError('{dest_det} detector already exists. Use "force" if you want to write to an existing detector.') 
 
-          self._to_compact(parameters_to_apply, dest_det, save_prev = self.force)
-          self._update_readme(self.detector if dest_same_as_src else self.next_detector,
+          self._to_compact(parameters_to_apply, self.next_detector, save_prev = self.force)
+          self._update_readme(self.next_detector,
               f"""
 Detector written by applying an intentional misalignment to {self.detector}.
 
