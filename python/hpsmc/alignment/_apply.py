@@ -65,7 +65,7 @@ class _DetectorEditor(Component) :
             # deduce source directory and check that it exists
             src_path = self._detector_dir(self.detector)
             if not os.path.isdir(src_path) :
-                raise ValueError(f'Detector {self.detector} is not in hps-java')
+                raise ValueError(f'Detector {self.detector} is not in hps-java ({src_path} not found)')
             
             if self.next_detector is None :
                 self.logger.info('Deducing next detector name from current name')
