@@ -54,7 +54,7 @@
         <driver name="PreCleanupDriver" type="org.hps.analysis.dataquality.ReadoutCleanupDriver">
           <!--Clean collections-->
           
-          <collectionNames>KalmanTracks EcalCalHits EcalClusters EcalClustersCorr FinalStateParticles UnconstrainedV0Candidates UnconstrainedV0Vertices TargetConstrainedV0Candidates TargetConstrainedV0Vertices BeamspotConstrainedV0Candidates BeamspotConstrainedV0Vertices GBLKinkData GBLKinkDataRelations MatchedToGBLTrackRelations HelicalTrackHits HelicalTrackHitRelations MatchedTracks GBLTracks MatchedToGBLTrackRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations TrackData TrackDataRelations TrackResiduals TrackResidualsRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations StripClusterer_SiTrackerHitStrip1D </collectionNames>
+          <collectionNames>KFTrackData KFTrackDataRelations KalmanFullTracks KalmanFullTracksToMCParticleRelations KallmanFullTracksToTruthTrackRelations KalmanFullTracksTruth EcalCalHits EcalClusters EcalClustersCorr FinalStateParticles UnconstrainedV0Candidates UnconstrainedV0Vertices TargetConstrainedV0Candidates TargetConstrainedV0Vertices BeamspotConstrainedV0Candidates BeamspotConstrainedV0Vertices GBLKinkData GBLKinkDataRelations MatchedToGBLTrackRelations HelicalTrackHits HelicalTrackHitRelations MatchedTracks GBLTracks MatchedToGBLTrackRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations TrackData TrackDataRelations TrackResiduals TrackResidualsRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations StripClusterer_SiTrackerHitStrip1D </collectionNames>
 
         </driver>
         
@@ -116,7 +116,7 @@
           <!-- <siHitsLimit>50</siHitsLimit> -->
           <seedCompThr>0.05</seedCompThr>
           <addResiduals>true</addResiduals>
-          <verbose>false</verbose>
+          <verbose>true</verbose>
         </driver>
         
         <!-- do front-back kink plots -->
@@ -165,7 +165,7 @@
           <maxTrackChisq5hits>${maxTrackChisqFiveHits}</maxTrackChisq5hits>
           <maxTrackChisq6hits>${maxTrackChisqSixHits}</maxTrackChisq6hits>
 
-          <inputCollectionName>${inputCollectionName}</inputCollectionName>
+          <inputCollectionName>KalmanFullTracks</inputCollectionName>
         </driver> 
         
         <driver name="GBLOutputDriverKF" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
