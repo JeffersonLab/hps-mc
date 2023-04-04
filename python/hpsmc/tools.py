@@ -172,6 +172,8 @@ class JobManager(Component):
         self.defs = None
         ## java arguments
         self.java_args = None
+        ## whether SVT alignment constants should be disabled
+        self.disable_svt_alignment_constants = False
         ## file for config logging
         self.logging_config_file = None
         ## lcsim cache directory
@@ -247,6 +249,10 @@ class JobManager(Component):
         if self.java_args is not None:
             self.logger.debug('Setting java_args from config: %s' % self.java_args)
             args.append(self.java_args)
+
+        if self.disable_svt_alignment_constants :
+            self.logger.debug('Disabling SVT alignment constants (necessary for alignment)')
+            args.append('-DdisableSvtAlignmentConstants')
 
         if self.logging_config_file is not None:
             self.logger.debug('Setting logging_config_file from config: %s' % self.logging_config_file)
@@ -329,7 +335,7 @@ class JobManager(Component):
         Optional parameters are: **detector**, **run_number**, **defs**
         @return list of optional parameters
         """
-        return ['detector', 'run_number', 'defs']
+        return ['detector', 'run_number', 'defs', 'disable_svt_alignment_constants']
 
 
 class HPSTR(Component):
