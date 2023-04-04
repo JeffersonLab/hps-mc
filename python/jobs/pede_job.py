@@ -35,7 +35,7 @@ if isinstance(job.input_files, str) :
             # non-empty line, have destination be just the name of the file
             job.input_files[line] = os.path.basename(line)
 
-pede = PEDE(inputs = job.input_files.values())
+pede = PEDE(inputs = job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())
 apply_res = ApplyPedeRes()
 construct_det = ConstructDetector()
 

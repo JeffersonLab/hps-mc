@@ -22,7 +22,7 @@ These parameters are required and change often depending on the iteration and wh
 
 | param         | description                                                                 |
 |---------------|-----------------------------------------------------------------------------|
-| inputs        | list of `bin` files or directories in which to recursively search for them  |
+| input\_files  | text file listng `bin` files or the list of `bin` files themselves          |
 | output\_files | mapping the pede output files to their destination names                    |
 | to\_float     | list of pede parameters to allow to float during minimization (see below)   |
 | detector      | name of detector that tracking was run on                                   |
@@ -41,6 +41,14 @@ These parameters are optional and only some of them are tested. They are provide
 | bump                  | if false, *do not* update the iteration number of detector when applying results  |
 | force                 | if true, ignore any existing detector when creating a new directory               |
 | next\_detector        | if set, use this name for the new iteration of the detector (with parameters applied) |
+| no\_copy      | don't use the destination file as `inputs` to pede, use the source          |
+
+The `no\_copy` parameter is helpful when you have a local set of `bin` files that you want to run over. Often times, the `pede` program tries to run over the input files before they are done being loaded into the kernel cache and so you see a "Open error" (example below). This parameter can avoid this error by just having `pede` look at the original source file rather than the copy in the scratch directory.
+```
+ Open error for file events.bin           2
+STOP FILETC: open error                                      
+hpsmc.job:INFO Execution of pede took 0.0129 second(s) with return code: 0
+```
 
 ## to\_float
 The to\_float job parameter is more complicated than the others, so it deserves its own section.
