@@ -186,7 +186,7 @@ class Parameter :
                 if 'MilleParameter' in line :
                     continue
                 p = Parameter.from_map_file_line(line)
-                parameters[p.id] = p
+                parameters[p.id()] = p
         return parameters
 
     def __from_res_file_line(self, line) :
