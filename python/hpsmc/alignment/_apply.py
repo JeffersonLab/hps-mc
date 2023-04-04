@@ -330,8 +330,8 @@ class WriteMisalignedDet(_DetectorEditor) :
           for idn, param in full_parameters.items() :
               for pattern, val_change in patterns :
                   if pattern.match(param) :
+                      param._val = val_change
                       parameters_to_apply[idn] = param
-                      parameters_to_apply[idn].value = val_change
                       break
 
           self._deduce_next_detector()
