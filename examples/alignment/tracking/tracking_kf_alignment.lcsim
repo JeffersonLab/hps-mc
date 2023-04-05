@@ -32,7 +32,6 @@
       -->
       <driver name="KalmanPatRecDriver"/>
       <driver name="KalmanKinkFitDriver"/>
-      <driver name="KalmanToGBLDriver"/> 
       
       <!--
         Use milli+GBL to prepare alignment data file for pede
@@ -123,11 +122,6 @@
         <driver name="KalmanKinkFitDriver" type="org.hps.recon.tracking.kalman.KalmanKinkFitDriver">
         </driver>
 
-        <!-- Form trajectories for MPII using the GBL algorithm, starting from Kalman Tracks -->
-        <driver name="KalmanToGBLDriver" type="org.hps.recon.tracking.gbl.KalmanToGBLDriver">
-          <!--<debug>true</debug>-->
-        </driver>
-        
         <!-- Form trajectories for MPII using the GBL algorithm -->
         <driver name="SimpleGBLTrajAliDriverKF" 
                 type="org.hps.recon.tracking.gbl.SimpleGBLTrajAliDriver" >
