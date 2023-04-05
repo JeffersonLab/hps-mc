@@ -20,42 +20,42 @@ from hpsmc.alignment import PEDE, ApplyPedeRes, ConstructDetector
 
 job.description = 'alignment parameter minimizatin via pede'
 
-if not isinstance(job.input_files, (str,dict)) :
+if not isinstance(job.input_files, (str, dict)):
     raise ValueError('"input_files" must be a dict list of input files or a path to a text file listing the input files')
 
-if isinstance(job.input_files, str) :
+if isinstance(job.input_files, str):
     listing = job.input_files
     job.input_files = dict()
-    with open(listing) as lf :
-        for line in lf :
+    with open(listing) as lf:
+        for line in lf:
             line = line.strip()
             # skip empty lines or ones starting with #
-            if line == '' or line.startswith('#') :
+            if line == '' or line.startswith('#'):
                 continue
             # non-empty line, have destination be just the name of the file
             job.input_files[line] = os.path.basename(line)
 
-pede = PEDE(inputs = job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())
+pede = PEDE(inputs=job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())
 apply_res = ApplyPedeRes()
 construct_det = ConstructDetector()
 
-job.add([ pede, apply_res, construct_det ])
+job.add([pede, apply_res, construct_det])
 
-gbl_plots = [ 
-    pede_bin_fp.replace('_mille.bin','_gblplots.root')
-    for pede_bin_fp in job.input_files.keys() 
-    if os.path.isfile(pede_bin_fp.replace('_mille.bin','_gblplots.root'))
+gbl_plots = [
+    pede_bin_fp.replace('_mille.bin', '_gblplots.root')
+    for pede_bin_fp in job.input_files.keys()
+    if os.path.isfile(pede_bin_fp.replace('_mille.bin', '_gblplots.root'))
     ]
 
 merged_gbl_plots = [
     f for f in job.output_files.keys() if f.endswith('root')
     ]
 
-if len(gbl_plots) > 0 and len(merged_gbl_plots) > 0 :
+if len(gbl_plots) > 0 and len(merged_gbl_plots) > 0:
     # if we found GBL plots and an output ROOT was provided, we attempt to merge
     from hpsmc import hadd
     hist_merge = hadd(
-        inputs = gbl_plots, 
-        outputs = merged_gbl_plots
+        inputs=gbl_plots,
+        outputs=merged_gbl_plots
         )
     job.add(hist_merge)
