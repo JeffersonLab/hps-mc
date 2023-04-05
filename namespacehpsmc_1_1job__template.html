@@ -129,6 +129,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a56caa2c635fcf5c09ef6bb1abdd0ae93"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1job__template.html#a56caa2c635fcf5c09ef6bb1abdd0ae93">uuid</a> ()</td></tr>
 <tr class="memdesc:a56caa2c635fcf5c09ef6bb1abdd0ae93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to get a uuid within a template.  <a href="namespacehpsmc_1_1job__template.html#a56caa2c635fcf5c09ef6bb1abdd0ae93">More...</a><br /></td></tr>
 <tr class="separator:a56caa2c635fcf5c09ef6bb1abdd0ae93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac04c949fdd8286874e8f198df137b041"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1job__template.html#ac04c949fdd8286874e8f198df137b041">runnumber</a> (path)</td></tr>
+<tr class="memdesc:ac04c949fdd8286874e8f198df137b041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter to get a run number by inspecting first event in slcio file.  <a href="namespacehpsmc_1_1job__template.html#ac04c949fdd8286874e8f198df137b041">More...</a><br /></td></tr>
+<tr class="separator:ac04c949fdd8286874e8f198df137b041"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adca3d0846ba81eb542149c00f9280439"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1job__template.html#adca3d0846ba81eb542149c00f9280439">filenum</a> (path)</td></tr>
+<tr class="memdesc:adca3d0846ba81eb542149c00f9280439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter to get the trailing number of a file.  <a href="namespacehpsmc_1_1job__template.html#adca3d0846ba81eb542149c00f9280439">More...</a><br /></td></tr>
+<tr class="separator:adca3d0846ba81eb542149c00f9280439"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -154,7 +160,7 @@ Variables</h2></td></tr>
 
 <p>Filter to return a file base name stripped of dir and extension. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00016">16</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00018">18</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -176,7 +182,7 @@ Variables</h2></td></tr>
 
 <p>Filter to get dir name from string. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00026">26</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00028">28</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -198,7 +204,30 @@ Variables</h2></td></tr>
 
 <p>Filter to get file extension from string. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00021">21</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00023">23</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+
+</div>
+</div>
+<a id="adca3d0846ba81eb542149c00f9280439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adca3d0846ba81eb542149c00f9280439">&#9670;&nbsp;</a></span>filenum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def hpsmc.job_template.filenum </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filter to get the trailing number of a file. </p>
+<p>This will extract the number between the last underscore and the extension. For example 'file_name_is_number.root' will return 'number' if 'number' is actually a integer. </p>
+
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00057">57</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -230,7 +259,29 @@ Variables</h2></td></tr>
 
 <p>Filter to pad a number. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00031">31</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00033">33</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+
+</div>
+</div>
+<a id="ac04c949fdd8286874e8f198df137b041"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac04c949fdd8286874e8f198df137b041">&#9670;&nbsp;</a></span>runnumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def hpsmc.job_template.runnumber </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filter to get a run number by inspecting first event in slcio file. </p>
+
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00042">42</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -251,7 +302,7 @@ Variables</h2></td></tr>
 
 <p>Function to get a uuid within a template. </p>
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00036">36</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00038">38</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>
@@ -268,7 +319,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00280">280</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="job__template_8py_source.html#l00309">309</a> of file <a class="el" href="job__template_8py_source.html">job_template.py</a>.</p>
 
 </div>
 </div>

@@ -4,6 +4,7 @@ var namespacetest =
     [ "test_func", "namespacetest_1_1test__func.html", "namespacetest_1_1test__func" ],
     [ "test_generators", "namespacetest_1_1test__generators.html", "namespacetest_1_1test__generators" ],
     [ "test_job", "namespacetest_1_1test__job.html", "namespacetest_1_1test__job" ],
+    [ "test_parameter_patterns", "namespacetest_1_1test__parameter__patterns.html", "namespacetest_1_1test__parameter__patterns" ],
     [ "test_run_params", "namespacetest_1_1test__run__params.html", "namespacetest_1_1test__run__params" ],
     [ "test_tools_hpstr", "namespacetest_1_1test__tools__hpstr.html", "namespacetest_1_1test__tools__hpstr" ],
     [ "test_tools_javatools", "namespacetest_1_1test__tools__javatools.html", "namespacetest_1_1test__tools__javatools" ],

@@ -1,14 +1,14 @@
 var namespaces_dup =
 [
-    [ "Prerequisites", "readme.html#autotoc_md29", null ],
-    [ "Installation", "readme.html#autotoc_md30", null ],
-    [ "Environment Setup", "readme.html#autotoc_md31", null ],
-    [ "Running Job Scripts", "readme.html#autotoc_md32", null ],
-    [ "Documentation", "readme.html#autotoc_md33", null ],
-    [ "Quick Start Guide", "readme.html#autotoc_md34", null ],
-    [ "Code Formatting", "readme.html#autotoc_md35", null ],
-    [ "Unit tests", "readme.html#autotoc_md36", null ],
-    [ "Help", "readme.html#autotoc_md37", null ],
+    [ "Prerequisites", "readme.html#autotoc_md48", null ],
+    [ "Installation", "readme.html#autotoc_md49", null ],
+    [ "Environment Setup", "readme.html#autotoc_md50", null ],
+    [ "Running Job Scripts", "readme.html#autotoc_md51", null ],
+    [ "Documentation", "readme.html#autotoc_md52", null ],
+    [ "Quick Start Guide", "readme.html#autotoc_md53", null ],
+    [ "Code Formatting", "readme.html#autotoc_md54", null ],
+    [ "Unit tests", "readme.html#autotoc_md55", null ],
+    [ "Help", "readme.html#autotoc_md56", null ],
     [ "_config", "namespace__config.html", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
       [ "description", "namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
@@ -121,12 +121,29 @@ var namespaces_dup =
       [ "nevents", "namespacelcio__count__job.html#aec013a013223f05e81214331b289330a", null ],
       [ "output_files", "namespacelcio__count__job.html#a7882aa8b39a47102a13c2630137590d8", null ]
     ] ],
+    [ "misalign_job", "namespacemisalign__job.html", [
+      [ "construct_det", "namespacemisalign__job.html#a288ec87a8eb5206cc8c34091f394c61b", null ],
+      [ "description", "namespacemisalign__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "misalign_writer", "namespacemisalign__job.html#a21b4062def89310289ba6ad34f87d41c", null ]
+    ] ],
     [ "moller_gen_job", "namespacemoller__gen__job.html", [
       [ "description", "namespacemoller__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "egs5", "namespacemoller__gen__job.html#adcc537972519ce9a382a1f3be803c91c", null ],
       [ "inputs", "namespacemoller__gen__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "nevents", "namespacemoller__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ],
       [ "rot", "namespacemoller__gen__job.html#a1db2ab3d82c6029ee441423308802a74", null ]
+    ] ],
+    [ "pede_job", "namespacepede__job.html", [
+      [ "apply_res", "namespacepede__job.html#a684f131acbcc52a3ad9734898de6128b", null ],
+      [ "construct_det", "namespacepede__job.html#a288ec87a8eb5206cc8c34091f394c61b", null ],
+      [ "description", "namespacepede__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "gbl_plots", "namespacepede__job.html#ac20a0c6ea1d88c0de59defc0ff6a6e05", null ],
+      [ "hist_merge", "namespacepede__job.html#a59cbe73d1860c56034c3cb9db962d4c0", null ],
+      [ "input_files", "namespacepede__job.html#a27256609f574b662639e0a8cd48b8d3a", null ],
+      [ "line", "namespacepede__job.html#a4fa05b1f00fcde100685cc887554b93b", null ],
+      [ "listing", "namespacepede__job.html#afeb3ee5fe76291f19b5aae1bdf9b122d", null ],
+      [ "merged_gbl_plots", "namespacepede__job.html#a2d75f4fd80f8cd09583c7f0d3a331514", null ],
+      [ "pede", "namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a", null ]
     ] ],
     [ "rad_gen_job", "namespacerad__gen__job.html", [
       [ "cnv", "namespacerad__gen__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
@@ -279,6 +296,14 @@ var namespaces_dup =
       [ "slic_file_names", "namespaceslic__to__recon__job.html#af9957ed1f3a1b74b9312c72a46048392", null ]
     ] ],
     [ "test", "namespacetest.html", "namespacetest" ],
+    [ "track_align_job", "namespacetrack__align__job.html", [
+      [ "defs", "namespacetrack__align__job.html#af4e0e6fc8c0067366f1234c584a4d36f", null ],
+      [ "description", "namespacetrack__align__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "input_files", "namespacetrack__align__job.html#a27256609f574b662639e0a8cd48b8d3a", null ],
+      [ "java_run", "namespacetrack__align__job.html#a9da591365dfe7daab4f892f2e1c4d7cc", null ],
+      [ "logger", "namespacetrack__align__job.html#a0b14e488ae28d98d262453f3e9cd6e4d", null ],
+      [ "traj_ali_driver_defaults", "namespacetrack__align__job.html#aeda238eb4ae3df63cb94edbe927aa64f", null ]
+    ] ],
     [ "tritrig_beam_job", "namespacetritrig__beam__job.html", [
       [ "beam_file_names", "namespacetritrig__beam__job.html#ad90e5e78a8229f9a398a8bc694f27cd4", null ],
       [ "comps", "namespacetritrig__beam__job.html#acc0773cf13b176eee1c782c41e8d1563", null ],

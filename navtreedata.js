@@ -28,6 +28,24 @@ var NAVTREE =
     [ "Job framework", "jobframework.html", null ],
     [ "Job scripts", "jobscripts.html", null ],
     [ "stdhep-tools", "stdheptools.html", null ],
+    [ "misalignment", "misalign.html", [
+      [ "Parameters", "misalign.html#autotoc_md2", [
+        [ "Documented files", "index.html#autotoc_md43", [
+          [ "External documentation", "index.html#autotoc_md44", null ]
+        ] ],
+        [ "Installation", "index.html#autotoc_md45", null ],
+        [ "Quick Start Guide", "index.html#autotoc_md46", null ],
+        [ "Help", "index.html#autotoc_md47", null ],
+        [ "parameters", "misalign.html#autotoc_md6", null ]
+      ] ]
+    ] ],
+    [ "pede minimizer", "pede.html", [
+      [ "Parameters", "pede.html#autotoc_md8", [
+        [ "to_float", "pede.html#autotoc_md12", null ]
+      ] ]
+    ] ],
+    [ "alignment", "alignment.html", null ],
+    [ "Tracking for Alignment", "trackingalign.html", null ],
     [ "Examples", "examples.html", "examples" ],
     [ "hps-mc installation guide", "readme.html", null ],
     [ "Data conversion/reco – evio to lcio", "ana1921pass0.html", null ],
@@ -48,7 +66,7 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", "functions_vars" ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -64,14 +82,15 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"__config_8py.html",
-"classhpsmc_1_1generators_1_1MG.html#ac90dbc799d17b924577136734893ea85",
-"classhpsmc_1_1tools_1_1LCIOConcat.html#af16e86fb81fbbc18f79fde1156e45ddc",
-"classtest_1_1test__tools__lciotools_1_1TestLCIOTool.html",
-"jobtemplate.html",
-"namespacemembers_vars_o.html",
-"namespacewab__gen__sample__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d",
-"stdhep__util_8hh.html#a4bafdcb5a84a5fd34d0bdacfc98d1586"
+"__apply_8py.html",
+"classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#af16e86fb81fbbc18f79fde1156e45ddc",
+"classhpsmc_1_1job__template_1_1JobTemplate.html#a1455473be5251de6b034c22cc919350d",
+"classtest_1_1test__generators_1_1TestEGS5.html",
+"dir_8dfcaee2e0365c95dcf9d149a47ad72b.html",
+"namespaceap__gen__to__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d",
+"namespacereadout__recon__job.html#a43a75300e7fbb760272affc39b34c5e1",
+"pede.html#autotoc_md13",
+"stdhep__util_8hh.html#a5c2588e78252ab71f3d6f5ff4ff59a0c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

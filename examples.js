@@ -1,14 +1,13 @@
 var examples =
 [
     [ "A-prime generation to slic", "apgentoslic.html", [
-      [ "Documented files", "index.html#autotoc_md24", [
-        [ "External documentation", "index.html#autotoc_md25", null ]
-      ] ],
-      [ "Installation", "index.html#autotoc_md26", null ],
-      [ "Quick Start Guide", "index.html#autotoc_md27", null ],
-      [ "Help", "index.html#autotoc_md28", [
+      [ "0. Intentional Misalignment", "alignment.html#autotoc_md14", null ],
+      [ "1. Run Tracking", "alignment.html#autotoc_md15", null ],
+      [ "2. Run pede, Apply Parameters, and Construct Detector", "alignment.html#autotoc_md16", null ],
+      [ "Note on Steering File", "trackingalign.html#autotoc_md17", null ],
+      [ "Tip", "trackingalign.html#autotoc_md18", [
         [ "Job parameters", "examples.html#params", null ],
-        [ "Job template", "examples.html#autotoc_md7", null ]
+        [ "Job template", "examples.html#autotoc_md26", null ]
       ] ]
     ] ],
     [ "Transformation to beam coordinates", "beamcoords.html", null ],

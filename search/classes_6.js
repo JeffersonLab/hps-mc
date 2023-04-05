@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['hpstr_786',['HPSTR',['../classhpsmc_1_1tools_1_1HPSTR.html',1,'hpsmc::tools']]]
+  ['filterbunches_916',['FilterBunches',['../classhpsmc_1_1tools_1_1FilterBunches.html',1,'hpsmc::tools']]]
 ];

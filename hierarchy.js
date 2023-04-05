@@ -18,6 +18,13 @@ var hierarchy =
     [ "KillProcessQueue", "classhpsmc_1_1batch_1_1KillProcessQueue.html", null ],
     [ "object", null, [
       [ "Component", "classhpsmc_1_1component_1_1Component.html", [
+        [ "hadd", "classhpsmc_1_1__hadd_1_1hadd.html", null ],
+        [ "_DetectorEditor", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html", [
+          [ "ApplyPedeRes", "classhpsmc_1_1alignment_1_1__apply_1_1ApplyPedeRes.html", null ],
+          [ "ConstructDetector", "classhpsmc_1_1alignment_1_1__apply_1_1ConstructDetector.html", null ],
+          [ "WriteMisalignedDet", "classhpsmc_1_1alignment_1_1__apply_1_1WriteMisalignedDet.html", null ]
+        ] ],
+        [ "PEDE", "classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html", null ],
         [ "DummyComponent", "classhpsmc_1_1component_1_1DummyComponent.html", null ],
         [ "EventGenerator", "classhpsmc_1_1generators_1_1EventGenerator.html", [
           [ "EGS5", "classhpsmc_1_1generators_1_1EGS5.html", [
@@ -62,6 +69,8 @@ var hierarchy =
       [ "JobConfig", "classhpsmc_1_1job_1_1JobConfig.html", null ],
       [ "JobData", "classhpsmc_1_1job__template_1_1JobData.html", null ]
     ] ],
+    [ "Parameter", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html", null ],
+    [ "Pattern", "classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html", null ],
     [ "RunParameters", "classhpsmc_1_1run__params_1_1RunParameters.html", null ],
     [ "stdhep_entry", "structstdhep__entry.html", null ],
     [ "stdhep_event", "structstdhep__event.html", null ],
@@ -77,6 +86,7 @@ var hierarchy =
       [ "TestJobConfig", "classtest_1_1test__job_1_1TestJobConfig.html", null ],
       [ "TestJobScriptDatabase", "classtest_1_1test__job_1_1TestJobScriptDatabase.html", null ],
       [ "TestJobStore", "classtest_1_1test__job_1_1TestJobStore.html", null ],
+      [ "TestParameterPatterns", "classtest_1_1test__parameter__patterns_1_1TestParameterPatterns.html", null ],
       [ "TestRunParams", "classtest_1_1test__run__params_1_1TestRunParams.html", null ],
       [ "TestHPSTR", "classtest_1_1test__tools__hpstr_1_1TestHPSTR.html", null ],
       [ "TestEvioToLcio", "classtest_1_1test__tools__javatools_1_1TestEvioToLcio.html", null ],

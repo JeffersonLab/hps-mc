@@ -20,6 +20,9 @@ var dir_f6b6e9890db328787ffd3fbf04cdb3a5 =
       [ "TestJobScriptDatabase", "classtest_1_1test__job_1_1TestJobScriptDatabase.html", "classtest_1_1test__job_1_1TestJobScriptDatabase" ],
       [ "TestJob", "classtest_1_1test__job_1_1TestJob.html", "classtest_1_1test__job_1_1TestJob" ]
     ] ],
+    [ "test_parameter_patterns.py", "test__parameter__patterns_8py.html", [
+      [ "TestParameterPatterns", "classtest_1_1test__parameter__patterns_1_1TestParameterPatterns.html", "classtest_1_1test__parameter__patterns_1_1TestParameterPatterns" ]
+    ] ],
     [ "test_run_params.py", "test__run__params_8py.html", [
       [ "TestRunParams", "classtest_1_1test__run__params_1_1TestRunParams.html", "classtest_1_1test__run__params_1_1TestRunParams" ]
     ] ],
