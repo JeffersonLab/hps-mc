@@ -1,0 +1,19 @@
+{
+    "detector": "{{ detector }}",
+    "run_number" : 1194550,
+    "steering" : "{{ steering }}",
+    "input_files": {
+        "{{ job.input_files['events'][0] }}": "events.slcio"
+    },
+    "output_files": {
+        "events_{{ steering }}_mille.bin": "{{ input_files['events'][0] | basename }}_mille.bin",
+        "events_{{ steering }}_mille_gblplots.root": "{{ input_files['events'][0] | basename }}_gblplots.root"
+    },
+    "disable_svt_alignment_constants" : true,
+    "output_dir": "output/{{ steering }}/{{ detector }}",
+    "steering_files" : {
+      "kf" : "/sdf/group/hps/users/eichl008/hps/mc/examples/alignment/tracking/tracking_kf_alignment.lcsim",
+      "st" : "/sdf/group/hps/users/eichl008/hps/mc/examples/alignment/tracking/tracking_st_alignment.lcsim"
+    }
+}
+
