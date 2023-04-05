@@ -1,0 +1,7 @@
+{
+    "parameters": {
+      "11106" : 0.05
+    },
+    "detector" : "HPS_Nominal_2019SensorSurvey_iter0",
+    "next_detector" : "L3TStereo_tu_50um_iter0"
+}

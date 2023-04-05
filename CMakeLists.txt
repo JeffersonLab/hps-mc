@@ -116,6 +116,19 @@ else()
     message(STATUS "HpsJava is disabled")
 endif()
 
+# Install Pede
+option(HPSMC_ENABLE_PEDE "Enable (and install if necessary) pede" OFF)
+if (HPSMC_ENABLE_PEDE)
+  find_program(pede_FOUND "pede")
+  if(pede_FOUND)
+    message(STATUS "Found pede at ${pede_FOUND}")
+  else()
+    include(InstallPede)
+  endif()
+else()
+  message(STATUS "pede is disabled")
+endif()
+
 # Install local conditions database
 option(HPSMC_ENABLE_CONDITIONS "Install local conditions database" OFF)
 if(HPSMC_ENABLE_CONDITIONS)
