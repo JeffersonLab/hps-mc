@@ -18,3 +18,12 @@ hps-mc-batch slurm track_align jobs.json
 The parameter `outputFile` is provided to the steering file as the basename
 of the first output file in the `output_files` dictionary. This is important
 to remember when writing the steering file.
+
+### Tip
+Use the `runnumber` filter in your jinja2 template if the files are accessible
+on your filesystem. This allows for the template to deduce the run number for
+the non-alignment conditions automatically.
+```json
+"run_number" : {{ job.input_files['events'][0] | runnumber }},
+```
+Instead of the manual run number.

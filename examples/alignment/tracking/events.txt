@@ -1,3 +1,1 @@
-/full/path/to/recon/events_1.slcio
-/full/path/to/recon/events_2.slcio
-/full/path/to/recon/events_3.slcio
+https://hpsweb.jlab.org/test/hps-mc/example_files/alignment/fee_beam_4pt55_20um120nA_recon.slcio
