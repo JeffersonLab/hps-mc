@@ -1,0 +1,2 @@
+[JobManager]
+java_args = -DdisableSvtAlignmentConstants -Djna.library.path="/sdf/group/hps/users/bravo/src/GeneralBrokenLines/cpp/install/lib/" -XX:+UseSerialGC -Xmx6500m
