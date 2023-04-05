@@ -10,10 +10,10 @@
         "events_{{ steering }}_mille_gblplots.root": "{{ input_files['events'][0] | basename }}_gblplots.root"
     },
     "disable_svt_alignment_constants" : true,
-    "output_dir": "/sdf/group/hps/users/eichl008/hps/alignment/output/{{ steering }}/{{ detector }}",
+    "output_dir": "output/{{ steering }}/{{ detector }}",
     "steering_files" : {
-      "kf" : "/sdf/group/hps/users/eichl008/hps-mc/examples/alignment/tracking/tracking_kf_alignment.lcsim",
-      "st" : "/sdf/group/hps/users/eichl008/hps-mc/examples/alignment/tracking/tracking_st_alignment.lcsim"
+      "kf" : "/sdf/group/hps/users/eichl008/hps/mc/examples/alignment/tracking/tracking_kf_alignment.lcsim",
+      "st" : "/sdf/group/hps/users/eichl008/hps/mc/examples/alignment/tracking/tracking_st_alignment.lcsim"
     }
 }
 
