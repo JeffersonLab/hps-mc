@@ -1,6 +1,9 @@
 Tracking for Alignment {#trackingalign}
 ======================
 
+**Note**: This example uses a detector created by the \ref misalign example,
+so that must be run first.
+
 1. Edit list of input files
 2. Modify non-input-file variables
   - The current job input variables assume that the input files are 2019 MC
