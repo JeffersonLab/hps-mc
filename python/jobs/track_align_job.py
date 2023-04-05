@@ -45,8 +45,6 @@ traj_ali_driver_defaults = {
     'constrainedBSFit': False,
     'bsZ': -7.7,
     'trackSide': -1,
-    #'writeMilleBinary' : True,
-    #'milleBinaryFileName' : '${outputFile}.bin',
     'writeMilleChisqCut': 5,
     'enableStandardCuts': False,
     'maxTrackChisqFourHits': 60.,

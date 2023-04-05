@@ -67,17 +67,17 @@ class Pattern:
         except ValueError:
             return NotImplemented
 
-    def __validate_layer(l):
+    def __validate_layer(layer):
         """!Make sure input is a valid layer number, otherwise return NotImplemented
 
         A valid layer number is an index counting axial/stereo pairs from 1 at
         the front of the detector up to NUM_MODULES
         """
         try:
-            l = int(l)
-            if l < 1 or l > NUM_MODULES:
+            layer = int(layer)
+            if layer < 1 or layer > NUM_MODULES:
                 return NotImplemented
-            return l
+            return layer
         except ValueError:
             return NotImplemented
 
