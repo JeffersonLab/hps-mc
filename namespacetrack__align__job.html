@@ -128,7 +128,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="track__align__job_8py_source.html#l00059">59</a> of file <a class="el" href="track__align__job_8py_source.html">track_align_job.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="track__align__job_8py_source.html#l00057">57</a> of file <a class="el" href="track__align__job_8py_source.html">track_align_job.py</a>.</p>
 
 </div>
 </div>
@@ -178,8 +178,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  JobManager(</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    steering = job.params[<span class="stringliteral">&quot;steering&quot;</span>],</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    outputs = list(job.output_files.keys())</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    steering=job.params[<span class="stringliteral">&quot;steering&quot;</span>],</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    outputs=list(job.output_files.keys())</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    )</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="track__align__job_8py_source.html#l00025">25</a> of file <a class="el" href="track__align__job_8py_source.html">track_align_job.py</a>.</p>
@@ -216,31 +216,29 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  {</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    <span class="stringliteral">&#39;enableAlignmentCuts&#39;</span> : <span class="keyword">True</span>,</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&#39;doCOMAlignment&#39;</span> : <span class="keyword">True</span>,</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="stringliteral">&#39;minMom&#39;</span> : 0.5,</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="stringliteral">&#39;maxMom&#39;</span> : 5.0,</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&#39;nHitsCut&#39;</span> : 6,</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&#39;debugAlignmentDs&#39;</span> : <span class="keyword">False</span>,</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="stringliteral">&#39;correctTrack&#39;</span> : <span class="keyword">True</span>,</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="stringliteral">&#39;includeNoHitScatters&#39;</span> : <span class="keyword">False</span>,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="stringliteral">&#39;gblRefitIterations&#39;</span> : 0,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="stringliteral">&#39;storeTrackStates&#39;</span> : <span class="keyword">True</span>,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="stringliteral">&#39;compositeAlign&#39;</span> : <span class="keyword">True</span>,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="stringliteral">&#39;constrainedFit&#39;</span> : <span class="keyword">False</span>,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="stringliteral">&#39;momC&#39;</span> : 4.55,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="stringliteral">&#39;constrainedBSFit&#39;</span> : <span class="keyword">False</span>,</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="stringliteral">&#39;bsZ&#39;</span> : -7.7,</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="stringliteral">&#39;trackSide&#39;</span> : -1,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">#&#39;writeMilleBinary&#39; : True,</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">#&#39;milleBinaryFileName&#39; : &#39;${outputFile}.bin&#39;,</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="stringliteral">&#39;writeMilleChisqCut&#39;</span> : 5,</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="stringliteral">&#39;enableStandardCuts&#39;</span> : <span class="keyword">False</span>,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqFourHits&#39;</span> : 60.,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqFiveHits&#39;</span> : 60.,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqSixHits&#39;</span> : 60.,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="stringliteral">&#39;inputCollectionName&#39;</span> : <span class="stringliteral">&#39;KalmanFullTracks&#39;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    <span class="stringliteral">&#39;enableAlignmentCuts&#39;</span>: <span class="keyword">True</span>,</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&#39;doCOMAlignment&#39;</span>: <span class="keyword">True</span>,</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="stringliteral">&#39;minMom&#39;</span>: 0.5,</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="stringliteral">&#39;maxMom&#39;</span>: 5.0,</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&#39;nHitsCut&#39;</span>: 6,</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&#39;debugAlignmentDs&#39;</span>: <span class="keyword">False</span>,</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="stringliteral">&#39;correctTrack&#39;</span>: <span class="keyword">True</span>,</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="stringliteral">&#39;includeNoHitScatters&#39;</span>: <span class="keyword">False</span>,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="stringliteral">&#39;gblRefitIterations&#39;</span>: 0,</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="stringliteral">&#39;storeTrackStates&#39;</span>: <span class="keyword">True</span>,</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="stringliteral">&#39;compositeAlign&#39;</span>: <span class="keyword">True</span>,</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="stringliteral">&#39;constrainedFit&#39;</span>: <span class="keyword">False</span>,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="stringliteral">&#39;momC&#39;</span>: 4.55,</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="stringliteral">&#39;constrainedBSFit&#39;</span>: <span class="keyword">False</span>,</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="stringliteral">&#39;bsZ&#39;</span>: -7.7,</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="stringliteral">&#39;trackSide&#39;</span>: -1,</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="stringliteral">&#39;writeMilleChisqCut&#39;</span>: 5,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="stringliteral">&#39;enableStandardCuts&#39;</span>: <span class="keyword">False</span>,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqFourHits&#39;</span>: 60.,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqFiveHits&#39;</span>: 60.,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="stringliteral">&#39;maxTrackChisqSixHits&#39;</span>: 60.,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="stringliteral">&#39;inputCollectionName&#39;</span>: <span class="stringliteral">&#39;KalmanFullTracks&#39;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="track__align__job_8py_source.html#l00031">31</a> of file <a class="el" href="track__align__job_8py_source.html">track_align_job.py</a>.</p>
 

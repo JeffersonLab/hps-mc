@@ -108,7 +108,7 @@ Variables</h2></td></tr>
 <tr class="separator:a27256609f574b662639e0a8cd48b8d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fa05b1f00fcde100685cc887554b93b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepede__job.html#a4fa05b1f00fcde100685cc887554b93b">line</a> = line.strip()</td></tr>
 <tr class="separator:a4fa05b1f00fcde100685cc887554b93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad98c49576006d9a279cc46e8e967965a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a">pede</a> = <a class="el" href="classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html">PEDE</a>(inputs = job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())</td></tr>
+<tr class="memitem:ad98c49576006d9a279cc46e8e967965a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a">pede</a> = <a class="el" href="classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html">PEDE</a>(inputs=job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())</td></tr>
 <tr class="separator:ad98c49576006d9a279cc46e8e967965a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a684f131acbcc52a3ad9734898de6128b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepede__job.html#a684f131acbcc52a3ad9734898de6128b">apply_res</a> = <a class="el" href="classhpsmc_1_1alignment_1_1__apply_1_1ApplyPedeRes.html">ApplyPedeRes</a>()</td></tr>
 <tr class="separator:a684f131acbcc52a3ad9734898de6128b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,10 +181,10 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  [ </div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    pede_bin_fp.replace(<span class="stringliteral">&#39;_mille.bin&#39;</span>,<span class="stringliteral">&#39;_gblplots.root&#39;</span>)</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="keywordflow">for</span> pede_bin_fp <span class="keywordflow">in</span> job.input_files.keys() </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="keywordflow">if</span> os.path.isfile(pede_bin_fp.replace(<span class="stringliteral">&#39;_mille.bin&#39;</span>,<span class="stringliteral">&#39;_gblplots.root&#39;</span>))</div>
+<b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  [</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    pede_bin_fp.replace(<span class="stringliteral">&#39;_mille.bin&#39;</span>, <span class="stringliteral">&#39;_gblplots.root&#39;</span>)</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="keywordflow">for</span> pede_bin_fp <span class="keywordflow">in</span> job.input_files.keys()</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="keywordflow">if</span> os.path.isfile(pede_bin_fp.replace(<span class="stringliteral">&#39;_mille.bin&#39;</span>, <span class="stringliteral">&#39;_gblplots.root&#39;</span>))</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    ]</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="pede__job_8py_source.html#l00044">44</a> of file <a class="el" href="pede__job_8py_source.html">pede_job.py</a>.</p>
@@ -203,8 +203,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Initial value:</b><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;=  hadd(</div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;        inputs = gbl_plots, </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        outputs = merged_gbl_plots</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;        inputs=gbl_plots,</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;        outputs=merged_gbl_plots</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;        )</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="pede__job_8py_source.html#l00057">57</a> of file <a class="el" href="pede__job_8py_source.html">pede_job.py</a>.</p>
@@ -285,7 +285,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pede = <a class="el" href="classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html">PEDE</a>(inputs = job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())</td>
+          <td class="memname">pede = <a class="el" href="classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html">PEDE</a>(inputs=job.input_files.values() if 'no_copy' in job.params else job.input_files.keys())</td>
         </tr>
       </table>
 </div><div class="memdoc">

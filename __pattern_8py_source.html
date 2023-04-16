@@ -99,204 +99,204 @@ $(document).ready(function(){initNavTree('__pattern_8py_source.html',''); initRe
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">from</span> ._parameter <span class="keyword">import</span> Parameter</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">    5</a></span>&#160;<span class="keyword">class </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">Pattern</a> :</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;! Pattern that can match one or more paramters</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral">    This is an internal class and should not be used outside of this module</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="stringliteral">    A single &quot;pattern&quot; is a str that is one of the unary keywords OR</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">    has a binary keyword followed by an &quot;=&quot; character followed by one</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">    of that keywords values. All whitespace in a pattern is removed so </span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">    spaces can be added for easier readability.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral">    Syntax</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    ------</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    Each pattern is made up of one or more operations where each operation</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">    is separated by an ampersand &quot;&amp;&quot; to reflect that a Pattern takes the</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">    logical-and of the operations listed.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral">      &#39;op1 &amp; op2 &amp; op3 ...&#39;</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral">    Each operation can be one of three things.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral">    1. An ID number.</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">    2. A unary operation.</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">    3. A binary operation.</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">    ID numbers are the 5-digit millepede ID number for that parameter which encodes all</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">    of the location information within it. It specifies a single millepede parameter.</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">    Unary operations are special keywords that correspond to different logical grouping</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">    of parameters. Some unary operations correspond to functions returning True/False</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">    of the Parameter class while others are simple shortenings of common Pattern strings</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">    (a.k.a. &quot;aliases&quot;).</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral"></span> </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">    Binary operations are a string formatted like &quot;kw = val&quot; where a *single* equal</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">    sign is used. kw is a keyword corresponding to select functions from the Parameter</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">    class while val is a keyword corresponding to specific options for each kw.</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a23c3ed3afd1bbba6b010dbf3b3f0b86c">   42</a></span>&#160;    NUM_MODULES = 7</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">   44</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">__validate_id</a>(i) :</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid ID number, otherwise return NotImplemented</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="stringliteral">        </span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral">        A valid ID number is a 5-digit integer matching the Parameter.idn_str_pattern</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">        regular expression.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span> Parameter.idn_str_pattern.match(i) :</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">return</span> int(i)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">   55</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">__validate_module</a>(m) :</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid module number, otherwise return NotImplemented</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">        </span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">        A valid module number is an index counting from 0 at the front of the detector</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral">        up to NUM_MODULES-1</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">try</span> :</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;          m = int(m)</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;          <span class="keywordflow">if</span> m &lt; 0 <span class="keywordflow">or</span> m &gt; NUM_MODULES-1 :</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;              <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          <span class="keywordflow">return</span> m</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">except</span> ValueError :</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ab7e7b3a052f35819c62b26ae4690b4d4">   69</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ab7e7b3a052f35819c62b26ae4690b4d4">__validate_layer</a>(l) :</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid layer number, otherwise return NotImplemented</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="stringliteral">        </span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral">        A valid layer number is an index counting axial/stereo pairs from 1 at </span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">        the front of the detector up to NUM_MODULES</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="keywordflow">try</span> :</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          l = int(l)</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          <span class="keywordflow">if</span> l &lt; 1 <span class="keywordflow">or</span> l &gt; NUM_MODULES :</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;              <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;          <span class="keywordflow">return</span> l</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">except</span> ValueError :</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;          <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment"># each one of these keywords (both binary and unary) are</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">#  the names of functions in the Parameter class which return</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">#  that value for the Parameter</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a5fcabdfb7190761c0e664d909ef3015c">   86</a></span>&#160;    binary_keywords = {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="stringliteral">&#39;id&#39;</span> : __validate_id,</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="stringliteral">&#39;module&#39;</span> : __validate_module,</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="stringliteral">&#39;layer&#39;</span> : __validate_layer,</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="stringliteral">&#39;direction&#39;</span> : {<span class="stringliteral">&#39;u&#39;</span> : 1, <span class="stringliteral">&#39;v&#39;</span> : 2, <span class="stringliteral">&#39;w&#39;</span> : 3}</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
-<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a522ce77616b94d66d8f08c1554771414">   92</a></span>&#160;    unary_keywords = [</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="stringliteral">&#39;top&#39;</span>,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="stringliteral">&#39;bottom&#39;</span>,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="stringliteral">&#39;translation&#39;</span>,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="stringliteral">&#39;rotation&#39;</span>,</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="stringliteral">&#39;individual&#39;</span>,</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="stringliteral">&#39;axial&#39;</span>,</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="stringliteral">&#39;stereo&#39;</span>,</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="stringliteral">&#39;front&#39;</span>,</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="stringliteral">&#39;back&#39;</span>,</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="stringliteral">&#39;hole&#39;</span>,</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="stringliteral">&#39;slot&#39;</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    ]</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="comment"># aliases are just a shortening of common Pattern strings</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">#    that are drop-in replacements</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a396061ad86a7bf7a5f36ff8232f6fb5a">  108</a></span>&#160;    aliases = {</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        <span class="stringliteral">&#39;bot&#39;</span> : <span class="stringliteral">&#39;bottom&#39;</span>,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="stringliteral">&#39;trans&#39;</span> : <span class="stringliteral">&#39;translation&#39;</span>,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="stringliteral">&#39;rot&#39;</span> : <span class="stringliteral">&#39;rotation&#39;</span>,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="stringliteral">&#39;tu&#39;</span> : <span class="stringliteral">&#39;direction=u &amp; translation&#39;</span>,</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="stringliteral">&#39;rw&#39;</span> : <span class="stringliteral">&#39;direction=w &amp; rotation&#39;</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">  116</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>(self, c) :</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;! add a check into our list of checks, making sure it is the correct format&quot;&quot;&quot;</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(c, tuple) <span class="keywordflow">or</span> len(c) != 2 :</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            <span class="keywordflow">raise</span> ValueError(<span class="stringliteral">&quot;Checks have to be 2-tuples&quot;</span>)</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        kw = c[0].strip()</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">if</span> kw <span class="keywordflow">in</span> Pattern.binary_keywords.keys() :</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            <span class="comment"># check is a binary check</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            possible_values = Pattern.binary_keywords[kw]</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            val = c[1].strip()</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            <span class="keywordflow">if</span> isinstance(possible_values, dict) :</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="keywordflow">if</span> val <span class="keywordflow">in</span> possible_values.keys() :</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw, possible_values[val]))</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Value {val} for {kw} not recognized. Possible values:\n{possible_values.keys()}&#39;</span>)</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                v = possible_values(val)</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keywordflow">if</span> v != NotImplemented :</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw,v))</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                    <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Value {val} for {kw} is not recognized.&#39;</span>)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        <span class="keywordflow">elif</span> kw <span class="keywordflow">in</span> Pattern.unary_keywords :</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw,c[1]))</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        <span class="keywordflow">elif</span> kw <span class="keywordflow">in</span> Pattern.aliases :</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">__init__</a>__init__(Pattern.aliases[kw], first = <span class="keyword">False</span>) </div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;{kw} is not a recognized keyword&#39;</span>)</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
-<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">  145</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">__init__</a>(self, pattern, *, first = True) :</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keywordflow">if</span> first :</div>
-<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">  147</a></span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks = []</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">  148</a></span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">_og_str</a>_og_str = str(pattern)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(pattern, (int,str)) :</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Pattern {pattern} must be an int or str&#39;</span>)</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="comment"># simplest pattern which is just the ID number</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="keywordflow">if</span> isinstance(pattern, int) <span class="keywordflow">or</span> pattern.isnumeric() :</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <span class="comment"># make sure pattern is casted to str for the regex testing</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check((<span class="stringliteral">&#39;id&#39;</span>,str(pattern)))</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="comment"># now complicated patterns</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            ops = pattern.split(<span class="stringliteral">&#39;&amp;&#39;</span>) </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            <span class="keywordflow">for</span> op <span class="keywordflow">in</span> ops :</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                <span class="keywordflow">if</span> <span class="stringliteral">&#39;=&#39;</span> <span class="keywordflow">in</span> op :</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    <span class="comment"># binary operation</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    split = op.split(<span class="stringliteral">&#39;=&#39;</span>)</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                    <span class="keywordflow">if</span> len(split) != 2 :</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                        <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;{op} does not have two sides of the equality&#39;</span>)</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check(<a class="code" href="namespacedata__cnv__job.html#a155c51da3493a0647b4e1a3b695b1c56">tuple</a>(split))</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                <span class="keywordflow">else</span> :</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    <span class="comment"># unary operation</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    value = <span class="keyword">True</span></div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    <span class="keywordflow">if</span> op.startswith(<span class="stringliteral">&#39;!&#39;</span>) :</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                        op = op[1:]</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                        value = <span class="keyword">False</span></div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check((op, value))</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">  176</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">match</a>(self, p) :</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(p, Parameter) :</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="keywordflow">for</span> kw, val <span class="keywordflow">in</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks :</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordflow">if</span> getattr(p, kw)() != val :</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">False</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">  186</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">__eq__</a>(self, p) :</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">match</a>match(p)</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">  189</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">__repr__</a>(self) :</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">_og_str</a>_og_str</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">hpsmc.alignment._pattern.Pattern</a></div><div class="ttdoc">Pattern that can match one or more paramters.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00005">_pattern.py:5</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a6bfa2868053031107abd38bfa9cd745e"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">hpsmc.alignment._pattern.Pattern.match</a></div><div class="ttdeci">def match(self, p)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00176">_pattern.py:176</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a73cb3f037ca06c13fa8623ebea6d5e27"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">hpsmc.alignment._pattern.Pattern.__validate_module</a></div><div class="ttdeci">def __validate_module(m)</div><div class="ttdoc">Make sure input is a valid module number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00055">_pattern.py:55</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a767e6a976048537e7d85a878cf72426c"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">hpsmc.alignment._pattern.Pattern._checks</a></div><div class="ttdeci">_checks</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00147">_pattern.py:147</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a77c08978bde0454ad57be4bca88286fa"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">hpsmc.alignment._pattern.Pattern.__eq__</a></div><div class="ttdeci">def __eq__(self, p)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00186">_pattern.py:186</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a7b6e210654068464cb0d4158082aad51"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">hpsmc.alignment._pattern.Pattern._og_str</a></div><div class="ttdeci">_og_str</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00148">_pattern.py:148</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a9a47563093dfc5ba12274b66e368920c"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">hpsmc.alignment._pattern.Pattern.__repr__</a></div><div class="ttdeci">def __repr__(self)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00189">_pattern.py:189</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_aa0bf5530d1bc079d7b8b1c65d038d943"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">hpsmc.alignment._pattern.Pattern._add_check</a></div><div class="ttdeci">def _add_check(self, c)</div><div class="ttdoc">add a check into our list of checks, making sure it is the correct format</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00116">_pattern.py:116</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_ab7e7b3a052f35819c62b26ae4690b4d4"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ab7e7b3a052f35819c62b26ae4690b4d4">hpsmc.alignment._pattern.Pattern.__validate_layer</a></div><div class="ttdeci">def __validate_layer(l)</div><div class="ttdoc">Make sure input is a valid layer number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00069">_pattern.py:69</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_ae7e100d8be167c8b42215cac541bf729"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">hpsmc.alignment._pattern.Pattern.__validate_id</a></div><div class="ttdeci">def __validate_id(i)</div><div class="ttdoc">Make sure input is a valid ID number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00044">_pattern.py:44</a></div></div>
-<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_aecc21d2cac3657fd3ab0a1caaca0fc66"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">hpsmc.alignment._pattern.Pattern.__init__</a></div><div class="ttdeci">def __init__(self, pattern, *first=True)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00145">_pattern.py:145</a></div></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">Pattern</a>:</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&quot;&quot;&quot;! Pattern that can match one or more paramters</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="stringliteral">    This is an internal class and should not be used outside of this module</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="stringliteral">    A single &quot;pattern&quot; is a str that is one of the unary keywords OR</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="stringliteral">    has a binary keyword followed by an &quot;=&quot; character followed by one</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="stringliteral">    of that keywords values. All whitespace in a pattern is removed so</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="stringliteral">    spaces can be added for easier readability.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="stringliteral">    Syntax</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="stringliteral">    ------</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="stringliteral">    Each pattern is made up of one or more operations where each operation</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="stringliteral">    is separated by an ampersand &quot;&amp;&quot; to reflect that a Pattern takes the</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="stringliteral">    logical-and of the operations listed.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="stringliteral">      &#39;op1 &amp; op2 &amp; op3 ...&#39;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="stringliteral">    Each operation can be one of three things.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="stringliteral">    1. An ID number.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="stringliteral">    2. A unary operation.</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">    3. A binary operation.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">    ID numbers are the 5-digit millepede ID number for that parameter which encodes all</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">    of the location information within it. It specifies a single millepede parameter.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">    Unary operations are special keywords that correspond to different logical grouping</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">    of parameters. Some unary operations correspond to functions returning True/False</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">    of the Parameter class while others are simple shortenings of common Pattern strings</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">    (a.k.a. &quot;aliases&quot;).</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">    Binary operations are a string formatted like &quot;kw = val&quot; where a *single* equal</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">    sign is used. kw is a keyword corresponding to select functions from the Parameter</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">    class while val is a keyword corresponding to specific options for each kw.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">    &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a23c3ed3afd1bbba6b010dbf3b3f0b86c">   43</a></span>&#160;    NUM_MODULES = 7</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">   45</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">__validate_id</a>(i):</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid ID number, otherwise return NotImplemented</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="stringliteral">        A valid ID number is a 5-digit integer matching the Parameter.idn_str_pattern</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="stringliteral">        regular expression.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> Parameter.idn_str_pattern.match(i):</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> int(i)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">   56</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">__validate_module</a>(m):</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid module number, otherwise return NotImplemented</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral">        A valid module number is an index counting from 0 at the front of the detector</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">        up to NUM_MODULES-1</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            m = int(m)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">if</span> m &lt; 0 <span class="keywordflow">or</span> m &gt; NUM_MODULES-1:</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">return</span> m</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">except</span> ValueError:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6fb66c73a8a1cd6718eb46b166f2608a">   70</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6fb66c73a8a1cd6718eb46b166f2608a">__validate_layer</a>(layer):</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;!Make sure input is a valid layer number, otherwise return NotImplemented</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="stringliteral"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="stringliteral">        A valid layer number is an index counting axial/stereo pairs from 1 at</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="stringliteral">        the front of the detector up to NUM_MODULES</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">try</span>:</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            layer = int(layer)</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> layer &lt; 1 <span class="keywordflow">or</span> layer &gt; NUM_MODULES:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">return</span> layer</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">except</span> ValueError:</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment"># each one of these keywords (both binary and unary) are</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="comment">#  the names of functions in the Parameter class which return</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">#  that value for the Parameter</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a5fcabdfb7190761c0e664d909ef3015c">   87</a></span>&#160;    binary_keywords = {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="stringliteral">&#39;id&#39;</span>: __validate_id,</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="stringliteral">&#39;module&#39;</span>: __validate_module,</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="stringliteral">&#39;layer&#39;</span>: __validate_layer,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="stringliteral">&#39;direction&#39;</span>: {<span class="stringliteral">&#39;u&#39;</span>: 1, <span class="stringliteral">&#39;v&#39;</span>: 2, <span class="stringliteral">&#39;w&#39;</span>: 3}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a522ce77616b94d66d8f08c1554771414">   93</a></span>&#160;    unary_keywords = [</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="stringliteral">&#39;top&#39;</span>,</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="stringliteral">&#39;bottom&#39;</span>,</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="stringliteral">&#39;translation&#39;</span>,</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="stringliteral">&#39;rotation&#39;</span>,</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="stringliteral">&#39;individual&#39;</span>,</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="stringliteral">&#39;axial&#39;</span>,</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="stringliteral">&#39;stereo&#39;</span>,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="stringliteral">&#39;front&#39;</span>,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="stringliteral">&#39;back&#39;</span>,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="stringliteral">&#39;hole&#39;</span>,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="stringliteral">&#39;slot&#39;</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    ]</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment"># aliases are just a shortening of common Pattern strings</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">#    that are drop-in replacements</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a396061ad86a7bf7a5f36ff8232f6fb5a">  109</a></span>&#160;    aliases = {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="stringliteral">&#39;bot&#39;</span>: <span class="stringliteral">&#39;bottom&#39;</span>,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="stringliteral">&#39;trans&#39;</span>: <span class="stringliteral">&#39;translation&#39;</span>,</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="stringliteral">&#39;rot&#39;</span>: <span class="stringliteral">&#39;rotation&#39;</span>,</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="stringliteral">&#39;tu&#39;</span>: <span class="stringliteral">&#39;direction=u &amp; translation&#39;</span>,</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        <span class="stringliteral">&#39;rw&#39;</span>: <span class="stringliteral">&#39;direction=w &amp; rotation&#39;</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">  117</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>(self, c):</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="stringliteral">&quot;&quot;&quot;! add a check into our list of checks, making sure it is the correct format&quot;&quot;&quot;</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(c, tuple) <span class="keywordflow">or</span> len(c) != 2:</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">raise</span> ValueError(<span class="stringliteral">&quot;Checks have to be 2-tuples&quot;</span>)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        kw = c[0].strip()</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">if</span> kw <span class="keywordflow">in</span> Pattern.binary_keywords.keys():</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="comment"># check is a binary check</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            possible_values = Pattern.binary_keywords[kw]</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            val = c[1].strip()</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            <span class="keywordflow">if</span> isinstance(possible_values, dict):</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                <span class="keywordflow">if</span> val <span class="keywordflow">in</span> possible_values.keys():</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw, possible_values[val]))</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Value {val} for {kw} not recognized. Possible values:\n{possible_values.keys()}&#39;</span>)</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                v = possible_values(val)</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                <span class="keywordflow">if</span> v != NotImplemented:</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw, v))</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                    <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Value {val} for {kw} is not recognized.&#39;</span>)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keywordflow">elif</span> kw <span class="keywordflow">in</span> Pattern.unary_keywords:</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks.append((kw, c[1]))</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">elif</span> kw <span class="keywordflow">in</span> Pattern.aliases:</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">__init__</a>__init__(Pattern.aliases[kw], first=<span class="keyword">False</span>)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;{kw} is not a recognized keyword&#39;</span>)</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">  146</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">__init__</a>(self, pattern, *, first=True):</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">if</span> first:</div>
+<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">  148</a></span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks = []</div>
+<div class="line"><a name="l00149"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">  149</a></span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">_og_str</a>_og_str = str(pattern)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(pattern, (int, str)):</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;Pattern {pattern} must be an int or str&#39;</span>)</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        <span class="comment"># simplest pattern which is just the ID number</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        <span class="keywordflow">if</span> isinstance(pattern, int) <span class="keywordflow">or</span> pattern.isnumeric():</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;            <span class="comment"># make sure pattern is casted to str for the regex testing</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check((<span class="stringliteral">&#39;id&#39;</span>, str(pattern)))</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <span class="comment"># now complicated patterns</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;            ops = pattern.split(<span class="stringliteral">&#39;&amp;&#39;</span>)</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">for</span> op <span class="keywordflow">in</span> ops:</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                <span class="keywordflow">if</span> <span class="stringliteral">&#39;=&#39;</span> <span class="keywordflow">in</span> op:</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    <span class="comment"># binary operation</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                    split = op.split(<span class="stringliteral">&#39;=&#39;</span>)</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                    <span class="keywordflow">if</span> len(split) != 2:</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                        <span class="keywordflow">raise</span> ValueError(f<span class="stringliteral">&#39;{op} does not have two sides of the equality&#39;</span>)</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check(<a class="code" href="namespacedata__cnv__job.html#a155c51da3493a0647b4e1a3b695b1c56">tuple</a>(split))</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    <span class="comment"># unary operation</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    value = <span class="keyword">True</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    <span class="keywordflow">if</span> op.startswith(<span class="stringliteral">&#39;!&#39;</span>):</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                        op = op[1:]</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                        value = <span class="keyword">False</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">_add_check</a>_add_check((op, value))</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">  177</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">match</a>(self, p):</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">if</span> <span class="keywordflow">not</span> isinstance(p, Parameter):</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">return</span> NotImplemented</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        <span class="keywordflow">for</span> kw, val <span class="keywordflow">in</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">_checks</a>_checks:</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <span class="keywordflow">if</span> getattr(p, kw)() != val:</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                <span class="keywordflow">return</span> <span class="keyword">False</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">True</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160; </div>
+<div class="line"><a name="l00187"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">  187</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">__eq__</a>(self, p):</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">match</a>match(p)</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">  190</a></span>&#160;    <span class="keyword">def </span><a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">__repr__</a>(self):</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        <span class="keywordflow">return</span> self.<a class="code" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">_og_str</a>_og_str</div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html">hpsmc.alignment._pattern.Pattern</a></div><div class="ttdoc">Pattern that can match one or more paramters.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00006">_pattern.py:6</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a6bfa2868053031107abd38bfa9cd745e"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6bfa2868053031107abd38bfa9cd745e">hpsmc.alignment._pattern.Pattern.match</a></div><div class="ttdeci">def match(self, p)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00177">_pattern.py:177</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a6fb66c73a8a1cd6718eb46b166f2608a"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a6fb66c73a8a1cd6718eb46b166f2608a">hpsmc.alignment._pattern.Pattern.__validate_layer</a></div><div class="ttdeci">def __validate_layer(layer)</div><div class="ttdoc">Make sure input is a valid layer number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00070">_pattern.py:70</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a73cb3f037ca06c13fa8623ebea6d5e27"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a73cb3f037ca06c13fa8623ebea6d5e27">hpsmc.alignment._pattern.Pattern.__validate_module</a></div><div class="ttdeci">def __validate_module(m)</div><div class="ttdoc">Make sure input is a valid module number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00056">_pattern.py:56</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a767e6a976048537e7d85a878cf72426c"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a767e6a976048537e7d85a878cf72426c">hpsmc.alignment._pattern.Pattern._checks</a></div><div class="ttdeci">_checks</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00148">_pattern.py:148</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a77c08978bde0454ad57be4bca88286fa"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a77c08978bde0454ad57be4bca88286fa">hpsmc.alignment._pattern.Pattern.__eq__</a></div><div class="ttdeci">def __eq__(self, p)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00187">_pattern.py:187</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a7b6e210654068464cb0d4158082aad51"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51">hpsmc.alignment._pattern.Pattern._og_str</a></div><div class="ttdeci">_og_str</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00149">_pattern.py:149</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_a9a47563093dfc5ba12274b66e368920c"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a9a47563093dfc5ba12274b66e368920c">hpsmc.alignment._pattern.Pattern.__repr__</a></div><div class="ttdeci">def __repr__(self)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00190">_pattern.py:190</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_aa0bf5530d1bc079d7b8b1c65d038d943"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aa0bf5530d1bc079d7b8b1c65d038d943">hpsmc.alignment._pattern.Pattern._add_check</a></div><div class="ttdeci">def _add_check(self, c)</div><div class="ttdoc">add a check into our list of checks, making sure it is the correct format</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00117">_pattern.py:117</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_ae7e100d8be167c8b42215cac541bf729"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ae7e100d8be167c8b42215cac541bf729">hpsmc.alignment._pattern.Pattern.__validate_id</a></div><div class="ttdeci">def __validate_id(i)</div><div class="ttdoc">Make sure input is a valid ID number, otherwise return NotImplemented.</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00045">_pattern.py:45</a></div></div>
+<div class="ttc" id="aclasshpsmc_1_1alignment_1_1__pattern_1_1Pattern_html_aecc21d2cac3657fd3ab0a1caaca0fc66"><div class="ttname"><a href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#aecc21d2cac3657fd3ab0a1caaca0fc66">hpsmc.alignment._pattern.Pattern.__init__</a></div><div class="ttdeci">def __init__(self, pattern, *first=True)</div><div class="ttdef"><b>Definition:</b> <a href="__pattern_8py_source.html#l00146">_pattern.py:146</a></div></div>
 <div class="ttc" id="anamespacedata__cnv__job_html_a155c51da3493a0647b4e1a3b695b1c56"><div class="ttname"><a href="namespacedata__cnv__job.html#a155c51da3493a0647b4e1a3b695b1c56">data_cnv_job.tuple</a></div><div class="ttdeci">tuple</div><div class="ttdef"><b>Definition:</b> <a href="data__cnv__job_8py_source.html#l00012">data_cnv_job.py:12</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

@@ -215,19 +215,17 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>write a detector intentionally misaligned relative to another one </p>
-<pre class="fragment"> Required Config:
- ```
- [WriteMisalignedDet]
- java_dir = /full/path/to/hps-java
- param_map = /full/path/to/parameter/map.txt
- ```
+<p>Required Config: </p><div class="fragment"><div class="line">[WriteMisalignedDet]</div>
+<div class="line">java_dir = /full/path/to/hps-java</div>
+<div class="line">param_map = /full/path/to/parameter/map.txt</div>
+</div><!-- fragment --><p>Required Job:</p><ul>
+<li><b>detector</b> : name of detector to base our misalignment on (and write to if no <b>next\_detector</b> is given)</li>
+<li><b>parameters</b> : dictionary of parameters to the change that should be applied<ul>
+<li>each key in this dictionary is a <a class="el" href="classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html" title="Pattern that can match one or more paramters.">hpsmc.alignment._pattern.Pattern</a> so it can specify a single parameter or a group of parameters </li>
+</ul>
+</li>
+</ul>
 
- Required Job:
- - **detector** : name of detector to base our misalignment on
-                  (and write to if no **next\_detector** is given)
- - **parameters** : dictionary of parameters to the change that should be applied
-   - each key in this dictionary is a hpsmc.alignment._pattern.Pattern so it can specify a single parameter or a group of parameters
-</pre> 
 <p class="definition">Definition at line <a class="el" href="__apply_8py_source.html#l00285">285</a> of file <a class="el" href="__apply_8py_source.html">_apply.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae64f0875afe3067b97ba370b354b9213"></a>
