@@ -12,4 +12,4 @@ job.description = 'generate a new, misaligned detector'
 misalign_writer = WriteMisalignedDet()
 construct_det = ConstructDetector()
 
-job.add([ misalign_writer, construct_det ])
+job.add([misalign_writer, construct_det])

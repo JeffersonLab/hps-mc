@@ -39,22 +39,24 @@ def uuid():
     """! Function to get a uuid within a template."""
     return str(_uuid.uuid4())[:8]
 
-def runnumber(path) :
+
+def runnumber(path):
     """! Filter to get a run number by inspecting first event in slcio file."""
     event_dump = subprocess.run(
-        ["dumpevent", path, "1"], # dump the first event from the file
-        check = True, # throw exception if returns non-0 exit code
-        stdout = subprocess.PIPE, # keep the output in the object rather than printing it out
-        stderr = subprocess.PIPE
+        ["dumpevent", path, "1"],  # dump the first event from the file
+        check=True,  # throw exception if returns non-0 exit code
+        stdout=subprocess.PIPE,  # keep the output in the object rather than printing it out
+        stderr=subprocess.PIPE
         )
     # search output for run number
-    match = re.search('run:\s*(\d+)', event_dump.stdout.decode('utf-8')) 
-    if not match :
+    match = re.search('run:\\s*(\\d+)', event_dump.stdout.decode('utf-8'))
+    if not match:
         raise ValueError(f'Unable to find run number from dump of first event in {path}')
     # group 0 is the entire match, group 1 is what is in the parentheses above
     return int(match.group(1))
 
-def filenum(path) :
+
+def filenum(path):
     """! Filter to get the trailing number of a file
 
     This will extract the number between the last underscore and the extension.
@@ -69,6 +71,7 @@ def filenum(path) :
 
 # def pwd():
 #    return os.getcwd()
+
 
 class JobData(object):
     """! Very simple key-value object for storing data for each job."""
