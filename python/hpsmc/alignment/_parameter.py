@@ -33,6 +33,7 @@ class Parameter:
     """
 
     idn_str_pattern = re.compile('^[12][12][123][0-9][0-9]$')
+    layer_number_pattern = re.compile('^.*_L([0-9]).*$')
 
     def __init__(self, idn, name, half, trans_rot, direction, mp_layer_id):
         self._id = int(idn)
@@ -66,9 +67,14 @@ class Parameter:
         """!Get the human layer number
 
         This is the module number but shifted by one since the first layer is
-        layer 1
+        layer 1.
         """
-        return self.module() + 1
+
+        m = Parameter.layer_number_pattern.match(self._name)
+        if m is None :
+            raise ValueError(f'Unable to deduce layer number from name {self.name}')
+
+        return int(m.group(1))
 
     def id(self):
         return self._id
@@ -104,13 +110,13 @@ class Parameter:
         """!Get whether this Parameter represents a single axial sensor (True)
         or something else (False)
         """
-        return self.individual() and (self._mp_layer_id % 2 == 0)
+        return self.individual() and ('axial' in self.name)
 
     def stereo(self):
         """!Get whether this Parameter represents a single stereo sensor (True)
         or something else (False)
         """
-        return self.individual() and (self._mp_layer_id % 2 == 1)
+        return self.individual() and ('stereo' in self.name)
 
     def front(self):
         """!True if Parameter is single sensor in front half, False otherwise"""
