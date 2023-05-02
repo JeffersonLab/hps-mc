@@ -190,7 +190,7 @@ class _DetectorEditor(Component):
         self.logger.info(f'Updating README.md at {log_path}')
         with open(log_path, 'a') as log:
             from datetime import datetime
-            log.write(f'# {detname}\n')
+            log.write(f'\n# {detname}\n')
             log.write(msg)
             log.write(f'_auto-generated note on {str(datetime.now())}_\n')
             log.flush()  # need manual flush since we leave after this
