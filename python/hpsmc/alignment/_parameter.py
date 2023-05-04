@@ -71,7 +71,7 @@ class Parameter:
         """
 
         m = Parameter.layer_number_pattern.match(self._name)
-        if m is None :
+        if m is None:
             raise ValueError(f'Unable to deduce layer number from name {self.name}')
 
         return int(m.group(1))
