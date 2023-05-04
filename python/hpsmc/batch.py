@@ -91,12 +91,12 @@ class Batch:
 
         self.debug = cl.debug
 
-        for d in ['log_dir','sh_dir','run_dir'] :
+        for d in ['log_dir', 'sh_dir', 'run_dir']:
             # get the name of a dir from the command line and set
             # an attr in ourselves to the abspath of that value
             setattr(self, d, os.path.abspath(getattr(cl, d)))
             # create the directory if it doesn't exist
-            if not os.path.exists(getattr(self, d)) :
+            if not os.path.exists(getattr(self, d)):
                 logger.info(f'Creating {d} at {getattr(self,d)}')
                 os.makedirs(getattr(self, d))
 
