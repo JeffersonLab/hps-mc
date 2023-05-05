@@ -276,7 +276,9 @@ class ApplyPedeRes(_DetectorEditor):
 Compact updated by applying results from a run of pede
 
 ### Parameters Floated
+```json
 {json.dumps(self.to_float, indent = 2)}
+```
 
 """)
         return 0
@@ -357,7 +359,9 @@ class WriteMisalignedDet(_DetectorEditor):
 Detector written by applying an intentional misalignment to {self.detector}.
 
 ### Misalignment Applied
+```json
 {json.dumps(self.parameters, indent=2)}
+```
 
 """)
 
