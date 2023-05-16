@@ -18,7 +18,7 @@
 #*********************************************************************
 # Tag name for the run (one word)                                    *
 #*********************************************************************
-  tag_1     = run_tag ! name of the run 
+  HPS       = run_tag ! name of the run 
 #*********************************************************************
 # Number of events and rnd seed                                      *
 # Warning: Do not generate more than 1M events in a single run       *
@@ -33,8 +33,8 @@
 #*********************************************************************
      0        = lpp1    ! beam 1 type 
      0        = lpp2    ! beam 2 type
-     500.0     = ebeam1  ! beam 1 total energy in GeV
-     500.0     = ebeam2  ! beam 2 total energy in GeV
+       2.3     = ebeam1  ! beam 1 total energy in GeV
+     174.0     = ebeam2  ! beam 2 total energy in GeV
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
 #*********************************************************************
@@ -112,7 +112,7 @@
 #*********************************************************************
 # Minimum and maximum pt's (for max, -1 means no cut)                *
 #*********************************************************************
- 10.0  = ptl       ! minimum pt for the charged leptons 
+  0.0  = ptl       ! minimum pt for the charged leptons 
  -1.0  = ptlmax    ! maximum pt for the charged leptons
  {} = pt_min_pdg ! pt cut for other particles (use pdg code). Applied on particle and anti-particle
  {}	= pt_max_pdg ! pt cut for other particles (syntax e.g. {6: 100, 25: 50}) 
@@ -122,15 +122,15 @@
 #*********************************************************************
 # Maximum and minimum absolute rapidity (for max, -1 means no cut)   *
 #*********************************************************************
- 2.5  = etal    ! max rap for the charged leptons 
+-1.0  = etal    ! max rap for the charged leptons 
  0.0  = etalmin ! main rap for the charged leptons
  {} = eta_min_pdg ! rap cut for other particles (use pdg code). Applied on particle and anti-particle
  {} = eta_max_pdg ! rap cut for other particles (syntax e.g. {6: 2.5, 23: 5})
 #*********************************************************************
 # Minimum and maximum DeltaR distance                                *
 #*********************************************************************
- 0.4 = drll    ! min distance between leptons 
- -1.0  = drllmax ! max distance between leptons
+  0.0 = drll    ! min distance between leptons 
+ -1.0 = drllmax ! max distance between leptons
 #*********************************************************************
 # Minimum and maximum invariant mass for pairs                       *
 #*********************************************************************
