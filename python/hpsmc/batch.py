@@ -14,6 +14,7 @@ import logging
 import signal
 import multiprocessing
 import psutil
+from pathlib import Path
 
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -55,7 +56,7 @@ class Batch:
             default=multiprocessing.cpu_count())
         parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
-        parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
+        #parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
         parser.add_argument("-D", "--debug", action='store_true', help="Enable debug settings", required=False)
         parser.add_argument("-o", "--check-output", action='store_true', required=False, help="Do not submit jobs where output files already exist")
         parser.add_argument("-s", "--job-steps", type=int, default=-1, required=False)
@@ -83,9 +84,6 @@ class Batch:
         if not os.path.isfile(cl.jobstore):
             raise Exception('The job store does not exist: %s' % cl.jobstore)
         self.jobstore = JobStore(cl.jobstore)
-
-        if cl.env:
-            self.env = cl.env
 
         self.email = cl.email
 
@@ -301,7 +299,7 @@ class Slurm(Batch):
         sh_file = open(sh_filename, 'w')
         #sh_file.write('#!/usr/bin/scl enable devtoolset-8 -- /bin/bash\n')
         sh_file.write('#!/bin/bash\n')
-        sh_file.write('source ' + self.env + '\n')
+        #sh_file.write('source ' + str(Path(os.environ['HPSMC_DIR'], 'bin', 'hps-mc-env.sh')) + '\n')
         sh_file.write('mkdir -p %s/%i\n' % (self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n' % (self.run_dir, job_params['job_id']))
         sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
