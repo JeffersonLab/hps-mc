@@ -190,7 +190,7 @@ class _DetectorEditor(Component):
         self.logger.info(f'Updating README.md at {log_path}')
         with open(log_path, 'a') as log:
             from datetime import datetime
-            log.write(f'# {detname}\n')
+            log.write(f'\n# {detname}\n')
             log.write(msg)
             log.write(f'_auto-generated note on {str(datetime.now())}_\n')
             log.flush()  # need manual flush since we leave after this
@@ -276,7 +276,9 @@ class ApplyPedeRes(_DetectorEditor):
 Compact updated by applying results from a run of pede
 
 ### Parameters Floated
+```json
 {json.dumps(self.to_float, indent = 2)}
+```
 
 """)
         return 0
@@ -357,7 +359,9 @@ class WriteMisalignedDet(_DetectorEditor):
 Detector written by applying an intentional misalignment to {self.detector}.
 
 ### Misalignment Applied
+```json
 {json.dumps(self.parameters, indent=2)}
+```
 
 """)
 

@@ -84,7 +84,7 @@ recompile() {
     export OLDPWD=${_old_pwd}
     return 1
   fi
-  if ! mvn ${MVN_OPTS}; then
+  if ! mvn install ${MVN_OPTS}; then
     echo "ERROR: Unable to recompile hps-java/detector-data"
     cd ${_pwd}
     export OLDPWD=${_old_pwd}
@@ -96,7 +96,7 @@ recompile() {
     export OLDPWD=${_old_pwd}
     return 1
   fi
-  if ! mvn ${MVN_OPTS}; then
+  if ! mvn install ${MVN_OPTS}; then
     echo "ERROR: Unable to recompile hps-java/distribution"
     cd ${_pwd}
     export OLDPWD=${_old_pwd}

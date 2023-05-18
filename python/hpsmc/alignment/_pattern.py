@@ -61,7 +61,7 @@ class Pattern:
         """
         try:
             m = int(m)
-            if m < 0 or m > NUM_MODULES-1:
+            if m < 0 or m > Pattern.NUM_MODULES-1:
                 return NotImplemented
             return m
         except ValueError:
@@ -75,7 +75,7 @@ class Pattern:
         """
         try:
             layer = int(layer)
-            if layer < 1 or layer > NUM_MODULES:
+            if layer < 1 or layer > Pattern.NUM_MODULES:
                 return NotImplemented
             return layer
         except ValueError:
