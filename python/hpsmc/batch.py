@@ -299,7 +299,8 @@ class Slurm(Batch):
                '--output=%s.out' % log_file]
         sh_filename = self.sh_dir + '/job.%i.sh' % job_params['job_id']
         sh_file = open(sh_filename, 'w')
-        sh_file.write('#!/usr/bin/scl enable devtoolset-8 -- /bin/bash\n')
+        #sh_file.write('#!/usr/bin/scl enable devtoolset-8 -- /bin/bash\n')
+        sh_file.write('#!/bin/bash\n')
         sh_file.write('source ' + self.env + '\n')
         sh_file.write('mkdir -p %s/%i\n' % (self.run_dir, job_params['job_id']))
         sh_file.write('cd %s/%i\n' % (self.run_dir, job_params['job_id']))
