@@ -1,2 +1,1 @@
-rm -r output scratch
-rm job.1.*
+rm -rf output scratch job.1.*
