@@ -447,13 +447,16 @@ class Auger(Batch):
         if 'input_files' in list(job_params.keys()):
             inputfiles = job_params['input_files']
             for src, dest in inputfiles.items():
-                input_elem = ET.SubElement(job, "Input")
-                input_elem.set("dest", dest)
-                if src.startswith("/mss"):
-                    src_file = "mss:%s" % src
+                if not src.startswith('http'):
+                    input_elem = ET.SubElement(job, "Input")
+                    input_elem.set("dest", dest)
+                    if src.startswith("/mss"):
+                        src_file = "mss:%s" % src
+                    else:
+                        src_file = src
+                    input_elem.set("src", src_file)
                 else:
-                    src_file = src
-                input_elem.set("src", src_file)
+                    logger.warning("http input file will not be included in XML job descr: {}".format(src))
         outputfiles = job_params["output_files"]
         outputdir = job_params["output_dir"]
         # outputdir = os.path.realpath(outputdir)
