@@ -296,7 +296,7 @@ class Job(object):
             self.err = open(err_file, 'w')
 
         if cl.run_dir:
-            self.rundir = os.path.abspath(cl.run_dir)
+            self.rundir = cl.run_dir
 
         self.job_steps = cl.job_steps
         if self.job_steps is not None and self.job_steps < 1:
