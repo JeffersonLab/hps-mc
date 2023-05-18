@@ -36,5 +36,6 @@ var classhpsmc_1_1alignment_1_1__parameter_1_1Parameter =
     [ "_name", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a705391f3be33314bd5788a28f7538642", null ],
     [ "_trans_rot", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a3813f1653651c8faf443cabb68cd7a66", null ],
     [ "_val", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a726655a11a1f769ae12a2de36013b670", null ],
-    [ "idn_str_pattern", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a5c7b465222ea020a2e0dd00de43078e1", null ]
+    [ "idn_str_pattern", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a5c7b465222ea020a2e0dd00de43078e1", null ],
+    [ "layer_number_pattern", "classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a48bf34563ca7712cc91f9aedb3faf0a5", null ]
 ];

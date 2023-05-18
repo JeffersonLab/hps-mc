@@ -186,6 +186,8 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a5c7b465222ea020a2e0dd00de43078e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a5c7b465222ea020a2e0dd00de43078e1">idn_str_pattern</a> = re.compile('^[12][12][123][0-9][0-9]$')</td></tr>
 <tr class="separator:a5c7b465222ea020a2e0dd00de43078e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48bf34563ca7712cc91f9aedb3faf0a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a48bf34563ca7712cc91f9aedb3faf0a5">layer_number_pattern</a> = re.compile('^.*_L([0-9]).*$')</td></tr>
+<tr class="separator:a48bf34563ca7712cc91f9aedb3faf0a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -279,7 +281,7 @@ Attributes</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00037">37</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00038">38</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -331,7 +333,7 @@ Attributes</h2>
    this function if the line has already been deduced to correspond
    to the parameter we represent.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00193">193</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00205">205</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -353,7 +355,7 @@ Attributes</h2>
 
 <p>Representation of this parameter. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00272">272</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00284">284</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -375,7 +377,7 @@ Attributes</h2>
 
 <p>Human printing of this parameter. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00276">276</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00288">288</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -398,7 +400,7 @@ Attributes</h2>
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is active (i.e. </p>
 <p>floating) and False if not </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00131">131</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00143">143</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -419,8 +421,9 @@ Attributes</h2>
 </div><div class="memdoc">
 
 <p>Get whether this <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> represents a single axial sensor (True) or something else (False) </p>
+<p>We have to check the name to see if 'axial' is in it. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00103">103</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00111">111</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -442,7 +445,7 @@ Attributes</h2>
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is single sensor in back half, False otherwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00119">119</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00131">131</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -464,7 +467,7 @@ Attributes</h2>
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is in bottom half, False if in top half. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00099">99</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00107">107</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -489,7 +492,7 @@ Attributes</h2>
 
    This is where we handle whether the sign flips (translations) or doesn't (rotations)
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00257">257</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00269">269</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -509,7 +512,7 @@ Attributes</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00076">76</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00084">84</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -541,7 +544,7 @@ Attributes</h2>
 
 <p>Set whether this parameter is floating/active or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00049">49</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00050">50</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -574,7 +577,7 @@ Attributes</h2>
    So we just need to break it down by modulo and integer
    division /OR/ do some str conversion nonsense in python.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00143">143</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00155">155</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -598,7 +601,7 @@ Attributes</h2>
 we assume that the constructor's arguments are in the same
 order as a line in the sensor map file
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00135">135</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00147">147</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -620,7 +623,7 @@ order as a line in the sensor map file
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is single sensor in front half, False otherwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00115">115</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00127">127</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -642,7 +645,7 @@ order as a line in the sensor map file
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is a single sensor in back half on the hole side, Flase otherwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00123">123</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00135">135</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -662,7 +665,7 @@ order as a line in the sensor map file
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00073">73</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00081">81</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -684,7 +687,7 @@ order as a line in the sensor map file
 
 <p>Get whether this <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> represents a single sensor (True) or a structural component holding two or more sensors (False) </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00079">79</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00087">87</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -705,10 +708,12 @@ order as a line in the sensor map file
 </div><div class="memdoc">
 
 <p>Get the human layer number. </p>
-<pre class="fragment">    This is the module number but shifted by one since the first layer is
-    layer 1
+<pre class="fragment">    Since, for the 2016 parameter mapping, a typo led to a dis-association between
+    the module number deduced from the ID number and the layer number, we have
+    to extract the layer number from the name of the parameter name as it appears
+    in the mapping. We look for '_L&lt;digit&gt;' and extract &lt;digit&gt; as the layer number.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00065">65</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00066">66</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -733,7 +738,7 @@ order as a line in the sensor map file
     for millepede counts up from the furthest upstream sensor. Thus,
     we do integer-division by two to get the module number.
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00053">53</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00054">54</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -759,7 +764,7 @@ order as a line in the sensor map file
    dict
        map from ID number to a Parameter
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00175">175</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00187">187</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -811,7 +816,7 @@ order as a line in the sensor map file
    skip_nonfloat : bool, optional
        skip non-floating parameters
 </pre> 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00216">216</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00228">228</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -833,7 +838,7 @@ order as a line in the sensor map file
 
 <p>Print this parameter as it should appear in the pede steering file. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00253">253</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00265">265</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -855,7 +860,7 @@ order as a line in the sensor map file
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> represents a rotation. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00089">89</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00097">97</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -877,7 +882,7 @@ order as a line in the sensor map file
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> is a single sensor in back half on the slot side, Flase otherwise. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00127">127</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00139">139</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -898,8 +903,9 @@ order as a line in the sensor map file
 </div><div class="memdoc">
 
 <p>Get whether this <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> represents a single stereo sensor (True) or something else (False) </p>
+<p>We have to check the name to see if 'stereo' is in it. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00109">109</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00119">119</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -921,7 +927,7 @@ order as a line in the sensor map file
 
 <p>Does this parameter represent a component on the top half (True) or bottom (False) </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00093">93</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00101">101</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -943,7 +949,7 @@ order as a line in the sensor map file
 
 <p>True if <a class="el" href="classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html" title="Representation of a single alignment parameter.">Parameter</a> represents a translation. </p>
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00085">85</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00093">93</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -968,7 +974,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00047">47</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00048">48</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -992,7 +998,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00042">42</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00043">43</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1016,7 +1022,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00046">46</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00047">47</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1040,7 +1046,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00040">40</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00041">41</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1064,7 +1070,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00038">38</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00039">39</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1088,7 +1094,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00043">43</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00044">44</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1112,7 +1118,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00039">39</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00040">40</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1136,7 +1142,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00041">41</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00042">42</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1166,7 @@ order as a line in the sensor map file
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00045">45</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00046">46</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>
@@ -1185,6 +1191,30 @@ order as a line in the sensor map file
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00035">35</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
+
+</div>
+</div>
+<a id="a48bf34563ca7712cc91f9aedb3faf0a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48bf34563ca7712cc91f9aedb3faf0a5">&#9670;&nbsp;</a></span>layer_number_pattern</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">layer_number_pattern = re.compile('^.*_L([0-9]).*$')</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="__parameter_8py_source.html#l00036">36</a> of file <a class="el" href="__parameter_8py_source.html">_parameter.py</a>.</p>
 
 </div>
 </div>

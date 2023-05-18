@@ -18,15 +18,12 @@ var classhpsmc_1_1batch_1_1Batch =
     [ "job_length", "classhpsmc_1_1batch_1_1Batch.html#a02feee8784d8f4b5806174d39fa17222", null ],
     [ "job_steps", "classhpsmc_1_1batch_1_1Batch.html#a453c9edaf56fb9f889fdd11b528668e5", null ],
     [ "jobstore", "classhpsmc_1_1batch_1_1Batch.html#a613dd1ce0eb970eae6f36760d9de4b60", null ],
-    [ "log_dir", "classhpsmc_1_1batch_1_1Batch.html#ab43a5b8305c170fa222e8332c8feb95e", null ],
     [ "memory", "classhpsmc_1_1batch_1_1Batch.html#a61a963e6e2f81b884bc6d17c72777b42", null ],
     [ "os", "classhpsmc_1_1batch_1_1Batch.html#a3f3d2903c7f533d4714d065386a9e6e8", null ],
     [ "pool_size", "classhpsmc_1_1batch_1_1Batch.html#ace095cfac39dad26bc702e15363a49a7", null ],
     [ "queue", "classhpsmc_1_1batch_1_1Batch.html#af8ceabb22d9297bd28382151f35a2252", null ],
-    [ "run_dir", "classhpsmc_1_1batch_1_1Batch.html#ac40761788dc5f7d66976bd8499c39e5b", null ],
     [ "script", "classhpsmc_1_1batch_1_1Batch.html#a52387f82090b097f98a1a44fa72ac060", null ],
     [ "script_name", "classhpsmc_1_1batch_1_1Batch.html#aa886282472cd7d345fc5070c61d8c251", null ],
-    [ "sh_dir", "classhpsmc_1_1batch_1_1Batch.html#a3a17db18325acb0b63029751694fef68", null ],
     [ "start_job_num", "classhpsmc_1_1batch_1_1Batch.html#a6d386b37c5a59d68827130ab8c028462", null ],
     [ "workflow", "classhpsmc_1_1batch_1_1Batch.html#a3a6cba84ae6df52c3eff41b65d0874bf", null ]
 ];

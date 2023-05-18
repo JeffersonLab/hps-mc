@@ -158,7 +158,7 @@ $(document).ready(function(){initNavTree('__pattern_8py_source.html',''); initRe
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">try</span>:</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            m = int(m)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">if</span> m &lt; 0 <span class="keywordflow">or</span> m &gt; NUM_MODULES-1:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">if</span> m &lt; 0 <span class="keywordflow">or</span> m &gt; Pattern.NUM_MODULES-1:</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">return</span> NotImplemented</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordflow">return</span> m</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">except</span> ValueError:</div>
@@ -172,7 +172,7 @@ $(document).ready(function(){initNavTree('__pattern_8py_source.html',''); initRe
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="stringliteral">        &quot;&quot;&quot;</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">try</span>:</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            layer = int(layer)</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> layer &lt; 1 <span class="keywordflow">or</span> layer &gt; NUM_MODULES:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> layer &lt; 1 <span class="keywordflow">or</span> layer &gt; Pattern.NUM_MODULES:</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">return</span> NotImplemented</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">return</span> layer</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">except</span> ValueError:</div>
