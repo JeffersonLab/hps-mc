@@ -1,0 +1,208 @@
+#!/usr/bin/env bash
+
+usage() {
+  cat <<\HELP
+
+  Construct a detector LCDD from a compact.xml and recompile
+  the necessary parts of hps-java.
+ 
+ USAGE:
+
+  hps-mc-construct-detector [-jar JAR] (DET_PATH | -p HPSJAVA_PATH DET_NAME)
+
+ ARGUMENTS:
+
+  DET_PATH : full path to detector to construct
+  DET_NAME : name of detector to construct
+             requires the '-p' option so we know where hps-java is
+
+ OPTIONS:
+
+  -jar : JAR is the path to the .jar file to use to run
+         default is the HPSJAVA_BIN_JAR environment variable
+  -p   : HPSJAVA_PATH is the path to the hps-java directory
+         only valid when using DET_NAME and is required in that case
+
+ ENV VARIABLES:
+
+  HPSJAVA_BIN_JAR : full path to hps-java jar file to run
+  HPSJAVA_OPTS : string of java options to run before jar
+  MVN_OPTS : mvn opts to run
+
+HELP
+}
+
+# get detector name from the path to its directory
+#    we strip a trailing slash (if it exists) and
+#    then call basename to get that directory name
+get_det_name() {
+  echo $(basename ${1%/})
+}
+
+# get the root directory of hps-java from a detector path
+#    detector directorires are three below the root
+get_java_dir() {
+  echo $(cd ${1}/../../../ && pwd)
+}
+
+convert() {
+  local jar="$1"
+  local java_dir="$2"
+  local det_name="$3"
+  local _old_pwd=$OLDPWD
+  local _pwd=$PWD
+
+  local det_path="detectors/${det_name}"
+
+  cd ${java_dir}/detector-data
+
+  if ! java \
+    ${HPSJAVA_OPTS} \
+    -cp ${jar} \
+    org.hps.detector.DetectorConverter \
+    -f lcdd \
+    -i ${det_path}/compact.xml \
+    -o ${det_path}/${det_name}.lcdd; then
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+
+  echo "name: ${det_name}" > ${det_path}/detector.properties
+  cd ${_pwd}
+  export OLDPWD=${_old_pwd}
+  return 0
+}
+
+recompile() {
+  local java_dir="$1"
+  local _old_pwd=$OLDPWD
+  local _pwd=$PWD
+  if ! cd ${java_dir}/detector-data; then
+    echo "ERROR: detector-data subdirectory of hps-java does not exist."
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! mvn install ${MVN_OPTS}; then
+    echo "ERROR: Unable to recompile hps-java/detector-data"
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! cd ${java_dir}/distribution; then
+    echo "ERROR: distribution subdirectory of hps-java does not exist."
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  if ! mvn install ${MVN_OPTS}; then
+    echo "ERROR: Unable to recompile hps-java/distribution"
+    cd ${_pwd}
+    export OLDPWD=${_old_pwd}
+    return 1
+  fi
+  cd ${_pwd}
+  export OLDPWD=${_old_pwd}
+  return 0
+}
+
+main() {
+  if [ "$#" -eq 0 ]; then
+    usage
+    return -1
+  fi
+
+  local java_dir=""
+  local jar=${HPSJAVA_BIN_JAR}
+  local positional=""
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      -h|--help)
+        usage
+        return 0
+        ;;
+      -jar)
+        jar="$2"
+        shift
+        shift
+        ;;
+      -p)
+        java_dir="$(cd "$2" && pwd)"
+        shift
+        shift
+        ;;
+      *)
+        if [ -z ${positional} ]; then
+          # store path without trailing slash
+          positional="${1%/}"
+          shift
+        else
+          echo "ERROR: Already set positional argument to ${positional}"
+          return -1
+        fi
+        ;;
+    esac
+  done
+
+  if [ -d ${positional} ]; then
+    # single positional argument is a directory,
+    #   assume running where positional is DET_PATH
+    det_path="$(cd "${positional}" && pwd)"
+    
+    if [ ! -z "${java_dir}" ]; then
+      echo "ERROR: Can't define hps-java dir when specifying full path to detector."
+      echo "       hps-java is deduced from the detector path in this case."
+      return -2
+    fi
+
+    java_dir="$(get_java_dir "${det_path}")"
+    det_name="$(get_det_name "${det_path}")"
+  else
+    # single positional argument is NOT a directory
+    #    assume running where positional is DET_NAME
+    if [ -z "${java_dir}" ]; then
+      echo "ERROR: Need to define where hps-java is with the '-p' option."
+      return -2
+    fi
+
+    if [ ! -d "${java_dir}" ]; then
+      echo "ERROR: '${java_dir}' does not exist."
+      return -2
+    fi
+
+    det_name="${positional}"
+  fi
+
+  # reconstruct detector path based on static knowledge of hps-java
+  #    so we can do some more checks
+  det_path="${java_dir}/detector-data/detectors/${det_name}"
+
+  if [ ! -d ${det_path} ]; then
+    echo "ERROR: '${det_path}' not a directory."
+    return -2
+  fi
+  
+  if [ ! -f ${det_path}/compact.xml ]; then
+    echo "ERROR: '${det_path}/compact.xml' does not exist."
+    return -2
+  fi
+
+  if [ -z "${jar}" ]; then
+    echo "ERROR: hps-java bin jar not defined."
+    echo "       use the '-jar' option or define the HPSJAVA_BIN_JAR environment variable."
+    return -2
+  fi
+
+  if [ ! -f "${jar}" ]; then
+    echo "ERROR: '${jar}' does not exist."
+    return -2
+  fi
+
+  convert "${jar}" "${java_dir}" "${det_name}" || return $?
+  recompile "${java_dir}" || return $?
+
+  return 0
+}
+
+main $@

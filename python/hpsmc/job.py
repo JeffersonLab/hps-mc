@@ -11,82 +11,29 @@ import filecmp
 import argparse
 import getpass
 import logging
-import configparser
 import glob
 import subprocess
+import copy
+import pathlib
 
 from collections.abc import Sequence
 from os.path import expanduser
 
-from hpsmc.util import convert_config_value, config_logging
+from _config import convert_config_value
+from hpsmc import global_config
 
-## Initialize logger with default level
+## Initialize logger
 logger = logging.getLogger('hpsmc.job')
-logger.setLevel(logging.INFO)
-
-
-def check(j):
-    jsonfile = j.application.args[1]
-    with open(jsonfile) as datafile:
-        data = json.load(datafile)
-    output_dir = ""
-    if "output_dir" in data:
-        output_dir = data["output_dir"]
-    if "output_files" in data:
-        outputfiles = data["output_files"]
-        for k, v in outputfiles.items():
-            fpath = v
-            if not os.path.isabs(v):
-                fpath = output_dir + os.path.sep + v
-            if not os.path.exists(fpath):
-                return False
-    return True
-
-
-def load_json_data(filename):
-    """! Load json data from file.
-    @param filename  name of json file
-    """
-    rawdata = open(filename, 'r').read()
-    return json.loads(rawdata)
 
 
 class JobConfig(object):
     """! Wrapper for accessing config information from parser."""
 
-    # , include_default_locations=True
-    def __init__(self, config_files=[], include_default_locations=True):
-        ## list of config files
-        self.config_files = []
-        if include_default_locations:
-            self.config_files.extend([os.path.join(expanduser("~"), ".hpsmc"),
-                                      os.path.abspath(".hpsmc")])
-
-        if len(config_files):
-            self.config_files.extend(config_files)
-
-        # if not len(self.config_files):
-        #    raise Exception('No config file locations provided.')
-
-        self._load()
-
-    def _load(self):
-        """! Load config from the list of possible locations."""
-        ## \todo implement or cleanup
-        # Read in config files and crash if none are found from list
-        ## configuration parser
-        self.parser = configparser.ConfigParser()
-        # logger.debug("Checking for config files: %s" % str(self.config_files))
-        # parsed =
-        self.parser.read(self.config_files)
-        # if not len(parsed):
-        #    raise Exception('No config files found in locations: %s' % str(self.config_files))
-
-        # Print detailed config info to the log
-        # if len(parsed):
+    def __init__(self):
+        self.parser = copy.copy(global_config)
 
     def __str__(self):
-        parser_lines = ['JobConfig:']
+        parser_lines = ['Job configuration:']
         for section in self.parser.sections():
             parser_lines.append("[" + section + "]")
             for i, v in self.parser.items(section):
@@ -113,10 +60,10 @@ class JobConfig(object):
                 if len(allowed_names) and name not in allowed_names:
                     raise Exception("Config name '%s' is not allowed for '%s'" % (name, section))
                 setattr(obj, name, convert_config_value(value))
-                logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
-                                             name,
-                                             getattr(obj, name).__class__.__name__,
-                                             getattr(obj, name)))
+                # logger.info("%s:%s:%s=%s" % (obj.__class__.__name__,
+                #                             name,
+                #                             getattr(obj, name).__class__.__name__,
+                #                             getattr(obj, name)))
         elif require_section:
             raise Exception("Missing required config section '%s'" % section)
         else:
@@ -229,8 +176,15 @@ class Job(object):
     PTAG_PREFIX = 'ptag:'
 
     def __init__(self, args=sys.argv, **kwargs):
+
+        if 'HPSMC_DIR' not in os.environ:
+            raise Exception('HPSMC_DIR is not set in the environ.')
+        self.hpsmc_dir = os.environ['HPSMC_DIR']
+
         ## (passed) job arguments
         self.args = args
+        ## Job configuration
+        self.job_config = JobConfig()
         ## short description of job, should be overridden by the job script
         self.description = "HPS MC Job"
         ## job ID
@@ -251,12 +205,16 @@ class Job(object):
         self.output_files = {}
         ## dict with keys to output filenames
         self.ptags = {}
-        ## log output
-        self.log = sys.stdout
-        ## system output
-        self.out = sys.stdout
-        ## error output
-        self.err = sys.stderr
+        ## output for component printouts
+        self.component_out = sys.stdout
+        ## output for component error messages
+        self.component_err = sys.stderr
+        ## script containing component initializations
+        self.script = None
+        ## job steps
+        self.job_steps = None
+        ## fieldmaps dir
+        self.hps_fieldmaps_dir = None
 
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
@@ -269,7 +227,6 @@ class Job(object):
         self.check_commands = False
         self.enable_file_chaining = True
         self.enable_env_config = False
-        self.log_level = logging.INFO
 
     def add(self, component):
         """!
@@ -300,11 +257,9 @@ class Job(object):
         parser = argparse.ArgumentParser(description=self.description)
         parser.add_argument("-c", "--config-file", help="Config file locations", action='append')
         parser.add_argument("-d", "--run-dir", nargs='?', help="Job run dir")
-        parser.add_argument("-o", "--out", nargs='?', help="File for component stdout")
-        parser.add_argument("-e", "--err", nargs='?', help="File for component stderr")
-        parser.add_argument("-l", "--log", nargs='?', help="File for logging output (default is print to terminal)")
-        parser.add_argument("-s", "--job-steps", type=int, default=-1,
-                            help="Job steps to run (single number)")
+        parser.add_argument("-o", "--out", nargs='?', help="File for component stdout (default prints to console)")
+        parser.add_argument("-e", "--err", nargs='?', help="File for component stderr (default prints to console)")
+        parser.add_argument("-s", "--job-steps", type=int, default=None, help="Job steps to run (single number)")
         parser.add_argument("-i", "--job-id", type=int, help="Job ID from JSON job store", default=None)
         parser.add_argument("script", nargs='?', help="Path or name of job script")
         parser.add_argument("params", nargs='?', help="Job param file in JSON format")
@@ -319,38 +274,17 @@ class Job(object):
         cl = parser.parse_args(self.args)
 
         # Read in job configuration files
-        config_files = []
         if cl.config_file:
             config_files = list(map(os.path.abspath, cl.config_file))
-        self.job_config = JobConfig(config_files=config_files)
-
-        # Configure job log level
-        try:
-            self.log_level = logging.getLevelName(
-                self.job_config.parser.get('Job', 'log_level'))
-        except BaseException:
-            pass
-
-        # Configure logging stream to file
-        if cl.log:
-            log_file = cl.log
-            if not os.path.isabs(log_file):
-                log_file = os.path.abspath(log_file)
-            self.log = open(log_file, 'w')
-
-        # Configure logging from command line parameters and configuration files,
-        # including sub-modules that are used in job scripts
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.job')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.component')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.tools')
-        config_logging(stream=self.log, level=self.log_level, logname='hpsmc.generators')
+            logger.info("Reading additional config from: {}".format(config_files))
+            self.job_config.parser.read(config_files)
 
         # Set file for stdout from components
         if cl.out:
             out_file = cl.out
             if not os.path.isabs(out_file):
                 out_file = os.path.abspath(out_file)
-                logger.debug('Changed stdout file to abs path: %s' % out_file)
+                logger.info('Job output will be written to: %s' % out_file)
             self.out = open(out_file, 'w')
 
         # Set file for stderr from components
@@ -358,20 +292,15 @@ class Job(object):
             err_file = cl.err
             if not os.path.isabs(err_file):
                 err_file = os.path.abspath(err_file)
-                logger.debug('Changed stderr file to abs path: %s' % err_file)
+                logger.info('Job error will be written to: %s' % err_file)
             self.err = open(err_file, 'w')
-
-        # if cl.level:
-        #    num_level = getattr(logging, cl.level.upper(), None)
-        #    if not isinstance(num_level, int):
-        #        raise ValueError('Invalid log level: %s' % num_level)
-        #    logging.getLogger('hpsmc').setLevel(num_level)
-        # print("Set log level of hpsmc: %s" % logging.getLevelName(logging.getLogger('hpsmc').getEffectiveLevel()))
 
         if cl.run_dir:
             self.rundir = cl.run_dir
 
         self.job_steps = cl.job_steps
+        if self.job_steps is not None and self.job_steps < 1:
+            raise Exception("Invalid job steps argument (must be > 0): {}".format(self.job_steps))
 
         if cl.script:
             ## name of or path to script
@@ -395,7 +324,7 @@ class Job(object):
             else:
                 # Load data from a JSON file with a single job definition.
                 logger.info('Loading job parameters from file: %s' % self.param_file)
-                params = load_json_data(self.param_file)
+                params = json.loads(open(self.param_file, 'r').read())
                 if not isinstance(params, dict):
                     raise Exception('Job ID must be provided when running from a job store.')
 
@@ -425,7 +354,7 @@ class Job(object):
         if 'output_files' in self.params:
             self.output_files = self.params['output_files']
 
-    def __set_input_files(self):
+    def _set_input_files(self):
         """!
         Prepare dictionary of input files.
 
@@ -434,15 +363,16 @@ class Job(object):
         input_files_dict = {}
         for file_key, file_name in self.input_files.items():
             if 'https' in file_key:
-                logger.info("Downloading input file from %s" % file_key)
+                logger.info("Downloading input file from: %s" % file_key)
                 file_name_path = self.rundir + "/" + file_name
-                subprocess.check_output(['wget', '-O', file_name_path, file_key])
+                # \todo FIXME: We need to make sure wget is installed locally during the build or use a python lib like requests.
+                subprocess.check_output(['wget', '-q', '-O', file_name_path, file_key])
                 input_files_dict.update({file_name: file_name})
             else:
                 input_files_dict.update({file_key: file_name})
         self.input_files = input_files_dict
 
-    def __initialize(self):
+    def _initialize(self):
         """!
         Perform basic initialization before the job script is loaded.
         """
@@ -463,26 +393,45 @@ class Job(object):
             logger.info('Creating run dir: %s' % self.rundir)
             os.makedirs(self.rundir)
 
-    def __configure(self):
+    def _configure(self):
         """!
         Configure job class and components.
         """
+
         # Configure job class
         self.job_config.config(self, require_section=False)
-        # allowed_names=Job._config_names,
+
+        # Configure the location of the fieldmap files
+        self._config_fieldmap_dir()
 
         # Configure each of the job components
-        for c in self.components:
-            c.config(self.job_config.parser)  # Configure from supplied config files
+        for component in self.components:
+
+            # Configure logging for the component.
+            component.config_logging(self.job_config.parser)
+
+            # Configure the component from job configuration.
+            component.config(self.job_config.parser)
+
+            ## \todo FIXME: This is dumb and probably shouldn't exist. --JM
             if self.enable_env_config:
-                c.config_from_environ()      # Configure from env vars, if enabled
-            # TODO: catch exception here...
-            c.check_config()                 # Check that the config is acceptable
+                # Configure from env vars, if enabled.
+                component.config_from_environ()
+
+            # Check that the config is acceptable.
+            component.check_config()
 
     def _load_script(self):
         """!
         Load the job script.
         """
+        # This might be okay if the user is manually adding components to a job for testing
+        # without the command line interface. If no components are added before the job is
+        # run, then this will be caught later.
+        if self.script is None:
+            logger.warning("No job script was provided!")
+            return
+
         if not self.script.endswith('.py'):
             # Script is a name.
             script_db = JobScriptDatabase()
@@ -497,7 +446,7 @@ class Job(object):
         if not os.path.exists(script_path):
             raise Exception('Job script does not exist: %s' % script_path)
 
-        logger.debug('Loading job script: %s' % script_path)
+        logger.info('Loading job script: %s' % script_path)
 
         exec(compile(open(script_path, "rb").read(), script_path, 'exec'), {'job': self})
 
@@ -513,7 +462,7 @@ class Job(object):
         logger.info(str(self.job_config))
 
         # Initialize after CL parameters were parsed.
-        self.__initialize()
+        self._initialize()
 
         # Load the job components from the script
         self._load_script()
@@ -522,38 +471,41 @@ class Job(object):
             raise Exception("Job has no components to execute.")
 
         # Print list of job components
-        logger.info("Job components: %s" % ([c.name for c in self.components]))
+        logger.info("Job components loaded: %s" % ([c.name for c in self.components]))
 
         # Print job parameters.
-        logger.info("Job parameters: %s" % str(self.params))
+        if len(self.params) > 0:
+            logger.info("Job parameters loaded: %s" % str(self.params))
+        else:
+            logger.info("No job parameters were specified!")
 
         # This will configure the Job class and its components by copying
         # information into them from loaded config files.
-        self.__configure()
+        self._configure()
 
         # This (re)sets the input correctly
-        self.__set_input_files()
+        self._set_input_files()
 
         # Set component parameters from job JSON file.
-        self.__set_parameters()
+        self._set_parameters()
 
         # Perform component setup to prepare for execution.
         # May use config and parameters that were set from above.
-        self.__setup()
+        self._setup()
 
         if not self.dry_run:
             if self.enable_copy_input_files:
                 # Copy input files to the run dir.
-                self.__copy_input_files()
+                self._copy_input_files()
             else:
                 # Symlink input files if copying is disabled.
-                self.__symlink_input_files()
+                self._symlink_input_files()
 
         # Save job start time
         start_time = time.time()
 
         # Execute the job.
-        self.__execute()
+        self._execute()
 
         # Copy the output files to the output dir if enabled and not in dry run.
         if not self.dry_run:
@@ -561,21 +513,21 @@ class Job(object):
             # Print job timer info
             stop_time = time.time()
             elapsed = stop_time - start_time
-            logger.info("Job execution took %f seconds" % elapsed)
+            logger.info("Job execution took {} seconds".format(round(elapsed, 4)))
 
             # Copy by file path or ptag
             if self.enable_copy_output_files:
                 ## \todo: combine these methods
-                self.__copy_output_files()
+                self._copy_output_files()
             else:
                 logger.warning('Copy output files is disabled!')
 
             # Perform job cleanup.
-            self.__cleanup()
+            self._cleanup()
 
         logger.info('Successfully finished running job: %s' % self.description)
 
-    def __execute(self):
+    def _execute(self):
         """!
         Execute all components in job.
 
@@ -587,24 +539,23 @@ class Job(object):
             for component in self.components:
 
                 logger.info("Executing '%s' with command: %s" % (component.name, component.cmd_line_str()))
-                logger.info("Inputs: %s" % str(component.input_files()))
-                logger.info("Outputs: %s" % str(component.output_files()))
+                # logger.info("Component IO: {} -> {}".format(str(component.input_files(), component.output_files())))
 
                 # Print header to stdout
-                self.out.write('================ Component: %s ================\n' % component.name)
-                self.out.flush()
+                self.component_out.write('================ Component: %s ================\n' % component.name)
+                self.component_out.flush()
 
                 # Print header to stderr if output is going to a file
-                if self.err != sys.stderr:
-                    self.err.write('================ Component: %s ================\n' % component.name)
-                    self.err.flush()
+                if self.component_err != sys.stderr:
+                    self.component_err.write('================ Component: %s ================\n' % component.name)
+                    self.component_err.flush()
 
                 start = time.time()
-                returncode = component.execute(self.out, self.err)
+                returncode = component.execute(self.component_out, self.component_err)
                 end = time.time()
                 elapsed = end - start
-                logger.info("Execution of '%s' took %f second(s)" % (component.name, elapsed))
-                logger.info("Return code of '%s' was %s" % (component.name, str(returncode)))
+                logger.info("Execution of {} took {} second(s) with return code: {}"
+                            .format(component.name, round(elapsed, 4), str(returncode)))
 
                 if not self.ignore_return_codes and returncode:
                     raise Exception("Non-zero return code %d from '%s'" % (returncode, component.name))
@@ -619,24 +570,26 @@ class Job(object):
             for component in self.components:
                 logger.info("'%s' with args: %s (DRY RUN)" % (component.name, ' '.join(component.cmd_args())))
 
-    def __setup(self):
+    def _setup(self):
         """!
         Necessary setup before job can be executed.
         """
 
         # Change to run dir
-        logger.debug('Changing to run dir: %s' % self.rundir)
+        logger.info('Changing to run dir: %s' % self.rundir)
         os.chdir(self.rundir)
 
+        # Create a symlink to the fieldmap directory
+        self._symlink_fieldmap_dir()
+
         # Limit components according to job steps
-        if self.job_steps > 0:
-            self.components = self.components[0:self.job_steps]
-            logger.info("Job is limited to first %d steps." % self.job_steps)
-        else:
-            logger.info("No job steps specified so full job will be run.")
+        if self.job_steps is not None:
+            if self.job_steps > 0:
+                self.components = self.components[0:self.job_steps]
+                logger.info("Job is limited to first %d steps." % self.job_steps)
 
         if self.enable_file_chaining:
-            self.__config_file_pipeline()
+            self._config_file_pipeline()
 
         # Run setup methods of each component
         for component in self.components:
@@ -646,7 +599,7 @@ class Job(object):
             if self.check_commands and not component.cmd_exists():
                 raise Exception("Command '%s' does not exist for '%s'." % (component.command, component.name))
 
-    def __config_file_pipeline(self):
+    def _config_file_pipeline(self):
         """!
         Pipe component outputs to inputs automatically.
         """
@@ -664,34 +617,43 @@ class Job(object):
                 if len(component.inputs) == 0:
                     component.inputs = self.components[i - 1].output_files()
 
-    def __set_parameters(self):
+    def _set_parameters(self):
         """!
         Push JSON job parameters to components.
         """
         for component in self.components:
             component.set_parameters(self.params)
 
-    def __cleanup(self):
+    def _cleanup(self):
         """!
         Perform post-job cleanup.
         """
         for component in self.components:
-            logger.debug('Running cleanup for component: %s' % str(component.name))
+            logger.info('Running cleanup for component: %s' % str(component.name))
             component.cleanup()
         if self.delete_rundir:
-            logger.debug('Deleting run dir: %s' % self.rundir)
+            logger.info('Deleting run dir: %s' % self.rundir)
             if os.path.exists("%s/__swif_env__" % self.rundir):
                 for f in os.listdir(self.rundir):
                     if ('.log' not in f) and ('__swif_' not in f):
                         os.system('rm -r %s' % f)
             else:
                 shutil.rmtree(self.rundir)
-        if self.out != sys.stdout:
-            self.out.close()
-        if self.err != sys.stderr:
-            self.err.close()
+        if self.component_out != sys.stdout:
+            try:
+                self.component_out.flush()
+                self.component_out.close()
+            except Exception as e:
+                logger.warn(e)
 
-    def __copy_output_files(self):
+        if self.component_err != sys.stderr:
+            try:
+                self.component_err.flush()
+                self.component_err.close()
+            except Exception as e:
+                logger.warn(e)
+
+    def _copy_output_files(self):
         """!
         Copy output files to output directory, handling ptags if necessary.
         """
@@ -709,9 +671,9 @@ class Job(object):
                     logger.info("Resolved ptag: {} -> {}".format(ptag_src, src_file))
                 else:
                     raise Exception('Undefined ptag used in job params: %s' % ptag_src)
-            self.__copy_output_file(src_file, dest)
+            self._copy_output_file(src_file, dest)
 
-    def __copy_output_file(self, src, dest):
+    def _copy_output_file(self, src, dest):
         """!
         Copy an output file from src to dest.
         """
@@ -745,12 +707,12 @@ class Job(object):
             shutil.copyfile(src_file, dest_file)
             # take the time to double-check that the copy is identical to the original
             #   this catches any sneaky network-dropping related copy failures
-            if not filecmp.cmp(src_file, dest_file, shallow=False) :
-                raise Exception('Copy from '%s' to '%s' failed.' % (src_file, dest_file))
+            if not filecmp.cmp(src_file, dest_file, shallow=False):
+                raise Exception("Copy from '%s' to '%s' failed." % (src_file, dest_file))
         else:
             logger.warning("Skipping copy of '%s' to '%s' because they are the same file!" % (src_file, dest_file))
 
-    def __copy_input_files(self):
+    def _copy_input_files(self):
         """!
         Copy input files to the run dir.
         """
@@ -764,13 +726,13 @@ class Job(object):
             if '/mss/' in src:
                 src = src.replace('/mss/', '/cache/')
             if os.path.exists(os.path.join(self.rundir, dest)):
-                logger.info("The input file %s already exists at destination %s" % (dest, self.rundir))
+                logger.info("The input file '%s' already exists at destination '%s'" % (dest, self.rundir))
                 os.chmod(os.path.join(self.rundir, dest), 0o666)
             else:
                 shutil.copyfile(src, os.path.join(self.rundir, dest))
             os.chmod(dest, 0o666)
 
-    def __symlink_input_files(self):
+    def _symlink_input_files(self):
         """!
         Symlink input files.
         """
@@ -792,19 +754,6 @@ class Job(object):
         else:
             raise Exception('The ptag already exists: %s' % tag)
 
-    ## \todo is this still needed?
-    def __copy_ptag_output_files(self):
-        if len(self.ptags):
-            for src, dest in self.output_files.items():
-                if Job.is_ptag(src):
-                    ptag_src = Job.get_ptag_from_src(src)
-                    if ptag_src in list(self.ptags.keys()):
-                        src_file = self.ptags[ptag_src]
-                        logger.info("Copying ptag '%s' from '%s' -> '%s'" % (ptag_src, src_file, dest))
-                        self.__copy_output_file(src_file, dest)
-                    else:
-                        raise Exception('Invalid ptag in job params: %s' % ptag_src)
-
     @staticmethod
     def is_ptag(src):
         return src.startswith(Job.PTAG_PREFIX)
@@ -821,6 +770,32 @@ class Job(object):
             return self.ptags[Job.get_ptag_from_src(src)]
         else:
             return src
+
+    def _config_fieldmap_dir(self):
+        """!
+        Set fieldmap dir to install location if not provided in config
+        """
+        if self.hps_fieldmaps_dir is None:
+            self.hps_fieldmaps_dir = "{}/share/fieldmap".format(self.hpsmc_dir)
+            if not os.path.isdir(self.hps_fieldmaps_dir):
+                raise Exception("The fieldmaps dir does not exist: {}".format(self.hps_fieldmaps_dir))
+            logger.debug("Using fieldmap dir from install: {}".format(self.hps_fieldmaps_dir))
+        else:
+            logger.debug("Using fieldmap dir from config: {}".format(self.hps_fieldmaps_dir))
+
+    def _symlink_fieldmap_dir(self):
+        """!
+        Symlink to the fieldmap directory
+        """
+        fieldmap_symlink = pathlib.Path(os.getcwd(), "fieldmap")
+        if not fieldmap_symlink.exists():
+            logger.debug("Creating symlink to fieldmap directory: {}".format(fieldmap_symlink))
+            os.symlink(self.hps_fieldmaps_dir, "fieldmap")
+        else:
+            if fieldmap_symlink.is_dir() or os.path.islink(fieldmap_symlink):
+                logger.debug("Fieldmap symlink or directory already exists: {}".format(fieldmap_symlink))
+            else:
+                raise Exception("A file called 'fieldmap' exists but it is not a symlink or directory!")
 
 
 cmds = {

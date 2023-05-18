@@ -22,9 +22,7 @@ from distutils.spawn import find_executable
 
 from hpsmc.job import Job, JobStore, JobScriptDatabase
 
-from hpsmc.util import config_logging
-
-logger = config_logging(stream=sys.stdout, level=logging.INFO, logname='hpsmc.batch')
+logger = logging.getLogger("hpsmc.batch")
 
 run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
@@ -212,8 +210,7 @@ class Batch:
         """
         cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
-                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id),
-                    '-l', os.path.join(self.log_dir, 'job.%d.log' % job_id)])
+                    '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
         if set_job_dir:
             job_dir = os.path.join(self.run_dir, str(job_id))
             cmd.extend(['-d', job_dir])
@@ -444,7 +441,7 @@ class Auger(Batch):
     def _add_job(self, req, job_params):
         job = ET.SubElement(req, "Job")
         job_id = job_params['job_id']
-        year = ''
+        year = ''  # /todo change to number
         if 'year' in job_params.keys():
             year = job_params['year']
 

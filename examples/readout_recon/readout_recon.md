@@ -14,5 +14,5 @@ This table contains parameters special to the readout\_recon job. The general pa
 | filter\_no\_cuts       | ?                                                                                             |
 | event\_print\_interval | interval at which events will be printed out?                                                 |
 | steering\_files        | steering files for readout and reconstruction                                                 |
-| input\_files           | list of input slcio files:<br>"path/to/input": "input_name.slcio"                            |
-| output\_files          | list of output recon slcio file:<br>"input_name_filt_readout_recon.slcio": "output.slcio" |
+| input\_files           | list of input slcio files:<br>"path/to/input": "input_name.slcio"                             |
+| output\_files          | list of output recon slcio file:<br>"input_name_filt_readout_recon.slcio": "output.slcio"     |
