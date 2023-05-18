@@ -1,0 +1,4 @@
+{
+    "steering" : ["kf"],
+    "detector": ["L3TStereo_tu_50um_iter0"]
+}

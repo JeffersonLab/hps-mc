@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcsim xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcsim/1.0/lcsim.xsd">
+    <!-- 
+      Steering file for running KF tracking and mille alignment
+      created:  Nov 2022
+      @author Tom Eichlersmith <eichl008@umn.edu>
+      @author PF <pbutti@slac.stanford.edu>
+    -->
+    <execute>
+      
+      <!-- Enable the following if re-processing lcio files -->
+      <driver name="PreCleanupDriver"/>      
+      
+      <driver name="RfFitter"/>
+      <driver name="EcalRunningPedestal"/> 
+      <driver name="EcalRawConverter" />
+      <driver name="EcalTimeCorrection"/> 
+      <driver name="ReconClusterer" /> 
+      <driver name="CopyCluster" /> 
+      
+      <!-- 
+        SVT reconstruction drivers 
+    
+        SensorSetup associates hits with sensors without having to re-decode them.
+        TrackerHitDriver assocites clusters with tracker modules without having to re-cluster.
+      -->
+      <driver name="SensorSetup"/>
+      <driver name="TrackerHitDriver"/> 
+
+      <!--
+        Kalman tracking
+      -->
+      <driver name="KalmanPatRecDriver"/>
+      <driver name="KalmanKinkFitDriver"/>
+      
+      <!--
+        Use milli+GBL to prepare alignment data file for pede
+      -->
+      <driver name="SimpleGBLTrajAliDriverKF"/>
+      
+      <!-- it has to be before GBLOutputDriver -->
+      <driver name="MultEvtVtx" />
+      
+      <!--
+      Write out histograms
+      <driver name="GBLOutputDriverKF"/>
+      -->
+      <driver name="GBLOutputDriver" />
+      
+      <driver name="CleanupDriver"/>
+    </execute>    
+    <drivers>    
+        <driver name="PreCleanupDriver" type="org.hps.analysis.dataquality.ReadoutCleanupDriver">
+          <!--Clean collections-->
+          
+          <collectionNames>KFTrackData KFTrackDataRelations KalmanFullTracks KalmanFullTracksToMCParticleRelations KallmanFullTracksToTruthTrackRelations KalmanFullTracksTruth EcalCalHits EcalClusters EcalClustersCorr FinalStateParticles UnconstrainedV0Candidates UnconstrainedV0Vertices TargetConstrainedV0Candidates TargetConstrainedV0Vertices BeamspotConstrainedV0Candidates BeamspotConstrainedV0Vertices GBLKinkData GBLKinkDataRelations MatchedToGBLTrackRelations HelicalTrackHits HelicalTrackHitRelations MatchedTracks GBLTracks MatchedToGBLTrackRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations TrackData TrackDataRelations TrackResiduals TrackResidualsRelations RotatedHelicalTrackHits RotatedHelicalTrackHitRelations StripClusterer_SiTrackerHitStrip1D </collectionNames>
+
+        </driver>
+        
+        <driver name="RfFitter" type="org.hps.evio.RfFitterDriver"/>       
+
+        <!-- Ecal reconstruction drivers -->
+        <driver name="EcalRunningPedestal" type="org.hps.recon.ecal.EcalRunningPedestalDriver">
+            <logLevel>CONFIG</logLevel>
+        </driver>
+        <driver name="EcalRawConverter" type="org.hps.recon.ecal.EcalRawConverter2Driver">
+            <!-- ecalCollectionName>EcalCalHits</ecalCollectionName -->
+            <!-- fixShapeParameter>true</fixShapeParameter -->
+            <!-- globalFixedPulseWidth>2.4</globalFixedPulseWidth -->
+        </driver> 
+        <driver name="EcalTimeCorrection" type="org.hps.recon.ecal.EcalTimeCorrectionDriver"/> 
+        <driver name="ReconClusterer" type="org.hps.recon.ecal.cluster.ReconClusterDriver">
+            <logLevel>WARNING</logLevel>
+            <outputClusterCollectionName>EcalClusters</outputClusterCollectionName>
+        </driver> 
+        <driver name="CopyCluster" type="org.hps.recon.ecal.cluster.CopyClusterCollectionDriver">
+            <inputCollectionName>EcalClusters</inputCollectionName>
+            <outputCollectionName>EcalClustersCorr</outputCollectionName>
+        </driver>
+        
+        <!-- SVT reconstruction drivers -->
+        <driver name="SensorSetup" type="org.hps.recon.tracking.SensorSetup" >
+          <readoutCollections>SVTRawTrackerHits</readoutCollections>
+          <fittedHitCollection>SVTFittedRawTrackerHits</fittedHitCollection>
+        </driver>
+        
+        <driver name="TrackerHitDriver" type="org.hps.recon.tracking.DataTrackerHitDriver">
+            <neighborDeltaT>8.0</neighborDeltaT>
+            <saveMonsterEvents>false</saveMonsterEvents>
+            <thresholdMonsterEvents>200</thresholdMonsterEvents>
+            <debug>false</debug>
+        </driver>
+
+        <driver name="GBLOutputDriver" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
+          <nHits>6</nHits> <!-- minimum hits -->
+          <outputPlotsFilename>${outputFile}_gblplots.root</outputPlotsFilename>
+          <bsZ>-7.5</bsZ>
+          <trackCollectionName>GBLTracks</trackCollectionName>
+
+          <!--the KF tracks refitted as GBL don't have kinks?? -->
+          <doGBLkinks>false</doGBLkinks> 
+          <dataRelationCollection>""</dataRelationCollection>
+
+          <chi2Cut>9999</chi2Cut>
+        </driver>
+
+        <driver name="CleanupDriver" type="org.lcsim.recon.tracking.digitization.sisim.config.ReadoutCleanupDriver"/>
+
+        <driver name="MultEvtVtx" type="org.hps.recon.vertexing.MultipleEventsVertexingDriver">
+          <ntrks>100</ntrks>
+        </driver>
+
+        <driver name="KalmanPatRecDriver" type="org.hps.recon.tracking.kalman.KalmanPatRecDriver">
+          <!--<doDebugPlots>false</doDebugPlots>-->
+          <!-- <siHitsLimit>50</siHitsLimit> -->
+          <seedCompThr>0.05</seedCompThr>
+          <addResiduals>true</addResiduals>
+          <verbose>true</verbose>
+        </driver>
+        
+        <!-- do front-back kink plots -->
+        <driver name="KalmanKinkFitDriver" type="org.hps.recon.tracking.kalman.KalmanKinkFitDriver">
+        </driver>
+
+        <!-- Form trajectories for MPII using the GBL algorithm -->
+        <driver name="SimpleGBLTrajAliDriverKF" 
+                type="org.hps.recon.tracking.gbl.SimpleGBLTrajAliDriver" >
+
+          <!-- apply the track quality cuts -->
+          <enableAlignmentCuts>${enableAlignmentCuts}</enableAlignmentCuts> 
+          <doCOMAlignment>${doCOMAlignment}</doCOMAlignment>
+          <minMom>${minMom}</minMom> 
+          <maxMom>${maxMom}</maxMom> 
+          <nHitsCut>${nHitsCut}</nHitsCut> <!-- minimum number of hits to be included -->
+
+          <debugAlignmentDs>${debugAlignmentDs}</debugAlignmentDs>
+
+          <correctTrack>${correctTrack}</correctTrack> <!-- refit with GBL before doing Mille -->
+          <includeNoHitScatters>${includeNoHitScatters}</includeNoHitScatters>
+          <gblRefitIterations>${gblRefitIterations}</gblRefitIterations>
+          <storeTrackStates>${storeTrackStates}</storeTrackStates>
+          <compositeAlign>${compositeAlign}</compositeAlign>
+
+          <momC>${momC}</momC> <!-- momentum constraint [GeV] -->
+          <constrainedFit>${constrainedFit}</constrainedFit> <!-- apply momentum constraint -->
+
+          <constrainedBSFit>${constrainedBSFit}</constrainedBSFit> <!-- apply beam spot constraint -->
+          <bsZ>${bsZ}</bsZ> <!-- beam spot z-coordinate, used to calculate beam spot -->
+
+          <trackSide>${trackSide}</trackSide> <!--hole-->
+
+          <writeMilleBinary>true</writeMilleBinary>
+          <milleBinaryFileName>${outputFile}.bin</milleBinaryFileName>
+          <!-- can't use numbers in variable substition from commandline defs -->
+          <writeMilleChi2Cut>${writeMilleChisqCut}</writeMilleChi2Cut>  <!-- max Chi2/Ndf to be included -->
+
+          <enableStandardCuts>${enableStandardCuts}</enableStandardCuts>
+          <maxTrackChisq4hits>${maxTrackChisqFourHits}</maxTrackChisq4hits>
+          <maxTrackChisq5hits>${maxTrackChisqFiveHits}</maxTrackChisq5hits>
+          <maxTrackChisq6hits>${maxTrackChisqSixHits}</maxTrackChisq6hits>
+
+          <inputCollectionName>KalmanFullTracks</inputCollectionName>
+        </driver> 
+        
+        <driver name="GBLOutputDriverKF" type="org.hps.recon.tracking.gbl.GBLOutputDriver">
+          <nHits>0</nHits> <!-- minimum hits -->
+          <outputPlotsFilename>${outputFile}_gblplots_from_kf.root</outputPlotsFilename>
+          <bsZ>-7.5</bsZ>
+          <trackCollectionName>KalmanFullTracks</trackCollectionName>
+          <trackResidualsRelColName>TrackResidualsKFtoGBLRelations</trackResidualsRelColName>
+
+          <!-- need to find relation collection for Kalma -->
+          <doGBLkinks>false</doGBLkinks>
+          <dataRelationCollection>""</dataRelationCollection>
+
+          <chi2Cut>9999</chi2Cut>
+        </driver>
+        
+    </drivers>
+</lcsim>
+
