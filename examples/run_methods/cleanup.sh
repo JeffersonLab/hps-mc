@@ -1,1 +1,1 @@
-rm -rf output scratch job.1.*
+rm -rf output ./scratch ./logs ./sh
