@@ -465,7 +465,7 @@ class Auger(Batch):
             output_elem = ET.SubElement(job, "Output")
             res_src = j.resolve_output_src(src)
             output_elem.set("src", res_src)
-            dest_file = os.path.join(outputdir, dest)
+            dest_file = os.path.abspath(os.path.join(outputdir, dest))
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
             output_elem.set("dest", dest_file)
