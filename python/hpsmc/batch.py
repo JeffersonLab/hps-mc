@@ -89,14 +89,14 @@ class Batch:
 
         self.debug = cl.debug
 
-        self.log_dir = cl.log_dir
-        self.sh_dir = cl.sh_dir
-        if not os.path.isabs(self.log_dir):
-            raise Exception('The log dir is not an abs path: %s' % self.log_dir)
-        ## \todo FIXME: This directory creation probably shouldn't happen here.
-        if not os.path.exists(self.log_dir):
-            logger.info('Creating log dir: %s' % self.log_dir)
-            os.makedirs(self.log_dir)
+        for d in ['log_dir', 'sh_dir', 'run_dir']:
+            # get the name of a dir from the command line and set
+            # an attr in ourselves to the abspath of that value
+            setattr(self, d, os.path.abspath(getattr(cl, d)))
+            # create the directory if it doesn't exist
+            if not os.path.exists(getattr(self, d)):
+                logger.info(f'Creating {d} at {getattr(self,d)}')
+                os.makedirs(getattr(self, d))
 
         self.check_output = cl.check_output
 
@@ -133,8 +133,6 @@ class Batch:
             self.config_files = list(map(os.path.abspath, cl.config_file))
         else:
             self.config_files = []
-
-        self.run_dir = cl.run_dir
 
         if cl.workflow:
             self.workflow = cl.workflow
