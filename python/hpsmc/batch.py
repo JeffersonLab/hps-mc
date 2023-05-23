@@ -40,13 +40,13 @@ class Batch:
         parser.add_argument("-l", "--log-dir", nargs='?', help="Log file output dir", required=False, default=str(Path(os.getcwd(), 'logs')))
         parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (must be an absolute path)", default=None)
         parser.add_argument("-S", "--sh-dir", nargs='?', help="Dir to hold sh scripts to submit jobs via Slurm", default="./sh")
-        parser.add_argument( "-q", "--queue", nargs='?',
-            help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)",
-            required=False)
+        parser.add_argument("-q", "--queue", nargs='?',
+                            help="Job queue for submission (e.g. 'long' or 'medium' at SLAC or 'simulation' at JLAB)",
+                            required=False)
         parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
-        parser.add_argument( "-p", "--pool-size", type=int,
-            help="Job pool size (only applicable when running pool)", required=False,
-            default=multiprocessing.cpu_count())
+        parser.add_argument("-p", "--pool-size", type=int,
+                            help="Job pool size (only applicable when running pool)", required=False,
+                            default=multiprocessing.cpu_count())
         parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
         #parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False)
@@ -103,7 +103,7 @@ class Batch:
         if self.run_dir is not None:
             logger.info('run dir: {}'.format(self.run_dir))
             if not os.path.isabs(self.run_dir):
-                # Require that the run dir is supplied as an abs path 
+                # Require that the run dir is supplied as an abs path
                 raise Exception("The run dir for batch processing must be an abs path.")
 
         self.check_output = cl.check_output
@@ -319,8 +319,8 @@ class Slurm(Batch):
         sh_file.write('\necho ---- Start Environment ----\n')
         sh_file.write('env | sort\n')
         sh_file.write('echo ---- End Environment ----\n\n')
-        sh_file.write('time ' + \
-            ' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
+        sh_file.write('time ' +
+                      ' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
         sh_file.write('echo End time: `date`\n')
         sh_file.close()
         cmd.append(sh_filename)
@@ -487,6 +487,7 @@ class Auger(Batch):
             dest_file = os.path.abspath(os.path.join(outputdir, dest))
             if dest_file.startswith("/mss"):
                 dest_file = "mss:%s" % dest_file
+            logger.debug('Auger dest file: {} -> {}'.format(src, dest))
             output_elem.set("dest", dest_file)
 
         job_name = ET.SubElement(job, "Name")
