@@ -15,6 +15,7 @@ import signal
 import multiprocessing
 import psutil
 from pathlib import Path
+import socket
 
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
@@ -208,7 +209,7 @@ class Batch:
             job_data = self.jobstore.get_job(job_id)
             self._submit_job(job_id, job_data)
 
-    def build_cmd(self, job_id, job_params, set_job_dir=True):
+    def build_cmd(self, job_id, job_params):
         """!
         Create the command to run a single job.
 
@@ -218,15 +219,17 @@ class Batch:
         cmd = [sys.executable, run_script, 'run']
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
-        if set_job_dir:
-            job_path = []
-            # Do not assume dir is set as batch system may start job in the correct dir automatically
-            if self.run_dir is not None:
-                job_path.append(self.run_dir)
-            job_path.append(str(job_id))
-            job_dir = str(Path(*job_path))
+        if self.run_dir:
+            # Set the job's run dir explicitly. 
+            job_dir = str(Path([self.run_dir, str(job_id)]))
             logger.debug(f'job dir: {job_dir}')
+                
             cmd.extend(['-d', job_dir])
+        elif 'slac.stanford.edu' in socket.getfqdn():
+            # Use the batch node scratch dir at SLAC.
+            logger.debug('$LSCRATCH dir will be used as job dir (SLAC)')
+            cmd.extend(['-d', '${LSCRATCH}'])
+
         if len(self.config_files):
             for cfg in self.config_files:
                 cmd.extend(['-c', cfg])
@@ -320,7 +323,7 @@ class Slurm(Batch):
         sh_file.write('env | sort\n')
         sh_file.write('echo ---- End Environment ----\n\n')
         sh_file.write('time ' +
-                      ' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
+                      ' '.join(Batch.build_cmd(self, name, job_params)) + '\n')
         sh_file.write('echo End time: `date`\n')
         sh_file.close()
         cmd.append(sh_filename)
