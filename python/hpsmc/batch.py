@@ -94,7 +94,7 @@ class Batch:
         # Set Slurm scripts dir
         self.sh_dir = os.path.abspath(cl.sh_dir)
         logger.info('sh dir: {}'.format(self.sh_dir))
-        if not os.path.exists(self.log_dir):
+        if not os.path.exists(self.sh_dir):
             os.makedirs(self.sh_dir)
             logger.info('Created sh dir: {}'.format(self.sh_dir))
 
@@ -156,12 +156,13 @@ class Batch:
         """
         return NotImplementedError
 
+    # FIXME: This is dumb. It should instead return a list of job IDs with missing outputs.
     @staticmethod
     def _outputs_exist(job):
         """! Check if job outputs exist.  Return False when first missing output is found."""
         for src, dest in job["output_files"].items():
             if not os.path.isfile(os.path.join(job["output_dir"], dest)):
-                # logger.warning('Job output does not exist: %s' % (dest))
+                logger.debug('Job output does not exist: %s -> %s' % (src, dest))
                 return False
         return True
 
@@ -170,11 +171,13 @@ class Batch:
         Get a list of job IDs to submit based on parsed command line options.
         """
         submit_ids = self.jobstore.get_job_ids()
+        logger.debug('Submit IDs: {}'.format(str(submit_ids)))
         if self.start_job_num:
             submit_ids = [job_id for job_id in submit_ids
                           if int(job_id) >= self.start_job_num and int(job_id) <= self.end_job_num]
         elif len(self.job_ids):
             submit_ids = self.job_ids
+        logger.debug('Submit IDs after range check: {}'.format(str(submit_ids)))
         if self.check_output:
             logger.debug('Checking output files...')
             submit_ids = [job_id for job_id in submit_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
@@ -216,7 +219,13 @@ class Batch:
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
         if set_job_dir:
-            job_dir = os.path.join(self.run_dir, str(job_id))
+            job_path = []
+            # Do not assume dir is set as batch system may start job in the correct dir automatically
+            if self.run_dir is not None:
+                job_path.append(self.run_dir)
+            job_path.append(str(job_id))
+            job_dir = str(Path(*job_path))
+            logger.debug(f'job dir: {job_dir}')
             cmd.extend(['-d', job_dir])
         if len(self.config_files):
             for cfg in self.config_files:
@@ -289,7 +298,7 @@ class Slurm(Batch):
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
     def build_cmd(self, name, job_params):
-        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
+        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s' % str(name)))
 
         queue = self.queue
         if queue is None:
@@ -299,16 +308,20 @@ class Slurm(Batch):
                '--time=%s' % (str(self.job_length) + ':00:00'),
                '--partition=%s' % queue,
                '--mem=%sM' % self.memory,
-               '--job-name=hps%i' % (job_params['job_id']),
-               '--output=%s.out' % log_file]
+               '--job-name=%s%i' % (self.script_name, job_params['job_id']),
+               '--output=%s.out' % log_file,
+               '--error=%s.err' % log_file]
         sh_filename = self.sh_dir + '/job.%i.sh' % job_params['job_id']
         sh_file = open(sh_filename, 'w')
-        #sh_file.write('#!/usr/bin/scl enable devtoolset-8 -- /bin/bash\n')
-        sh_file.write('#!/bin/bash\n')
-        #sh_file.write('source ' + str(Path(os.environ['HPSMC_DIR'], 'bin', 'hps-mc-env.sh')) + '\n')
-        sh_file.write('mkdir -p %s/%i\n' % (self.run_dir, job_params['job_id']))
-        sh_file.write('cd %s/%i\n' % (self.run_dir, job_params['job_id']))
-        sh_file.write(' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
+        sh_file.write('#!/bin/bash\n\n')
+        sh_file.write('echo Start time: `date`\n')
+        sh_file.write('echo PWD=`pwd`\n')
+        sh_file.write('\necho ---- Start Environment ----\n')
+        sh_file.write('env | sort\n')
+        sh_file.write('echo ---- End Environment ----\n\n')
+        sh_file.write('time ' + \
+            ' '.join(Batch.build_cmd(self, name, job_params, set_job_dir=True)) + '\n')
+        sh_file.write('echo End time: `date`\n')
         sh_file.close()
         cmd.append(sh_filename)
 
