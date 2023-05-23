@@ -10,7 +10,7 @@
         "output_files": {
             "beam_1.slcio": "beam_4pt55_20um120nA_1.slcio"
         },
-        "output_dir": "../../output",
+        "output_dir": "output",
         "job_id": 1,
         "year": 2019
     }
