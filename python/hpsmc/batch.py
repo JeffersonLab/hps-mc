@@ -1,9 +1,10 @@
 """!
 @package batch
-Scripts for submitting batch jobs.
 
-Provides a set of scripts for submitting batch jobs including support for
-local running, a multiprocessing pool, LSF, and Auger.
+Defines a set of classes and a command-line interface for submitting batch jobs.
+
+Supported systems include serial execution locally, a multiprocessing pool,
+Slurm, LSF, and Auger.
 """
 
 import os
@@ -22,6 +23,8 @@ from xml.dom import minidom
 from xml.sax.saxutils import unescape
 from distutils.spawn import find_executable
 
+from abc import ABC, abstractmethod
+
 from hpsmc.job import Job, JobStore, JobScriptDatabase
 
 logger = logging.getLogger("hpsmc.batch")
@@ -29,8 +32,10 @@ logger = logging.getLogger("hpsmc.batch")
 RUN_SCRIPT = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
 
-class Batch:
-    """! Generic batch processing interface."""
+class Batch(ABC):
+    """! 
+    Generic batch processing interface.
+    """
 
     def __init__(self):
 
@@ -120,12 +125,12 @@ class Batch:
 
         return cl
 
-    def submit_cmd(self, job_id, job_data):
+    @abstractmethod
+    def submit_cmd(self, job_id):
         """!
         Submit a single batch job and return the batch ID.
-        Must be implemented by derived classes for a specific batch system.
         """
-        return NotImplementedError
+        pass
 
     @staticmethod
     def _outputs_exist(job):
@@ -149,11 +154,11 @@ class Batch:
             submit_ids = self.job_ids
         logger.debug('job IDs after range check: {}'.format(str(submit_ids)))
         if self.check_output:
-            submit_ids = self._jobs_ids_missing_output(submit_ids)
+            submit_ids = self._job_ids_missing_output(submit_ids)
             logger.info('job IDs after output file check: {}'.format(str(submit_ids)))
         return submit_ids
 
-    def _jobs_ids_missing_output(self, job_ids):
+    def _job_ids_missing_output(self, job_ids):
         return [job_id for job_id in job_ids if not self._outputs_exist(self.jobstore.get_job(job_id))]
 
     def submit(self):
@@ -164,11 +169,11 @@ class Batch:
         logger.info('Submitting jobs: %s' % str(job_ids))
         self._submit_jobs(job_ids)
 
-    def _submit_job(self, job_id, job):
+    def _submit_job(self, job_id):
         """! Submit a single job to the batch system."""
         batch_id = None
-        batch_id = self.submit_cmd(job_id, job)
-        logger.info("Submitted job %s with batch ID %s" % (job_id, str(batch_id)))
+        batch_id = self.submit_cmd(job_id)
+        logger.info(f"Submitted job {job_id} with batch ID {str(batch_id)}")
         return batch_id
 
     def _submit_jobs(self, job_ids):
@@ -177,9 +182,9 @@ class Batch:
             if not self.jobstore.has_job_id(job_id):
                 raise Exception('Job ID was not found in job store: %s' % job_id)
             job_data = self.jobstore.get_job(job_id)
-            self._submit_job(job_id, job_data)
+            self._submit_job(job_id)
 
-    def build_cmd(self, job_id, job_params):
+    def build_cmd(self, job_id):
         """!
         Create the command to run a single job.
 
@@ -206,23 +211,25 @@ class Batch:
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd
 
-
-class BatchSystem(Batch):
-    """! A batch processing system like Slurm."""
+class BatchSystem(Batch, ABC):
+    """! 
+    Represents a batch processing system that requires submission like Slurm or Auger.
+    """
 
     def __init__(self):
 
         super().__init__()
 
         self.parser.add_argument("-q", "--queue", nargs='?',
-                                 help="Job queue for submission (e.g. 'long' or 'medium' at SLAC; 'simulation' at JLAB)",
+                                 help="Job queue or partition",
                                  required=False)
-        self.parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
-        self.parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
-        self.parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
+        self.parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=4)
+        self.parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB", default=2000)
+        self.parser.add_argument("-e", "--email", nargs='?', help="Email address for job notifications", required=False)
+        ## \todo Make sure this is applied to Slurm as well.
         self.parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
 
-        # Set site to JLab or SLAC based on FQDN
+        # Set site based on FQDN
         self.site = BatchSystem._site()
 
     def parse_args(self, args):
@@ -237,6 +244,13 @@ class BatchSystem(Batch):
         self.job_length = cl.job_length
 
         return cl
+
+    @abstractmethod
+    def submit_cmd(self, job_id, job_data):
+        """!
+        Submit a single batch job and return the batch ID.
+        """
+        pass
 
     @staticmethod
     def _site():
@@ -261,8 +275,9 @@ class LSF(BatchSystem):
         if self.email:
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
-    def build_cmd(self, name, job_params):
-        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(name)))
+    def build_cmd(self, job_id):
+
+        log_file = os.path.abspath(os.path.join(self.log_dir, 'job.%s.log' % str(job_id)))
 
         queue = self.queue
         if queue is None:
@@ -279,7 +294,8 @@ class LSF(BatchSystem):
                '-R', lsf_os,
                '-o', log_file,
                '-e', log_file]
-        cmd.extend(Batch.build_cmd(self, name, job_params, set_job_dir=False))
+        
+        cmd.extend(super().build_cmd(self, job_id))
 
         return cmd
 
@@ -337,32 +353,39 @@ class Slurm(BatchSystem):
                 raise Exception('No queue name was provided.')
         return queue
 
-    def _logfile(self, name):
-        return os.path.abspath(os.path.join(self.log_dir, 'job.%s' % str(name)))
+    def _logfile(self, job_id):
+        return os.path.abspath(os.path.join(self.log_dir, 'job.%s' % str(job_id)))
 
-    def _sbatch(self, name, job_params):
-        log_file = self._logfile(name)
-        return ['sbatch',
-                '--time=%s' % (str(self.job_length) + ':00:00'),
-                '--partition=%s' % self._queue(),
-                '--mem=%sM' % self.memory,
-                '--job-name=%s_%i' % (self.script_name, job_params['job_id']),
-                '--output=%s.out' % log_file,
-                '--error=%s.err' % log_file]
+    def _sbatch(self, job_id):
+        log_file = self._logfile(job_id)
+        sbatch_cmd = ['sbatch',
+                      '--time=%s' % (str(self.job_length) + ':00:00'),
+                      '--partition=%s' % self._queue(),
+                      '--mem=%sM' % self.memory,
+                      '--job-name=%s_%i' % (self.script_name, job_id),
+                      '--output=%s.out' % log_file,
+                      '--error=%s.err' % log_file]
+        if self.email:
+            sbatch_cmd.extend([f'--mail-user={self.email}',
+                               f'--mail-type=ALL'])
+        return sbatch_cmd
 
     def _sh_filename(self, job_id):
         return self.sh_dir + '/job.%i.sh' % job_id
 
-    def build_cmd(self, name, job_params):
+    def build_cmd(self, job_id):
+        """!
+        Wrap submission of Slurm jobs using a generated script.
+        """
 
         # Get the sbatch command
-        cmd = self._sbatch(name, job_params)
+        cmd = self._sbatch(job_id)
 
         # Get name of shell script to generate
-        sh_filename = self._sh_filename(job_params['job_id'])
+        sh_filename = self._sh_filename(job_id)
 
         # Build the basic job command for execution
-        job_cmd = super().build_cmd(name, job_params)
+        job_cmd = super().build_cmd(job_id)
         if self.run_dir is None:
             # The superclass will have already set this if the user provided an
             # explicit run dir. Here we set a default scratch directory if none
@@ -378,6 +401,9 @@ class Slurm(BatchSystem):
         return cmd
 
     def _write_job_script(self, sh_filename, job_cmd):
+        """!
+        Write the shell script for Slurm job submission using the 'sbatch' command.
+        """
 
         script_lines = ['#!/bin/bash',
                         ''
@@ -397,8 +423,8 @@ class Slurm(BatchSystem):
 
         logger.debug('Wrote Slurm submission script to: '.format(str(Path(self.sh_dir, sh_filename))))
 
-    def submit_cmd(self, name, job_params):
-        cmd = self.build_cmd(name, job_params)
+    def submit_cmd(self, name):
+        cmd = self.build_cmd(name)
         logger.info('Submitting job %s to Slurm with command: %s' % (name, ' '.join(cmd)))
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out, err = proc.communicate()
@@ -422,6 +448,13 @@ class Auger(BatchSystem):
 
         if not self.setup_script:
             raise Exception("Failed to find 'hps-mc-env.csh' in environment.")
+
+    ## \todo Implement this properly for Auger. 
+    def submit_cmd(self, job_id):
+        """!
+        Submit a single batch job and return the batch ID.
+        """
+        pass
 
     def submit(self):
         """Primary batch submission method for Auger."""
@@ -508,23 +541,19 @@ class Auger(BatchSystem):
         os_elem.set("name", auger_os)
         return req
 
-    def build_cmd(job_id, job_params, job_script, jobstore, config_files=[], job_steps=None):
+    def build_cmd(self, job_id):
         cmd = [sys.executable, RUN_SCRIPT, 'run']
-        if len(config_files):
-            for cfg in config_files:
+        if len(self.config_files):
+            for cfg in self.config_files:
                 cmd.extend(['-c', cfg])
-        if job_steps is not None:
-            cmd.extend(['--job-steps', str(job_steps)])
+        if self.job_steps is not None:
+            cmd.extend(['--job-steps', str(self.job_steps)])
         cmd.extend(['-i', str(job_id)])
-        cmd.append(job_script)
-        cmd.append(os.path.abspath(jobstore.path))
+        cmd.append(self.job_script)
+        cmd.append(os.path.abspath(self.jobstore.path))
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd
-
-    @staticmethod
-    def build_cmd(self, job_id, job_params):
-        return Batch.build_cmd(job_id, job_params, self.script, self.jobstore, self.config_files, self.job_steps)
-
+        
     def _create_job(self, params):
         """! Needed for resolving ptag output sources."""
         j = Job()
@@ -628,8 +657,6 @@ class Swif(Auger):
 
     def submit(self):
 
-        # if self.workflow is None:
-        #    raise Exception("Workflow name is required for swif2 submission")
         logger.info("Submitting swif workflow: {}".format(self.workflow))
 
         # Write request to XML file
@@ -656,17 +683,17 @@ class Local(Batch):
     def __init__(self):
         super().__init__()
 
-    def submit_cmd(self, name, job_params):
+    def submit_cmd(self, job_id):
         """! Run a single job locally."""
 #        log_out = file(os.path.abspath(os.path.join(self.log_dir, name+".log")), 'w')
-        cmd = self.build_cmd(name, job_params)
+        cmd = self.build_cmd(job_id)
         if self.submit:
-            logger.info("Executing local job %s" % name)
+            logger.info(f"Executing local job: {job_id}")
             proc = subprocess.Popen(cmd, shell=False)
             proc.communicate()
 #            log_out.close()
             if proc.returncode:
-                logger.error("Local execution of '%s' returned error code: %d" % (name, proc.returncode))
+                logger.error(f"Local execution of {job_id} returned error code: {proc.returncode}")
 
 
 # Queue used to keep track of processes created by batch pool.
@@ -739,6 +766,13 @@ class Pool(Batch):
         self.parser.add_argument("-p", "--pool-size", type=int,
                                  help="Job pool size (only applicable when running pool)", required=False,
                                  default=multiprocessing.cpu_count())
+
+    ## \todo Implement this properly for Pool. 
+    def submit_cmd(self, job_id):
+        """!
+        Submit a single batch job and return the batch ID.
+        """
+        pass
 
     def parse_args(self, args):
         cl = super().parse_args(args)
