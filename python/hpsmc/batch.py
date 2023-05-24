@@ -330,7 +330,7 @@ class Slurm(BatchSystem):
         queue = self.queue
         if queue is None:
             if self.site == 'slac':
-                queue = 'hps'
+                queue = 'shared'
             elif self.site == 'jlab':
                 queue = 'ifarm'
             else:
