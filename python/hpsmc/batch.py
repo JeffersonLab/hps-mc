@@ -304,16 +304,11 @@ class Slurm(BatchSystem):
 
         super().__init__()
 
-        os.environ["LSB_JOB_REPORT_MAIL"] = "N"
-
         self.parser.add_argument("-S", "--sh-dir", nargs='?', help="Directory to hold generated shell scripts for Slurm", default=str(Path(os.getcwd(), 'sh')))
 
     def parse_args(self, args):
 
         cl = super().parse_args(args)
-
-        if self.email:
-            os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
 
         # Set Slurm scripts dir
         self.sh_dir = os.path.abspath(cl.sh_dir)
@@ -595,11 +590,11 @@ class Auger(BatchSystem):
         job_cmd = self.build_cmd(job_id, job_params)
 
         # Write log file locally so it can be copied back with Output element
-        #log_file = 'job.%d.log' % job_id
-        #job_cmd.extend(['-l', '$PWD/%s' % log_file])
-        #log_out_elem = ET.SubElement(job, "Output")
-        #log_out_elem.set('src', log_file)
-        #log_out_elem.set('dest', os.path.join(self.log_dir, log_file))
+        # log_file = 'job.%d.log' % job_id
+        # job_cmd.extend(['-l', '$PWD/%s' % log_file])
+        # log_out_elem = ET.SubElement(job, "Output")
+        # log_out_elem.set('src', log_file)
+        # log_out_elem.set('dest', os.path.join(self.log_dir, log_file))
 
         cmd_lines.extend(job_cmd)
         cmd_lines.append(';\n')
