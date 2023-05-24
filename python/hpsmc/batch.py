@@ -28,6 +28,7 @@ logger = logging.getLogger("hpsmc.batch")
 
 RUN_SCRIPT = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')
 
+
 class Batch:
     """! Generic batch processing interface."""
 
@@ -35,7 +36,7 @@ class Batch:
 
         parser = argparse.ArgumentParser(self.__class__.__name__,
                                          epilog='Available scripts: %s' % ', '.join(JobScriptDatabase().get_script_names()))
-        
+
         parser.add_argument("-c", "--config-file", nargs='?', help="Config file", action='append')
         parser.add_argument("-l", "--log-dir", nargs='?', help="Log file output dir", required=False, default=str(Path(os.getcwd(), 'logs')))
         parser.add_argument("-d", "--run-dir", nargs='?', help="Base run dir for the jobs (must be an absolute path)", default=None)
@@ -46,7 +47,7 @@ class Batch:
         parser.add_argument("script", nargs='?', help="Name of job script")
         parser.add_argument("jobstore", nargs='?', help="Job store in JSON format")
         parser.add_argument("jobids", nargs="*", type=int, help="List of individual job IDs to submit (optional)")
-        
+
         self.parser = parser
 
     def parse_args(self, args):
@@ -189,11 +190,11 @@ class Batch:
         cmd.extend(['-o', os.path.join(self.log_dir, 'job.%d.out' % job_id),
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
         if self.run_dir:
-            # Set the job's run dir explicitly. 
+            # Set the job's run dir explicitly.
             job_dir = str(Path(self.run_dir, str(job_id)))
-            logger.debug(f'job dir: {job_dir}')                
+            logger.debug(f'job dir: {job_dir}')
             cmd.extend(['-d', job_dir])
-       
+
         if len(self.config_files):
             for cfg in self.config_files:
                 cmd.extend(['-c', cfg])
@@ -205,6 +206,7 @@ class Batch:
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd
 
+
 class BatchSystem(Batch):
     """! A batch processing system like Slurm."""
 
@@ -213,8 +215,8 @@ class BatchSystem(Batch):
         super().__init__()
 
         self.parser.add_argument("-q", "--queue", nargs='?',
-                            help="Job queue for submission (e.g. 'long' or 'medium' at SLAC; 'simulation' at JLAB)",
-                            required=False)
+                                 help="Job queue for submission (e.g. 'long' or 'medium' at SLAC; 'simulation' at JLAB)",
+                                 required=False)
         self.parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=48)
         self.parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB (Auger)", default=1000)
         self.parser.add_argument("-e", "--email", nargs='?', help="Your email address if you want to get job system emails (default is off)", required=False)
@@ -245,6 +247,7 @@ class BatchSystem(Batch):
         elif 'jlab.org' in fqdn:
             site = 'jlab'
         return site
+
 
 class LSF(BatchSystem):
     """! Submit LSF batch jobs."""
@@ -298,27 +301,27 @@ class Slurm(BatchSystem):
     """! Submit Slurm batch jobs."""
 
     def __init__(self):
-        
+
         super().__init__()
 
         os.environ["LSB_JOB_REPORT_MAIL"] = "N"
-        
+
         self.parser.add_argument("-S", "--sh-dir", nargs='?', help="Directory to hold generated shell scripts for Slurm", default=str(Path(os.getcwd(), 'sh')))
-    
+
     def parse_args(self, args):
-        
+
         cl = super().parse_args(args)
-        
+
         if self.email:
             os.environ["LSB_JOB_REPORT_MAIL"] = "Y"
-        
+
         # Set Slurm scripts dir
         self.sh_dir = os.path.abspath(cl.sh_dir)
         logger.info('Slurm sh dir: {}'.format(self.sh_dir))
         if not os.path.exists(self.sh_dir):
             os.makedirs(self.sh_dir)
             logger.info('Created Slurm sh dir: {}'.format(self.sh_dir))
- 
+
     def _default_rundir(self):
         if self.site == 'slac':
             run_dir = '$LSCRATCH'
@@ -338,19 +341,19 @@ class Slurm(BatchSystem):
             else:
                 raise Exception('No queue name was provided.')
         return queue
-    
+
     def _logfile(self, name):
         return os.path.abspath(os.path.join(self.log_dir, 'job.%s' % str(name)))
-    
+
     def _sbatch(self, name, job_params):
         log_file = self._logfile(name)
         return ['sbatch',
-               '--time=%s' % (str(self.job_length) + ':00:00'),
-               '--partition=%s' % self._queue(),
-               '--mem=%sM' % self.memory,
-               '--job-name=%s_%i' % (self.script_name, job_params['job_id']),
-               '--output=%s.out' % log_file,
-               '--error=%s.err' % log_file]
+                '--time=%s' % (str(self.job_length) + ':00:00'),
+                '--partition=%s' % self._queue(),
+                '--mem=%sM' % self.memory,
+                '--job-name=%s_%i' % (self.script_name, job_params['job_id']),
+                '--output=%s.out' % log_file,
+                '--error=%s.err' % log_file]
 
     def _sh_filename(self, job_id):
         return self.sh_dir + '/job.%i.sh' % job_id
@@ -359,7 +362,7 @@ class Slurm(BatchSystem):
 
         # Get the sbatch command
         cmd = self._sbatch(name, job_params)
-                
+
         # Get name of shell script to generate
         sh_filename = self._sh_filename(job_params['job_id'])
 
@@ -390,7 +393,7 @@ class Slurm(BatchSystem):
                         'echo ---- End Environment ----',
                         'time ' + ' '.join(job_cmd),
                         'echo End time: `date`']
-        
+
         logger.debug("Slurm submission script:\n" + str(script_lines))
 
         with open(sh_filename, 'w') as sh_file:
@@ -741,6 +744,7 @@ class Pool(Batch):
         self.parser.add_argument("-p", "--pool-size", type=int,
                                  help="Job pool size (only applicable when running pool)", required=False,
                                  default=multiprocessing.cpu_count())
+
     def parse_args(self, args):
         cl = super().parse_args(args)
         self.pool_size = int(cl.pool_size)
