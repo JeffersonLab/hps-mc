@@ -190,9 +190,8 @@ class Batch:
                     '-e', os.path.join(self.log_dir, 'job.%d.err' % job_id)])
         if self.run_dir:
             # Set the job's run dir explicitly. 
-            job_dir = str(Path([self.run_dir, str(job_id)]))
-            logger.debug(f'job dir: {job_dir}')
-                
+            job_dir = str(Path(self.run_dir, str(job_id)))
+            logger.debug(f'job dir: {job_dir}')                
             cmd.extend(['-d', job_dir])
        
         if len(self.config_files):
@@ -657,7 +656,7 @@ class Local(Batch):
     """! Run a local batch jobs sequentially."""
 
     def __init__(self):
-        super.__init__()
+        super().__init__()
 
     def submit_cmd(self, name, job_params):
         """! Run a single job locally."""
@@ -738,7 +737,7 @@ class Pool(Batch):
     max_wait = 999999
 
     def __init__(self):
-        super.__init__()
+        super().__init__()
         self.parser.add_argument("-p", "--pool-size", type=int,
                                  help="Job pool size (only applicable when running pool)", required=False,
                                  default=multiprocessing.cpu_count())
