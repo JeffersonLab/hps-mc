@@ -19,7 +19,7 @@ import pathlib
 from collections.abc import Sequence
 from os.path import expanduser
 
-from _config import convert_config_value
+from ._config import convert_config_value
 from hpsmc import global_config
 
 ## Initialize logger
