@@ -1,0 +1,25 @@
+{
+    "nevents": 10000,
+    "run_params": "2pt3",
+    "Map": 300.0,
+    "mchi": 100.0,
+    "dmchi": 10.0,
+    "seed": 879483,
+    "target_thickness": 0.0004062,
+    "beam_energy": 2300.0,
+    "num_electrons": 2500,
+    "target_z": -4.3,
+    "run_number": 1162300,
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "steering_files": {
+      "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim",
+      "recon": "/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"
+    },
+     "output_files": {
+       "idm_rot.slcio": "mchi_100/sim/idm_2pt3_1.slcio",
+       "idm_rot_filt.slcio": "mchi_100/filt/idm_2pt3_1.slcio",
+       "idm_rot_filt_readout.slcio": "mchi_100/readout/idm_2pt3_1.slcio",
+       "idm_rot_filt_readout_recon.slcio": "mchi_100/recon/idm_2pt3_1.slcio"
+    },
+    "output_dir": "output/HPS-PhysicsRun2016-Pass2"
+}

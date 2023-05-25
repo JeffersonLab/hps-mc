@@ -1,0 +1,26 @@
+{
+    "nevents": {{ nevents }}, 
+    "run_params": "{{ run_params }}",
+    "target_thickness": {{ target_thickness }},
+    "beam_energy": {{ beam_energy }},
+    "num_electrons": {{ num_electrons }},
+    "target_z": {{ target_z }},
+    "Map": {% set map = "%0.2f"%(rmap*mchi) %}{{map|float}},
+    "mchi": {{ mchi }},
+    "dmchi": {% set dmchi = "%0.2f"%(rdmchi*mchi) %}{{dmchi|float}},
+    "run_number": {{ run_number }},
+    "seed": {{job_id + 879482}}, 
+    "detector": "{{ detector }}",
+    "filter_no_cuts": true,
+    "steering_files": {
+        "readout": "{{ steering_readout }}",
+        "recon": "{{ steering_reco }}"
+    },
+    "output_files": {
+        "idm_rot.slcio": "mchi_{{ mchi }}/sim/idm_{{ run_params }}_{{ job_id }}.slcio",
+        "idm_rot_filt.slcio": "mchi_{{ mchi }}/filt/idm_{{ run_params }}_{{ job_id }}.slcio",
+        "idm_rot_filt_readout.slcio": "mchi_{{ mchi }}/readout/idm_{{ run_params }}_{{ job_id }}.slcio",
+        "idm_rot_filt_readout_recon.slcio": "mchi_{{ mchi }}/recon/idm_{{ run_params }}_{{ job_id }}.slcio"
+    },
+    "output_dir": "output/{{ detector }}"
+}

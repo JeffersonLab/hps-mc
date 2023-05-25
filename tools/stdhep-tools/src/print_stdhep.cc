@@ -5,7 +5,7 @@
 #include <stdhep_util.hh>
 
 /**
- * Takes input stdhep file, merges a fixed number of events, and writes to a new stdhep file.
+ * prints the first N events from the input stdhep file
  */
 int main(int argc,char** argv)
 {
