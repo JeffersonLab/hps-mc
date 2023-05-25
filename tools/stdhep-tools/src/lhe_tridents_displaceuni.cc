@@ -50,7 +50,7 @@ void displace_vertex(vector<stdhep_entry> *event, gsl_rng *r, double decay_lengt
   int ap_id = -1;
   double vx[4];
   for (int i = 0; i < event->size(); i++) {
-    if (event->at(i).idhep == 625) {
+    if (event->at(i).idhep == 625 || event->at(i).idhep == 1000023) {
       if (ap_id != -1) {
         printf("multiple A' found\n");
         break;
@@ -157,11 +157,10 @@ int main(int argc, char** argv)
     for (int i = 0; i < nup; i++) {
       struct stdhep_entry *temp = new struct stdhep_entry;
       fgets(line, 1000, in_file);
-      int icolup0, icolup1;
-      double phep0 = 100.0;
-      char blah[1000];
-      sscanf(line, "%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f", &(temp->idhep), &(temp->isthep), &(temp->jmohep[0]), &(temp->jmohep[1]), &(temp->phep[0]), &(temp->phep[1]), &(temp->phep[2]), &(temp->phep[3]), &(temp->phep[4]));
-      //int status = sscanf(line,"%d %d %d %d %*d %*d %s",&(temp->idhep),&istup,&(temp->jmohep[0]),&(temp->jmohep[1]),blah);
+      sscanf(line, "%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f",
+          &(temp->idhep), &(temp->isthep),
+          &(temp->jmohep[0]), &(temp->jmohep[1]),
+          &(temp->phep[0]), &(temp->phep[1]), &(temp->phep[2]), &(temp->phep[3]), &(temp->phep[4]));
       switch (temp->isthep) {
         case 1:
         case 2:
