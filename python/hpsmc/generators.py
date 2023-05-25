@@ -196,14 +196,20 @@ class MG(EventGenerator):
         # map = mass of the A-prime
         # mpid = mass of the dark pion
         # mrhod = mass of the dark rho
-        ## A-prime mass? \todo apmass or map is A-prime mass?
+        ## A-prime mass \note map and Map are also A' masses
         self.apmass = None
-        ## A-prime mass? \todo apmass or map is A-prime mass?
+        ## A-prime mass \note apmass and Map are also A' masses
         self.map = None
+        ## A-prime mass \note apmass and map are also A' masses
+        self.Map = None
         ## dark pion mass
         self.mpid = None
         ## dark rho mass
         self.mrhod = None
+        ## average dark fermion mass when running idm
+        self.mchi = None
+        ## difference between dark fermion masses when running idm
+        self.dmchi = None
 
         if 'event_types' in kwargs:
             ## event types: weighted or unweighted
@@ -240,9 +246,9 @@ class MG(EventGenerator):
         """!
         Return optional parameters.
 
-        Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod**
+        Optional parameters are: **seed**, **param_card**, **apmass**, **map**, **mpid**, **mrhod**, **Map**, **mchi**, **dmchi**
         """
-        return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod']
+        return ['seed', 'param_card', 'apmass', 'map', 'mpid', 'mrhod', 'Map', 'mchi', 'dmchi']
 
     # def required_config(self):
     #    return ['madgraph_dir']
@@ -284,6 +290,12 @@ class MG(EventGenerator):
                 data[i] = "      624 %.7fe-03 # mpid" % (self.mpid) + '\n'
             if "mrhod" in data[i] and self.mrhod is not None:
                 data[i] = "      625 %.7fe-03 # mrhod" % (self.mrhod) + '\n'
+            if "Map" in data[i] and "ap :" not in data[i] and self.Map is not None:
+                data[i] = "    1 %.7e # Map\n" % (self.Map/1000)
+            if "Mchi" in data[i] and "dMchi" not in data[i] and self.mchi is not None:
+                data[i] = "    1 %.7e # Mchi\n" % (self.mchi/1000)
+            if "dMchi" in data[i] and "Mchi/2" not in data[i] and self.dmchi is not None:
+                data[i] = "    2 %.7e # dMchi" % (self.dmchi/1000)
 
         with open(param_card, 'w') as paramout:
             paramout.writelines(data)
@@ -391,7 +403,9 @@ class MG5(MG):
     dir_map = {"BH": "BH",
                "RAD": "RAD",
                "tritrig": "tritrig",
-               "simp": "simp"}
+               "simp": "simp",
+               "idm": "idm",
+               }
 
     def __init__(self, name='tritrig', **kwargs):
 
