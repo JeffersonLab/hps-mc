@@ -30,12 +30,12 @@ var NAVTREE =
     [ "stdhep-tools", "stdheptools.html", null ],
     [ "misalignment", "misalign.html", [
       [ "Parameters", "misalign.html#autotoc_md2", [
-        [ "Documented files", "index.html#autotoc_md43", [
-          [ "External documentation", "index.html#autotoc_md44", null ]
+        [ "Documented files", "index.html#autotoc_md45", [
+          [ "External documentation", "index.html#autotoc_md46", null ]
         ] ],
-        [ "Installation", "index.html#autotoc_md45", null ],
-        [ "Quick Start Guide", "index.html#autotoc_md46", null ],
-        [ "Help", "index.html#autotoc_md47", null ],
+        [ "Installation", "index.html#autotoc_md47", null ],
+        [ "Quick Start Guide", "index.html#autotoc_md48", null ],
+        [ "Help", "index.html#autotoc_md49", null ],
         [ "parameters", "misalign.html#autotoc_md6", null ]
       ] ]
     ] ],
@@ -47,6 +47,7 @@ var NAVTREE =
     [ "alignment", "alignment.html", null ],
     [ "Tracking for Alignment", "trackingalign.html", null ],
     [ "Examples", "examples.html", "examples" ],
+    [ "iDM generation to reconstruction pipeline", "idm.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
     [ "Data conversion/reco – evio to lcio", "ana1921pass0.html", null ],
     [ "Production scripts", "prod.html", null ],
@@ -86,11 +87,11 @@ var NAVTREEINDEX =
 "classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#aeb6e8a0e0691d933ea682c4a8f5ec314",
 "classhpsmc_1_1job__template_1_1JobData.html#ae64f0875afe3067b97ba370b354b9213",
 "classtest_1_1test__func_1_1TestLint.html#aa0e1aac9aa12f6290b3f951d8bc9f9d1",
-"dir_69083470f9b9a6503e5e68a008405ff8.html",
-"namespaceap__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4",
-"namespacereadout__recon__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d",
-"pede.html",
-"stdhep__util_8hh.html#a1b2a7543aca488dba0b07e46ad35a821"
+"dir_5efb4d6afddd3e46bc1a6427a4869f6e.html",
+"mix__signal_8cc_source.html",
+"namespacemoller__gen__job.html#adcc537972519ce9a382a1f3be803c91c",
+"namespacetritrig__slic__full__chain__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1",
+"stdhep__mcfio_8h.html#a82be3451d2c03db78eb8767cf3db4dae"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

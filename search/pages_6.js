@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['job_20framework_1797',['Job framework',['../jobframework.html',1,'']]],
-  ['job_20scripts_1798',['Job scripts',['../jobscripts.html',1,'']]],
-  ['job_20template_1799',['Job Template',['../jobtemplate.html',1,'examples']]]
+  ['idm_20generation_20to_20reconstruction_20pipeline_1804',['iDM generation to reconstruction pipeline',['../idm.html',1,'']]]
 ];

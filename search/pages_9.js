@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['radiative_20event_20generation_1804',['Radiative event generation',['../radgen.html',1,'examples']]],
-  ['readout_20and_20reconstruction_1805',['Readout and reconstruction',['../readoutrecon.html',1,'examples']]],
-  ['run_20examples_1806',['Run examples',['../runexamples.html',1,'examples']]]
+  ['pede_20minimizer_1810',['pede minimizer',['../pede.html',1,'']]],
+  ['production_20scripts_1811',['Production scripts',['../prod.html',1,'']]]
 ];

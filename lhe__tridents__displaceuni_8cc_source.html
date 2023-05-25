@@ -147,7 +147,7 @@ $(document).ready(function(){initNavTree('lhe__tridents__displaceuni_8cc_source.
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;  <span class="keywordtype">int</span> ap_id = -1;</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  <span class="keywordtype">double</span> vx[4];</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <span class="keyword">event</span>-&gt;size(); i++) {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (event-&gt;at(i).idhep == 625) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">if</span> (event-&gt;at(i).idhep == 625 || event-&gt;at(i).idhep == 1000023) {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keywordflow">if</span> (ap_id != -1) {</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        printf(<span class="stringliteral">&quot;multiple A&#39; found\n&quot;</span>);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">break</span>;</div>
@@ -249,42 +249,41 @@ $(document).ready(function(){initNavTree('lhe__tridents__displaceuni_8cc_source.
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; nup; i++) {</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;      <span class="keyword">struct </span><a class="code" href="structstdhep__entry.html">stdhep_entry</a> *temp = <span class="keyword">new</span> <span class="keyword">struct </span><a class="code" href="structstdhep__entry.html">stdhep_entry</a>;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      fgets(<a class="code" href="namespacepede__job.html#a4fa05b1f00fcde100685cc887554b93b">line</a>, 1000, in_file);</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      <span class="keywordtype">int</span> icolup0, icolup1;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      <span class="keywordtype">double</span> phep0 = 100.0;</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      <span class="keywordtype">char</span> blah[1000];</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      sscanf(<a class="code" href="namespacepede__job.html#a4fa05b1f00fcde100685cc887554b93b">line</a>, <span class="stringliteral">&quot;%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f&quot;</span>, &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a>), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a>), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a88fe3187d63f355dd3749528e99f12eb">jmohep</a>[0]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a88fe3187d63f355dd3749528e99f12eb">jmohep</a>[1]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[0]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[1]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[2]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[3]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[4]));</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      <span class="comment">//int status = sscanf(line,&quot;%d %d %d %d %*d %*d %s&quot;,&amp;(temp-&gt;idhep),&amp;istup,&amp;(temp-&gt;jmohep[0]),&amp;(temp-&gt;jmohep[1]),blah);</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;      <span class="keywordflow">switch</span> (temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a>) {</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;        <span class="keywordflow">case</span> -1:</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a> = 3;</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a> = 0;</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      }</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;      <span class="keywordflow">switch</span> (temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a>) {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <span class="keywordflow">case</span> 611:</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a> = 11;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        <span class="keywordflow">case</span> -611:</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a> = -11;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;          <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 4; j++) temp-&gt;<a class="code" href="structstdhep__entry.html#a6d6faaa9c2ffc62123a45b2670086ad1">vhep</a>[j] = 0.0;</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      for (<span class="keywordtype">int</span> j = 0; j &lt; 2; j++) temp-&gt;<a class="code" href="structstdhep__entry.html#ad5f4bc4614cad8987d6cd2012d013ef3">jdahep</a>[j] = 0;</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;      new_event.push_back(*temp);</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#ace2a75d993f0cea89505afdffb610f28">remove_nulls</a>(&amp;new_event);</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#a4257e460d098aef0694b773c264c21ca">set_jdahep</a>(&amp;new_event);</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#af7326eb416b57eda33e3757685a549d2">displace_vertex</a>(&amp;new_event, r, decay_length);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <a class="code" href="stdhep__util_8cpp.html#a66423f2b6106a177dfe98ed091a9aefb">write_stdhep</a>(&amp;new_event, nevhep);</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <a class="code" href="stdhep__util_8cpp.html#ac16edf3f9969dcb74e1fc5b23e015a9f">write_file</a>(ostream);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    nevhep++;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;  }</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;      sscanf(<a class="code" href="namespacepede__job.html#a4fa05b1f00fcde100685cc887554b93b">line</a>, <span class="stringliteral">&quot;%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f&quot;</span>,</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;          &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a>), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a>),</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;          &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a88fe3187d63f355dd3749528e99f12eb">jmohep</a>[0]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a88fe3187d63f355dd3749528e99f12eb">jmohep</a>[1]),</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;          &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[0]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[1]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[2]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[3]), &amp;(temp-&gt;<a class="code" href="structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28">phep</a>[4]));</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      <span class="keywordflow">switch</span> (temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a>) {</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">case</span> -1:</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a> = 3;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#ac3d1e4f226ae07092097131f848d7bc8">isthep</a> = 0;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;      }</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;      <span class="keywordflow">switch</span> (temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a>) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        <span class="keywordflow">case</span> 611:</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a> = 11;</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;        <span class="keywordflow">case</span> -611:</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;          temp-&gt;<a class="code" href="structstdhep__entry.html#a282950e052092073330dab4c294b6c88">idhep</a> = -11;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;          <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;      }</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 4; j++) temp-&gt;<a class="code" href="structstdhep__entry.html#a6d6faaa9c2ffc62123a45b2670086ad1">vhep</a>[j] = 0.0;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;      for (<span class="keywordtype">int</span> j = 0; j &lt; 2; j++) temp-&gt;<a class="code" href="structstdhep__entry.html#ad5f4bc4614cad8987d6cd2012d013ef3">jdahep</a>[j] = 0;</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;      new_event.push_back(*temp);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    }</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#ace2a75d993f0cea89505afdffb610f28">remove_nulls</a>(&amp;new_event);</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#a4257e460d098aef0694b773c264c21ca">set_jdahep</a>(&amp;new_event);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="lhe__tridents__displaceuni_8cc.html#af7326eb416b57eda33e3757685a549d2">displace_vertex</a>(&amp;new_event, r, decay_length);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <a class="code" href="stdhep__util_8cpp.html#a66423f2b6106a177dfe98ed091a9aefb">write_stdhep</a>(&amp;new_event, nevhep);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <a class="code" href="stdhep__util_8cpp.html#ac16edf3f9969dcb74e1fc5b23e015a9f">write_file</a>(ostream);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    nevhep++;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;  }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="ttc" id="alhe__tridents__displaceuni_8cc_html_a3c04138a5bfe5d72780bb7e82a18e627"><div class="ttname"><a href="lhe__tridents__displaceuni_8cc.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a></div><div class="ttdeci">int main(int argc, char **argv)</div><div class="ttdef"><b>Definition:</b> <a href="lhe__tridents__displaceuni_8cc_source.html#l00082">lhe_tridents_displaceuni.cc:82</a></div></div>
 <div class="ttc" id="alhe__tridents__displaceuni_8cc_html_a4257e460d098aef0694b773c264c21ca"><div class="ttname"><a href="lhe__tridents__displaceuni_8cc.html#a4257e460d098aef0694b773c264c21ca">set_jdahep</a></div><div class="ttdeci">void set_jdahep(vector&lt; stdhep_entry &gt; *event)</div><div class="ttdef"><b>Definition:</b> <a href="lhe__tridents__displaceuni_8cc_source.html#l00033">lhe_tridents_displaceuni.cc:33</a></div></div>
 <div class="ttc" id="alhe__tridents__displaceuni_8cc_html_ace2a75d993f0cea89505afdffb610f28"><div class="ttname"><a href="lhe__tridents__displaceuni_8cc.html#ace2a75d993f0cea89505afdffb610f28">remove_nulls</a></div><div class="ttdeci">void remove_nulls(vector&lt; stdhep_entry &gt; *event)</div><div class="ttdef"><b>Definition:</b> <a href="lhe__tridents__displaceuni_8cc_source.html#l00012">lhe_tridents_displaceuni.cc:12</a></div></div>

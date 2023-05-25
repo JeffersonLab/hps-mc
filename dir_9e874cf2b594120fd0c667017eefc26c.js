@@ -11,6 +11,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "dummy_job.py", "dummy__job_8py.html", "dummy__job_8py" ],
     [ "fee_gen_to_recon_job.py", "fee__gen__to__recon__job_8py.html", "fee__gen__to__recon__job_8py" ],
     [ "hpstr_job.py", "hpstr__job_8py.html", "hpstr__job_8py" ],
+    [ "idm_job.py", "idm__job_8py.html", "idm__job_8py" ],
     [ "lcio_count_job.py", "lcio__count__job_8py.html", "lcio__count__job_8py" ],
     [ "misalign_job.py", "misalign__job_8py.html", "misalign__job_8py" ],
     [ "moller_gen_job.py", "moller__gen__job_8py.html", "moller__gen__job_8py" ],
