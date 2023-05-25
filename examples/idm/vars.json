@@ -1,0 +1,15 @@
+{
+    "nevents": [10000],
+    "run_params": ["2pt3"],
+    "target_thickness": [0.002],
+    "beam_energy": [2300.00],
+    "num_electrons": [1500],
+    "target_z": [-4.3],
+    "rmap": [3], 
+    "rdmchi": [0.1],
+    "mchi": [60, 90, 120, 150, 180, 210],
+    "run_number": [1194550],
+    "detector": ["HPS-PhysicsRun2016-Pass2"],
+    "steering_readout": ["/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim"],
+    "steering_reco": ["/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"]
+}
