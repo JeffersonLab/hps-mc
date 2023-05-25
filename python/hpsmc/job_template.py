@@ -40,7 +40,7 @@ def uuid():
     return str(_uuid.uuid4())[:8]
 
 
-def runnumber(path):
+def lcio_dumpevent_runnumber(path):
     """! Filter to get a run number by inspecting first event in slcio file."""
     event_dump = subprocess.run(
         ["dumpevent", path, "1"],  # dump the first event from the file
@@ -113,7 +113,7 @@ class JobTemplate:
         self.env.filters['uuid'] = uuid
         self.env.filters['extension'] = extension
         self.env.filters['dirname'] = dirname
-        self.env.filters['runnumber'] = runnumber
+        self.env.filters['lcio_dumpevent_runnumber'] = lcio_dumpevent_runnumber
         self.env.filters['filenum'] = filenum
         ## start ID for jobs
         self.job_id_start = 0
