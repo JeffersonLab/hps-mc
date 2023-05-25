@@ -152,6 +152,11 @@ class Batch(ABC):
             batch_id = self.submit_job(job_id)
             logger.info(f"Submitted job {job_id} with batch ID {str(batch_id)}")
 
+    def default_rundir(self, job_id=None):
+        if job_id is None:
+            raise Exception('Missing valid job ID')
+        return str(Path(os.getcwd(), 'scratch', str(job_id)))
+
     def build_cmd(self, job_id):
         """!
         This is the basic implementation of building a command to run the job from a batch system.
@@ -163,9 +168,13 @@ class Batch(ABC):
         if self.run_dir:
             # Set the job's base run dir explicitly from user argument,
             # appending the job number as a subdirectory.
-            job_dir = str(Path(self.run_dir, str(job_id)))
-            logger.debug(f'job dir: {job_dir}')
-            cmd.extend(['-d', job_dir])
+            job_dir = str(Path(self.run_dir, str(job_id)))           
+        else:
+            # Set the job directory to the default.
+            job_dir = self.default_rundir(job_id)
+
+        logger.debug(f'job dir: {job_dir}')
+        cmd.extend(['-d', job_dir])
 
         if len(self.config_files):
             for cfg in self.config_files:
@@ -338,7 +347,10 @@ class Slurm(BatchSystem):
             os.makedirs(self.sh_dir)
             logger.info('Created Slurm sh dir: {}'.format(self.sh_dir))
 
-    def _default_rundir(self):
+    def default_rundir(self, job_id=None):
+        """!
+        Override the basic implementation for getting the default run directory.
+        """
         if self.site == 'slac':
             run_dir = '$LSCRATCH'
         elif self.site == 'jlab':
@@ -347,7 +359,7 @@ class Slurm(BatchSystem):
             run_dir = os.getcwd() + "/scratch/$SLURM_JOBID"
         return run_dir
 
-    def _queue(self):
+    def _default_queue(self):
         queue = self.queue
         if queue is None:
             if self.site == 'slac':
@@ -362,7 +374,7 @@ class Slurm(BatchSystem):
         log_file = self._logfile(job_id)
         sbatch_cmd = ['sbatch',
                       '--time=%s' % (str(self.job_length) + ':00:00'),
-                      '--partition=%s' % self._queue(),
+                      '--partition=%s' % self._default_queue(),
                       '--mem=%sM' % self.memory,
                       '--job-name=%s_%i' % (self.script_name, job_id),
                       '--output=%s.out' % log_file,
@@ -392,7 +404,7 @@ class Slurm(BatchSystem):
             # The superclass will have already set this if the user provided an
             # explicit run dir. Here we set a default scratch directory if none
             # was given.
-            job_cmd.extend(['-d', self._default_rundir()])
+            job_cmd.extend(['-d', self.default_rundir()])
 
         # Write the job submission script out
         self._write_job_script(sh_filename, job_cmd)
