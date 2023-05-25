@@ -1,0 +1,10 @@
+{
+    "run_params": ["3pt74"],
+    "detector": ["HPS_Nominal_3pt74GeV"],
+    "target_z": [0.0],
+    "run_number": [14552],
+    "event_interval": [250],
+    "ecal_hit_ecut": [0.05],
+    "steering_readout": ["/org/hps/steering/readout/PhysicsRun2019TrigPulse.lcsim"],
+    "steering_recon": ["/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"]
+}

@@ -1,0 +1,9 @@
+{
+    "bunches": [10000],
+    "nevents": [10000],
+    "run_params": ["3pt74"],
+    "target_thickness": [0.002],
+    "beam_energy": [3740.0],
+    "num_electrons": [1500],
+    "run_number": [14552]
+}
