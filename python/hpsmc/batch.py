@@ -168,7 +168,7 @@ class Batch(ABC):
         if self.run_dir:
             # Set the job's base run dir explicitly from user argument,
             # appending the job number as a subdirectory.
-            job_dir = str(Path(self.run_dir, str(job_id)))           
+            job_dir = str(Path(self.run_dir, str(job_id)))
         else:
             # Set the job directory to the default.
             job_dir = self.default_rundir(job_id)
