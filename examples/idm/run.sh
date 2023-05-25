@@ -4,4 +4,4 @@
 #SBATCH --partition=shared
 #SBATCH --job-name=examples
 
-hps-mc-job run -d $PWD/scratch -c .hpsmc simp job.json
+hps-mc-job run -d $PWD/scratch -c .hpsmc idm job.json
