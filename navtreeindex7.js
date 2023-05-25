@@ -1,5 +1,8 @@
 var NAVTREEINDEX7 =
 {
+"pede.html":[4],
+"pede.html#autotoc_md10":[5],
+"pede.html#autotoc_md11":[6],
 "pede.html#autotoc_md12":[4,0,0],
 "pede.html#autotoc_md13":[7],
 "pede.html#autotoc_md8":[4,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX7 =
 "stdhep__util_8cpp.html#ad6e82e6b97504fe245dd1769a99d4971":[14,0,3,0,0,18,3],
 "stdhep__util_8cpp_source.html":[14,0,3,0,0,18],
 "stdhep__util_8hh.html":[14,0,3,0,0,19],
-"stdhep__util_8hh.html#a1832c53e510deed9eca4097a76cf0051":[14,0,3,0,0,19,2],
-"stdhep__util_8hh.html#a1b2a7543aca488dba0b07e46ad35a821":[14,0,3,0,0,19,15],
-"stdhep__util_8hh.html#a3fc2b664f9f45008a4e115c7c03991e2":[14,0,3,0,0,19,7],
-"stdhep__util_8hh.html#a4bafdcb5a84a5fd34d0bdacfc98d1586":[14,0,3,0,0,19,16]
+"stdhep__util_8hh.html#a1832c53e510deed9eca4097a76cf0051":[14,0,3,0,0,19,2]
 };
