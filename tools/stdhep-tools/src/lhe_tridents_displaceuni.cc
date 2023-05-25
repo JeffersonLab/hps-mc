@@ -50,7 +50,7 @@ void displace_vertex(vector<stdhep_entry> *event, gsl_rng *r, double decay_lengt
   int ap_id = -1;
   double vx[4];
   for (int i = 0; i < event->size(); i++) {
-    if (event->at(i).idhep == 625) {
+    if (event->at(i).idhep == 625 || event->at(i).idhep == 1000023) {
       if (ap_id != -1) {
         printf("multiple A' found\n");
         break;
