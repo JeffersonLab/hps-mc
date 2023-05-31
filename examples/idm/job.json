@@ -9,7 +9,7 @@
     "beam_energy": 2300.0,
     "num_electrons": 2500,
     "target_z": -4.3,
-    "run_number": 1162300,
+    "run_number": 7000,
     "detector": "HPS-PhysicsRun2016-Pass2",
     "steering_files": {
       "readout": "/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim",
