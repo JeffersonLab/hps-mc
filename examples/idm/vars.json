@@ -8,7 +8,7 @@
     "rmap": [3], 
     "rdmchi": [0.1],
     "mchi": [60, 90, 120, 150, 180, 210],
-    "run_number": [1162300],
+    "run_number": [7000],
     "detector": ["HPS-PhysicsRun2016-Pass2"],
     "steering_readout": ["/org/hps/steering/readout/PhysicsRun2016TrigPairs1.lcsim"],
     "steering_reco": ["/org/hps/steering/recon/PhysicsRun2016FullReconMC.lcsim"]
