@@ -157,7 +157,7 @@ MHS = Parameter(name = 'MHS',
 epsilon = Parameter(name = 'epsilon',
                     nature = 'external',
                     type = 'real',
-                    value = 0.01,
+                    value = 1.00,
                     texname = '\\epsilon',
                     lhablock = 'HIDDEN',
                     lhacode = [ 3 ])

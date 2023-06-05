@@ -103,7 +103,7 @@ Block GAUGEMASS
 Block HIDDEN 
     1 1.000000e+00 # Map 
     2 2.000000e+02 # MHS 
-    3 1.000000e-02 # epsilon 
+    3 1.000000e+00 # epsilon 
     4 1.000000e-09 # kap 
     5 1.279000e+02 # aXM1 
 
