@@ -1,4 +1,6 @@
 #!/bin/sh
 
+_basedir=$PWD/slurm_scratch
+
 # Run a slurm job using mostly default arguments.
-hps-mc-batch slurm slic job_slurm.json
+hps-mc-batch slurm -l ${_basedir}/logs -d ${_basedir}/jobs -S ${_basedir}/sh -o -q shared -W 2 -m 2000 slic job_slurm.json
