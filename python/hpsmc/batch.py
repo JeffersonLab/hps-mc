@@ -335,10 +335,14 @@ class Slurm(BatchSystem):
         super().__init__()
 
         self.parser.add_argument("-S", "--sh-dir", nargs='?', help="Directory to hold generated shell scripts for Slurm", default=str(Path(os.getcwd(), 'sh')))
+        self.parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False, default=None)
 
     def parse_args(self, args):
 
         cl = super().parse_args(args)
+        
+        # Set Slurm env script
+        self.env = cl.env
 
         # Set Slurm scripts dir
         self.sh_dir = os.path.abspath(cl.sh_dir)
@@ -419,15 +423,17 @@ class Slurm(BatchSystem):
         Write the shell script for Slurm job submission using the 'sbatch' command.
         """
 
-        script_lines = ['#!/bin/bash',
-                        ''
-                        'echo Start time: `date`',
-                        'echo PWD=`pwd`',
-                        'echo ---- Start Environment ----',
-                        'env | sort',
-                        'echo ---- End Environment ----',
-                        'time ' + ' '.join(job_cmd),
-                        'echo End time: `date`']
+        script_lines = ['#!/bin/bash', 
+                        ''] 
+        if self.env:
+            script_lines.append(f'source {self.env}')
+        script_lines.extend(['echo Start time: `date`',
+                             'echo PWD=`pwd`',
+                             'echo ---- Start Environment ----',
+                             'env | sort',
+                             'echo ---- End Environment ----',
+                             'time ' + ' '.join(job_cmd),
+                             'echo End time: `date`'])
 
         logger.debug("Slurm submission script:\n" + str(script_lines))
 
@@ -785,8 +791,6 @@ class KillProcessQueue():
 
             if mp_queue.empty():
                 break
-
-        # print('Done killing processes!')
 
 
 class Pool(Batch):
