@@ -1,14 +1,5 @@
 var hierarchy =
 [
-    [ "Batch", "classhpsmc_1_1batch_1_1Batch.html", [
-      [ "Auger", "classhpsmc_1_1batch_1_1Auger.html", [
-        [ "Swif", "classhpsmc_1_1batch_1_1Swif.html", null ]
-      ] ],
-      [ "LSF", "classhpsmc_1_1batch_1_1LSF.html", null ],
-      [ "Local", "classhpsmc_1_1batch_1_1Local.html", null ],
-      [ "Pool", "classhpsmc_1_1batch_1_1Pool.html", null ],
-      [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", null ]
-    ] ],
     [ "Exception", null, [
       [ "MaxJobsException", "classhpsmc_1_1job__template_1_1MaxJobsException.html", null ]
     ] ],
@@ -113,5 +104,19 @@ var hierarchy =
       [ "TestMotherFullTruth", "classtest_1_1test__tools__stdheptools_1_1TestMotherFullTruth.html", null ],
       [ "TestRandomSample", "classtest_1_1test__tools__stdheptools_1_1TestRandomSample.html", null ],
       [ "TestStdHepTools", "classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html", null ]
+    ] ],
+    [ "ABC", null, [
+      [ "Batch", "classhpsmc_1_1batch_1_1Batch.html", [
+        [ "BatchSystem", "classhpsmc_1_1batch_1_1BatchSystem.html", [
+          [ "Auger", "classhpsmc_1_1batch_1_1Auger.html", [
+            [ "Swif", "classhpsmc_1_1batch_1_1Swif.html", null ]
+          ] ],
+          [ "LSF", "classhpsmc_1_1batch_1_1LSF.html", null ],
+          [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", null ]
+        ] ],
+        [ "Local", "classhpsmc_1_1batch_1_1Local.html", null ],
+        [ "Pool", "classhpsmc_1_1batch_1_1Pool.html", null ]
+      ] ],
+      [ "BatchSystem", "classhpsmc_1_1batch_1_1BatchSystem.html", null ]
     ] ]
 ];

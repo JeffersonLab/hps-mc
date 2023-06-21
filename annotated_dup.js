@@ -23,6 +23,7 @@ var annotated_dup =
       ] ],
       [ "batch", "namespacehpsmc_1_1batch.html", [
         [ "Batch", "classhpsmc_1_1batch_1_1Batch.html", "classhpsmc_1_1batch_1_1Batch" ],
+        [ "BatchSystem", "classhpsmc_1_1batch_1_1BatchSystem.html", "classhpsmc_1_1batch_1_1BatchSystem" ],
         [ "LSF", "classhpsmc_1_1batch_1_1LSF.html", "classhpsmc_1_1batch_1_1LSF" ],
         [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", "classhpsmc_1_1batch_1_1Slurm" ],
         [ "Auger", "classhpsmc_1_1batch_1_1Auger.html", "classhpsmc_1_1batch_1_1Auger" ],

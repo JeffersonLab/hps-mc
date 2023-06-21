@@ -103,7 +103,10 @@ $(document).ready(function(){initNavTree('namespacehpsmc_1_1batch.html',''); ini
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html">Batch</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic interface to a batch system.  <a href="classhpsmc_1_1batch_1_1Batch.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic batch processing interface.  <a href="classhpsmc_1_1batch_1_1Batch.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html">BatchSystem</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a batch processing system that requires submission like <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs.">Slurm</a> or <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a>.  <a href="classhpsmc_1_1batch_1_1BatchSystem.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1LSF.html">LSF</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit <a class="el" href="classhpsmc_1_1batch_1_1LSF.html" title="Submit LSF batch jobs.">LSF</a> batch jobs.  <a href="classhpsmc_1_1batch_1_1LSF.html#details">More...</a><br /></td></tr>
@@ -115,16 +118,16 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a> batch jobs.  <a href="classhpsmc_1_1batch_1_1Auger.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Swif.html">Swif</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit to swif2 at JLAB using an <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a> file.  <a href="classhpsmc_1_1batch_1_1Swif.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit using the 'swif2' command at JLAB using an <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a> file.  <a href="classhpsmc_1_1batch_1_1Swif.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Local.html">Local</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a local batch jobs sequentially.  <a href="classhpsmc_1_1batch_1_1Local.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run local batch jobs sequentially.  <a href="classhpsmc_1_1batch_1_1Local.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1KillProcessQueue.html">KillProcessQueue</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kills process objects from an MP queue after exit from a with statement.  <a href="classhpsmc_1_1batch_1_1KillProcessQueue.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kill processes in the multiprocessing queue if the jobs are canceled.  <a href="classhpsmc_1_1batch_1_1KillProcessQueue.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Pool.html">Pool</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a set of jobs in a local pool using Python's multiprocessing module.  <a href="classhpsmc_1_1batch_1_1Pool.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a set of jobs in a local multiprocessing pool using Python's multiprocessing module.  <a href="classhpsmc_1_1batch_1_1Pool.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
@@ -133,14 +136,15 @@ Functions</h2></td></tr>
 <tr class="memdesc:ad68db43028e671de96d5c20d0b2d249c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the command in a new process whose PID is added to a global MP queue.  <a href="namespacehpsmc_1_1batch.html#ad68db43028e671de96d5c20d0b2d249c">More...</a><br /></td></tr>
 <tr class="separator:ad68db43028e671de96d5c20d0b2d249c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5727c488b89db5f5675577a34a44080"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#ae5727c488b89db5f5675577a34a44080">is_running</a> (proc)</td></tr>
+<tr class="memdesc:ae5727c488b89db5f5675577a34a44080"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if a system process looks like it is still running.  <a href="namespacehpsmc_1_1batch.html#ae5727c488b89db5f5675577a34a44080">More...</a><br /></td></tr>
 <tr class="separator:ae5727c488b89db5f5675577a34a44080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a0b14e488ae28d98d262453f3e9cd6e4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#a0b14e488ae28d98d262453f3e9cd6e4d">logger</a> = logging.getLogger(&quot;hpsmc.batch&quot;)</td></tr>
 <tr class="separator:a0b14e488ae28d98d262453f3e9cd6e4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55767275ca2e9e82d8b8c71fc41dad50"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#a55767275ca2e9e82d8b8c71fc41dad50">run_script</a> = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')</td></tr>
-<tr class="separator:a55767275ca2e9e82d8b8c71fc41dad50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a847e62f785a6f86fe21d0f822fd05d08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#a847e62f785a6f86fe21d0f822fd05d08">RUN_SCRIPT</a> = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')</td></tr>
+<tr class="separator:a847e62f785a6f86fe21d0f822fd05d08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51dc3e1cfaee89af43df285cc40b87cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#a51dc3e1cfaee89af43df285cc40b87cb">mp_queue</a> = multiprocessing.Queue()</td></tr>
 <tr class="separator:a51dc3e1cfaee89af43df285cc40b87cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a145d3de981e8e18314b1ccda4152c9af"><td class="memItemLeft" align="right" valign="top">dictionary&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehpsmc_1_1batch.html#a145d3de981e8e18314b1ccda4152c9af">system_dict</a></td></tr>
@@ -169,7 +173,9 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00577">577</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p>Check if a system process looks like it is still running. </p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00755">755</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -191,7 +197,7 @@ Variables</h2></td></tr>
 
 <p>Run the command in a new process whose PID is added to a global MP queue. </p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00562">562</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00740">740</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -208,7 +214,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00681">681</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00880">880</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -224,7 +230,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00680">680</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00879">879</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -240,7 +246,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00025">25</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00030">30</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -256,23 +262,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00559">559</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00737">737</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
-<a id="a55767275ca2e9e82d8b8c71fc41dad50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55767275ca2e9e82d8b8c71fc41dad50">&#9670;&nbsp;</a></span>run_script</h2>
+<a id="a847e62f785a6f86fe21d0f822fd05d08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a847e62f785a6f86fe21d0f822fd05d08">&#9670;&nbsp;</a></span>RUN_SCRIPT</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">run_script = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')</td>
+          <td class="memname">RUN_SCRIPT = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'job.py')</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00027">27</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00032">32</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -288,7 +294,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00677">677</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00876">876</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -312,7 +318,7 @@ Variables</h2></td></tr>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="stringliteral">&quot;swif&quot;</span>: Swif</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00668">668</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00867">867</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>

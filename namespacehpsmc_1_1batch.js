@@ -1,6 +1,7 @@
 var namespacehpsmc_1_1batch =
 [
     [ "Batch", "classhpsmc_1_1batch_1_1Batch.html", "classhpsmc_1_1batch_1_1Batch" ],
+    [ "BatchSystem", "classhpsmc_1_1batch_1_1BatchSystem.html", "classhpsmc_1_1batch_1_1BatchSystem" ],
     [ "LSF", "classhpsmc_1_1batch_1_1LSF.html", "classhpsmc_1_1batch_1_1LSF" ],
     [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", "classhpsmc_1_1batch_1_1Slurm" ],
     [ "Auger", "classhpsmc_1_1batch_1_1Auger.html", "classhpsmc_1_1batch_1_1Auger" ],
@@ -14,7 +15,7 @@ var namespacehpsmc_1_1batch =
     [ "batch", "namespacehpsmc_1_1batch.html#af489033daa5a6bfe51b930590bde453c", null ],
     [ "logger", "namespacehpsmc_1_1batch.html#a0b14e488ae28d98d262453f3e9cd6e4d", null ],
     [ "mp_queue", "namespacehpsmc_1_1batch.html#a51dc3e1cfaee89af43df285cc40b87cb", null ],
-    [ "run_script", "namespacehpsmc_1_1batch.html#a55767275ca2e9e82d8b8c71fc41dad50", null ],
+    [ "RUN_SCRIPT", "namespacehpsmc_1_1batch.html#a847e62f785a6f86fe21d0f822fd05d08", null ],
     [ "system", "namespacehpsmc_1_1batch.html#ac4ca86dead4518ac4fd6e30172db3d9e", null ],
     [ "system_dict", "namespacehpsmc_1_1batch.html#a145d3de981e8e18314b1ccda4152c9af", null ]
 ];

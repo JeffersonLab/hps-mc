@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('classhpsmc_1_1batch_1_1Batch.html','')
 </div><!--header-->
 <div class="contents">
 
-<p>Generic interface to a batch system.  
+<p>Generic batch processing interface.  
  <a href="classhpsmc_1_1batch_1_1Batch.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Batch:</div>
@@ -110,51 +110,51 @@ Inheritance diagram for Batch:</div>
  <div class="center">
   <img src="classhpsmc_1_1batch_1_1Batch.png" usemap="#Batch_map" alt=""/>
   <map id="Batch_map" name="Batch_map">
-<area href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs." alt="Auger" shape="rect" coords="0,56,47,80"/>
-<area href="classhpsmc_1_1batch_1_1LSF.html" title="Submit LSF batch jobs." alt="LSF" shape="rect" coords="57,56,104,80"/>
-<area href="classhpsmc_1_1batch_1_1Local.html" title="Run a local batch jobs sequentially." alt="Local" shape="rect" coords="114,56,161,80"/>
-<area href="classhpsmc_1_1batch_1_1Pool.html" title="Run a set of jobs in a local pool using Python&#39;s multiprocessing module." alt="Pool" shape="rect" coords="171,56,218,80"/>
-<area href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs." alt="Slurm" shape="rect" coords="228,56,275,80"/>
-<area href="classhpsmc_1_1batch_1_1Swif.html" title="Submit to swif2 at JLAB using an Auger file." alt="Swif" shape="rect" coords="0,112,47,136"/>
+<area href="classhpsmc_1_1batch_1_1BatchSystem.html" title="Represents a batch processing system that requires submission like Slurm or Auger." alt="BatchSystem" shape="rect" coords="94,112,178,136"/>
+<area href="classhpsmc_1_1batch_1_1Local.html" title="Run local batch jobs sequentially." alt="Local" shape="rect" coords="188,112,272,136"/>
+<area href="classhpsmc_1_1batch_1_1Pool.html" title="Run a set of jobs in a local multiprocessing pool using Python&#39;s multiprocessing module." alt="Pool" shape="rect" coords="282,112,366,136"/>
+<area href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs." alt="Auger" shape="rect" coords="0,168,84,192"/>
+<area href="classhpsmc_1_1batch_1_1LSF.html" title="Submit LSF batch jobs." alt="LSF" shape="rect" coords="94,168,178,192"/>
+<area href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs." alt="Slurm" shape="rect" coords="188,168,272,192"/>
+<area href="classhpsmc_1_1batch_1_1Swif.html" title="Submit using the &#39;swif2&#39; command at JLAB using an Auger file." alt="Swif" shape="rect" coords="0,224,84,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ae64f0875afe3067b97ba370b354b9213"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ae64f0875afe3067b97ba370b354b9213">__init__</a> (self)</td></tr>
+<tr class="separator:ae64f0875afe3067b97ba370b354b9213"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf8a9df3f59b8a945fbc5ed61a057396"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#abf8a9df3f59b8a945fbc5ed61a057396">parse_args</a> (self, <a class="el" href="namespacehpsmc_1_1batch.html#a8187411843a6284ffb964ef3fb9fcab3">args</a>)</td></tr>
 <tr class="memdesc:abf8a9df3f59b8a945fbc5ed61a057396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command line arguments and perform setup.  <a href="classhpsmc_1_1batch_1_1Batch.html#abf8a9df3f59b8a945fbc5ed61a057396">More...</a><br /></td></tr>
 <tr class="separator:abf8a9df3f59b8a945fbc5ed61a057396"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafa74317d3ee4a0a3469f7667a665457"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#aafa74317d3ee4a0a3469f7667a665457">submit_cmd</a> (self, job_id, job_data)</td></tr>
-<tr class="memdesc:aafa74317d3ee4a0a3469f7667a665457"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a single batch job and return the batch ID.  <a href="classhpsmc_1_1batch_1_1Batch.html#aafa74317d3ee4a0a3469f7667a665457">More...</a><br /></td></tr>
-<tr class="separator:aafa74317d3ee4a0a3469f7667a665457"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19f12dc4377bb28daa57345083ecd8a0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a19f12dc4377bb28daa57345083ecd8a0">get_filtered_job_ids</a> (self)</td></tr>
-<tr class="memdesc:a19f12dc4377bb28daa57345083ecd8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of job IDs to submit based on parsed command line options.  <a href="classhpsmc_1_1batch_1_1Batch.html#a19f12dc4377bb28daa57345083ecd8a0">More...</a><br /></td></tr>
-<tr class="separator:a19f12dc4377bb28daa57345083ecd8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">submit_job</a> (self, job_id)</td></tr>
+<tr class="memdesc:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a single batch job and return the batch ID.  <a href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">More...</a><br /></td></tr>
+<tr class="separator:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b6002765badbb614507479cf1ce9f4"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a29b6002765badbb614507479cf1ce9f4">submit</a> (self)</td></tr>
-<tr class="memdesc:a29b6002765badbb614507479cf1ce9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Primary public method for submitting jobs after args are parsed.  <a href="classhpsmc_1_1batch_1_1Batch.html#a29b6002765badbb614507479cf1ce9f4">More...</a><br /></td></tr>
+<tr class="memdesc:a29b6002765badbb614507479cf1ce9f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the generic batch submission function which gets a list of jobs to run based on command line arguments and submits them individually.  <a href="classhpsmc_1_1batch_1_1Batch.html#a29b6002765badbb614507479cf1ce9f4">More...</a><br /></td></tr>
 <tr class="separator:a29b6002765badbb614507479cf1ce9f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1928363ebe261a35f4e5b70885add8bb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a1928363ebe261a35f4e5b70885add8bb">build_cmd</a> (self, job_id, job_params, set_job_dir=True)</td></tr>
-<tr class="memdesc:a1928363ebe261a35f4e5b70885add8bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the command to run a single job.  <a href="classhpsmc_1_1batch_1_1Batch.html#a1928363ebe261a35f4e5b70885add8bb">More...</a><br /></td></tr>
-<tr class="separator:a1928363ebe261a35f4e5b70885add8bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a233da160b4786230f2982af30199db9d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a233da160b4786230f2982af30199db9d">default_rundir</a> (self, job_id=None)</td></tr>
+<tr class="separator:a233da160b4786230f2982af30199db9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d0cb775e9851bfbbcd4f7015aaf4891"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a7d0cb775e9851bfbbcd4f7015aaf4891">build_cmd</a> (self, job_id)</td></tr>
+<tr class="memdesc:a7d0cb775e9851bfbbcd4f7015aaf4891"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the basic implementation of building a command to run the job from a batch system.  <a href="classhpsmc_1_1batch_1_1Batch.html#a7d0cb775e9851bfbbcd4f7015aaf4891">More...</a><br /></td></tr>
+<tr class="separator:a7d0cb775e9851bfbbcd4f7015aaf4891"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a90eee7a4677ca8b1ed116364a24367f9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a90eee7a4677ca8b1ed116364a24367f9">parser</a></td></tr>
+<tr class="separator:a90eee7a4677ca8b1ed116364a24367f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa886282472cd7d345fc5070c61d8c251"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#aa886282472cd7d345fc5070c61d8c251">script_name</a></td></tr>
 <tr class="separator:aa886282472cd7d345fc5070c61d8c251"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52387f82090b097f98a1a44fa72ac060"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a52387f82090b097f98a1a44fa72ac060">script</a></td></tr>
 <tr class="separator:a52387f82090b097f98a1a44fa72ac060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a613dd1ce0eb970eae6f36760d9de4b60"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a613dd1ce0eb970eae6f36760d9de4b60">jobstore</a></td></tr>
 <tr class="separator:a613dd1ce0eb970eae6f36760d9de4b60"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9a4f51a2aa1485342c48472a9124d83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#af9a4f51a2aa1485342c48472a9124d83">env</a></td></tr>
-<tr class="separator:af9a4f51a2aa1485342c48472a9124d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acba0eb96d8dc53394f4bc448317402ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#acba0eb96d8dc53394f4bc448317402ed">email</a></td></tr>
-<tr class="separator:acba0eb96d8dc53394f4bc448317402ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0514aabed091ee5e2f35766eb01eced6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a0514aabed091ee5e2f35766eb01eced6">debug</a></td></tr>
 <tr class="separator:a0514aabed091ee5e2f35766eb01eced6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab43a5b8305c170fa222e8332c8feb95e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ab43a5b8305c170fa222e8332c8feb95e">log_dir</a></td></tr>
 <tr class="separator:ab43a5b8305c170fa222e8332c8feb95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a17db18325acb0b63029751694fef68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a3a17db18325acb0b63029751694fef68">sh_dir</a></td></tr>
-<tr class="separator:a3a17db18325acb0b63029751694fef68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac40761788dc5f7d66976bd8499c39e5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ac40761788dc5f7d66976bd8499c39e5b">run_dir</a></td></tr>
+<tr class="separator:ac40761788dc5f7d66976bd8499c39e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af405e883416e60946616f367445e3511"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#af405e883416e60946616f367445e3511">check_output</a></td></tr>
 <tr class="separator:af405e883416e60946616f367445e3511"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1117386d5c4582da7fe5dc953fd2261e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a1117386d5c4582da7fe5dc953fd2261e">job_ids</a></td></tr>
@@ -165,43 +165,165 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a6d386b37c5a59d68827130ab8c028462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01564d84a9937f38aed850c4aa3b3b7e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a01564d84a9937f38aed850c4aa3b3b7e">end_job_num</a></td></tr>
 <tr class="separator:a01564d84a9937f38aed850c4aa3b3b7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8ceabb22d9297bd28382151f35a2252"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#af8ceabb22d9297bd28382151f35a2252">queue</a></td></tr>
-<tr class="separator:af8ceabb22d9297bd28382151f35a2252"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f3d2903c7f533d4714d065386a9e6e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a3f3d2903c7f533d4714d065386a9e6e8">os</a></td></tr>
-<tr class="separator:a3f3d2903c7f533d4714d065386a9e6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02feee8784d8f4b5806174d39fa17222"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a02feee8784d8f4b5806174d39fa17222">job_length</a></td></tr>
-<tr class="separator:a02feee8784d8f4b5806174d39fa17222"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61a963e6e2f81b884bc6d17c72777b42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a61a963e6e2f81b884bc6d17c72777b42">memory</a></td></tr>
-<tr class="separator:a61a963e6e2f81b884bc6d17c72777b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace095cfac39dad26bc702e15363a49a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ace095cfac39dad26bc702e15363a49a7">pool_size</a></td></tr>
-<tr class="separator:ace095cfac39dad26bc702e15363a49a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae61be9571b4d5e303b3cc73a598d16ba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ae61be9571b4d5e303b3cc73a598d16ba">config_files</a></td></tr>
 <tr class="separator:ae61be9571b4d5e303b3cc73a598d16ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40761788dc5f7d66976bd8499c39e5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ac40761788dc5f7d66976bd8499c39e5b">run_dir</a></td></tr>
-<tr class="separator:ac40761788dc5f7d66976bd8499c39e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a6cba84ae6df52c3eff41b65d0874bf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a3a6cba84ae6df52c3eff41b65d0874bf">workflow</a></td></tr>
-<tr class="separator:a3a6cba84ae6df52c3eff41b65d0874bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a9a5c14c4fc92a3bcac655a94f3d07e55"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a9a5c14c4fc92a3bcac655a94f3d07e55">_submit_job</a> (self, job_id, job)</td></tr>
-<tr class="memdesc:a9a5c14c4fc92a3bcac655a94f3d07e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a single job to the batch system.  <a href="classhpsmc_1_1batch_1_1Batch.html#a9a5c14c4fc92a3bcac655a94f3d07e55">More...</a><br /></td></tr>
-<tr class="separator:a9a5c14c4fc92a3bcac655a94f3d07e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8b7ff36c509da12f0bc77757820cc5f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#af8b7ff36c509da12f0bc77757820cc5f">_submit_jobs</a> (self, <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a1117386d5c4582da7fe5dc953fd2261e">job_ids</a>)</td></tr>
-<tr class="memdesc:af8b7ff36c509da12f0bc77757820cc5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit the jobs with the specified job IDs to the batch system.  <a href="classhpsmc_1_1batch_1_1Batch.html#af8b7ff36c509da12f0bc77757820cc5f">More...</a><br /></td></tr>
-<tr class="separator:af8b7ff36c509da12f0bc77757820cc5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb18a04d4cb73e54cebd11b206342baf"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#adb18a04d4cb73e54cebd11b206342baf">_logfile</a> (self, job_id)</td></tr>
+<tr class="memdesc:adb18a04d4cb73e54cebd11b206342baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the base name of a log file for the job.  <a href="classhpsmc_1_1batch_1_1Batch.html#adb18a04d4cb73e54cebd11b206342baf">More...</a><br /></td></tr>
+<tr class="separator:adb18a04d4cb73e54cebd11b206342baf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ac3ed59a40c1d67c84e25254e9f1bed"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a9ac3ed59a40c1d67c84e25254e9f1bed">_get_filtered_job_ids</a> (self)</td></tr>
+<tr class="memdesc:a9ac3ed59a40c1d67c84e25254e9f1bed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of job IDs to submit based on parsed command line options and whether output files are being checked.  <a href="classhpsmc_1_1batch_1_1Batch.html#a9ac3ed59a40c1d67c84e25254e9f1bed">More...</a><br /></td></tr>
+<tr class="separator:a9ac3ed59a40c1d67c84e25254e9f1bed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc22ce8abcbbc45c052c091a412aaec"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a0dc22ce8abcbbc45c052c091a412aaec">_job_ids_missing_output</a> (self, <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a1117386d5c4582da7fe5dc953fd2261e">job_ids</a>)</td></tr>
+<tr class="memdesc:a0dc22ce8abcbbc45c052c091a412aaec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a list of IDs for jobs that are missing output files.  <a href="classhpsmc_1_1batch_1_1Batch.html#a0dc22ce8abcbbc45c052c091a412aaec">More...</a><br /></td></tr>
+<tr class="separator:a0dc22ce8abcbbc45c052c091a412aaec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
 Static Private Member Functions</h2></td></tr>
 <tr class="memitem:a1f3703eec8fe9b918b4711ae905e945e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a1f3703eec8fe9b918b4711ae905e945e">_outputs_exist</a> (job)</td></tr>
-<tr class="memdesc:a1f3703eec8fe9b918b4711ae905e945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if job outputs exist.  <a href="classhpsmc_1_1batch_1_1Batch.html#a1f3703eec8fe9b918b4711ae905e945e">More...</a><br /></td></tr>
+<tr class="memdesc:a1f3703eec8fe9b918b4711ae905e945e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if all output files exist for the given job.  <a href="classhpsmc_1_1batch_1_1Batch.html#a1f3703eec8fe9b918b4711ae905e945e">More...</a><br /></td></tr>
 <tr class="separator:a1f3703eec8fe9b918b4711ae905e945e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Generic interface to a batch system. </p>
+<div class="textblock"><p>Generic batch processing interface. </p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00030">30</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00035">35</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ae64f0875afe3067b97ba370b354b9213"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae64f0875afe3067b97ba370b354b9213">&#9670;&nbsp;</a></span>__init__()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def __init__ </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Pool.html#ae64f0875afe3067b97ba370b354b9213">Pool</a>, <a class="el" href="classhpsmc_1_1batch_1_1Local.html#ae64f0875afe3067b97ba370b354b9213">Local</a>, <a class="el" href="classhpsmc_1_1batch_1_1Swif.html#ae64f0875afe3067b97ba370b354b9213">Swif</a>, <a class="el" href="classhpsmc_1_1batch_1_1Auger.html#ae64f0875afe3067b97ba370b354b9213">Auger</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#ae64f0875afe3067b97ba370b354b9213">Slurm</a>, <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#ae64f0875afe3067b97ba370b354b9213">LSF</a>, and <a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#ae64f0875afe3067b97ba370b354b9213">BatchSystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00040">40</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9ac3ed59a40c1d67c84e25254e9f1bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ac3ed59a40c1d67c84e25254e9f1bed">&#9670;&nbsp;</a></span>_get_filtered_job_ids()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def _get_filtered_job_ids </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a list of job IDs to submit based on parsed command line options and whether output files are being checked. </p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00209">209</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="a0dc22ce8abcbbc45c052c091a412aaec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0dc22ce8abcbbc45c052c091a412aaec">&#9670;&nbsp;</a></span>_job_ids_missing_output()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def _job_ids_missing_output </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>job_ids</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a list of IDs for jobs that are missing output files. </p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00226">226</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="adb18a04d4cb73e54cebd11b206342baf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb18a04d4cb73e54cebd11b206342baf">&#9670;&nbsp;</a></span>_logfile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def _logfile </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>job_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the base name of a log file for the job. </p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00190">190</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
 <a id="a1f3703eec8fe9b918b4711ae905e945e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1f3703eec8fe9b918b4711ae905e945e">&#9670;&nbsp;</a></span>_outputs_exist()</h2>
 
@@ -226,101 +348,16 @@ Static Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Check if job outputs exist. </p>
+<p>Check if all output files exist for the given job. </p>
+<p>This is not the job ID but the full JSON job data.</p>
 <p>Return False when first missing output is found. </p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00156">156</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00197">197</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
-<a id="a9a5c14c4fc92a3bcac655a94f3d07e55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a5c14c4fc92a3bcac655a94f3d07e55">&#9670;&nbsp;</a></span>_submit_job()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">def _submit_job </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Submit a single job to the batch system. </p>
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00189">189</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="af8b7ff36c509da12f0bc77757820cc5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8b7ff36c509da12f0bc77757820cc5f">&#9670;&nbsp;</a></span>_submit_jobs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">def _submit_jobs </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_ids</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Submit the jobs with the specified job IDs to the batch system. </p>
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00196">196</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="a1928363ebe261a35f4e5b70885add8bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1928363ebe261a35f4e5b70885add8bb">&#9670;&nbsp;</a></span>build_cmd()</h2>
+<a id="a7d0cb775e9851bfbbcd4f7015aaf4891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d0cb775e9851bfbbcd4f7015aaf4891">&#9670;&nbsp;</a></span>build_cmd()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,19 +372,7 @@ Static Private Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>set_job_dir</em> = <code>True</code>&#160;</td>
+          <td class="paramname"><em>job_id</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -357,32 +382,43 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create the command to run a single job. </p>
-<p>This generically creates the command to run the job locally but subclasses may override if necessary. </p>
+<p>This is the basic implementation of building a command to run the job from a batch system. </p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00204">204</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Auger.html#a7d0cb775e9851bfbbcd4f7015aaf4891">Auger</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#a7d0cb775e9851bfbbcd4f7015aaf4891">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#a7d0cb775e9851bfbbcd4f7015aaf4891">LSF</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00160">160</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
-<a id="a19f12dc4377bb28daa57345083ecd8a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19f12dc4377bb28daa57345083ecd8a0">&#9670;&nbsp;</a></span>get_filtered_job_ids()</h2>
+<a id="a233da160b4786230f2982af30199db9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a233da160b4786230f2982af30199db9d">&#9670;&nbsp;</a></span>default_rundir()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def get_filtered_job_ids </td>
+          <td class="memname">def default_rundir </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>self</em></td><td>)</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>job_id</em> = <code>None</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get a list of job IDs to submit based on parsed command line options. </p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#a233da160b4786230f2982af30199db9d">Slurm</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00164">164</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00155">155</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -414,9 +450,9 @@ Static Private Member Functions</h2></td></tr>
 
 <p>Parse command line arguments and perform setup. </p>
 
-<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Local.html#abf8a9df3f59b8a945fbc5ed61a057396">Local</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#abf8a9df3f59b8a945fbc5ed61a057396">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#abf8a9df3f59b8a945fbc5ed61a057396">LSF</a>.</p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Pool.html#abf8a9df3f59b8a945fbc5ed61a057396">Pool</a>, <a class="el" href="classhpsmc_1_1batch_1_1Swif.html#abf8a9df3f59b8a945fbc5ed61a057396">Swif</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#abf8a9df3f59b8a945fbc5ed61a057396">Slurm</a>, <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#abf8a9df3f59b8a945fbc5ed61a057396">LSF</a>, and <a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#abf8a9df3f59b8a945fbc5ed61a057396">BatchSystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00033">33</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00058">58</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -436,22 +472,23 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Primary public method for submitting jobs after args are parsed. </p>
+<p>This is the generic batch submission function which gets a list of jobs to run based on command line arguments and submits them individually. </p>
+<p>It calls the abstract <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3" title="Submit a single batch job and return the batch ID.">submit_job()</a> method and prints the batch system ID that was returned, if any. </p>
 
 <p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Pool.html#a29b6002765badbb614507479cf1ce9f4">Pool</a>, <a class="el" href="classhpsmc_1_1batch_1_1Swif.html#a29b6002765badbb614507479cf1ce9f4">Swif</a>, and <a class="el" href="classhpsmc_1_1batch_1_1Auger.html#a29b6002765badbb614507479cf1ce9f4">Auger</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00181">181</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00140">140</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
-<a id="aafa74317d3ee4a0a3469f7667a665457"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafa74317d3ee4a0a3469f7667a665457">&#9670;&nbsp;</a></span>submit_cmd()</h2>
+<a id="a052ce3076fbbcbd1a2be9734b3a7f2a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a052ce3076fbbcbd1a2be9734b3a7f2a3">&#9670;&nbsp;</a></span>submit_job()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def submit_cmd </td>
+          <td class="memname">def submit_job </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -460,13 +497,7 @@ Static Private Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_data</em>&#160;</td>
+          <td class="paramname"><em>job_id</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -477,11 +508,12 @@ Static Private Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Submit a single batch job and return the batch ID. </p>
-<p>Must be implemented by derived classes for a specific batch system. </p>
+<p>This is abstract as each batch system will do this differently.</p>
+<p>Some batch systems don't implement this but sub-classes should override this and make it a no-op so that they can be instantiated. </p>
 
-<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Local.html#a06e86f6b9513946c99338863ba12a879">Local</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#a06e86f6b9513946c99338863ba12a879">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#a06e86f6b9513946c99338863ba12a879">LSF</a>.</p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Pool.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">Pool</a>, <a class="el" href="classhpsmc_1_1batch_1_1Local.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">Local</a>, <a class="el" href="classhpsmc_1_1batch_1_1Auger.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">Auger</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">LSF</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00148">148</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00129">129</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -497,9 +529,8 @@ Static Private Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>FIXME: This directory creation probably shouldn't happen here.</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00103">103</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00098">98</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -515,7 +546,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00135">135</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00122">122</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -531,23 +562,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00092">92</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="acba0eb96d8dc53394f4bc448317402ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acba0eb96d8dc53394f4bc448317402ed">&#9670;&nbsp;</a></span>email</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">email</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00090">90</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00081">81</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -563,23 +578,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00117">117</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="af9a4f51a2aa1485342c48472a9124d83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9a4f51a2aa1485342c48472a9124d83">&#9670;&nbsp;</a></span>env</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">env</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00088">88</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00112">112</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -595,23 +594,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00106">106</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="a02feee8784d8f4b5806174d39fa17222"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02feee8784d8f4b5806174d39fa17222">&#9670;&nbsp;</a></span>job_length</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">job_length</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00129">129</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00101">101</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -627,7 +610,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00110">110</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00105">105</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -643,7 +626,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00085">85</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00079">79</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -659,71 +642,23 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00094">94</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00084">84</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
-<a id="a61a963e6e2f81b884bc6d17c72777b42"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a61a963e6e2f81b884bc6d17c72777b42">&#9670;&nbsp;</a></span>memory</h2>
+<a id="a90eee7a4677ca8b1ed116364a24367f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90eee7a4677ca8b1ed116364a24367f9">&#9670;&nbsp;</a></span>parser</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">memory</td>
+          <td class="memname">parser</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00130">130</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="a3f3d2903c7f533d4714d065386a9e6e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f3d2903c7f533d4714d065386a9e6e8">&#9670;&nbsp;</a></span>os</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">os</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00127">127</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="ace095cfac39dad26bc702e15363a49a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace095cfac39dad26bc702e15363a49a7">&#9670;&nbsp;</a></span>pool_size</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pool_size</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00132">132</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="af8ceabb22d9297bd28382151f35a2252"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8ceabb22d9297bd28382151f35a2252">&#9670;&nbsp;</a></span>queue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">queue</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00126">126</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00056">56</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -739,7 +674,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00139">139</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00091">91</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -755,7 +690,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00077">77</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00071">71</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -771,23 +706,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00073">73</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="a3a17db18325acb0b63029751694fef68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a17db18325acb0b63029751694fef68">&#9670;&nbsp;</a></span>sh_dir</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">sh_dir</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00095">95</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00067">67</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -803,23 +722,7 @@ Static Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00116">116</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
-
-</div>
-</div>
-<a id="a3a6cba84ae6df52c3eff41b65d0874bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a6cba84ae6df52c3eff41b65d0874bf">&#9670;&nbsp;</a></span>workflow</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">workflow</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00142">142</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00111">111</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>

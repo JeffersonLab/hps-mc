@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>HPS-MC: Local Class Reference</title>
+<title>HPS-MC: BatchSystem Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,7 +72,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('classhpsmc_1_1batch_1_1Local.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('classhpsmc_1_1batch_1_1BatchSystem.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -93,35 +93,41 @@ $(document).ready(function(){initNavTree('classhpsmc_1_1batch_1_1Local.html','')
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="classhpsmc_1_1batch_1_1Local-members.html">List of all members</a>  </div>
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
+<a href="classhpsmc_1_1batch_1_1BatchSystem-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Local Class Reference</div>  </div>
+<div class="title">BatchSystem Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Run local batch jobs sequentially.  
- <a href="classhpsmc_1_1batch_1_1Local.html#details">More...</a></p>
+<p>Represents a batch processing system that requires submission like <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs.">Slurm</a> or <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a>.  
+ <a href="classhpsmc_1_1batch_1_1BatchSystem.html#details">More...</a></p>
 <div class="dynheader">
-Inheritance diagram for Local:</div>
+Inheritance diagram for BatchSystem:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classhpsmc_1_1batch_1_1Local.png" usemap="#Local_map" alt=""/>
-  <map id="Local_map" name="Local_map">
-<area href="classhpsmc_1_1batch_1_1Batch.html" title="Generic batch processing interface." alt="Batch" shape="rect" coords="0,56,44,80"/>
+  <img src="classhpsmc_1_1batch_1_1BatchSystem.png" usemap="#BatchSystem_map" alt=""/>
+  <map id="BatchSystem_map" name="BatchSystem_map">
+<area href="classhpsmc_1_1batch_1_1Batch.html" title="Generic batch processing interface." alt="Batch" shape="rect" coords="47,56,131,80"/>
+<area href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs." alt="Auger" shape="rect" coords="0,168,84,192"/>
+<area href="classhpsmc_1_1batch_1_1LSF.html" title="Submit LSF batch jobs." alt="LSF" shape="rect" coords="94,168,178,192"/>
+<area href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs." alt="Slurm" shape="rect" coords="188,168,272,192"/>
+<area href="classhpsmc_1_1batch_1_1Swif.html" title="Submit using the &#39;swif2&#39; command at JLAB using an Auger file." alt="Swif" shape="rect" coords="0,224,84,248"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae64f0875afe3067b97ba370b354b9213"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Local.html#ae64f0875afe3067b97ba370b354b9213">__init__</a> (self)</td></tr>
+<tr class="memitem:ae64f0875afe3067b97ba370b354b9213"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#ae64f0875afe3067b97ba370b354b9213">__init__</a> (self)</td></tr>
 <tr class="separator:ae64f0875afe3067b97ba370b354b9213"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Local.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">submit_job</a> (self, job_id)</td></tr>
-<tr class="memdesc:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a single job locally.  <a href="classhpsmc_1_1batch_1_1Local.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">More...</a><br /></td></tr>
-<tr class="separator:a052ce3076fbbcbd1a2be9734b3a7f2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf8a9df3f59b8a945fbc5ed61a057396"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#abf8a9df3f59b8a945fbc5ed61a057396">parse_args</a> (self, <a class="el" href="namespacehpsmc_1_1batch.html#a8187411843a6284ffb964ef3fb9fcab3">args</a>)</td></tr>
+<tr class="memdesc:abf8a9df3f59b8a945fbc5ed61a057396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command line arguments and perform setup.  <a href="classhpsmc_1_1batch_1_1BatchSystem.html#abf8a9df3f59b8a945fbc5ed61a057396">More...</a><br /></td></tr>
+<tr class="separator:abf8a9df3f59b8a945fbc5ed61a057396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classhpsmc_1_1batch_1_1Batch"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classhpsmc_1_1batch_1_1Batch')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classhpsmc_1_1batch_1_1Batch.html">Batch</a></td></tr>
-<tr class="memitem:abf8a9df3f59b8a945fbc5ed61a057396 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#abf8a9df3f59b8a945fbc5ed61a057396">parse_args</a> (self, <a class="el" href="namespacehpsmc_1_1batch.html#a8187411843a6284ffb964ef3fb9fcab3">args</a>)</td></tr>
-<tr class="memdesc:abf8a9df3f59b8a945fbc5ed61a057396 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command line arguments and perform setup.  <a href="classhpsmc_1_1batch_1_1Batch.html#abf8a9df3f59b8a945fbc5ed61a057396">More...</a><br /></td></tr>
-<tr class="separator:abf8a9df3f59b8a945fbc5ed61a057396 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a052ce3076fbbcbd1a2be9734b3a7f2a3 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">submit_job</a> (self, job_id)</td></tr>
+<tr class="memdesc:a052ce3076fbbcbd1a2be9734b3a7f2a3 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit a single batch job and return the batch ID.  <a href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">More...</a><br /></td></tr>
+<tr class="separator:a052ce3076fbbcbd1a2be9734b3a7f2a3 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29b6002765badbb614507479cf1ce9f4 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a29b6002765badbb614507479cf1ce9f4">submit</a> (self)</td></tr>
 <tr class="memdesc:a29b6002765badbb614507479cf1ce9f4 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the generic batch submission function which gets a list of jobs to run based on command line arguments and submits them individually.  <a href="classhpsmc_1_1batch_1_1Batch.html#a29b6002765badbb614507479cf1ce9f4">More...</a><br /></td></tr>
 <tr class="separator:a29b6002765badbb614507479cf1ce9f4 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,8 +137,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a7d0cb775e9851bfbbcd4f7015aaf4891 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the basic implementation of building a command to run the job from a batch system.  <a href="classhpsmc_1_1batch_1_1Batch.html#a7d0cb775e9851bfbbcd4f7015aaf4891">More...</a><br /></td></tr>
 <tr class="separator:a7d0cb775e9851bfbbcd4f7015aaf4891 inherit pub_methods_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a69505da8975e3c2a73b5699776ffa4a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#a69505da8975e3c2a73b5699776ffa4a6">site</a></td></tr>
+<tr class="separator:a69505da8975e3c2a73b5699776ffa4a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acba0eb96d8dc53394f4bc448317402ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#acba0eb96d8dc53394f4bc448317402ed">email</a></td></tr>
+<tr class="separator:acba0eb96d8dc53394f4bc448317402ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ceabb22d9297bd28382151f35a2252"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#af8ceabb22d9297bd28382151f35a2252">queue</a></td></tr>
+<tr class="separator:af8ceabb22d9297bd28382151f35a2252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f3d2903c7f533d4714d065386a9e6e8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#a3f3d2903c7f533d4714d065386a9e6e8">os</a></td></tr>
+<tr class="separator:a3f3d2903c7f533d4714d065386a9e6e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61a963e6e2f81b884bc6d17c72777b42"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#a61a963e6e2f81b884bc6d17c72777b42">memory</a></td></tr>
+<tr class="separator:a61a963e6e2f81b884bc6d17c72777b42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02feee8784d8f4b5806174d39fa17222"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#a02feee8784d8f4b5806174d39fa17222">job_length</a></td></tr>
+<tr class="separator:a02feee8784d8f4b5806174d39fa17222"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classhpsmc_1_1batch_1_1Batch"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classhpsmc_1_1batch_1_1Batch')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classhpsmc_1_1batch_1_1Batch.html">Batch</a></td></tr>
 <tr class="memitem:a90eee7a4677ca8b1ed116364a24367f9 inherit pub_attribs_classhpsmc_1_1batch_1_1Batch"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a90eee7a4677ca8b1ed116364a24367f9">parser</a></td></tr>
 <tr class="separator:a90eee7a4677ca8b1ed116364a24367f9 inherit pub_attribs_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,11 +178,17 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a01564d84a9937f38aed850c4aa3b3b7e inherit pub_attribs_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae61be9571b4d5e303b3cc73a598d16ba inherit pub_attribs_classhpsmc_1_1batch_1_1Batch"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ae61be9571b4d5e303b3cc73a598d16ba">config_files</a></td></tr>
 <tr class="separator:ae61be9571b4d5e303b3cc73a598d16ba inherit pub_attribs_classhpsmc_1_1batch_1_1Batch"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:ace8d7c23904ab69f1a77a771834e5d46"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html#ace8d7c23904ab69f1a77a771834e5d46">_site</a> ()</td></tr>
+<tr class="separator:ace8d7c23904ab69f1a77a771834e5d46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Run local batch jobs sequentially. </p>
+<div class="textblock"><p>Represents a batch processing system that requires submission like <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs.">Slurm</a> or <a class="el" href="classhpsmc_1_1batch_1_1Auger.html" title="Submit Auger batch jobs.">Auger</a>. </p>
+<p>This subclasses <a class="el" href="classhpsmc_1_1batch_1_1Batch.html" title="Generic batch processing interface.">Batch</a> because it adds a number of different parameters which do not apply to all the batch system types (namely <a class="el" href="classhpsmc_1_1batch_1_1Pool.html" title="Run a set of jobs in a local multiprocessing pool using Python&#39;s multiprocessing module.">Pool</a> and <a class="el" href="classhpsmc_1_1batch_1_1Local.html" title="Run local batch jobs sequentially.">Local</a>). </p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00717">717</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00231">231</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae64f0875afe3067b97ba370b354b9213"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae64f0875afe3067b97ba370b354b9213">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -184,19 +208,48 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Reimplemented from <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#ae64f0875afe3067b97ba370b354b9213">Batch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00722">722</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Swif.html#ae64f0875afe3067b97ba370b354b9213">Swif</a>, <a class="el" href="classhpsmc_1_1batch_1_1Auger.html#ae64f0875afe3067b97ba370b354b9213">Auger</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#ae64f0875afe3067b97ba370b354b9213">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#ae64f0875afe3067b97ba370b354b9213">LSF</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00239">239</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a052ce3076fbbcbd1a2be9734b3a7f2a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a052ce3076fbbcbd1a2be9734b3a7f2a3">&#9670;&nbsp;</a></span>submit_job()</h2>
+<a id="ace8d7c23904ab69f1a77a771834e5d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace8d7c23904ab69f1a77a771834e5d46">&#9670;&nbsp;</a></span>_site()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">def _site </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00269">269</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="abf8a9df3f59b8a945fbc5ed61a057396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf8a9df3f59b8a945fbc5ed61a057396">&#9670;&nbsp;</a></span>parse_args()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">def submit_job </td>
+          <td class="memname">def parse_args </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname"><em>self</em>, </td>
@@ -205,7 +258,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>job_id</em>&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -215,11 +268,111 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Run a single job locally. </p>
+<p>Parse command line arguments and perform setup. </p>
 
-<p>Reimplemented from <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#a052ce3076fbbcbd1a2be9734b3a7f2a3">Batch</a>.</p>
+<p>Reimplemented from <a class="el" href="classhpsmc_1_1batch_1_1Batch.html#abf8a9df3f59b8a945fbc5ed61a057396">Batch</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00725">725</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+<p>Reimplemented in <a class="el" href="classhpsmc_1_1batch_1_1Swif.html#abf8a9df3f59b8a945fbc5ed61a057396">Swif</a>, <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html#abf8a9df3f59b8a945fbc5ed61a057396">Slurm</a>, and <a class="el" href="classhpsmc_1_1batch_1_1LSF.html#abf8a9df3f59b8a945fbc5ed61a057396">LSF</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00255">255</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="acba0eb96d8dc53394f4bc448317402ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acba0eb96d8dc53394f4bc448317402ed">&#9670;&nbsp;</a></span>email</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">email</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00260">260</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="a02feee8784d8f4b5806174d39fa17222"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02feee8784d8f4b5806174d39fa17222">&#9670;&nbsp;</a></span>job_length</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">job_length</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00264">264</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="a61a963e6e2f81b884bc6d17c72777b42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61a963e6e2f81b884bc6d17c72777b42">&#9670;&nbsp;</a></span>memory</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">memory</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00263">263</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="a3f3d2903c7f533d4714d065386a9e6e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f3d2903c7f533d4714d065386a9e6e8">&#9670;&nbsp;</a></span>os</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">os</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00262">262</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="af8ceabb22d9297bd28382151f35a2252"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8ceabb22d9297bd28382151f35a2252">&#9670;&nbsp;</a></span>queue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">queue</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00261">261</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
+
+</div>
+</div>
+<a id="a69505da8975e3c2a73b5699776ffa4a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69505da8975e3c2a73b5699776ffa4a6">&#9670;&nbsp;</a></span>site</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">site</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Make sure this is applied to <a class="el" href="classhpsmc_1_1batch_1_1Slurm.html" title="Submit Slurm batch jobs.">Slurm</a> as well.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="batch_8py_source.html#l00253">253</a> of file <a class="el" href="batch_8py_source.html">batch.py</a>.</p>
 
 </div>
 </div>
@@ -231,7 +384,7 @@ Additional Inherited Members</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1batch.html">batch</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1batch_1_1Local.html">Local</a></li>
+    <li class="navelem"><a class="el" href="namespacehpsmc.html">hpsmc</a></li><li class="navelem"><a class="el" href="namespacehpsmc_1_1batch.html">batch</a></li><li class="navelem"><a class="el" href="classhpsmc_1_1batch_1_1BatchSystem.html">BatchSystem</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
