@@ -1,6 +1,6 @@
 #!/bin/sh
-# Use this hps partition (or other valid partition) for SLAC
-hps-mc-batch slurm -o -q hps -r 1:1 -E $HPSMC_DIR/bin/hps-mc-env.sh -W 5 -d $PWD/scratch -c $PWD/.hpsmc -l $PWD/scratch/logs -S $PWD/scratch slic $PWD/job_slurm.json
 
-# Use this ifarm partition (or other valid partition) for JLab
-# hps-mc-batch slurm -o -q ifarm -r 1:1 -E $HPSMC_DIR/bin/hps-mc-env.sh -W 5 -d $PWD/scratch -c $PWD/.hpsmc -l $PWD/scratch/logs -S $PWD/scratch slic $PWD/job_slurm.json
+_basedir=$PWD/slurm_scratch
+
+# Run a slurm job using mostly default arguments.
+hps-mc-batch slurm -l ${_basedir}/logs -d ${_basedir}/jobs -S ${_basedir}/sh -o -q shared -W 2 -m 2000 slic job_slurm.json

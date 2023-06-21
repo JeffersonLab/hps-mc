@@ -1,2 +1,1 @@
-rm -r output scratch
-rm job.1.*
+rm -rf slurm_scratch output scratch logs
