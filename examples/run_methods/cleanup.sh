@@ -1,1 +1,1 @@
-rm -rf output scratch logs sh
+rm -rf slurm_scratch output scratch logs
