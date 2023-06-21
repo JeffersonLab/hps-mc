@@ -340,7 +340,7 @@ class Slurm(BatchSystem):
     def parse_args(self, args):
 
         cl = super().parse_args(args)
-        
+
         # Set Slurm env script
         self.env = cl.env
 
@@ -423,8 +423,8 @@ class Slurm(BatchSystem):
         Write the shell script for Slurm job submission using the 'sbatch' command.
         """
 
-        script_lines = ['#!/bin/bash', 
-                        ''] 
+        script_lines = ['#!/bin/bash',
+                        '']
         if self.env:
             script_lines.append(f'source {self.env}')
         script_lines.extend(['echo Start time: `date`',
