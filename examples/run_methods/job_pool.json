@@ -13,5 +13,20 @@
         "output_dir": "output",
         "job_id": 1,
         "year": 2019
+    },
+    {
+        "seed": 2532765,
+        "nevents": 250,
+        "run_number": 10666,
+        "detector": "HPS-PhysicsRun2019-v2-4pt5",
+        "input_files": {
+            "https://hpsweb.jlab.org/test/hps-mc/example_files/beam/beam_4pt55_20um120nA_1.stdhep": "beam_2.stdhep"
+        },
+        "output_files": {
+            "beam_2.slcio": "beam_4pt55_20um120nA_2.slcio"
+        },
+        "output_dir": "output",
+        "job_id": 2,
+        "year": 2019
     }
 ]
