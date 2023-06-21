@@ -380,7 +380,7 @@ class Slurm(BatchSystem):
                       '--time=%s' % (str(self.job_length) + ':00:00'),
                       '--partition=%s' % self._default_queue(),
                       '--mem=%sM' % self.memory,
-                      '--job-name=%s_%i' % (self.script_name, job_id),
+                      '--job-name=%i_%s' % (job_id, self.script_name),
                       '--output=%s.out' % log_file,
                       '--error=%s.err' % log_file]
         if self.email:
