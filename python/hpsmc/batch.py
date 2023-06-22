@@ -737,19 +737,18 @@ class Local(Batch):
 mp_queue = multiprocessing.Queue()
 
 
-def run_job_pool(cmd):
+def run_job_pool(args):
     """! Run the command in a new process whose PID is added to a global MP queue."""
+    job_id, cmd, log_dir = args
     try:
-        sys.stdout.flush()
-        proc = subprocess.Popen(cmd, preexec_fn=os.setsid)
-        mp_queue.put(proc.pid)
-        proc.wait()
-        returncode = proc.returncode
+        with open(f'{log_dir}/job.{job_id}.log', 'w') as f:
+            proc = subprocess.Popen(cmd, preexec_fn=os.setsid, stdout=f, stderr=f)
+            mp_queue.put(proc.pid)
+            proc.wait()
+            return proc.returncode
     except subprocess.CalledProcessError as e:
         logger.error(str(e))
-        sys.stdout.flush()
-        pass
-    return returncode
+        return 1
 
 
 def is_running(proc):
@@ -830,7 +829,11 @@ class Pool(Batch):
         cmds = []
         for job_id in self._get_filtered_job_ids():
             cmd = self.build_cmd(job_id)
-            cmds.append(cmd)
+            cmds.append((
+              job_id,
+              cmd,
+              self.log_dir
+              ))
 
         # logger.debug('Running job commands in pool ...')
         # logger.debug('\n'.join([' '.join(cmd) for cmd in cmds]))
