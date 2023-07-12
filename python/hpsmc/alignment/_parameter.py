@@ -32,7 +32,7 @@ class Parameter:
         true if parameter is floating, false otherwise
     """
 
-    idn_str_pattern = re.compile('^[12][12][123][0-9][0-9]$')
+    idn_str_pattern = re.compile('^[12][123][123][0-9][0-9]$')
     layer_number_pattern = re.compile('^.*_L([0-9]).*$')
 
     def __init__(self, idn, name, half, trans_rot, direction, mp_layer_id):
@@ -114,7 +114,7 @@ class Parameter:
 
         We have to check the name to see if 'axial' is in it.
         """
-        return self.individual() and ('axial' in self.name)
+        return self.individual() and ('axial' in self._name)
 
     def stereo(self):
         """!Get whether this Parameter represents a single stereo sensor (True)
@@ -122,7 +122,7 @@ class Parameter:
 
         We have to check the name to see if 'stereo' is in it.
         """
-        return self.individual() and ('stereo' in self.name)
+        return self.individual() and ('stereo' in self._name)
 
     def front(self):
         """!True if Parameter is single sensor in front half, False otherwise"""
