@@ -4,10 +4,10 @@
         "{{input_files['hps'][0]}}" : "data_events.evio"
     },
     "output_files": {
-        "data_events_hist.root" : "hps_{{run_number}}_evio_{{job_id}}_bl2dhisto.root"
+        "data_events_hist.root" : "hps_{{input_files['hps'][0][37:42]}}_evio_{{job_id}}_bl2dhisto.root"
     }, 
     "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines{{run_number}}",
-    "run_number": {{run_number}},
+    "run_number": {{input_files['hps'][0][37:42]}},
     "steering_files": {
         "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
     }, 
