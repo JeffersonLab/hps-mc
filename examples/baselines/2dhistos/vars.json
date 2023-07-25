@@ -1,6 +1,0 @@
-{
-    "run_params" : ["3pt74"],
-    "detector" : ["HPS_PhysicsRun2019-v2-FEE-Pass0"],
-    "target_z": [-1],
-    "run_number" : [14449]
-}
