@@ -1,904 +1,863 @@
 [
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00010": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_1_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 1,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 1,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_1_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00011": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_2_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 2,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 2,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_2_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00012": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_3_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 3,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 3,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_3_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00013": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_4_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 4,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 4,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_4_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00014": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_5_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 5,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 5,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_5_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00015": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_6_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 6,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 6,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_6_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00016": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_7_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 7,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 7,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_7_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00017": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_8_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 8,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 8,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_8_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00018": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_9_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 9,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 9,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_9_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00019": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_10_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 10,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 10,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_10_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00020": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_11_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 11,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 11,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_11_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00021": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_12_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 12,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 12,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_12_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00022": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_13_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 13,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 13,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_13_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00023": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_14_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 14,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 14,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_14_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00024": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_15_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 15,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 15,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_15_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00025": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_16_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 16,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 16,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_16_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00026": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_17_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 17,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 17,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_17_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00027": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_18_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 18,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 18,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_18_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00028": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_19_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 19,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 19,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_19_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00029": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_20_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 20,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 20,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_20_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00030": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_21_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 21,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 21,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_21_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00031": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_22_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 22,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 22,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_22_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00032": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_23_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 23,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 23,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_23_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00033": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_24_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 24,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 24,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_24_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00034": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_25_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 25,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 25,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_25_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00035": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_26_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 26,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 26,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_26_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00036": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_27_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 27,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 27,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_27_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00037": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_28_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 28,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 28,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_28_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00038": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_29_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 29,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 29,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_29_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00039": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_30_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 30,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 30,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_30_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00040": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_31_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 31,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 31,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_31_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00041": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_32_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 32,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 32,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_32_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00042": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_33_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 33,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 33,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_33_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00043": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_34_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 34,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 34,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_34_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00044": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_35_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 35,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 35,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_35_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00045": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_36_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 36,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 36,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_36_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00046": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_37_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 37,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 37,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_37_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00047": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_38_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 38,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 38,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_38_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00048": "data_events.evio"
         },
+        "year": 2021,
+        "output_files": {
+            "data_events_hist.root": "hps_14449_evio_39_bl2dhisto.root"
+        },
+        "run_number": 14449,
         "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "job_id": 39,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 39,
-        "run_number": 14449,
-        "output_files": {
-            "data_events_hist.root": "hps_14449_evio_39_bl2dhisto.root"
-        }
+        "is_data": 1
     },
     {
-        "year": 2021,
-        "steering_files": {
-            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
-        },
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "input_files": {
             "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00049": "data_events.evio"
         },
-        "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
-        "config_files": {
-            "hist": "anaSvtBl2D_cfg.py",
-            "raw": "rawSvtHits_cfg.py"
-        },
-        "job_id": 40,
-        "run_number": 14449,
+        "year": 2021,
         "output_files": {
             "data_events_hist.root": "hps_14449_evio_40_bl2dhisto.root"
-        }
-    },
-    {
-        "year": 2021,
+        },
+        "run_number": 14449,
+        "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
+        "job_id": 40,
         "steering_files": {
             "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
         },
-        "input_files": {
-            "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00050": "data_events.evio"
-        },
-        "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
-        "is_data": 1,
-        "nevents": 2000000,
-        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
         "config_files": {
             "hist": "anaSvtBl2D_cfg.py",
             "raw": "rawSvtHits_cfg.py"
         },
-        "job_id": 41,
-        "run_number": 14449,
+        "is_data": 1
+    },
+    {
+        "output_dir": "/w/hallb-scshelf2102/hps/rodwyer/baselines/scratch3/baselines14449",
+        "input_files": {
+            "/mss/hallb/hps/physrun2021/data/hps_014449/hps_014449.evio.00050": "data_events.evio"
+        },
+        "year": 2021,
         "output_files": {
             "data_events_hist.root": "hps_14449_evio_41_bl2dhisto.root"
-        }
+        },
+        "run_number": 14449,
+        "detector": "HPS_PhysicsRun2019-v2-FEE-Pass0",
+        "job_id": 41,
+        "steering_files": {
+            "recon": "/org/hps/steering/production/Evio2LcioCnv.lcsim"
+        },
+        "config_files": {
+            "hist": "anaSvtBl2D_cfg.py",
+            "raw": "rawSvtHits_cfg.py"
+        },
+        "is_data": 1
     }
 ]
