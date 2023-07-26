@@ -579,7 +579,7 @@ class Auger(BatchSystem):
         if self.job_steps is not None:
             cmd.extend(['--job-steps', str(self.job_steps)])
         cmd.extend(['-i', str(job_id)])
-        cmd.append(self.job_script)
+        cmd.append(self.script)
         cmd.append(os.path.abspath(self.jobstore.path))
         logger.debug("Job command: %s" % " ".join(cmd))
         return cmd
@@ -646,7 +646,7 @@ class Auger(BatchSystem):
         cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
         cmd_lines.append("source %s/bin/jlab-env.csh;\n" % os.getenv('HPSMC_DIR'))
 
-        job_cmd = self.build_cmd(job_id, job_params)
+        job_cmd=self.build_cmd(job_id)
 
         # Write log file locally so it can be copied back with Output element
         # log_file = 'job.%d.log' % job_id
@@ -681,7 +681,7 @@ class Swif(Auger):
 
         super().__init__()
 
-        self.add_argument("-w", "--workflow", nargs='?', help="Name of swif2 workflow", required=False)
+        self.parser.add_argument("-w", "--workflow", nargs='?', help="Name of swif2 workflow", required=False)
 
     def parse_args(self, args):
         cl = super().parse_args(args)
