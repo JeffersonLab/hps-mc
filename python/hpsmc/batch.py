@@ -646,7 +646,7 @@ class Auger(BatchSystem):
         cmd_lines.append("source %s;\n" % os.path.realpath(self.setup_script))
         cmd_lines.append("source %s/bin/jlab-env.csh;\n" % os.getenv('HPSMC_DIR'))
 
-        job_cmd=self.build_cmd(job_id)
+        job_cmd = self.build_cmd(job_id)
 
         # Write log file locally so it can be copied back with Output element
         # log_file = 'job.%d.log' % job_id
