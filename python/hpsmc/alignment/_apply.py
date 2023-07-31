@@ -73,10 +73,10 @@ class _DetectorEditor(Component):
                 # deduce iter value, using iter0 if there is no iter suffix
                 matches = re.search('.*iter([0-9]*)', self.detector)
                 if matches is None:
-                    raise ValueError('No "_iterN" suffix on detector name.')
+                    raise ValueError('No "iterN" suffix on detector name.')
                 else:
                     i = int(matches.group(1))
-                    self.next_detector = self.detector.replace(f'_iter{i}', f'_iter{i+1}')
+                    self.next_detector = self.detector.replace(f'iter{i}', f'iter{i+1}')
 
             self.logger.info(f'Creating new detector named "{self.next_detector}"')
         else:
