@@ -1,0 +1,17 @@
+
+/generator/select gps
+
+/gps/verbose 2
+
+/gps/particle e-
+/gps/pos/type Point
+/gps/energy 3.74 GeV
+/gps/position 0 0 0 mm
+/gps/ang/type iso
+
+#/slic/plugins/load StepPrinter
+
+# Set the output file name
+/lcio/fileExists delete
+
+
