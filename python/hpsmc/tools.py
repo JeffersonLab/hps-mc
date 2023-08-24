@@ -44,7 +44,7 @@ class SLIC(Component):
             raise Exception("No inputs given for SLIC.")
 
         args = ["-g", self.__detector_file(),
-#                "-i", self.input_files()[0],
+                #"-i", self.input_files()[0],
                 "-o", self.output_files()[0],
                 "-d%s" % str(self.seed)]
 
@@ -61,7 +61,7 @@ class SLIC(Component):
             raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
 
         if len(self.macros):
-#            args = []
+            #args = []
             for macro in self.macros:
                 if macro == "run_number.mac":
                     raise Exception("Macro name '%s' is not allowed." % macro)
