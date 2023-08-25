@@ -4,5 +4,5 @@
 #SBATCH --partition=shared
 #SBATCH --job-name=examples
 
-hps-mc-job run -d $PWD/scratch -c .hpsmc slic_to_ana $PWD/job.json
+hps-mc-job run -d $PWD/scratch -c .hpsmc slic_gps_to_ana $PWD/job.json
 
