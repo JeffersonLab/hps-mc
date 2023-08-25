@@ -1,10 +1,10 @@
-SLIC to analysis pipeline with macro data from GEANT4 GPS {#slictoana_macro}
+SLIC to analysis pipeline with gps macro from GEANT4 GPS {#slicgpstoana}
 =====================================
 
-slic_to_ana_job.py runs slic on the input stdhep files or GEANT4 GPS macro, converts the output to root files, runs the reconstruction and runs a hpstr analysis on these files.
+slic_gps_to_ana_job.py runs slic on a GEANT4 GPS macro, converts the output to root files, runs the reconstruction and runs a hpstr analysis on these files.
 
 #### Job parameters
-This table contains parameters special to the slic\_to\_ana\_macro job. The general parameters are discussed on the [examples main page](@ref examples).
+This table contains parameters special to the slic\_gps\_to\_ana job. The general parameters are discussed on the [examples main page](@ref examples).
 
 | param         |                                       |
 |---------------|---------------------------------------|
