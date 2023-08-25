@@ -1,0 +1,25 @@
+{
+    "run_number": 1193740, 
+    "job_id": 66, 
+    "macros": ["/sdf/group/hps/users/abdatta/src/hps-mc/examples/slic_to_ana_macro/gps.mac"],
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigPulse.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
+    },
+    "config_files": {
+        "recon": "kalSimpTuple_cfg.py",
+        "ana": "anaVtxTuple_cfg.py"
+    },
+    "nevents": 1000,
+    "output_dir": "output/HPS_EngAli1mmBotShimL12_3pt74_iter0", 
+    "filter_no_cuts": true,
+    "filter_bunches": true,
+    "detector": "HPS_EngAli1mmBotShimL12_3pt74_iter0", 
+    "output_files": {
+        "ptag:sim": "gps_3pt74_sim.slcio",
+        "ptag:readout": "electrons_3pt74_filt_readout.slcio",
+        "ptag:recon": "electrons_3pt74_filt_readout_recon.slcio",
+        "ptag:recon_root": "electrons_3pt74_filt_readout_recon.root",
+        "ptag:ana": "electrons_3pt74_filt_readout_recon_ana.root"
+    }
+} 
