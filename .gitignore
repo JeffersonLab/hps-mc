@@ -17,3 +17,6 @@ docs/html/*
 
 # vscode config (makes Sarah's life easier)
 .vscode
+
+# Mac artifacts
+.DS_Store
