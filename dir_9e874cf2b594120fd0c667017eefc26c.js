@@ -23,6 +23,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "signal_pulser_overlay_to_recon_job.py", "signal__pulser__overlay__to__recon__job_8py.html", "signal__pulser__overlay__to__recon__job_8py" ],
     [ "sim_to_ana_job.py", "sim__to__ana__job_8py.html", "sim__to__ana__job_8py" ],
     [ "simp_job.py", "simp__job_8py.html", "simp__job_8py" ],
+    [ "slic_gps_to_ana_job.py", "slic__gps__to__ana__job_8py.html", "slic__gps__to__ana__job_8py" ],
     [ "slic_job.py", "slic__job_8py.html", "slic__job_8py" ],
     [ "slic_to_ana_job.py", "slic__to__ana__job_8py.html", "slic__to__ana__job_8py" ],
     [ "slic_to_anaMC_job.py", "slic__to__anaMC__job_8py.html", "slic__to__anaMC__job_8py" ],

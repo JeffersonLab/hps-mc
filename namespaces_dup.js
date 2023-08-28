@@ -1,18 +1,19 @@
 var namespaces_dup =
 [
-    [ "Prerequisites", "readme.html#autotoc_md50", null ],
-    [ "Installation", "readme.html#autotoc_md51", null ],
-    [ "Environment Setup", "readme.html#autotoc_md52", null ],
-    [ "Running Job Scripts", "readme.html#autotoc_md53", null ],
-    [ "Documentation", "readme.html#autotoc_md54", null ],
-    [ "Quick Start Guide", "readme.html#autotoc_md55", null ],
-    [ "Code Formatting", "readme.html#autotoc_md56", null ],
-    [ "Unit tests", "readme.html#autotoc_md57", null ],
-    [ "Help", "readme.html#autotoc_md58", null ],
+    [ "Prerequisites", "readme.html#autotoc_md51", null ],
+    [ "Installation", "readme.html#autotoc_md52", null ],
+    [ "Environment Setup", "readme.html#autotoc_md53", null ],
+    [ "Running Job Scripts", "readme.html#autotoc_md54", null ],
+    [ "Documentation", "readme.html#autotoc_md55", null ],
+    [ "Quick Start Guide", "readme.html#autotoc_md56", null ],
+    [ "Code Formatting", "readme.html#autotoc_md57", null ],
+    [ "Unit tests", "readme.html#autotoc_md58", null ],
+    [ "Help", "readme.html#autotoc_md59", null ],
     [ "_config", "namespace__config.html", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
       [ "Job parameters", "idm.html#autotoc_md29", null ],
       [ "Job template", "idm.html#autotoc_md30", null ],
+      [ "Job parameters", "slicgpstoana.html#autotoc_md38", null ],
       [ "description", "namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "mg", "namespaceap__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
       [ "nevents", "namespaceap__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ]
@@ -261,6 +262,17 @@ var namespaces_dup =
       [ "rot", "namespacesimp__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
       [ "slic", "namespacesimp__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ],
       [ "unzip", "namespacesimp__job.html#ada93bbf7295ab03a07435e4999845526", null ]
+    ] ],
+    [ "slic_gps_to_ana_job", "namespaceslic__gps__to__ana__job.html", [
+      [ "ana", "namespaceslic__gps__to__ana__job.html#a98913e0a438f1e6376eedaef8541569b", null ],
+      [ "base_name", "namespaceslic__gps__to__ana__job.html#a7ececf89ecb9b0dc15cc917c46ff5670", null ],
+      [ "description", "namespaceslic__gps__to__ana__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "filter_bunches", "namespaceslic__gps__to__ana__job.html#a3074e3594d8071411ddd34bbbf47acd9", null ],
+      [ "input_filename", "namespaceslic__gps__to__ana__job.html#a1a82e68cdf16eca7feb03b1174ab6f6d", null ],
+      [ "readout", "namespaceslic__gps__to__ana__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
+      [ "recon", "namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
+      [ "root_cnv", "namespaceslic__gps__to__ana__job.html#ad324e5599132ef76e1594fb62a3c9a23", null ],
+      [ "sim", "namespaceslic__gps__to__ana__job.html#a9ce7d8135916f3d4dcc638c7b8279419", null ]
     ] ],
     [ "slic_job", "namespaceslic__job.html", [
       [ "description", "namespaceslic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],

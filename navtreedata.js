@@ -30,12 +30,12 @@ var NAVTREE =
     [ "stdhep-tools", "stdheptools.html", null ],
     [ "misalignment", "misalign.html", [
       [ "Parameters", "misalign.html#autotoc_md2", [
-        [ "Documented files", "index.html#autotoc_md45", [
-          [ "External documentation", "index.html#autotoc_md46", null ]
+        [ "Documented files", "index.html#autotoc_md46", [
+          [ "External documentation", "index.html#autotoc_md47", null ]
         ] ],
-        [ "Installation", "index.html#autotoc_md47", null ],
-        [ "Quick Start Guide", "index.html#autotoc_md48", null ],
-        [ "Help", "index.html#autotoc_md49", null ],
+        [ "Installation", "index.html#autotoc_md48", null ],
+        [ "Quick Start Guide", "index.html#autotoc_md49", null ],
+        [ "Help", "index.html#autotoc_md50", null ],
         [ "parameters", "misalign.html#autotoc_md6", null ]
       ] ]
     ] ],
@@ -48,6 +48,7 @@ var NAVTREE =
     [ "Tracking for Alignment", "trackingalign.html", null ],
     [ "Examples", "examples.html", "examples" ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
+    [ "SLIC to analysis pipeline with gps macro from GEANT4 GPS", "slicgpstoana.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
     [ "Data conversion/reco – evio to lcio", "ana1921pass0.html", null ],
     [ "Production scripts", "prod.html", null ],
@@ -88,10 +89,11 @@ var NAVTREEINDEX =
 "classhpsmc_1_1job_1_1JobScriptDatabase.html#a10763a1f0b1f242ac223e855ab0d9604",
 "classtest_1_1test__component_1_1TestComponent.html#a28fc81d36de9692beab59eab6399c18c",
 "config__writer_8py.html#a93fee1b9e017ebbd1173f53ca18f9e4d",
-"merge__files_8cc.html",
-"namespacemembers_vars_j.html",
-"namespacetritrig__prep__and__slic__job.html#ada93bbf7295ab03a07435e4999845526",
-"slictoanaMC.html#autotoc_md38"
+"merge__bunches_8cc_source.html",
+"namespacemembers_vars_i.html",
+"namespacetritrig__gen__to__beam__coords__job.html#a1db2ab3d82c6029ee441423308802a74",
+"slic__to__ana__job_8py.html#ad324e5599132ef76e1594fb62a3c9a23",
+"wab__gen__to__slic__job_8py.html#a5209ed8d981dc170e77bea159c5bbe48"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

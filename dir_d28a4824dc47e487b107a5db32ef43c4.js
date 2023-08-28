@@ -16,6 +16,7 @@ var dir_d28a4824dc47e487b107a5db32ef43c4 =
     [ "readout_recon", "dir_d2b9fc179199248a23bc6b6c8e4a9c61.html", null ],
     [ "run_methods", "dir_230ef9542e403d77fbe34972e6a2d100.html", null ],
     [ "simp", "dir_c2b016e79bfa7f70d2ba71c7ec9b8fe3.html", null ],
+    [ "slic_gps_to_ana", "dir_35a1d10b1ce1c80e80957a918fe79d56.html", null ],
     [ "slic_to_anaMC", "dir_45eeb3f260d7894c26bc6926829d9e61.html", null ],
     [ "tritrig_beam", "dir_f971fb6e69374eebb5220b0f865810dd.html", null ],
     [ "tritrig_gen", "dir_a130ce581647a7e301371b0e8a5ff388.html", null ],
