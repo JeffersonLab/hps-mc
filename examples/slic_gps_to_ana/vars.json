@@ -3,5 +3,6 @@
     "macros": ["/sdf/group/hps/users/abdatta/src/hps-mc/examples/slic_to_ana_macro/gps.mac"],
     "nevents": [1000],
     "detector": ["HPS_EngAli1mmBotShimL12_3pt74_iter0"], 
+    "year": [2021],
     "run_params": ["3pt74"]
 } 
