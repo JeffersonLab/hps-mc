@@ -15,6 +15,7 @@
     "filter_no_cuts": true,
     "filter_bunches": true,
     "detector": "HPS_EngAli1mmBotShimL12_3pt74_iter0", 
+    "year": 2021,
     "output_files": {
         "ptag:sim": "gps_3pt74_sim.slcio",
         "ptag:readout": "electrons_3pt74_filt_readout.slcio",
