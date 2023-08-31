@@ -245,6 +245,7 @@ class BatchSystem(Batch, ABC):
                                  required=False)
         self.parser.add_argument("-W", "--job-length", type=int, help="Max job length in hours", required=False, default=4)
         self.parser.add_argument("-m", "--memory", type=int, help="Max job memory allocation in MB", default=2000)
+        self.parser.add_argument("-f", "--diskspace", type=int, help="Disk space needed for job in GB", default=20)
         self.parser.add_argument("-e", "--email", nargs='?', help="Email address for job notifications", required=False)
         ## \todo Make sure this is applied to Slurm as well.
         self.parser.add_argument("-O", "--os", nargs='?', help="Operating system of batch nodes (Auger and LSF)")
@@ -261,6 +262,7 @@ class BatchSystem(Batch, ABC):
         self.queue = cl.queue
         self.os = cl.os
         self.memory = cl.memory
+        self.diskspace = cl.diskspace
         self.job_length = cl.job_length
 
         return cl
@@ -560,6 +562,9 @@ class Auger(BatchSystem):
         mem = ET.SubElement(req, "Memory")
         mem.set("space", str(self.memory))
         mem.set("unit", "MB")
+        disk = ET.SubElement(req, "DiskSpace")
+        disk.set("space", str(self.diskspace))
+        disk.set("unit", "GB")
         limit = ET.SubElement(req, "TimeLimit")
         limit.set("time", str(self.job_length))
         limit.set("unit", "hours")
