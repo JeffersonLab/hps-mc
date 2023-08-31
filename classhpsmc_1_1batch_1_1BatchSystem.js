@@ -3,6 +3,7 @@ var classhpsmc_1_1batch_1_1BatchSystem =
     [ "__init__", "classhpsmc_1_1batch_1_1BatchSystem.html#ae64f0875afe3067b97ba370b354b9213", null ],
     [ "_site", "classhpsmc_1_1batch_1_1BatchSystem.html#ace8d7c23904ab69f1a77a771834e5d46", null ],
     [ "parse_args", "classhpsmc_1_1batch_1_1BatchSystem.html#abf8a9df3f59b8a945fbc5ed61a057396", null ],
+    [ "diskspace", "classhpsmc_1_1batch_1_1BatchSystem.html#a882351c36cde640dd0d61116d5e55765", null ],
     [ "email", "classhpsmc_1_1batch_1_1BatchSystem.html#acba0eb96d8dc53394f4bc448317402ed", null ],
     [ "job_length", "classhpsmc_1_1batch_1_1BatchSystem.html#a02feee8784d8f4b5806174d39fa17222", null ],
     [ "memory", "classhpsmc_1_1batch_1_1BatchSystem.html#a61a963e6e2f81b884bc6d17c72777b42", null ],
