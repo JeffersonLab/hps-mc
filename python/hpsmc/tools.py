@@ -29,6 +29,8 @@ class SLIC(Component):
         ## To be set from config or install dir
         self.detector_dir = None
         ## Optionally disable loading of the particle table shipped with slic
+        ## Note: This should not be used with a General Particle Source since the GPS
+        ## in slic requires the particle table to function.
         self.disable_particle_table = False
 
         Component.__init__(self,
