@@ -1,14 +1,14 @@
 {
     "run_number": 14166, 
     "job_id": 66, 
-    "macros": ["/sdf/group/hps/users/abdatta/src/hps-mc/examples/slic_to_ana_macro/gps.mac"],
+    "macros": ["/home/bravo/src/hps-mc/examples/slic_gps_to_ana/gps.mac"],
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2019TrigPulse.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
     },
     "config_files": {
-        "recon": "kalSimpTuple_cfg.py",
-        "ana": "anaVtxTuple_cfg.py"
+        "recon": "simPartTuple_cfg.py",
+        "ana": "anaTrackHits_cfg.py"
     },
     "nevents": 1000,
     "output_dir": "output/HPS_EngAli1mmBotShimL12_3pt74_iter0", 
