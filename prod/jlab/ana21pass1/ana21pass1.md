@@ -14,6 +14,6 @@ These files are in a human readable format.
 
 The jobs are submitted to the swif2 system at jlab via run_swif2.sh
 The specfic location of the installations used are configured in .hpsmc
-hpstr release that will be installed is v1.0.0
+hpstr master branch at commit 4cb8342 was used
 
 Using hps-java master at commit 2771eb8
