@@ -1,0 +1,2 @@
+#!/bin/sh
+hps-mc-batch local -o -r 15:15 -E /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.sh -W 24 -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana1921pass0/.hpsmc -d /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana1921pass0/scratch -l /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana1921pass0/logsLocal data_cnv /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana1921pass0/jobs2019.json
