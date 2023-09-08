@@ -166,6 +166,8 @@ class JobManager(Component):
         ## \todo verify these definitions
         ## run number
         self.run_number = None
+        ## nevents
+        self.nevents= None
         ## detector name
         self.detector = None
         ## event print interval
@@ -331,7 +333,7 @@ class JobManager(Component):
         Optional parameters are: **detector**, **run_number**, **defs**
         @return list of optional parameters
         """
-        return ['detector', 'run_number', 'defs']
+        return ['detector', 'run_number', 'defs', 'nevents']
 
 
 class HPSTR(Component):
