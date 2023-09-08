@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"namespacetritrig__gen__to__beam__coords__job.html":[14,0,51],
 "namespacetritrig__gen__to__beam__coords__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7":[14,0,51,3],
 "namespacetritrig__gen__to__beam__coords__job.html#a1db2ab3d82c6029ee441423308802a74":[14,0,51,4],
 "namespacetritrig__gen__to__beam__coords__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[14,0,51,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "slic__to__ana__job_8py.html#a3074e3594d8071411ddd34bbbf47acd9":[16,0,2,1,25,4],
 "slic__to__ana__job_8py.html#a6215e022267dc11d572ec677098947ab":[16,0,2,1,25,3],
 "slic__to__ana__job_8py.html#a6b8c91e3ce53f8874c33b1d8f3a406e1":[16,0,2,1,25,6],
-"slic__to__ana__job_8py.html#a849ea1ba7ab7001753fbc4f99a06b718":[16,0,2,1,25,1],
-"slic__to__ana__job_8py.html#a98913e0a438f1e6376eedaef8541569b":[16,0,2,1,25,0]
+"slic__to__ana__job_8py.html#a849ea1ba7ab7001753fbc4f99a06b718":[16,0,2,1,25,1]
 };
