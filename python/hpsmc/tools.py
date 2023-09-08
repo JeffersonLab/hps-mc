@@ -16,7 +16,7 @@ class SLIC(Component):
     """!
     Run the SLIC Geant4 simulation.
 
-    Optional parameters are: **nevents**, **macros**, **run_number** \n
+    Optional parameters are: **nevents**, **macros**, **run_number**, **disable_particle_table** \n
     Required parameters are: **detector** \n
     Required configurations are: **slic_dir**, **detector_dir**
     """
@@ -28,6 +28,10 @@ class SLIC(Component):
         self.run_number = None
         ## To be set from config or install dir
         self.detector_dir = None
+        ## Optionally disable loading of the particle table shipped with slic
+        ## Note: This should not be used with a General Particle Source since the GPS
+        ## in slic requires the particle table to function.
+        self.disable_particle_table = False
 
         Component.__init__(self,
                            name='slic',
@@ -54,11 +58,12 @@ class SLIC(Component):
         if self.run_number is not None:
             args.extend(["-m", "run_number.mac"])
 
-        tbl = self.__particle_tbl()
-        if os.path.exists(tbl):
-            args.extend(["-P", tbl])
-        else:
-            raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
+        if not self.disable_particle_table:
+            tbl = self.__particle_tbl()
+            if os.path.exists(tbl):
+                args.extend(["-P", tbl])
+            else:
+                raise Exception('SLIC particle.tbl does not exist: %s' % tbl)
 
         if len(self.macros):
             # args = []
@@ -113,7 +118,7 @@ class SLIC(Component):
         Optional parameters are: **nevents**, **macros**, **run_number**
         @return  list of optional parameters
         """
-        return ['nevents', 'macros', 'run_number']
+        return ['nevents', 'macros', 'run_number', 'disable_particle_table']
 
     def required_parameters(self):
         """!
