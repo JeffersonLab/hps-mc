@@ -18,6 +18,7 @@ var classhpsmc_1_1tools_1_1JobManager =
     [ "java_args", "classhpsmc_1_1tools_1_1JobManager.html#ae1c32a6f57706d69f98cdf26038cf50a", null ],
     [ "lcsim_cache_dir", "classhpsmc_1_1tools_1_1JobManager.html#a80913a6ffd23b3f618bd32bee8b293c9", null ],
     [ "logging_config_file", "classhpsmc_1_1tools_1_1JobManager.html#aa3c9d9e479aed2bdd1e1e3fe6ad2bb4e", null ],
+    [ "nevents", "classhpsmc_1_1tools_1_1JobManager.html#aec013a013223f05e81214331b289330a", null ],
     [ "overlay_file", "classhpsmc_1_1tools_1_1JobManager.html#a2e5c1af385c5cd4b8941431eb6d52763", null ],
     [ "run_number", "classhpsmc_1_1tools_1_1JobManager.html#a22ff01ebc09b017d63f5c99e92e43620", null ],
     [ "steering", "classhpsmc_1_1tools_1_1JobManager.html#a86d369adce270d7d3ed000a2014c3b51", null ],

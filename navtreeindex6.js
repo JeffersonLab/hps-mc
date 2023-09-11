@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"namespacemembers_vars_c.html":[14,1,2,3],
 "namespacemembers_vars_d.html":[14,1,2,4],
 "namespacemembers_vars_e.html":[14,1,2,5],
 "namespacemembers_vars_f.html":[14,1,2,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "namespacetritrig__beam__slic__to__reco__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6":[14,0,49,22],
 "namespacetritrig__beam__slic__to__reco__job.html#ad90e5e78a8229f9a398a8bc694f27cd4":[14,0,49,0],
 "namespacetritrig__beam__slic__to__reco__job.html#ae219caee644dd69bd3f281a6de26c5e2":[14,0,49,8],
-"namespacetritrig__beam__slic__to__reco__job.html#aee4592eef02a5201f1e90ff6cf517f54":[14,0,49,20],
-"namespacetritrig__beam__slic__to__reco__job.html#afde3b66b6b41bd008469f366fa756e54":[14,0,49,13]
+"namespacetritrig__beam__slic__to__reco__job.html#aee4592eef02a5201f1e90ff6cf517f54":[14,0,49,20]
 };
