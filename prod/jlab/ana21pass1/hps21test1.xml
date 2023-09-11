@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<Request>
+  <Name name="data_cnv"/>
+  <Project name="hps"/>
+  <Track name="simulation"/>
+  <Memory space="2200" unit="MB"/>
+  <TimeLimit time="72" unit="hours"/>
+  <OS name="general"/>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00033"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00033.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00033.root"/>
+    <Name name="2021hps1"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.1.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.1.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 1 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00032"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00032.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00032.root"/>
+    <Name name="2021hps2"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.2.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.2.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 2 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00034"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00034.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00034.root"/>
+    <Name name="2021hps3"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.3.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.3.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 3 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00031"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00031.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00031.root"/>
+    <Name name="2021hps4"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.4.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.4.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 4 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00030"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00030.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00030.root"/>
+    <Name name="2021hps5"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.5.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.5.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 5 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00037"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00037.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00037.root"/>
+    <Name name="2021hps6"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.6.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.6.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 6 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00036"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00036.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00036.root"/>
+    <Name name="2021hps7"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.7.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.7.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 7 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00039"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00039.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00039.root"/>
+    <Name name="2021hps8"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.8.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.8.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 8 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00038"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00038.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00038.root"/>
+    <Name name="2021hps9"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.9.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.9.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 9 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.evio" src="mss:/mss/hallb/hps/physrun2021/data/hps_014166/hps_014166.evio.00035"/>
+    <Output src="data_events.slcio" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00035.slcio"/>
+    <Output src="data_events.root" dest="/cache/hallb/hps/physrun2021/production/pass1/hps_014166/hps_014166_00035.root"/>
+    <Name name="2021hps10"/>
+    <Stderr dest="/farm_out/bravo/hps21/job.10.err"/>
+    <Stdout dest="/farm_out/bravo/hps21/job.10.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/.hpsmc -i 10 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/data_cnv_job.py /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/prod/jlab/ana21pass1/jobs2021.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+</Request>
