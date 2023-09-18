@@ -172,7 +172,7 @@ class JobManager(Component):
         ## run number
         self.run_number = None
         ## nevents
-        self.nevents= None
+        self.nevents = None
         ## detector name
         self.detector = None
         ## event print interval
