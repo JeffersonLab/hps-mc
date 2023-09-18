@@ -1,0 +1,29 @@
+
+/generator/select gps
+
+/gps/verbose 2
+
+/gps/particle e-
+/gps/pos/type Point
+/gps/position 0 0 0 mm
+
+/gps/ang/type iso
+/gps/ang/rot1 0 0 1
+/gps/ang/rot2 1 0 0
+/gps/ang/mintheta 1.419 rad
+/gps/ang/maxtheta 1.721 rad
+/gps/ang/minphi 2.541 rad
+/gps/ang/maxphi 3.741 rad
+
+/gps/energy 3.74 GeV
+#/gps/ene/type User
+#/gps/hist/type energy
+#/gps/hist/point 0. 0.
+#/gps/hist/point 3740. 1.
+
+#/slic/plugins/load StepPrinter
+
+# Set the output file name
+/lcio/fileExists delete
+
+

@@ -1,7 +1,7 @@
 {
     "run_number": 14166, 
     "job_id": 66, 
-    "macros": ["/home/bravo/src/hps-mc/examples/slic_gps_to_ana/gps.mac"],
+    "macros": ["/sdf/group/hps/users/abdatta/src/hps-mc/examples/slic_to_ana_macro/gps.mac"],
     "steering_files": {
         "readout": "/org/hps/steering/readout/PhysicsRun2019TrigPulse.lcsim",
         "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon.lcsim"
