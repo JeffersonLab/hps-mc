@@ -112,10 +112,10 @@ Variables</h2></td></tr>
 <tr class="memitem:a3074e3594d8071411ddd34bbbf47acd9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#a3074e3594d8071411ddd34bbbf47acd9">filter_bunches</a> = <a class="el" href="classhpsmc_1_1tools_1_1FilterBunches.html">FilterBunches</a>()</td></tr>
 <tr class="memdesc:a3074e3594d8071411ddd34bbbf47acd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">insert empty bunches expected by pile-up simulation  <a href="namespaceslic__gps__to__ana__job.html#a3074e3594d8071411ddd34bbbf47acd9">More...</a><br /></td></tr>
 <tr class="separator:a3074e3594d8071411ddd34bbbf47acd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">readout</a> = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='readout')</td></tr>
+<tr class="memitem:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">readout</a> = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='readout', ignore_job_params=['nevents'])</td></tr>
 <tr class="memdesc:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run simulated events in readout to generate triggers.  <a href="namespaceslic__gps__to__ana__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab">More...</a><br /></td></tr>
 <tr class="separator:a1820b9438d6a7ae4a4995bb66c9aa1ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">recon</a> = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='recon')</td></tr>
+<tr class="memitem:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">recon</a> = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='recon', ignore_job_params=['nevents'])</td></tr>
 <tr class="memdesc:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run physics reconstruction.  <a href="namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">More...</a><br /></td></tr>
 <tr class="separator:a6b8c91e3ce53f8874c33b1d8f3a406e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad324e5599132ef76e1594fb62a3c9a23"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceslic__gps__to__ana__job.html#ad324e5599132ef76e1594fb62a3c9a23">root_cnv</a> = <a class="el" href="classhpsmc_1_1tools_1_1HPSTR.html">HPSTR</a>(cfg='<a class="el" href="namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1">recon</a>')</td></tr>
@@ -219,7 +219,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">readout = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='readout')</td>
+          <td class="memname">readout = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='readout', ignore_job_params=['nevents'])</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -237,7 +237,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">recon = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='recon')</td>
+          <td class="memname">recon = <a class="el" href="classhpsmc_1_1tools_1_1JobManager.html">JobManager</a>(steering='recon', ignore_job_params=['nevents'])</td>
         </tr>
       </table>
 </div><div class="memdoc">
