@@ -123,14 +123,14 @@
 #*********************************************************************
 # Maximum and minimum absolute rapidity (for max, -1 means no cut)   *
 #*********************************************************************
- 2.5  = etal    ! max rap for the charged leptons 
+ -1.0 = etal    ! max rap for the charged leptons 
  0.0  = etalmin ! main rap for the charged leptons
  {} = eta_min_pdg ! rap cut for other particles (use pdg code). Applied on particle and anti-particle
  {} = eta_max_pdg ! rap cut for other particles (syntax e.g. {6: 2.5, 23: 5})
 #*********************************************************************
 # Minimum and maximum DeltaR distance                                *
 #*********************************************************************
- 0.4 = drll    ! min distance between leptons 
+ 0.0 = drll    ! min distance between leptons 
  -1.0  = drllmax ! max distance between leptons
 #*********************************************************************
 # Minimum and maximum invariant mass for pairs                       *
