@@ -1,0 +1,25 @@
+{
+    "nevents": 2500,
+    "run_params": "3pt7",
+    "target_thickness": 0.002,
+    "beam_energy": 3700.00,
+    "num_electrons": 1500,
+    "target_z": -0.01,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 1194550,
+    "seed": 879483,
+    "detector": "HPS-v2019-3pt7GeV",
+    "filter_no_cuts": true,
+    "steering_files": {
+        "readout": "/org/hps/steering/readout/TriggerTuning2021TrigPulse.lcsim",
+        "recon": "/org/hps/steering/recon/TriggerTuning2021MCRecon_targetAt0_0_0.lcsim"
+    },
+    "output_files": {
+        "simp_rot.slcio": "mrhod_60/simp_3pt7_1.slcio",
+        "simp_rot_filt_readout_recon.slcio": "mrhod_60/recon/simp_3pt7_recon_1.slcio"
+    },
+    "output_dir": "output/HPS-v2019-3pt7GeV",
+    "job_id": 1
+}
