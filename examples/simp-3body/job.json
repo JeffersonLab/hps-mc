@@ -6,7 +6,7 @@
     "mrhod": 60,
     "seed": 879483,
     "output_files": {
-        "simp_unweighted_events.lhe.gz" : "simp_beam_2pt3_jobid_1_map_100_mpid_33_mrhod_60.lhe.gz"
+        "simp-3body_unweighted_events.lhe.gz" : "simp_beam_2pt3_jobid_1_map_100_mpid_33_mrhod_60.lhe.gz"
     },
     "output_dir": "output",
     "job_id": 1
