@@ -47,10 +47,10 @@ Block mass
    15 1.777000e+00 # MTA 
    23 9.118760e+01 # MZ 
    25 1.250000e+02 # MH 
-  622 1.000000e-01 # MAp 
+  622 1.000000e-01 # map 
   623 1.740000e+02 # MNuc 
-  624 3.333333e-02 # MPiD 
-  625 6.000000e-02 # MRhoD 
+  624 3.333333e-02 # mpid 
+  625 6.000000e-02 # mrhod 
 ## Dependent parameters, given by model restrictions.
 ## Those values should be edited following the 
 ## analytical expression. MG5 ignores those values 
