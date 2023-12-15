@@ -30,12 +30,12 @@ var NAVTREE =
     [ "stdhep-tools", "stdheptools.html", null ],
     [ "misalignment", "misalign.html", [
       [ "Parameters", "misalign.html#autotoc_md2", [
-        [ "Documented files", "index.html#autotoc_md46", [
-          [ "External documentation", "index.html#autotoc_md47", null ]
+        [ "Documented files", "index.html#autotoc_md47", [
+          [ "External documentation", "index.html#autotoc_md48", null ]
         ] ],
-        [ "Installation", "index.html#autotoc_md48", null ],
-        [ "Quick Start Guide", "index.html#autotoc_md49", null ],
-        [ "Help", "index.html#autotoc_md50", null ],
+        [ "Installation", "index.html#autotoc_md49", null ],
+        [ "Quick Start Guide", "index.html#autotoc_md50", null ],
+        [ "Help", "index.html#autotoc_md51", null ],
         [ "parameters", "misalign.html#autotoc_md6", null ]
       ] ]
     ] ],
@@ -48,6 +48,7 @@ var NAVTREE =
     [ "Tracking for Alignment", "trackingalign.html", null ],
     [ "Examples", "examples.html", "examples" ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
+    [ "SIMP-3Body Generation", "md_examples_simp_3body_simp_3body.html", null ],
     [ "SLIC to analysis pipeline with gps macro from GEANT4 GPS", "slicgpstoana.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
     [ "Data conversion/reco – evio to lcio", "ana1921pass0.html", null ],
@@ -89,11 +90,11 @@ var NAVTREEINDEX =
 "classhpsmc_1_1job_1_1JobConfig.html#ac61095bd3966c67d305eee5eebcf4a0b",
 "classhpsmc_1_1tools_1_1Unzip.html#a8b5b5f0c003d46d75d76468f1e4298a5",
 "config__writer_8py.html#a2f4ab7bf743142dae2e459aa18f9f1d4",
-"lhe__tridents__displaceuni_8cc.html#a4257e460d098aef0694b773c264c21ca",
-"namespacemembers_vars_c.html",
-"namespacetritrig__beam__slic__to__reco__job.html#afde3b66b6b41bd008469f366fa756e54",
-"slic__to__ana__job_8py.html#a3074e3594d8071411ddd34bbbf47acd9",
-"wab__gen__sample__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4"
+"lhe__tridents__displacetime_8cc.html#ace2a75d993f0cea89505afdffb610f28",
+"namespacemembers_n.html",
+"namespacetritrig__beam__slic__to__reco__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1",
+"slic__job_8py.html#afde3b66b6b41bd008469f366fa756e54",
+"tritrigbeam.html#autotoc_md41"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

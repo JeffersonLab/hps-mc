@@ -96,7 +96,7 @@ $(document).ready(function(){initNavTree('readme.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a></p>
-<h2><a class="anchor" id="autotoc_md51"></a>
+<h2><a class="anchor" id="autotoc_md52"></a>
 Prerequisites</h2>
 <p>There are a number of required programs and tools you must have installed on your system to build and run hps-mc.</p>
 <ul>
@@ -116,7 +116,7 @@ Prerequisites</h2>
 <div class="fragment"><div class="line">pip install psutil jinja2</div>
 </div><!-- fragment --><p>The <a href="https://github.com/slaclab/slic">slic</a> program should be pre-installed and available in the system path.</p>
 <p>Some scripts may also require that the <a href="https://github.com/JeffersonLab/hps-dst">DST Maker</a> is installed and available in the system path.</p>
-<h2><a class="anchor" id="autotoc_md52"></a>
+<h2><a class="anchor" id="autotoc_md53"></a>
 Installation</h2>
 <p>You need to have CMake installed on your system as well as gcc (preferably version 4.8 or greater).</p>
 <p>To build the project:</p>
@@ -129,7 +129,7 @@ Installation</h2>
 </div><!-- fragment --><p>This should install all of the tools to <code>hps-mc/install</code>. <br  />
 </p>
 <p>Change <code>CMAKE_INSTALL_PREFIX</code> above if you wish to install to a different directory.</p>
-<h2><a class="anchor" id="autotoc_md53"></a>
+<h2><a class="anchor" id="autotoc_md54"></a>
 Environment Setup</h2>
 <p>Before running scripts, the environment script should be sourced.</p>
 <p>This sources the bash environment setup script:</p>
@@ -141,7 +141,7 @@ Environment Setup</h2>
 <div class="fragment"><div class="line">which slic</div>
 <div class="line">which dst_maker</div>
 </div><!-- fragment --><p>You should also check that typing <code>slic</code> and <code>dst_maker</code> executes these commands correctly.</p>
-<h2><a class="anchor" id="autotoc_md54"></a>
+<h2><a class="anchor" id="autotoc_md55"></a>
 Running Job Scripts</h2>
 <p>You will want to run jobs from a scratch directory as many of components create a lot of files:</p>
 <div class="fragment"><div class="line">mkdir /scratch/myjob</div>
@@ -149,10 +149,10 @@ Running Job Scripts</h2>
 </div><!-- fragment --><p>Now you can execute one of the test jobs:</p>
 <div class="fragment"><div class="line">python hps-mc/python/test/egs5_test.py</div>
 </div><!-- fragment --><p>In the above command insert the full path to your hps-mc installation instead of <code>hps-mc</code> or you can copy the python script to the scratch directory.</p>
-<h2><a class="anchor" id="autotoc_md55"></a>
+<h2><a class="anchor" id="autotoc_md56"></a>
 Documentation</h2>
 <p>The source code documentation can be found <a href="https://jeffersonlab.github.io/hps-mc/">here</a>. For additional information of how to use the job scripts, refer to the examples directory and the comments in there.</p>
-<h2><a class="anchor" id="autotoc_md56"></a>
+<h2><a class="anchor" id="autotoc_md57"></a>
 Quick Start Guide</h2>
 <p>The first step to setting up an system to run jobs via hps-mc is first producing <code>~/.hpsmc</code> which will set all of the system level configuration parameters for all types of jobs. An example of what a system level .hpsmc file should look like is provided at <code>config/bravo_sdf.cfg</code>. One can simply copy this to <code>~/.hpsmc</code> of the system and update the paths to point to the relevant locations on that particular system.</p>
 <p>The system level configuration file should not be confused with a job level configuration file, typcially kept in the directory used to prepare and submit the jobs. hps-mc will go looking in a few standard locations for configuration files named <code>.hpsmc</code> and load any configurations in them. The local directory where the submission command is issued is the last place searched and parameters in this location will override all others, if any conflicts exist. An example of a job level configuration file is provided at <code>config/job.cfg</code> as well as more in the various example jobs provided in the examples directory.</p>
@@ -160,7 +160,7 @@ Quick Start Guide</h2>
 <p>Parameters one might want to iterate over in jobs can be entered into lists in vars.json, the example uses this to generate the sample with two different target positions, just to illustrate this feature. Another important arguement for <code>hps-mc-job-template</code> is job.json.tmpl. This is the filename for the job template to be used to define all the parameters for one particular job. Variables provided in the vars.json file can be accessed in job.json.tmpl inside of double curly braces, and jinja2 support is available for processing the variables. An example of this feature is the seed parameter in <code>examples/tritrig_gen</code> where an offset is added to <code>job_id</code> (which is always an available template variable) to make a unique seed number for each job. Jinja2 is a well documented templating engine on which this part of hps-mc is based.</p>
 <p>After one has generated a jobs.json file, the jobs it defines can be ran locally, in a pool, or submitted to one of the various batch systems it supports via <code>hps-mc-batch</code>. In <code>examples/tritrig_gen</code> there are a few examples of submission commands in <code>run_pool.sh</code>, <code>submit_lsf.sh</code>, and <code>run_slurm.sh</code>. Slurm in particular will generate script to use to submit each individual job. With some small modifications one can use these to prepare a job array to submit to slurm, if one wants to use that particular feature of the Slurm system. Ultimately, hps-mc just prepares a single run command using <code>hps-mc-job</code> which the batch tool knows how to prepare and call properly, given the configuration and parameters of each job, to get the job running in any of the supported run modes (local, pool, or some batch system).</p>
 <p>It is recommended to slowly build up jobs and tests them locally first before submitting a whole set to a batch system to run. This can be with commands nearly identical to the commands used to submit the jobs to a batch system (local or pool). The system is pretty abstracted so you might even find a new clever way to leverage the features of hps-mc to speed up the process of defining job sets, or even just getting the jobs ran.</p>
-<h2><a class="anchor" id="autotoc_md57"></a>
+<h2><a class="anchor" id="autotoc_md58"></a>
 Code Formatting</h2>
 <p>There is a github action ensuring proper formatting of python code in <code>hps-mc</code>. This action will fail if the pushed code does not follow the <b>PEP 8 style conventions</b>.</p>
 <p>To prevent this action from failing, you can check if your code is formatted correctly locally before pushing. This can be done using <a href="https://pycodestyle.pycqa.org/en/latest/intro.html#configuration">pycodestyle</a>, by navigating to the top directory of hps-mc and running </p><div class="fragment"><div class="line">pycodestyle --ignore=E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --max-line-length=160 python/</div>
@@ -174,7 +174,7 @@ Code Formatting</h2>
 </div><!-- fragment --><p> Then run </p><div class="fragment"><div class="line">autopep8 --aggressive --aggressive --ignore=E265,E266,E501,E121,E123,E126,E133,E226,E241,E242,E704,W503,W504,W505 --in-place --max-line-length=160 --recursive python/</div>
 </div><!-- fragment --><p> from the top of the <code>hps-mc</code> directory. Alternatively, run <code>format_python_code.sh</code>. This will automatically fix (most) of the formatting issues.</p>
 <p>To preserve the Doxygen-style comments, it is necessary to disable the automatic formatting of comment blocks which means that you might need to fix those by hand.</p>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 Unit tests</h2>
 <p>Unit tests for the hps-mc python modules can be found in <code>python/test</code>. There are several ways to run the tests. Assuming you are in <code>python/test</code>, you can</p><ul>
 <li>run all tests at once: <div class="fragment"><div class="line">python3 -m unittest -v</div>
@@ -188,7 +188,7 @@ Unit tests</h2>
 <li>run a specific test class or test in a module: <div class="fragment"><div class="line">python3 -m unittest -v test_some_module.TestClass.test_method</div>
 </div><!-- fragment --> More details on the python <code>unittest</code> framework can be found <a href="https://docs.python.org/3/library/unittest.html">here</a>.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md59"></a>
+<h2><a class="anchor" id="autotoc_md60"></a>
 Help</h2>
 <p>You can post any questions or report problems on the <a href="https://heavyphotonsearch.slack.com/">HPS Slack</a> in the <a href="https://heavyphotonsearch.slack.com/messages/C47LLBP5F">montecarlo</a> channel.</p>
 <p>The HPS software mailing list can also be used for help. </p>
