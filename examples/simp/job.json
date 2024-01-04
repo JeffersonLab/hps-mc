@@ -11,6 +11,7 @@
     "run_number": 1194550,
     "seed": 879483,
     "detector": "HPS-v2019-3pt7GeV",
+    "disable_particle_table": true,
     "filter_no_cuts": true,
     "steering_files": {
         "readout": "/org/hps/steering/readout/TriggerTuning2021TrigPulse.lcsim",
