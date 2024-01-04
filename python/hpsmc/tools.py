@@ -19,6 +19,15 @@ class SLIC(Component):
     Optional parameters are: **nevents**, **macros**, **run_number**, **disable_particle_table** \n
     Required parameters are: **detector** \n
     Required configurations are: **slic_dir**, **detector_dir**
+
+    Besides setting the number of events, detector, and run number it is common to disable
+    loading of the particle table. The loaded particle table creates particles that have
+    decay widths but the actual decay process is not defined within Geant4; thus, if one
+    of the particles that is created happens to trigger a decay within the Geant4 world,
+    it will create a Segmentation fault when trying to access the uncreated decay process.
+
+    The particle table loading is helpful for the General Particle Source (GPS) since it
+    needs to have these extra particles defined.
     """
 
     def __init__(self, **kwargs):
