@@ -1,0 +1,180 @@
+<?xml version="1.0" ?>
+<Request>
+  <Name name="rereco"/>
+  <Project name="hps"/>
+  <Track name="simulation"/>
+  <Memory space="1900" unit="MB"/>
+  <DiskSpace space="20" unit="GB"/>
+  <TimeLimit time="12" unit="hours"/>
+  <OS name="general"/>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_007800.290_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_007800.290_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_007800.290_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_007800.290_recon_4.2_ana.root"/>
+    <Name name="2016hps1"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.1.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.1.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 1 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008049.50_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008049.50_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008049.50_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008049.50_recon_4.2_ana.root"/>
+    <Name name="2016hps2"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.2.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.2.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 2 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008074.180_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008074.180_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008074.180_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008074.180_recon_4.2_ana.root"/>
+    <Name name="2016hps3"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.3.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.3.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 3 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008096.10_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.10_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.10_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.10_recon_4.2_ana.root"/>
+    <Name name="2016hps4"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.4.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.4.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 4 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008094.160_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008094.160_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008094.160_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008094.160_recon_4.2_ana.root"/>
+    <Name name="2016hps5"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.5.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.5.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 5 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008092.210_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008092.210_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008092.210_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008092.210_recon_4.2_ana.root"/>
+    <Name name="2016hps6"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.6.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.6.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 6 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008097.180_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.180_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.180_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.180_recon_4.2_ana.root"/>
+    <Name name="2016hps7"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.7.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.7.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 7 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008096.120_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.120_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.120_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008096.120_recon_4.2_ana.root"/>
+    <Name name="2016hps8"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.8.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.8.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 8 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008087.40_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008087.40_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008087.40_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008087.40_recon_4.2_ana.root"/>
+    <Name name="2016hps9"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.9.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.9.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 9 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+  <Job>
+    <Input dest="data_events.slcio" src="mss:/mss/hallb/hps/physrun2016/BLPass4b/recon/hps_008097.190_recon_4.2.slcio"/>
+    <Output src="data_events_recon.slcio" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.190_recon_4.2.slcio"/>
+    <Output src="data_events_recon.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.190_recon_4.2.root"/>
+    <Output src="data_events_recon_ana.root" dest="/cache/hallb/hps/physrun2016/BLPass4c/rereco/hps_008097.190_recon_4.2_ana.root"/>
+    <Name name="2016hps10"/>
+    <Stderr dest="/farm_out/bravo/hps16/rereco/job.10.err"/>
+    <Stdout dest="/farm_out/bravo/hps16/rereco/job.10.out"/>
+    <Command><![CDATA[ pwd;
+ env | sort;
+ ls -lart;
+ source /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/bin/hps-mc-env.csh;
+ source /work/hallb/hps/bravo/sw/hps-mc/install/bin/jlab-env.csh;
+ /apps/python/3.9.1/bin/python3 /w/hallb-scshelf2102/hps/bravo/sw/hps-mc/install/lib/python/hpsmc/job.py run -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -i 10 /work/hallb/hps/bravo/sw/hps-mc/install/lib/python/jobs/rereco_job.py /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json ;
+ ls -lart; 
+ ]]></Command>
+  </Job>
+</Request>
