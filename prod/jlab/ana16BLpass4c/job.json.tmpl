@@ -1,0 +1,25 @@
+{
+    {% set splitPath = input_files['data'][0].split('/') %}
+    {% set run_number = splitPath[7].split('_')[1].split(".")[0]|int %}
+    {% set partition = splitPath[7].split('.')[2]|int %}
+    "input_files": {
+        "{{input_files['data'][0]}}": "data_events.slcio"
+    },
+    "output_files": {
+        "data_events_recon.slcio": "{{splitPath[7][:-6]}}.slcio",
+        "data_events_recon.root": "{{splitPath[7][:-6]}}.root",
+        "data_events_recon_ana.root": "{{splitPath[7][:-6]}}_ana.root" 
+    },
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2016Rerecon_KF.lcsim"
+    },
+    "config_files": {
+        "recon": "simpTuple_2016_cfg.py",
+        "ana": "anaSimps_2016_cfg.py"
+    },
+    "detector": "HPS-PhysicsRun2016-Pass2",
+    "output_dir": "/cache/hallb/hps/physrun2016/BLPass4c/rereco",
+    "is_data": 1,
+    "run_number": {{run_number}},
+    "year": 2016
+}
