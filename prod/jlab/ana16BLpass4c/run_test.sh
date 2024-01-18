@@ -1,0 +1,2 @@
+#hps-mc-batch swif -r 1:1960 -w hpstr16 -m 2000 -E /work/hallb/hps/bravo/setup/swifEnv.sh -W 12 -c /w/hallb-scshelf2102/hps/bravo/run/BLpass4b_hps16/reco/.hpsmc -l /farm_out/bravo/hps16/hpstr rereco /w/hallb-scshelf2102/hps/bravo/run/BLpass4b_hps16/reco/jobs.json
+hps-mc-batch local -r 1:1 -d /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/scratch -c /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/.hpsmc -l /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/logs rereco /work/hallb/hps/bravo/sw/hps-mc/prod/jlab/ana16BLpass4c/jobs.json
