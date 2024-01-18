@@ -404,6 +404,7 @@ class MG5(MG):
                "RAD": "RAD",
                "tritrig": "tritrig",
                "simp": "simp",
+               "simp-3body": "simp-3body",
                "idm": "idm",
                }
 

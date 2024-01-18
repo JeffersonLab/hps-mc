@@ -17,10 +17,10 @@ sim = SLIC(inputs=[input_filename])
 filter_bunches = FilterBunches()
 
 ## Run simulated events in readout to generate triggers
-readout = JobManager(steering='readout')
+readout = JobManager(steering='readout', ignore_job_params=['nevents'])
 
 ## Run physics reconstruction
-recon = JobManager(steering='recon')
+recon = JobManager(steering='recon', ignore_job_params=['nevents'])
 
 ## Convert LCIO to ROOT
 root_cnv = HPSTR(cfg='recon')
