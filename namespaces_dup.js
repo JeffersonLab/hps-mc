@@ -117,6 +117,10 @@ var namespaces_dup =
     ] ],
     [ "generators", "namespacegenerators.html", null ],
     [ "hpsmc", "namespacehpsmc.html", "namespacehpsmc" ],
+    [ "hpstr_ana_job", "namespacehpstr__ana__job.html", [
+      [ "ana", "namespacehpstr__ana__job.html#a98913e0a438f1e6376eedaef8541569b", null ],
+      [ "description", "namespacehpstr__ana__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ]
+    ] ],
     [ "hpstr_job", "namespacehpstr__job.html", [
       [ "ana", "namespacehpstr__job.html#a98913e0a438f1e6376eedaef8541569b", null ],
       [ "cnv", "namespacehpstr__job.html#ac2353b13f43ff77203d94b47953aa942", null ],

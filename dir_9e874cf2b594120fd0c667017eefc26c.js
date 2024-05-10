@@ -10,6 +10,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "data_cnv_job.py", "data__cnv__job_8py.html", "data__cnv__job_8py" ],
     [ "dummy_job.py", "dummy__job_8py.html", "dummy__job_8py" ],
     [ "fee_gen_to_recon_job.py", "fee__gen__to__recon__job_8py.html", "fee__gen__to__recon__job_8py" ],
+    [ "hpstr_ana_job.py", "hpstr__ana__job_8py.html", "hpstr__ana__job_8py" ],
     [ "hpstr_job.py", "hpstr__job_8py.html", "hpstr__job_8py" ],
     [ "idm_job.py", "idm__job_8py.html", "idm__job_8py" ],
     [ "lcio_count_job.py", "lcio__count__job_8py.html", "lcio__count__job_8py" ],

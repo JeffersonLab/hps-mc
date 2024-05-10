@@ -9,6 +9,7 @@ var classhpsmc_1_1batch_1_1Slurm =
     [ "default_rundir", "classhpsmc_1_1batch_1_1Slurm.html#a233da160b4786230f2982af30199db9d", null ],
     [ "parse_args", "classhpsmc_1_1batch_1_1Slurm.html#abf8a9df3f59b8a945fbc5ed61a057396", null ],
     [ "submit_job", "classhpsmc_1_1batch_1_1Slurm.html#a052ce3076fbbcbd1a2be9734b3a7f2a3", null ],
+    [ "account", "classhpsmc_1_1batch_1_1Slurm.html#a3f3fcd00f4a6b97fbf9edcfa86d9607b", null ],
     [ "env", "classhpsmc_1_1batch_1_1Slurm.html#af9a4f51a2aa1485342c48472a9124d83", null ],
     [ "sh_dir", "classhpsmc_1_1batch_1_1Slurm.html#a3a17db18325acb0b63029751694fef68", null ],
     [ "site", "classhpsmc_1_1batch_1_1Slurm.html#a69505da8975e3c2a73b5699776ffa4a6", null ]
