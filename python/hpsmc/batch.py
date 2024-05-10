@@ -338,6 +338,7 @@ class Slurm(BatchSystem):
 
         self.parser.add_argument("-S", "--sh-dir", nargs='?', help="Directory to hold generated shell scripts for Slurm", default=str(Path(os.getcwd(), 'sh')))
         self.parser.add_argument("-E", "--env", nargs='?', help="Full path to env setup script", required=False, default=None)
+        self.parser.add_argument("-A", "--account", nargs='?', help="Account name for s3df slurm jobs.", required=False, default=None)
 
     def parse_args(self, args):
 
@@ -345,6 +346,7 @@ class Slurm(BatchSystem):
 
         # Set Slurm env script
         self.env = cl.env
+        self.account = cl.account
 
         # Set Slurm scripts dir
         self.sh_dir = os.path.abspath(cl.sh_dir)
@@ -380,11 +382,14 @@ class Slurm(BatchSystem):
         log_file = self._logfile(job_id)
         sbatch_cmd = ['sbatch',
                       '--time=%s' % (str(self.job_length) + ':00:00'),
-                      '--partition=%s' % self._default_queue(),
                       '--mem=%sM' % self.memory,
                       '--job-name=%i_%s' % (job_id, self.script_name),
                       '--output=%s.out' % log_file,
                       '--error=%s.err' % log_file]
+        if self.queue:
+            sbatch_cmd.extend([f'--partition={self.queue}'])
+        if self.account:
+            sbatch_cmd.extend([f'--account={self.account}'])
         if self.email:
             sbatch_cmd.extend([f'--mail-user={self.email}',
                                f'--mail-type=ALL'])
