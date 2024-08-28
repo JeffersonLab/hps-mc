@@ -235,7 +235,7 @@ echo ""
 echo "Your Compiler is $COMPILER"
 
 
-CFLAGS="$CFLAGS -fno-second-underscore -L$STDHEP/lib -I$STDHEP/src/inc"
+CFLAGS="$CFLAGS -fno-second-underscore -L$STDHEP/lib -I$STDHEP/src/inc -ltirpc"
 LIBS="-lstdhep -lFmcfio"
 #-------------------------
 # Build the egs5job.f file 
