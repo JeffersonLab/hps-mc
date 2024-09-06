@@ -1,0 +1,28 @@
+{
+    {% set splitPath = input_files['data'][0].split('/') %}
+    {% set run_number = splitPath[8]|int %}
+    {% set filename = splitPath[9].split('.') %}
+    {% if run_number >= 14626 and run_number <= 14673 %}
+        {% set detector = 'HPS_Run2021Pass1_v4_1pt92GeV' %}
+    {% else %}
+        {% set detector = 'HPS_Run2021Pass1_v4' %}
+    {% endif %}
+    "input_files": {
+        "{{input_files['data'][0]}}": "data_events.evio"
+    },
+    "output_files": {
+        {# "data_events.slcio": "{{filename[0]}}_{{filename[2]}}.slcio", #}
+        "data_events.root": "{{filename[0]}}_{{filename[2]}}.root"
+    },
+    "output_dir": "/cache/hallb/hps/physrun2021/production/pass1b/{{detector}}/{{filename[0]}}",
+    "detector": "{{detector}}",
+    "is_data": 1,
+    "run_number": {{run_number}},
+    "steering_files": {
+        "recon": "/org/hps/steering/recon/PhysicsRun2021_pass0_recon_evio.lcsim"
+    },
+    "config_files": {
+        "recon": "noRawHitTuple_cfg.py"
+    },
+    "year": 2021
+}
