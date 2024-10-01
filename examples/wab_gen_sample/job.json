@@ -1,16 +1,13 @@
 {
-    "nevents": 1000,
-    "run_params": "3pt7",
+    "nevents": 10000,
+    "run_params": "3pt74",
     "target_thickness": 0.002,
-    "beam_energy": 3700.00,
+    "beam_energy": 3740.00,
     "num_electrons": 1500,
-    "param_card": "MG_mini_WAB/AP_6W_XSec2_HallB/Cards/param_card.dat",
-    "seed": 7614876,
+    "seed": 123,
     "output_files": {
-        "wab_unweighted_events.stdhep": "wab_unweighted_events_3pt7_1.stdhep",
-        "wab_unweighted_events_rot.stdhep": "wab_unweighted_events_3pt7_rot_1.stdhep",
-        "wab_unweighted_events_rot_sampled.stdhep": "wab_unweighted_events_3pt7_rot_sampled_1.stdhep"
+        "wab_unweighted_events.stdhep": "wab_unweighted_events_3pt7_1.stdhep"
     },
-    "output_dir": "output/2019/",
+    "output_dir": "output",
     "job_id": 1
 }
