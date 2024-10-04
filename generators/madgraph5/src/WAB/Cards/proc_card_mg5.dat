@@ -41,5 +41,5 @@ define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 import model DarkphotonNuc_UFO_3
-generate e- N > e- N a /ap QND=1
-output WAB
+generate e- N > e- a N /ap QND=1
+output cut_WAB

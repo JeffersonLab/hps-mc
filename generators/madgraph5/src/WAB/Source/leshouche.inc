@@ -1,1 +1,1 @@
-../SubProcesses/P1_emn_emna/leshouche.inc
+../SubProcesses/P1_emn_eman/leshouche.inc

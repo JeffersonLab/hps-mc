@@ -3373,6 +3373,31 @@ class RunCardLO(RunCard):
         self.add_param("cut_decays", False, cut='d')
         self.add_param('dsqrt_shat',0., cut=True)
         self.add_param("nhel", 0, include=False)
+
+        # fixed target cuts SARAH
+        self.add_param("ef", -1.0, cut='l')
+        self.add_param("thetafmin", -1.0, cut='l')
+        self.add_param("thetaxfmin", -1.0, cut='l')
+        self.add_param("thetayfmin", -1.0, cut='l')
+        self.add_param("xthetaxfmin", -1.0, cut='l')
+        self.add_param("xthetayfmin", -1.0, cut='l')
+
+        self.add_param("efmax", -1.0, cut='l')
+        self.add_param("thetafmax", -1.0, cut='l')
+        self.add_param("thetaxfmax", -1.0, cut='l')
+        self.add_param("thetayfmax", -1.0, cut='l')
+        self.add_param("xthetaxfmax", -1.0, cut='l')
+        self.add_param("xthetayfmax", -1.0, cut='l')
+
+        self.add_param("mmff", -1.0, cut='ll') # invariant mass of l+l- pair
+        self.add_param("mmffmax", -1.0, cut='ll')
+        self.add_param("xef", -1.0, cut='l') # min energy of >= 1 lepton
+        self.add_param("xthetaf", -1.0, cut='l')
+        self.add_param("eftot", -1.0, cut='ll') # min energy for both leptons
+        self.add_param("efrat", -1.0, cut='ll') # min. ratio Emin/Emax for the two leptons
+
+        # end sarah added
+
         #pt cut
         self.add_param("ptj", 20.0, cut='j')
         self.add_param("ptb", 0.0, cut='b')
@@ -4634,7 +4659,30 @@ class RunCardNLO(RunCard):
         self.add_param('bwcutoff', 15.0)
         #cuts        
         self.add_param('jetalgo', 1.0)
-        self.add_param('jetradius', 0.7)         
+        self.add_param('jetradius', 0.7)
+
+        # begin sarah added
+        self.add_param('ef', -1.0, cut=True)
+        self.add_param('thetafmin', -1.0, cut=True)
+        self.add_param('thetaxfmin', -1.0, cut=True)
+        self.add_param('thetayfmin', -1.0, cut=True)
+        self.add_param('xthetaxfmin', -1.0, cut=True)
+        self.add_param('xthetayfmin', -1.0, cut=True)
+        self.add_param('efmax', -1.0, cut=True)
+        self.add_param('thetafmax', -1.0, cut=True)
+        self.add_param('thetaxfmax', -1.0, cut=True)
+        self.add_param('thetayfmax', -1.0, cut=True)
+        self.add_param('xthetaxfmax', -1.0, cut=True)
+        self.add_param('xthetayfmax', -1.0, cut=True)
+
+        self.add_param('mmff', -1.0, cut=True)
+        self.add_param('mmffmax', -1.0, cut=True)
+        self.add_param('xef', -1.0, cut=True) 
+        self.add_param('xthetaf', -1.0, cut=True)
+        self.add_param('eftot', -1.0, cut=True) 
+        self.add_param('efrat', -1.0, cut=True) 
+        #end sarah added
+
         self.add_param('ptj', 10.0 , cut=True)
         self.add_param('etaj', -1.0, cut=True)        
         self.add_param('gamma_is_j', True)        

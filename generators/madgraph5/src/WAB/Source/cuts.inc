@@ -1,4 +1,17 @@
 C
+C     NATALIA'S FT CUTS (added by sarah)
+C
+      real*8 ef, thetafmin, mmff, xef, xthetaf, efTot, efRat
+     $     , efmax, thetafmax, thetaxfmin, thetaxfmax
+     $     , thetayfmin, thetayfmax, xthetaxfmin, xthetaxfmax
+     $     , xthetayfmin, xthetayfmax, mmffmax
+      COMMON /TO_FT_CUTS/
+     $     ef, thetafmin, mmff, xef, xthetaf, efTot, efRat
+     $     , efmax, thetafmax, thetaxfmin, thetaxfmax
+     $     , thetayfmin, thetayfmax, xthetaxfmin, xthetaxfmax
+     $     , xthetayfmin, xthetayfmax, mmffmax
+
+C
 C     AUTOMATIC CUTS
 C
       REAL*8 PTJ,PTB,PTA,PTL,PTONIUM  ! ptmin

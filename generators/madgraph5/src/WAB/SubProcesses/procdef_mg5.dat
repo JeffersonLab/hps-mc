@@ -16,7 +16,7 @@
 # Process(es) requested : mg2 input                                  *
 #*********************************************************************
 # Begin PROCESS # This is TAG. Do not modify this line
-e- N > e- N a /ap           #Process
+e- N > e- a N /ap           #Process
 # Be carefull the coupling are here in MG5 convention
 QND=1
           

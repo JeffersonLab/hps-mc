@@ -1,1 +1,1 @@
-../SubProcesses/P1_emn_emna/nexternal.inc
+../SubProcesses/P1_emn_eman/nexternal.inc

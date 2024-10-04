@@ -1,1 +1,1 @@
-../SubProcesses/P1_emn_emna/maxamps.inc
+../SubProcesses/P1_emn_eman/maxamps.inc

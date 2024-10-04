@@ -52,6 +52,19 @@ C
       REAL*8 XVAR,ptmax1,ptmax2,htj,tmp,inclht
       real*8 ptemp(0:3), ptemp2(0:3)
       character*20 formstr
+
+C
+C     SARAH ADDED
+C
+      logical xgoodf,passphoton
+      Real*8 efRatVal
+      integer jf
+
+      real*8 pboost(0:3), plab(0:3, nexternal)
+C
+C     SARAH ADDED END
+C
+
 C
 C     PARAMETERS
 C
@@ -61,9 +74,11 @@ C
 C     EXTERNAL
 C
       REAL*8 R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,PtDot
+      REAL*8 theta,thetax,thetay  ! sarah added
       logical cut_bw,setclscales,dummy_cuts
       external R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,cut_bw,setclscales,PtDot
       external dummy_cuts
+      external theta,thetax,thetay  ! sarah added
 C
 C     GLOBAL
 C
@@ -310,6 +325,136 @@ C $B$ DESACTIVATE_CUT $E$ !This is a tag for MadWeight
       if(debug) write (*,*) '============================='
       if(debug) write (*,*) ' EVENT STARTS TO BE CHECKED  '
       if(debug) write (*,*) '============================='
+
+c****************************************     
+c     Special Fixed-Target cuts, added by Sarah
+c****************************************
+
+c.....first boost
+      pboost(0)=1d0
+      pboost(1)=0d0
+      pboost(2)=0d0
+      pboost(3)=0d0
+      if (xbk(2)*xbk(1) .gt. 0d0) then
+         pboost(0)=ebeam(1)+ebeam(2)
+         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
+     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
+      endif
+
+      do j=1,nexternal
+         call boostx(p(0,j),pboost,plab(0,j))
+      enddo
+
+         
+
+c      goto 777
+c...  inclusive cuts for leptons      
+      xgoodf=.false.
+      passphoton=.false.
+c      xgoodf=.true.
+      jf=0
+
+      do i=nincoming+1,nexternal
+c...     Is it a photon?
+         if(is_a_a(i)) then
+c...        Does it pass inclusive criteria?            
+            if(
+     $         (theta(plab(0,i)) .gt. xthetaf).and.
+     $         (thetax(plab(0,i)) .gt. xthetaxfmin).and.
+     $         (thetax(plab(0,i)) .lt. xthetaxfmax).and.
+     $         (thetay(plab(0,i)) .gt. xthetayfmin).and.
+     $         (thetay(plab(0,i)) .lt. xthetayfmax).and.
+     $         (plab(0,i) .gt. xef)) then
+               xgoodf=.true.               
+            endif
+            
+c...        Does it pass exclusive criteria?
+            if(plab(0,i) .lt. ef) then
+               if(debug) write(*,*) "f too soft -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(plab(0,i) .gt. efmax) then
+               if(debug) write(*,*) "f too hard -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(theta(plab(0,i)) .lt. thetafmin) then
+               if(debug) write(*,*) "f small angle -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(theta(plab(0,i)) .gt. thetafmax) then
+               if(debug) write(*,*) "f large angle -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(thetax(plab(0,i)) .lt. thetaxfmin) then
+               if(debug) write(*,*) "f small x-angle -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(thetax(plab(0,i)) .gt. thetaxfmax) then
+               if(debug) write(*,*) "f large x-angle -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(thetay(plab(0,i)) .lt. thetayfmin) then
+               if(debug) write(*,*) "f small y-angle -> fails"
+               passcuts=.false.
+               return
+            endif
+            if(thetay(plab(0,i)) .gt. thetayfmax) then
+               if(debug) write(*,*) "f large y-angle -> fails"
+               passcuts=.false.
+               return
+            endif
+
+c...        Prepare for pair. criteria            
+            if(jf.eq.0) then
+               jf=i
+            else
+c...           m(i,j) cut?
+               if(dSqrt(Sumdot(plab(0,i),plab(0,jf),+1d0)).lt.mmff) then
+                  if(debug) write(*,*) "mmff too small -> fails"
+                  passcuts=.false.
+                  return
+               endif
+c...           etot(ij) cut?
+               if(plab(0,i)+plab(0,jf).lt.efTot) then
+                  if(debug) write(*,*) "efTot too small -> fails"
+                  passcuts=.false.
+                  return
+               endif
+c...           eratio(ij) cut?
+               efRatVal=plab(0,i)/plab(0,jf)
+               if(efRatVal.gt.1) efRatVal=1d0/efRatVal
+               if(efRatVal.lt.efRat) then
+                  if(debug) write(*,*) "efRatio too small -> fails"
+                  passcuts=.false.
+                  return
+               endif
+            endif ! Close pair criteria
+            passphoton=.true.
+         endif ! Close if is_a_a
+      enddo ! Close loop over f's
+
+c...  Check: were inclusive criteria satisfied?      
+      if(.not. xgoodf) then
+         if(debug) write(*,*) "no f pass inclusive -> fails"
+         passcuts=.false.
+         return
+      endif
+
+      if(.not. passphoton) then
+         if(debug) write(*,*) "no photon in accpetance -> fails"
+         passcuts=.false.
+         return
+      endif
+
+ 777  continue
+
+
 c     
 c     p_t min & max cuts
 c     
