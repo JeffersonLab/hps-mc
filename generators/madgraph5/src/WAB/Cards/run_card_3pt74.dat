@@ -34,7 +34,9 @@
   0	= lpp1 ! beam 1 type 
   0	= lpp2 ! beam 2 type
   3.74	= ebeam1 ! beam 1 total energy in GeV
-  171.24	= ebeam2 ! beam 2 total energy in GeV
+  171.2	= ebeam2 ! beam 2 total energy in GeV
+  0.000511 = mbeam1  ! beam 1 mass in GeV
+  171.2 = mbeam2     ! beam 2 mass in GeV
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
 #*********************************************************************
@@ -180,7 +182,7 @@
   100.0	= efmax # hidden_parameter
   100.0	= thetaxfmax # hidden_parameter
   100.0	= mmffmax # hidden_parameter
-  0.03 = xthetayfmin # hidden_parameter
+  0.005 = xthetayfmin # hidden_parameter
   0.64	= ef # hidden_parameter
   100.0	= xthetaxfmax # hidden_parameter
   0.0	= mmll # hidden_parameter
