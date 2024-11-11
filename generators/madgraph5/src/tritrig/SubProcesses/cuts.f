@@ -57,9 +57,11 @@ C
       !real*8 pboost(0:3), plab(0:3, nexternal)
 
       ! new variables for HPS fixed-target
-      logical tripass,pairpass,passlp,passonelm
+      logical tripass,pairpass,pairpass2,passlp,passonelm
       !Real*8 efRatVal
-      integer nlppass,nlmpass,jpasslp,jpasslm(2),kk
+      integer nlppass,nlmpass,jpasslp,jpasslm(2),kk,isele(2),nele
+
+      real*8 pboost(0:3), plab(0:3, nexternal) ! sarah added
 
       character*20 formstr
 C
@@ -344,19 +346,19 @@ c     Special Fixed-Target cuts
 c***********************************************************
 
 c.....first boost
-!      pboost(0)=1d0
-!      pboost(1)=0d0
-!      pboost(2)=0d0
-!      pboost(3)=0d0
-c      if (xbk(2)*xbk(1) .gt. 0d0) then
-c         pboost(0)=ebeam(1)+ebeam(2)
-c         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
-c     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
-c      endif
-!
-!      do j=1,nexternal
-!         call boostx(p(0,j),pboost,plab(0,j))
-!      enddo
+      pboost(0)=1d0
+      pboost(1)=0d0
+      pboost(2)=0d0
+      pboost(3)=0d0
+      if (xbk(2)*xbk(1) .gt. 0d0) then
+         pboost(0)=ebeam(1)+ebeam(2)
+         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
+     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
+      endif
+
+      do j=1,nexternal
+         call boostx(p(0,j),pboost,plab(0,j))
+      enddo
 
          
 
@@ -364,14 +366,18 @@ c      goto 777
 c logical variables for lepton cuts    
       tripass=.false.
       pairpass=.false.
+      pairpass2=.false.
       passlp=.false.
       passonelm=.false.
 c ....initialize some variables
       nlppass=0
       nlmpass=0
+      nele=0
       jpasslp=0
       jpasslm(1)=0
       jpasslm(2)=0
+      isele(1)=0
+      isele(2)=0
 c      write(47,*) " --evt --"
       do i=nincoming+1,nexternal
 c  identify charged leptons among outgoing particles
@@ -379,14 +385,14 @@ c  identify charged leptons among outgoing particles
 
 c angle cuts & energy cuts for at least one leptons
             if(
-     $         (thetax(p(0,i)) .gt. thetaxlmins).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxs).and.
-     $         (thetay(p(0,i)) .gt. thetaylmins).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxs).and.
-     $         (theta(p(0,i)) .gt. thetalmins).and.
-     $         (theta(p(0,i)) .lt. thetalmaxs).and.
-     $         (p(0,i) .gt. elmins).and.
-     $         (p(0,i) .lt. elmaxs)) then
+     $         (thetax(plab(0,i)) .gt. thetaxlmins).and.
+     $         (thetax(plab(0,i)) .lt. thetaxlmaxs).and.
+     $         (thetay(plab(0,i)) .gt. thetaylmins).and.
+     $         (thetay(plab(0,i)) .lt. thetaylmaxs).and.
+     $         (theta(plab(0,i)) .gt. thetalmins).and.
+     $         (theta(plab(0,i)) .lt. thetalmaxs).and.
+     $         (plab(0,i) .gt. elmins).and.
+     $         (plab(0,i) .lt. elmaxs)) then
                tripass=.true.               
 c               write (47,*) "PASS!"
             endif
@@ -395,14 +401,14 @@ c               write (47,*) "PASS!"
 c there is only one positron; check if it passes angle cuts & energy cuts
             if(
      $         is_a_lp(i).and.
-     $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
-     $         (thetay(p(0,i)) .gt. thetaylminsp).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
-     $         (theta(p(0,i)) .gt. thetalminsp).and.
-     $         (theta(p(0,i)) .lt. thetalmaxsp).and.
-     $         (p(0,i) .gt. elminsp).and.
-     $         (p(0,i) .lt. elmaxsp)) then
+     $         (thetax(plab(0,i)) .gt. thetaxlminsp).and.
+     $         (thetax(plab(0,i)) .lt. thetaxlmaxsp).and.
+     $         (thetay(plab(0,i)) .gt. thetaylminsp).and.
+     $         (thetay(plab(0,i)) .lt. thetaylmaxsp).and.
+     $         (theta(plab(0,i)) .gt. thetalminsp).and.
+     $         (theta(plab(0,i)) .lt. thetalmaxsp).and.
+     $         (plab(0,i) .gt. elminsp).and.
+     $         (plab(0,i) .lt. elmaxsp)) then
                passlp=.true.
                nlppass=nlppass+1
                jpasslp=i
@@ -412,29 +418,39 @@ c there are two electrons; check if one passes angle cuts & energy cuts
 
             if(
      $         is_a_lm(i).and.
-     $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
-     $         (thetay(p(0,i)) .gt. thetaylminsp).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
-     $         (theta(p(0,i)) .gt. thetalminsp).and.
-     $         (theta(p(0,i)) .lt. thetalmaxsp).and.
-     $         (p(0,i) .gt. elminsp).and.
-     $         (p(0,i) .lt. elmaxsp)) then
+     $         (thetax(plab(0,i)) .gt. thetaxlminsp).and.
+     $         (thetax(plab(0,i)) .lt. thetaxlmaxsp).and.
+     $         (thetay(plab(0,i)) .gt. thetaylminsp).and.
+     $         (thetay(plab(0,i)) .lt. thetaylmaxsp).and.
+     $         (theta(plab(0,i)) .gt. thetalminsp).and.
+     $         (theta(plab(0,i)) .lt. thetalmaxsp).and.
+     $         (plab(0,i) .gt. elminsm).and.
+     $         (plab(0,i) .lt. elmaxsm)) then
                passonelm=.true.
                nlmpass=nlmpass+1
                jpasslm(nlmpass)=i
             endif
-            
+            if (is_a_lm(i)) then
+               nele=nele+1
+               isele(nele)=i
+            endif
+
+c SARAH
+         endif ! Close if is_a_l
+
+      enddo ! Close loop over outgoing particles
+c SRAH END
+
 c...        Evaluate electron-positron criteria
             ! only one electron passes the angle & energy cuts
             if(nlppass.eq.1.and.nlmpass.eq.1.and.(.not.pairpass)) then
 
               if(
-     $         (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).gt.mmllminsp)
+     $         (dSqrt(Sumdot(plab(0,jpasslp),plab(0,jpasslm(1)),+1d0)).gt.mmllminsp)
      $         .and.
-     $         (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).lt.mmllmaxsp)
+     $         (dSqrt(Sumdot(plab(0,jpasslp),plab(0,jpasslm(1)),+1d0)).lt.mmllmaxsp)
      $         .and.
-     $         (p(0,jpasslp)+p(0,jpasslm(1)).gt.eltotsp)
+     $         (plab(0,jpasslp)+plab(0,jpasslm(1)).gt.eltotsp)
      $          ) then
                  pairpass=.true.
                endif 
@@ -443,20 +459,41 @@ c...        Evaluate electron-positron criteria
               ! loop over the two electrons
               do kk=1,2
                if(
-     $          (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).gt.mmllminsp)
+     $          (dSqrt(Sumdot(plab(0,jpasslp),plab(0,jpasslm(kk)),+1d0)).gt.mmllminsp)
      $          .and.
-     $          (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).lt.mmllmaxsp)
+     $          (dSqrt(Sumdot(plab(0,jpasslp),plab(0,jpasslm(kk)),+1d0)).lt.mmllmaxsp)
      $          .and.
-     $          (p(0,jpasslp)+p(0,jpasslm(kk)).gt.eltotsp)
+     $          (plab(0,jpasslp)+plab(0,jpasslm(kk)).gt.eltotsp)
      $          ) then
                  pairpass=.true.
-                endif
+               endif
               enddo ! Close loop over the two electrons              
+c              if(
+c     $         (dSqrt(Sumdot(plab(0,isele(1)),plab(0,isele(2)),+1d0)).gt.mmllminsp)
+c     $         .and.
+c     $         (dSqrt(Sumdot(plab(0,jpasslp),plab(0,jpasslm(2)),+1d0)).gt.mmllminsp)
+c     $         ) then
+c                pairpass2=.true.
+c              endif   
              endif ! Close the pair case           
 
-         endif ! Close if is_a_l
+             if( nele.eq.2.and.nlppass.eq.1 ) then
+              if(
+     $          plab(0,isele(1)).lt.elmaxsm .and. plab(0,isele(2)).lt.elmaxsm
+c     $          .and.
+c     $          (dSqrt(Sumdot(plab(0,isele(1)),plab(0,isele(2)),+1d0)).gt.mmllminsm)
+c     $          .and.
+c     $          ((dSqrt(Sumdot(plab(0,jpasslp),plab(0,isele(1)),+1d0)).gt.mmllminsp)
+c     $          .and.
+c     $          (dSqrt(Sumdot(plab(0,jpasslp),plab(0,isele(2)),+1d0)).gt.mmllminsp))
+     $         ) then
+                pairpass2=.true.
+              endif ! mmee
+             endif ! 2 ele
 
-      enddo ! Close loop over outgoing particles
+c         endif ! Close if is_a_l
+
+c      enddo ! Close loop over outgoing particles
 
 c...  Check: were inclusive criteria satisfied?      
 
@@ -477,9 +514,15 @@ c...  Check: were inclusive criteria satisfied?
        passcuts=.false.
        return
       endif
-
+      
       ! Pair criteria
       if(.not.pairpass) then
+       passcuts=.false.
+       return
+      endif
+
+      ! Pair criteria
+      if(.not.pairpass2) then
        passcuts=.false.
        return
       endif

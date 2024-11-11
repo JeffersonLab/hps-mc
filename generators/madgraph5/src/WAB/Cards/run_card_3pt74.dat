@@ -51,8 +51,8 @@
 #          eva=Effective W/Z/A Approx.       [21yy.zzzzz]            *
 #          none=No PDF, same as lhapdf with lppx=0                   *
 #*********************************************************************
-  none	= pdlabel1 ! PDF type for beam #1
-  none	= pdlabel2 ! PDF type for beam #2
+  cteq6l1	= pdlabel1 ! PDF type for beam #1
+  cteq6l1	= pdlabel2 ! PDF type for beam #2
   230000	= lhaid ! if pdlabel=lhapdf, this is the lhapdf number
 # To see heavy ion options: type "update ion_pdf"
 #*********************************************************************
@@ -172,7 +172,7 @@
 #********************************************************************* 
 #  Additional hidden parameters
 #*********************************************************************
-  0.64	= xef # hidden_parameter
+  0.0	= xef # hidden_parameter
   0.0	= drll # hidden_parameter
   0.0	= thetafmin # hidden_parameter
   0.0	= eftot # hidden_parameter
@@ -188,7 +188,7 @@
   0.0	= mmll # hidden_parameter
   100.0	= thetayfmax # hidden_parameter
   0.0	= xthetaxfmin # hidden_parameter
-  0.07	= xthetayfmax # hidden_parameter
+  100.0	= xthetayfmax # hidden_parameter
   0.005	= thetayfmin # hidden_parameter
   0.0	= mmff # hidden_parameter
   0.0	= efrat # hidden_parameter

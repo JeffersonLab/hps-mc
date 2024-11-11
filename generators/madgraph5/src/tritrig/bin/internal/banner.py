@@ -1591,6 +1591,10 @@ class RunCardLO(RunCard):
         self.add_param("lpp2", 1, fortran_name="lpp(2)")
         self.add_param("ebeam1", 6500.0, fortran_name="ebeam(1)")
         self.add_param("ebeam2", 6500.0, fortran_name="ebeam(2)")
+        #beam mass, sarah added
+        self.add_param("mbeam1", 1.0, fortran_name="mbeam(1)")
+        self.add_param("mbeam2", 1.0, fortran_name="mbeam(2)")
+        #end sarah added
         self.add_param("polbeam1", 0.0, fortran_name="pb1")
         self.add_param("polbeam2", 0.0, fortran_name="pb2")
         self.add_param("pdlabel", "nn23lo1")
@@ -1622,6 +1626,9 @@ class RunCardLO(RunCard):
         self.add_param("elminsp", 0.0)
         self.add_param("elmaxsp", 100.0)
         self.add_param("eltotsp", 0.0)
+        self.add_param("elminsm", 0.0)
+        self.add_param("elmaxsm", 100.0)
+        self.add_param("mmllminsm", 0.0)
         self.add_param("mmllminsp", 0.0)
         self.add_param("mmllmaxsp", 100.0)
         self.add_param("thetalminsp", 0.0)
@@ -1967,6 +1974,10 @@ class RunCardNLO(RunCard):
         self.add_param('lpp2', 1, fortran_name='lpp(2)')                        
         self.add_param('ebeam1', 6500.0, fortran_name='ebeam(1)')
         self.add_param('ebeam2', 6500.0, fortran_name='ebeam(2)')        
+        #beam mass, sarah added
+        self.add_param("mbeam1", 1.0, fortran_name="mbeam(1)")
+        self.add_param("mbeam2", 1.0, fortran_name="mbeam(2)")
+        #end sarah added
         self.add_param('pdlabel', 'nn23nlo')                
         self.add_param('lhaid', [244600],fortran_name='lhaPDFid')
         self.add_param('lhapdfsetname', ['internal_use_only'], system=True)

@@ -5,6 +5,7 @@ No idea what this is supposed to do.
 """
 
 from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount
+from hpsmc.tools import HPSTR
 
 job.description = 'signal-pulse from overlay to recon'
 
@@ -41,7 +42,8 @@ signal_pulser_name = 'signal_pulser'
 ## Filter signal events and catenate files before overlaying with pulser data
 filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name,
                                                outputs=['%s_filt.slcio' % signal_name],
-                                               event_interval=0, num_hodo_hits=1)
+                                               ignore_job_params=['event_interval'],
+                                               event_interval=0, num_hodo_hits=0)
 
 ## Count filtered events
 count_filter = LCIOCount(inputs=filter_events.output_files())
@@ -50,12 +52,14 @@ count_filter = LCIOCount(inputs=filter_events.output_files())
 evio_to_lcio = EvioToLcio(steering='evio_to_lcio', inputs=pulser_file_name, output=['%s.slcio' % pulser_name])
 
 ## Count pulser events
-count_pulser = LCIOCount(inputs=evio_to_lcio.output_files())
+#count_pulser = LCIOCount(inputs=evio_to_lcio.output_files())
+count_pulser = LCIOCount(inputs=pulser_file_name)
 
 ## Overlay signal with pulser data
 overlay = JobManager(steering='overlay',
                      inputs=filter_events.output_files(),
-                     overlay_file=evio_to_lcio.output_files()[0],
+                     overlay_file=pulser_file_name[0],
+                     #overlay_file=evio_to_lcio.output_file[0],
                      outputs=['%s.slcio' % signal_pulser_name])
 
 ## Space overlaid events
@@ -69,6 +73,7 @@ count_space_overlay = LCIOCount(inputs=space_overlay.output_files())
 
 ## Run simulated events in readout to generate triggers
 readout = JobManager(steering='readout',
+                     #inputs=['signal_pulser_spaced.slcio'],
                      inputs=space_overlay.output_files(),
                      outputs=['%s_readout.slcio' % signal_pulser_name])
 
@@ -83,6 +88,11 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
+## Convert LCIO to ROOT
+cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
+
 ## Add the components
-job.add([filter_events, count_filter, evio_to_lcio, count_pulser, overlay, space_overlay,
-         count_space_overlay, readout, count_readout, recon, count_recon])
+#job.add([filter_events, count_filter, evio_to_lcio, count_pulser, overlay, space_overlay,
+job.add([filter_events, count_filter, count_pulser, overlay, space_overlay,    
+         count_space_overlay, readout, count_readout, recon, count_recon, cnv])
+#job.add([readout, count_readout, recon, count_recon, cnv])

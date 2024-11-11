@@ -14,8 +14,8 @@ c
 c     Collider
 c
       integer                                        lpp(2)
-      double precision    ebeam(2), xbk(2),q2fact(2)
-      common/to_collider/ ebeam   , xbk   ,q2fact,   lpp
+      double precision    ebeam(2), xbk(2),q2fact(2),mbeam(2)
+      common/to_collider/ ebeam   , xbk   ,q2fact,   lpp, mbeam  ! added mbeam (sarah)
 c
 c     Number of events
 c

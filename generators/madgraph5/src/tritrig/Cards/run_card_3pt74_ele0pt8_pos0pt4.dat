@@ -108,13 +108,13 @@
 # Fixed-Target Cuts
 # N.B. relevant lepton cuts not included: el/elmax, mmll/mmllmax, etal/etalmax..
 #******************************************************************************
- 0.16 = elminsm      ! min E for at least one l-
- 0.16 = elminsp      ! min E for l+
+ 0.8 = elminsm      ! min E for at least one l-
+ 0.4 = elminsp      ! min E for l+
  100.0 = elmaxsp      ! max E for l+
  100.0 = elmaxsm      ! max E for at least one l-
- 1.6 = eltotsp       ! min total E for l+ & at least one l-
+ 0.0 = eltotsp       ! min total E for l+ & at least one l-
  0.01 = mmllminsp    ! min invariant mass for at least one l+l- pair
- 0.0 = mmllminsm
+ 0.01 = mmllminsm
  100.0 = mmllmaxsp   ! max invariant mass for at least one l+l- pair
  0.0 = thetalminsp   ! min angle (radial direction) for l+ and at least one l-
  100.0 = thetalmaxsp ! max angle (radial direction) for l+ and at least one l-

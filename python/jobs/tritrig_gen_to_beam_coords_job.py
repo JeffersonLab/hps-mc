@@ -12,10 +12,10 @@ job.description = 'Generate tritrig events using MadGraph5 and convert to StdHep
 mg = MG5(name='tritrig')
 
 ## Unzip the LHE events to a local file
-unzip = Unzip(inputs=mg.output_files())
+unzip = Unzip(inputs=['tritrig_unweighted_events.lhe.gz'])
 
 ## Convert LHE output to stdhep
-cnv = StdHepConverter(inputs=mg.output_files(), outputs=['tritrig.stdhep'])
+cnv = StdHepConverter(inputs=['tritrig_unweighted_events.lhe.gz'], outputs=['tritrig.stdhep'])
 
 ## Add mother particle to tag trident particles
 mom = AddMotherFullTruth(inputs=[cnv.output_files()[0], unzip.output_files()[0]], outputs=['tritrig_mom.stdhep'])

@@ -34,6 +34,12 @@ c
       character*132 buff
       real*8 sf1,sf2
       real*8 pb1,pb2
+
+C
+C     beam mass (sarah)
+C
+      real*8 mb1,mb2
+
 C
 C     input cuts
 C

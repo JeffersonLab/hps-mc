@@ -1,12 +1,12 @@
 C
 C     Fixed-target CUTS
 C
-      real*8 elminsp, elmaxsp, eltotsp, mmllminsp, mmllmaxsp, thetalminsp, thetalmaxsp
+      real*8 elminsp, elmaxsp, elminsm, elmaxsm, eltotsp, mmllminsp, mmllmaxsp, mmllminsm, thetalminsp, thetalmaxsp
      $     , thetaxlminsp, thetaxlmaxsp, thetaylminsp, thetaylmaxsp
      $     , thetalmins, thetalmaxs, thetaxlmins, thetaxlmaxs
      $     , thetaylmins, thetaylmaxs, elmins, elmaxs
       COMMON /TO_FT_CUTS/
-     $     elminsp, elmaxsp, eltotsp, mmllminsp, mmllmaxsp, thetalminsp, thetalmaxsp
+     $     elminsp, elmaxsp, elminsm, elmaxsm, eltotsp, mmllminsp, mmllmaxsp,mmllminsm, thetalminsp, thetalmaxsp
      $     , thetaxlminsp, thetaxlmaxsp, thetaylminsp, thetaylmaxsp
      $     , thetalmins, thetalmaxs, thetaxlmins, thetaxlmaxs
      $     , thetaylmins, thetaylmaxs, elmins, elmaxs
