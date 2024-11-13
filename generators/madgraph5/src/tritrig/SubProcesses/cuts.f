@@ -375,88 +375,86 @@ c ....initialize some variables
 c      write(47,*) " --evt --"
       do i=nincoming+1,nexternal
 c  identify charged leptons among outgoing particles
-         if(is_a_l(i)) then
+        if(is_a_l(i)) then
 
 c angle cuts & energy cuts for at least one leptons
-            if(
-     $         (thetax(p(0,i)) .gt. thetaxlmins).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxs).and.
-     $         (thetay(p(0,i)) .gt. thetaylmins).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxs).and.
-     $         (theta(p(0,i)) .gt. thetalmins).and.
-     $         (theta(p(0,i)) .lt. thetalmaxs).and.
-     $         (p(0,i) .gt. elmins).and.
-     $         (p(0,i) .lt. elmaxs)) then
-               tripass=.true.               
-c               write (47,*) "PASS!"
-            endif
+          if(
+    $         (thetax(p(0,i)) .gt. thetaxlmins).and.
+    $         (thetax(p(0,i)) .lt. thetaxlmaxs).and.
+    $         (thetay(p(0,i)) .gt. thetaylmins).and.
+    $         (thetay(p(0,i)) .lt. thetaylmaxs).and.
+    $         (theta(p(0,i)) .gt. thetalmins).and.
+    $         (theta(p(0,i)) .lt. thetalmaxs).and.
+    $         (p(0,i) .gt. elmins).and.
+    $         (p(0,i) .lt. elmaxs)) then
+            tripass=.true.               
+c            write (47,*) "PASS!"
+          endif
 
 
 c there is only one positron; check if it passes angle cuts & energy cuts
-            if(
-     $         is_a_lp(i).and.
-     $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
-     $         (thetay(p(0,i)) .gt. thetaylminsp).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
-     $         (theta(p(0,i)) .gt. thetalminsp).and.
-     $         (theta(p(0,i)) .lt. thetalmaxsp).and.
-     $         (p(0,i) .gt. elminsp).and.
-     $         (p(0,i) .lt. elmaxsp)) then
-               passlp=.true.
-               nlppass=nlppass+1
-               jpasslp=i
-            endif
+          if(
+    $         is_a_lp(i).and.
+    $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
+    $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
+    $         (thetay(p(0,i)) .gt. thetaylminsp).and.
+    $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
+    $         (theta(p(0,i)) .gt. thetalminsp).and.
+    $         (theta(p(0,i)) .lt. thetalmaxsp).and.
+    $         (p(0,i) .gt. elminsp).and.
+    $         (p(0,i) .lt. elmaxsp)) then
+            passlp=.true.
+            nlppass=nlppass+1
+            jpasslp=i
+          endif
 
 c there are two electrons; check if one passes angle cuts & energy cuts
 
-            if(
-     $         is_a_lm(i).and.
-     $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
-     $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
-     $         (thetay(p(0,i)) .gt. thetaylminsp).and.
-     $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
-     $         (theta(p(0,i)) .gt. thetalminsp).and.
-     $         (theta(p(0,i)) .lt. thetalmaxsp).and.
-     $         (p(0,i) .gt. elminsp).and.
-     $         (p(0,i) .lt. elmaxsp)) then
-               passonelm=.true.
-               nlmpass=nlmpass+1
-               jpasslm(nlmpass)=i
-            endif
-            
-c...        Evaluate electron-positron criteria
-            ! only one electron passes the angle & energy cuts
-            if(nlppass.eq.1.and.nlmpass.eq.1.and.(.not.pairpass)) then
+          if(
+    $         is_a_lm(i).and.
+    $         (thetax(p(0,i)) .gt. thetaxlminsp).and.
+    $         (thetax(p(0,i)) .lt. thetaxlmaxsp).and.
+    $         (thetay(p(0,i)) .gt. thetaylminsp).and.
+    $         (thetay(p(0,i)) .lt. thetaylmaxsp).and.
+    $         (theta(p(0,i)) .gt. thetalminsp).and.
+    $         (theta(p(0,i)) .lt. thetalmaxsp).and.
+    $         (p(0,i) .gt. elminsp).and.
+    $         (p(0,i) .lt. elmaxsp)) then
+            passonelm=.true.
+            nlmpass=nlmpass+1
+            jpasslm(nlmpass)=i
+          endif
 
-              if(
-     $         (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).gt.mmllminsp)
-     $         .and.
-     $         (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).lt.mmllmaxsp)
-     $         .and.
-     $         (p(0,jpasslp)+p(0,jpasslm(1)).gt.eltotsp)
-     $          ) then
-                 pairpass=.true.
-               endif 
-             ! two electrons both pass the angle & energy cuts  
-             elseif(nlppass.eq.1.and.nlmpass.eq.2.and.(.not.pairpass)) then
-              ! loop over the two electrons
-              do kk=1,2
-               if(
-     $          (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).gt.mmllminsp)
-     $          .and.
-     $          (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).lt.mmllmaxsp)
-     $          .and.
-     $          (p(0,jpasslp)+p(0,jpasslm(kk)).gt.eltotsp)
-     $          ) then
-                 pairpass=.true.
-                endif
-              enddo ! Close loop over the two electrons              
-             endif ! Close the pair case           
-
-         endif ! Close if is_a_l
-
+        endif ! Close if is_a_l
       enddo ! Close loop over outgoing particles
+
+c...  Evaluate electron-positron criteria
+      ! only one electron passes the angle & energy cuts
+      if(nlppass.eq.1.and.nlmpass.eq.1.and.(.not.pairpass)) then
+
+        if(
+    $       (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).gt.mmllminsp)
+    $        .and.
+    $        (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(1)),+1d0)).lt.mmllmaxsp)
+    $        .and.
+    $        (p(0,jpasslp)+p(0,jpasslm(1)).gt.eltotsp)) then
+          pairpass=.true.
+        endif
+ 
+        ! two electrons both pass the angle & energy cuts  
+        elseif(nlppass.eq.1.and.nlmpass.eq.2.and.(.not.pairpass)) then
+          ! loop over the two electrons
+          do kk=1,2
+            if(
+    $           (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).gt.mmllminsp)
+    $           .and.
+    $           (dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm(kk)),+1d0)).lt.mmllmaxsp)
+    $           .and.
+    $           (p(0,jpasslp)+p(0,jpasslm(kk)).gt.eltotsp)) then
+              pairpass=.true.
+            endif
+          enddo ! Close loop over the two electrons              
+        endif ! Close the pair case           
 
 c...  Check: were inclusive criteria satisfied?      
 
