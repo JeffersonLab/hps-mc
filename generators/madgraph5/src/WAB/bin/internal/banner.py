@@ -3393,12 +3393,12 @@ class RunCardLO(RunCard):
         self.add_param("xthetaxfmax", -1.0, cut='l')
         self.add_param("xthetayfmax", -1.0, cut='l')
 
-        self.add_param("mmff", -1.0, cut='ll') # invariant mass of l+l- pair
+        self.add_param("mmff", -1.0, cut='ll') # invariant mass of photon and electron
         self.add_param("mmffmax", -1.0, cut='ll')
-        self.add_param("xef", -1.0, cut='l') # min energy of >= 1 lepton
+        self.add_param("xef", -1.0, cut='l') # min energy of photon
         self.add_param("xthetaf", -1.0, cut='l')
-        self.add_param("eftot", -1.0, cut='ll') # min energy for both leptons
-        self.add_param("efrat", -1.0, cut='ll') # min. ratio Emin/Emax for the two leptons
+        self.add_param("eftot", -1.0, cut='ll') # min energy for electron and photon combined
+        self.add_param("efrat", -1.0, cut='ll') # min. ratio Emin/Emax for the photon and electron
 
         # end sarah added
 

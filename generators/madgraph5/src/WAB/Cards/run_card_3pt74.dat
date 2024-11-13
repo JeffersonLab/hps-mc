@@ -170,25 +170,24 @@
   systematics	= systematics_program ! none, systematics [python], SysCalc [depreceted, C++]
   ['--mur=0.5,1,2', '--muf=0.5,1,2', '--pdf=errorset']	= systematics_arguments ! see: https://cp3.irmp.ucl.ac.be/projects/madgraph/wiki/Systematics#Systematicspythonmodule
 #********************************************************************* 
-#  Additional hidden parameters
+#  Fixed-target cuts
 #*********************************************************************
-  0.0	= xef # hidden_parameter
-  0.0	= drll # hidden_parameter
-  0.0	= thetafmin # hidden_parameter
-  0.0	= eftot # hidden_parameter
-  100.0	= thetafmax # hidden_parameter
-  0.0	= xthetaf # hidden_parameter
-  0.0	= thetaxfmin # hidden_parameter
-  100.0	= efmax # hidden_parameter
-  100.0	= thetaxfmax # hidden_parameter
-  100.0	= mmffmax # hidden_parameter
-  0.005 = xthetayfmin # hidden_parameter
-  0.64	= ef # hidden_parameter
-  100.0	= xthetaxfmax # hidden_parameter
-  0.0	= mmll # hidden_parameter
-  100.0	= thetayfmax # hidden_parameter
-  0.0	= xthetaxfmin # hidden_parameter
-  100.0	= xthetayfmax # hidden_parameter
-  0.005	= thetayfmin # hidden_parameter
-  0.0	= mmff # hidden_parameter
-  0.0	= efrat # hidden_parameter
+  0.64	= ef            # min energy for all final state particles (fsp)
+  100.0	= efmax         # max energy for all fsp
+  0.0	= thetafmin     # min angle for all fsp
+  100.0	= thetafmax     # max angle for all fsp
+  0.0	= thetaxfmin    # min x angle for all fsp
+  100.0	= thetaxfmax    # max x angle for all fsp
+  0.005	= thetayfmin    # min y angle for all fsp
+  100.0	= thetayfmax    # max y angle for all fsp
+
+  0.0	= xef           # min energy for photon
+  0.0	= xthetaf       # min angle for photon
+  0.0	= xthetaxfmin   # min x angle for photon
+  100.0	= xthetaxfmax   # max x angle for photon
+  0.005 = xthetayfmin   # min y angle for photon
+  100.0	= xthetayfmax   # max y angle for photon
+
+  0.0	= eftot         # minimum total energy of electron and photon
+  100.0	= mmffmax       # minimum invariant mass of electron and photon
+  0.0	= efrat         # min. ratio Emin/Emax of electron and photon
