@@ -133,7 +133,7 @@ class EGS5(EventGenerator):
 
 
 class StdHepConverter(EGS5):
-    """! Convert LHE files to StdHep using EGS5."""
+    """! Target processing and conversion of LHE files to StdHep using EGS5."""
 
     def __init__(self, name="lhe_v1", **kwargs):
         EGS5.__init__(self, name, **kwargs)
