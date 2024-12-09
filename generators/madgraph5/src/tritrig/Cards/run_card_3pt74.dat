@@ -106,7 +106,7 @@
 # Fixed-Target Cuts
 # N.B. relevant lepton cuts not included: el/elmax, mmll/mmllmax, etal/etalmax..
 #******************************************************************************
- 0.160 = eminpos      ! min E for l+
+ 0.2   = eminpos      ! min E for l+
  100.0 = emaxpos      ! max E for l+
  0.0 = thetaminpos    ! min angle (radial direction) for l+
  100.0 = thetamaxpos  ! max angle (radial direction) for l+
@@ -115,14 +115,23 @@
  0.005 = thetayminpos ! min angle (y direction) for l+
  100.0 = thetaymaxpos ! max angle (y direction) for l+
 
- 0.0 = eminrecoil        ! min E for recoil e-
- 4.0 = emaxrecoil      ! max E for recoil e-
- 0.0001 = thetaminrecoil    ! min angle (radial direction) for recoil e-
+ 0.2 = eminrecoil        ! min E for recoil e-
+ 4.0 = emaxrecoil        ! max E for recoil e-
+ 0.0001 = thetaminrecoil ! min angle (radial direction) for recoil e-
  100.0 = thetamaxrecoil  ! max angle (radial direction) for recoil e-
  0.0 = thetaxminrecoil   ! min angle (x direction) for recoil e-
  100.0 = thetaxmaxrecoil ! max angle (x direction) for recoil e-
- 0.0 = thetayminrecoil ! min angle (y direction) for recoil e-
+ 0.0 = thetayminrecoil   ! min angle (y direction) for recoil e-
  100.0 = thetaymaxrecoil ! max angle (y direction) for recoil e-
+
+ 0.2 = eminele        ! min E for e-
+ 4.0 = emaxele        ! max E for e-
+ 0.0 = thetaminele    ! min angle (radial direction) for e-
+ 100.0 = thetamaxele  ! max angle (radial direction) for e-
+ 0.0 = thetaxminele   ! min angle (x direction) for e-
+ 100.0 = thetaxmaxele ! max angle (x direction) for e-
+ 0.0 = thetayminele   ! min angle (y direction) for e-
+ 100.0 = thetaymaxele ! max angle (y direction) for e-
 
  0.0 = eminanyl          ! min E for at least one l
  100.0 = emaxanyl        ! max E for at least one l
