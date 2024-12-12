@@ -60,6 +60,7 @@ C
       logical tripass,pairpass,passlp,passlm,passrecoil
       !Real*8 efRatVal
       integer nlppass,nlmpass,jpasslp,jpasslm,jpassrecoil,kk
+      real*8 thetaratio
 
       character*20 formstr
 C
@@ -442,16 +443,21 @@ c check the first electron which should be the recoil electron
 c...  Evaluate electron-positron criteria
 c...  positron and electron from pair passed, recoil electron passed
       if(nlppass.eq.1.and.nlmpass.eq.2) then
+        ! find the smaller ratio of lepton angles in lab frame
+        if( abs(theta(p(0,jpasslm))/theta(p(0,jpasslp))) .lt. abs(theta(p(0,jpasslp))/theta(p(0,jpasslm))) ) then
+          thetaratio=abs( theta(p(0,jpasslm))/theta(p(0,jpasslp)) )
+        else
+          thetaratio=abs( theta(p(0,jpasslp))/theta(p(0,jpasslm)) )
+        endif ! determine theta ratio
+        ! check invariant mass
         if( dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm),+1d0)).gt.mmeemin ) then
           if( dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm),+1d0)).lt.mmeemax ) then
-            if( abs( theta(p(0,jpasslp))/theta(p(0,jpasslm)) ).gt.thetaratiomin ) then
-              if( abs( theta(p(0,jpasslp))/theta(p(0,jpasslm)) ).lt.thetaratiomax ) then
-                if( ( p(0,jpasslp)+p(0,jpasslm) ).gt.eltot) then
-c...      electron-positron pair passed invM and energy cuts
-                  pairpass=.true.
-                endif ! pass esum cuts
-              endif ! pass theta ratio max
-            endif ! pass theta ratio min
+            ! check angles
+            if( thetaratio.gt.thetaratiomin .and. thetaratio.lt.thetaratiomax ) then
+              if( ( p(0,jpasslp)+p(0,jpasslm) ).gt.eltot) then
+                pairpass=.true.
+              endif ! pass esum cuts
+            endif ! pass theta ratio 
           endif ! pass invM max
         endif ! pass invM min
       endif ! found all particles
