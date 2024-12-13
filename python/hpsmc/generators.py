@@ -133,7 +133,7 @@ class EGS5(EventGenerator):
 
 
 class StdHepConverter(EGS5):
-    """! Convert LHE files to StdHep using EGS5."""
+    """! Target processing and conversion of LHE files to StdHep using EGS5."""
 
     def __init__(self, name="lhe_v1", **kwargs):
         EGS5.__init__(self, name, **kwargs)
@@ -311,6 +311,9 @@ class MG(EventGenerator):
         @return  error code
         """
         os.chdir(os.path.dirname(self.command))
+        # need python3.7 for MG5, but s3df only has python3.6 for now; python2 works though
+        if "WAB" in self.name:
+            self.command = "python2 " + self.command
         self.logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
         return Component.execute(self, log_out, log_err)
 
@@ -406,6 +409,7 @@ class MG5(MG):
                "simp": "simp",
                "simp-3body": "simp-3body",
                "idm": "idm",
+               "WAB": "WAB"
                }
 
     def __init__(self, name='tritrig', **kwargs):
