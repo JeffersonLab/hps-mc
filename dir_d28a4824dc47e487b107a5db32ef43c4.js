@@ -22,5 +22,6 @@ var dir_d28a4824dc47e487b107a5db32ef43c4 =
     [ "tritrig_beam", "dir_f971fb6e69374eebb5220b0f865810dd.html", null ],
     [ "tritrig_gen", "dir_a130ce581647a7e301371b0e8a5ff388.html", null ],
     [ "tritrig_slic_full_chain", "dir_5efb4d6afddd3e46bc1a6427a4869f6e.html", null ],
-    [ "wab_gen_sample", "dir_8179150db99a4203a166a5a9d7e8362b.html", null ]
+    [ "wab_gen_mg5", "dir_49e02d12f2593c0fe94a361aa3dc1b48.html", null ],
+    [ "wab_gen_sample", "dir_8179150db99a4203a166a5a9d7e8362b.html", "dir_8179150db99a4203a166a5a9d7e8362b" ]
 ];

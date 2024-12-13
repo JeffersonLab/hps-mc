@@ -37,6 +37,8 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "tritrig_prep_and_slic_job.py", "tritrig__prep__and__slic__job_8py.html", "tritrig__prep__and__slic__job_8py" ],
     [ "tritrig_sim_full_chain_job.py", "tritrig__sim__full__chain__job_8py.html", "tritrig__sim__full__chain__job_8py" ],
     [ "tritrig_slic_full_chain_job.py", "tritrig__slic__full__chain__job_8py.html", "tritrig__slic__full__chain__job_8py" ],
-    [ "wab_gen_sample_job.py", "wab__gen__sample__job_8py.html", "wab__gen__sample__job_8py" ],
+    [ "wab_gen_mg4_job.py", "wab__gen__mg4__job_8py.html", "wab__gen__mg4__job_8py" ],
+    [ "wab_gen_mg5_job.py", "wab__gen__mg5__job_8py.html", "wab__gen__mg5__job_8py" ],
+    [ "wab_gen_sample_job.py", "python_2jobs_2wab__gen__sample__job_8py.html", "python_2jobs_2wab__gen__sample__job_8py" ],
     [ "wab_gen_to_slic_job.py", "wab__gen__to__slic__job_8py.html", "wab__gen__to__slic__job_8py" ]
 ];

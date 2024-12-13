@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"classhpsmc_1_1tools_1_1TarFiles.html":[16,0,0,8,20],
 "classhpsmc_1_1tools_1_1TarFiles.html#a7a0adff6665e8fb2d78385168e7c811e":[16,0,0,8,20,2],
 "classhpsmc_1_1tools_1_1TarFiles.html#aae7af906a32c4f8bb123982f38866c42":[16,0,0,8,20,0],
 "classhpsmc_1_1tools_1_1TarFiles.html#ad286a22613de018ebafca798849bd52f":[16,0,0,8,20,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "classtest_1_1test__tools__stdheptools_1_1TestRandomSample.html#aceabda3b10a35a8bda6ab9c2365ea6fc":[16,0,1,15,2,1],
 "classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html":[16,0,1,15,0],
 "classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a29e80f5629942d5b599f18e188cadc12":[16,0,1,15,0,2],
-"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a3d8aa208839887708bd106afc858e17e":[16,0,1,15,0,0],
-"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a437bd8059e72de11b24785b3c19dc142":[16,0,1,15,0,1]
+"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a3d8aa208839887708bd106afc858e17e":[16,0,1,15,0,0]
 };

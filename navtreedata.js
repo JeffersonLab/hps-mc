@@ -30,12 +30,12 @@ var NAVTREE =
     [ "stdhep-tools", "stdheptools.html", null ],
     [ "misalignment", "misalign.html", [
       [ "Parameters", "misalign.html#autotoc_md2", [
-        [ "Documented files", "index.html#autotoc_md47", [
-          [ "External documentation", "index.html#autotoc_md48", null ]
+        [ "Documented files", "index.html#autotoc_md49", [
+          [ "External documentation", "index.html#autotoc_md50", null ]
         ] ],
-        [ "Installation", "index.html#autotoc_md49", null ],
-        [ "Quick Start Guide", "index.html#autotoc_md50", null ],
-        [ "Help", "index.html#autotoc_md51", null ],
+        [ "Installation", "index.html#autotoc_md51", null ],
+        [ "Quick Start Guide", "index.html#autotoc_md52", null ],
+        [ "Help", "index.html#autotoc_md53", null ],
         [ "parameters", "misalign.html#autotoc_md6", null ]
       ] ]
     ] ],
@@ -87,14 +87,14 @@ var NAVTREEINDEX =
 [
 "__apply_8py.html",
 "classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#aae7af906a32c4f8bb123982f38866c42",
-"classhpsmc_1_1job_1_1Job.html#afe33d5e2adcbcebebcad8b5fd0b96efb",
-"classhpsmc_1_1tools_1_1TarFiles.html#a7a0adff6665e8fb2d78385168e7c811e",
-"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a6ea50dadca040b159a3ba51adc79125f",
-"lcio__count__job_8py.html#aec013a013223f05e81214331b289330a",
-"namespacemembers_a.html",
-"namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54",
-"slic__gps__to__ana__job_8py.html#a6b8c91e3ce53f8874c33b1d8f3a406e1",
-"tritrig__slic__full__chain__job_8py.html"
+"classhpsmc_1_1job_1_1Job.html#afdd9431af0be720a5091a663181f5624",
+"classhpsmc_1_1tools_1_1TarFiles.html",
+"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a437bd8059e72de11b24785b3c19dc142",
+"lcio__count__job_8py.html",
+"namespacelcio__count__job.html#ae11b3deb3de3df7dc48e439074023e35",
+"namespacetritrig__beam__job.html#abbe469cbb24e10408ceddbf0048955c2",
+"sim__to__ana__job_8py.html#ad324e5599132ef76e1594fb62a3c9a23",
+"tritrig__prep__and__slic__job_8py.html#a0edfd5bd129fcfa8dc6c9607d04780b7"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

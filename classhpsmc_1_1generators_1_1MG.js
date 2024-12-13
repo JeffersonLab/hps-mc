@@ -11,6 +11,7 @@ var classhpsmc_1_1generators_1_1MG =
     [ "set_parameters", "classhpsmc_1_1generators_1_1MG.html#adfbb8108e211e38af8ce0c2a03c3f2c0", null ],
     [ "setup", "classhpsmc_1_1generators_1_1MG.html#ade41f93307784822f8bc17e85964d427", null ],
     [ "apmass", "classhpsmc_1_1generators_1_1MG.html#a6995f70e38f5696c129c1373b2bd591b", null ],
+    [ "command", "classhpsmc_1_1generators_1_1MG.html#a9e0992eae3950adccaf4847fbff4231d", null ],
     [ "dmchi", "classhpsmc_1_1generators_1_1MG.html#adbc06e706c5e3c2188defb7f8076da67", null ],
     [ "event_types", "classhpsmc_1_1generators_1_1MG.html#a46647e26ac2740f7c5e75378391d6afb", null ],
     [ "madgraph_dir", "classhpsmc_1_1generators_1_1MG.html#ac90dbc799d17b924577136734893ea85", null ],

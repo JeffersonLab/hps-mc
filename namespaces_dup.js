@@ -1,14 +1,14 @@
 var namespaces_dup =
 [
-    [ "Prerequisites", "readme.html#autotoc_md52", null ],
-    [ "Installation", "readme.html#autotoc_md53", null ],
-    [ "Environment Setup", "readme.html#autotoc_md54", null ],
-    [ "Running Job Scripts", "readme.html#autotoc_md55", null ],
-    [ "Documentation", "readme.html#autotoc_md56", null ],
-    [ "Quick Start Guide", "readme.html#autotoc_md57", null ],
-    [ "Code Formatting", "readme.html#autotoc_md58", null ],
-    [ "Unit tests", "readme.html#autotoc_md59", null ],
-    [ "Help", "readme.html#autotoc_md60", null ],
+    [ "Prerequisites", "readme.html#autotoc_md54", null ],
+    [ "Installation", "readme.html#autotoc_md55", null ],
+    [ "Environment Setup", "readme.html#autotoc_md56", null ],
+    [ "Running Job Scripts", "readme.html#autotoc_md57", null ],
+    [ "Documentation", "readme.html#autotoc_md58", null ],
+    [ "Quick Start Guide", "readme.html#autotoc_md59", null ],
+    [ "Code Formatting", "readme.html#autotoc_md60", null ],
+    [ "Unit tests", "readme.html#autotoc_md61", null ],
+    [ "Help", "readme.html#autotoc_md62", null ],
     [ "_config", "namespace__config.html", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
       [ "Job parameters", "idm.html#autotoc_md29", null ],
@@ -424,6 +424,18 @@ var namespaces_dup =
       [ "rot", "namespacetritrig__slic__full__chain__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
       [ "sim", "namespacetritrig__slic__full__chain__job.html#a9ce7d8135916f3d4dcc638c7b8279419", null ],
       [ "stdhep_cnv", "namespacetritrig__slic__full__chain__job.html#aed50593077683605d7a49f0e580b3e2e", null ]
+    ] ],
+    [ "wab_gen_mg4_job", "namespacewab__gen__mg4__job.html", [
+      [ "cnv", "namespacewab__gen__mg4__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacewab__gen__mg4__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "mg", "namespacewab__gen__mg4__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
+      [ "rot", "namespacewab__gen__mg4__job.html#a1db2ab3d82c6029ee441423308802a74", null ]
+    ] ],
+    [ "wab_gen_mg5_job", "namespacewab__gen__mg5__job.html", [
+      [ "cnv", "namespacewab__gen__mg5__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacewab__gen__mg5__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "mg", "namespacewab__gen__mg5__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
+      [ "rot", "namespacewab__gen__mg5__job.html#a1db2ab3d82c6029ee441423308802a74", null ]
     ] ],
     [ "wab_gen_sample_job", "namespacewab__gen__sample__job.html", [
       [ "cnv", "namespacewab__gen__sample__job.html#ac2353b13f43ff77203d94b47953aa942", null ],

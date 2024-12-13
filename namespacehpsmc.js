@@ -32,6 +32,8 @@ var namespacehpsmc =
       [ "Job parameters", "tritrigslicfullchain.html#autotoc_md44", null ],
       [ "Job parameters", "wabgensample.html#autotoc_md45", null ],
       [ "Job template", "wabgensample.html#autotoc_md46", null ],
+      [ "Job parameters", "wabgensample.html#autotoc_md47", null ],
+      [ "Job template", "wabgensample.html#autotoc_md48", null ],
       [ "_read_global_config", "namespacehpsmc_1_1__config.html#aa5168d8de2c82a4b5bd305d73721b7c0", null ],
       [ "convert_config_value", "namespacehpsmc_1_1__config.html#af52e60a9ea5089f880148a25ebf77189", null ]
     ] ],
