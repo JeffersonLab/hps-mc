@@ -8,6 +8,11 @@ from hpsmc.tools import Unzip, AddMotherFullTruth, BeamCoords, SLIC
 
 job.description = 'Generate tritrig events and simulate passage through detector'
 
+if 'nevents' in job.params:
+    nevents = job.params['nevents']
+else:
+    nevents = 10000
+
 ## Generate tritrig in MG5
 mg = MG5(name='tritrig')
 
