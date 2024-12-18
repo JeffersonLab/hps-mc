@@ -1,0 +1,17 @@
+{
+    "run_number": {{ run_number }},
+    "bunches": {{ bunches }},
+    "nevents": {{ nevents }},
+    "seed": {{ 42 + job_id }},
+    "run_params": "{{ run_params }}",
+    "target_thickness": {{ target_thickness }},
+    "beam_energy": {{ beam_energy }},
+    "num_electrons": {{ num_electrons }},
+    "target_z": {{ target_z }},
+    "detector": "{{ detector }}",
+    "output_files": {
+        "WAB_unweighted_events_mom_rot.stdhep": "wab_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
+	"WAB_unweighted_events_mom_rot.slcio": "wab_{{ run_params }}_mom_rot_{{ job_id }}.slcio"
+    },
+    "output_dir": "/sdf/data/hps/physics2021/mc/gen/pass01/gen/wab"
+}
