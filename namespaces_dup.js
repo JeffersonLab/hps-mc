@@ -390,6 +390,16 @@ var namespaces_dup =
       [ "rot", "namespacetritrig__gen__to__beam__coords__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
       [ "unzip", "namespacetritrig__gen__to__beam__coords__job.html#ada93bbf7295ab03a07435e4999845526", null ]
     ] ],
+    [ "tritrig_gen_to_slic_job", "namespacetritrig__gen__to__slic__job.html", [
+      [ "cnv", "namespacetritrig__gen__to__slic__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacetritrig__gen__to__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "mg", "namespacetritrig__gen__to__slic__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
+      [ "mom", "namespacetritrig__gen__to__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7", null ],
+      [ "nevents", "namespacetritrig__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ],
+      [ "rot", "namespacetritrig__gen__to__slic__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
+      [ "slic", "namespacetritrig__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ],
+      [ "unzip", "namespacetritrig__gen__to__slic__job.html#ada93bbf7295ab03a07435e4999845526", null ]
+    ] ],
     [ "tritrig_prep_and_slic_job", "namespacetritrig__prep__and__slic__job.html", [
       [ "cnv", "namespacetritrig__prep__and__slic__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "description", "namespacetritrig__prep__and__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],

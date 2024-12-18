@@ -34,6 +34,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "tritrig_beam_slic_to_reco_job.py", "tritrig__beam__slic__to__reco__job_8py.html", "tritrig__beam__slic__to__reco__job_8py" ],
     [ "tritrig_gen_job.py", "tritrig__gen__job_8py.html", "tritrig__gen__job_8py" ],
     [ "tritrig_gen_to_beam_coords_job.py", "tritrig__gen__to__beam__coords__job_8py.html", "tritrig__gen__to__beam__coords__job_8py" ],
+    [ "tritrig_gen_to_slic_job.py", "tritrig__gen__to__slic__job_8py.html", "tritrig__gen__to__slic__job_8py" ],
     [ "tritrig_prep_and_slic_job.py", "tritrig__prep__and__slic__job_8py.html", "tritrig__prep__and__slic__job_8py" ],
     [ "tritrig_sim_full_chain_job.py", "tritrig__sim__full__chain__job_8py.html", "tritrig__sim__full__chain__job_8py" ],
     [ "tritrig_slic_full_chain_job.py", "tritrig__slic__full__chain__job_8py.html", "tritrig__slic__full__chain__job_8py" ],

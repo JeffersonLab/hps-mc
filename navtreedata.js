@@ -93,8 +93,8 @@ var NAVTREEINDEX =
 "lcio__count__job_8py.html",
 "namespacelcio__count__job.html#ae11b3deb3de3df7dc48e439074023e35",
 "namespacetritrig__beam__job.html#abbe469cbb24e10408ceddbf0048955c2",
-"sim__to__ana__job_8py.html#ad324e5599132ef76e1594fb62a3c9a23",
-"tritrig__prep__and__slic__job_8py.html#a0edfd5bd129fcfa8dc6c9607d04780b7"
+"sim__to__ana__job_8py.html",
+"tritrig__gen__to__beam__coords__job_8py.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
