@@ -1,15 +1,15 @@
 var classhpsmc_1_1generators_1_1MG =
 [
-    [ "__init__", "classhpsmc_1_1generators_1_1MG.html#a74f6559596c9f44acb9609e51af7ace9", null ],
-    [ "cmd_args", "classhpsmc_1_1generators_1_1MG.html#af16e86fb81fbbc18f79fde1156e45ddc", null ],
-    [ "execute", "classhpsmc_1_1generators_1_1MG.html#a7a0adff6665e8fb2d78385168e7c811e", null ],
-    [ "make_param_card", "classhpsmc_1_1generators_1_1MG.html#aa64ddebe55023b9cd0db691ca9fc4f70", null ],
-    [ "make_run_card", "classhpsmc_1_1generators_1_1MG.html#ac15e514f9296fc2e5f09e5d50317f71b", null ],
-    [ "optional_parameters", "classhpsmc_1_1generators_1_1MG.html#aa030092c6097b91c3d451b195bc498cb", null ],
-    [ "output_files", "classhpsmc_1_1generators_1_1MG.html#a8b5b5f0c003d46d75d76468f1e4298a5", null ],
-    [ "required_parameters", "classhpsmc_1_1generators_1_1MG.html#a7cfececac3ad0536a7eea77c6ade91b9", null ],
-    [ "set_parameters", "classhpsmc_1_1generators_1_1MG.html#adfbb8108e211e38af8ce0c2a03c3f2c0", null ],
-    [ "setup", "classhpsmc_1_1generators_1_1MG.html#ade41f93307784822f8bc17e85964d427", null ],
+    [ "__init__", "classhpsmc_1_1generators_1_1MG.html#ab5add20dcd998e611a6f20380f9fae86", null ],
+    [ "cmd_args", "classhpsmc_1_1generators_1_1MG.html#ace89847533ffa77c07a4a1447e85a6ba", null ],
+    [ "execute", "classhpsmc_1_1generators_1_1MG.html#a07253cf7370ec88c6ba44459569fb506", null ],
+    [ "make_param_card", "classhpsmc_1_1generators_1_1MG.html#a4bd50045307cbc1ff4d965820e336961", null ],
+    [ "make_run_card", "classhpsmc_1_1generators_1_1MG.html#a1a80d5b5f2e4edfff91172da3a65b4fd", null ],
+    [ "optional_parameters", "classhpsmc_1_1generators_1_1MG.html#a25bf0120b1ee699bbe65804685abaef0", null ],
+    [ "output_files", "classhpsmc_1_1generators_1_1MG.html#a18d70b0e156913af9d3e6a5d70370e67", null ],
+    [ "required_parameters", "classhpsmc_1_1generators_1_1MG.html#a4fcbe03feef0ad109f592cecf3b95bad", null ],
+    [ "set_parameters", "classhpsmc_1_1generators_1_1MG.html#a78c0531fd5e21469732d00d9ea4bfec1", null ],
+    [ "setup", "classhpsmc_1_1generators_1_1MG.html#a55917f1c1705cff6027de163d6822f8a", null ],
     [ "apmass", "classhpsmc_1_1generators_1_1MG.html#a6995f70e38f5696c129c1373b2bd591b", null ],
     [ "command", "classhpsmc_1_1generators_1_1MG.html#a9e0992eae3950adccaf4847fbff4231d", null ],
     [ "dmchi", "classhpsmc_1_1generators_1_1MG.html#adbc06e706c5e3c2188defb7f8076da67", null ],
@@ -21,6 +21,8 @@ var classhpsmc_1_1generators_1_1MG =
     [ "mpid", "classhpsmc_1_1generators_1_1MG.html#a4c6513c8414194f55bcc030c137b2b33", null ],
     [ "mrhod", "classhpsmc_1_1generators_1_1MG.html#aa7453e89a3f61dca550431239a072070", null ],
     [ "name", "classhpsmc_1_1generators_1_1MG.html#ab74e6bf80237ddc4109968cedc58c151", null ],
+    [ "nevents", "classhpsmc_1_1generators_1_1MG.html#aec013a013223f05e81214331b289330a", null ],
     [ "param_card", "classhpsmc_1_1generators_1_1MG.html#a948762a7da83c348e7e68342c12ba11c", null ],
-    [ "run_card", "classhpsmc_1_1generators_1_1MG.html#a60848ecad86e58026c8e857602fa4ebc", null ]
+    [ "run_card", "classhpsmc_1_1generators_1_1MG.html#a60848ecad86e58026c8e857602fa4ebc", null ],
+    [ "seed", "classhpsmc_1_1generators_1_1MG.html#ab31f6ed1e7e88c7cca70910409c6bbee", null ]
 ];

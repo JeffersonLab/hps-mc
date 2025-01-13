@@ -29,29 +29,43 @@ var NAVTREE =
     [ "Job scripts", "jobscripts.html", null ],
     [ "stdhep-tools", "stdheptools.html", null ],
     [ "misalignment", "misalign.html", [
-      [ "Parameters", "misalign.html#autotoc_md2", [
-        [ "Documented files", "index.html#autotoc_md49", [
-          [ "External documentation", "index.html#autotoc_md50", null ]
-        ] ],
-        [ "Installation", "index.html#autotoc_md51", null ],
-        [ "Quick Start Guide", "index.html#autotoc_md52", null ],
-        [ "Help", "index.html#autotoc_md53", null ],
-        [ "parameters", "misalign.html#autotoc_md6", null ]
+      [ "Parameters", "misalign.html#autotoc_md5", [
+        [ "parameters", "misalign.html#autotoc_md9", null ]
       ] ]
     ] ],
     [ "pede minimizer", "pede.html", [
-      [ "Parameters", "pede.html#autotoc_md8", [
-        [ "to_float", "pede.html#autotoc_md12", null ]
+      [ "Parameters", "pede.html#autotoc_md11", [
+        [ "to_float", "pede.html#autotoc_md15", null ]
       ] ]
     ] ],
     [ "alignment", "alignment.html", null ],
     [ "Tracking for Alignment", "trackingalign.html", null ],
-    [ "Examples", "examples.html", "examples" ],
+    [ "Examples", "examples.html", [
+      [ "A-prime generation to slic", "apgentoslic.html", null ],
+      [ "Transformation to beam coordinates", "beamcoords.html", null ],
+      [ "Beam generation", "beamgen.html", null ],
+      [ "Beam SLIC detector simulation", "beamslic.html", null ],
+      [ "Data conversion -- evio to lcio", "datacnv.html", null ],
+      [ "dummy", "dummy.html", null ],
+      [ "FEE SLIC to reconstruction pipeline", "feeslictorecon.html", null ],
+      [ "HPSTR", "hpstr.html", null ],
+      [ "Moller event generation", "mollergen.html", null ],
+      [ "Radiative event generation", "radgen.html", null ],
+      [ "Readout and reconstruction", "readoutrecon.html", null ],
+      [ "Run examples", "runexamples.html", null ],
+      [ "Simp generation to reconstruction pipeline", "simp.html", null ],
+      [ "SLIC to analysis pipeline for MC data", "slictoanaMC.html", null ],
+      [ "Tritrig and beam files -- merge to reconstruction pipline", "tritrigbeam.html", null ],
+      [ "Tritrig event generation", "tritriggen.html", null ],
+      [ "Tritrig pipeline -- generation to analysis", "tritrigslicfullchain.html", null ],
+      [ "WAB generation and sampling", "wabgensample.html", null ],
+      [ "Job Template", "jobtemplate.html", null ]
+    ] ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
-    [ "SIMP-3Body Generation", "md_examples_simp_3body_simp_3body.html", null ],
+    [ "SIMP-3Body Generation", "md_examples_2simp-3body_2simp-3body.html", null ],
     [ "SLIC to analysis pipeline with gps macro from GEANT4 GPS", "slicgpstoana.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
-    [ "Data conversion/reco – evio to lcio", "ana1921pass0.html", null ],
+    [ "Data conversion/reco -- evio to lcio", "ana1921pass0.html", null ],
     [ "Production scripts", "prod.html", null ],
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
@@ -86,15 +100,18 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "__apply_8py.html",
-"classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#aae7af906a32c4f8bb123982f38866c42",
-"classhpsmc_1_1job_1_1Job.html#afdd9431af0be720a5091a663181f5624",
-"classhpsmc_1_1tools_1_1TarFiles.html",
-"classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html#a437bd8059e72de11b24785b3c19dc142",
-"lcio__count__job_8py.html",
-"namespacelcio__count__job.html#ae11b3deb3de3df7dc48e439074023e35",
-"namespacetritrig__beam__job.html#abbe469cbb24e10408ceddbf0048955c2",
-"sim__to__ana__job_8py.html",
-"tritrig__gen__to__beam__coords__job_8py.html"
+"classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a40b37c981a056437fd94276341c63fe8",
+"classhpsmc_1_1batch_1_1KillProcessQueue.html#add4a3e4cc953dff2bf4b5aeaeb67d19f",
+"classhpsmc_1_1generators_1_1MG4.html#a9e0992eae3950adccaf4847fbff4231d",
+"classhpsmc_1_1job__template_1_1JobTemplate.html#ac00f64e7ae9c4cbe2575af8554c4401d",
+"classhpsmc_1_1tools_1_1JobManager.html#ae1c32a6f57706d69f98cdf26038cf50a",
+"classtest_1_1test__func_1_1TestLint.html",
+"classtest_1_1test__tools__jobmanager_1_1TestJobManager.html#a007cdce34c9864fd66e058e772dea56e",
+"dir_a130ce581647a7e301371b0e8a5ff388.html",
+"namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d",
+"namespacepede__job.html#a2d75f4fd80f8cd09583c7f0d3a331514",
+"namespacetritrig__sim__full__chain__job.html#a3074e3594d8071411ddd34bbbf47acd9",
+"slic__to__recon__job_8py.html#afde3b66b6b41bd008469f366fa756e54"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

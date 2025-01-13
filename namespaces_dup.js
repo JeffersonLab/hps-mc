@@ -1,26 +1,13 @@
 var namespaces_dup =
 [
-    [ "Prerequisites", "readme.html#autotoc_md54", null ],
-    [ "Installation", "readme.html#autotoc_md55", null ],
-    [ "Environment Setup", "readme.html#autotoc_md56", null ],
-    [ "Running Job Scripts", "readme.html#autotoc_md57", null ],
-    [ "Documentation", "readme.html#autotoc_md58", null ],
-    [ "Quick Start Guide", "readme.html#autotoc_md59", null ],
-    [ "Code Formatting", "readme.html#autotoc_md60", null ],
-    [ "Unit tests", "readme.html#autotoc_md61", null ],
-    [ "Help", "readme.html#autotoc_md62", null ],
     [ "_config", "namespace__config.html", null ],
     [ "ap_gen_job", "namespaceap__gen__job.html", [
-      [ "Job parameters", "idm.html#autotoc_md29", null ],
-      [ "Job template", "idm.html#autotoc_md30", null ],
-      [ "Job parameters", "md_examples_simp_3body_simp_3body.html#autotoc_md38", null ],
-      [ "Job parameters", "slicgpstoana.html#autotoc_md39", null ],
       [ "description", "namespaceap__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "mg", "namespaceap__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
       [ "nevents", "namespaceap__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ]
     ] ],
     [ "ap_gen_to_slic_job", "namespaceap__gen__to__slic__job.html", [
-      [ "ap_decay_dist", "namespaceap__gen__to__slic__job.html#af0efaa6dc084485ab7f3653b83121c31", null ],
+      [ "ap_decay_dist", "namespaceap__gen__to__slic__job.html#ae32b274271adde5256bbf36c634e1964", null ],
       [ "cnv", "namespaceap__gen__to__slic__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "description", "namespaceap__gen__to__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "inputs", "namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
@@ -32,7 +19,7 @@ var namespaces_dup =
       [ "unzip", "namespaceap__gen__to__slic__job.html#ada93bbf7295ab03a07435e4999845526", null ]
     ] ],
     [ "ap_slic_job", "namespaceap__slic__job.html", [
-      [ "ap_decay_dist", "namespaceap__slic__job.html#af0efaa6dc084485ab7f3653b83121c31", null ],
+      [ "ap_decay_dist", "namespaceap__slic__job.html#ae32b274271adde5256bbf36c634e1964", null ],
       [ "cnv", "namespaceap__slic__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "description", "namespaceap__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "inputs", "namespaceap__slic__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
@@ -69,7 +56,7 @@ var namespaces_dup =
       [ "slic", "namespacebeam__prep__and__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ]
     ] ],
     [ "build2019filenames", "namespacebuild2019filenames.html", [
-      [ "fullpath", "namespacebuild2019filenames.html#a27d9dde321ad1360dc0760f87cff3b1a", null ],
+      [ "fullpath", "namespacebuild2019filenames.html#a2675a6e94dffede5e88cf26bfef44b15", null ],
       [ "myT", "namespacebuild2019filenames.html#a556ab3cdccec26fc294001d6b2ba1487", null ],
       [ "nParts", "namespacebuild2019filenames.html#a2a35871c4dcaff8945981ae4c182fa12", null ],
       [ "nPartsList", "namespacebuild2019filenames.html#aab3512c8dd9bd1bd691924dfcba28684", null ],
@@ -80,13 +67,13 @@ var namespaces_dup =
       [ "RN", "namespacebuild2019filenames.html#a09250d38aa55a02ef1c57a9c64fc3898", null ]
     ] ],
     [ "build2021filenames", "namespacebuild2021filenames.html", [
-      [ "fullpath", "namespacebuild2021filenames.html#a27d9dde321ad1360dc0760f87cff3b1a", null ],
+      [ "fullpath", "namespacebuild2021filenames.html#a2675a6e94dffede5e88cf26bfef44b15", null ],
       [ "myT", "namespacebuild2021filenames.html#a556ab3cdccec26fc294001d6b2ba1487", null ],
       [ "nfiles", "namespacebuild2021filenames.html#ad3689093e74725e64a447ba28fbdbf69", null ],
       [ "nPartsTot", "namespacebuild2021filenames.html#a438a5ff9a31bc5e752293113a3f71902", null ],
       [ "outF", "namespacebuild2021filenames.html#a618e9979a0bcef2b28a8ec9c0b0acdcc", null ],
       [ "passList", "namespacebuild2021filenames.html#ab980284ebbe4a046a9f1af3dbcdfe50b", null ],
-      [ "pin", "namespacebuild2021filenames.html#a9e3d0660dbaa3e5c881eb4e5873afb1c", null ],
+      [ "pin", "namespacebuild2021filenames.html#a4652a115cbcff57f053c0178f11521ef", null ],
       [ "RN", "namespacebuild2021filenames.html#a09250d38aa55a02ef1c57a9c64fc3898", null ]
     ] ],
     [ "component", "namespacecomponent.html", null ],
@@ -195,7 +182,7 @@ var namespaces_dup =
     ] ],
     [ "signal_beam_merge_to_recon_2016_job", "namespacesignal__beam__merge__to__recon__2016__job.html", [
       [ "beam_file_name", "namespacesignal__beam__merge__to__recon__2016__job.html#a2b93181f6eb12f47c1beb79b9bf38580", null ],
-      [ "beam_name", "namespacesignal__beam__merge__to__recon__2016__job.html#a4a10dff35e2d38e6e7da9b09b98a47fc", null ],
+      [ "beam_name", "namespacesignal__beam__merge__to__recon__2016__job.html#ad609e74c76aa675eb8f591f0cccba906", null ],
       [ "catenate_beam", "namespacesignal__beam__merge__to__recon__2016__job.html#ae925dd85574c874c226afc7f4aa07a39", null ],
       [ "count_beam", "namespacesignal__beam__merge__to__recon__2016__job.html#a1c1fa335b87137ccc06502402405726f", null ],
       [ "count_filter", "namespacesignal__beam__merge__to__recon__2016__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
@@ -208,13 +195,13 @@ var namespaces_dup =
       [ "merge", "namespacesignal__beam__merge__to__recon__2016__job.html#a2c314bbf889bccf5fbdd959da9db1006", null ],
       [ "readout", "namespacesignal__beam__merge__to__recon__2016__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "recon", "namespacesignal__beam__merge__to__recon__2016__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
-      [ "signal_beam_name", "namespacesignal__beam__merge__to__recon__2016__job.html#aed5144841cb5bf13e8fb576c0c5e1ace", null ],
+      [ "signal_beam_name", "namespacesignal__beam__merge__to__recon__2016__job.html#ab2dbdaa262cb44a1f9c6348c0f007684", null ],
       [ "signal_file_name", "namespacesignal__beam__merge__to__recon__2016__job.html#afbdcc914096c575778ec4502dc6e9a35", null ],
-      [ "signal_name", "namespacesignal__beam__merge__to__recon__2016__job.html#a67794470ef410287906b999c006f1e58", null ]
+      [ "signal_name", "namespacesignal__beam__merge__to__recon__2016__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ]
     ] ],
     [ "signal_beam_merge_to_recon_job", "namespacesignal__beam__merge__to__recon__job.html", [
       [ "beam_file_name", "namespacesignal__beam__merge__to__recon__job.html#a2b93181f6eb12f47c1beb79b9bf38580", null ],
-      [ "beam_name", "namespacesignal__beam__merge__to__recon__job.html#a4a10dff35e2d38e6e7da9b09b98a47fc", null ],
+      [ "beam_name", "namespacesignal__beam__merge__to__recon__job.html#ad609e74c76aa675eb8f591f0cccba906", null ],
       [ "catenate_beam", "namespacesignal__beam__merge__to__recon__job.html#ae925dd85574c874c226afc7f4aa07a39", null ],
       [ "count_beam", "namespacesignal__beam__merge__to__recon__job.html#a1c1fa335b87137ccc06502402405726f", null ],
       [ "count_filter", "namespacesignal__beam__merge__to__recon__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
@@ -227,9 +214,9 @@ var namespaces_dup =
       [ "merge", "namespacesignal__beam__merge__to__recon__job.html#a2c314bbf889bccf5fbdd959da9db1006", null ],
       [ "readout", "namespacesignal__beam__merge__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "recon", "namespacesignal__beam__merge__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
-      [ "signal_beam_name", "namespacesignal__beam__merge__to__recon__job.html#aed5144841cb5bf13e8fb576c0c5e1ace", null ],
+      [ "signal_beam_name", "namespacesignal__beam__merge__to__recon__job.html#ab2dbdaa262cb44a1f9c6348c0f007684", null ],
       [ "signal_file_name", "namespacesignal__beam__merge__to__recon__job.html#afbdcc914096c575778ec4502dc6e9a35", null ],
-      [ "signal_name", "namespacesignal__beam__merge__to__recon__job.html#a67794470ef410287906b999c006f1e58", null ]
+      [ "signal_name", "namespacesignal__beam__merge__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ]
     ] ],
     [ "signal_pulser_overlay_to_recon_job", "namespacesignal__pulser__overlay__to__recon__job.html", [
       [ "count_filter", "namespacesignal__pulser__overlay__to__recon__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
@@ -243,12 +230,12 @@ var namespaces_dup =
       [ "inputs", "namespacesignal__pulser__overlay__to__recon__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "overlay", "namespacesignal__pulser__overlay__to__recon__job.html#ad18735e21b9100cb298ea247556c1868", null ],
       [ "pulser_file_name", "namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48", null ],
-      [ "pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#a8606481dc75d9334bed08eca503e0eed", null ],
+      [ "pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#a5e774b7c9cb7a8c85308d6e6cf8d8f47", null ],
       [ "readout", "namespacesignal__pulser__overlay__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "recon", "namespacesignal__pulser__overlay__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
       [ "signal_file_name", "namespacesignal__pulser__overlay__to__recon__job.html#afbdcc914096c575778ec4502dc6e9a35", null ],
-      [ "signal_name", "namespacesignal__pulser__overlay__to__recon__job.html#a67794470ef410287906b999c006f1e58", null ],
-      [ "signal_pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#a407b904ced90001e217f8b5b99e692d6", null ],
+      [ "signal_name", "namespacesignal__pulser__overlay__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ],
+      [ "signal_pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#aa679acbbac395fc917849fb6cbc79327", null ],
       [ "space_overlay", "namespacesignal__pulser__overlay__to__recon__job.html#a463e4c2fef687df8ea3aae9e5bf73b78", null ]
     ] ],
     [ "sim_to_ana_job", "namespacesim__to__ana__job.html", [
@@ -275,10 +262,10 @@ var namespaces_dup =
     ] ],
     [ "slic_gps_to_ana_job", "namespaceslic__gps__to__ana__job.html", [
       [ "ana", "namespaceslic__gps__to__ana__job.html#a98913e0a438f1e6376eedaef8541569b", null ],
-      [ "base_name", "namespaceslic__gps__to__ana__job.html#a7ececf89ecb9b0dc15cc917c46ff5670", null ],
+      [ "base_name", "namespaceslic__gps__to__ana__job.html#a22fb4c28d6835ec9da647ff5e6b0df95", null ],
       [ "description", "namespaceslic__gps__to__ana__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "filter_bunches", "namespaceslic__gps__to__ana__job.html#a3074e3594d8071411ddd34bbbf47acd9", null ],
-      [ "input_filename", "namespaceslic__gps__to__ana__job.html#a1a82e68cdf16eca7feb03b1174ab6f6d", null ],
+      [ "input_filename", "namespaceslic__gps__to__ana__job.html#a789cdc98fc2f84497d78d5d1a1b9894a", null ],
       [ "readout", "namespaceslic__gps__to__ana__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "recon", "namespaceslic__gps__to__ana__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
       [ "root_cnv", "namespaceslic__gps__to__ana__job.html#ad324e5599132ef76e1594fb62a3c9a23", null ],
@@ -290,7 +277,7 @@ var namespaces_dup =
       [ "filename", "namespaceslic__job.html#a2ff994e16bf9521154de4cf659a3b689", null ],
       [ "inputs", "namespaceslic__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "nevents", "namespaceslic__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ],
-      [ "outname", "namespaceslic__job.html#a9e3448e9350a8c3d5e421ecb1e64ba50", null ],
+      [ "outname", "namespaceslic__job.html#a9555389d1cd9ccc09c563a1d0fb5b295", null ],
       [ "output_names", "namespaceslic__job.html#a97c9be2f89e783b8598fd55e60bd6b6e", null ],
       [ "slic_outs", "namespaceslic__job.html#a2e599b4ba87ed463e8e672e24558a9b6", null ]
     ] ],
@@ -312,8 +299,8 @@ var namespaces_dup =
       [ "tuple", "namespaceslic__to__anaMC__job.html#a155c51da3493a0647b4e1a3b695b1c56", null ]
     ] ],
     [ "slic_to_recon_job", "namespaceslic__to__recon__job.html", [
-      [ "base_name", "namespaceslic__to__recon__job.html#a7ececf89ecb9b0dc15cc917c46ff5670", null ],
-      [ "cat_out_name", "namespaceslic__to__recon__job.html#a62b44a39a5917360142303251639bb29", null ],
+      [ "base_name", "namespaceslic__to__recon__job.html#a22fb4c28d6835ec9da647ff5e6b0df95", null ],
+      [ "cat_out_name", "namespaceslic__to__recon__job.html#ad21ee3949b8660872030021672a82053", null ],
       [ "comps", "namespaceslic__to__recon__job.html#acc0773cf13b176eee1c782c41e8d1563", null ],
       [ "description", "namespaceslic__to__recon__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
       [ "event_int", "namespaceslic__to__recon__job.html#a1118a4eacb04fe1bcd62603ecc83f2f8", null ],
@@ -322,12 +309,12 @@ var namespaces_dup =
       [ "inputs", "namespaceslic__to__recon__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "nevents", "namespaceslic__to__recon__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ],
       [ "readout", "namespaceslic__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
-      [ "readout_out_name", "namespaceslic__to__recon__job.html#a87b974a257d9a8226de274b25f83b90b", null ],
+      [ "readout_out_name", "namespaceslic__to__recon__job.html#a69b96edb857a259b23498df4ff52f4f7", null ],
       [ "recon", "namespaceslic__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
-      [ "recon_out_name", "namespaceslic__to__recon__job.html#ade7c185bdd08147731544f2d865a24c0", null ],
+      [ "recon_out_name", "namespaceslic__to__recon__job.html#a04c41e962d78bc32bae711aa58d5691e", null ],
       [ "slic_cat", "namespaceslic__to__recon__job.html#ad7ce7216ef5eaeee97223aca2af0d8b1", null ],
       [ "slic_comps", "namespaceslic__to__recon__job.html#abf6aeaed519fd5be73fa0a19583ac455", null ],
-      [ "slic_file", "namespaceslic__to__recon__job.html#a641eb6472ec27c3dac2615f88dfefc2d", null ],
+      [ "slic_file", "namespaceslic__to__recon__job.html#ab6a7e233c298be9d15cefd71e89a469f", null ],
       [ "slic_file_names", "namespaceslic__to__recon__job.html#af9957ed1f3a1b74b9312c72a46048392", null ]
     ] ],
     [ "test", "namespacetest.html", "namespacetest" ],
@@ -337,7 +324,7 @@ var namespaces_dup =
       [ "input_files", "namespacetrack__align__job.html#a27256609f574b662639e0a8cd48b8d3a", null ],
       [ "java_run", "namespacetrack__align__job.html#a9da591365dfe7daab4f892f2e1c4d7cc", null ],
       [ "logger", "namespacetrack__align__job.html#a0b14e488ae28d98d262453f3e9cd6e4d", null ],
-      [ "traj_ali_driver_defaults", "namespacetrack__align__job.html#aeda238eb4ae3df63cb94edbe927aa64f", null ]
+      [ "traj_ali_driver_defaults", "namespacetrack__align__job.html#a5e4c465913d012ac989259f5fdb1664a", null ]
     ] ],
     [ "tritrig_beam_job", "namespacetritrig__beam__job.html", [
       [ "beam_file_names", "namespacetritrig__beam__job.html#ad90e5e78a8229f9a398a8bc694f27cd4", null ],
@@ -348,14 +335,14 @@ var namespaces_dup =
       [ "inputs", "namespacetritrig__beam__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "merge", "namespacetritrig__beam__job.html#a2c314bbf889bccf5fbdd959da9db1006", null ],
       [ "slic_beam_cat", "namespacetritrig__beam__job.html#a2323dc11620d7478791746ce4f6d661a", null ],
-      [ "tritrig_beam_name", "namespacetritrig__beam__job.html#a82645e0aa04f2488ddf7ec8680268346", null ],
-      [ "tritrig_file_name", "namespacetritrig__beam__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6", null ],
-      [ "tritrig_name", "namespacetritrig__beam__job.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac", null ]
+      [ "tritrig_beam_name", "namespacetritrig__beam__job.html#a5fa40612b7ff6cd39f512f1b7864b625", null ],
+      [ "tritrig_file_name", "namespacetritrig__beam__job.html#aeea5f9200d56e82b8a2e91eafe228a6b", null ],
+      [ "tritrig_name", "namespacetritrig__beam__job.html#a6e2ca7867b81116c69ec8638198d8eec", null ]
     ] ],
     [ "tritrig_beam_slic_to_reco_job", "namespacetritrig__beam__slic__to__reco__job.html", [
       [ "beam_file_names", "namespacetritrig__beam__slic__to__reco__job.html#ad90e5e78a8229f9a398a8bc694f27cd4", null ],
-      [ "beam_name", "namespacetritrig__beam__slic__to__reco__job.html#a4a10dff35e2d38e6e7da9b09b98a47fc", null ],
-      [ "beam_slic_file", "namespacetritrig__beam__slic__to__reco__job.html#a0de1b262d21d3bd0358bd2375c86d170", null ],
+      [ "beam_name", "namespacetritrig__beam__slic__to__reco__job.html#ad609e74c76aa675eb8f591f0cccba906", null ],
+      [ "beam_slic_file", "namespacetritrig__beam__slic__to__reco__job.html#a6e7b2b9fa6496ccb62baea5ebda73a41", null ],
       [ "beam_slic_file_names", "namespacetritrig__beam__slic__to__reco__job.html#a523e60dba0716d5d73df73f08c7fa5aa", null ],
       [ "comps", "namespacetritrig__beam__slic__to__reco__job.html#acc0773cf13b176eee1c782c41e8d1563", null ],
       [ "count_filter", "namespacetritrig__beam__slic__to__reco__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
@@ -374,9 +361,9 @@ var namespaces_dup =
       [ "slic", "namespacetritrig__beam__slic__to__reco__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ],
       [ "slic_beam_cat", "namespacetritrig__beam__slic__to__reco__job.html#a2323dc11620d7478791746ce4f6d661a", null ],
       [ "slic_beams", "namespacetritrig__beam__slic__to__reco__job.html#aee4592eef02a5201f1e90ff6cf517f54", null ],
-      [ "tritrig_beam_name", "namespacetritrig__beam__slic__to__reco__job.html#a82645e0aa04f2488ddf7ec8680268346", null ],
-      [ "tritrig_file_name", "namespacetritrig__beam__slic__to__reco__job.html#ad8b460040ac41dbd3ee6864ec8f2d9b6", null ],
-      [ "tritrig_name", "namespacetritrig__beam__slic__to__reco__job.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac", null ]
+      [ "tritrig_beam_name", "namespacetritrig__beam__slic__to__reco__job.html#a5fa40612b7ff6cd39f512f1b7864b625", null ],
+      [ "tritrig_file_name", "namespacetritrig__beam__slic__to__reco__job.html#aeea5f9200d56e82b8a2e91eafe228a6b", null ],
+      [ "tritrig_name", "namespacetritrig__beam__slic__to__reco__job.html#a6e2ca7867b81116c69ec8638198d8eec", null ]
     ] ],
     [ "tritrig_gen_job", "namespacetritrig__gen__job.html", [
       [ "description", "namespacetritrig__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],

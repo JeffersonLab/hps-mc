@@ -1,12 +1,12 @@
 var classhpsmc_1_1tools_1_1JobManager =
 [
-    [ "__init__", "classhpsmc_1_1tools_1_1JobManager.html#a03eee2caaab6acf2f97f2ec0953cefc5", null ],
-    [ "cmd_args", "classhpsmc_1_1tools_1_1JobManager.html#af16e86fb81fbbc18f79fde1156e45ddc", null ],
-    [ "config", "classhpsmc_1_1tools_1_1JobManager.html#a778de97a2205357ace12a31e944ca3d8", null ],
-    [ "optional_parameters", "classhpsmc_1_1tools_1_1JobManager.html#aa030092c6097b91c3d451b195bc498cb", null ],
-    [ "required_config", "classhpsmc_1_1tools_1_1JobManager.html#a0f2f5067bb76f32ee6fd3097c021983b", null ],
-    [ "required_parameters", "classhpsmc_1_1tools_1_1JobManager.html#a7cfececac3ad0536a7eea77c6ade91b9", null ],
-    [ "setup", "classhpsmc_1_1tools_1_1JobManager.html#ade41f93307784822f8bc17e85964d427", null ],
+    [ "__init__", "classhpsmc_1_1tools_1_1JobManager.html#a8011c569568318d8de5b452f9dfce739", null ],
+    [ "cmd_args", "classhpsmc_1_1tools_1_1JobManager.html#ace89847533ffa77c07a4a1447e85a6ba", null ],
+    [ "config", "classhpsmc_1_1tools_1_1JobManager.html#a99dfd7e07bd2aa40bd9f13eb26668ca2", null ],
+    [ "optional_parameters", "classhpsmc_1_1tools_1_1JobManager.html#a25bf0120b1ee699bbe65804685abaef0", null ],
+    [ "required_config", "classhpsmc_1_1tools_1_1JobManager.html#aa4d8a09c1b4480e5930b67b2a00d008a", null ],
+    [ "required_parameters", "classhpsmc_1_1tools_1_1JobManager.html#a4fcbe03feef0ad109f592cecf3b95bad", null ],
+    [ "setup", "classhpsmc_1_1tools_1_1JobManager.html#a55917f1c1705cff6027de163d6822f8a", null ],
     [ "append_tok", "classhpsmc_1_1tools_1_1JobManager.html#aa5a426ed511c3810a90d5892c727539c", null ],
     [ "conditions_password", "classhpsmc_1_1tools_1_1JobManager.html#afb07efae3756c0d0eb909dcebba57e69", null ],
     [ "conditions_url", "classhpsmc_1_1tools_1_1JobManager.html#a43c7c241dddadb8d1158fe9bbf1dca5f", null ],
@@ -18,9 +18,11 @@ var classhpsmc_1_1tools_1_1JobManager =
     [ "java_args", "classhpsmc_1_1tools_1_1JobManager.html#ae1c32a6f57706d69f98cdf26038cf50a", null ],
     [ "lcsim_cache_dir", "classhpsmc_1_1tools_1_1JobManager.html#a80913a6ffd23b3f618bd32bee8b293c9", null ],
     [ "logging_config_file", "classhpsmc_1_1tools_1_1JobManager.html#aa3c9d9e479aed2bdd1e1e3fe6ad2bb4e", null ],
+    [ "name", "classhpsmc_1_1tools_1_1JobManager.html#ab74e6bf80237ddc4109968cedc58c151", null ],
     [ "nevents", "classhpsmc_1_1tools_1_1JobManager.html#aec013a013223f05e81214331b289330a", null ],
     [ "overlay_file", "classhpsmc_1_1tools_1_1JobManager.html#a2e5c1af385c5cd4b8941431eb6d52763", null ],
     [ "run_number", "classhpsmc_1_1tools_1_1JobManager.html#a22ff01ebc09b017d63f5c99e92e43620", null ],
     [ "steering", "classhpsmc_1_1tools_1_1JobManager.html#a86d369adce270d7d3ed000a2014c3b51", null ],
-    [ "steering_file", "classhpsmc_1_1tools_1_1JobManager.html#a5b04756cc0390f7aa3f4be4403917537", null ]
+    [ "steering_file", "classhpsmc_1_1tools_1_1JobManager.html#a5b04756cc0390f7aa3f4be4403917537", null ],
+    [ "steering_files", "classhpsmc_1_1tools_1_1JobManager.html#ae6938f3d6e5f2e7c00ecd8cfc0a598f9", null ]
 ];

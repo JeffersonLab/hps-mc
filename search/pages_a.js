@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['radiative_20event_20generation_1872',['Radiative event generation',['../radgen.html',1,'examples']]],
-  ['readout_20and_20reconstruction_1873',['Readout and reconstruction',['../readoutrecon.html',1,'examples']]],
-  ['run_20examples_1874',['Run examples',['../runexamples.html',1,'examples']]]
+  ['job_20framework_0',['Job framework',['../jobframework.html',1,'']]],
+  ['job_20scripts_1',['Job scripts',['../jobscripts.html',1,'']]],
+  ['job_20template_2',['Job Template',['../jobtemplate.html',1,'examples']]]
 ];

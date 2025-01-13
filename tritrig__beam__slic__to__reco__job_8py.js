@@ -1,8 +1,8 @@
 var tritrig__beam__slic__to__reco__job_8py =
 [
     [ "beam_file_names", "tritrig__beam__slic__to__reco__job_8py.html#ad90e5e78a8229f9a398a8bc694f27cd4", null ],
-    [ "beam_name", "tritrig__beam__slic__to__reco__job_8py.html#a4a10dff35e2d38e6e7da9b09b98a47fc", null ],
-    [ "beam_slic_file", "tritrig__beam__slic__to__reco__job_8py.html#a0de1b262d21d3bd0358bd2375c86d170", null ],
+    [ "beam_name", "tritrig__beam__slic__to__reco__job_8py.html#ad609e74c76aa675eb8f591f0cccba906", null ],
+    [ "beam_slic_file", "tritrig__beam__slic__to__reco__job_8py.html#a6e7b2b9fa6496ccb62baea5ebda73a41", null ],
     [ "beam_slic_file_names", "tritrig__beam__slic__to__reco__job_8py.html#a523e60dba0716d5d73df73f08c7fa5aa", null ],
     [ "comps", "tritrig__beam__slic__to__reco__job_8py.html#acc0773cf13b176eee1c782c41e8d1563", null ],
     [ "count_filter", "tritrig__beam__slic__to__reco__job_8py.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
@@ -21,7 +21,7 @@ var tritrig__beam__slic__to__reco__job_8py =
     [ "slic", "tritrig__beam__slic__to__reco__job_8py.html#abaa485babeb1ee67ebdaadec53822fe6", null ],
     [ "slic_beam_cat", "tritrig__beam__slic__to__reco__job_8py.html#a2323dc11620d7478791746ce4f6d661a", null ],
     [ "slic_beams", "tritrig__beam__slic__to__reco__job_8py.html#aee4592eef02a5201f1e90ff6cf517f54", null ],
-    [ "tritrig_beam_name", "tritrig__beam__slic__to__reco__job_8py.html#a82645e0aa04f2488ddf7ec8680268346", null ],
-    [ "tritrig_file_name", "tritrig__beam__slic__to__reco__job_8py.html#ad8b460040ac41dbd3ee6864ec8f2d9b6", null ],
-    [ "tritrig_name", "tritrig__beam__slic__to__reco__job_8py.html#a2fe862cabbc3d6cc1ac5f8aa87ba52ac", null ]
+    [ "tritrig_beam_name", "tritrig__beam__slic__to__reco__job_8py.html#a5fa40612b7ff6cd39f512f1b7864b625", null ],
+    [ "tritrig_file_name", "tritrig__beam__slic__to__reco__job_8py.html#aeea5f9200d56e82b8a2e91eafe228a6b", null ],
+    [ "tritrig_name", "tritrig__beam__slic__to__reco__job_8py.html#a6e2ca7867b81116c69ec8638198d8eec", null ]
 ];

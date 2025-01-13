@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pede_20minimizer_1870',['pede minimizer',['../pede.html',1,'']]],
-  ['production_20scripts_1871',['Production scripts',['../prod.html',1,'']]]
+  ['idm_20generation_20to_20reconstruction_20pipeline_0',['iDM generation to reconstruction pipeline',['../idm.html',1,'']]],
+  ['installation_20guide_1',['hps-mc installation guide',['../readme.html',1,'']]]
 ];

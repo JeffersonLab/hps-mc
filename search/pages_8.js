@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['misalignment_1868',['misalignment',['../misalign.html',1,'']]],
-  ['moller_20event_20generation_1869',['Moller event generation',['../mollergen.html',1,'examples']]]
+  ['hps_20mc_0',['HPS-MC',['../index.html',1,'']]],
+  ['hps_20mc_20installation_20guide_1',['hps-mc installation guide',['../readme.html',1,'']]],
+  ['hpstr_2',['HPSTR',['../hpstr.html',1,'examples']]]
 ];

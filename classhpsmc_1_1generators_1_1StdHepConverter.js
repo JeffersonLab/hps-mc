@@ -1,8 +1,10 @@
 var classhpsmc_1_1generators_1_1StdHepConverter =
 [
-    [ "__init__", "classhpsmc_1_1generators_1_1StdHepConverter.html#af1ace5396e33616abbd39aa5d11fdec3", null ],
-    [ "config", "classhpsmc_1_1generators_1_1StdHepConverter.html#a778de97a2205357ace12a31e944ca3d8", null ],
-    [ "execute", "classhpsmc_1_1generators_1_1StdHepConverter.html#a7a0adff6665e8fb2d78385168e7c811e", null ],
-    [ "output_files", "classhpsmc_1_1generators_1_1StdHepConverter.html#a8b5b5f0c003d46d75d76468f1e4298a5", null ],
-    [ "setup", "classhpsmc_1_1generators_1_1StdHepConverter.html#ade41f93307784822f8bc17e85964d427", null ]
+    [ "__init__", "classhpsmc_1_1generators_1_1StdHepConverter.html#abf86c280799a0873323fd508d88366a4", null ],
+    [ "config", "classhpsmc_1_1generators_1_1StdHepConverter.html#a99dfd7e07bd2aa40bd9f13eb26668ca2", null ],
+    [ "execute", "classhpsmc_1_1generators_1_1StdHepConverter.html#a07253cf7370ec88c6ba44459569fb506", null ],
+    [ "output_files", "classhpsmc_1_1generators_1_1StdHepConverter.html#a18d70b0e156913af9d3e6a5d70370e67", null ],
+    [ "setup", "classhpsmc_1_1generators_1_1StdHepConverter.html#a55917f1c1705cff6027de163d6822f8a", null ],
+    [ "inputs", "classhpsmc_1_1generators_1_1StdHepConverter.html#afde3b66b6b41bd008469f366fa756e54", null ],
+    [ "name", "classhpsmc_1_1generators_1_1StdHepConverter.html#ab74e6bf80237ddc4109968cedc58c151", null ]
 ];

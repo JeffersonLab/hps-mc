@@ -1,9 +1,9 @@
 var classtest_1_1test__generators_1_1test__MG5 =
 [
-    [ "test_get_install_dir", "classtest_1_1test__generators_1_1test__MG5.html#aba1c5ebe6cde5c9cbb727afc1f14e091", null ],
-    [ "test_init", "classtest_1_1test__generators_1_1test__MG5.html#aceabda3b10a35a8bda6ab9c2365ea6fc", null ],
-    [ "test_init_BH", "classtest_1_1test__generators_1_1test__MG5.html#af864b60ae0336605c1fa320637f5f8e3", null ],
-    [ "test_init_exception", "classtest_1_1test__generators_1_1test__MG5.html#a50689c9e38ad4de8ccb33f6eac2395d1", null ],
-    [ "test_init_RAD", "classtest_1_1test__generators_1_1test__MG5.html#a46d3b679173de4d2e1de145df2eb7584", null ],
-    [ "test_init_simp", "classtest_1_1test__generators_1_1test__MG5.html#a17de85058f2a917c884ec853e6d5239e", null ]
+    [ "test_get_install_dir", "classtest_1_1test__generators_1_1test__MG5.html#a8c9e3f4a561cffdde1e897673d15f1a5", null ],
+    [ "test_init", "classtest_1_1test__generators_1_1test__MG5.html#aa034ccea1c508ec2968f2025b4b89f32", null ],
+    [ "test_init_BH", "classtest_1_1test__generators_1_1test__MG5.html#a1ef0ddf98ee5e9a2d9520d04adb8983c", null ],
+    [ "test_init_exception", "classtest_1_1test__generators_1_1test__MG5.html#a32daf8ae5d9c7c555925aa0c9188376a", null ],
+    [ "test_init_RAD", "classtest_1_1test__generators_1_1test__MG5.html#a46cd164ae56b756405cac21f7ebedae6", null ],
+    [ "test_init_simp", "classtest_1_1test__generators_1_1test__MG5.html#aacc76e22008427917bd62c21d90ae615", null ]
 ];
