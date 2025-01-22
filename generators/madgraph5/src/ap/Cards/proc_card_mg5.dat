@@ -41,5 +41,5 @@ define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 import model DarkphotonNuc_UFO_3
-generate e- n > e- n ap /z h QCD=0 QED=1 QND=1, (ap > e+ e-)
-output ap
+generate e- n > e- n ap /chi DQND=0, (ap > e+ e-)
+output apWAB

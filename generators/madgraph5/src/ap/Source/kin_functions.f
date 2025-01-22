@@ -648,9 +648,13 @@ c-----
       return
       end
 
+c-----
+c  FIXED TARGET begin
+c-----
+      
       double precision function thetax(p)
 c************************************************************************
-c     Fixed-target: Returns abs(angle) in x-drn w.r.t. beam line (z-drn) of particle
+c     Returns abs(angle) in x-drn w.r.t. beam line (z-drn) of particle
 c************************************************************************
       IMPLICIT NONE
 c
@@ -668,7 +672,7 @@ c-----
 
       double precision function thetay(p)
 c************************************************************************
-c     Fixed-target: Returns abs(angle) in y-drn w.r.t. beam line (z-drn) of particle
+c     Returns abs(angle) in y-drn w.r.t. beam line (z-drn) of particle
 c************************************************************************
       IMPLICIT NONE
 c
@@ -683,6 +687,10 @@ c-----
 
       return
       end
+
+c-----
+c  FIXED TARGET end
+c-----
 
       double precision function eta(p)
 c************************************************************************

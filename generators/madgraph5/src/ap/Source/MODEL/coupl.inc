@@ -30,7 +30,7 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       COMMON/WIDTHS/ MDL_WAP,MDL_WH,MDL_WT,MDL_WW,MDL_WZ
 
 
-      DOUBLE COMPLEX GC_3, GC_12, GC_13, GC_15
+      DOUBLE COMPLEX GC_3, GC_12, GC_15
 
-      COMMON/COUPLINGS/ GC_3, GC_12, GC_13, GC_15
+      COMMON/COUPLINGS/ GC_3, GC_12, GC_15
 

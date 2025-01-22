@@ -46,8 +46,8 @@ Block mass
    23 9.118760e+01 # MZ 
    25 1.200000e+02 # MH 
   9000001 1.000000e+00 # MChi 
-  9000002 1.712400e+02 # MNul 
-  9000009 1.800000e-01 # MAp 
+  9000002 1.740000e+02 # MNul 
+  9000009 1.200000e-01 # MAp 
 ## Dependent parameters, given by model restrictions.
 ## Those values should be edited following the 
 ## analytical expression. MG5 ignores those values 

@@ -11,7 +11,7 @@ C      state/symmetry factor
 C     and helicities
 C     for the point in phase space P(0:3,NEXTERNAL)
 C     
-C     Process: e- n > e- n ap QCD=0 QED<=1 QND<=1 / z h @1
+C     Process: e- n > e- n ap DQND=0 / chi @1
 C     *   Decay: ap > e+ e- WEIGHTED<=2
 C     
       USE DISCRETESAMPLER
@@ -26,9 +26,9 @@ C
       INTEGER                 NCOMB
       PARAMETER (             NCOMB=64)
       INTEGER    NGRAPHS
-      PARAMETER (NGRAPHS=4)
+      PARAMETER (NGRAPHS=2)
       INTEGER    NDIAGS
-      PARAMETER (NDIAGS=4)
+      PARAMETER (NDIAGS=2)
       INTEGER    THEL
       PARAMETER (THEL=2*NCOMB)
 C     
@@ -354,7 +354,7 @@ C
 C     Returns amplitude squared summed/avg over colors
 C     for the point with external lines W(0:6,NEXTERNAL)
 C     
-C     Process: e- n > e- n ap QCD=0 QED<=1 QND<=1 / z h @1
+C     Process: e- n > e- n ap DQND=0 / chi @1
 C     *   Decay: ap > e+ e- WEIGHTED<=2
 C     
       IMPLICIT NONE
@@ -362,14 +362,14 @@ C
 C     CONSTANTS
 C     
       INTEGER    NGRAPHS
-      PARAMETER (NGRAPHS=4)
+      PARAMETER (NGRAPHS=2)
       INTEGER                 NCOMB
       PARAMETER (             NCOMB=64)
       INCLUDE 'genps.inc'
       INCLUDE 'nexternal.inc'
       INCLUDE 'maxamps.inc'
       INTEGER    NWAVEFUNCS,     NCOLOR
-      PARAMETER (NWAVEFUNCS=8, NCOLOR=1)
+      PARAMETER (NWAVEFUNCS=7, NCOLOR=1)
       REAL*8     ZERO
       PARAMETER (ZERO=0D0)
       COMPLEX*16 IMAG1
@@ -462,24 +462,18 @@ C     ----------
       CALL IXXXXX(P(0,5),MDL_ME,NHEL(5),-1*IC(5),W(1,5))
       CALL OXXXXX(P(0,6),MDL_ME,NHEL(6),+1*IC(6),W(1,6))
       CALL FFV1_3(W(1,5),W(1,6),GC_15,MDL_MAP, FK_MDL_WAP,W(1,7))
-      CALL FFV1P0_3(W(1,1),W(1,3),GC_3,ZERO, FK_ZERO,W(1,6))
-      CALL FF1_2(W(1,2),W(1,7),GC_13,MDL_MNUL, FK_ZERO,W(1,5))
+      CALL FFV1_2(W(1,1),W(1,7),GC_15,MDL_ME, FK_ZERO,W(1,6))
+      CALL FF1P0_3(W(1,2),W(1,4),GC_12,ZERO, FK_ZERO,W(1,5))
 C     Amplitude(s) for diagram number 1
-      CALL FF1_0(W(1,5),W(1,4),W(1,6),GC_12,AMP(1))
-      CALL FFV1_3(W(1,1),W(1,3),GC_15,MDL_MAP, ZERO,W(1,8))
+      CALL FFV1_0(W(1,6),W(1,3),W(1,5),GC_3,AMP(1))
+      CALL FFV1_1(W(1,3),W(1,7),GC_15,MDL_ME, FK_ZERO,W(1,6))
 C     Amplitude(s) for diagram number 2
-      CALL FF1_0(W(1,5),W(1,4),W(1,8),GC_13,AMP(2))
-      CALL FF1_1(W(1,4),W(1,7),GC_13,MDL_MNUL, FK_ZERO,W(1,5))
-C     Amplitude(s) for diagram number 3
-      CALL FF1_0(W(1,2),W(1,5),W(1,6),GC_12,AMP(3))
-C     Amplitude(s) for diagram number 4
-      CALL FF1_0(W(1,2),W(1,5),W(1,8),GC_13,AMP(4))
+      CALL FFV1_0(W(1,1),W(1,6),W(1,5),GC_3,AMP(2))
 
       JAMP(:,:) = (0D0,0D0)
 C     JAMPs contributing to orders ALL_ORDERS=1
       JAMP(1,1) = (-1.000000000000000D+00)*AMP(2)+(-1.000000000000000D
-     $ +00)*AMP(3)+(-1.000000000000000D+00)*AMP(1)+(
-     $ -1.000000000000000D+00)*AMP(4)
+     $ +00)*AMP(1)
 
       IF(INIT_MODE)THEN
         DO I=1, NGRAPHS
@@ -507,8 +501,6 @@ C     JAMPs contributing to orders ALL_ORDERS=1
       IF(SDE_STRAT.EQ.1)THEN
         AMP2(1)=AMP2(1)+AMP(1)*DCONJG(AMP(1))
         AMP2(2)=AMP2(2)+AMP(2)*DCONJG(AMP(2))
-        AMP2(3)=AMP2(3)+AMP(3)*DCONJG(AMP(3))
-        AMP2(4)=AMP2(4)+AMP(4)*DCONJG(AMP(4))
       ENDIF
 
       DO I = 1, NCOLOR
@@ -527,7 +519,7 @@ C     JAMPs contributing to orders ALL_ORDERS=1
 
       IMPLICIT NONE
       INTEGER    NGRAPHS
-      PARAMETER (NGRAPHS=4)
+      PARAMETER (NGRAPHS=2)
 
       INTEGER    NCOMB
       PARAMETER (NCOMB=64)

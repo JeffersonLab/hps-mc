@@ -10,7 +10,7 @@ C     Returns amplitude squared summed/avg over colors
 C     and helicities
 C     for the point in phase space P(0:3,NEXTERNAL)
 C     
-C     Process: e- n > e- n ap QCD=0 QED<=1 QND<=1 / z h @1
+C     Process: e- n > e- n ap DQND=0 / chi @1
 C     *   Decay: ap > e+ e- WEIGHTED<=2
 C     
       IMPLICIT NONE
@@ -24,9 +24,9 @@ C
       INTEGER                 NCOMB         
       PARAMETER (             NCOMB=${ncomb})
       INTEGER    NGRAPHS
-      PARAMETER (NGRAPHS=4) 
+      PARAMETER (NGRAPHS=2) 
       INTEGER    NDIAGS
-      PARAMETER (NDIAGS=4) 
+      PARAMETER (NDIAGS=2) 
       INTEGER    THEL
       PARAMETER (THEL=2*NCOMB)
 C     
@@ -172,7 +172,7 @@ C
 C     Returns amplitude squared summed/avg over colors
 C     for the point with external lines W(0:6,NEXTERNAL)
 C     
-C     Process: e- n > e- n ap QCD=0 QED<=1 QND<=1 / z h @1
+C     Process: e- n > e- n ap DQND=0 / chi @1
 C     *   Decay: ap > e+ e- WEIGHTED<=2
 C     
       IMPLICIT NONE
@@ -180,7 +180,7 @@ C
 C     CONSTANTS
 C     
       INTEGER    NGRAPHS
-      PARAMETER (NGRAPHS=4) 
+      PARAMETER (NGRAPHS=2) 
       include 'genps.inc'
       include 'nexternal.inc'
       include 'maxamps.inc'

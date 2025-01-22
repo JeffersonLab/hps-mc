@@ -53,11 +53,16 @@ C
       real*8 ptemp(0:3), ptemp2(0:3)
       character*20 formstr
 
-      ! new variables for HPS fixed-target
-      logical tripass,pairpass,passlp,passlm,passrecoil
-      !Real*8 efRatVal
-      integer nlppass,nlmpass,jpasslp,jpasslm,jpassrecoil,kk
-      real*8 thetaratio
+C
+C    FIXED TARGET
+C
+      logical xgoodf
+      integer jf
+
+      real*8 pboost(0:3), plab(0:3, nexternal)
+C
+C     FIXED TARGET END
+C
 
 C
 C     PARAMETERS
@@ -67,10 +72,12 @@ C
 C
 C     EXTERNAL
 C
-      REAL*8 R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,PtDot, theta, thetax, thetay
+      REAL*8 R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,PtDot
+      REAL*8 theta,thetax,thetay  ! fxed target
       logical cut_bw,setclscales,dummy_cuts
-      external R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,cut_bw,setclscales,PtDot, theta, thetax, thetay
+      external R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,cut_bw,setclscales,PtDot
       external dummy_cuts
+      external theta,thetax,thetay
 C
 C     GLOBAL
 C
@@ -124,12 +131,13 @@ C
 C     SPECIAL CUTS
 C
       LOGICAL  IS_A_J(NEXTERNAL),IS_A_L(NEXTERNAL)
+      ! new variable for HPS fixed-target
       LOGICAL  IS_A_LP(NEXTERNAL),IS_A_LM(NEXTERNAL)
       LOGICAL  IS_A_B(NEXTERNAL),IS_A_A(NEXTERNAL),IS_A_ONIUM(NEXTERNAL)
       LOGICAL  IS_A_NU(NEXTERNAL),IS_HEAVY(NEXTERNAL)
       logical  do_cuts(nexternal)
-      COMMON /TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_LP,IS_A_LM,IS_A_B,IS_A_NU,IS_HEAVY,
-     . IS_A_ONIUM, do_cuts
+      COMMON /TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_B,IS_A_NU,IS_HEAVY,
+     . IS_A_ONIUM, IS_A_LP,IS_A_LM, do_cuts
 
 C
 C     MERGING SCALE CUT
@@ -319,162 +327,71 @@ C $B$ DESACTIVATE_CUT $E$ !This is a tag for MadWeight
       if(debug) write (*,*) ' EVENT STARTS TO BE CHECKED  '
       if(debug) write (*,*) '============================='
 
-c**********************************************************     
+c****************************************     
 c     Special Fixed-Target cuts
-c***********************************************************
+c****************************************
 
 c.....first boost
-!      pboost(0)=1d0
-!      pboost(1)=0d0
-!      pboost(2)=0d0
-!      pboost(3)=0d0
-c      if (xbk(2)*xbk(1) .gt. 0d0) then
-c         pboost(0)=ebeam(1)+ebeam(2)
-c         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
-c     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
-c      endif
-!
-!      do j=1,nexternal
-!         call boostx(p(0,j),pboost,plab(0,j))
-!      enddo
+      pboost(0)=1d0
+      pboost(1)=0d0
+      pboost(2)=0d0
+      pboost(3)=0d0
+      if (xbk(2)*xbk(1) .gt. 0d0) then
+         pboost(0)=ebeam(1)+ebeam(2)
+         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
+     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
+      endif
 
-         
+      do j=1,nexternal
+         call boostx(p(0,j),pboost,plab(0,j))
+      enddo
 
 c      goto 777
-c logical variables for lepton cuts    
-      tripass=.false.
-      pairpass=.false.
-      passlp=.false.
-      passlm=.false.
-      passrecoil=.false.
-c ....initialize some variables
-      nlppass=0
-      nlmpass=0
-      jpasslp=0
-      jpasslm=0
-      jpassrecoil=0
-c      write(47,*) " --evt --"
+c...  inclusive cuts for leptons      
+      xgoodf=.false.
+      jf=0
 
       do i=nincoming+1,nexternal
-c angle cuts & energy cuts for at least one leptons
-        if ( is_a_l(i) ) then     
-          if( (thetax(p(0,i)) .gt. thetaxminanyl).and.(thetax(p(0,i)) .lt. thetaxmaxanyl)) then
-            if( (thetay(p(0,i)) .gt. thetayminanyl).and.(thetay(p(0,i)) .lt. thetaymaxanyl)) then
-              if( (theta(p(0,i)) .gt. thetaminanyl).and.(theta(p(0,i)) .lt. thetamaxanyl)) then
-                if( (p(0,i) .gt. eminanyl).and.(p(0,i) .lt. emaxanyl) ) then
-                  tripass=.true.               
-c            write (47,*) "PASS!"
-                endif ! pass momentum cuts
-              endif ! pass theta cuts
-            endif ! pass ytheta cuts
-          endif  ! pass xtheta cuts
-        endif  ! is any lepton
+c...     Is it a lepton
+         if(is_a_l(i)) then
+c...        Is there a positron that passes inclusivity criteria?            
+            if(
+     $         (is_a_lp(i)) .and.
+     $         (thetax(plab(0,i)) .gt. thetaxminpos).and.
+     $         (thetax(plab(0,i)) .lt. thetaxmaxpos).and.
+     $         (thetay(plab(0,i)) .gt. thetayminpos).and.
+     $         (thetay(plab(0,i)) .lt. thetaymaxpos).and.
+     $         (plab(0,i) .gt. eminpos) .and. (plab(0,i) .lt. emaxpos)) then
+               xgoodf=.true.               
+            endif
 
-
-c there is only one positron; check if it passes angle cuts & energy cuts
-        if( is_a_lp(i) ) then
-          if( (thetax(p(0,i)) .gt. thetaxminpos).and.(thetax(p(0,i)) .lt. thetaxmaxpos)) then
-            if( (thetay(p(0,i)) .gt. thetayminpos).and.(thetay(p(0,i)) .lt. thetaymaxpos)) then
-              if( (theta(p(0,i)) .gt. thetaminpos).and.(theta(p(0,i)) .lt. thetamaxpos)) then
-                if ((p(0,i) .gt. eminpos).and.(p(0,i) .lt. emaxpos)) then
-                  passlp=.true.
-                  nlppass=nlppass+1
-                  jpasslp=i
-                endif ! pass momentum cuts
-              endif ! pass theta cuts
-            endif ! pass theta y cuts
-          endif ! pass theta x cuts
-        endif ! is positron
-
-c there are two electrons; check if one passes angle cuts & energy cuts
-c check the first electron which should be the recoil electron
-
-        if( is_a_lm(i).and. i.eq.nincoming+1 ) then
-          if ( (thetax(p(0,i)) .gt. thetaxminrecoil).and.(thetax(p(0,i)) .lt. thetaxmaxrecoil)) then
-            if( (thetay(p(0,i)) .gt. thetayminrecoil).and.(thetay(p(0,i)) .lt. thetaymaxrecoil)) then
-              if( (theta(p(0,i)) .gt. thetaminrecoil).and.(theta(p(0,i)) .lt. thetamaxrecoil)) then
-                if( (p(0,i) .gt. eminrecoil).and. (p(0,i) .lt. emaxrecoil)) then
-                  passrecoil=.true.
-                  nlmpass=nlmpass+1
-                  jpassrecoil=i
-                endif ! pass momentum cuts
-              endif ! pass theta cuts
-            endif ! pass theta y cuts
-          endif ! pass theta x cuts
-        endif  ! is recoil electron
-          
-        if( is_a_lm(i).and. i.ne.nincoming+1 ) then
-          if( (thetax(p(0,i)) .gt. thetaxminele).and.(thetax(p(0,i)) .lt. thetaxmaxele)) then
-            if( (thetay(p(0,i)) .gt. thetayminele).and.(thetay(p(0,i)) .lt. thetaymaxele)) then
-              if( (theta(p(0,i)) .gt. thetaminele).and.(theta(p(0,i)) .lt. thetamaxele)) then
-                if( (p(0,i) .gt. eminele).and.(p(0,i) .lt. emaxele)) then
-                  passlm=.true.
-                  nlmpass=nlmpass+1
-                  jpasslm=i
-                endif ! pass momentum cuts
-              endif ! pass theta cuts
-            endif ! pass theta y cuts
-          endif ! pass theta x cuts
-        endif  ! is electron
-
-      enddo ! Close loop over outgoing particles
-
-c...  Evaluate electron-positron criteria
-c...  positron and electron from pair passed, recoil electron passed
-      if(nlppass.eq.1.and.nlmpass.eq.2) then
-        ! find the smaller ratio of lepton angles in lab frame
-        if( abs(theta(p(0,jpasslm))/theta(p(0,jpasslp))) .lt. abs(theta(p(0,jpasslp))/theta(p(0,jpasslm))) ) then
-          thetaratio=abs( theta(p(0,jpasslm))/theta(p(0,jpasslp)) )
-        else
-          thetaratio=abs( theta(p(0,jpasslp))/theta(p(0,jpasslm)) )
-        endif ! determine theta ratio
-        ! check invariant mass
-        if( dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm),+1d0)).gt.mmeemin ) then
-          if( dSqrt(Sumdot(p(0,jpasslp),p(0,jpasslm),+1d0)).lt.mmeemax ) then
-            ! check angles
-            if( thetaratio.gt.thetaratiomin .and. thetaratio.lt.thetaratiomax ) then
-              if( ( p(0,jpasslp)+p(0,jpasslm) ).gt.eltot) then
-                pairpass=.true.
-              endif ! pass esum cuts
-            endif ! pass theta ratio 
-          endif ! pass invM max
-        endif ! pass invM min
-      endif ! found all particles
+c...        Prepare for pair. criteria            
+            if(jf.eq.0) then
+               jf=i
+            else
+c...           m(i,j) cut?
+               if(dSqrt(Sumdot(plab(0,i),plab(0,jf),+1d0)).lt.mmeemin) then
+                  if(debug) write(*,*) "mmee too small -> fails"
+                  passcuts=.false.
+                  return
+               endif
+               if(dSqrt(Sumdot(plab(0,i),plab(0,jf),+1d0)).gt.mmeemax) then
+                  if(debug) write(*,*) "mmee too big -> fails"
+                  passcuts=.false.
+                  return
+               endif
+            endif ! Close pair criteria
+         endif ! Close if is_a_l
+      enddo ! Close loop over particles
 
 c...  Check: were inclusive criteria satisfied?      
-
-      ! at least one lepton criteria
-      if(.not.tripass) then
-       passcuts=.false.
-       return
-      endif
-
-      ! Positron criteria
-      if(.not.passlp) then
-       passcuts=.false.
-       return
-      endif
-         
-      ! Electron criteria
-      if(.not.passlm) then
-       passcuts=.false.
-       return
-      endif
-
-      ! Recoil criteria
-      if(.not.passrecoil) then
-       passcuts=.false.
-       return
-      endif
-
-      ! Pair criteria
-      if(.not.pairpass) then
-       passcuts=.false.
-       return
+      if(.not. xgoodf) then
+         if(debug) write(*,*) "no positron pass inclusive -> fails"
+         passcuts=.false.
+         return
       endif
 
  777  continue
-
 
 c     
 c     p_t min & max cuts

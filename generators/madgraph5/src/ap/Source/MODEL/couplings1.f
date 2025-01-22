@@ -14,6 +14,5 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       INCLUDE 'coupl.inc'
       GC_3 = -(MDL_EE*MDL_COMPLEXI)
       GC_12 = -(MDL_COMPLEXI*MDL_GAN)
-      GC_13 = -(MDL_COMPLEXI*MDL_GAPN)
       GC_15 = -(MDL_COMPLEXI*MDL_GE)
       END

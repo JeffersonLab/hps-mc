@@ -3310,6 +3310,10 @@ class RunCardLO(RunCard):
                        comment='second beam energy distribution:\n 0: fixed energy\n 1: PDF of proton\n -1: PDF of antiproton\n 2:elastic photon from proton, +/-3:PDF of electron/positron, +/-4:PDF of muon/antimuon, 9: PLUGIN MODE')
         self.add_param("ebeam1", 6500.0, fortran_name="ebeam(1)")
         self.add_param("ebeam2", 6500.0, fortran_name="ebeam(2)")
+        #beam mass, fixed target
+        self.add_param("mbeam1", 1.0, fortran_name="mbeam(1)")
+        self.add_param("mbeam2", 1.0, fortran_name="mbeam(2)")
+        #end fixed target
         self.add_param("polbeam1", 0.0, fortran_name="pb1", hidden=True,
                                               comment="Beam polarization from -100 (left-handed) to 100 (right-handed) --use lpp=0 for this parameter--")
         self.add_param("polbeam2", 0.0, fortran_name="pb2", hidden=True,
@@ -3367,55 +3371,26 @@ class RunCardLO(RunCard):
         self.add_param('frame_id', 6,  system=True)
         self.add_param("event_norm", "average", allowed=['sum','average', 'unity'],
                         include=False, sys_default='sum', hidden=True)
+        
+        # fixed target cuts
+        self.add_param("eminpos", 0.0, cut='l')
+        self.add_param("emaxpos", 100.0, cut='l')
+        self.add_param("thetaminpos", 0.0, cut='l')
+        self.add_param("thetamaxpos", 100.0, cut='l')
+        self.add_param("thetaxminpos", 0.0, cut='l')
+        self.add_param("thetaxmaxpos", 100.0, cut='l')
+        self.add_param("thetayminpos", 0.0, cut='l')
+        self.add_param("thetaymaxpos", 100.0, cut='l')
+
+        self.add_param("mmeemin", 0.0, cut='ll') # min invariant mass of any two e+-
+        self.add_param("mmeemax", 100.0, cut='ll') # max invariant mass of any two e+-
+
         #cut
         self.add_param("auto_ptj_mjj", True, hidden=True)
         self.add_param("bwcutoff", 15.0)
         self.add_param("cut_decays", False, cut='d')
         self.add_param('dsqrt_shat',0., cut=True)
         self.add_param("nhel", 0, include=False)
-        # newly add run_card variables for HPS fixed-target
-        # positron
-        self.add_param("eminpos", 0.0)
-        self.add_param("emaxpos", 100.0)
-        self.add_param("thetaminpos", 0.0)
-        self.add_param("thetamaxpos", 100.0)
-        self.add_param("thetaxminpos", 0.0)
-        self.add_param("thetaxmaxpos", 100.0)
-        self.add_param("thetayminpos", 0.0)
-        self.add_param("thetaymaxpos", 100.0)
-        # electron
-        self.add_param("eminele", 0.0)
-        self.add_param("emaxele", 100.0)
-        self.add_param("thetaminele", 0.0)
-        self.add_param("thetamaxele", 100.0)
-        self.add_param("thetaxminele", 0.0)
-        self.add_param("thetaxmaxele", 100.0)
-        self.add_param("thetayminele", 0.0)
-        self.add_param("thetaymaxele", 100.0)
-        # recoil electron
-        self.add_param("eminrecoil", 0.0)
-        self.add_param("emaxrecoil", 100.0)
-        self.add_param("thetaminrecoil", 0.0)
-        self.add_param("thetamaxrecoil", 100.0)
-        self.add_param("thetaxminrecoil", 0.0)
-        self.add_param("thetaxmaxrecoil", 100.0)
-        self.add_param("thetayminrecoil", 0.0)
-        self.add_param("thetaymaxrecoil", 100.0)
-        # any lepton
-        self.add_param("eminanyl", 0.0)
-        self.add_param("emaxanyl", 100.0)
-        self.add_param("thetaminanyl", 0.0)
-        self.add_param("thetamaxanyl", 100.0)
-        self.add_param("thetaxminanyl", 0.0)
-        self.add_param("thetaxmaxanyl", 100.0)
-        self.add_param("thetayminanyl", 0.0)
-        self.add_param("thetaymaxanyl", 100.0)
-        # electron-positron pair cuts
-        self.add_param("eltot", 0.0)
-        self.add_param("mmeemin", 0.0)
-        self.add_param("mmeemax", 100.0)
-        self.add_param("thetaratiomin", 0.0)
-        self.add_param("thetaratiomax", 100.0)
         #pt cut
         self.add_param("ptj", 20.0, cut='j')
         self.add_param("ptb", 0.0, cut='b')
@@ -4636,7 +4611,11 @@ class RunCardNLO(RunCard):
         self.add_param('lpp1', 1, fortran_name='lpp(1)')        
         self.add_param('lpp2', 1, fortran_name='lpp(2)')                        
         self.add_param('ebeam1', 6500.0, fortran_name='ebeam(1)')
-        self.add_param('ebeam2', 6500.0, fortran_name='ebeam(2)')        
+        self.add_param('ebeam2', 6500.0, fortran_name='ebeam(2)')       
+        #beam mass, fixed target
+        self.add_param("mbeam1", 1.0, fortran_name="mbeam(1)")
+        self.add_param("mbeam2", 1.0, fortran_name="mbeam(2)")
+        #end fixed target
         self.add_param('pdlabel', 'nn23nlo', allowed=['lhapdf', 'cteq6_m','cteq6_d','cteq6_l','cteq6l1', 'nn23lo','nn23lo1','nn23nlo','ct14q00','ct14q07','ct14q14','ct14q21'] +\
              sum(self.allowed_lep_densities.values(),[]) )                
         self.add_param('lhaid', [244600],fortran_name='lhaPDFid')
@@ -4675,6 +4654,19 @@ class RunCardNLO(RunCard):
         #merging
         self.add_param('ickkw', 0, allowed=[-1,0,3,4], comment=" - 0: No merging\n - 3:  FxFx Merging :  http://amcatnlo.cern.ch/FxFx_merging.htm\n - 4: UNLOPS merging (No interface within MG5aMC)\n - -1:  NNLL+NLO jet-veto computation. See arxiv:1412.8408 [hep-ph]")
         self.add_param('bwcutoff', 15.0)
+        # fixed target cuts
+        self.add_param("eminpos", 0.0, cut=True)
+        self.add_param("emaxpos", 100.0, cut=True)
+        self.add_param("thetaminpos", 0.0, cut=True)
+        self.add_param("thetamaxpos", 100.0, cut=True)
+        self.add_param("thetaxminpos", 0.0, cut=True)
+        self.add_param("thetaxmaxpos", 100.0, cut=True)
+        self.add_param("thetayminpos", 0.0, cut=True)
+        self.add_param("thetaymaxpos", 100.0, cut=True)
+
+        self.add_param("mmeemin", 0.0, cut=True) # min invariant mass of any two e+-
+        self.add_param("mmeemax", 100.0, cut=True) # max invariant mass of any two e+-
+
         #cuts        
         self.add_param('jetalgo', 1.0)
         self.add_param('jetradius', 0.7)         

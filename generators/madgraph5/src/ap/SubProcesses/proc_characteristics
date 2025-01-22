@@ -4,7 +4,7 @@
  grouped_matrix = True 
  pdg_initial1 = [11] 
  nlo_mixed_expansion = True 
- nb_channel = 4 
+ nb_channel = 2 
  has_loops = False 
  single_color = True 
  ninitial = 2 
