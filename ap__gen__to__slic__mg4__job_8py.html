@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>HPS-MC: python/jobs/ap_gen_to_slic_job.py File Reference</title>
+<title>HPS-MC: python/jobs/ap_gen_to_slic_mg4_job.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('ap__gen__to__slic__job_8py.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('ap__gen__to__slic__mg4__job_8py.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -98,61 +98,53 @@ $(document).ready(function(){initNavTree('ap__gen__to__slic__job_8py.html',''); 
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">ap_gen_to_slic_job.py File Reference</div></div>
+  <div class="headertitle"><div class="title">ap_gen_to_slic_mg4_job.py File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Job script to generate A-prime events, convert to StdHep, apply transformations, and resulting simulate signal events using SLIC.  
-<a href="#details">More...</a></p>
-
-<p><a href="ap__gen__to__slic__job_8py_source.html">Go to the source code of this file.</a></p>
+<p><a href="ap__gen__to__slic__mg4__job_8py_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
-<tr class="memitem:namespaceap__gen__to__slic__job" id="r_namespaceap__gen__to__slic__job"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html">ap_gen_to_slic_job</a></td></tr>
+<tr class="memitem:namespaceap__gen__to__slic__mg4__job" id="r_namespaceap__gen__to__slic__mg4__job"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html">ap_gen_to_slic_mg4_job</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a2661f439a4a94ffdcd5e47ae1da0bb1d" id="r_a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">description</a></td></tr>
+<tr class="memitem:a2661f439a4a94ffdcd5e47ae1da0bb1d" id="r_a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">description</a></td></tr>
 <tr class="separator:a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afde3b66b6b41bd008469f366fa756e54" id="r_afde3b66b6b41bd008469f366fa756e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a> = list(job.input_files.values())</td></tr>
+<tr class="memitem:afde3b66b6b41bd008469f366fa756e54" id="r_afde3b66b6b41bd008469f366fa756e54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a> = list(job.input_files.values())</td></tr>
 <tr class="memdesc:afde3b66b6b41bd008469f366fa756e54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get job input file targets.  <br /></td></tr>
 <tr class="separator:afde3b66b6b41bd008469f366fa756e54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5209ed8d981dc170e77bea159c5bbe48" id="r_a5209ed8d981dc170e77bea159c5bbe48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> = job.params['nevents']</td></tr>
+<tr class="memitem:a5209ed8d981dc170e77bea159c5bbe48" id="r_a5209ed8d981dc170e77bea159c5bbe48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> = job.params['nevents']</td></tr>
 <tr class="separator:a5209ed8d981dc170e77bea159c5bbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaa4bf1b4d0978fa034ada89161a23c4" id="r_adaa4bf1b4d0978fa034ada89161a23c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#adaa4bf1b4d0978fa034ada89161a23c4">mg</a> = <a class="el" href="classhpsmc_1_1generators_1_1MG5.html">MG5</a>(name='ap', event_types=['unweighted'])</td></tr>
-<tr class="memdesc:adaa4bf1b4d0978fa034ada89161a23c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate rad in MG5.  <br /></td></tr>
+<tr class="memitem:adaa4bf1b4d0978fa034ada89161a23c4" id="r_adaa4bf1b4d0978fa034ada89161a23c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#adaa4bf1b4d0978fa034ada89161a23c4">mg</a> = <a class="el" href="classhpsmc_1_1generators_1_1MG4.html">MG4</a>(name='ap', event_types=['unweighted'])</td></tr>
+<tr class="memdesc:adaa4bf1b4d0978fa034ada89161a23c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate rad in MG4.  <br /></td></tr>
 <tr class="separator:adaa4bf1b4d0978fa034ada89161a23c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae32b274271adde5256bbf36c634e1964" id="r_ae32b274271adde5256bbf36c634e1964"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#ae32b274271adde5256bbf36c634e1964">ap_decay_dist</a> = job.params['ap_decay_dist']</td></tr>
+<tr class="memitem:ae32b274271adde5256bbf36c634e1964" id="r_ae32b274271adde5256bbf36c634e1964"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#ae32b274271adde5256bbf36c634e1964">ap_decay_dist</a> = job.params['ap_decay_dist']</td></tr>
 <tr class="separator:ae32b274271adde5256bbf36c634e1964"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada93bbf7295ab03a07435e4999845526" id="r_ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe.gz&quot;], outputs=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
+<tr class="memitem:ada93bbf7295ab03a07435e4999845526" id="r_ada93bbf7295ab03a07435e4999845526"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#ada93bbf7295ab03a07435e4999845526">unzip</a> = <a class="el" href="classhpsmc_1_1tools_1_1Unzip.html">Unzip</a>(<a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe.gz&quot;], outputs=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
 <tr class="memdesc:ada93bbf7295ab03a07435e4999845526"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unzip the LHE events to a local file.  <br /></td></tr>
 <tr class="separator:ada93bbf7295ab03a07435e4999845526"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2353b13f43ff77203d94b47953aa942" id="r_ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a> = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, <a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
+<tr class="memitem:ac2353b13f43ff77203d94b47953aa942" id="r_ac2353b13f43ff77203d94b47953aa942"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#ac2353b13f43ff77203d94b47953aa942">cnv</a> = <a class="el" href="classhpsmc_1_1generators_1_1StdHepConverter.html">StdHepConverter</a>(name=&quot;lhe_uniform&quot;, <a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.lhe&quot;])</td></tr>
 <tr class="memdesc:ac2353b13f43ff77203d94b47953aa942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert LHE output to stdhep for uniform signal.  <br /></td></tr>
 <tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0edfd5bd129fcfa8dc6c9607d04780b7" id="r_a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">mom</a> = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.stdhep&quot;, unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td></tr>
+<tr class="memitem:a0edfd5bd129fcfa8dc6c9607d04780b7" id="r_a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a0edfd5bd129fcfa8dc6c9607d04780b7">mom</a> = <a class="el" href="classhpsmc_1_1tools_1_1AddMotherFullTruth.html">AddMotherFullTruth</a>(<a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=[&quot;ap_unweighted_events.stdhep&quot;, unzip.output_files()[0]], outputs=[&quot;ap_mom.stdhep&quot;])</td></tr>
 <tr class="memdesc:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add mother particle to tag trident particles.  <br /></td></tr>
 <tr class="separator:a0edfd5bd129fcfa8dc6c9607d04780b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1db2ab3d82c6029ee441423308802a74" id="r_a1db2ab3d82c6029ee441423308802a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#a1db2ab3d82c6029ee441423308802a74">rot</a> = <a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a>(<a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=mom.output_files(), outputs=[&quot;ap_rot.stdhep&quot;])</td></tr>
+<tr class="memitem:a1db2ab3d82c6029ee441423308802a74" id="r_a1db2ab3d82c6029ee441423308802a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a1db2ab3d82c6029ee441423308802a74">rot</a> = <a class="el" href="classhpsmc_1_1tools_1_1BeamCoords.html">BeamCoords</a>(<a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=mom.output_files(), outputs=[&quot;ap_rot.stdhep&quot;])</td></tr>
 <tr class="memdesc:a1db2ab3d82c6029ee441423308802a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate events into beam coords.  <br /></td></tr>
 <tr class="separator:a1db2ab3d82c6029ee441423308802a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abaa485babeb1ee67ebdaadec53822fe6" id="r_abaa485babeb1ee67ebdaadec53822fe6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6">slic</a> = <a class="el" href="classhpsmc_1_1tools_1_1SLIC.html">SLIC</a>(<a class="el" href="namespaceap__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a>=<a class="el" href="namespaceap__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> + 1, <a class="el" href="namespaceap__gen__to__slic__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=rot.output_files(), outputs=[&quot;ap.slcio&quot;])</td></tr>
+<tr class="memitem:abaa485babeb1ee67ebdaadec53822fe6" id="r_abaa485babeb1ee67ebdaadec53822fe6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceap__gen__to__slic__mg4__job.html#abaa485babeb1ee67ebdaadec53822fe6">slic</a> = <a class="el" href="classhpsmc_1_1tools_1_1SLIC.html">SLIC</a>(<a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a>=<a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> + 1, <a class="el" href="namespaceap__gen__to__slic__mg4__job.html#afde3b66b6b41bd008469f366fa756e54">inputs</a>=rot.output_files(), outputs=[&quot;ap.slcio&quot;])</td></tr>
 <tr class="memdesc:abaa485babeb1ee67ebdaadec53822fe6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simulate signal events.  <br /></td></tr>
 <tr class="separator:abaa485babeb1ee67ebdaadec53822fe6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Job script to generate A-prime events, convert to StdHep, apply transformations, and resulting simulate signal events using SLIC. </p>
-<p>There are options to generate prompt and displaced events. You can use them by adjusting the StdHepConverter options as seen below. </p>
-
-<p class="definition">Definition in file <a class="el" href="ap__gen__to__slic__job_8py_source.html">ap_gen_to_slic_job.py</a>.</p>
-</div></div><!-- contents -->
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_9e874cf2b594120fd0c667017eefc26c.html">jobs</a></li><li class="navelem"><a class="el" href="ap__gen__to__slic__job_8py.html">ap_gen_to_slic_job.py</a></li>
+    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_9e874cf2b594120fd0c667017eefc26c.html">jobs</a></li><li class="navelem"><a class="el" href="ap__gen__to__slic__mg4__job_8py.html">ap_gen_to_slic_mg4_job.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

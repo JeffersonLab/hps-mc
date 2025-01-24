@@ -1,7 +1,9 @@
 var dir_9e874cf2b594120fd0c667017eefc26c =
 [
     [ "ap_gen_job.py", "ap__gen__job_8py.html", "ap__gen__job_8py" ],
+    [ "ap_gen_mg4_job.py", "ap__gen__mg4__job_8py.html", "ap__gen__mg4__job_8py" ],
     [ "ap_gen_to_slic_job.py", "ap__gen__to__slic__job_8py.html", "ap__gen__to__slic__job_8py" ],
+    [ "ap_gen_to_slic_mg4_job.py", "ap__gen__to__slic__mg4__job_8py.html", "ap__gen__to__slic__mg4__job_8py" ],
     [ "ap_slic_job.py", "ap__slic__job_8py.html", "ap__slic__job_8py" ],
     [ "beam_coords_job.py", "beam__coords__job_8py.html", "beam__coords__job_8py" ],
     [ "beam_gen_job.py", "beam__gen__job_8py.html", "beam__gen__job_8py" ],
