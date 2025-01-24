@@ -8,7 +8,7 @@ There are options to generate prompt and displaced events.
 You can use them by adjusting the StdHepConverter options as seen below.
 """
 
-from hpsmc.generators import MG4, StdHepConverter
+from hpsmc.generators import MG5, StdHepConverter
 from hpsmc.tools import DisplaceUni, Unzip, BeamCoords, AddMotherFullTruth, SLIC
 
 job.description = 'ap from generation to slic'
@@ -21,13 +21,8 @@ if 'nevents' in job.params:
 else:
     nevents = 10000
 
-# if 'ap_decay_dist' in job.params:
-#     ap_decay_dist = job.params['ap_decay_dist']
-# else:
-#     ap_decay_dist = "lhe_uniform"
-
-## Generate rad in MG4
-mg = MG4(name='ap', event_types=['unweighted'])
+## Generate rad in MG5
+mg = MG5(name='ap', event_types=['unweighted'])
 
 if 'ap_decay_dist' in job.params:
     ap_decay_dist = job.params['ap_decay_dist']

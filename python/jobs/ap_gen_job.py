@@ -4,7 +4,7 @@
 Job script to generate A-prime events.
 """
 
-from hpsmc.generators import MG4
+from hpsmc.generators import MG5
 
 job.description = 'ap generation'
 
@@ -14,7 +14,7 @@ else:
     nevents = 10000
 
 ## Generate rad in MG4
-mg = MG4(name='ap', event_types=['unweighted'])
+mg = MG5(name='ap', event_types=['unweighted'])
 
 ## run the job
 job.add([mg])

@@ -284,6 +284,8 @@ class MG(EventGenerator):
             if "APMASS" in data[i] and self.apmass is not None:
                 data[i] = "       622     %.7fe-03   # APMASS" % (self.apmass) + '\n'
                 self.logger.debug("APMASS in param card set to %d" % self.apmass)
+            if "MAp" in data[i] and "9000009" in data[i] and self.apmass is not None:
+                data[i] = "  9000009 %.7fe-03 # MAp" % (self.apmass) + '\n'
             if "map" in data[i] and self.map is not None:
                 data[i] = "      622 %.7fe-03 # map" % (self.map) + '\n'
             if "mpid" in data[i] and self.mpid is not None:
@@ -312,8 +314,8 @@ class MG(EventGenerator):
         """
         os.chdir(os.path.dirname(self.command))
         # need python3.7 for MG5, but s3df only has python3.6 for now; python2 works though
-        if "WAB" in self.name:
-            self.command = "python2 " + self.command
+        # if "WAB" in self.name:
+        #     self.command = "python2 " + self.command
         self.logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
         return Component.execute(self, log_out, log_err)
 
@@ -409,7 +411,8 @@ class MG5(MG):
                "simp": "simp",
                "simp-3body": "simp-3body",
                "idm": "idm",
-               "WAB": "WAB"
+               "WAB": "WAB",
+               "ap": "ap"
                }
 
     def __init__(self, name='tritrig', **kwargs):
@@ -466,7 +469,14 @@ class MG5(MG):
         @param log_err  name of log file for error
         @return  error code
         """
-        returncode = MG.execute(self, log_out, log_err)
+        os.chdir(os.path.dirname(self.command))
+        # need python3.7 for MG5, but s3df only has python3.6 for now; python2 works though
+        if "WAB" or "ap" in self.name:
+            self.command = "python2 " + self.command
+        self.logger.debug("Executing '%s' from '%s'" % (self.name, os.getcwd()))
+        returncode = Component.execute(self, log_out, log_err)
+
+        # returncode = MG.execute(self, log_out, log_err)
         lhe_files = glob.glob(os.path.join(self.event_dir, "*.lhe.gz"))
         for f in lhe_files:
             dest = os.path.join(self.rundir, '%s_%s' % (self.name, os.path.basename(f)))
