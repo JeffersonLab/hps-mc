@@ -1025,3 +1025,8 @@ V_169 = Vertex(name = 'V_169',
                lorentz = [ L.FFV1 ],
                couplings = {(0,0):C.GC_15})
 
+V_170 = Vertex(name = 'V_170',
+               particles = [ P.f__plus__, P.f__minus__, P.Ap ],
+               color = [ '1' ],
+               lorentz = [ L.FFV1 ],
+               couplings = {(0,0):C.GC_15})

@@ -74,7 +74,9 @@ mass 9000002 mdl_MNul
 
 mass 23 mdl_MZ
 
-mass 9000009 mdl_MAp
+mass 622 mdl_MAp
+
+mass 623 mdl_Mf
 
 mass 25 mdl_MH
 
@@ -84,6 +86,8 @@ decay 23 mdl_WZ
 
 decay 24 mdl_WW
 
-decay 9000009 mdl_WAp
+decay 622 mdl_WAp
+
+decay 623 mdl_Wf
 
 decay 25 mdl_WH

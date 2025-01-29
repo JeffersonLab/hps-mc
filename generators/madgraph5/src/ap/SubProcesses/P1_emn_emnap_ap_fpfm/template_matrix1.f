@@ -11,7 +11,7 @@ C     and helicities
 C     for the point in phase space P(0:3,NEXTERNAL)
 C     
 C     Process: e- n > e- n ap DQND=0 / chi @1
-C     *   Decay: ap > e+ e- WEIGHTED<=2
+C     *   Decay: ap > f+ f- WEIGHTED<=2
 C     
       IMPLICIT NONE
 C     
@@ -173,7 +173,7 @@ C     Returns amplitude squared summed/avg over colors
 C     for the point with external lines W(0:6,NEXTERNAL)
 C     
 C     Process: e- n > e- n ap DQND=0 / chi @1
-C     *   Decay: ap > e+ e- WEIGHTED<=2
+C     *   Decay: ap > f+ f- WEIGHTED<=2
 C     
       IMPLICIT NONE
 C     

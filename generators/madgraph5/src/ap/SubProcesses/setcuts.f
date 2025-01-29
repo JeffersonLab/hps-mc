@@ -76,13 +76,11 @@ c
       include 'leshouche.inc'
 C
       LOGICAL  IS_A_J(NEXTERNAL),IS_A_L(NEXTERNAL)
-      ! new variables for HPS fixed-target
-      LOGICAL  IS_A_LP(NEXTERNAL),IS_A_LM(NEXTERNAL)
       LOGICAL  IS_A_B(NEXTERNAL),IS_A_A(NEXTERNAL),IS_A_ONIUM(NEXTERNAL)
       LOGICAL  IS_A_NU(NEXTERNAL),IS_HEAVY(NEXTERNAL)
       logical  do_cuts(nexternal)
       COMMON /TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_B,IS_A_NU,IS_HEAVY,
-     . IS_A_ONIUM,IS_A_LP,IS_A_LM, do_cuts 
+     . IS_A_ONIUM, do_cuts 
 
 c     Store which external particles undergo the ktdurham and ptlund cuts.
       LOGICAL  is_pdg_for_merging_cut(NEXTERNAL)
@@ -207,8 +205,6 @@ c
          is_a_b(i)=.false.
          is_a_a(i)=.false.
          is_a_nu(i)=.false.
-         is_a_lp(i)=.false.
-         is_a_lm(i)=.false.
 
 
 c-do not apply cuts to these. CAREFULL: PDG_CUT do not consider do_cuts (they simply check the cut_decays)
@@ -230,9 +226,6 @@ c-charged-leptons
          if (abs(idup(i,1,iproc)).eq.11)  is_a_l(i)=.true. ! e+  e-
          if (abs(idup(i,1,iproc)).eq.13)  is_a_l(i)=.true. ! mu+ mu-
          if (abs(idup(i,1,iproc)).eq.15)  is_a_l(i)=.true. ! ta+ ta-
-         !-positron-electron-identification for HPS fixed-target
-         if (idup(i,1,iproc).eq.11)  is_a_lm(i)=.true. ! e-  COUNT E TOO!
-         if (idup(i,1,iproc).eq.-11)  is_a_lp(i)=.true. ! e+  COUNT E TOO! 
 c-b-quarks
 c         if (abs(idup(i,1,iproc)).eq.5)   is_a_b(i)=.true. ! b b~
 c-photon

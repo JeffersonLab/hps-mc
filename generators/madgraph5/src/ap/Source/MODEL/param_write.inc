@@ -42,11 +42,13 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       WRITE(*,*) 'mdl_MNul = ', MDL_MNUL
       WRITE(*,*) 'mdl_MZ = ', MDL_MZ
       WRITE(*,*) 'mdl_MAp = ', MDL_MAP
+      WRITE(*,*) 'mdl_Mf = ', MDL_MF
       WRITE(*,*) 'mdl_MH = ', MDL_MH
       WRITE(*,*) 'mdl_WT = ', MDL_WT
       WRITE(*,*) 'mdl_WZ = ', MDL_WZ
       WRITE(*,*) 'mdl_WW = ', MDL_WW
       WRITE(*,*) 'mdl_WAp = ', MDL_WAP
+      WRITE(*,*) 'mdl_Wf = ', MDL_WF
       WRITE(*,*) 'mdl_WH = ', MDL_WH
       WRITE(*,*)  ' Internal Params'
       WRITE(*,*)  ' ---------------------------------'

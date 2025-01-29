@@ -311,7 +311,15 @@ MAp = Parameter(name = 'MAp',
                 value = 0.1,
                 texname = '\\text{MAp}',
                 lhablock = 'MASS',
-                lhacode = [ 9000009 ])
+                lhacode = [ 622 ])
+
+Mf = Parameter(name = 'Mf',
+                nature = 'external',
+                type = 'real',
+                value = 0.0005110000000000001,
+                texname = '\\text{Mf}',
+                lhablock = 'MASS',
+                lhacode = [ 623 ])
 
 MH = Parameter(name = 'MH',
                nature = 'external',
@@ -351,7 +359,15 @@ WAp = Parameter(name = 'WAp',
                 value = 1.,
                 texname = '\\text{WAp}',
                 lhablock = 'DECAY',
-                lhacode = [ 9000009 ])
+                lhacode = [ 622 ])
+
+Wf = Parameter(name = 'Wf',
+                nature = 'external',
+                type = 'real',
+                value = 0.,
+                texname = '\\text{Wf}',
+                lhablock = 'DECAY',
+                lhacode = [ 623 ])
 
 WH = Parameter(name = 'WH',
                nature = 'external',

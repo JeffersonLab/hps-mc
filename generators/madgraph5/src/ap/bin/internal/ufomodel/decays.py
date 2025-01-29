@@ -10,7 +10,7 @@ import particles as P
 Decay_Ap = Decay(name = 'Decay_Ap',
                  particle = P.Ap,
                  partial_widths = {(P.chi,P.chi__tilde__):'((4*GChi**2*MAp**2 + 8*GChi**2*MChi**2)*cmath.sqrt(MAp**4 - 4*MAp**2*MChi**2))/(48.*cmath.pi*abs(MAp)**3)',
-                                   (P.e__minus__,P.e__plus__):'((4*Ge**2*MAp**2 + 8*Ge**2*Me**2)*cmath.sqrt(MAp**4 - 4*MAp**2*Me**2))/(48.*cmath.pi*abs(MAp)**3)',
+                                   (P.f__minus__,P.f__plus__):'((4*Ge**2*MAp**2 + 8*Ge**2*Me**2)*cmath.sqrt(MAp**4 - 4*MAp**2*Me**2))/(48.*cmath.pi*abs(MAp)**3)',
                                    (P.m__minus__,P.m__plus__):'((4*Ge**2*MAp**2 + 8*Ge**2*MM**2)*cmath.sqrt(MAp**4 - 4*MAp**2*MM**2))/(48.*cmath.pi*abs(MAp)**3)',
                                    (P.N,P.N__tilde__):'((4*GAPN**2*MAp**2 + 8*GAPN**2*MNul**2)*cmath.sqrt(MAp**4 - 4*MAp**2*MNul**2))/(48.*cmath.pi*abs(MAp)**3)',
                                    (P.tt__minus__,P.tt__plus__):'((4*Ge**2*MAp**2 + 8*Ge**2*MTA**2)*cmath.sqrt(MAp**4 - 4*MAp**2*MTA**2))/(48.*cmath.pi*abs(MAp)**3)'})
@@ -35,6 +35,10 @@ Decay_d = Decay(name = 'Decay_d',
 
 Decay_e__minus__ = Decay(name = 'Decay_e__minus__',
                          particle = P.e__minus__,
+                         partial_widths = {(P.W__minus__,P.ve):'((Me**2 - MW**2)*((ee**2*Me**2)/(2.*sw**2) + (ee**2*Me**4)/(2.*MW**2*sw**2) - (ee**2*MW**2)/sw**2))/(32.*cmath.pi*abs(Me)**3)'})
+
+Decay_f__minus__ = Decay(name = 'Decay_f__minus__',
+                         particle = P.f__minus__,
                          partial_widths = {(P.W__minus__,P.ve):'((Me**2 - MW**2)*((ee**2*Me**2)/(2.*sw**2) + (ee**2*Me**4)/(2.*MW**2*sw**2) - (ee**2*MW**2)/sw**2))/(32.*cmath.pi*abs(Me)**3)'})
 
 Decay_H = Decay(name = 'Decay_H',

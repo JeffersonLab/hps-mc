@@ -6,7 +6,7 @@ C     By the MadGraph5_aMC@NLO Development Team
 C     Visit launchpad.net/madgraph5 and amcatnlo.web.cern.ch
 C     
 C     Process: e- n > e- n ap DQND=0 / chi @1
-C     *   Decay: ap > e+ e- WEIGHTED<=2
+C     *   Decay: ap > f+ f- WEIGHTED<=2
 C     
 C     RETURNS DIFFERENTIAL CROSS SECTION 
 C     FOR MULTIPLE PROCESSES IN PROCESS GROUP
@@ -507,7 +507,7 @@ C       Flip CM_RAP (to get rapidity right)
         IF (IMODE.EQ.0D0.AND.NB_PASS_CUTS.LT.2**12)THEN
           NB_PASS_CUTS = NB_PASS_CUTS + 1
         ENDIF
-        IF(IPROC.EQ.1) DSIGPROC=DSIG1(P1,WGT,IMODE)  ! e- n > e- n e+ e-
+        IF(IPROC.EQ.1) DSIGPROC=DSIG1(P1,WGT,IMODE)  ! e- n > e- n f+ f-
       ENDIF
 
       IF (LAST_ICONF.NE.-1.AND.IMIRROR.EQ.2) THEN

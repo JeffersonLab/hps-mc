@@ -52,18 +52,6 @@ C
       REAL*8 XVAR,ptmax1,ptmax2,htj,tmp,inclht
       real*8 ptemp(0:3), ptemp2(0:3)
       character*20 formstr
-
-C
-C    FIXED TARGET
-C
-      logical xgoodf
-      integer jf
-
-      real*8 pboost(0:3), plab(0:3, nexternal)
-C
-C     FIXED TARGET END
-C
-
 C
 C     PARAMETERS
 C
@@ -73,11 +61,9 @@ C
 C     EXTERNAL
 C
       REAL*8 R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,PtDot
-      REAL*8 theta,thetax,thetay  ! fxed target
       logical cut_bw,setclscales,dummy_cuts
       external R2,DOT,ET,RAP,DJ,SumDot,pt,ALPHAS,cut_bw,setclscales,PtDot
       external dummy_cuts
-      external theta,thetax,thetay
 C
 C     GLOBAL
 C
@@ -131,13 +117,11 @@ C
 C     SPECIAL CUTS
 C
       LOGICAL  IS_A_J(NEXTERNAL),IS_A_L(NEXTERNAL)
-      ! new variable for HPS fixed-target
-      LOGICAL  IS_A_LP(NEXTERNAL),IS_A_LM(NEXTERNAL)
       LOGICAL  IS_A_B(NEXTERNAL),IS_A_A(NEXTERNAL),IS_A_ONIUM(NEXTERNAL)
       LOGICAL  IS_A_NU(NEXTERNAL),IS_HEAVY(NEXTERNAL)
       logical  do_cuts(nexternal)
       COMMON /TO_SPECISA/IS_A_J,IS_A_A,IS_A_L,IS_A_B,IS_A_NU,IS_HEAVY,
-     . IS_A_ONIUM, IS_A_LP,IS_A_LM, do_cuts
+     . IS_A_ONIUM, do_cuts
 
 C
 C     MERGING SCALE CUT
@@ -326,73 +310,6 @@ C $B$ DESACTIVATE_CUT $E$ !This is a tag for MadWeight
       if(debug) write (*,*) '============================='
       if(debug) write (*,*) ' EVENT STARTS TO BE CHECKED  '
       if(debug) write (*,*) '============================='
-
-c****************************************     
-c     Special Fixed-Target cuts
-c****************************************
-
-c.....first boost
-      pboost(0)=1d0
-      pboost(1)=0d0
-      pboost(2)=0d0
-      pboost(3)=0d0
-      if (xbk(2)*xbk(1) .gt. 0d0) then
-         pboost(0)=ebeam(1)+ebeam(2)
-         pboost(3)=   sqrt(ebeam(1)**2-mbeam(1)**2)
-     $        - sqrt(ebeam(2)**2-mbeam(2)**2)
-      endif
-
-      do j=1,nexternal
-         call boostx(p(0,j),pboost,plab(0,j))
-      enddo
-
-c      goto 777
-c...  inclusive cuts for leptons      
-      xgoodf=.false.
-      jf=0
-
-      do i=nincoming+1,nexternal
-c...     Is it a lepton
-         if(is_a_l(i)) then
-c...        Is there a positron that passes inclusivity criteria?            
-            if(
-     $         (is_a_lp(i)) .and.
-     $         (thetax(plab(0,i)) .gt. thetaxminpos).and.
-     $         (thetax(plab(0,i)) .lt. thetaxmaxpos).and.
-     $         (thetay(plab(0,i)) .gt. thetayminpos).and.
-     $         (thetay(plab(0,i)) .lt. thetaymaxpos).and.
-     $         (plab(0,i) .gt. eminpos) .and. (plab(0,i) .lt. emaxpos)) then
-               xgoodf=.true.               
-            endif
-
-c...        Prepare for pair. criteria            
-            if(jf.eq.0) then
-               jf=i
-            else
-c...           m(i,j) cut?
-               if(dSqrt(Sumdot(plab(0,i),plab(0,jf),+1d0)).lt.mmeemin) then
-                  if(debug) write(*,*) "mmee too small -> fails"
-                  passcuts=.false.
-                  return
-               endif
-               if(dSqrt(Sumdot(plab(0,i),plab(0,jf),+1d0)).gt.mmeemax) then
-                  if(debug) write(*,*) "mmee too big -> fails"
-                  passcuts=.false.
-                  return
-               endif
-            endif ! Close pair criteria
-         endif ! Close if is_a_l
-      enddo ! Close loop over particles
-
-c...  Check: were inclusive criteria satisfied?      
-      if(.not. xgoodf) then
-         if(debug) write(*,*) "no positron pass inclusive -> fails"
-         passcuts=.false.
-         return
-      endif
-
- 777  continue
-
 c     
 c     p_t min & max cuts
 c     

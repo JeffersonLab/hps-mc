@@ -648,50 +648,6 @@ c-----
       return
       end
 
-c-----
-c  FIXED TARGET begin
-c-----
-      
-      double precision function thetax(p)
-c************************************************************************
-c     Returns abs(angle) in x-drn w.r.t. beam line (z-drn) of particle
-c************************************************************************
-      IMPLICIT NONE
-c
-c     Arguments
-c
-      double precision p(0:3)
-c-----
-c  Begin Code
-c-----
-
-      thetax=dabs(datan(p(1)/p(3)))
-
-      return
-      end
-
-      double precision function thetay(p)
-c************************************************************************
-c     Returns abs(angle) in y-drn w.r.t. beam line (z-drn) of particle
-c************************************************************************
-      IMPLICIT NONE
-c
-c     Arguments
-c
-      double precision p(0:3)
-c-----
-c  Begin Code
-c-----
-
-      thetay=dabs(datan(p(2)/p(3)))
-
-      return
-      end
-
-c-----
-c  FIXED TARGET end
-c-----
-
       double precision function eta(p)
 c************************************************************************
 c     Returns pseudo rapidity of particle

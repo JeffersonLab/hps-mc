@@ -16,7 +16,7 @@
 # Process(es) requested : mg2 input                                  *
 #*********************************************************************
 # Begin PROCESS # This is TAG. Do not modify this line
-e- n > e- n ap /chi , (ap > e+ e-)           #Process
+e- n > e- n ap /chi , (ap > f+ f-)           #Process
 # Be carefull the coupling are here in MG5 convention
 DQND=0
           
@@ -28,7 +28,7 @@ done               # this tells MG there are no more procs
 # Model information                                                  *
 #*********************************************************************
 # Begin MODEL  # This is TAG. Do not modify this line
-DarkphotonNuc_UFO_3
+SM_N_Ap
 # End   MODEL  # This is TAG. Do not modify this line
 #*********************************************************************
 # Start multiparticle definitions                                    *
