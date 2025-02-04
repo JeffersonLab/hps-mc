@@ -4,7 +4,7 @@
 No idea what this is supposed to do.
 """
 
-from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount
+from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount, HPSTR
 
 job.description = 'signal-pulse from overlay to recon'
 
@@ -55,7 +55,7 @@ count_pulser = LCIOCount(inputs=evio_to_lcio.output_files())
 ## Overlay signal with pulser data
 overlay = JobManager(steering='overlay',
                      inputs=filter_events.output_files(),
-                     overlay_file=evio_to_lcio.output_files()[0],
+                     overlay_file=pulser_file_name[0],
                      outputs=['%s.slcio' % signal_pulser_name])
 
 ## Space overlaid events
@@ -83,6 +83,9 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
+## Convert LCIO to ROOT
+cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
+
 ## Add the components
-job.add([filter_events, count_filter, evio_to_lcio, count_pulser, overlay, space_overlay,
-         count_space_overlay, readout, count_readout, recon, count_recon])
+job.add([filter_events, count_filter, overlay, space_overlay,
+         count_space_overlay, readout, count_readout, recon, count_recon, cnv])

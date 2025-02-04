@@ -69,6 +69,21 @@ e__minus__ = Particle(pdg_code = 11,
 
 e__plus__ = e__minus__.anti()
 
+f__minus__ = Particle(pdg_code = 611,
+                      name = 'f-',
+                      antiname = 'f+',
+                      spin = 2,
+                      color = 1,
+                      mass = Param.Me,
+                      width = Param.ZERO,
+                      texname = 'f-',
+                      antitexname = 'f+',
+                      charge = -1,
+                      GhostNumber = 0,
+                      LeptonNumber = 1)
+
+f__plus__ = f__minus__.anti()
+
 m__minus__ = Particle(pdg_code = 13,
                       name = 'm-',
                       antiname = 'm+',
@@ -363,7 +378,7 @@ G = Particle(pdg_code = 21,
              GhostNumber = 0,
              LeptonNumber = 0)
 
-Ap = Particle(pdg_code = 9000009,
+Ap = Particle(pdg_code = 622,
               name = 'Ap',
               antiname = 'Ap',
               spin = 3,

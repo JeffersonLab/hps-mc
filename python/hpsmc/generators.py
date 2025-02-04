@@ -284,8 +284,8 @@ class MG(EventGenerator):
             if "APMASS" in data[i] and self.apmass is not None:
                 data[i] = "       622     %.7fe-03   # APMASS" % (self.apmass) + '\n'
                 self.logger.debug("APMASS in param card set to %d" % self.apmass)
-            if "MAp" in data[i] and "9000009" in data[i] and self.apmass is not None:
-                data[i] = "  9000009 %.7fe-03 # MAp" % (self.apmass) + '\n'
+            if "MAp" in data[i] and "622" in data[i] and self.apmass is not None:
+                data[i] = "  622 %.7fe-03 # MAp" % (self.apmass) + '\n'
             if "map" in data[i] and self.map is not None:
                 data[i] = "      622 %.7fe-03 # map" % (self.map) + '\n'
             if "mpid" in data[i] and self.mpid is not None:

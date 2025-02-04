@@ -6,7 +6,7 @@ C     By the MadGraph5_aMC@NLO Development Team
 C     Visit launchpad.net/madgraph5 and amcatnlo.web.cern.ch
 C     
 C     Process: e- n > e- n ap DQND=0 / chi @1
-C     *   Decay: ap > e+ e- WEIGHTED<=2
+C     *   Decay: ap > f+ f- WEIGHTED<=2
 C     
 C     RETURNS DIFFERENTIAL CROSS SECTION
 C     Input:
@@ -130,7 +130,7 @@ C     Continue only if IMODE is 0, 4 or 5
       ENDIF
       PD(0) = 0D0
       IPROC = 0
-      IPROC=IPROC+1  ! e- n > e- n e+ e-
+      IPROC=IPROC+1  ! e- n > e- n f+ f-
       PD(IPROC)=EM1*N2
       PD(0)=PD(0)+DABS(PD(IPROC))
       IF (IMODE.EQ.4)THEN

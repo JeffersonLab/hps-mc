@@ -1,15 +1,4 @@
 C
-C     FIXED TARGET CUTS
-C
-      real*8 eminpos, thetaminpos, mmeemin, mmeemax
-     $     , emaxpos, thetamaxpos, thetaxminpos, thetaxmaxpos
-     $     , thetayminpos, thetaymaxpos
-      COMMON /TO_FT_CUTS/
-     $     eminpos, thetaminpos, mmeemin, mmeemax
-     $     , emaxpos, thetamaxpos, thetaxminpos, thetaxmaxpos
-     $     , thetayminpos, thetaymaxpos
-
-C
 C     AUTOMATIC CUTS
 C
       REAL*8 PTJ,PTB,PTA,PTL,PTONIUM  ! ptmin

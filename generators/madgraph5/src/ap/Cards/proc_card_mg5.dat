@@ -40,6 +40,6 @@ define l+ = e+ mu+
 define l- = e- mu-
 define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
-import model DarkphotonNuc_UFO_3
-generate e- n > e- n ap /chi DQND=0, (ap > e+ e-)
-output apWAB
+import model SM_N_Ap
+generate e- n > e- n ap /chi DQND=0, (ap > f+ f-)
+output ap_new_model

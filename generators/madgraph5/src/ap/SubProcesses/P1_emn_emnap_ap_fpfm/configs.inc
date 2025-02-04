@@ -2,7 +2,7 @@ C     Diagram 1
       DATA MAPCONFIG(1)/1/
       DATA TSTRATEGY(1)/1/
       DATA (IFOREST(I,-1,1),I=1,2)/6,5/
-      DATA (SPROP(I,-1,1),I=1,1)/9000009/
+      DATA (SPROP(I,-1,1),I=1,1)/622/
       DATA TPRID(-1,1)/0/
       DATA (IFOREST(I,-2,1),I=1,2)/2,4/
       DATA TPRID(-2,1)/22/
@@ -17,7 +17,7 @@ C     Diagram 2
       DATA MAPCONFIG(2)/2/
       DATA TSTRATEGY(2)/2/
       DATA (IFOREST(I,-1,2),I=1,2)/6,5/
-      DATA (SPROP(I,-1,2),I=1,1)/9000009/
+      DATA (SPROP(I,-1,2),I=1,1)/622/
       DATA TPRID(-1,2)/0/
       DATA (IFOREST(I,-2,2),I=1,2)/-1,3/
       DATA (SPROP(I,-2,2),I=1,1)/11/

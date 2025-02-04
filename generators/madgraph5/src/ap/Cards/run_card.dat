@@ -23,7 +23,7 @@
 # Number of events and rnd seed                                      *
 # Warning: Do not generate more than 1M events in a single run       *
 #*********************************************************************
-  10000 = nevents ! Number of unweighted events requested 
+  1000 = nevents ! Number of unweighted events requested 
   0   = iseed   ! rnd seed (0=assigned automatically=default))
 #*********************************************************************
 # Collider type and energy                                           *
@@ -34,9 +34,7 @@
      0        = lpp1    ! beam 1 type 
      0        = lpp2    ! beam 2 type
      3.74     = ebeam1  ! beam 1 total energy in GeV
-     171.24   = ebeam2  ! beam 2 total energy in GeV
-     0.000511 = mbeam1  ! beam 1 mass in GeV
-     171.24   = mbeam2  ! beam 2 mass in GeV
+     171.24     = ebeam2  ! beam 2 total energy in GeV
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
 #*********************************************************************
@@ -108,23 +106,6 @@
  # (note that etmiss/ptll/ptheavy/ht/sorted cuts always apply)
  #*********************************************************************
    False  = cut_decays    ! Cut decay products 
-
-#*********************************************************************
-# Fixed-Target Cuts                                                  *
-#*********************************************************************
-
- 0.0   = eminpos      ! min E for l+
- 100.0 = emaxpos      ! max E for l+
- 0.0   = thetaminpos  ! min angle for l+
- 100.0 = thetamaxpos  ! max angle for l+
- 0.0   = thetaxminpos ! min x angle for l+ -> phi0
- 100.0 = thetaxmaxpos ! max x angle for l+ -> phi0
- 0.0   = thetayminpos ! min y angle for l+ -> tanL
- 100.0 = thetaymaxpos ! max y angle for l+ -> tanL
-
- 0.0   = mmeemin      ! min invariant mass for any lepton pair
- 100.0 = mmeemax      ! max invariant mass for any lepton pair
-
 #*********************************************************************
 # Standard Cuts                                                      *
 #*********************************************************************
@@ -147,41 +128,16 @@
 #*********************************************************************
 # Minimum and maximum DeltaR distance                                *
 #*********************************************************************
- 0.0 = drll    ! min distance between leptons 
- -1.0  = drllmax ! max distance between leptons
 #*********************************************************************
 # Minimum and maximum invariant mass for pairs                       *
 #*********************************************************************
- 0.0   = mmll    ! min invariant mass of l+l- (same flavour) lepton pair
- -1.0  = mmllmax ! max invariant mass of l+l- (same flavour) lepton pair
  {} = mxx_min_pdg ! min invariant mass of a pair of particles X/X~ (e.g. {6:250})
  {'default': False} = mxx_only_part_antipart ! if True the invariant mass is applied only 
                        ! to pairs of particle/antiparticle and not to pairs of the same pdg codes.  
- #*********************************************************************
- # Minimum and maximum invariant mass for all letpons                 *
- #*********************************************************************
- 0.0   = mmnl    ! min invariant mass for all letpons (l+- and vl) 
- -1.0  = mmnlmax ! max invariant mass for all letpons (l+- and vl) 
- #*********************************************************************
- # Minimum and maximum pt for 4-momenta sum of leptons / neutrino     *
- #  for pair of lepton includes only same flavor, opposite charge
- #*********************************************************************
- 0.0   = ptllmin  ! Minimum pt for 4-momenta sum of leptons(l and vl)
- -1.0  = ptllmax  ! Maximum pt for 4-momenta sum of leptons(l and vl)
 #*********************************************************************
 # Inclusive cuts                                                     *
 #*********************************************************************
  0.0  = ptheavy   ! minimum pt for at least one heavy final state
- 0.0  = xptl ! minimum pt for at least one charged lepton 
- #*********************************************************************
- # Control the pt's of leptons sorted by pt                           *
- #*********************************************************************
- 0.0   = ptl1min ! minimum pt for the leading lepton in pt
- 0.0   = ptl2min ! minimum pt for the second lepton in pt
- 0.0   = ptl3min ! minimum pt for the third lepton in pt
- -1.0  = ptl1max ! maximum pt for the leading lepton in pt 
- -1.0  = ptl2max ! maximum pt for the second lepton in pt
- -1.0  = ptl3max ! maximum pt for the third lepton in pt
 #*********************************************************************
 # maximal pdg code for quark to be considered as a light jet         *
 # (otherwise b cuts are applied)                                     *

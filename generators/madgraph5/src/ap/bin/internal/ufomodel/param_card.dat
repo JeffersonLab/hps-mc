@@ -25,9 +25,10 @@ Block MASS
    15 1.777000e+00 # MTA 
    23 9.118760e+01 # MZ 
    25 1.200000e+02 # MH 
+  622 1.000000e-01 # MAp 
+  623 5.110000e-04 # Mf 
   9000001 1.000000e+00 # MChi 
   9000002 1.740000e+02 # MNul 
-  9000009 1.000000e-01 # MAp 
 ##  Not dependent paramater.
 ## Those values should be edited following analytical the 
 ## analytical expression. Some generator could simply ignore 
@@ -44,6 +45,7 @@ Block MASS
   24 79.824360 # W+ : cmath.sqrt(MZ**2/2. + cmath.sqrt(MZ**4/4. - (aEW*cmath.pi*MZ**2)/(Gf*cmath.sqrt(2)))) 
   21 0.000000 # G : 0.0 
   251 79.824360 # phi+ : cmath.sqrt(MZ**2/2. + cmath.sqrt(MZ**4/4. - (aEW*cmath.pi*MZ**2)/(Gf*cmath.sqrt(2)))) 
+  611 0.000511 # f- : Me 
   9000004 91.187600 # ghZ : MZ 
   250 91.187600 # phi0 : MZ 
 
@@ -54,7 +56,8 @@ DECAY   6 1.508336e+00
 DECAY  23 2.495200e+00 
 DECAY  24 2.085000e+00 
 DECAY  25 5.753088e-03 
-DECAY 9000009 1.000000e+00 
+DECAY 622 1.000000e+00 
+DECAY 623 0.000000e+00 
 ##  Not dependent paramater.
 ## Those values should be edited following analytical the 
 ## analytical expression. Some generator could simply ignore 
@@ -63,6 +66,7 @@ DECAY  12 0.000000 # ve : 0.0
 DECAY  14 0.000000 # vm : 0.0 
 DECAY  16 0.000000 # vt : 0.0 
 DECAY  11 0.000000 # e- : 0.0 
+DECAY  611 0.000000 # f- : 0.0 
 DECAY  13 0.000000 # m- : 0.0 
 DECAY  15 0.000000 # tt- : 0.0 
 DECAY  2 0.000000 # u : 0.0 
@@ -122,6 +126,11 @@ Block YUKAWA
 # QUANTUM NUMBERS OF NEW STATE(S) (NON SM PDG CODE)
 #===========================================================
 
+Block QNUMBERS 611  # f- 
+        1 -3  # 3 times electric charge
+        2 2  # number of spin states (2S+1)
+        3 1  # colour rep (1: singlet, 3: triplet, 8: octet)
+        4 1  # Particle/Antiparticle distinction (0=own anti)
 Block QNUMBERS 9000001  # chi 
         1 0  # 3 times electric charge
         2 2  # number of spin states (2S+1)
@@ -162,7 +171,7 @@ Block QNUMBERS 9000008  # ghAp
         2 -1  # number of spin states (2S+1)
         3 1  # colour rep (1: singlet, 3: triplet, 8: octet)
         4 1  # Particle/Antiparticle distinction (0=own anti)
-Block QNUMBERS 9000009  # Ap 
+Block QNUMBERS 622  # Ap 
         1 0  # 3 times electric charge
         2 3  # number of spin states (2S+1)
         3 1  # colour rep (1: singlet, 3: triplet, 8: octet)
