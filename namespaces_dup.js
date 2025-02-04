@@ -236,6 +236,7 @@ var namespaces_dup =
       [ "signal_name", "namespacesignal__beam__merge__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ]
     ] ],
     [ "signal_pulser_overlay_to_recon_job", "namespacesignal__pulser__overlay__to__recon__job.html", [
+      [ "cnv", "namespacesignal__pulser__overlay__to__recon__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "count_filter", "namespacesignal__pulser__overlay__to__recon__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
       [ "count_pulser", "namespacesignal__pulser__overlay__to__recon__job.html#a09eca22d605dea1eda526496a3adb8fa", null ],
       [ "count_readout", "namespacesignal__pulser__overlay__to__recon__job.html#a5335cc02f651b1d910b2705947ea52bf", null ],

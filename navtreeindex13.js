@@ -1,5 +1,7 @@
 var NAVTREEINDEX13 =
 {
+"tritrig__slic__full__chain__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4":[17,0,2,1,39,3],
+"tritrig__slic__full__chain__job_8py.html#aed50593077683605d7a49f0e580b3e2e":[17,0,2,1,39,10],
 "tritrig__slic__full__chain__job_8py_source.html":[17,0,2,1,39],
 "tritrigbeam.html":[7,14],
 "tritriggen.html":[7,15],
