@@ -1,7 +1,7 @@
 """!
 wab from generation to slic
 """
-from hpsmc.generators import MG5, StdHepConverter
+from hpsmc.generators import MG4, StdHepConverter
 from hpsmc.tools import BeamCoords, AddMother, SLIC
 
 job.description = 'wab from generation to slic'
@@ -14,8 +14,8 @@ if 'nevents' in job.params:
 else:
     nevents = 10000
 
-## Generate wab in MG5
-mg = MG5(name='WAB', event_types=['unweighted'])
+## Generate wab in MG4
+mg = MG4(name='wab', event_types=['unweighted'])
 
 ## Convert LHE output to stdhep
 cnv = StdHepConverter()

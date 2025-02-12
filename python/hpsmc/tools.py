@@ -148,8 +148,9 @@ class SLIC(Component):
         """
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
-
-        # self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
+        cl += " -f FileList3.txt "
+        
+            # self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
@@ -391,9 +392,9 @@ class HPSTR(Component):
         self.logger.debug('Set config path: %s' % self.cfg_path)
 
         # For ROOT output, automatically append the cfg key from the job params.
-        if os.path.splitext(self.input_files()[0])[1] == '.root':
-            self.append_tok = self.cfg
-            self.logger.debug('Automatically appending token to output file: %s' % self.append_tok)
+#        if os.path.splitext(self.input_files()[0])[1] == '.root':
+#            self.append_tok = self.cfg
+#            self.logger.debug('Automatically appending token to output file: %s' % self.append_tok)
 
     def required_parameters(self):
         """!
@@ -454,7 +455,7 @@ class HPSTR(Component):
         args = self.cmd_args()
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
-
+        cl += " -f FileList.txt"
         self.logger.debug("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
@@ -1014,8 +1015,10 @@ class EvioToLcio(JavaTool):
         """
         args = JavaTool.cmd_args(self)
         if not len(self.output_files()):
-            raise Exception('No output files were provided.')
-        output_file = self.output_files()[0]
+       #     raise Exception('No output files were provided.')
+      #  output_file = self.output_files()[0]
+            print("ZZ -> Modi -> Good")
+        output_file = "data_events.evio"
         args.append('-DoutputFile=%s' % os.path.splitext(output_file)[0])
         args.extend(['-d', self.detector])
         if self.run_number is not None:

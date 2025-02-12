@@ -1,7 +1,0 @@
-[Job]
-dry_run = False 
-enable_file_chaining = True 
-check_output_files = False
-enable_copy_output_files = True
-delete_rundir = True
-enable_copy_input_files = False

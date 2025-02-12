@@ -83,6 +83,7 @@ class Component(object):
         proc.communicate()
         proc.wait()
 
+
         return proc.returncode
 
     def cmd_exists(self):
