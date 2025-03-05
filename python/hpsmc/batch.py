@@ -577,7 +577,7 @@ class Auger(BatchSystem):
         if self.os is not None:
             auger_os = self.os
         else:
-            auger_os = 'general'
+            auger_os = 'el9'
         os_elem.set("name", auger_os)
         return req
 
