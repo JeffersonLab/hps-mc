@@ -1,6 +1,7 @@
 **/.DS_Store
 **/*.o
 **/*.log
+**/*.pyo
 */RunWeb
 */HTML/**
 */HTML/*/**
