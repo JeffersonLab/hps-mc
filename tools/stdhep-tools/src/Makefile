@@ -9,7 +9,7 @@ LDLIBS=-lstdhepC -lFmcfio -lgsl -lgslcblas -ltirpc
 #-l$(GSL_CBLAS_LIBRARY) -l$(GSL_LIBRARY) 
 INCFILES=-I$(STDHEP_DIR)/src/inc -I$(SRC_DIR) -I$(GSL_INCLUDE_DIRS) -I/usr/include/tirpc
 CPP=g++
-CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g -std=c++11
+CPPFLAGS=$(LOADLIBS) $(LDLIBS) -g -std=c++11 -m64
 TARGETS := $(patsubst $(SRC_DIR)/%.cc,$(BIN)/%,$(wildcard $(SRC_DIR)/*.cc))
 UTIL_SRC := $(wildcard $(SRC_DIR)/*.cpp)
 UTIL_OBJ := $(UTIL_SRC:.cpp=.o)

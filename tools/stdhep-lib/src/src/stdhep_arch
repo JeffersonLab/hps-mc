@@ -44,9 +44,9 @@ endif
 ifeq "$(UNAME)" "Darwin"
     CC=gcc
     CPP=gcc
-    F77=g77
-    CFLAGS= $(DFLG)  -I/sw/include
-    FFLAGS= $(DFLG) -fno-second-underscore
+    F77=gfortran
+    CFLAGS= $(DFLG)  -I/sw/include -m64
+    FFLAGS= $(DFLG) -fno-second-underscore  -fallow-argument-mismatch -fallow-invalid-boz -m64
     KPPFLAGS= -C -P -DUNIX
     LOCAL = -lSystem -ldl
     #BUILD_SHARED = true
@@ -59,16 +59,16 @@ ifeq "$(UNAME)" "Linux"
     CC=gcc
     CPP=gcc -E
     F77=gfortran
-    CFLAGS= $(DFLG)
-    CXFLAGS = -I/usr/X11R6/include
-    FFLAGS= $(DFLG) -fno-second-underscore -fd-lines-as-comments
+    CFLAGS= $(DFLG) -m64
+    CXFLAGS = -I/usr/X11R6/include -m64
+    FFLAGS= $(DFLG) -fno-second-underscore -fd-lines-as-comments  -fallow-argument-mismatch -fallow-invalid-boz -m64
     KPPFLAGS= -C -P -DLinux -DUNIX
     LOCAL = -lnsl -lm
     #BUILD_SHARED = true
     SHFLAG = -fPIC
     SHEXT  = so
     LIBS= -L/usr/X11R6/lib -lXm -lXt -lX11 -lXp -lXext \
-          -lm -lg2c -lnsl
+          -lm  -lnsl
 endif
 ifeq "$(UNAME)" "OSF1"
     CC=cc

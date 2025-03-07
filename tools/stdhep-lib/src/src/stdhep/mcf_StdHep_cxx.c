@@ -46,7 +46,7 @@
 #define TRUE 1
 #endif
 
-struct stdver stdver_;
+extern struct stdver stdver_;
 
 bool_t xdr_stdhep_cxx_(XDR *xdrs, int *blockid,
  				 int *ntot, char** version)
