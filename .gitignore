@@ -1,5 +1,6 @@
 # Compiled Python files
 *.pyc
+*.pyo
 
 # Build and install dirs
 build/
