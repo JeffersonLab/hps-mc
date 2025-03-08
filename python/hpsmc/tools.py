@@ -148,14 +148,64 @@ class SLIC(Component):
         """
         # SLIC needs to be run inside bash as the Geant4 setup script is a piece of #@$@#$.
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command, ' '.join(self.cmd_args()))
-        cl += " -f FileList3.txt "
-        
-            # self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
+
+        # self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
 
         return proc.returncode
+
+
+
+class SQLiteProc(Component):
+    """!
+    Copy the SQLite database file to the desired location.
+    """
+
+    def __init__(self, **kwargs):
+        """!
+        Initialize SQLiteProc to copy the SQLite file.
+        """
+
+        self.source_file = '/w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite'
+        self.destination_file = './hps_conditions_2025_03_06.sqlite'  # Modify this as needed
+
+       
+        # Ensure to call the parent constructor properly
+        Component.__init__(self, name='sqlite_file_copy', **kwargs)
+
+
+    def cmd_args(self):
+        """!
+        Return dummy command arguments to satisfy the parent class.
+        """
+        cmd_args = ["(no-command-needed)"]
+
+        if not all(isinstance(arg, str) for arg in cmd_args):
+            raise ValueError("All arguments must be strings.")
+      #  return ["(no-command-needed)"]
+        return ['--source', self.source_file, '--destination', self.destination_file]
+
+    def execute(self, log_out, log_err):
+        """!
+        Execute the file copy operation.
+        """
+        
+        try:
+            # Copy the file
+          
+            self.logger.info(f"Copying file from {self.source_file} to {self.destination_file}")
+            shutil.copy(self.source_file, self.destination_file)
+
+            # Log success
+            self.logger.info(f"Successfully copied file to {self.destination_file}")
+
+            return 0  # Success code
+
+        except Exception as e:
+            self.logger.error(f"Error during file copy: {e}")
+            return 1  # Error code
 
 
 class JobManager(Component):
@@ -392,9 +442,9 @@ class HPSTR(Component):
         self.logger.debug('Set config path: %s' % self.cfg_path)
 
         # For ROOT output, automatically append the cfg key from the job params.
-#        if os.path.splitext(self.input_files()[0])[1] == '.root':
-#            self.append_tok = self.cfg
-#            self.logger.debug('Automatically appending token to output file: %s' % self.append_tok)
+        if os.path.splitext(self.input_files()[0])[1] == '.root':
+            self.append_tok = self.cfg
+            self.logger.debug('Automatically appending token to output file: %s' % self.append_tok)
 
     def required_parameters(self):
         """!
@@ -455,7 +505,7 @@ class HPSTR(Component):
         args = self.cmd_args()
         cl = 'bash -c ". %s && %s %s"' % (self.env_script, self.command,
                                           ' '.join(self.cmd_args()))
-        cl += " -f FileList.txt"
+
         self.logger.debug("Executing '%s' with command: %s" % (self.name, cl))
         proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
@@ -1015,10 +1065,8 @@ class EvioToLcio(JavaTool):
         """
         args = JavaTool.cmd_args(self)
         if not len(self.output_files()):
-       #     raise Exception('No output files were provided.')
-      #  output_file = self.output_files()[0]
-            print("ZZ -> Modi -> Good")
-        output_file = "data_events.evio"
+            raise Exception('No output files were provided.')
+        output_file = self.output_files()[0]
         args.append('-DoutputFile=%s' % os.path.splitext(output_file)[0])
         args.extend(['-d', self.detector])
         if self.run_number is not None:

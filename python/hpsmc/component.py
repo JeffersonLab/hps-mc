@@ -66,7 +66,9 @@ class Component(object):
         self.logger = logging.getLogger("{}.{}".format(__name__, self.__class__.__name__))
 
     def cmd_line_str(self):
-        cl = [self.command]
+        cl = []
+        if self.command: 
+            cl.append(self.command)
         cl.extend(self.cmd_args())
         return ' '.join(cl)
 
@@ -82,7 +84,6 @@ class Component(object):
         proc = subprocess.Popen(self.cmd_line_str(), shell=True, stdout=log_out, stderr=log_err)
         proc.communicate()
         proc.wait()
-
 
         return proc.returncode
 
