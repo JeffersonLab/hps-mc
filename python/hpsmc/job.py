@@ -127,9 +127,11 @@ class JobScriptDatabase:
     """
 
     def __init__(self):
+        print(f'HPSMC_DIR={os.environ["HPSMC_DIR"]}')
         if 'HPSMC_DIR' not in os.environ:
             raise Exception('HPSMC_DIR is not set in the environ.')
         hps_mc_dir = os.environ['HPSMC_DIR']
+        #print(f'HPSMC_DIR={os.environ["HPSMC_DIR"]}')
         script_dir = os.path.join(hps_mc_dir, 'lib', 'python', 'jobs')
         ## dict of paths to job scripts sorted by name
         self.scripts = {}
@@ -553,12 +555,13 @@ class Job(object):
                 # logger.info("Component IO: {} -> {}".format(str(component.input_files(), component.output_files())))
 
                 # Print header to stdout
-                self.component_out.write('================ Component: %s ================\n' % component.name)
+                self.component_out.write('================ ZZ - Component: %s ================\n' % component.name)
                 self.component_out.flush()
+                self.component_out.write('================ ZZ - Component: %s -> OK ================\n' % component.name)
 
                 # Print header to stderr if output is going to a file
                 if self.component_err != sys.stderr:
-                    self.component_err.write('================ Component: %s ================\n' % component.name)
+                    self.component_err.write('================ ZZ - Component: %s ================\n' % component.name)
                     self.component_err.flush()
 
                 start = time.time()

@@ -144,7 +144,8 @@ class Batch(ABC):
         system ID that was returned, if any.
         """
         job_ids = self._get_filtered_job_ids()
-        logger.info('Submitting jobs: %s' % str(job_ids))
+        
+        logger.info('ZZ -> Modi Submitting jobs: %s' % str(job_ids))
         for job_id in job_ids:
             if not self.jobstore.has_job_id(job_id):
                 raise Exception('Job ID was not found in job store: %s' % job_id)
@@ -211,7 +212,16 @@ class Batch(ABC):
         Get a list of job IDs to submit based on parsed command line options and whether output files are being checked.
         """
         submit_ids = self.jobstore.get_job_ids()
+        if len(submit_ids) == 0:
+            print("submit_ids is empty.")
+        else:
+#            print("submit_ids is not empty -> Then what it us")
+            print("submit_ids is not empty -> Its content is: {}".format(str(submit_ids)))
+            
         logger.debug('Initial pre-filtered job IDs: {}'.format(str(submit_ids)))
+        print("self.start_job_num: ", self.start_job_num)
+        print("self.end_job_num: ", self.end_job_num)
+
         if self.start_job_num:
             submit_ids = [job_id for job_id in submit_ids
                           if int(job_id) >= self.start_job_num and int(job_id) <= self.end_job_num]
@@ -220,7 +230,7 @@ class Batch(ABC):
         logger.debug('job IDs after range check: {}'.format(str(submit_ids)))
         if self.check_output:
             submit_ids = self._job_ids_missing_output(submit_ids)
-            logger.info('job IDs after output file check: {}'.format(str(submit_ids)))
+            logger.info('ZZ Check: job IDs after output file check: {}'.format(str(submit_ids)))
         return submit_ids
 
     def _job_ids_missing_output(self, job_ids):
