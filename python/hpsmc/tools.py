@@ -157,6 +157,57 @@ class SLIC(Component):
         return proc.returncode
 
 
+
+class SQLiteProc(Component):
+    """!
+    Copy the SQLite database file to the desired location.
+    """
+
+    def __init__(self, **kwargs):
+        """!
+        Initialize SQLiteProc to copy the SQLite file.
+        """
+
+        self.source_file = '/w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite'
+        self.destination_file = './hps_conditions_2025_03_06.sqlite'  # Modify this as needed
+
+       
+        # Ensure to call the parent constructor properly
+        Component.__init__(self, name='sqlite_file_copy', **kwargs)
+
+
+    def cmd_args(self):
+        """!
+        Return dummy command arguments to satisfy the parent class.
+        """
+        cmd_args = ["(no-command-needed)"]
+
+        if not all(isinstance(arg, str) for arg in cmd_args):
+            raise ValueError("All arguments must be strings.")
+      #  return ["(no-command-needed)"]
+        return ['--source', self.source_file, '--destination', self.destination_file]
+
+    def execute(self, log_out, log_err):
+        """!
+        Execute the file copy operation.
+        """
+        
+        try:
+            # Copy the file
+          
+            self.logger.info(f"Copying file from {self.source_file} to {self.destination_file}")
+            shutil.copy(self.source_file, self.destination_file)
+
+            # Log success
+            self.logger.info(f"Successfully copied file to {self.destination_file}")
+
+            return 0  # Success code
+
+        except Exception as e:
+            self.logger.error(f"Error during file copy: {e}")
+            return 1  # Error code
+
+
 class JobManager(Component):
     """!
     Run the hps-java JobManager class.
