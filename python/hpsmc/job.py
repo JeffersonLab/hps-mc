@@ -171,6 +171,7 @@ class Job(object):
     """
     _config_names = ['enable_copy_output_files',
                      'enable_copy_input_files',
+                     'enable_cleanup',
                      'delete_existing',
                      'delete_rundir',
                      'dry_run',
@@ -227,6 +228,7 @@ class Job(object):
         ## These attributes can all be set in the config file.
         self.enable_copy_output_files = True
         self.enable_copy_input_files = True
+        self.enable_cleanup = True
         self.delete_existing = False
         self.delete_rundir = False
         self.dry_run = False
@@ -531,7 +533,8 @@ class Job(object):
                 logger.warning('Copy output files is disabled!')
 
             # Perform job cleanup.
-            self._cleanup()
+            if self.enable_cleanup:
+                self._cleanup()
 
         logger.info('Successfully finished running job: %s' % self.description)
 
