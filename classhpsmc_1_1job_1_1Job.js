@@ -35,6 +35,7 @@ var classhpsmc_1_1job_1_1Job =
     [ "delete_rundir", "classhpsmc_1_1job_1_1Job.html#ae0a1da50999abdd81b4a2271d38d7170", null ],
     [ "description", "classhpsmc_1_1job_1_1Job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
     [ "dry_run", "classhpsmc_1_1job_1_1Job.html#a7d0d652a11d142afd36f2568ce6bed9f", null ],
+    [ "enable_cleanup", "classhpsmc_1_1job_1_1Job.html#adf8f74b15a7142ec7148320e2fc8e6d3", null ],
     [ "enable_copy_input_files", "classhpsmc_1_1job_1_1Job.html#afe33d5e2adcbcebebcad8b5fd0b96efb", null ],
     [ "enable_copy_output_files", "classhpsmc_1_1job_1_1Job.html#ae5b07c8ea81afdca9f444952c1a7407a", null ],
     [ "enable_env_config", "classhpsmc_1_1job_1_1Job.html#abb79bae957acaad42eebf24cfab4162a", null ],

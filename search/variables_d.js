@@ -2,7 +2,7 @@ var searchData=
 [
   ['macros_0',['macros',['../classhpsmc_1_1tools_1_1SLIC.html#a960130d431b811c507889eb2a13bc302',1,'hpsmc::tools::SLIC']]],
   ['madgraph_5fdir_1',['madgraph_dir',['../classhpsmc_1_1generators_1_1MG.html#ac90dbc799d17b924577136734893ea85',1,'hpsmc::generators::MG']]],
-  ['map_2',['map',['../classhpsmc_1_1generators_1_1MG.html#a9ec9dda576db2a36c42c1c3af155d07c',1,'hpsmc.generators.MG.map'],['../classhpsmc_1_1generators_1_1MG.html#afdfce14f0d12266a9956f9fe5e4fe1fd',1,'hpsmc.generators.MG.Map']]],
+  ['map_2',['map',['../classhpsmc_1_1generators_1_1MG.html#afdfce14f0d12266a9956f9fe5e4fe1fd',1,'hpsmc.generators.MG.Map'],['../classhpsmc_1_1generators_1_1MG.html#a9ec9dda576db2a36c42c1c3af155d07c',1,'hpsmc.generators.MG.map']]],
   ['max_5fjobs_3',['max_jobs',['../classhpsmc_1_1job__template_1_1JobTemplate.html#a377f2dd8e57571cad24d6a01cb340d57',1,'hpsmc::job_template::JobTemplate']]],
   ['max_5fwait_4',['max_wait',['../classhpsmc_1_1batch_1_1Pool.html#a21477e6d22ae6f8e89d3686584a60c2c',1,'hpsmc::batch::Pool']]],
   ['mchi_5',['mchi',['../classhpsmc_1_1generators_1_1MG.html#a56cc530de1c0ed23f4358138d1d9f5af',1,'hpsmc::generators::MG']]],
