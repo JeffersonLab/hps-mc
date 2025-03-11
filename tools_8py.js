@@ -1,6 +1,7 @@
 var tools_8py =
 [
     [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", "classhpsmc_1_1tools_1_1SLIC" ],
+    [ "SQLiteProc", "classhpsmc_1_1tools_1_1SQLiteProc.html", "classhpsmc_1_1tools_1_1SQLiteProc" ],
     [ "JobManager", "classhpsmc_1_1tools_1_1JobManager.html", "classhpsmc_1_1tools_1_1JobManager" ],
     [ "HPSTR", "classhpsmc_1_1tools_1_1HPSTR.html", "classhpsmc_1_1tools_1_1HPSTR" ],
     [ "StdHepTool", "classhpsmc_1_1tools_1_1StdHepTool.html", "classhpsmc_1_1tools_1_1StdHepTool" ],

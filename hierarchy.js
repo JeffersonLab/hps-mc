@@ -42,6 +42,7 @@ var hierarchy =
         [ "LHECount", "classhpsmc_1_1tools_1_1LHECount.html", null ],
         [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", null ],
         [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", null ],
+        [ "SQLiteProc", "classhpsmc_1_1tools_1_1SQLiteProc.html", null ],
         [ "StdHepCount", "classhpsmc_1_1tools_1_1StdHepCount.html", null ],
         [ "StdHepTool", "classhpsmc_1_1tools_1_1StdHepTool.html", [
           [ "AddMother", "classhpsmc_1_1tools_1_1AddMother.html", null ],

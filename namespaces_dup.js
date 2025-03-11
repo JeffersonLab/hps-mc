@@ -94,6 +94,12 @@ var namespaces_dup =
       [ "RN", "namespacebuild2021filenames.html#a09250d38aa55a02ef1c57a9c64fc3898", null ]
     ] ],
     [ "component", "namespacecomponent.html", null ],
+    [ "data_cnv_10_percent_job", "namespacedata__cnv__10__percent__job.html", [
+      [ "cnv", "namespacedata__cnv__10__percent__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacedata__cnv__10__percent__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "sqlite", "namespacedata__cnv__10__percent__job.html#af96d74e7b41d5ca965d442fde179ea3a", null ],
+      [ "tuple", "namespacedata__cnv__10__percent__job.html#a155c51da3493a0647b4e1a3b695b1c56", null ]
+    ] ],
     [ "data_cnv_job", "namespacedata__cnv__job.html", [
       [ "cnv", "namespacedata__cnv__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "description", "namespacedata__cnv__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],

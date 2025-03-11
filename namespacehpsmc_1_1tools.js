@@ -22,6 +22,7 @@ var namespacehpsmc_1_1tools =
     [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", "classhpsmc_1_1tools_1_1MoveFiles" ],
     [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", "classhpsmc_1_1tools_1_1RandomSample" ],
     [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", "classhpsmc_1_1tools_1_1SLIC" ],
+    [ "SQLiteProc", "classhpsmc_1_1tools_1_1SQLiteProc.html", "classhpsmc_1_1tools_1_1SQLiteProc" ],
     [ "StdHepCount", "classhpsmc_1_1tools_1_1StdHepCount.html", "classhpsmc_1_1tools_1_1StdHepCount" ],
     [ "StdHepTool", "classhpsmc_1_1tools_1_1StdHepTool.html", "classhpsmc_1_1tools_1_1StdHepTool" ],
     [ "TarFiles", "classhpsmc_1_1tools_1_1TarFiles.html", "classhpsmc_1_1tools_1_1TarFiles" ],
