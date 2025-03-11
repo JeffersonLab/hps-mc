@@ -167,10 +167,24 @@ class SQLiteProc(Component):
         """!
         Initialize SQLiteProc to copy the SQLite file.
         """
+        self.source_file = kwargs.get('source_file')    
+        self.destination_file = kwargs.get('destination_file')
+        
+        #You can set this under for .hpsmc file to point to a specific local database. For me I used the following in .hpsmc 
+        #[EvioToLcio]
+        #hps_java_bin_jar = /home/zshi/.m2/repository/org/hps/hps-distribution/5.2.2-SNAPSHOT/hps-distribution-5.2.2-SNAPSHOT-bin.jar
+        #java_args = -Xmx3g -XX:+UseSerialGC -Dorg.sqlite.tmpdir=/w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/tmp/ -Dorg.hps.conditions.url=jdbc:sqlite:hps_conditions_2025_03_06.sqlite
+        #[SQLiteProc]
+        #source_file = /w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite
+        #destination_file = ./hps_conditions_2025_03_06.sqlite
 
-        self.source_file = '/w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite'
-        self.destination_file = './hps_conditions_2025_03_06.sqlite'  # Modify this as needed
 
+        if self.source_file is not None:
+            self.logger.debug("Setting SQLite local copy source file from config: %s" + self.source_file) 
+            args.append(self.source_file)
+        if self.destination_file is not None:
+            self.logger.debug('Setting Job Destination file from config: %s' % self.destination_file)
+            args.append('-Dorg.hps.conditions.url=%s' % self.destination_file)
        
         # Ensure to call the parent constructor properly
         Component.__init__(self, name='sqlite_file_copy', **kwargs)
