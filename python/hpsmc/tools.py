@@ -169,16 +169,8 @@ class SQLiteProc(Component):
         """
         self.source_file = kwargs.get('source_file')    
         self.destination_file = kwargs.get('destination_file')
-        
-        #You can set this under for .hpsmc file to point to a specific local database. For me I used the following in .hpsmc 
-        #[EvioToLcio]
-        #hps_java_bin_jar = /home/zshi/.m2/repository/org/hps/hps-distribution/5.2.2-SNAPSHOT/hps-distribution-5.2.2-SNAPSHOT-bin.jar
-        #java_args = -Xmx3g -XX:+UseSerialGC -Dorg.sqlite.tmpdir=/w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/tmp/ -Dorg.hps.conditions.url=jdbc:sqlite:hps_conditions_2025_03_06.sqlite
-        #[SQLiteProc]
-        #source_file = /w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite
-        #destination_file = ./hps_conditions_2025_03_06.sqlite
 
-
+        # Set the Local SQLite Snapshot Location
         if self.source_file is not None:
             self.logger.debug("Setting SQLite local copy source file from config: %s" + self.source_file) 
             args.append(self.source_file)
