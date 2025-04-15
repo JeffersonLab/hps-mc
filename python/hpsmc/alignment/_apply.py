@@ -277,7 +277,7 @@ Compact updated by applying results from a run of pede
 
 ### Parameters Floated
 ```json
-{json.dumps(self.to_float, indent = 2)}
+{json.dumps(self.to_float, indent=2)}
 ```
 
 """)

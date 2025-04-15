@@ -67,7 +67,7 @@ class Component(object):
 
     def cmd_line_str(self):
         cl = []
-        if self.command: 
+        if self.command:
             cl.append(self.command)
         cl.extend(self.cmd_args())
         return ' '.join(cl)
