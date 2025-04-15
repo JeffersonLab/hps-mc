@@ -1,7 +1,7 @@
 """!
 @file tritrig_gen_to_recon_job.py
 
-Simulate tritrig events, add mother particle information and rotate events into beam coordinates, then 
+Simulate tritrig events, add mother particle information and rotate events into beam coordinates, then
 run through SLIC, space events, do readout and recon and finally make a minidst root file.
 """
 from hpsmc.generators import MG5, StdHepConverter
@@ -56,7 +56,7 @@ recon = JobManager(steering='recon',
 
 minidst = ProcessMiniDst(inputs=['tritrig_mom_recon.slcio'],
                          outputs=['tritrig_mom_minidst.root'])
-## 
+##
 
 
 ## Run the job
