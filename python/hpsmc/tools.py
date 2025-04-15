@@ -219,6 +219,69 @@ class SQLiteProc(Component):
             return 1  # Error code
 
 
+class ProcessMiniDst(Component):
+    """!
+    Run the make_mini_dst command on the input file.
+
+    Required parameters are: **input_file**
+    """
+    print("OK -> ProcessMiniDst ZZ Included -> Good")  # This will be printed once the class is loaded
+
+    def __init__(self, **kwargs):
+        """!
+        Initialize DumpevioComponent with default input file and the command to run.
+        """
+        self.input_file = None
+        # Ensure to call the parent constructor properly
+        Component.__init__(self, name='makeminidst',
+                           command='make_mini_dst',
+                           **kwargs)
+
+    def cmd_args(self):
+        """!
+        Setup command arguments for make_mini_dst.
+        @return list of arguments
+        """
+        # Check if input files exist
+        if not len(self.input_files()):
+            raise Exception("No input files provided to make_mini_dst.")
+
+        input_file = "data_events.slcio"
+        output_file = "mini_dst.root"
+        print(f"OK -> Make MiniDST ZZ input_file: {input_file}, output_file: {output_file}")
+
+        # Command line arguments for make_mini_dst
+        args = ['-q', '-c', '-e', '-h', '-k', '-o', output_file, input_file]
+
+        # You can add the output_root_file here if needed
+        # args.extend([output_root_file])
+
+        return args
+
+    def execute(self, log_out, log_err):
+        """!
+        Execute make_mini_dst component.
+
+        The component is executed by creating command line input
+        from command and command arguments.
+
+        @return return code of process
+        """
+        # Build the command line from command and arguments
+        cl = '{} {}'.format(self.command, ' '.join(self.cmd_args()))
+
+        # Log the command being executed
+        self.logger.info("Executing '%s' with command: %s" % (self.name, cl))
+
+        # Run the process
+        proc = subprocess.Popen(cl, shell=True, stdout=log_out, stderr=log_err)
+        proc.communicate()
+        proc.wait()
+
+        # Return the process return code
+        return proc.returncode
+
+
 class JobManager(Component):
     """!
     Run the hps-java JobManager class.
