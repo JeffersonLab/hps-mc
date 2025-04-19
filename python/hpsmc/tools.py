@@ -256,15 +256,16 @@ class ProcessMiniDst(Component):
 
         print("===== Make MiniDST with input files: ",end="")
         for i in range(len(self.input_files())):
-            print(f"{self.input_files()[i]} -> {self.output_files()[i]}")
+            print(f"{self.input_files()[i]} -> {self.output_files()[i]}", end=", ")
+        print()
 
         if self.minidst_args is None:
             args.extend(['-q', '-c', '-e', '-h', '-k'])
         else:
             args.extend(self.minidst_args)
 
-        # Command line arguments for make_mini_dst
-        args.extend(['-o', self.output_files()[0], self.input_files()])
+        args.extend(['-o', self.output_files()[0]])
+        args.extend(self.input_files())
 
         # You can add the output_root_file here if needed
         # args.extend([output_root_file])
