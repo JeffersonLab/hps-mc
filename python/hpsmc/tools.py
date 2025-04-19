@@ -253,7 +253,10 @@ class ProcessMiniDst(Component):
         @return list of arguments
         """
         args = []
-        print(f"OK -> Make MiniDST ZZ input_file: {self.input_files}, output_file: {self.output_files}")
+
+        print("===== Make MiniDST with input files: ",end="")
+        for i in range(len(self.input_files())):
+            print(f"{self.input_files()[i]} -> {self.output_files()[i]}")
 
         if self.minidst_args is None:
             args.extend(['-q', '-c', '-e', '-h', '-k'])
@@ -261,14 +264,14 @@ class ProcessMiniDst(Component):
             args.extend(self.minidst_args)
 
         # Command line arguments for make_mini_dst
-        args.extend(['-o', self.output_file[0], self.input_file[0]])
+        args.extend(['-o', self.output_files()[0], self.input_files()])
 
         # You can add the output_root_file here if needed
         # args.extend([output_root_file])
 
         return args
 
-    
+
 class JobManager(Component):
     """!
     Run the hps-java JobManager class.

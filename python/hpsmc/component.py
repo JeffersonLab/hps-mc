@@ -203,6 +203,7 @@ class Component(object):
 
     def input_files(self):
         """! Get a list of input files for this component."""
+        #! TODO: This is bad coding. It should be property
         return self.inputs
 
     def output_files(self):
@@ -211,6 +212,7 @@ class Component(object):
         By default, a series of transformations will be performed on inputs to
         transform them into outputs.
         """
+        # ! TODO: This is bad coding. It should be property
         if self.outputs is not None and len(self.outputs):
             return self.outputs
         else:
