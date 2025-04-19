@@ -637,7 +637,7 @@ class Auger(BatchSystem):
             output_elem.set("dest", dest_file)
 
         job_name = ET.SubElement(job, "Name")
-        job_name.set("name", '%ihps%i' % (year, job_id))
+        job_name.set("name", 'hps%i' % (job_id))
 
         job_err = ET.SubElement(job, "Stderr")
         stdout_file = os.path.abspath(os.path.join(self.log_dir, "job.%d.out" % job_id))
