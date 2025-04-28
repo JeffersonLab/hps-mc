@@ -724,6 +724,38 @@ class Swif(Auger):
         proc.wait()
 
 
+class Swif2(Swif):
+
+    def __init__(self):
+        super().__init__()
+
+    def _create_job_json():
+        # read the XML and export the relevant parts to SWIF-JSON format
+        pass
+
+    def submit(self):
+
+        logger.info("Submitting swif workflow: {}".format(self.workflow))
+
+        # Write request to XML file
+        json_filename = self._create_job_json()
+
+        # Add job to swif2 workflow using Auger XML file
+        cmd = ['swif2', 'import', '-file', json_filename]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
+
+        # Run the workflow
+        run_cmd = ['swif2', 'run', self.workflow]
+        proc = subprocess.Popen(run_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = proc.communicate()[0]
+        print("".join([s for s in out.decode().strip().splitlines(True) if s.strip()]))
+        proc.wait()
+
+
+
 class Local(Batch):
     """!
     Run local batch jobs sequentially.
