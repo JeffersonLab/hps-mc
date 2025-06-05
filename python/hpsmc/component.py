@@ -203,7 +203,7 @@ class Component(object):
 
     def input_files(self):
         """! Get a list of input files for this component."""
-        #! TODO: This is bad coding. It should be property
+        # ! TODO: This is bad coding. It should be property
         return self.inputs
 
     def output_files(self):

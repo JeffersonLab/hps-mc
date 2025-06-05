@@ -247,7 +247,6 @@ class ProcessMiniDst(Component):
         if not len(self.input_files()):
             raise Exception("No input files provided to make_mini_dst.")
 
-
     def cmd_args(self):
         """!
         Setup command arguments for make_mini_dst.
@@ -255,7 +254,7 @@ class ProcessMiniDst(Component):
         """
         args = []
 
-        print("===== Make MiniDST with input files: ",end="")
+        print("===== Make MiniDST with input files: ", end="")
         for i in range(len(self.input_files())):
             print(f"{self.input_files()[i]} -> {self.output_files()[i]}", end=", ")
         print()
