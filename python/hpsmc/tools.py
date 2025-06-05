@@ -177,6 +177,7 @@ class SQLiteProc(Component):
         # source_file = /w/hallb-scshelf2102/hps/zshi/swiftjob/SQLite/LocalTest/hps_conditions_2025_03_06.sqlite
         # destination_file = ./hps_conditions_2025_03_06.sqlite
 
+        # Set the Local SQLite Snapshot Location
         if self.source_file is not None:
             self.logger.debug("Setting SQLite local copy source file from config: %s" + self.source_file)
             args.append(self.source_file)
