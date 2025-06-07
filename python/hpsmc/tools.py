@@ -226,7 +226,7 @@ class ProcessMiniDst(Component):
 
     Required parameters are: **input_file**
     """
-    print("OK -> ProcessMiniDst ZZ Included -> Good")  # This will be printed once the class is loaded
+#    print("OK -> ProcessMiniDst ZZ Included -> Good")  # This will be printed once the class is loaded
 
     def __init__(self, **kwargs):
         """!

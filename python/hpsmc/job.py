@@ -507,9 +507,11 @@ class Job(object):
             if self.enable_copy_input_files:
                 # Copy input files to the run dir.
                 self._copy_input_files()
-            else:
+            # else:
                 # Symlink input files if copying is disabled.
-                self._symlink_input_files()
+                # NO NO NO NO NO!!!! WE DO NOT WANT TO COPY OR SYMLINK
+                # swif2 copies the files.
+                # self._symlink_input_files()
 
         # Save job start time
         start_time = time.time()
