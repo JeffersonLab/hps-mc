@@ -1,0 +1,24 @@
+{
+        "run_numbes": 1000,
+        "nevents": 1000,
+        "seed": 43,
+        "run_params": "4pt55",
+        "target_thickness": 0.002,
+        "beam_energy": 4550.0,
+        "num_electrons": 1500,
+        "target_x": 0.0,
+        "target_y": 0.0,
+        "target_z": -7.51,
+        "beam_sigma_x": 0.3,
+        "beam_sigma_y": 0.02,
+        "beam_rot_x": 0.0,
+        "beam_rot_y": 0.0305,
+        "beam_rot_z": 0.0,
+        "detector": "HPS_Physics2019_survey_v2p4a_L4",
+        "output_files": {
+            "WAB_unweighted_events_mom_rot.stdhep": "wab_4pt55_mom_rot_1.stdhep",
+            "WAB_unweighted_events_mom_rot.slcio": "slic/wab_4pt55_mom_rot_1.slcio"
+        },
+        "output_dir": "/sdf/data/hps/physics2021/mc/gen/wab/pass01/",
+        "job_id": 1
+}
