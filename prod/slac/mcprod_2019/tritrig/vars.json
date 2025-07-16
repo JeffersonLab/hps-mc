@@ -1,7 +1,7 @@
 {
     "run_number": [1994550],
-    "bunches": [10000],
-    "nevents": [10000],
+    "bunches": [100],
+    "nevents": [100],
     "run_params": ["4pt55"],
     "target_thickness": [0.002],
     "beam_energy": [4550.00],

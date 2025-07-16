@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export JOBDIR=/sdf/home/s/sgaiser/src/hps-mc/prod/slac/mcprod_2021/tritrig
-export RUNDIR=/fs/ddn/sdf/scratch/s/sgaiser/prod/tritrig/gen
+export JOBDIR=/home/groups/laurenat/majd/HPS/hps-mc/prod/slac/mcprod_2019/tritrig
+export RUNDIR=/home/groups/laurenat/majd/scratch/tritrig
 
-hps-mc-batch slurm -o -r 1:100 -E /sdf/home/s/sgaiser/src/hps-mc/install/bin/hps-mc-env.sh -W 9 -q milano -A HPS:hps-prod -d $RUNDIR  -c $JOBDIR/.hpsmc -l /sdf/data/hps/physics2021/mc/gen/tritrig/pass01/logs tritrig_gen_to_slic $JOBDIR/jobs.json 
+hps-mc-batch slurm -o -r 1:100 -E /home/groups/laurenat/majd/HPS/hps-mc/install/bin/hps-mc-env.sh -W 9 -q normal -d $RUNDIR  -c $JOBDIR/.hpsmc tritrig_gen_to_slic $JOBDIR/jobs.json 
 
