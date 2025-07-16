@@ -38,7 +38,7 @@
 #*********************************************************************
      0        = lpp1    ! beam 1 type 
      0        = lpp2    ! beam 2 type
-     2.3     = ebeam1  ! beam 1 total energy in GeV
+     2.3      = ebeam1  ! beam 1 total energy in GeV
      171.24     = ebeam2  ! beam 2 total energy in GeV
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
@@ -106,16 +106,16 @@
 # Fixed-Target Cuts
 # N.B. relevant lepton cuts not included: el/elmax, mmll/mmllmax, etal/etalmax..
 #******************************************************************************
- 0.05 = elminsp      ! min E for l+ & at least one l-
+ 0.100 = elminsp      ! min E for l+ & at least one l-
  100.0 = elmaxsp     ! max E for l+ & at least one l-
- 0.5 = eltotsp       ! min total E for l+ & at least one l-
+ 1.00 = eltotsp       ! min total E for l+ & at least one l-
  0.01 = mmllminsp    ! min invariant mass for at least one l+l- pair
  100.0 = mmllmaxsp   ! max invariant mass for at least one l+l- pair
  0.0 = thetalminsp   ! min angle (radial direction) for l+ and at least one l-
  100.0 = thetalmaxsp ! max angle (radial direction) for l+ and at least one l-
  0.0 = thetaxlminsp  ! min angle (x direction) for l+ and at least one l-
  100.0 = thetaxlmaxsp ! max angle (x direction) for l+ and at least one l-
- 0.01 = thetaylminsp ! min angle (y direction) for l+ and at least one l-
+ 0.005 = thetaylminsp ! min angle (y direction) for l+ and at least one l-
  100.0 = thetaylmaxsp ! max angle (y direction) for l+ and at least one l-
  0.0 = elmins        ! min E for at least one l
  100.0 = elmaxs      ! max E for at least one l
@@ -159,7 +159,7 @@
 #*********************************************************************
   0.0 = etaj    ! max rap for the jets 
   -1.0  = etab    ! max rap for the b
- -1.0  = etaa    ! max rap for the photons 
+ 0.0  = etaa    ! max rap for the photons 
  -1.0  = etal    ! max rap for the charged leptons 
  0.0  = etajmin ! min rap for the jets
  0.0  = etabmin ! min rap for the b

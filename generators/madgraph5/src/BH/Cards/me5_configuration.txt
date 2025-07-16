@@ -202,7 +202,7 @@ automatic_html_opening = False
 # amcfast = amcfast-config
 
 
-mg5_path = /projet/nucleon2/annie/background/SENA/MAdGraph5_Rouven/MG5_aMC_v2_4_2 
+mg5_path = /Users/zym/MG5_aMC_v2_4_2 
 
 # MG5 MAIN DIRECTORY
-mg5_path = /projet/nucleon2/annie/background/SENA/MAdGraph5_Rouven/MG5_aMC_v2_4_2
+mg5_path = /Users/zym/MG5_aMC_v2_4_2

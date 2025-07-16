@@ -115,7 +115,7 @@
  100.0 = thetalmaxsp ! max angle (radial direction) for l+ and at least one l-
  0.0 = thetaxlminsp  ! min angle (x direction) for l+ and at least one l-
  100.0 = thetaxlmaxsp ! max angle (x direction) for l+ and at least one l-
- 0.01 = thetaylminsp ! min angle (y direction) for l+ and at least one l-
+ 0.005 = thetaylminsp ! min angle (y direction) for l+ and at least one l-
  100.0 = thetaylmaxsp ! max angle (y direction) for l+ and at least one l-
  0.0 = elmins        ! min E for at least one l
  100.0 = elmaxs      ! max E for at least one l
@@ -159,7 +159,7 @@
 #*********************************************************************
   0.0 = etaj    ! max rap for the jets 
   -1.0  = etab    ! max rap for the b
- -1.0  = etaa    ! max rap for the photons 
+ 0.0  = etaa    ! max rap for the photons 
  -1.0  = etal    ! max rap for the charged leptons 
  0.0  = etajmin ! min rap for the jets
  0.0  = etabmin ! min rap for the b
