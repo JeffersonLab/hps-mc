@@ -1,15 +1,45 @@
 C
 C     Fixed-target CUTS
 C
-      real*8 elminsp, elmaxsp, eltotsp, mmllminsp, mmllmaxsp, thetalminsp, thetalmaxsp
-     $     , thetaxlminsp, thetaxlmaxsp, thetaylminsp, thetaylmaxsp
-     $     , thetalmins, thetalmaxs, thetaxlmins, thetaxlmaxs
-     $     , thetaylmins, thetaylmaxs, elmins, elmaxs
+
+c     positron cuts
+      real*8 eminpos, emaxpos ! min and max energy of lepton
+      real*8 thetaminpos, thetamaxpos ! min and max angle wrt beam
+      real*8 thetaxminpos, thetaxmaxpos, thetayminpos, thetaymaxpos ! min and max angle in x/y direction
+
+c     electron cuts
+      real*8 eminele, emaxele ! min and max energy of lepton
+      real*8 thetaminele, thetamaxele ! min and max angle wrt beam
+      real*8 thetaxminele, thetaxmaxele, thetayminele, thetaymaxele ! min and max angle in x/y direction
+
+c     recoil cuts
+      real*8 eminrecoil, emaxrecoil ! min and max energy of lepton
+      real*8 thetaminrecoil, thetamaxrecoil ! min and max angle wrt beam
+      real*8 thetaxminrecoil, thetaxmaxrecoil, thetayminrecoil, thetaymaxrecoil 
+
+c     any lepton
+      real*8 eminanyl, emaxanyl ! min and max energy of lepton
+      real*8 thetaminanyl, thetamaxanyl ! min and max angle wrt beam
+      real*8 thetaxminanyl, thetaxmaxanyl, thetayminanyl, thetaymaxanyl 
+
+c     pair cuts
+      real*8 eltot, mmeemin, mmeemax, thetaratiomax, thetaratiomin
+
       COMMON /TO_FT_CUTS/
-     $     elminsp, elmaxsp, eltotsp, mmllminsp, mmllmaxsp, thetalminsp, thetalmaxsp
-     $     , thetaxlminsp, thetaxlmaxsp, thetaylminsp, thetaylmaxsp
-     $     , thetalmins, thetalmaxs, thetaxlmins, thetaxlmaxs
-     $     , thetaylmins, thetaylmaxs, elmins, elmaxs
+     &     eminpos, emaxpos,
+     &     thetaminpos, thetamaxpos,
+     &     thetaxminpos, thetaxmaxpos, thetayminpos, thetaymaxpos,
+     &     eminele, emaxele,
+     &     thetaminele, thetamaxele,
+     &     thetaxminele, thetaxmaxele, thetayminele, thetaymaxele,
+     &     eminrecoil, emaxrecoil,
+     &     thetaminrecoil, thetamaxrecoil,
+     &     thetaxminrecoil, thetaxmaxrecoil, thetayminrecoil, thetaymaxrecoil,
+     &     eminanyl, emaxanyl,
+     &     thetaminanyl, thetamaxanyl,
+     &     thetaxminanyl, thetaxmaxanyl, thetayminanyl, thetaymaxanyl,
+     &     eltot, mmeemin, mmeemax, thetaratiomax, thetaratiomin
+     
 
 C
 C     AUTOMATIC CUTS

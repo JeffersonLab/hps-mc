@@ -34,17 +34,19 @@ class Component(object):
     @param kwargs  additional keyword arguments
     """
 
-    def __init__(self,
-                 name,
-                 command=None,
-                 nevents=None,
-                 seed=1,
-                 inputs=[],
-                 outputs=None,
-                 append_tok=None,
-                 output_ext=None,
-                 ignore_job_params=[],
-                 **kwargs):
+    def __init__(
+        self,
+        name,
+        command=None,
+        nevents=None,
+        seed=1,
+        inputs=[],
+        outputs=None,
+        append_tok=None,
+        output_ext=None,
+        ignore_job_params=[],
+        **kwargs
+    ):
 
         self.name = name
         self.command = command
@@ -63,14 +65,16 @@ class Component(object):
             raise Exception("The HPSMC_DIR is not set!")
 
         # Setup a logger specifically for this component. It will be configured later.
-        self.logger = logging.getLogger("{}.{}".format(__name__, self.__class__.__name__))
+        self.logger = logging.getLogger(
+            "{}.{}".format(__name__, self.__class__.__name__)
+        )
 
     def cmd_line_str(self):
         cl = []
-        if self.command: 
+        if self.command:
             cl.append(self.command)
         cl.extend(self.cmd_args())
-        return ' '.join(cl)
+        return " ".join(cl)
 
     def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         """! Generic component execution method.
@@ -81,7 +85,9 @@ class Component(object):
         @param log_err  name of log file for error
         @return error code
         """
-        proc = subprocess.Popen(self.cmd_line_str(), shell=True, stdout=log_out, stderr=log_err)
+        proc = subprocess.Popen(
+            self.cmd_line_str(), shell=True, stdout=log_out, stderr=log_err
+        )
         proc.communicate()
         proc.wait()
 
@@ -89,8 +95,15 @@ class Component(object):
 
     def cmd_exists(self):
         """! Check if the component's assigned command exists."""
-        return subprocess.call("type " + self.command, shell=True,
-                               stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
+        return (
+            subprocess.call(
+                "type " + self.command,
+                shell=True,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+            )
+            == 0
+        )
 
     def cmd_args(self):
         """! Return the command arguments of this component."""
@@ -118,8 +131,8 @@ class Component(object):
         """
         classname = self.__class__.__name__
         if classname in parser:
-            if 'loglevel' in parser[classname]:
-                loglevel = logging.getLevelName(parser[classname]['loglevel'])
+            if "loglevel" in parser[classname]:
+                loglevel = logging.getLevelName(parser[classname]["loglevel"])
                 self.logger.setLevel(loglevel)
 
     def config(self, parser):
@@ -135,10 +148,15 @@ class Component(object):
         if parser.has_section(section_name):
             for name, value in parser.items(section_name):
                 setattr(self, name, convert_config_value(value))
-                self.logger.debug("%s:%s:%s=%s" % (self.name,
-                                                   name,
-                                                   getattr(self, name).__class__.__name__,
-                                                   getattr(self, name)))
+                self.logger.debug(
+                    "%s:%s:%s=%s"
+                    % (
+                        self.name,
+                        name,
+                        getattr(self, name).__class__.__name__,
+                        getattr(self, name),
+                    )
+                )
 
     def set_parameters(self, params):
         """! Set class attributes for the component based on JSON parameters.
@@ -151,8 +169,10 @@ class Component(object):
         # Set required parameters.
         for p in self.required_parameters():
             if p not in params:
-                raise Exception("Required parameter '%s' is missing for component '%s'"
-                                % (p, self.name))
+                raise Exception(
+                    "Required parameter '%s' is missing for component '%s'"
+                    % (p, self.name)
+                )
             else:
                 if p not in self.ignore_job_params:
                     setattr(self, p, params[p])
@@ -183,7 +203,7 @@ class Component(object):
 
         Optional parameters are: **nevents**, **seed**
         """
-        return ['nevents', 'seed']
+        return ["nevents", "seed"]
 
     def required_config(self):
         """!
@@ -197,9 +217,14 @@ class Component(object):
         """! Raise an exception on the first missing config setting for this component."""
         for c in self.required_config():
             if not hasattr(self, c):
-                raise Exception('Missing required config attribute: %s:%s' % (self.__class__.__name__, c))
+                raise Exception(
+                    "Missing required config attribute: %s:%s"
+                    % (self.__class__.__name__, c)
+                )
             if getattr(self, c) is None:
-                raise Exception('Config was not set: %s:%s' % (self.__class__.__name__, c))
+                raise Exception(
+                    "Config was not set: %s:%s" % (self.__class__.__name__, c)
+                )
 
     def input_files(self):
         """! Get a list of input files for this component."""
@@ -224,10 +249,10 @@ class Component(object):
         for infile in self.input_files():
             f, ext = os.path.splitext(infile)
             if self.append_tok is not None:
-                f += '_%s' % self.append_tok
+                f += "_%s" % self.append_tok
             if self.output_ext is not None:
                 ext = self.output_ext
-            outputs.append('%s%s' % (f, ext))
+            outputs.append("%s%s" % (f, ext))
         return outputs
 
     def config_from_environ(self):
@@ -237,7 +262,10 @@ class Component(object):
             self.logger.debug("Setting config '%s' from environ" % c)
             if c.upper() in os.environ:
                 setattr(self, c, os.environ[c.upper()])
-                self.logger.debug("Set config '%s=%s' from env var '%s'" % (c, getattr(self, c), c.upper()))
+                self.logger.debug(
+                    "Set config '%s=%s' from env var '%s'"
+                    % (c, getattr(self, c), c.upper())
+                )
             else:
                 raise Exception("Missing config in environ for '%s'" % c)
 
@@ -246,7 +274,7 @@ class DummyComponent(Component):
     """! A dummy component that just prints some information instead of executing a program."""
 
     def __init__(self, **kwargs):
-        Component.__init__(self, 'dummy', 'dummy', **kwargs)
+        Component.__init__(self, "dummy", "dummy", **kwargs)
 
     def execute(self, log_out=sys.stdout, log_err=sys.stderr):
         self.logger.debug("dummy debug")

@@ -1,10 +1,16 @@
-DEFAULT_CPP_COMPILER=g++
+DEFAULT_CPP_COMPILER=clang
 DEFAULT_F2PY_COMPILER=f2py
 DEFAULT_F_COMPILER=gfortran
-MACFLAG=
+MACFLAG=-mmacosx-version-min=10.7
 lhapdf=
+
+# LINUX:
 STDLIB=-lstdc++
-STDLIB_FLAG=
+
+# OSX:
+#STDLIB=-lc++
+
+STDLIB_FLAG=-stdlib=libc++
 #end_of_make_opts_variables
 # Rest of the makefile
 

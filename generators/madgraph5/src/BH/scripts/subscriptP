@@ -1,0 +1,31 @@
+#!/bin/sh
+
+
+tarball=$1
+MGsubdir=$2
+dir=$3
+runname=$4
+eventdir=$dir
+# where events get stored -- should not be in current directory, so that they don't have to be copied each time.
+random=`perl -e 'print int(rand()*1e8*rand())'`
+echo sed -i.bak s/'.* *= iseed'/"$random = iseed"/ Cards/run_card.dat && \
+echo "SEED = $random";
+
+
+echo "$tarball";
+echo "$MGsubdir";
+echo "$dir";
+echo "$runname";
+
+rundir=/tmp/madgraph/$random
+
+mkdir /tmp/madgraph 
+
+mkdir $rundir && \
+tar xvzf $tarball -C $rundir && \
+cd $rundir/$MGsubdir && \
+sed -i.bak s/'.* *= iseed'/"$random = iseed"/ Cards/run_card.dat && \
+./bin/generate_events 0 $runname && \
+cp Events/$runname* $eventdir && \
+cd /tmp && \
+rm -r $rundir

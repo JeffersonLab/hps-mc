@@ -1,0 +1,50 @@
+#!/usr/local/bin/perl
+
+my $start=1;
+#my $nsamples=15000;
+my $nsamples=100;
+my $queue="long";
+
+#my $apdir="apTri";
+#my $mini="MG_mini_Trigg";
+#my $energy="1pt056";
+#my $mass="Trigg";
+#my $dir="Events$energy$mass";
+
+#my $apdir="apTri";
+#my $mini="MG_mini_Tri_W";
+#my $energy="1pt05";
+#my $mass="Tri1";
+#my $dir="Events$energy$mass";
+
+#my $apdir="ap";
+#my $mini="MG_mini";
+#my $energy="1pt056";
+#my $mass="Ap25MeV";
+#my $dir="Events$energy$mass";
+
+my $apdir="AP_6W_XSec2_HallB";
+my $mini="MG_mini_wab_newprocess";
+my $energy="1pt056";
+my $mass="WABff";
+my $dir="Events$energy$mass";
+
+$outdir="/nfs/slac/g/hps/hps_data/MadGraph";
+
+if(!(-e "$outdir/$dir")){
+    `mkdir $outdir/$dir`; 
+}
+#system("cd $outdir");
+system("pwd");
+system("cd $outdir;tar -zcf $mini.tar.gz $mini");
+
+for($i=$start;$i<$start+$nsamples;$i++){
+     while(`bjobs -q $queue|grep -c RUN` > 400||`bjobs -q $queue|grep -c PEND` > 50) {
+         print "waiting...";
+         system("sleep 1m"); 
+     }
+     system("sleep 1s");
+     system("bsub -W 1:00 -o ${outdir}/logs/${dir}-$i.log ${outdir}/subscriptP ${outdir}/${mini}.tar.gz ${mini}/${apdir}/ ${outdir}/$dir W${energy}GeV_${mass}_$i");
+}
+
+system("echo Jobs submitted");

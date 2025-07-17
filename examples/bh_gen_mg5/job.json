@@ -1,0 +1,16 @@
+{
+    "run_number": 14185,
+    "bunches": 1000,
+    "nevents": 1000,
+    "seed": 123,
+    "run_params": "3pt74",
+    "target_thickness": 0.002,
+    "beam_energy": 3740.0,
+    "num_electrons": 1500,
+    "target_z": 0.0,
+    "output_files": {
+            "BH_unweighted_events.lhe.gz": "BH_unweighted_events.lhe.gz"
+    },
+    "output_dir": "output",
+    "job_id": 1
+}
