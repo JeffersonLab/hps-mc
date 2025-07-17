@@ -3,4 +3,4 @@
 #SBATCH --time=6:00:00
 #SBATCH --job-name=examples
 
-hps-mc-job run -d $PWD/scratch BH_gen_job job.json
+hps-mc-job run -d $PWD/scratch BH_gen job.json
