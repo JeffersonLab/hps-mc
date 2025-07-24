@@ -20,6 +20,6 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_1.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_1.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_test/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
         "job_id": 1
     }
