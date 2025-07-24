@@ -1,0 +1,18 @@
+{
+    "run_number": [14185],
+    "bunches": [10000],
+    "nevents": [10000],
+    "run_params": ["3pt74"],
+    "target_thickness": [0.002],
+    "beam_energy": [3740.00],
+    "num_electrons": [1500],
+    "target_x": [0.0],
+    "target_y": [0.0],
+    "target_z": [0.0],
+    "beam_sigma_x": [0.3],
+    "beam_sigma_y": [0.02],
+    "beam_rot_x": [0.0],
+    "beam_rot_y": [0.0305],
+    "beam_rot_z": [0.0],
+    "detector": ["HPS_Run2021Pass1_v4newBot"]
+}

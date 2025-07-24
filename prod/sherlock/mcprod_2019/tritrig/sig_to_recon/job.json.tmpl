@@ -1,0 +1,28 @@
+{
+    "run_params": "{{ run_params }}",
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
+    "steering_files": {
+        "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+        "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSinglesWithPulserDataMerging.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon_KF_WithSpacing_pass2.lcsim"
+    },
+    "config_files": {
+        "cnv": "recoTuple_cfg.py"
+    },
+    "is_data": 0,
+    "year": 2019,
+    "input_files": {
+        "{{ input_files['tritrig'][0] }}": "signal_1.slcio",
+        "{{ input_files['tritrig'][1] }}": "signal_2.slcio",
+        "{{ input_files['tritrig'][2] }}": "signal_3.slcio",
+        "{{ input_files['tritrig'][3] }}": "signal_4.slcio",
+        "{{ input_files['tritrig'][4] }}": "signal_5.slcio"
+    },
+    "output_files": {
+        "signal_spaced_readout.slcio": "readout/tritrig_spaced/{{detector}}/tritrig_spaced_{{job_id}}.slcio",
+        "signal_spaced_recon.slcio": "recon/tritrig_spaced/{{detector}}/tritrig_spaced_{{job_id}}.slcio"
+    },
+    "output_dir": "/home/groups/laurenat/majd/scratch"
+}
