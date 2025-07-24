@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export JOBDIR=/sdf/home/s/sgaiser/src/hps-mc/prod/slac/mcprod_2021/wab
-export RUNDIR=/fs/ddn/sdf/scratch/s/sgaiser/wab/gen
+export JOBDIR=/home/groups/laurenat/majd/HPS/hps-mc/prod/sherlock/mcprod_2019/wab
+export RUNDIR=/home/groups/laurenat/majd/scratch/wab
 
-hps-mc-batch slurm -o -r 1:500 -E /sdf/home/s/sgaiser/src/hps-mc/install/bin/hps-mc-env.sh -W 9 -q milano -A HPS:hps-prod -d $RUNDIR  -c $JOBDIR/.hpsmc -l /sdf/data/hps/physics2021/mc/gen/wab/pass01/logs wab_gen_to_slic $JOBDIR/jobs.json 
+hps-mc-batch slurm -o -r 1:1000 -E /home/groups/laurenat/majd/HPS/hps-mc/install/bin/hps-mc-env.sh -W 9 -q normal -d $RUNDIR  -c $JOBDIR/.hpsmc  wab_gen_to_slic $JOBDIR/jobs.json 
 

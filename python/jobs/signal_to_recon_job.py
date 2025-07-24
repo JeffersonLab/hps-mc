@@ -1,7 +1,7 @@
 """!
 @file signal_pulser_overlay_to_recon_job.py
 
-No idea what this is supposed to do.
+Processes slic to recon without beam overlay.
 """
 
 from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, EvioToLcio, JobManager, FilterBunches, LCIOCount, HPSTR
