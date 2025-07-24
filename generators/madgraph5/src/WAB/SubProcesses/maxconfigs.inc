@@ -1,2 +1,1 @@
-      INTEGER LMAXCONFIGS
-      PARAMETER(LMAXCONFIGS=2)
+../Source/maxconfigs.inc

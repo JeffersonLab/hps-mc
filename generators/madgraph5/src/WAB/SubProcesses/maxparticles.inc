@@ -1,2 +1,1 @@
-      INTEGER MAX_PARTICLES
-      PARAMETER(MAX_PARTICLES=5)
+../Source/maxparticles.inc
