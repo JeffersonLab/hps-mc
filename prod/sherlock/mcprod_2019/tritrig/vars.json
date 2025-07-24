@@ -1,0 +1,18 @@
+{
+    "run_number": [1994550],
+    "bunches": [10000],
+    "nevents": [10000],
+    "run_params": ["4pt55"],
+    "target_thickness": [0.002],
+    "beam_energy": [4550.00],
+    "num_electrons": [1500],
+    "target_x": [0.18],
+    "target_y": [0.02],
+    "target_z": [-7.54],
+    "beam_sigma_x": [0.3],
+    "beam_sigma_y": [0.02],
+    "beam_rot_x": [0.0],
+    "beam_rot_y": [0.0305],
+    "beam_rot_z": [0.0],
+    "detector": ["HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051"]
+}
