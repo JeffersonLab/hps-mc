@@ -1,4 +1,1 @@
-      INTEGER    NEXTERNAL
-      PARAMETER (NEXTERNAL=5)
-      INTEGER    NINCOMING
-      PARAMETER (NINCOMING=2)
+../SubProcesses/P1_emn_emnepem/nexternal.inc

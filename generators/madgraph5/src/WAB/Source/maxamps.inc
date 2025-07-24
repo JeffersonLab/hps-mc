@@ -1,3 +1,1 @@
-      INTEGER    MAXAMPS, MAXFLOW, MAXPROC, MAXSPROC
-      PARAMETER (MAXAMPS=2, MAXFLOW=1)
-      PARAMETER (MAXPROC=1, MAXSPROC=1)
+../SubProcesses/P1_emn_emnepem/maxamps.inc
