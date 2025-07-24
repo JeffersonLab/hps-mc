@@ -21,7 +21,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_1.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_1.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 1
     },
     {
@@ -46,7 +46,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_2.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_2.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 2
     },
     {
@@ -71,7 +71,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_3.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_3.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 3
     },
     {
@@ -96,7 +96,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_4.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_4.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 4
     },
     {
@@ -121,7 +121,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_5.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_5.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 5
     },
     {
@@ -146,7 +146,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_6.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_6.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 6
     },
     {
@@ -171,7 +171,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_7.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_7.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 7
     },
     {
@@ -196,7 +196,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_8.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_8.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 8
     },
     {
@@ -221,7 +221,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_9.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_9.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 9
     },
     {
@@ -246,7 +246,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_10.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_10.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 10
     },
     {
@@ -271,7 +271,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_11.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_11.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 11
     },
     {
@@ -296,7 +296,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_12.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_12.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 12
     },
     {
@@ -321,7 +321,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_13.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_13.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 13
     },
     {
@@ -346,7 +346,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_14.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_14.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 14
     },
     {
@@ -371,7 +371,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_15.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_15.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 15
     },
     {
@@ -396,7 +396,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_16.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_16.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 16
     },
     {
@@ -421,7 +421,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_17.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_17.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 17
     },
     {
@@ -446,7 +446,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_18.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_18.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 18
     },
     {
@@ -471,7 +471,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_19.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_19.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 19
     },
     {
@@ -496,7 +496,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_20.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_20.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 20
     },
     {
@@ -521,7 +521,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_21.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_21.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 21
     },
     {
@@ -546,7 +546,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_22.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_22.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 22
     },
     {
@@ -571,7 +571,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_23.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_23.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 23
     },
     {
@@ -596,7 +596,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_24.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_24.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 24
     },
     {
@@ -621,7 +621,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_25.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_25.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 25
     },
     {
@@ -646,7 +646,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_26.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_26.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 26
     },
     {
@@ -671,7 +671,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_27.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_27.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 27
     },
     {
@@ -696,7 +696,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_28.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_28.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 28
     },
     {
@@ -721,7 +721,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_29.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_29.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 29
     },
     {
@@ -746,7 +746,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_30.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_30.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 30
     },
     {
@@ -771,7 +771,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_31.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_31.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 31
     },
     {
@@ -796,7 +796,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_32.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_32.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 32
     },
     {
@@ -821,7 +821,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_33.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_33.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 33
     },
     {
@@ -846,7 +846,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_34.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_34.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 34
     },
     {
@@ -871,7 +871,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_35.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_35.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 35
     },
     {
@@ -896,7 +896,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_36.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_36.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 36
     },
     {
@@ -921,7 +921,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_37.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_37.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 37
     },
     {
@@ -946,7 +946,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_38.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_38.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 38
     },
     {
@@ -971,7 +971,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_39.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_39.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 39
     },
     {
@@ -996,7 +996,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_40.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_40.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 40
     },
     {
@@ -1021,7 +1021,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_41.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_41.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 41
     },
     {
@@ -1046,7 +1046,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_42.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_42.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 42
     },
     {
@@ -1071,7 +1071,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_43.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_43.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 43
     },
     {
@@ -1096,7 +1096,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_44.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_44.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 44
     },
     {
@@ -1121,7 +1121,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_45.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_45.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 45
     },
     {
@@ -1146,7 +1146,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_46.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_46.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 46
     },
     {
@@ -1171,7 +1171,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_47.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_47.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 47
     },
     {
@@ -1196,7 +1196,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_48.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_48.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 48
     },
     {
@@ -1221,7 +1221,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_49.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_49.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 49
     },
     {
@@ -1246,7 +1246,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_50.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_50.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 50
     },
     {
@@ -1271,7 +1271,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_51.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_51.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 51
     },
     {
@@ -1296,7 +1296,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_52.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_52.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 52
     },
     {
@@ -1321,7 +1321,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_53.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_53.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 53
     },
     {
@@ -1346,7 +1346,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_54.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_54.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 54
     },
     {
@@ -1371,7 +1371,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_55.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_55.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 55
     },
     {
@@ -1396,7 +1396,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_56.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_56.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 56
     },
     {
@@ -1421,7 +1421,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_57.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_57.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 57
     },
     {
@@ -1446,7 +1446,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_58.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_58.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 58
     },
     {
@@ -1471,7 +1471,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_59.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_59.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 59
     },
     {
@@ -1496,7 +1496,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_60.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_60.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 60
     },
     {
@@ -1521,7 +1521,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_61.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_61.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 61
     },
     {
@@ -1546,7 +1546,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_62.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_62.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 62
     },
     {
@@ -1571,7 +1571,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_63.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_63.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 63
     },
     {
@@ -1596,7 +1596,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_64.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_64.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 64
     },
     {
@@ -1621,7 +1621,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_65.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_65.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 65
     },
     {
@@ -1646,7 +1646,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_66.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_66.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 66
     },
     {
@@ -1671,7 +1671,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_67.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_67.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 67
     },
     {
@@ -1696,7 +1696,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_68.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_68.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 68
     },
     {
@@ -1721,7 +1721,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_69.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_69.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 69
     },
     {
@@ -1746,7 +1746,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_70.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_70.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 70
     },
     {
@@ -1771,7 +1771,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_71.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_71.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 71
     },
     {
@@ -1796,7 +1796,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_72.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_72.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 72
     },
     {
@@ -1821,7 +1821,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_73.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_73.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 73
     },
     {
@@ -1846,7 +1846,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_74.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_74.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 74
     },
     {
@@ -1871,7 +1871,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_75.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_75.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 75
     },
     {
@@ -1896,7 +1896,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_76.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_76.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 76
     },
     {
@@ -1921,7 +1921,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_77.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_77.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 77
     },
     {
@@ -1946,7 +1946,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_78.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_78.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 78
     },
     {
@@ -1971,7 +1971,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_79.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_79.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 79
     },
     {
@@ -1996,7 +1996,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_80.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_80.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 80
     },
     {
@@ -2021,7 +2021,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_81.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_81.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 81
     },
     {
@@ -2046,7 +2046,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_82.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_82.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 82
     },
     {
@@ -2071,7 +2071,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_83.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_83.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 83
     },
     {
@@ -2096,7 +2096,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_84.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_84.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 84
     },
     {
@@ -2121,7 +2121,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_85.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_85.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 85
     },
     {
@@ -2146,7 +2146,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_86.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_86.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 86
     },
     {
@@ -2171,7 +2171,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_87.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_87.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 87
     },
     {
@@ -2196,7 +2196,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_88.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_88.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 88
     },
     {
@@ -2221,7 +2221,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_89.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_89.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 89
     },
     {
@@ -2246,7 +2246,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_90.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_90.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 90
     },
     {
@@ -2271,7 +2271,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_91.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_91.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 91
     },
     {
@@ -2296,7 +2296,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_92.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_92.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 92
     },
     {
@@ -2321,7 +2321,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_93.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_93.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 93
     },
     {
@@ -2346,7 +2346,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_94.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_94.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 94
     },
     {
@@ -2371,7 +2371,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_95.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_95.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 95
     },
     {
@@ -2396,7 +2396,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_96.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_96.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 96
     },
     {
@@ -2421,7 +2421,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_97.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_97.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 97
     },
     {
@@ -2446,7 +2446,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_98.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_98.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 98
     },
     {
@@ -2471,7 +2471,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_99.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_99.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 99
     },
     {
@@ -2496,7 +2496,7 @@
             "tritrig_mom_rot.stdhep": "tritrig_4pt55_mom_rot_100.stdhep",
             "tritrig_mom_rot.slcio": "slic/tritrig_4pt55_mom_rot_100.slcio"
         },
-        "output_dir": "/home/groups/laurenat/majd/2019_prod1/",
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig",
         "job_id": 100
     }
 ]
