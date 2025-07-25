@@ -26,24 +26,14 @@ if len(signal_file_name) == 0:
 ## Base name of intermediate signal files
 signal_name = 'signal'
 
-
-
 ## Filter signal events and catenate files before overlaying with pulser data
-filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name,
-                                               outputs=['%s_filt.slcio' % signal_name],
-                                               event_interval=0, num_hodo_hits=1)
+filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name, outputs=['%s_filt.slcio' % signal_name], event_interval=0, num_hodo_hits=1)
 
 ## Count filtered events
 count_filter = LCIOCount(inputs=filter_events.output_files())
 
-
-
-
 ## Space overlaid events
-space_signal = FilterBunches(inputs=filter_events.output_files(),
-                              filter_no_cuts=True,
-                              outputs=['%s_spaced.slcio' % signal_name],
-                              filter_event_interval=250)
+space_signal = FilterBunches(inputs=filter_events.output_files(), filter_no_cuts=True, outputs=['%s_spaced.slcio' % signal_name], filter_event_interval=250)
 
 ## Print number of merged events
 count_space_overlay = LCIOCount(inputs=space_signal.output_files())
@@ -64,8 +54,6 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
-## Convert LCIO to ROOT
-#cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
 
 ## Add the components
 job.add([filter_events, count_filter, space_signal,
