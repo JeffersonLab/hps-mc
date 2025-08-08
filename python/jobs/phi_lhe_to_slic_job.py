@@ -19,4 +19,3 @@ slic = SLIC()
 
 ## Run the job
 job.add([cnv, rot, slic])
-

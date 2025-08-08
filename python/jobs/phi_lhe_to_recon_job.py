@@ -28,4 +28,3 @@ recon = JobManager(steering='recon')
 
 ## Run the job
 job.add([cnv, rot, slic, filter_bunches, readout, recon])
-
