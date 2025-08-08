@@ -18,14 +18,11 @@
         "{{ input_files['tritrig'][1] }}": "signal_2.slcio",
         "{{ input_files['tritrig'][2] }}": "signal_3.slcio",
         "{{ input_files['tritrig'][3] }}": "signal_4.slcio",
-        "{{ input_files['tritrig'][4] }}": "signal_5.slcio",
-	"{{ input_files['pulser'][0] }}": "pulser.evio"
+        "{{ input_files['tritrig'][4] }}": "signal_5.slcio"
     },
     "output_files": {
-        "pulser.slcio": "gen/pulser/14275/{{detector}}/pulser_{{job_id}}.slcio",
-        "signal_pulser_readout.slcio": "readout/tritrig_pulser/pass_v8beta/{{detector}}/tritrig_pulser_{{job_id}}.slcio",
-        "signal_pulser_recon.slcio": "recon/tritrig_pulser/pass_v8beta/{{detector}}/tritrig_pulser_{{job_id}}.slcio",
-        "signal_pulser_recon.root": "hpstr/tritrig_pulser/pass_v8beta/{{detector}}/tritrig_pulser_{{job_id}}.root"    
-	},
-    "output_dir": "/home/groups/laurenat/majd/scratch"
+        "signal_spaced_readout.slcio": "readout/tritrig_spaced/{{detector}}/tritrig_spaced_{{job_id}}.slcio",
+        "signal_spaced_recon.slcio": "recon/tritrig_spaced/{{detector}}/tritrig_spaced_{{job_id}}.slcio"
+    },
+    "output_dir": "/home/groups/laurenat/majd/test"
 }

@@ -83,9 +83,7 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
-## Convert LCIO to ROOT
-cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
 
 ## Add the components
-job.add([filter_events, count_filter, overlay, space_overlay,
-         count_space_overlay, readout, count_readout, recon, count_recon, cnv])
+job.add([filter_events, count_filter, evio_to_lcio, overlay, space_overlay,
+         count_space_overlay, readout, count_readout, recon, count_recon])
