@@ -31,7 +31,10 @@ hps_java_bin_jar = /home/groups/laurenat/majd/HPS/hps-java/distribution/target/h
 hps_fieldmaps_dir = /home/groups/laurenat/majd/HPS/hps-fieldmaps
 
 [LCIOCount]
-lcio_bin_jar = /home/groups/laurenat/majd/HPS/target/lcio-2.7.4-SNAPSHOT-bin.jar
+lcio_bin_jar = /home/groups/laurenat/majd/HPS/hps-lcio/target/lcio-2.7.4-SNAPSHOT-bin.jar
 
 [LCIOMerge]
-lcio_bin_jar = /home/groups/laurenat/majd/HPS/target/lcio-2.7.4-SNAPSHOT-bin.jar
+lcio_bin_jar = /home/groups/laurenat/majd/HPS/hps-lcio/target/lcio-2.7.4-SNAPSHOT-bin.jar
+
+[EvioToLcio]
+hps_java_bin_jar = /home/groups/laurenat/majd/HPS/hps-java/distribution/target/hps-distribution-5.2.2-SNAPSHOT-bin.jar
