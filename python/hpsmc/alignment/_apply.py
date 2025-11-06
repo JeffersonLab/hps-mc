@@ -163,7 +163,7 @@ class _DetectorEditor(Component):
 
                     line_edited = False
                     for i in parameter_set:
-                        if str(i) in line:
+                        if f'name="{i}"' in line:
                             # the parameter with ID i is being set on this line
                             self.logger.debug(f'Changing parameter {i}')
                             f.write(_change_xml_value(
