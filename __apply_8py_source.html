@@ -277,7 +277,7 @@ $(document).ready(function(){initNavTree('__apply_8py_source.html',''); initResi
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                    line_edited = <span class="keyword">False</span></div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    <span class="keywordflow">for</span> i <span class="keywordflow">in</span> parameter_set:</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                        <span class="keywordflow">if</span> str(i) <span class="keywordflow">in</span> line:</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                        <span class="keywordflow">if</span> f<span class="stringliteral">&#39;name=&quot;{i}&quot;&#39;</span> <span class="keywordflow">in</span> line:</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                            <span class="comment"># the parameter with ID i is being set on this line</span></div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                            self.<a class="code hl_variable" href="classhpsmc_1_1component_1_1Component.html#a0b14e488ae28d98d262453f3e9cd6e4d">logger</a>.debug(f<span class="stringliteral">&#39;Changing parameter {i}&#39;</span>)</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                            f.write(_change_xml_value(</div>
