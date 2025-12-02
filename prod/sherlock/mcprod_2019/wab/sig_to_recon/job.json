@@ -1,0 +1,49 @@
+    {
+        "run_params": "4pt55",
+        "run_number": 10291,
+        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon_KF_WithSpacing_pass2.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2019,
+        "input_files": {
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_1000.slcio": "signal_1.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_100.slcio": "signal_2.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_101.slcio": "signal_3.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_102.slcio": "signal_4.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_103.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_104.slcio": "signal_6.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_105.slcio": "signal_7.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_106.slcio": "signal_8.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_107.slcio": "signal_9.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_108.slcio": "signal_10.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_109.slcio": "signal_11.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_10.slcio": "signal_12.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_110.slcio": "signal_13.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_111.slcio": "signal_14.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_112.slcio": "signal_15.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_113.slcio": "signal_16.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_114.slcio": "signal_17.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_115.slcio": "signal_18.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_116.slcio": "signal_19.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_117.slcio": "signal_20.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_118.slcio": "signal_21.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_119.slcio": "signal_22.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_11.slcio": "signal_23.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_120.slcio": "signal_24.slcio",
+            "/home/groups/laurenat/majd/2019_prod1/wab/slic/wab_4pt55_mom_rot_121.slcio": "signal_25.slcio"
+        },
+        "output_files": {
+            "signal_spaced_readout.slcio": "readout/wab_spaced/HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051/wab_spaced_1.slcio",
+            "signal_spaced_recon.slcio": "recon/wab_spaced/HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051/wab_spaced_1.slcio"
+        },
+        "output_dir": "/home/groups/laurenat/majd/2019_prod1/wab",
+        "job_id": 1
+    }

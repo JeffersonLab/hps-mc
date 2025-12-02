@@ -1,1 +1,1 @@
-hps-mc-job run -d /home/groups/laurenat/majd/scratch/tritrig tritrig_gen_to_slic job.json
+hps-mc-job run -d /scratch/users/mghrear/tritrig tritrig_gen_to_slic job.json

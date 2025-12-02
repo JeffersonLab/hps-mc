@@ -2,7 +2,7 @@
     "run_number": {{ run_number }},
     "bunches": {{ bunches }},
     "nevents": {{ nevents }},
-    "seed": {{ 42 + job_id }},
+    "seed": {{ 1043 + job_id }},
     "run_params": "{{ run_params }}",
     "target_thickness": {{ target_thickness }},
     "beam_energy": {{ beam_energy }},
@@ -17,8 +17,9 @@
     "beam_rot_z": {{ beam_rot_z }},
     "detector": "{{ detector }}",
     "output_files": {
-        "tritrig_mom_rot.stdhep": "tritrig_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
+        "tritrig_unweighted_events.lhe.gz": "MG5/tritrig_unweighted_{{ run_params }}_{{ job_id }}.lhe.gz",
+        "tritrig_mom_rot.stdhep": "stdhep/tritrig_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
 	"tritrig_mom_rot.slcio": "slic/tritrig_{{ run_params }}_mom_rot_{{ job_id }}.slcio"
     },
-    "output_dir": "/home/groups/laurenat/majd/2019_prod1/tritrig"
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/tritrig"
 }

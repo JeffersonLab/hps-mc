@@ -1,0 +1,50 @@
+{
+    "run_params": "{{ run_params }}",
+    "run_number": {{ run_number }},
+    "detector": "{{ detector }}",
+    "steering_files": {
+        "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+        "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+        "readout": "/org/hps/steering/readout/PhysicsRun2019TrigSinglesWithPulserDataMerging.lcsim",
+        "recon": "/org/hps/steering/recon/PhysicsRun2019MCRecon_KF_WithSpacing_pass2.lcsim"
+    },
+    "config_files": {
+        "cnv": "recoTuple_cfg.py"
+    },
+    "is_data": 0,
+    "year": 2019,
+    "input_files": {
+        "{{ input_files['tritrig'][0] }}": "signal_1.slcio",
+        "{{ input_files['tritrig'][1] }}": "signal_2.slcio",
+        "{{ input_files['tritrig'][2] }}": "signal_3.slcio",
+        "{{ input_files['tritrig'][3] }}": "signal_4.slcio",
+        "{{ input_files['tritrig'][4] }}": "signal_5.slcio",
+        "{{ input_files['tritrig'][5] }}": "signal_6.slcio",
+        "{{ input_files['tritrig'][6] }}": "signal_7.slcio",
+        "{{ input_files['tritrig'][7] }}": "signal_8.slcio",
+        "{{ input_files['tritrig'][8] }}": "signal_9.slcio",
+        "{{ input_files['tritrig'][9] }}": "signal_10.slcio",
+        "{{ input_files['tritrig'][10] }}": "signal_11.slcio",
+        "{{ input_files['tritrig'][11] }}": "signal_12.slcio",
+        "{{ input_files['tritrig'][12] }}": "signal_13.slcio",
+        "{{ input_files['tritrig'][13] }}": "signal_14.slcio",
+        "{{ input_files['tritrig'][14] }}": "signal_15.slcio",
+        "{{ input_files['tritrig'][15] }}": "signal_16.slcio",
+        "{{ input_files['tritrig'][16] }}": "signal_17.slcio",
+        "{{ input_files['tritrig'][17] }}": "signal_18.slcio",
+        "{{ input_files['tritrig'][18] }}": "signal_19.slcio",
+        "{{ input_files['tritrig'][19] }}": "signal_20.slcio",
+        "{{ input_files['tritrig'][20] }}": "signal_21.slcio",
+        "{{ input_files['tritrig'][21] }}": "signal_22.slcio",
+        "{{ input_files['tritrig'][22] }}": "signal_23.slcio",
+        "{{ input_files['tritrig'][23] }}": "signal_24.slcio",
+        "{{ input_files['tritrig'][24] }}": "signal_25.slcio",
+        "{{ input_files['pulser'][0] }}": "pulser.evio"
+    },
+    "output_files": {
+        "pulser.slcio": "pulser/{{detector}}/pulser_{{job_id}}.slcio",
+        "signal_pulser_readout.slcio": "readout/tritrig_pulser/{{detector}}/tritrig_pulser_{{job_id}}.slcio",
+        "signal_pulser_recon.slcio": "recon/tritrig_pulser/{{detector}}/tritrig_pulser_{{job_id}}.slcio"
+	},
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/tritrig"
+}

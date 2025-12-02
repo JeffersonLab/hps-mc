@@ -2,7 +2,7 @@
     "run_number": {{ run_number }},
     "bunches": {{ bunches }},
     "nevents": {{ nevents }},
-    "seed": {{ 42 + job_id }},
+    "seed": {{ 1043 + job_id }},
     "run_params": "{{ run_params }}",
     "target_thickness": {{ target_thickness }},
     "beam_energy": {{ beam_energy }},
@@ -17,8 +17,9 @@
     "beam_rot_z": {{ beam_rot_z }},
     "detector": "{{ detector }}",
     "output_files": {
-        "WAB_unweighted_events_mom_rot.stdhep": "wab_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
+	"WAB_unweighted_events.lhe.gz": "MG5/wab_unweighted_{{ run_params }}_{{ job_id }}.lhe.gz",
+        "WAB_unweighted_events_mom_rot.stdhep": "stdhep/wab_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
 	"WAB_unweighted_events_mom_rot.slcio": "slic/wab_{{ run_params }}_mom_rot_{{ job_id }}.slcio"
     },
-    "output_dir": "/home/groups/laurenat/majd/2019_prod1/wab"
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part1/wab"
 }
