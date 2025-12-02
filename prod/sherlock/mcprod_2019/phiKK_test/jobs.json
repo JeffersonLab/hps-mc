@@ -1,0 +1,5489 @@
+[
+{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_0.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_0.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_0.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 0
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_1.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_1.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_1.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 1
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_2.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_2.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_2.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 2
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_3.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_3.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_3.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 3
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_4.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_4.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_4.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 4
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_5.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_5.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_5.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 5
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_6.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_6.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_6.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 6
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_7.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_7.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_7.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 7
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_8.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_8.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_8.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 8
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_9.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_9.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_9.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 9
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_10.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_10.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_10.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 10
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_11.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_11.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_11.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 11
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_12.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_12.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_12.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 12
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_13.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_13.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_13.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 13
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_14.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_14.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_14.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 14
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_15.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_15.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_15.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 15
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_16.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_16.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_16.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 16
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_17.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_17.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_17.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 17
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_18.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_18.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_18.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 18
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_19.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_19.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_19.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 19
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_20.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_20.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_20.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 20
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_21.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_21.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_21.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 21
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_22.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_22.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_22.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 22
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_23.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_23.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_23.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 23
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_24.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_24.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_24.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 24
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_25.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_25.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_25.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 25
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_26.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_26.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_26.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 26
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_27.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_27.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_27.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 27
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_28.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_28.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_28.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 28
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_29.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_29.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_29.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 29
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_30.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_30.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_30.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 30
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_31.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_31.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_31.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 31
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_32.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_32.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_32.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 32
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_33.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_33.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_33.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 33
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_34.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_34.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_34.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 34
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_35.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_35.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_35.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 35
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_36.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_36.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_36.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 36
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_37.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_37.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_37.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 37
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_38.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_38.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_38.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 38
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_39.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_39.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_39.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 39
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_40.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_40.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_40.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 40
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_41.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_41.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_41.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 41
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_42.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_42.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_42.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 42
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_43.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_43.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_43.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 43
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_44.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_44.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_44.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 44
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_45.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_45.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_45.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 45
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_46.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_46.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_46.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 46
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_47.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_47.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_47.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 47
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_48.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_48.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_48.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 48
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_49.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_49.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_49.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 49
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_50.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_50.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_50.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 50
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_51.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_51.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_51.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 51
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_52.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_52.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_52.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 52
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_53.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_53.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_53.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 53
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_54.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_54.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_54.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 54
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_55.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_55.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_55.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 55
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_56.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_56.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_56.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 56
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_57.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_57.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_57.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 57
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_58.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_58.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_58.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 58
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_59.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_59.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_59.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 59
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_60.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_60.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_60.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 60
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_61.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_61.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_61.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 61
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_62.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_62.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_62.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 62
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_63.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_63.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_63.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 63
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_64.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_64.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_64.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 64
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_65.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_65.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_65.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 65
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_66.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_66.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_66.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 66
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_67.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_67.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_67.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 67
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_68.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_68.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_68.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 68
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_69.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_69.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_69.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 69
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_70.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_70.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_70.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 70
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_71.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_71.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_71.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 71
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_72.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_72.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_72.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 72
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_73.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_73.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_73.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 73
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_74.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_74.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_74.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 74
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_75.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_75.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_75.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 75
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_76.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_76.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_76.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 76
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_77.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_77.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_77.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 77
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_78.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_78.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_78.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 78
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_79.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_79.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_79.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 79
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_80.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_80.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_80.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 80
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_81.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_81.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_81.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 81
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_82.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_82.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_82.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 82
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_83.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_83.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_83.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 83
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_84.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_84.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_84.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 84
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_85.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_85.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_85.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 85
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_86.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_86.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_86.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 86
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_87.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_87.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_87.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 87
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_88.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_88.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_88.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 88
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_89.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_89.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_89.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 89
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_90.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_90.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_90.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 90
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_91.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_91.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_91.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 91
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_92.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_92.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_92.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 92
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_93.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_93.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_93.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 93
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_94.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_94.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_94.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 94
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_95.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_95.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_95.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 95
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_96.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_96.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_96.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 96
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_97.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_97.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_97.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 97
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_98.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_98.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_98.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 98
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_99.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_99.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_99.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 99
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_100.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_100.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_100.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 100
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_101.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_101.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_101.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 101
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_102.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_102.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_102.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 102
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_103.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_103.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_103.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 103
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_104.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_104.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_104.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 104
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_105.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_105.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_105.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 105
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_106.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_106.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_106.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 106
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_107.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_107.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_107.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 107
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_108.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_108.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_108.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 108
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_109.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_109.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_109.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 109
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_110.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_110.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_110.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 110
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_111.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_111.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_111.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 111
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_112.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_112.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_112.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 112
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_113.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_113.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_113.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 113
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_114.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_114.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_114.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 114
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_115.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_115.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_115.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 115
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_116.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_116.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_116.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 116
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_117.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_117.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_117.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 117
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_118.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_118.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_118.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 118
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_119.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_119.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_119.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 119
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_120.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_120.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_120.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 120
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_121.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_121.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_121.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 121
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_122.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_122.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_122.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 122
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_123.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_123.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_123.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 123
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_124.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_124.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_124.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 124
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_125.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_125.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_125.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 125
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_126.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_126.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_126.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 126
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_127.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_127.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_127.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 127
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_128.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_128.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_128.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 128
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_129.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_129.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_129.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 129
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_130.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_130.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_130.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 130
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_131.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_131.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_131.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 131
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_132.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_132.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_132.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 132
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_133.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_133.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_133.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 133
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_134.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_134.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_134.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 134
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_135.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_135.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_135.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 135
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_136.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_136.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_136.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 136
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_137.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_137.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_137.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 137
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_138.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_138.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_138.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 138
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_139.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_139.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_139.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 139
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_140.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_140.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_140.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 140
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_141.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_141.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_141.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 141
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_142.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_142.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_142.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 142
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_143.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_143.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_143.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 143
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_144.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_144.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_144.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 144
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_145.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_145.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_145.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 145
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_146.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_146.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_146.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 146
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_147.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_147.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_147.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 147
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_148.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_148.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_148.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 148
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_149.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_149.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_149.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 149
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_150.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_150.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_150.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 150
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_151.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_151.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_151.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 151
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_152.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_152.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_152.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 152
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_153.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_153.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_153.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 153
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_154.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_154.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_154.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 154
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_155.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_155.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_155.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 155
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_156.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_156.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_156.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 156
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_157.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_157.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_157.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 157
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_158.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_158.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_158.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 158
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_159.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_159.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_159.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 159
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_160.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_160.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_160.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 160
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_161.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_161.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_161.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 161
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_162.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_162.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_162.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 162
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_163.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_163.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_163.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 163
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_164.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_164.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_164.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 164
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_165.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_165.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_165.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 165
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_166.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_166.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_166.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 166
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_167.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_167.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_167.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 167
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_168.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_168.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_168.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 168
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_169.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_169.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_169.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 169
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_170.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_170.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_170.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 170
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_171.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_171.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_171.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 171
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_172.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_172.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_172.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 172
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_173.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_173.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_173.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 173
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_174.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_174.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_174.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 174
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_175.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_175.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_175.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 175
+}
+,{
+    "nevents": 10000,
+    "run_params": "4pt55",
+    "target_thickness": 0.002,
+    "beam_energy": 4550.00,
+    "num_electrons": 1500,
+    "target_x": 0.18,
+    "target_y": 0.02,
+    "target_z": -7.54,
+    "beam_sigma_x": 0.3,
+    "beam_sigma_y": 0.02,
+    "beam_rot_x": 0.0,
+    "beam_rot_y": 0.0305,
+    "beam_rot_z": 0.0,
+    "map": 100.0,
+    "mpid": 33.3,
+    "mrhod": 60,
+    "run_number": 10291,
+    "seed": 879483,
+    "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+    "filter_no_cuts": true,
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phi_4pt55_rot_176.stdhep",
+        "phi_rot.slcio": "slic/phi_4pt55_rot_176.slcio"
+    },
+    "input_files": {
+        "/home/groups/laurenat/majd/lhe_files/phiKK_4550_MeV_7883/phiKK_4550_MeV_7883_176.lhe": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK",
+    "job_id": 176
+}
+]

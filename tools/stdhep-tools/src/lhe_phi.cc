@@ -1,0 +1,165 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+#include <stdhep_util.hh>
+
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_randist.h>
+
+#include <unistd.h>
+
+void remove_nulls(vector<stdhep_entry> *event)
+{
+  int i=0;
+  while (i<event->size()) {
+    if (event->at(i).isthep == 0) {
+      event->erase(event->begin() + i);
+      for (int j = 0; j < event->size(); j++) {
+        if (event->at(j).jmohep[0] > i)
+          event->at(j).jmohep[0]--;
+        if (event->at(j).jmohep[1] > i)
+          event->at(j).jmohep[1]--;
+        if (event->at(j).jdahep[0] > i)
+          event->at(j).jdahep[0]--;
+        if (event->at(j).jdahep[1] > i)
+          event->at(j).jdahep[1]--;
+      }
+    }
+    i++;
+  }
+}
+
+void set_jdahep(vector<stdhep_entry> *event)
+{
+  for (int i=0;i<event->size();i++) {
+    event->at(i).jdahep[0] = 0;
+    event->at(i).jdahep[1] = 0;
+    for (int j = 0; j < event->size(); j++) {
+      if (event->at(j).jmohep[0] == i+1 || event->at(j).jmohep[1] == i+1) {
+        if (event->at(i).jdahep[0] == 0)
+          event->at(i).jdahep[0] = j+1;
+        event->at(i).jdahep[1] = j+1;
+      }
+    }
+  }
+}
+
+
+/**
+ * Takes input stdhep file, applies beam rotation and width,
+ * and writes to a new stdhep file
+ * /todo is this description correct?
+ */
+int main(int argc, char** argv)
+{
+  int nevhep;             //!< The event number
+  vector<stdhep_entry> new_event;
+
+  int rseed = 0;
+  double decay_length = 0.0;
+  int c;
+
+  while ((c = getopt(argc,argv,"hs:l:")) != -1)
+    switch (c)
+    {
+      case 'h':
+        printf("-h: print this help\n");
+        printf("-s: RNG seed\n");
+        printf("-l: A' decay length in mm\n");
+        return(0);
+        break;
+      case 's':
+        rseed = atoi(optarg);
+        break;
+      case 'l':
+        decay_length = atof(optarg);
+        break;
+      case '?':
+        printf("Invalid option or missing option argument; -h to list options\n");
+        return(1);
+      default:
+        abort();
+    }
+
+  if (argc-optind < 2)
+  {
+    printf("<input stdhep filename> <output stdhep filename>\n");
+    return 1;
+  }
+
+  FILE * in_file;
+  in_file = fopen(argv[optind],"r");
+
+  //initialize the RNG
+  const gsl_rng_type * T;
+  gsl_rng * r;
+  gsl_rng_env_setup();
+
+  T = gsl_rng_mt19937;
+  r = gsl_rng_alloc (T);
+  gsl_rng_set(r, rseed);
+
+  int ostream = 0;
+
+  open_write(argv[optind+1], ostream, 1000);
+  nevhep = 1;
+
+  printf("Applying decay length of %f mm\n", decay_length > 0 ? decay_length : 0.0);
+
+  while (true) {
+    char line[1000];
+    bool found_event = false;
+    while (fgets(line, 1000, in_file) != NULL) {
+      if (strstr(line, "<event") != NULL) {
+        found_event = true;
+        break;
+      }
+    }
+    if (!found_event) {
+      fclose(in_file);
+      close_write(ostream);
+      return(0);
+    }
+
+    int nup;
+
+    fgets(line, 1000, in_file);
+    sscanf(line, "%d %*d %*f %*f %*f %*f", &nup);
+    for (int i = 0; i < nup; i++) {
+      struct stdhep_entry *temp = new struct stdhep_entry;
+      fgets(line, 1000, in_file);
+      sscanf(line, "%d %d %d %d %*d %*d %lf %lf %lf %lf %lf %*f %*f",
+          &(temp->idhep), &(temp->isthep),
+          &(temp->jmohep[0]), &(temp->jmohep[1]),
+          &(temp->phep[0]), &(temp->phep[1]), &(temp->phep[2]), &(temp->phep[3]), &(temp->phep[4]));
+      switch (temp->isthep) {
+        case 1:
+        case 2:
+          break;
+        case -1:
+          temp->isthep = 3;
+          break;
+        default:
+          temp->isthep = 0;
+      }
+      switch (temp->idhep) {
+        case 611:
+          temp->idhep = 11;
+          break;
+        case -611:
+          temp->idhep = -11;
+          break;
+      }
+      for (int j = 0; j < 4; j++) temp->vhep[j] = 0.0;
+      for (int j = 0; j < 2; j++) temp->jdahep[j] = 0;
+      new_event.push_back(*temp);
+    }
+    remove_nulls(&new_event);
+    set_jdahep(&new_event);
+    write_stdhep(&new_event, nevhep);
+    write_file(ostream);
+    nevhep++;
+  }
+}
+
