@@ -1,0 +1,27 @@
+{
+    "run_number": {{ run_number }},
+    "bunches": {{ bunches }},
+    "nevents": {{ nevents }},
+    "seed": {{ 1043 + job_id }},
+    "run_params": "{{ run_params }}",
+    "target_thickness": {{ target_thickness }},
+    "beam_energy": {{ beam_energy }},
+    "num_electrons": {{ num_electrons }},
+    "target_x": {{ target_x }},
+    "target_y": {{ target_y }},
+    "target_z": {{ target_z }},
+    "beam_sigma_x": {{ beam_sigma_x }},
+    "beam_sigma_y": {{ beam_sigma_y }},
+    "beam_rot_x": {{ beam_rot_x }},
+    "beam_rot_y": {{ beam_rot_y }},
+    "beam_rot_z": {{ beam_rot_z }},
+    "detector": "{{ detector }}",
+    "output_files": {
+        "phi_rot.stdhep": "stdhep/phiKK_{{ run_params }}_rot_{{ job_id }}.stdhep",
+	"phi_rot.slcio": "slic/phiKK_{{ run_params }}_rot_{{ job_id }}.slcio"
+    },
+    "input_files": {
+        "{{ input_files['phiKK'][0] }}": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch"
+}

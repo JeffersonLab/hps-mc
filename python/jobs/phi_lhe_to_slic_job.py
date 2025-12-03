@@ -1,15 +1,15 @@
 """!
-@file phi_lhe_to_recon.py
+@file phi_lhe_to_slic.py
 
 Simulation of phi meson to charged kaon decays, detector signals.
 """
 from hpsmc.generators import MG5
-from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, DisplaceUni
+from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, PhitoLHE
 
-job.description = 'Phi lhe to recon'
+job.description = 'Phi lhe to slic'
 
 ## Convert LHE output to stdhep
-cnv = DisplaceUni(inputs=['phi.lhe'], outputs=['phi.stdhep'])
+cnv = PhitoLHE(inputs=['phi.lhe'], outputs=['phi.stdhep'])
 
 ## Rotate into beam coords
 rot = BeamCoords()
