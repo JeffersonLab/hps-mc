@@ -748,7 +748,7 @@ class DisplaceTime(StdHepTool):
         """
         return ['ctau']
 
-class PhitoLHE(StdHepTool):
+class Phi_LHE_to_STDHEP(StdHepTool):
     """!
     Convert LHE files to StdHep.
     """
@@ -767,18 +767,8 @@ class PhitoLHE(StdHepTool):
         @return  list of arguments
         """
         args = StdHepTool.cmd_args(self)
-        if self.ctau is not None:
-            args.extend(["-l", str(self.ctau)])
         return args
 
-    def optional_parameters(self):
-        """!
-        Return list of optional parameters.
-
-        Optional parameters are: **ctau**
-        @return list of optional parameters
-        """
-        return ['ctau']
 
 
 class DisplaceUni(StdHepTool):
