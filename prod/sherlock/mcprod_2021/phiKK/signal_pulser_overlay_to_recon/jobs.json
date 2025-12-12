@@ -1,0 +1,684 @@
+[
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_100.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_101.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_102.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_103.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_104.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_10.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_1.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_1.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_1.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 1
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_105.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_106.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_107.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_108.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_109.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_11.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_2.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_2.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_2.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 2
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_10.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_110.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_111.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_112.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_113.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_12.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_3.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_3.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_3.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 3
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_114.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_11.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_12.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_13.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_14.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_13.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_4.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_4.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_4.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 4
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_15.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_16.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_17.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_18.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_19.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_14.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_5.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_5.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_5.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 5
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_1.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_20.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_21.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_22.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_23.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_15.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_6.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_6.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_6.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 6
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_24.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_25.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_26.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_27.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_28.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_16.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_7.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_7.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_7.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 7
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_29.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_2.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_30.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_31.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_32.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_17.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_8.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_8.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_8.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 8
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_33.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_34.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_35.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_36.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_37.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_18.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_9.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_9.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_9.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 9
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_38.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_39.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_3.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_40.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_41.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_19.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_10.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_10.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_10.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 10
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_42.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_43.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_44.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_45.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_46.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_1.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_11.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_11.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_11.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 11
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_47.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_48.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_49.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_4.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_50.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_20.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_12.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_12.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_12.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 12
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_51.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_52.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_53.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_54.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_55.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_21.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_13.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_13.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_13.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 13
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_56.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_57.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_58.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_59.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_5.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_22.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_14.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_14.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_14.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 14
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_60.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_61.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_62.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_63.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_64.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_23.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_15.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_15.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_15.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 15
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_65.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_66.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_67.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_68.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_69.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_24.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_16.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_16.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_16.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 16
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_6.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_70.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_71.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_72.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_73.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_25.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_17.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_17.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_17.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 17
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_74.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_75.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_76.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_77.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_78.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_2.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_18.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_18.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_18.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 18
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_79.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_7.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_80.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_81.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_82.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_3.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_19.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_19.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_19.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 19
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_83.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_84.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_85.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_86.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_87.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_4.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_20.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_20.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_20.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 20
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_88.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_89.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_8.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_90.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_91.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_5.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_21.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_21.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_21.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 21
+    },
+    {
+        "run_params": "3pt74",
+        "run_number": 14272,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "steering_files": {
+            "evio_to_lcio": "/org/hps/steering/production/Evio2LcioCnv.lcsim",
+            "overlay": "/org/hps/steering/readout/Overlay.lcsim",
+            "readout": "/org/hps/steering/readout/PhysicsRun2021TrigSinglesWithPulserDataMerging.lcsim",
+            "recon": "/org/hps/steering/recon/PhysicsRun2021MCRecon_KF_WithSpacing_pass4.lcsim"
+        },
+        "config_files": {
+            "cnv": "recoTuple_cfg.py"
+        },
+        "is_data": 0,
+        "year": 2021,
+        "input_files": {
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_92.slcio": "signal_1.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_93.slcio": "signal_2.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_94.slcio": "signal_3.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_95.slcio": "signal_4.slcio",
+            "/scratch/groups/laurenat/2021/phiKK_patch/slic/phiKK_3pt74_rot_96.slcio": "signal_5.slcio",
+            "/home/groups/laurenat/data/2021_pulser_files/pulser_6.slcio": "pulser.slcio"
+        },
+        "output_files": {
+            "pulser.slcio": "pulser/HPS_Run2021Pass1_v8_14272/pulser_22.slcio",
+            "signal_pulser_readout.slcio": "readout/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_22.slcio",
+            "signal_pulser_recon.slcio": "recon/phiKK_pulser/HPS_Run2021Pass1_v8_14272/phiKK_pulser_22.slcio"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 22
+    }
+]

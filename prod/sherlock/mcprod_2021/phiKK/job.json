@@ -1,0 +1,28 @@
+    {
+        "run_number": 14272,
+        "bunches": 100000,
+        "nevents": 100000,
+        "seed": 43,
+        "run_params": "3pt74",
+        "target_thickness": 0.002,
+        "beam_energy": 3740.0,
+        "num_electrons": 1500,
+        "target_x": 0.0,
+        "target_y": 0.0,
+        "target_z": -0.5,
+        "beam_sigma_x": 0.055,
+        "beam_sigma_y": 0.045,
+        "beam_rot_x": 0.0,
+        "beam_rot_y": 0.035,
+        "beam_rot_z": 0.0,
+        "detector": "HPS_Run2021Pass1_v8_14272",
+        "output_files": {
+            "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_1.stdhep",
+            "phi_rot.slcio": "slic/phiKK_3pt74_rot_1.slcio"
+        },
+        "input_files": {
+            "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_0.lhe": "phi.lhe"
+        },
+        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "job_id": 1
+    }

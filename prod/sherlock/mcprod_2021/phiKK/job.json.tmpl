@@ -17,8 +17,11 @@
     "beam_rot_z": {{ beam_rot_z }},
     "detector": "{{ detector }}",
     "output_files": {
-        "WAB_unweighted_events_mom_rot.stdhep": "wab_{{ run_params }}_mom_rot_{{ job_id }}.stdhep",
-	"WAB_unweighted_events_mom_rot.slcio": "slic/wab_{{ run_params }}_mom_rot_{{ job_id }}.slcio"
+        "phi_rot.stdhep": "stdhep/phiKK_{{ run_params }}_rot_{{ job_id }}.stdhep",
+	"phi_rot.slcio": "slic/phiKK_{{ run_params }}_rot_{{ job_id }}.slcio"
     },
-    "output_dir": "/sdf/data/hps/physics2021/mc/gen/wab/pass01/"
+    "input_files": {
+        "{{ input_files['phiKK'][0] }}": "phi.lhe"
+    },
+    "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch"
 }
