@@ -1610,3 +1610,388 @@ class LCIOMerge(LCIOTool):
         if self.nevents is not None:
             args.extend(['-n', str(self.nevents)])
         return args
+
+
+"""
+MergeROOT tool for hps-mc
+Merges ROOT files using hadd with validation
+"""
+
+class MergeROOT(Component):
+    """
+    Merge ROOT files using hadd with event count validation.
+    
+    This component uses ROOT's hadd utility to merge multiple ROOT files
+    into a single output file, and validates that all events are preserved.
+    """
+
+    def __init__(self, **kwargs):
+        """
+        Initialize MergeROOT component.
+        
+        Parameters
+        ----------
+        inputs : list
+            List of input ROOT files to merge
+        outputs : list
+            List containing the output merged ROOT file name
+        force : bool, optional
+            Force overwrite of output file (default: True)
+        compression : int, optional
+            Compression level for output file (0-9, default: None uses hadd default)
+        validate : bool, optional
+            Validate event counts after merge (default: True)
+        """
+        Component.__init__(self, **kwargs)
+        
+        # Set default command
+        if not hasattr(self, 'command') or self.command is None:
+            self.command = 'hadd'
+        
+        # Set force overwrite by default
+        if not hasattr(self, 'force'):
+            self.force = True
+            
+        # Optional compression level
+        if not hasattr(self, 'compression'):
+            self.compression = None
+        
+        # Enable validation by default
+        if not hasattr(self, 'validate'):
+            self.validate = True
+        
+        # Store event counts
+        self.input_tree_counts = {}
+        self.output_tree_counts = {}
+    
+    def cmd_args(self):
+        """
+        Build command line arguments for hadd.
+        
+        Returns
+        -------
+        list
+            List of command arguments
+        """
+        args = []
+        
+        # Add force flag if enabled
+        if self.force:
+            args.append('-f')
+        
+        # Add compression level if specified
+        if self.compression is not None:
+            args.extend(['-fk', '-f%d' % self.compression])
+        
+        # Add output file
+        if self.outputs and len(self.outputs) > 0:
+            args.append(self.outputs[0])
+        else:
+            raise RuntimeError("MergeROOT: No output file specified")
+        
+        # Add input files
+        if self.inputs and len(self.inputs) > 0:
+            args.extend(self.inputs)
+        else:
+            raise RuntimeError("MergeROOT: No input files specified")
+        
+        return args
+    
+    def scan_root_file(self, filename):
+        """
+        Scan a ROOT file and extract TTree event counts.
+        
+        Parameters
+        ----------
+        filename : str
+            Path to ROOT file
+            
+        Returns
+        -------
+        dict
+            Dictionary mapping tree names to entry counts
+        """
+        try:
+            import ROOT
+        except ImportError:
+            raise RuntimeError("MergeROOT: PyROOT is required for validation but not available")
+        
+        tree_counts = {}
+        
+        # Open ROOT file
+        root_file = ROOT.TFile.Open(filename, "READ")
+        if not root_file or root_file.IsZombie():
+            raise RuntimeError("MergeROOT: Cannot open ROOT file: %s" % filename)
+        
+        # Iterate through all keys in the file
+        for key in root_file.GetListOfKeys():
+            obj = key.ReadObj()
+            
+            # Check if it's a TTree
+            if obj.InheritsFrom("TTree"):
+                tree_name = obj.GetName()
+                num_entries = obj.GetEntries()
+                tree_counts[tree_name] = num_entries
+        
+        root_file.Close()
+        
+        return tree_counts
+    
+    def scan_input_files(self, log_out):
+        """
+        Scan all input files and store tree event counts.
+        
+        Parameters
+        ----------
+        log_out : file
+            Log file for output
+        """
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.write("MergeROOT: Scanning input files for TTrees\n")
+        log_out.write("="*70 + "\n")
+        
+        for input_file in self.inputs:
+            if not os.path.exists(input_file):
+                raise RuntimeError("MergeROOT: Input file not found: %s" % input_file)
+            
+            log_out.write("\nScanning: %s\n" % input_file)
+            tree_counts = self.scan_root_file(input_file)
+            
+            if not tree_counts:
+                log_out.write("  WARNING: No TTrees found in this file\n")
+            else:
+                for tree_name, count in tree_counts.items():
+                    log_out.write("  Tree '%s': %d events\n" % (tree_name, count))
+            
+            self.input_tree_counts[input_file] = tree_counts
+        
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.flush()
+    
+    def scan_output_file(self, log_out):
+        """
+        Scan output file and store tree event counts.
+        
+        Parameters
+        ----------
+        log_out : file
+            Log file for output
+        """
+        output_file = self.outputs[0]
+        
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.write("MergeROOT: Scanning output file for TTrees\n")
+        log_out.write("="*70 + "\n")
+        log_out.write("\nScanning: %s\n" % output_file)
+        
+        self.output_tree_counts = self.scan_root_file(output_file)
+        
+        if not self.output_tree_counts:
+            log_out.write("  WARNING: No TTrees found in output file\n")
+        else:
+            for tree_name, count in self.output_tree_counts.items():
+                log_out.write("  Tree '%s': %d events\n" % (tree_name, count))
+        
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.flush()
+    
+    def validate_merge(self, log_out):
+        """
+        Validate that event counts match between input and output files.
+        
+        Parameters
+        ----------
+        log_out : file
+            Log file for output
+            
+        Returns
+        -------
+        bool
+            True if validation passes, False otherwise
+        """
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.write("MergeROOT: Validating merge results\n")
+        log_out.write("="*70 + "\n\n")
+        
+        # Calculate sum of events per tree across all input files
+        total_input_counts = {}
+        
+        for input_file, tree_counts in self.input_tree_counts.items():
+            for tree_name, count in tree_counts.items():
+                if tree_name not in total_input_counts:
+                    total_input_counts[tree_name] = 0
+                total_input_counts[tree_name] += count
+        
+        # Check that all input trees are in output
+        all_valid = True
+        
+        if not total_input_counts:
+            log_out.write("WARNING: No TTrees found in input files\n")
+            return True
+        
+        log_out.write("Event count validation:\n")
+        log_out.write("-" * 70 + "\n")
+        log_out.write("%-30s %15s %15s %10s\n" % ("Tree Name", "Input Events", "Output Events", "Status"))
+        log_out.write("-" * 70 + "\n")
+        
+        for tree_name, input_count in sorted(total_input_counts.items()):
+            output_count = self.output_tree_counts.get(tree_name, 0)
+            
+            if output_count == input_count:
+                status = "✓ PASS"
+            else:
+                status = "✗ FAIL"
+                all_valid = False
+            
+            log_out.write("%-30s %15d %15d %10s\n" % 
+                         (tree_name, input_count, output_count, status))
+        
+        # Check for trees in output that weren't in input
+        extra_trees = set(self.output_tree_counts.keys()) - set(total_input_counts.keys())
+        if extra_trees:
+            log_out.write("\nWARNING: Output contains trees not found in inputs:\n")
+            for tree_name in extra_trees:
+                log_out.write("  - %s: %d events\n" % 
+                             (tree_name, self.output_tree_counts[tree_name]))
+        
+        log_out.write("-" * 70 + "\n")
+        
+        if all_valid:
+            log_out.write("\n✓ VALIDATION PASSED: All event counts match!\n")
+        else:
+            log_out.write("\n✗ VALIDATION FAILED: Event count mismatch detected!\n")
+        
+        log_out.write("="*70 + "\n\n")
+        log_out.flush()
+        
+        return all_valid
+    
+    def print_summary(self, log_out):
+        """
+        Print a summary of the merge operation.
+        
+        Parameters
+        ----------
+        log_out : file
+            Log file for output
+        """
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.write("MergeROOT: Summary\n")
+        log_out.write("="*70 + "\n")
+        log_out.write("Input files: %d\n" % len(self.inputs))
+        
+        for i, input_file in enumerate(self.inputs, 1):
+            log_out.write("  %d. %s\n" % (i, input_file))
+        
+        log_out.write("\nOutput file: %s\n" % self.outputs[0])
+        log_out.write("Compression level: %s\n" % 
+                     (self.compression if self.compression else "default"))
+        
+        # Print total events per tree
+        if self.output_tree_counts:
+            log_out.write("\nTotal events in merged file:\n")
+            for tree_name, count in sorted(self.output_tree_counts.items()):
+                log_out.write("  %-30s: %d events\n" % (tree_name, count))
+        
+        log_out.write("="*70 + "\n")
+        log_out.flush()
+    
+    def execute(self, log_out, log_err):
+        """
+        Execute MergeROOT component using hadd.
+        
+        Parameters
+        ----------
+        log_out : file
+            Log file for stdout
+        log_err : file
+            Log file for stderr
+            
+        Returns
+        -------
+        int
+            Return code from hadd command
+        """
+        # Check that hadd command exists
+        if not self.cmd_exists():
+            raise RuntimeError("MergeROOT: hadd command not found in PATH")
+        
+        # Check that input files exist
+        for input_file in self.inputs:
+            if not os.path.exists(input_file):
+                raise RuntimeError("MergeROOT: Input file not found: %s" % input_file)
+        
+        # Scan input files before merge if validation is enabled
+        if self.validate:
+            try:
+                self.scan_input_files(log_out)
+            except Exception as e:
+                log_out.write("\nWARNING: Could not scan input files: %s\n" % str(e))
+                log_out.write("Proceeding with merge without validation.\n")
+                self.validate = False
+        
+        # Build full command
+        cmd = [self.command] + self.cmd_args()
+        
+        # Log the command
+        log_out.write("\n" + "="*70 + "\n")
+        log_out.write("MergeROOT: Executing hadd\n")
+        log_out.write("="*70 + "\n")
+        log_out.write("Command: %s\n" % ' '.join(cmd))
+        log_out.write("="*70 + "\n\n")
+        log_out.flush()
+        
+        # Execute hadd
+        proc = subprocess.Popen(cmd, stdout=log_out, stderr=log_err)
+        proc.wait()
+        
+        # Check return code
+        if proc.returncode != 0:
+            raise RuntimeError("MergeROOT: hadd failed with return code %d" % proc.returncode)
+        
+        # Verify output file was created
+        if not os.path.exists(self.outputs[0]):
+            raise RuntimeError("MergeROOT: Output file was not created: %s" % self.outputs[0])
+        
+        log_out.write("\n✓ hadd completed successfully\n")
+        
+        # Scan output file and validate if enabled
+        if self.validate:
+            try:
+                self.scan_output_file(log_out)
+                validation_passed = self.validate_merge(log_out)
+                
+                if not validation_passed:
+                    raise RuntimeError("MergeROOT: Event count validation failed!")
+                
+            except Exception as e:
+                log_out.write("\nERROR during validation: %s\n" % str(e))
+                raise
+        
+        # Print summary
+        self.print_summary(log_out)
+        
+        return proc.returncode
+    
+    def output_files(self):
+        """
+        Return list of output files.
+        
+        Returns
+        -------
+        list
+            List containing the merged output ROOT file
+        """
+        return self.outputs
+    
+    def required_config(self):
+        """
+        Return list of required configuration parameters.
+        
+        Returns
+        -------
+        list
+            List of required config parameters (empty for MergeROOT)
+        """
+        return []
+
