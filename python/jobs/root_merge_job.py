@@ -19,11 +19,6 @@ Example JSON parameters:
     "compression": 6,
     "validate": true
 }
-
-Usage:
-    python job.py run merge_root_job.py job_params.json
-    or from within hps-mc installation:
-    python python/hpsmc/job.py run python/jobs/merge_root_job.py job_params.json
 """
 
 from hpsmc.tools import MergeROOT

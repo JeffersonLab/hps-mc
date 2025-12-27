@@ -5,8 +5,13 @@
 # This example demonstrates how to:
 # 1. Scan run directories for ROOT files
 # 2. Prepare merge job configurations
-# 3. Generate job JSON files
+# 3. Generate job JSON files (optimized single-call approach)
 # 4. Execute merge jobs
+#
+# Performance Note:
+# This script uses --single-list for hps-mc-prepare-merge-jobs which allows
+# a SINGLE call to hps-mc-job-template instead of one call per batch.
+# For large datasets, this provides ~100x speedup over the per-batch approach.
 #
 
 # Step 1: Scan directories and prepare input files
@@ -28,32 +33,25 @@ MAX_FILES=20
 hps-mc-prepare-merge-jobs \
     $PARENT_DIR \
     -o $OUTPUT_PREFIX \
-    -n $MAX_FILES
+    -n $MAX_FILES \
+    --single-list
 
 # This creates:
-#   - merge_jobs_batch*_files.txt (individual batch file lists)
+#   - merge_jobs_input_files.txt  (single consolidated file list)
 #   - merge_jobs_vars.json        (iteration variables for template)
 #   - merge_jobs_batches.json     (metadata about batches)
 
 # Step 2: Generate job configurations using template
 # ------------------------------------------------------
-# Process each batch separately (recommended by hps-mc-prepare-merge-jobs)
+# Single call to hps-mc-job-template (much faster than per-batch processing)
 
-for batch_file in ${OUTPUT_PREFIX}_batch*_files.txt; do
-    batch_num=$(echo $batch_file | grep -oP 'batch\K[0-9]+')
-    hps-mc-job-template \
-        -j $batch_num \
-        -i root_files $batch_file $(cat $batch_file | wc -l) \
-        merge_root.json.tmpl \
-        ${OUTPUT_PREFIX}_batch${batch_num}_jobs.json
-done
-
-# Combine all batch job files into one
-cat ${OUTPUT_PREFIX}_batch*_jobs.json | jq -s 'add' > ${OUTPUT_PREFIX}_jobs.json
+hps-mc-job-template \
+    -i root_files ${OUTPUT_PREFIX}_input_files.txt $MAX_FILES \
+    merge_root.json.tmpl \
+    ${OUTPUT_PREFIX}_jobs.json
 
 # This creates:
-#   - merge_jobs_batch*_jobs.json  (individual batch job configurations)
-#   - merge_jobs_jobs.json  (combined job configurations)
+#   - merge_jobs_jobs.json  (all job configurations in one file)
 
 # Step 3: Run the merge jobs
 # ------------------------------------------------------
@@ -83,3 +81,41 @@ done
 # Check that output files were created successfully
 
 ls -lh output/*/merged_*.root
+
+# Alternative Approaches
+# ------------------------------------------------------
+#
+# APPROACH 1: Per-batch processing (slower, but separate job files per batch)
+# Useful if you need separate job files for different batch submissions
+#
+# hps-mc-prepare-merge-jobs \
+#     $PARENT_DIR \
+#     -o $OUTPUT_PREFIX \
+#     -n $MAX_FILES
+#     # (omit --single-list)
+#
+# for batch_file in ${OUTPUT_PREFIX}_batch*_files.txt; do
+#     batch_num=$(echo $batch_file | grep -oP 'batch\K[0-9]+')
+#     hps-mc-job-template \
+#         -j $batch_num \
+#         -i root_files $batch_file $(wc -l < $batch_file) \
+#         merge_root.json.tmpl \
+#         ${OUTPUT_PREFIX}_batch${batch_num}_jobs.json
+# done
+#
+# cat ${OUTPUT_PREFIX}_batch*_jobs.json | jq -s 'add' > ${OUTPUT_PREFIX}_jobs.json
+#
+#
+# APPROACH 2: Parallel per-batch processing (requires GNU parallel)
+# Faster than sequential per-batch, but still slower than --single-list
+#
+# ls ${OUTPUT_PREFIX}_batch*_files.txt | parallel -j $(nproc) '
+#     batch_num=$(echo {} | grep -oP "batch\K[0-9]+")
+#     hps-mc-job-template \
+#         -j $batch_num \
+#         -i root_files {} $(wc -l < {}) \
+#         merge_root.json.tmpl \
+#         '${OUTPUT_PREFIX}'_batch${batch_num}_jobs.json
+# '
+#
+# cat ${OUTPUT_PREFIX}_batch*_jobs.json | jq -s 'add' > ${OUTPUT_PREFIX}_jobs.json
