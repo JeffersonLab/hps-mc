@@ -6,7 +6,7 @@
     "description": "Merge ROOT files for {{ run_name }} (job {{ job_id }})",
     "input_files": {
         {% for file in input_files['root_files'] -%}
-        "{{ file | basename }}": "{{ file }}"{% if not loop.last %},{% endif %}
+        "{{ file }}": "{{ file | basename }}"{% if not loop.last %},{% endif %}
 
         {% endfor -%}
     },
@@ -15,6 +15,7 @@
     },
     "output_dir": "output/{{ run_name }}",
     "run_name": "{{ run_name }}",
+    "year": 2021,
     "num_input_files": {{ input_files['root_files'] | length }},
     "force": true,
     "compression": 6,

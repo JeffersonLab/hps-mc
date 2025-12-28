@@ -20,3 +20,6 @@ docs/html/*
 
 # Mac artifacts
 .DS_Store
+
+# Claude Code project instructions
+CLAUDE.md
