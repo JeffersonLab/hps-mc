@@ -11,6 +11,7 @@ var classhpsmc_1_1tools_1_1HPSTR =
     [ "append_tok", "classhpsmc_1_1tools_1_1HPSTR.html#aa5a426ed511c3810a90d5892c727539c", null ],
     [ "cfg", "classhpsmc_1_1tools_1_1HPSTR.html#a9bda50c2ecb07d8a4e9f694c60e1120f", null ],
     [ "cfg_path", "classhpsmc_1_1tools_1_1HPSTR.html#ae9a57d51bce1e9a974cf5ad76ff3da21", null ],
+    [ "command", "classhpsmc_1_1tools_1_1HPSTR.html#a9e0992eae3950adccaf4847fbff4231d", null ],
     [ "config_files", "classhpsmc_1_1tools_1_1HPSTR.html#ae61be9571b4d5e303b3cc73a598d16ba", null ],
     [ "env_script", "classhpsmc_1_1tools_1_1HPSTR.html#a148093257009ad5b67fb0caf76285ca4", null ],
     [ "hpstr_base", "classhpsmc_1_1tools_1_1HPSTR.html#a75607d2fa7422b0e363af7924befb855", null ],

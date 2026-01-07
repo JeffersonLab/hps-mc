@@ -39,6 +39,7 @@ var namespacehpsmc =
     ] ],
     [ "job", "namespacehpsmc_1_1job.html", "namespacehpsmc_1_1job" ],
     [ "job_template", "namespacehpsmc_1_1job__template.html", "namespacehpsmc_1_1job__template" ],
+    [ "prepare_merge_jobs", "namespacehpsmc_1_1prepare__merge__jobs.html", "namespacehpsmc_1_1prepare__merge__jobs" ],
     [ "run_params", "namespacehpsmc_1_1run__params.html", "namespacehpsmc_1_1run__params" ],
     [ "tools", "namespacehpsmc_1_1tools.html", "namespacehpsmc_1_1tools" ],
     [ "_config_files", "namespacehpsmc.html#adf5170b22a40217429951668717a6292", null ],

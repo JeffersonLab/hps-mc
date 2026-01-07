@@ -9,6 +9,7 @@ var searchData=
   ['print_5fcomponents_6',['print_components',['../namespacehpsmc_1_1help.html#a0e35cc3a537c844013ecb3ea8af900ec',1,'hpsmc::help']]],
   ['print_5fentry_7',['print_entry',['../stdhep__util_8cpp.html#ab5ec58d80bd8ab6158d7766f0ce6f9c2',1,'print_entry(stdhep_entry entry):&#160;stdhep_util.cpp'],['../stdhep__util_8hh.html#ab5ec58d80bd8ab6158d7766f0ce6f9c2',1,'print_entry(stdhep_entry entry):&#160;stdhep_util.cpp']]],
   ['print_5fjob_5fscript_8',['print_job_script',['../namespacehpsmc_1_1help.html#a8dba769ae4b6bf6f6922918c4b4719a2',1,'hpsmc::help']]],
-  ['print_5fusage_9',['print_usage',['../namespacehpsmc_1_1job.html#a3f14f29edb7e335871711d7f37fed468',1,'hpsmc::job']]],
-  ['ptag_10',['ptag',['../classhpsmc_1_1job_1_1Job.html#ac9d18db060e272f10fdb17a8dd9a298f',1,'hpsmc::job::Job']]]
+  ['print_5fsummary_9',['print_summary',['../classhpsmc_1_1tools_1_1MergeROOT.html#a8663759f4baf9b7e83c95dbb5c918b9c',1,'hpsmc::tools::MergeROOT']]],
+  ['print_5fusage_10',['print_usage',['../namespacehpsmc_1_1job.html#a3f14f29edb7e335871711d7f37fed468',1,'hpsmc::job']]],
+  ['ptag_11',['ptag',['../classhpsmc_1_1job_1_1Job.html#ac9d18db060e272f10fdb17a8dd9a298f',1,'hpsmc::job::Job']]]
 ];

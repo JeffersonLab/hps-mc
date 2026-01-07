@@ -55,6 +55,9 @@ var annotated_dup =
         [ "JobTemplate", "classhpsmc_1_1job__template_1_1JobTemplate.html", "classhpsmc_1_1job__template_1_1JobTemplate" ],
         [ "MaxJobsException", "classhpsmc_1_1job__template_1_1MaxJobsException.html", "classhpsmc_1_1job__template_1_1MaxJobsException" ]
       ] ],
+      [ "prepare_merge_jobs", "namespacehpsmc_1_1prepare__merge__jobs.html", [
+        [ "MergeJobPreparation", "classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html", "classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation" ]
+      ] ],
       [ "run_params", "namespacehpsmc_1_1run__params.html", [
         [ "RunParameters", "classhpsmc_1_1run__params_1_1RunParameters.html", "classhpsmc_1_1run__params_1_1RunParameters" ]
       ] ],
@@ -78,6 +81,7 @@ var annotated_dup =
         [ "LHECount", "classhpsmc_1_1tools_1_1LHECount.html", "classhpsmc_1_1tools_1_1LHECount" ],
         [ "MergeFiles", "classhpsmc_1_1tools_1_1MergeFiles.html", "classhpsmc_1_1tools_1_1MergeFiles" ],
         [ "MergePoisson", "classhpsmc_1_1tools_1_1MergePoisson.html", "classhpsmc_1_1tools_1_1MergePoisson" ],
+        [ "MergeROOT", "classhpsmc_1_1tools_1_1MergeROOT.html", "classhpsmc_1_1tools_1_1MergeROOT" ],
         [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", "classhpsmc_1_1tools_1_1MoveFiles" ],
         [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", "classhpsmc_1_1tools_1_1RandomSample" ],
         [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", "classhpsmc_1_1tools_1_1SLIC" ],

@@ -7,6 +7,7 @@ var hierarchy =
     [ "JobStore", "classhpsmc_1_1job_1_1JobStore.html", null ],
     [ "JobTemplate", "classhpsmc_1_1job__template_1_1JobTemplate.html", null ],
     [ "KillProcessQueue", "classhpsmc_1_1batch_1_1KillProcessQueue.html", null ],
+    [ "MergeJobPreparation", "classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html", null ],
     [ "object", null, [
       [ "Component", "classhpsmc_1_1component_1_1Component.html", [
         [ "hadd", "classhpsmc_1_1__hadd_1_1hadd.html", null ],
@@ -40,6 +41,7 @@ var hierarchy =
           [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", null ]
         ] ],
         [ "LHECount", "classhpsmc_1_1tools_1_1LHECount.html", null ],
+        [ "MergeROOT", "classhpsmc_1_1tools_1_1MergeROOT.html", null ],
         [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", null ],
         [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", null ],
         [ "SQLiteProc", "classhpsmc_1_1tools_1_1SQLiteProc.html", null ],

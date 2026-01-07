@@ -19,6 +19,7 @@ var namespacehpsmc_1_1tools =
     [ "LHECount", "classhpsmc_1_1tools_1_1LHECount.html", "classhpsmc_1_1tools_1_1LHECount" ],
     [ "MergeFiles", "classhpsmc_1_1tools_1_1MergeFiles.html", "classhpsmc_1_1tools_1_1MergeFiles" ],
     [ "MergePoisson", "classhpsmc_1_1tools_1_1MergePoisson.html", "classhpsmc_1_1tools_1_1MergePoisson" ],
+    [ "MergeROOT", "classhpsmc_1_1tools_1_1MergeROOT.html", "classhpsmc_1_1tools_1_1MergeROOT" ],
     [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", "classhpsmc_1_1tools_1_1MoveFiles" ],
     [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", "classhpsmc_1_1tools_1_1RandomSample" ],
     [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", "classhpsmc_1_1tools_1_1SLIC" ],

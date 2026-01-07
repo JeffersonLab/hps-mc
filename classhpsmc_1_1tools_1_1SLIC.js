@@ -10,6 +10,7 @@ var classhpsmc_1_1tools_1_1SLIC =
     [ "required_config", "classhpsmc_1_1tools_1_1SLIC.html#aa4d8a09c1b4480e5930b67b2a00d008a", null ],
     [ "required_parameters", "classhpsmc_1_1tools_1_1SLIC.html#a4fcbe03feef0ad109f592cecf3b95bad", null ],
     [ "setup", "classhpsmc_1_1tools_1_1SLIC.html#a55917f1c1705cff6027de163d6822f8a", null ],
+    [ "command", "classhpsmc_1_1tools_1_1SLIC.html#a9e0992eae3950adccaf4847fbff4231d", null ],
     [ "detector", "classhpsmc_1_1tools_1_1SLIC.html#a2e2cc69bf023676b0749903f295a507e", null ],
     [ "detector_dir", "classhpsmc_1_1tools_1_1SLIC.html#ac617bf3e61557e2ed92433296f98db86", null ],
     [ "disable_particle_table", "classhpsmc_1_1tools_1_1SLIC.html#a5fc703eb9e4766e02b657ab1e49f08e1", null ],

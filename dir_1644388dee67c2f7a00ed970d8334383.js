@@ -13,6 +13,7 @@ var dir_1644388dee67c2f7a00ed970d8334383 =
     [ "help.py", "help_8py.html", "help_8py" ],
     [ "job.py", "job_8py.html", "job_8py" ],
     [ "job_template.py", "job__template_8py.html", "job__template_8py" ],
+    [ "prepare_merge_jobs.py", "prepare__merge__jobs_8py.html", "prepare__merge__jobs_8py" ],
     [ "run_params.py", "run__params_8py.html", "run__params_8py" ],
     [ "tools.py", "tools_8py.html", "tools_8py" ]
 ];

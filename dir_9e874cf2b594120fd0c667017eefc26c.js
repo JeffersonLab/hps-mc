@@ -22,6 +22,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "pede_job.py", "pede__job_8py.html", "pede__job_8py" ],
     [ "rad_gen_job.py", "rad__gen__job_8py.html", "rad__gen__job_8py" ],
     [ "readout_recon_job.py", "readout__recon__job_8py.html", "readout__recon__job_8py" ],
+    [ "root_merge_job.py", "root__merge__job_8py.html", "root__merge__job_8py" ],
     [ "signal_beam_merge_to_recon_2016_job.py", "signal__beam__merge__to__recon__2016__job_8py.html", "signal__beam__merge__to__recon__2016__job_8py" ],
     [ "signal_beam_merge_to_recon_job.py", "signal__beam__merge__to__recon__job_8py.html", "signal__beam__merge__to__recon__job_8py" ],
     [ "signal_pulser_overlay_to_recon_job.py", "signal__pulser__overlay__to__recon__job_8py.html", "signal__pulser__overlay__to__recon__job_8py" ],

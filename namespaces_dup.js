@@ -179,6 +179,7 @@ var namespaces_dup =
       [ "merged_gbl_plots", "namespacepede__job.html#a2d75f4fd80f8cd09583c7f0d3a331514", null ],
       [ "pede", "namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a", null ]
     ] ],
+    [ "prepare_merge_jobs", "namespaceprepare__merge__jobs.html", null ],
     [ "rad_gen_job", "namespacerad__gen__job.html", [
       [ "cnv", "namespacerad__gen__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
       [ "description", "namespacerad__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
@@ -202,6 +203,15 @@ var namespaces_dup =
       [ "output_base", "namespacereadout__recon__job.html#aea45d0da6f62963f27f595ad8efdffe0", null ],
       [ "readout", "namespacereadout__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "reco", "namespacereadout__recon__job.html#a27a2e032fb08a489a864b8cec061146e", null ]
+    ] ],
+    [ "root_merge_job", "namespaceroot__merge__job.html", [
+      [ "compression_level", "namespaceroot__merge__job.html#a3e3fea2fdf249a0f887b02d08e454ec2", null ],
+      [ "description", "namespaceroot__merge__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "force_overwrite", "namespaceroot__merge__job.html#a278e18f34000bbbf31638d133fac2642", null ],
+      [ "input_list", "namespaceroot__merge__job.html#a6927fc762903ecb0f117514eac45629f", null ],
+      [ "merge", "namespaceroot__merge__job.html#a2c314bbf889bccf5fbdd959da9db1006", null ],
+      [ "output_file", "namespaceroot__merge__job.html#a8691fbda845191debece7688e06e3654", null ],
+      [ "validate_merge", "namespaceroot__merge__job.html#a0e06eea0dada6d06309f9ffa460054aa", null ]
     ] ],
     [ "signal_beam_merge_to_recon_2016_job", "namespacesignal__beam__merge__to__recon__2016__job.html", [
       [ "beam_file_name", "namespacesignal__beam__merge__to__recon__2016__job.html#a2b93181f6eb12f47c1beb79b9bf38580", null ],

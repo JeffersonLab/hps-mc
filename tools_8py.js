@@ -26,5 +26,6 @@ var tools_8py =
     [ "LCIOTool", "classhpsmc_1_1tools_1_1LCIOTool.html", "classhpsmc_1_1tools_1_1LCIOTool" ],
     [ "LCIOConcat", "classhpsmc_1_1tools_1_1LCIOConcat.html", "classhpsmc_1_1tools_1_1LCIOConcat" ],
     [ "LCIOCount", "classhpsmc_1_1tools_1_1LCIOCount.html", "classhpsmc_1_1tools_1_1LCIOCount" ],
-    [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ]
+    [ "LCIOMerge", "classhpsmc_1_1tools_1_1LCIOMerge.html", "classhpsmc_1_1tools_1_1LCIOMerge" ],
+    [ "MergeROOT", "classhpsmc_1_1tools_1_1MergeROOT.html", "classhpsmc_1_1tools_1_1MergeROOT" ]
 ];

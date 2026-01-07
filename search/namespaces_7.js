@@ -18,8 +18,9 @@ var searchData=
   ['hpsmc_3a_3ahelp_15',['help',['../namespacehpsmc_1_1help.html',1,'hpsmc']]],
   ['hpsmc_3a_3ajob_16',['job',['../namespacehpsmc_1_1job.html',1,'hpsmc']]],
   ['hpsmc_3a_3ajob_5ftemplate_17',['job_template',['../namespacehpsmc_1_1job__template.html',1,'hpsmc']]],
-  ['hpsmc_3a_3arun_5fparams_18',['run_params',['../namespacehpsmc_1_1run__params.html',1,'hpsmc']]],
-  ['hpsmc_3a_3atools_19',['tools',['../namespacehpsmc_1_1tools.html',1,'hpsmc']]],
-  ['hpstr_5fana_5fjob_20',['hpstr_ana_job',['../namespacehpstr__ana__job.html',1,'']]],
-  ['hpstr_5fjob_21',['hpstr_job',['../namespacehpstr__job.html',1,'']]]
+  ['hpsmc_3a_3aprepare_5fmerge_5fjobs_18',['prepare_merge_jobs',['../namespacehpsmc_1_1prepare__merge__jobs.html',1,'hpsmc']]],
+  ['hpsmc_3a_3arun_5fparams_19',['run_params',['../namespacehpsmc_1_1run__params.html',1,'hpsmc']]],
+  ['hpsmc_3a_3atools_20',['tools',['../namespacehpsmc_1_1tools.html',1,'hpsmc']]],
+  ['hpstr_5fana_5fjob_21',['hpstr_ana_job',['../namespacehpstr__ana__job.html',1,'']]],
+  ['hpstr_5fjob_22',['hpstr_job',['../namespacehpstr__job.html',1,'']]]
 ];
