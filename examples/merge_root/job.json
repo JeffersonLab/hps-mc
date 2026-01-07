@@ -1,0 +1,13 @@
+{
+    "job_num": 1,
+    "input_files": {
+        "/sdf/data/hps/physics2021/data/recon/pass4_v8/hps_014200/hps_014200_00030_v0skim.root" : "input1.root",
+        "/sdf/data/hps/physics2021/data/recon/pass4_v8/hps_014200/hps_014200_00031_v0skim.root" : "input2.root",
+        "/sdf/data/hps/physics2021/data/recon/pass4_v8/hps_014200/hps_014200_00032_v0skim.root" : "input3.root",
+        "/sdf/data/hps/physics2021/data/recon/pass4_v8/hps_014200/hps_014200_00033_v0skim.root" : "input4.root"
+    },
+    "output_files": {
+        "merged.root": "merged_analysis_output.root"
+    },
+    "output_dir": "output"
+}

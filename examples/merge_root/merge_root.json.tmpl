@@ -1,0 +1,23 @@
+{
+    {% set first_file = input_files['root_files'][0] %}
+    {% set file_dir = first_file | dirname %}
+    {% set run_name = file_dir.split('/')[-1] %}
+    "job_id": {{ job_id }},
+    "description": "Merge ROOT files for {{ run_name }} (job {{ job_id }})",
+    "input_files": {
+        {% for file in input_files['root_files'] -%}
+        "{{ file }}": "{{ file | basename }}"{% if not loop.last %},{% endif %}
+
+        {% endfor -%}
+    },
+    "output_files": {
+        "merged_{{ run_name }}_job{{ job_id }}.root": "merged_{{ run_name }}_job{{ job_id }}.root"
+    },
+    "output_dir": "output/{{ run_name }}",
+    "run_name": "{{ run_name }}",
+    "year": 2021,
+    "num_input_files": {{ input_files['root_files'] | length }},
+    "force": true,
+    "compression": 6,
+    "validate": true
+}
