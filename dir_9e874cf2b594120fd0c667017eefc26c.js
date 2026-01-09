@@ -9,6 +9,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "beam_gen_job.py", "beam__gen__job_8py.html", "beam__gen__job_8py" ],
     [ "beam_gen_sample_job.py", "beam__gen__sample__job_8py.html", "beam__gen__sample__job_8py" ],
     [ "beam_prep_and_slic_job.py", "beam__prep__and__slic__job_8py.html", "beam__prep__and__slic__job_8py" ],
+    [ "BH_gen_job.py", "BH__gen__job_8py.html", "BH__gen__job_8py" ],
     [ "data_cnv_10_percent_job.py", "data__cnv__10__percent__job_8py.html", "data__cnv__10__percent__job_8py" ],
     [ "data_cnv_job.py", "data__cnv__job_8py.html", "data__cnv__job_8py" ],
     [ "dummy_job.py", "dummy__job_8py.html", "dummy__job_8py" ],

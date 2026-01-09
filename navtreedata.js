@@ -58,7 +58,7 @@ var NAVTREE =
       [ "Tritrig and beam files -- merge to reconstruction pipline", "tritrigbeam.html", null ],
       [ "Tritrig event generation", "tritriggen.html", null ],
       [ "Tritrig pipeline -- generation to analysis", "tritrigslicfullchain.html", null ],
-      [ "WAB generation and sampling", "wabgensample.html", null ],
+      [ "BH generation and sampling", "wabgensample.html", null ],
       [ "Job Template", "jobtemplate.html", null ]
     ] ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
@@ -99,20 +99,20 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"__apply_8py.html",
-"classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#ac43c1ed593f06957d9f4c51efcf9374e",
-"classhpsmc_1_1batch_1_1BatchSystem.html#a882351c36cde640dd0d61116d5e55765",
-"classhpsmc_1_1generators_1_1MG.html#adbc06e706c5e3c2188defb7f8076da67",
-"classhpsmc_1_1job__template_1_1JobTemplate.html#a34ecc9f1b392f609d6846cfc528d8ed5",
-"classhpsmc_1_1tools_1_1JavaTool.html#aa4d8a09c1b4480e5930b67b2a00d008a",
-"classhpsmc_1_1tools_1_1SLIC.html#a55917f1c1705cff6027de163d6822f8a",
-"classtest_1_1test__parameter__patterns_1_1TestParameterPatterns.html#a4c41880c6a5e7cabd36c17cc6e447e3b",
-"classtest_1_1test__tools__stdheptools_1_1TestDisplaceTime.html#aa034ccea1c508ec2968f2025b4b89f32",
-"hpsmc_2____init_____8py.html#a91b67a6a22e604761e4ff169a32eeb3d",
-"namespacehpsmc_1_1config__writer.html#a87f35ac6fa80d957c59e394549aa7e15",
-"namespaceslic__gps__to__ana__job.html#a3074e3594d8071411ddd34bbbf47acd9",
-"readoutrecon.html",
-"test__tools__jobmanager_8py_source.html"
+"BH__gen__job_8py.html",
+"classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#ab5add20dcd998e611a6f20380f9fae86",
+"classhpsmc_1_1batch_1_1BatchSystem.html#a69505da8975e3c2a73b5699776ffa4a6",
+"classhpsmc_1_1generators_1_1MG.html#ac90dbc799d17b924577136734893ea85",
+"classhpsmc_1_1job__template_1_1JobTemplate.html#a1393192eddcf3d869ad85b4db4b790b9",
+"classhpsmc_1_1tools_1_1JavaTool.html#a99dfd7e07bd2aa40bd9f13eb26668ca2",
+"classhpsmc_1_1tools_1_1SLIC.html#a4fcbe03feef0ad109f592cecf3b95bad",
+"classtest_1_1test__parameter__patterns_1_1TestParameterPatterns.html#a2ebf876941e84691161477260ab47210",
+"classtest_1_1test__tools__stdheptools_1_1TestDisplaceTime.html#a0fccc1cd99b896f40edb1a2e8218ff8a",
+"help_8py_source.html",
+"namespacehpsmc_1_1batch.html#ac4ca86dead4518ac4fd6e30172db3d9e",
+"namespacesimp__job.html#abaa485babeb1ee67ebdaadec53822fe6",
+"readout__recon__job_8py.html#a32c5ff16c2da5df0b2d0ee8d2474a850",
+"test__parameter__patterns_8py_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

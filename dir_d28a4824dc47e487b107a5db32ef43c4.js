@@ -5,6 +5,7 @@ var dir_d28a4824dc47e487b107a5db32ef43c4 =
     [ "beam_coords", "dir_c13ed5748bd1485f553823b07ad098df.html", null ],
     [ "beam_gen", "dir_c2c9ae01ae43b2495e969a8f05f5d5f9.html", null ],
     [ "beam_slic", "dir_b42a0f75447e6f85adb68d2f8839d61a.html", null ],
+    [ "bh_gen_mg5", "dir_6aeb74a908fde3b647039c51bb8f013c.html", null ],
     [ "data_cnv", "dir_82aea5e2421bf63646ef6408fd787a47.html", null ],
     [ "dummy", "dir_e61f3e84f5daeda1bf670c9a0b4ab320.html", null ],
     [ "fee_slic_to_recon", "dir_f4f20b1fd917712a74dd502a783fc8cc.html", null ],

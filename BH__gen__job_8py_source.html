@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>HPS-MC: SLIC to analysis pipeline for MC data</title>
+<title>HPS-MC: python/jobs/BH_gen_job.py Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('slictoanaMC.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('BH__gen__job_8py_source.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -94,28 +94,32 @@ $(document).ready(function(){initNavTree('slictoanaMC.html',''); initResizable()
 </div>
 </div>
 
-<div><div class="header">
-  <div class="headertitle"><div class="title">SLIC to analysis pipeline for MC data</div></div>
+<div class="header">
+  <div class="headertitle"><div class="title">BH_gen_job.py</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="el" href="slic__to__anaMC__job_8py.html" title="Run SLIC to analysis using mcTuple.">slic_to_anaMC_job.py</a> runs slic on the input stdhep files, converts the output to root files and runs a hpstr analysis on these files.</p>
-<h3><a class="anchor" id="autotoc_md45"></a>
-Job parameters</h3>
-<p>This table contains parameters special to the slic_to_anaMC job. The general parameters are discussed on the <a class="el" href="examples.html">examples main page</a>.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">param   </th><th class="markdownTableHeadNone"></th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">config_files   </td><td class="markdownTableBodyNone">configuration files for recon and ana    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">input_files   </td><td class="markdownTableBodyNone">stdhep input files   </td></tr>
-</table>
-</div></div><!-- contents -->
-</div><!-- PageDoc -->
+<a href="BH__gen__job_8py.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="namespaceBH__gen__job.html">    1</a></span><span class="stringliteral">&quot;&quot;&quot;!</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="stringliteral">@file BH_gen_job.py</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="stringliteral"></span> </div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="stringliteral">Simulate Bethe-Heitler events.</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">from</span> <a class="code hl_namespace" href="namespacehpsmc_1_1generators.html">hpsmc.generators</a> <span class="keyword">import</span> MG5</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="namespaceBH__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">    8</a></span>job.description = <span class="stringliteral">&#39;Generate Bethe-Heitler events using MadGraph5&#39;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespaceBH__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4">   11</a></span>mg = <a class="code hl_class" href="classhpsmc_1_1generators_1_1MG5.html">MG5</a>(name=<span class="stringliteral">&#39;BH&#39;</span>)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>job.add([mg])</div>
+<div class="ttc" id="aclasshpsmc_1_1generators_1_1MG5_html"><div class="ttname"><a href="classhpsmc_1_1generators_1_1MG5.html">hpsmc.generators.MG5</a></div><div class="ttdoc">Run the MadGraph 5 event generator.</div><div class="ttdef"><b>Definition</b> <a href="generators_8py_source.html#l00404">generators.py:404</a></div></div>
+<div class="ttc" id="anamespacehpsmc_1_1generators_html"><div class="ttname"><a href="namespacehpsmc_1_1generators.html">hpsmc.generators</a></div><div class="ttdef"><b>Definition</b> <a href="generators_8py_source.html#l00001">generators.py:1</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_9e874cf2b594120fd0c667017eefc26c.html">jobs</a></li><li class="navelem"><a class="el" href="BH__gen__job_8py.html">BH_gen_job.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

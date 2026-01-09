@@ -72,6 +72,10 @@ var namespaces_dup =
       [ "sample", "namespacebeam__prep__and__slic__job.html#a6ad492ae3f3437963b8df4ab045165f1", null ],
       [ "slic", "namespacebeam__prep__and__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ]
     ] ],
+    [ "BH_gen_job", "namespaceBH__gen__job.html", [
+      [ "description", "namespaceBH__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "mg", "namespaceBH__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ]
+    ] ],
     [ "build2019filenames", "namespacebuild2019filenames.html", [
       [ "fullpath", "namespacebuild2019filenames.html#a2675a6e94dffede5e88cf26bfef44b15", null ],
       [ "myT", "namespacebuild2019filenames.html#a556ab3cdccec26fc294001d6b2ba1487", null ],

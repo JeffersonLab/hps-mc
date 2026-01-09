@@ -7,14 +7,14 @@ var searchData=
   ['gen_2dsimp_2d3body_2epy_4',['gen-simp-3body.py',['../gen-simp-3body_8py.html',1,'']]],
   ['generate_5fiteration_5fvars_5',['generate_iteration_vars',['../classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#af92a0301cbb475adfcd17b0562d7a66c',1,'hpsmc::prepare_merge_jobs::MergeJobPreparation']]],
   ['generation_6',['generation',['../beamgen.html',1,'Beam generation'],['../mollergen.html',1,'Moller event generation'],['../radgen.html',1,'Radiative event generation'],['../md_examples_2simp-3body_2simp-3body.html',1,'SIMP-3Body Generation'],['../tritriggen.html',1,'Tritrig event generation']]],
-  ['generation_20and_20sampling_7',['WAB generation and sampling',['../wabgensample.html',1,'examples']]],
+  ['generation_20and_20sampling_7',['BH generation and sampling',['../wabgensample.html',1,'examples']]],
   ['generation_20to_20analysis_8',['Tritrig pipeline -- generation to analysis',['../tritrigslicfullchain.html',1,'examples']]],
   ['generation_20to_20reconstruction_20pipeline_9',['generation to reconstruction pipeline',['../idm.html',1,'iDM generation to reconstruction pipeline'],['../simp.html',1,'Simp generation to reconstruction pipeline']]],
   ['generation_20to_20slic_10',['A-prime generation to slic',['../apgentoslic.html',1,'examples']]],
   ['generators_11',['generators',['../namespacegenerators.html',1,'']]],
   ['generators_2epy_12',['generators.py',['../generators_8py.html',1,'']]],
   ['get_13',['get',['../classhpsmc_1_1run__params_1_1RunParameters.html#ad18475e0830e4de3d1aff595eae93131',1,'hpsmc::run_params::RunParameters']]],
-  ['get_5finstall_5fdir_14',['get_install_dir',['../classhpsmc_1_1generators_1_1EventGenerator.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.EventGenerator.get_install_dir()'],['../classhpsmc_1_1generators_1_1EGS5.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.EGS5.get_install_dir()'],['../classhpsmc_1_1generators_1_1MG5.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.MG5.get_install_dir()'],['../classhpsmc_1_1generators_1_1MG4.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.MG4.get_install_dir()']]],
+  ['get_5finstall_5fdir_14',['get_install_dir',['../classhpsmc_1_1generators_1_1MG5.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.MG5.get_install_dir()'],['../classhpsmc_1_1generators_1_1MG4.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.MG4.get_install_dir()'],['../classhpsmc_1_1generators_1_1EGS5.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.EGS5.get_install_dir()'],['../classhpsmc_1_1generators_1_1EventGenerator.html#acc89fa4109cfa4680d9d8aeda58798b7',1,'hpsmc.generators.EventGenerator.get_install_dir()']]],
   ['get_5fitervars_15',['get_itervars',['../classhpsmc_1_1job__template_1_1JobTemplate.html#a09d46c1f98a3a13ea2a0e5ec8f49756c',1,'hpsmc::job_template::JobTemplate']]],
   ['get_5fjob_16',['get_job',['../classhpsmc_1_1job_1_1JobStore.html#adad7e4a8850fca26ddd0667d6b5d4287',1,'hpsmc::job::JobStore']]],
   ['get_5fjob_5fdata_17',['get_job_data',['../classhpsmc_1_1job_1_1JobStore.html#ab3eecbd49723cb0064a210591f2bb497',1,'hpsmc::job::JobStore']]],
@@ -27,5 +27,5 @@ var searchData=
   ['getbeamspotconstraintsfloatingonly_24',['getBeamspotConstraintsFloatingOnly',['../namespacehpsmc_1_1alignment_1_1__util.html#a7e6867e85329247eb76b76276940b806',1,'hpsmc::alignment::_util']]],
   ['global_5fconfig_25',['global_config',['../namespacehpsmc.html#a4dea3ad19448cf35cbbf2373d4f97fbd',1,'hpsmc']]],
   ['gps_20macro_20from_20geant4_20gps_26',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
-  ['guide_27',['guide',['../readme.html',1,'hps-mc installation guide'],['../index.html#autotoc_md55',1,'Quick Start Guide'],['../readme.html#autotoc_md62',1,'Quick Start Guide']]]
+  ['guide_27',['guide',['../readme.html',1,'hps-mc installation guide'],['../index.html#autotoc_md57',1,'Quick Start Guide'],['../readme.html#autotoc_md64',1,'Quick Start Guide']]]
 ];

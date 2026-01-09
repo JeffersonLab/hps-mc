@@ -25,7 +25,7 @@ var searchData=
   ['and_20beam_20files_20merge_20to_20reconstruction_20pipline_22',['Tritrig and beam files -- merge to reconstruction pipline',['../tritrigbeam.html',1,'examples']]],
   ['and_20construct_20detector_23',['2. Run pede, Apply Parameters, and Construct Detector',['../alignment.html#autotoc_md19',1,'']]],
   ['and_20reconstruction_24',['Readout and reconstruction',['../readoutrecon.html',1,'examples']]],
-  ['and_20sampling_25',['WAB generation and sampling',['../wabgensample.html',1,'examples']]],
+  ['and_20sampling_25',['BH generation and sampling',['../wabgensample.html',1,'examples']]],
   ['ap_5fdecay_5fdist_26',['ap_decay_dist',['../namespaceap__slic__job.html#ae32b274271adde5256bbf36c634e1964',1,'ap_slic_job.ap_decay_dist'],['../namespaceap__gen__to__slic__mg4__job.html#ae32b274271adde5256bbf36c634e1964',1,'ap_gen_to_slic_mg4_job.ap_decay_dist'],['../namespaceap__gen__to__slic__job.html#ae32b274271adde5256bbf36c634e1964',1,'ap_gen_to_slic_job.ap_decay_dist']]],
   ['ap_5fgen_5fjob_27',['ap_gen_job',['../namespaceap__gen__job.html',1,'']]],
   ['ap_5fgen_5fjob_2epy_28',['ap_gen_job.py',['../ap__gen__job_8py.html',1,'']]],
