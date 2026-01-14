@@ -93,7 +93,7 @@ add_custom_target(external)
 
 
 # Install magnetic field maps
-option(HPSMC_ENABLE_FIELDMAPS "Install fieldmaps" OFF)
+option(HPSMC_ENABLE_FIELDMAPS "Install fieldmaps" ON)
 if(HPSMC_ENABLE_FIELDMAPS)
     include(InstallFieldmaps)
 else()

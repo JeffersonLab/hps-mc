@@ -6,7 +6,7 @@ There are a number of required programs and tools you must have installed on you
 - wget
 - git
 - gcc >= 4.8
-- CMake >= 3.18
+- CMake >= 3.22
 - Maven >= 3.0
 - python >= 3.6
 - Java =1.8
@@ -47,8 +47,30 @@ The `GSL_ROOT_DIR` variable should be set to the GSL installation prefix which w
 To build with additional external dependencies installed automatically:
 
 ```
-cmake -DCMAKE_INSTALL_PREFIX=$(realpath ../install) -DGSL_ROOT_DIR=/work/slac/sw/gsl/gsl-1.16-install/ -DENABLE_INSTALL_GENERATORS=ON -DENABLE_INSTALL_FIELDMAPS=ON -DENABLE_INSTALL_LCIO=ON -DENABLE_INSTALL_HPSJAVA=ON -DENABLE_INSTALL_CONDITIONS=ON ..
+cmake -DCMAKE_INSTALL_PREFIX=$(realpath ../install) \
+      -DGSL_ROOT_DIR=$GSL_ROOT_DIR \
+      -DHPSMC_ENABLE_STDHEP=ON \
+      -DHPSMC_ENABLE_EGS5=ON \
+      -DHPSMC_ENABLE_MADGRAPH=ON \
+      -DHPSMC_ENABLE_FIELDMAPS=ON \
+      -DHPSMC_ENABLE_LCIO=ON \
+      -DHPSMC_ENABLE_HPSJAVA=ON \
+      -DHPSMC_ENABLE_CONDITIONS=ON ..
 ```
+
+The available CMake options are:
+
+| Option | Description |
+|--------|-------------|
+| `HPSMC_ENABLE_STDHEP` | Install StdHep tools |
+| `HPSMC_ENABLE_EGS5` | Install EGS5 (requires STDHEP) |
+| `HPSMC_ENABLE_MADGRAPH` | Install MadGraph 4 and 5 |
+| `HPSMC_ENABLE_ROOT` | Enable ROOT setup (requires ROOTSYS) |
+| `HPSMC_ENABLE_FIELDMAPS` | Install magnetic field maps (ON by default) |
+| `HPSMC_ENABLE_LCIO` | Install LCIO |
+| `HPSMC_ENABLE_HPSJAVA` | Install HPS Java |
+| `HPSMC_ENABLE_PEDE` | Enable pede (install if not found) |
+| `HPSMC_ENABLE_CONDITIONS` | Install local conditions database |
 
 This should install all of the tools to `hps-mc/install`.  
 
