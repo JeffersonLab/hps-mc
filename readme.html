@@ -105,7 +105,7 @@ Prerequisites</h2>
 <li>wget</li>
 <li>git</li>
 <li>gcc &gt;= 4.8</li>
-<li>CMake &gt;= 3.18</li>
+<li>CMake &gt;= 3.22</li>
 <li>Maven &gt;= 3.0</li>
 <li>python &gt;= 3.6</li>
 <li>Java =1.8</li>
@@ -127,8 +127,39 @@ Installation</h2>
 <div class="line">make install</div>
 </div><!-- fragment --><p>The <code>GSL_ROOT_DIR</code> variable should be set to the GSL installation prefix which was used when you configured it (directory should contain the directories bin, include, etc.).</p>
 <p>To build with additional external dependencies installed automatically:</p>
-<div class="fragment"><div class="line">cmake -DCMAKE_INSTALL_PREFIX=$(realpath ../install) -DGSL_ROOT_DIR=/work/slac/sw/gsl/gsl-1.16-install/ -DENABLE_INSTALL_GENERATORS=ON -DENABLE_INSTALL_FIELDMAPS=ON -DENABLE_INSTALL_LCIO=ON -DENABLE_INSTALL_HPSJAVA=ON -DENABLE_INSTALL_CONDITIONS=ON ..</div>
-</div><!-- fragment --><p>This should install all of the tools to <code>hps-mc/install</code>. <br  />
+<div class="fragment"><div class="line">cmake -DCMAKE_INSTALL_PREFIX=$(realpath ../install) \</div>
+<div class="line">      -DGSL_ROOT_DIR=$GSL_ROOT_DIR \</div>
+<div class="line">      -DHPSMC_ENABLE_STDHEP=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_EGS5=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_MADGRAPH=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_FIELDMAPS=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_LCIO=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_HPSJAVA=ON \</div>
+<div class="line">      -DHPSMC_ENABLE_CONDITIONS=ON ..</div>
+</div><!-- fragment --><p>The available CMake options are:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Option   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_STDHEP</code>   </td><td class="markdownTableBodyNone">Install StdHep tools    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_EGS5</code>   </td><td class="markdownTableBodyNone">Install EGS5 (requires STDHEP)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_MADGRAPH</code>   </td><td class="markdownTableBodyNone">Install MadGraph 4 and 5    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_ROOT</code>   </td><td class="markdownTableBodyNone">Enable ROOT setup (requires ROOTSYS)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_FIELDMAPS</code>   </td><td class="markdownTableBodyNone">Install magnetic field maps (ON by default)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_LCIO</code>   </td><td class="markdownTableBodyNone">Install LCIO    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_HPSJAVA</code>   </td><td class="markdownTableBodyNone">Install HPS Java    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_PEDE</code>   </td><td class="markdownTableBodyNone">Enable pede (install if not found)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><code>HPSMC_ENABLE_CONDITIONS</code>   </td><td class="markdownTableBodyNone">Install local conditions database   </td></tr>
+</table>
+<p>This should install all of the tools to <code>hps-mc/install</code>. <br  />
 </p>
 <p>Change <code>CMAKE_INSTALL_PREFIX</code> above if you wish to install to a different directory.</p>
 <h2><a class="anchor" id="autotoc_md61"></a>
