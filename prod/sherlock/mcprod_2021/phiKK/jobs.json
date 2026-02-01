@@ -10,13 +10,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_1.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_1.slcio"
@@ -24,7 +24,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_0.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 1
     },
     {
@@ -38,13 +38,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_2.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_2.slcio"
@@ -52,7 +52,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_100.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 2
     },
     {
@@ -66,13 +66,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_3.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_3.slcio"
@@ -80,7 +80,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_101.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 3
     },
     {
@@ -94,13 +94,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_4.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_4.slcio"
@@ -108,7 +108,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_102.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 4
     },
     {
@@ -122,13 +122,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_5.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_5.slcio"
@@ -136,7 +136,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_103.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 5
     },
     {
@@ -150,13 +150,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_6.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_6.slcio"
@@ -164,7 +164,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_104.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 6
     },
     {
@@ -178,13 +178,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_7.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_7.slcio"
@@ -192,7 +192,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_105.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 7
     },
     {
@@ -206,13 +206,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_8.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_8.slcio"
@@ -220,7 +220,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_106.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 8
     },
     {
@@ -234,13 +234,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_9.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_9.slcio"
@@ -248,7 +248,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_107.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 9
     },
     {
@@ -262,13 +262,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_10.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_10.slcio"
@@ -276,7 +276,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_108.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 10
     },
     {
@@ -290,13 +290,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_11.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_11.slcio"
@@ -304,7 +304,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_109.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 11
     },
     {
@@ -318,13 +318,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_12.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_12.slcio"
@@ -332,7 +332,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_10.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 12
     },
     {
@@ -346,13 +346,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_13.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_13.slcio"
@@ -360,7 +360,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_110.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 13
     },
     {
@@ -374,13 +374,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_14.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_14.slcio"
@@ -388,7 +388,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_111.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 14
     },
     {
@@ -402,13 +402,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_15.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_15.slcio"
@@ -416,7 +416,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_112.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 15
     },
     {
@@ -430,13 +430,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_16.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_16.slcio"
@@ -444,7 +444,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_113.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 16
     },
     {
@@ -458,13 +458,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_17.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_17.slcio"
@@ -472,7 +472,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_11.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 17
     },
     {
@@ -486,13 +486,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_18.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_18.slcio"
@@ -500,7 +500,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_12.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 18
     },
     {
@@ -514,13 +514,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_19.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_19.slcio"
@@ -528,7 +528,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_13.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 19
     },
     {
@@ -542,13 +542,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_20.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_20.slcio"
@@ -556,7 +556,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_14.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 20
     },
     {
@@ -570,13 +570,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_21.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_21.slcio"
@@ -584,7 +584,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_15.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 21
     },
     {
@@ -598,13 +598,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_22.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_22.slcio"
@@ -612,7 +612,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_16.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 22
     },
     {
@@ -626,13 +626,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_23.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_23.slcio"
@@ -640,7 +640,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_17.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 23
     },
     {
@@ -654,13 +654,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_24.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_24.slcio"
@@ -668,7 +668,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_18.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 24
     },
     {
@@ -682,13 +682,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_25.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_25.slcio"
@@ -696,7 +696,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_19.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 25
     },
     {
@@ -710,13 +710,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_26.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_26.slcio"
@@ -724,7 +724,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_1.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 26
     },
     {
@@ -738,13 +738,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_27.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_27.slcio"
@@ -752,7 +752,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_20.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 27
     },
     {
@@ -766,13 +766,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_28.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_28.slcio"
@@ -780,7 +780,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_21.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 28
     },
     {
@@ -794,13 +794,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_29.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_29.slcio"
@@ -808,7 +808,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_22.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 29
     },
     {
@@ -822,13 +822,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_30.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_30.slcio"
@@ -836,7 +836,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_23.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 30
     },
     {
@@ -850,13 +850,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_31.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_31.slcio"
@@ -864,7 +864,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_24.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 31
     },
     {
@@ -878,13 +878,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_32.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_32.slcio"
@@ -892,7 +892,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_25.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 32
     },
     {
@@ -906,13 +906,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_33.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_33.slcio"
@@ -920,7 +920,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_26.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 33
     },
     {
@@ -934,13 +934,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_34.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_34.slcio"
@@ -948,7 +948,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_27.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 34
     },
     {
@@ -962,13 +962,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_35.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_35.slcio"
@@ -976,7 +976,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_28.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 35
     },
     {
@@ -990,13 +990,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_36.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_36.slcio"
@@ -1004,7 +1004,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_29.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 36
     },
     {
@@ -1018,13 +1018,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_37.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_37.slcio"
@@ -1032,7 +1032,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_2.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 37
     },
     {
@@ -1046,13 +1046,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_38.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_38.slcio"
@@ -1060,7 +1060,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_30.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 38
     },
     {
@@ -1074,13 +1074,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_39.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_39.slcio"
@@ -1088,7 +1088,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_31.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 39
     },
     {
@@ -1102,13 +1102,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_40.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_40.slcio"
@@ -1116,7 +1116,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_32.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 40
     },
     {
@@ -1130,13 +1130,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_41.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_41.slcio"
@@ -1144,7 +1144,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_33.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 41
     },
     {
@@ -1158,13 +1158,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_42.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_42.slcio"
@@ -1172,7 +1172,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_34.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 42
     },
     {
@@ -1186,13 +1186,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_43.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_43.slcio"
@@ -1200,7 +1200,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_35.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 43
     },
     {
@@ -1214,13 +1214,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_44.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_44.slcio"
@@ -1228,7 +1228,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_36.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 44
     },
     {
@@ -1242,13 +1242,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_45.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_45.slcio"
@@ -1256,7 +1256,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_37.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 45
     },
     {
@@ -1270,13 +1270,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_46.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_46.slcio"
@@ -1284,7 +1284,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_38.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 46
     },
     {
@@ -1298,13 +1298,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_47.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_47.slcio"
@@ -1312,7 +1312,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_39.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 47
     },
     {
@@ -1326,13 +1326,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_48.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_48.slcio"
@@ -1340,7 +1340,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_3.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 48
     },
     {
@@ -1354,13 +1354,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_49.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_49.slcio"
@@ -1368,7 +1368,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_40.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 49
     },
     {
@@ -1382,13 +1382,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_50.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_50.slcio"
@@ -1396,7 +1396,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_41.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 50
     },
     {
@@ -1410,13 +1410,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_51.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_51.slcio"
@@ -1424,7 +1424,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_42.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 51
     },
     {
@@ -1438,13 +1438,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_52.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_52.slcio"
@@ -1452,7 +1452,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_43.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 52
     },
     {
@@ -1466,13 +1466,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_53.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_53.slcio"
@@ -1480,7 +1480,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_44.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 53
     },
     {
@@ -1494,13 +1494,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_54.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_54.slcio"
@@ -1508,7 +1508,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_45.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 54
     },
     {
@@ -1522,13 +1522,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_55.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_55.slcio"
@@ -1536,7 +1536,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_46.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 55
     },
     {
@@ -1550,13 +1550,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_56.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_56.slcio"
@@ -1564,7 +1564,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_47.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 56
     },
     {
@@ -1578,13 +1578,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_57.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_57.slcio"
@@ -1592,7 +1592,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_48.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 57
     },
     {
@@ -1606,13 +1606,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_58.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_58.slcio"
@@ -1620,7 +1620,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_49.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 58
     },
     {
@@ -1634,13 +1634,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_59.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_59.slcio"
@@ -1648,7 +1648,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_4.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 59
     },
     {
@@ -1662,13 +1662,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_60.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_60.slcio"
@@ -1676,7 +1676,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_50.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 60
     },
     {
@@ -1690,13 +1690,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_61.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_61.slcio"
@@ -1704,7 +1704,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_51.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 61
     },
     {
@@ -1718,13 +1718,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_62.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_62.slcio"
@@ -1732,7 +1732,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_52.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 62
     },
     {
@@ -1746,13 +1746,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_63.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_63.slcio"
@@ -1760,7 +1760,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_53.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 63
     },
     {
@@ -1774,13 +1774,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_64.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_64.slcio"
@@ -1788,7 +1788,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_54.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 64
     },
     {
@@ -1802,13 +1802,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_65.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_65.slcio"
@@ -1816,7 +1816,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_55.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 65
     },
     {
@@ -1830,13 +1830,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_66.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_66.slcio"
@@ -1844,7 +1844,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_56.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 66
     },
     {
@@ -1858,13 +1858,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_67.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_67.slcio"
@@ -1872,7 +1872,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_57.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 67
     },
     {
@@ -1886,13 +1886,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_68.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_68.slcio"
@@ -1900,7 +1900,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_58.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 68
     },
     {
@@ -1914,13 +1914,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_69.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_69.slcio"
@@ -1928,7 +1928,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_59.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 69
     },
     {
@@ -1942,13 +1942,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_70.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_70.slcio"
@@ -1956,7 +1956,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_5.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 70
     },
     {
@@ -1970,13 +1970,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_71.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_71.slcio"
@@ -1984,7 +1984,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_60.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 71
     },
     {
@@ -1998,13 +1998,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_72.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_72.slcio"
@@ -2012,7 +2012,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_61.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 72
     },
     {
@@ -2026,13 +2026,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_73.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_73.slcio"
@@ -2040,7 +2040,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_62.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 73
     },
     {
@@ -2054,13 +2054,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_74.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_74.slcio"
@@ -2068,7 +2068,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_63.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 74
     },
     {
@@ -2082,13 +2082,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_75.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_75.slcio"
@@ -2096,7 +2096,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_64.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 75
     },
     {
@@ -2110,13 +2110,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_76.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_76.slcio"
@@ -2124,7 +2124,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_65.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 76
     },
     {
@@ -2138,13 +2138,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_77.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_77.slcio"
@@ -2152,7 +2152,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_66.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 77
     },
     {
@@ -2166,13 +2166,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_78.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_78.slcio"
@@ -2180,7 +2180,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_67.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 78
     },
     {
@@ -2194,13 +2194,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_79.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_79.slcio"
@@ -2208,7 +2208,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_68.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 79
     },
     {
@@ -2222,13 +2222,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_80.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_80.slcio"
@@ -2236,7 +2236,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_69.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 80
     },
     {
@@ -2250,13 +2250,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_81.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_81.slcio"
@@ -2264,7 +2264,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_6.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 81
     },
     {
@@ -2278,13 +2278,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_82.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_82.slcio"
@@ -2292,7 +2292,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_70.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 82
     },
     {
@@ -2306,13 +2306,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_83.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_83.slcio"
@@ -2320,7 +2320,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_71.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 83
     },
     {
@@ -2334,13 +2334,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_84.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_84.slcio"
@@ -2348,7 +2348,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_72.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 84
     },
     {
@@ -2362,13 +2362,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_85.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_85.slcio"
@@ -2376,7 +2376,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_73.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 85
     },
     {
@@ -2390,13 +2390,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_86.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_86.slcio"
@@ -2404,7 +2404,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_74.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 86
     },
     {
@@ -2418,13 +2418,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_87.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_87.slcio"
@@ -2432,7 +2432,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_75.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 87
     },
     {
@@ -2446,13 +2446,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_88.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_88.slcio"
@@ -2460,7 +2460,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_76.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 88
     },
     {
@@ -2474,13 +2474,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_89.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_89.slcio"
@@ -2488,7 +2488,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_77.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 89
     },
     {
@@ -2502,13 +2502,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_90.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_90.slcio"
@@ -2516,7 +2516,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_78.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 90
     },
     {
@@ -2530,13 +2530,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_91.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_91.slcio"
@@ -2544,7 +2544,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_79.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 91
     },
     {
@@ -2558,13 +2558,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_92.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_92.slcio"
@@ -2572,7 +2572,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_7.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 92
     },
     {
@@ -2586,13 +2586,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_93.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_93.slcio"
@@ -2600,7 +2600,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_80.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 93
     },
     {
@@ -2614,13 +2614,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_94.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_94.slcio"
@@ -2628,7 +2628,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_81.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 94
     },
     {
@@ -2642,13 +2642,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_95.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_95.slcio"
@@ -2656,7 +2656,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_82.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 95
     },
     {
@@ -2670,13 +2670,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_96.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_96.slcio"
@@ -2684,7 +2684,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_83.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 96
     },
     {
@@ -2698,13 +2698,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_97.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_97.slcio"
@@ -2712,7 +2712,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_84.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 97
     },
     {
@@ -2726,13 +2726,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_98.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_98.slcio"
@@ -2740,7 +2740,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_85.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 98
     },
     {
@@ -2754,13 +2754,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_99.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_99.slcio"
@@ -2768,7 +2768,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_86.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 99
     },
     {
@@ -2782,13 +2782,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_100.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_100.slcio"
@@ -2796,7 +2796,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_87.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 100
     },
     {
@@ -2810,13 +2810,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_101.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_101.slcio"
@@ -2824,7 +2824,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_88.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 101
     },
     {
@@ -2838,13 +2838,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_102.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_102.slcio"
@@ -2852,7 +2852,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_89.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 102
     },
     {
@@ -2866,13 +2866,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_103.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_103.slcio"
@@ -2880,7 +2880,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_8.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 103
     },
     {
@@ -2894,13 +2894,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_104.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_104.slcio"
@@ -2908,7 +2908,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_90.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 104
     },
     {
@@ -2922,13 +2922,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_105.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_105.slcio"
@@ -2936,7 +2936,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_91.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 105
     },
     {
@@ -2950,13 +2950,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_106.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_106.slcio"
@@ -2964,7 +2964,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_92.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 106
     },
     {
@@ -2978,13 +2978,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_107.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_107.slcio"
@@ -2992,7 +2992,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_93.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 107
     },
     {
@@ -3006,13 +3006,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_108.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_108.slcio"
@@ -3020,7 +3020,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_94.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 108
     },
     {
@@ -3034,13 +3034,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_109.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_109.slcio"
@@ -3048,7 +3048,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_95.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 109
     },
     {
@@ -3062,13 +3062,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_110.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_110.slcio"
@@ -3076,7 +3076,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_96.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 110
     },
     {
@@ -3090,13 +3090,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_111.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_111.slcio"
@@ -3104,7 +3104,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_97.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 111
     },
     {
@@ -3118,13 +3118,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_112.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_112.slcio"
@@ -3132,7 +3132,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_98.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 112
     },
     {
@@ -3146,13 +3146,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_113.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_113.slcio"
@@ -3160,7 +3160,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_99.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 113
     },
     {
@@ -3174,13 +3174,13 @@
         "num_electrons": 1500,
         "target_x": 0.0,
         "target_y": 0.0,
-        "target_z": -0.5,
+        "target_z": -1.1,
         "beam_sigma_x": 0.055,
         "beam_sigma_y": 0.045,
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.035,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Run2021Pass1_v8_14272",
+        "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_114.stdhep",
             "phi_rot.slcio": "slic/phiKK_3pt74_rot_114.slcio"
@@ -3188,7 +3188,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_3740_MeV_patch_19995_files/phiKK_3740_MeV_9.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2021/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/phiKK_patch",
         "job_id": 114
     }
 ]
