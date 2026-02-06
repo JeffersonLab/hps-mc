@@ -32,6 +32,9 @@ var annotated_dup =
         [ "Slurm", "classhpsmc_1_1batch_1_1Slurm.html", "classhpsmc_1_1batch_1_1Slurm" ],
         [ "Swif", "classhpsmc_1_1batch_1_1Swif.html", "classhpsmc_1_1batch_1_1Swif" ]
       ] ],
+      [ "collect_merge_stats", "namespacehpsmc_1_1collect__merge__stats.html", [
+        [ "MergeStatsCollector", "classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html", "classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector" ]
+      ] ],
       [ "component", "namespacehpsmc_1_1component.html", [
         [ "Component", "classhpsmc_1_1component_1_1Component.html", "classhpsmc_1_1component_1_1Component" ],
         [ "DummyComponent", "classhpsmc_1_1component_1_1DummyComponent.html", "classhpsmc_1_1component_1_1DummyComponent" ]

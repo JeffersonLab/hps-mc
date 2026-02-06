@@ -23,9 +23,10 @@ var searchData=
   ['get_5fscript_5fnames_20',['get_script_names',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#ab7fd9c1ea251caf1b41d8f697cd88769',1,'hpsmc::job::JobScriptDatabase']]],
   ['get_5fscript_5fpath_21',['get_script_path',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#a8fc72dcda9ba61c19d0f190bbb6c3db7',1,'hpsmc::job::JobScriptDatabase']]],
   ['get_5fscripts_22',['get_scripts',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#a633053760ae90228554f4cfb04037acc',1,'hpsmc::job::JobScriptDatabase']]],
-  ['getbeamspotconstraints_23',['getBeamspotConstraints',['../namespacehpsmc_1_1alignment_1_1__util.html#af76fb285e1677ef4e10263c3e9b42725',1,'hpsmc::alignment::_util']]],
-  ['getbeamspotconstraintsfloatingonly_24',['getBeamspotConstraintsFloatingOnly',['../namespacehpsmc_1_1alignment_1_1__util.html#a7e6867e85329247eb76b76276940b806',1,'hpsmc::alignment::_util']]],
-  ['global_5fconfig_25',['global_config',['../namespacehpsmc.html#a4dea3ad19448cf35cbbf2373d4f97fbd',1,'hpsmc']]],
-  ['gps_20macro_20from_20geant4_20gps_26',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
-  ['guide_27',['guide',['../readme.html',1,'hps-mc installation guide'],['../index.html#autotoc_md57',1,'Quick Start Guide'],['../readme.html#autotoc_md64',1,'Quick Start Guide']]]
+  ['get_5fstats_5ffilename_23',['get_stats_filename',['../classhpsmc_1_1tools_1_1MergeROOT.html#abc1f341838f78278784c59649e28e733',1,'hpsmc::tools::MergeROOT']]],
+  ['getbeamspotconstraints_24',['getBeamspotConstraints',['../namespacehpsmc_1_1alignment_1_1__util.html#af76fb285e1677ef4e10263c3e9b42725',1,'hpsmc::alignment::_util']]],
+  ['getbeamspotconstraintsfloatingonly_25',['getBeamspotConstraintsFloatingOnly',['../namespacehpsmc_1_1alignment_1_1__util.html#a7e6867e85329247eb76b76276940b806',1,'hpsmc::alignment::_util']]],
+  ['global_5fconfig_26',['global_config',['../namespacehpsmc.html#a4dea3ad19448cf35cbbf2373d4f97fbd',1,'hpsmc']]],
+  ['gps_20macro_20from_20geant4_20gps_27',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
+  ['guide_28',['guide',['../readme.html',1,'hps-mc installation guide'],['../index.html#autotoc_md57',1,'Quick Start Guide'],['../readme.html#autotoc_md64',1,'Quick Start Guide']]]
 ];

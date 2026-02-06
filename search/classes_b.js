@@ -5,8 +5,9 @@ var searchData=
   ['mergejobpreparation_2',['MergeJobPreparation',['../classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html',1,'hpsmc::prepare_merge_jobs']]],
   ['mergepoisson_3',['MergePoisson',['../classhpsmc_1_1tools_1_1MergePoisson.html',1,'hpsmc::tools']]],
   ['mergeroot_4',['MergeROOT',['../classhpsmc_1_1tools_1_1MergeROOT.html',1,'hpsmc::tools']]],
-  ['mg_5',['MG',['../classhpsmc_1_1generators_1_1MG.html',1,'hpsmc::generators']]],
-  ['mg4_6',['MG4',['../classhpsmc_1_1generators_1_1MG4.html',1,'hpsmc::generators']]],
-  ['mg5_7',['MG5',['../classhpsmc_1_1generators_1_1MG5.html',1,'hpsmc::generators']]],
-  ['movefiles_8',['MoveFiles',['../classhpsmc_1_1tools_1_1MoveFiles.html',1,'hpsmc::tools']]]
+  ['mergestatscollector_5',['MergeStatsCollector',['../classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html',1,'hpsmc::collect_merge_stats']]],
+  ['mg_6',['MG',['../classhpsmc_1_1generators_1_1MG.html',1,'hpsmc::generators']]],
+  ['mg4_7',['MG4',['../classhpsmc_1_1generators_1_1MG4.html',1,'hpsmc::generators']]],
+  ['mg5_8',['MG5',['../classhpsmc_1_1generators_1_1MG5.html',1,'hpsmc::generators']]],
+  ['movefiles_9',['MoveFiles',['../classhpsmc_1_1tools_1_1MoveFiles.html',1,'hpsmc::tools']]]
 ];

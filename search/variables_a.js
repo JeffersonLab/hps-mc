@@ -8,12 +8,13 @@ var searchData=
   ['jmohep_5',['jmohep',['../structstdhep__entry.html#a88fe3187d63f355dd3749528e99f12eb',1,'stdhep_entry']]],
   ['job_6',['job',['../namespacehpsmc_1_1job.html#a7718e37d567b721003cf67cbd3125b4a',1,'hpsmc::job']]],
   ['job_5fconfig_7',['job_config',['../classhpsmc_1_1job_1_1Job.html#a3feaa2f8c0970f93ee48106c0cc0a0ea',1,'hpsmc::job::Job']]],
-  ['job_5fid_8',['job_id',['../classhpsmc_1_1job_1_1Job.html#a44b85d3843ea93724e325cc4a211ec1d',1,'hpsmc.job.Job.job_id'],['../classhpsmc_1_1job__template_1_1JobData.html#a44b85d3843ea93724e325cc4a211ec1d',1,'hpsmc.job_template.JobData.job_id']]],
+  ['job_5fid_8',['job_id',['../classhpsmc_1_1job_1_1Job.html#a44b85d3843ea93724e325cc4a211ec1d',1,'hpsmc.job.Job.job_id'],['../classhpsmc_1_1job__template_1_1JobData.html#a44b85d3843ea93724e325cc4a211ec1d',1,'hpsmc.job_template.JobData.job_id'],['../classhpsmc_1_1tools_1_1MergeROOT.html#a44b85d3843ea93724e325cc4a211ec1d',1,'hpsmc.tools.MergeROOT.job_id'],['../namespaceroot__merge__job.html#a44b85d3843ea93724e325cc4a211ec1d',1,'root_merge_job.job_id']]],
   ['job_5fid_5fstart_9',['job_id_start',['../classhpsmc_1_1job__template_1_1JobTemplate.html#ad6723b9401c1ba0038be3ea578d11255',1,'hpsmc::job_template::JobTemplate']]],
   ['job_5fids_10',['job_ids',['../classhpsmc_1_1batch_1_1Batch.html#a1117386d5c4582da7fe5dc953fd2261e',1,'hpsmc::batch::Batch']]],
   ['job_5flength_11',['job_length',['../classhpsmc_1_1batch_1_1BatchSystem.html#a02feee8784d8f4b5806174d39fa17222',1,'hpsmc.batch.BatchSystem.job_length'],['../classhpsmc_1_1batch_1_1Auger.html#a02feee8784d8f4b5806174d39fa17222',1,'hpsmc.batch.Auger.job_length'],['../classhpsmc_1_1batch_1_1Slurm.html#a02feee8784d8f4b5806174d39fa17222',1,'hpsmc.batch.Slurm.job_length'],['../classhpsmc_1_1batch_1_1LSF.html#a02feee8784d8f4b5806174d39fa17222',1,'hpsmc.batch.LSF.job_length']]],
-  ['job_5fsteps_12',['job_steps',['../classhpsmc_1_1batch_1_1Batch.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.batch.Batch.job_steps'],['../classhpsmc_1_1batch_1_1Auger.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.batch.Auger.job_steps'],['../classhpsmc_1_1job_1_1Job.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.job.Job.job_steps']]],
-  ['job_5ftmpl_13',['job_tmpl',['../namespacehpsmc_1_1job__template.html#a7ec29e31da69859e406dfb318af350ee',1,'hpsmc::job_template']]],
-  ['jobstore_14',['jobstore',['../classhpsmc_1_1batch_1_1Batch.html#a613dd1ce0eb970eae6f36760d9de4b60',1,'hpsmc::batch::Batch']]],
-  ['json_5ftemplate_5ffile_15',['json_template_file',['../classhpsmc_1_1job__template_1_1JobTemplate.html#acdafee7d356a242bdd730c03f53a8654',1,'hpsmc::job_template::JobTemplate']]]
+  ['job_5fstats_12',['job_stats',['../classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html#a877f5c6099e21d8ab642e80e87171993',1,'hpsmc::collect_merge_stats::MergeStatsCollector']]],
+  ['job_5fsteps_13',['job_steps',['../classhpsmc_1_1batch_1_1Batch.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.batch.Batch.job_steps'],['../classhpsmc_1_1batch_1_1Auger.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.batch.Auger.job_steps'],['../classhpsmc_1_1job_1_1Job.html#a453c9edaf56fb9f889fdd11b528668e5',1,'hpsmc.job.Job.job_steps']]],
+  ['job_5ftmpl_14',['job_tmpl',['../namespacehpsmc_1_1job__template.html#a7ec29e31da69859e406dfb318af350ee',1,'hpsmc::job_template']]],
+  ['jobstore_15',['jobstore',['../classhpsmc_1_1batch_1_1Batch.html#a613dd1ce0eb970eae6f36760d9de4b60',1,'hpsmc::batch::Batch']]],
+  ['json_5ftemplate_5ffile_16',['json_template_file',['../classhpsmc_1_1job__template_1_1JobTemplate.html#acdafee7d356a242bdd730c03f53a8654',1,'hpsmc::job_template::JobTemplate']]]
 ];

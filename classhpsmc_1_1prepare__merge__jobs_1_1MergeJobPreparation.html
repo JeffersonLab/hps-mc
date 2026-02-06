@@ -98,6 +98,7 @@ $(document).ready(function(){initNavTree('classhpsmc_1_1prepare__merge__jobs_1_1
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">MergeJobPreparation Class Reference</div></div>
 </div><!--header-->
@@ -108,9 +109,9 @@ $(document).ready(function(){initNavTree('classhpsmc_1_1prepare__merge__jobs_1_1
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac02ee5fb78098a6259521e008efc06b0" id="r_ac02ee5fb78098a6259521e008efc06b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#ac02ee5fb78098a6259521e008efc06b0">__init__</a> (self, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a733391d2d77bcaa1eb93777eb24aa60b">parent_dir</a>, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a31e6a0880d3c2cf31c5c4d60325d7c93">output_prefix</a>=&quot;merge_jobs&quot;, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#ad4ca360f0154734bcb3de66f845744ad">max_files_per_job</a>=20, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#ab421458e13ccb745facfb73bb1d7440d">file_pattern</a>=&quot;*.root&quot;, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#af15235a27898801820a20a12027f8efb">run_pattern</a>=&quot;hps_*&quot;)</td></tr>
-<tr class="memdesc:ac02ee5fb78098a6259521e008efc06b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the merge job preparation.  <br /></td></tr>
-<tr class="separator:ac02ee5fb78098a6259521e008efc06b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e1e89cb0593d7e51f63a13f442f35a7" id="r_a9e1e89cb0593d7e51f63a13f442f35a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a9e1e89cb0593d7e51f63a13f442f35a7">__init__</a> (self, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a733391d2d77bcaa1eb93777eb24aa60b">parent_dir</a>, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a31e6a0880d3c2cf31c5c4d60325d7c93">output_prefix</a>=&quot;merge_jobs&quot;, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#ad4ca360f0154734bcb3de66f845744ad">max_files_per_job</a>=20, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#ab421458e13ccb745facfb73bb1d7440d">file_pattern</a>=&quot;*.root&quot;, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#af15235a27898801820a20a12027f8efb">run_pattern</a>=&quot;hps_*&quot;, max_depth=3, <a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a2b4d6e0831a517c081fd006e2d20fc88">path_filter</a>=None)</td></tr>
+<tr class="memdesc:a9e1e89cb0593d7e51f63a13f442f35a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the merge job preparation.  <br /></td></tr>
+<tr class="separator:a9e1e89cb0593d7e51f63a13f442f35a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5b0270e1e1eee5405fb0573dfe7202b" id="r_aa5b0270e1e1eee5405fb0573dfe7202b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#aa5b0270e1e1eee5405fb0573dfe7202b">scan_directories</a> (self)</td></tr>
 <tr class="memdesc:aa5b0270e1e1eee5405fb0573dfe7202b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan parent directory for run directories and ROOT files.  <br /></td></tr>
 <tr class="separator:aa5b0270e1e1eee5405fb0573dfe7202b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,14 +143,24 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ab421458e13ccb745facfb73bb1d7440d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af15235a27898801820a20a12027f8efb" id="r_af15235a27898801820a20a12027f8efb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#af15235a27898801820a20a12027f8efb">run_pattern</a></td></tr>
 <tr class="separator:af15235a27898801820a20a12027f8efb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0b4340c0a3ede312856c001b86d7ed" id="r_abe0b4340c0a3ede312856c001b86d7ed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#abe0b4340c0a3ede312856c001b86d7ed">max_depth</a></td></tr>
+<tr class="separator:abe0b4340c0a3ede312856c001b86d7ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b4d6e0831a517c081fd006e2d20fc88" id="r_a2b4d6e0831a517c081fd006e2d20fc88"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a2b4d6e0831a517c081fd006e2d20fc88">path_filter</a></td></tr>
+<tr class="separator:a2b4d6e0831a517c081fd006e2d20fc88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a2fed8d90b627e2a96d3929bd03d5e291" id="r_a2fed8d90b627e2a96d3929bd03d5e291"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a2fed8d90b627e2a96d3929bd03d5e291">_find_files_recursive</a> (self, directory, current_depth=0)</td></tr>
+<tr class="memdesc:a2fed8d90b627e2a96d3929bd03d5e291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively search for files matching pattern up to max_depth.  <br /></td></tr>
+<tr class="separator:a2fed8d90b627e2a96d3929bd03d5e291"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Prepare merge jobs by scanning directories for ROOT files. </p>
 
 <p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00017">17</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac02ee5fb78098a6259521e008efc06b0" name="ac02ee5fb78098a6259521e008efc06b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac02ee5fb78098a6259521e008efc06b0">&#9670;&#160;</a></span>__init__()</h2>
+<a id="a9e1e89cb0593d7e51f63a13f442f35a7" name="a9e1e89cb0593d7e51f63a13f442f35a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e1e89cb0593d7e51f63a13f442f35a7">&#9670;&#160;</a></span>__init__()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +199,19 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>run_pattern</em> = <code>&quot;hps_*&quot;</code>&#160;</td>
+          <td class="paramname"><em>run_pattern</em> = <code>&quot;hps_*&quot;</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>max_depth</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>path_filter</em> = <code>None</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -206,6 +229,8 @@ Public Attributes</h2></td></tr>
     <tr><td class="paramname">max_files_per_job</td><td>Maximum number of ROOT files per merge job </td></tr>
     <tr><td class="paramname">file_pattern</td><td>Glob pattern for files to merge (default: *.root) </td></tr>
     <tr><td class="paramname">run_pattern</td><td>Glob pattern for run directories (default: hps_*) </td></tr>
+    <tr><td class="paramname">max_depth</td><td>Maximum depth to search for ROOT files if not found at top level (default: 3) </td></tr>
+    <tr><td class="paramname">path_filter</td><td>String that must appear somewhere in the full file path (default: None) </td></tr>
   </table>
   </dd>
 </dl>
@@ -215,6 +240,60 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2fed8d90b627e2a96d3929bd03d5e291" name="a2fed8d90b627e2a96d3929bd03d5e291"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fed8d90b627e2a96d3929bd03d5e291">&#9670;&#160;</a></span>_find_files_recursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">_find_files_recursive </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>directory</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>current_depth</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Recursively search for files matching pattern up to max_depth. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">directory</td><td>Directory to search in </td></tr>
+    <tr><td class="paramname">current_depth</td><td>Current recursion depth </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of file paths found </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00043">43</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+
+</div>
+</div>
 <a id="abf77b586737e7d44340147345ce595de" name="abf77b586737e7d44340147345ce595de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abf77b586737e7d44340147345ce595de">&#9670;&#160;</a></span>create_batches()</h2>
 
@@ -251,7 +330,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List of batch dictionaries with metadata </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00069">69</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00136">136</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -299,7 +378,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Path to the written file </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00155">155</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00222">222</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -352,7 +431,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Dictionary with paths to generated files and batch info </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00186">186</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00253">253</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -373,9 +452,10 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Scan parent directory for run directories and ROOT files. </p>
+<p>If no ROOT files are found directly in a run directory, searches recursively up to max_depth levels deep.</p>
 <dl class="section return"><dt>Returns</dt><dd>Dictionary mapping run names to lists of ROOT file paths </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00039">39</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00066">66</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -422,7 +502,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Path to the written file </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00135">135</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00202">202</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -469,7 +549,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List of file paths written or single file path if single_file=True </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00100">100</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00167">167</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -486,7 +566,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00033">33</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00035">35</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+
+</div>
+</div>
+<a id="abe0b4340c0a3ede312856c001b86d7ed" name="abe0b4340c0a3ede312856c001b86d7ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe0b4340c0a3ede312856c001b86d7ed">&#9670;&#160;</a></span>max_depth</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">max_depth</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00037">37</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -502,7 +598,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00032">32</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00034">34</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -518,7 +614,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00031">31</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00033">33</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -534,7 +630,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00030">30</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00032">32</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+
+</div>
+</div>
+<a id="a2b4d6e0831a517c081fd006e2d20fc88" name="a2b4d6e0831a517c081fd006e2d20fc88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b4d6e0831a517c081fd006e2d20fc88">&#9670;&#160;</a></span>path_filter</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">path_filter</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00038">38</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>
@@ -550,7 +662,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00034">34</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="prepare__merge__jobs_8py_source.html#l00036">36</a> of file <a class="el" href="prepare__merge__jobs_8py_source.html">prepare_merge_jobs.py</a>.</p>
 
 </div>
 </div>

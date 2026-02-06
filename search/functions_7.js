@@ -11,6 +11,7 @@ var searchData=
   ['get_5fscript_5fnames_8',['get_script_names',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#ab7fd9c1ea251caf1b41d8f697cd88769',1,'hpsmc::job::JobScriptDatabase']]],
   ['get_5fscript_5fpath_9',['get_script_path',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#a8fc72dcda9ba61c19d0f190bbb6c3db7',1,'hpsmc::job::JobScriptDatabase']]],
   ['get_5fscripts_10',['get_scripts',['../classhpsmc_1_1job_1_1JobScriptDatabase.html#a633053760ae90228554f4cfb04037acc',1,'hpsmc::job::JobScriptDatabase']]],
-  ['getbeamspotconstraints_11',['getBeamspotConstraints',['../namespacehpsmc_1_1alignment_1_1__util.html#af76fb285e1677ef4e10263c3e9b42725',1,'hpsmc::alignment::_util']]],
-  ['getbeamspotconstraintsfloatingonly_12',['getBeamspotConstraintsFloatingOnly',['../namespacehpsmc_1_1alignment_1_1__util.html#a7e6867e85329247eb76b76276940b806',1,'hpsmc::alignment::_util']]]
+  ['get_5fstats_5ffilename_11',['get_stats_filename',['../classhpsmc_1_1tools_1_1MergeROOT.html#abc1f341838f78278784c59649e28e733',1,'hpsmc::tools::MergeROOT']]],
+  ['getbeamspotconstraints_12',['getBeamspotConstraints',['../namespacehpsmc_1_1alignment_1_1__util.html#af76fb285e1677ef4e10263c3e9b42725',1,'hpsmc::alignment::_util']]],
+  ['getbeamspotconstraintsfloatingonly_13',['getBeamspotConstraintsFloatingOnly',['../namespacehpsmc_1_1alignment_1_1__util.html#a7e6867e85329247eb76b76276940b806',1,'hpsmc::alignment::_util']]]
 ];

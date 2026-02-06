@@ -10,6 +10,7 @@ var namespacehpsmc =
     ] ],
     [ "alignment", "namespacehpsmc_1_1alignment.html", "namespacehpsmc_1_1alignment" ],
     [ "batch", "namespacehpsmc_1_1batch.html", "namespacehpsmc_1_1batch" ],
+    [ "collect_merge_stats", "namespacehpsmc_1_1collect__merge__stats.html", "namespacehpsmc_1_1collect__merge__stats" ],
     [ "component", "namespacehpsmc_1_1component.html", "namespacehpsmc_1_1component" ],
     [ "config_writer", "namespacehpsmc_1_1config__writer.html", [
       [ "_get_job_defaults", "namespacehpsmc_1_1config__writer.html#aedef3ec00a9c74c192ae18b1c231fb30", null ],

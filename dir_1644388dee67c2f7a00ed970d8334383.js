@@ -6,6 +6,7 @@ var dir_1644388dee67c2f7a00ed970d8334383 =
     [ "_hadd.py", "__hadd_8py.html", "__hadd_8py" ],
     [ "_logging.py", "__logging_8py.html", "__logging_8py" ],
     [ "batch.py", "batch_8py.html", "batch_8py" ],
+    [ "collect_merge_stats.py", "collect__merge__stats_8py.html", "collect__merge__stats_8py" ],
     [ "component.py", "component_8py.html", "component_8py" ],
     [ "config_writer.py", "config__writer_8py.html", "config__writer_8py" ],
     [ "func.py", "func_8py.html", "func_8py" ],

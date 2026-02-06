@@ -14,5 +14,6 @@ var searchData=
   ['_5fog_5fstr_11',['_og_str',['../classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#a7b6e210654068464cb0d4158082aad51',1,'hpsmc::alignment::_pattern::Pattern']]],
   ['_5fpede_5fsteering_5ffile_12',['_pede_steering_file',['../classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#a171a61c13dae1aa6fea5edabb0764878',1,'hpsmc::alignment::_pede::PEDE']]],
   ['_5ftrans_5frot_13',['_trans_rot',['../classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a3813f1653651c8faf443cabb68cd7a66',1,'hpsmc::alignment::_parameter::Parameter']]],
-  ['_5fval_14',['_val',['../classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a726655a11a1f769ae12a2de36013b670',1,'hpsmc::alignment::_parameter::Parameter']]]
+  ['_5fval_14',['_val',['../classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#a726655a11a1f769ae12a2de36013b670',1,'hpsmc::alignment::_parameter::Parameter']]],
+  ['_5fvalidation_5fpassed_15',['_validation_passed',['../classhpsmc_1_1tools_1_1MergeROOT.html#a18b07bbdfe6894861417ea4efed46cc4',1,'hpsmc::tools::MergeROOT']]]
 ];
