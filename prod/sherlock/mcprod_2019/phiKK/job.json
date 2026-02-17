@@ -15,7 +15,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_1.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_1.slcio"
@@ -23,6 +23,6 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_0.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/users/mghrear/phiKK_Test",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 1
     }

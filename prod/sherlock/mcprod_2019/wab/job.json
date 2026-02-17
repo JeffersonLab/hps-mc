@@ -15,12 +15,12 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "WAB_unweighted_events.lhe.gz": "MG5/wab_unweighted_4pt55_1.lhe.gz",
             "WAB_unweighted_events_mom_rot.stdhep": "stdhep/wab_4pt55_mom_rot_1.stdhep",
             "WAB_unweighted_events_mom_rot.slcio": "slic/wab_4pt55_mom_rot_1.slcio"
         },
-        "output_dir": "/scratch/groups/laurenat/wab_test",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/wab",
         "job_id": 1
-    }
+    } 

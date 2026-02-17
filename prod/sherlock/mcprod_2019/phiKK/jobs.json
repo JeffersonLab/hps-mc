@@ -16,7 +16,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_1.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_1.slcio"
@@ -24,7 +24,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_0.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 1
     },
     {
@@ -44,7 +44,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_2.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_2.slcio"
@@ -52,7 +52,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_100.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 2
     },
     {
@@ -72,7 +72,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_3.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_3.slcio"
@@ -80,7 +80,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_101.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 3
     },
     {
@@ -100,7 +100,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_4.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_4.slcio"
@@ -108,7 +108,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_102.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 4
     },
     {
@@ -128,7 +128,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_5.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_5.slcio"
@@ -136,7 +136,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_103.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 5
     },
     {
@@ -156,7 +156,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_6.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_6.slcio"
@@ -164,7 +164,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_104.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 6
     },
     {
@@ -184,7 +184,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_7.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_7.slcio"
@@ -192,7 +192,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_105.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 7
     },
     {
@@ -212,7 +212,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_8.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_8.slcio"
@@ -220,7 +220,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_106.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 8
     },
     {
@@ -240,7 +240,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_9.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_9.slcio"
@@ -248,7 +248,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_107.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 9
     },
     {
@@ -268,7 +268,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_10.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_10.slcio"
@@ -276,7 +276,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_108.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 10
     },
     {
@@ -296,7 +296,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_11.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_11.slcio"
@@ -304,7 +304,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_109.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 11
     },
     {
@@ -324,7 +324,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_12.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_12.slcio"
@@ -332,7 +332,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_10.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 12
     },
     {
@@ -352,7 +352,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_13.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_13.slcio"
@@ -360,7 +360,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_110.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 13
     },
     {
@@ -380,7 +380,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_14.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_14.slcio"
@@ -388,7 +388,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_111.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 14
     },
     {
@@ -408,7 +408,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_15.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_15.slcio"
@@ -416,7 +416,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_112.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 15
     },
     {
@@ -436,7 +436,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_16.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_16.slcio"
@@ -444,7 +444,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_113.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 16
     },
     {
@@ -464,7 +464,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_17.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_17.slcio"
@@ -472,7 +472,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_114.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 17
     },
     {
@@ -492,7 +492,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_18.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_18.slcio"
@@ -500,7 +500,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_115.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 18
     },
     {
@@ -520,7 +520,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_19.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_19.slcio"
@@ -528,7 +528,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_116.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 19
     },
     {
@@ -548,7 +548,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_20.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_20.slcio"
@@ -556,7 +556,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_117.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 20
     },
     {
@@ -576,7 +576,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_21.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_21.slcio"
@@ -584,7 +584,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_118.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 21
     },
     {
@@ -604,7 +604,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_22.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_22.slcio"
@@ -612,7 +612,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_119.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 22
     },
     {
@@ -632,7 +632,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_23.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_23.slcio"
@@ -640,7 +640,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_11.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 23
     },
     {
@@ -660,7 +660,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_24.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_24.slcio"
@@ -668,7 +668,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_120.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 24
     },
     {
@@ -688,7 +688,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_25.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_25.slcio"
@@ -696,7 +696,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_121.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 25
     },
     {
@@ -716,7 +716,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_26.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_26.slcio"
@@ -724,7 +724,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_122.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 26
     },
     {
@@ -744,7 +744,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_27.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_27.slcio"
@@ -752,7 +752,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_123.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 27
     },
     {
@@ -772,7 +772,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_28.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_28.slcio"
@@ -780,7 +780,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_124.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 28
     },
     {
@@ -800,7 +800,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_29.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_29.slcio"
@@ -808,7 +808,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_125.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 29
     },
     {
@@ -828,7 +828,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_30.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_30.slcio"
@@ -836,7 +836,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_126.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 30
     },
     {
@@ -856,7 +856,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_31.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_31.slcio"
@@ -864,7 +864,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_127.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 31
     },
     {
@@ -884,7 +884,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_32.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_32.slcio"
@@ -892,7 +892,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_128.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 32
     },
     {
@@ -912,7 +912,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_33.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_33.slcio"
@@ -920,7 +920,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_129.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 33
     },
     {
@@ -940,7 +940,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_34.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_34.slcio"
@@ -948,7 +948,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_12.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 34
     },
     {
@@ -968,7 +968,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_35.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_35.slcio"
@@ -976,7 +976,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_130.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 35
     },
     {
@@ -996,7 +996,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_36.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_36.slcio"
@@ -1004,7 +1004,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_131.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 36
     },
     {
@@ -1024,7 +1024,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_37.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_37.slcio"
@@ -1032,7 +1032,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_132.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 37
     },
     {
@@ -1052,7 +1052,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_38.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_38.slcio"
@@ -1060,7 +1060,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_133.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 38
     },
     {
@@ -1080,7 +1080,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_39.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_39.slcio"
@@ -1088,7 +1088,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_134.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 39
     },
     {
@@ -1108,7 +1108,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_40.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_40.slcio"
@@ -1116,7 +1116,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_135.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 40
     },
     {
@@ -1136,7 +1136,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_41.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_41.slcio"
@@ -1144,7 +1144,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_136.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 41
     },
     {
@@ -1164,7 +1164,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_42.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_42.slcio"
@@ -1172,7 +1172,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_137.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 42
     },
     {
@@ -1192,7 +1192,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_43.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_43.slcio"
@@ -1200,7 +1200,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_138.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 43
     },
     {
@@ -1220,7 +1220,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_44.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_44.slcio"
@@ -1228,7 +1228,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_139.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 44
     },
     {
@@ -1248,7 +1248,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_45.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_45.slcio"
@@ -1256,7 +1256,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_13.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 45
     },
     {
@@ -1276,7 +1276,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_46.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_46.slcio"
@@ -1284,7 +1284,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_140.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 46
     },
     {
@@ -1304,7 +1304,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_47.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_47.slcio"
@@ -1312,7 +1312,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_141.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 47
     },
     {
@@ -1332,7 +1332,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_48.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_48.slcio"
@@ -1340,7 +1340,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_142.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 48
     },
     {
@@ -1360,7 +1360,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_49.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_49.slcio"
@@ -1368,7 +1368,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_143.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 49
     },
     {
@@ -1388,7 +1388,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_50.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_50.slcio"
@@ -1396,7 +1396,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_144.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 50
     },
     {
@@ -1416,7 +1416,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_51.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_51.slcio"
@@ -1424,7 +1424,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_145.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 51
     },
     {
@@ -1444,7 +1444,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_52.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_52.slcio"
@@ -1452,7 +1452,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_146.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 52
     },
     {
@@ -1472,7 +1472,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_53.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_53.slcio"
@@ -1480,7 +1480,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_147.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 53
     },
     {
@@ -1500,7 +1500,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_54.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_54.slcio"
@@ -1508,7 +1508,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_148.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 54
     },
     {
@@ -1528,7 +1528,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_55.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_55.slcio"
@@ -1536,7 +1536,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_149.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 55
     },
     {
@@ -1556,7 +1556,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_56.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_56.slcio"
@@ -1564,7 +1564,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_14.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 56
     },
     {
@@ -1584,7 +1584,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_57.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_57.slcio"
@@ -1592,7 +1592,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_150.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 57
     },
     {
@@ -1612,7 +1612,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_58.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_58.slcio"
@@ -1620,7 +1620,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_151.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 58
     },
     {
@@ -1640,7 +1640,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_59.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_59.slcio"
@@ -1648,7 +1648,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_152.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 59
     },
     {
@@ -1668,7 +1668,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_60.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_60.slcio"
@@ -1676,7 +1676,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_153.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 60
     },
     {
@@ -1696,7 +1696,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_61.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_61.slcio"
@@ -1704,7 +1704,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_154.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 61
     },
     {
@@ -1724,7 +1724,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_62.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_62.slcio"
@@ -1732,7 +1732,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_155.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 62
     },
     {
@@ -1752,7 +1752,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_63.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_63.slcio"
@@ -1760,7 +1760,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_156.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 63
     },
     {
@@ -1780,7 +1780,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_64.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_64.slcio"
@@ -1788,7 +1788,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_157.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 64
     },
     {
@@ -1808,7 +1808,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_65.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_65.slcio"
@@ -1816,7 +1816,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_158.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 65
     },
     {
@@ -1836,7 +1836,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_66.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_66.slcio"
@@ -1844,7 +1844,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_159.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 66
     },
     {
@@ -1864,7 +1864,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_67.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_67.slcio"
@@ -1872,7 +1872,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_15.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 67
     },
     {
@@ -1892,7 +1892,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_68.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_68.slcio"
@@ -1900,7 +1900,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_160.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 68
     },
     {
@@ -1920,7 +1920,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_69.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_69.slcio"
@@ -1928,7 +1928,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_161.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 69
     },
     {
@@ -1948,7 +1948,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_70.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_70.slcio"
@@ -1956,7 +1956,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_162.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 70
     },
     {
@@ -1976,7 +1976,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_71.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_71.slcio"
@@ -1984,7 +1984,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_163.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 71
     },
     {
@@ -2004,7 +2004,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_72.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_72.slcio"
@@ -2012,7 +2012,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_164.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 72
     },
     {
@@ -2032,7 +2032,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_73.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_73.slcio"
@@ -2040,7 +2040,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_165.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 73
     },
     {
@@ -2060,7 +2060,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_74.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_74.slcio"
@@ -2068,7 +2068,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_166.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 74
     },
     {
@@ -2088,7 +2088,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_75.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_75.slcio"
@@ -2096,7 +2096,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_167.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 75
     },
     {
@@ -2116,7 +2116,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_76.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_76.slcio"
@@ -2124,7 +2124,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_168.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 76
     },
     {
@@ -2144,7 +2144,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_77.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_77.slcio"
@@ -2152,7 +2152,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_169.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 77
     },
     {
@@ -2172,7 +2172,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_78.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_78.slcio"
@@ -2180,7 +2180,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_16.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 78
     },
     {
@@ -2200,7 +2200,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_79.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_79.slcio"
@@ -2208,7 +2208,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_170.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 79
     },
     {
@@ -2228,7 +2228,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_80.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_80.slcio"
@@ -2236,7 +2236,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_171.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 80
     },
     {
@@ -2256,7 +2256,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_81.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_81.slcio"
@@ -2264,7 +2264,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_172.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 81
     },
     {
@@ -2284,7 +2284,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_82.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_82.slcio"
@@ -2292,7 +2292,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_173.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 82
     },
     {
@@ -2312,7 +2312,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_83.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_83.slcio"
@@ -2320,7 +2320,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_174.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 83
     },
     {
@@ -2340,7 +2340,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_84.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_84.slcio"
@@ -2348,7 +2348,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_175.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 84
     },
     {
@@ -2368,7 +2368,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_85.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_85.slcio"
@@ -2376,7 +2376,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_176.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 85
     },
     {
@@ -2396,7 +2396,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_86.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_86.slcio"
@@ -2404,7 +2404,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_177.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 86
     },
     {
@@ -2424,7 +2424,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_87.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_87.slcio"
@@ -2432,7 +2432,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_178.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 87
     },
     {
@@ -2452,7 +2452,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_88.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_88.slcio"
@@ -2460,7 +2460,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_179.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 88
     },
     {
@@ -2480,7 +2480,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_89.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_89.slcio"
@@ -2488,7 +2488,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_17.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 89
     },
     {
@@ -2508,7 +2508,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_90.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_90.slcio"
@@ -2516,7 +2516,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_180.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 90
     },
     {
@@ -2536,7 +2536,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_91.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_91.slcio"
@@ -2544,7 +2544,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_181.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 91
     },
     {
@@ -2564,7 +2564,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_92.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_92.slcio"
@@ -2572,7 +2572,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_182.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 92
     },
     {
@@ -2592,7 +2592,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_93.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_93.slcio"
@@ -2600,7 +2600,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_183.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 93
     },
     {
@@ -2620,7 +2620,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_94.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_94.slcio"
@@ -2628,7 +2628,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_184.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 94
     },
     {
@@ -2648,7 +2648,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_95.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_95.slcio"
@@ -2656,7 +2656,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_185.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 95
     },
     {
@@ -2676,7 +2676,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_96.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_96.slcio"
@@ -2684,7 +2684,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_186.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 96
     },
     {
@@ -2704,7 +2704,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_97.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_97.slcio"
@@ -2712,7 +2712,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_187.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 97
     },
     {
@@ -2732,7 +2732,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_98.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_98.slcio"
@@ -2740,7 +2740,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_188.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 98
     },
     {
@@ -2760,7 +2760,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_99.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_99.slcio"
@@ -2768,7 +2768,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_189.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 99
     },
     {
@@ -2788,7 +2788,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_100.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_100.slcio"
@@ -2796,7 +2796,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_18.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 100
     },
     {
@@ -2816,7 +2816,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_101.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_101.slcio"
@@ -2824,7 +2824,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_190.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 101
     },
     {
@@ -2844,7 +2844,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_102.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_102.slcio"
@@ -2852,7 +2852,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_191.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 102
     },
     {
@@ -2872,7 +2872,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_103.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_103.slcio"
@@ -2880,7 +2880,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_192.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 103
     },
     {
@@ -2900,7 +2900,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_104.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_104.slcio"
@@ -2908,7 +2908,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_193.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 104
     },
     {
@@ -2928,7 +2928,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_105.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_105.slcio"
@@ -2936,7 +2936,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_194.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 105
     },
     {
@@ -2956,7 +2956,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_106.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_106.slcio"
@@ -2964,7 +2964,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_195.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 106
     },
     {
@@ -2984,7 +2984,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_107.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_107.slcio"
@@ -2992,7 +2992,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_196.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 107
     },
     {
@@ -3012,7 +3012,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_108.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_108.slcio"
@@ -3020,7 +3020,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_197.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 108
     },
     {
@@ -3040,7 +3040,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_109.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_109.slcio"
@@ -3048,7 +3048,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_198.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 109
     },
     {
@@ -3068,7 +3068,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_110.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_110.slcio"
@@ -3076,7 +3076,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_199.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 110
     },
     {
@@ -3096,7 +3096,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_111.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_111.slcio"
@@ -3104,7 +3104,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_19.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 111
     },
     {
@@ -3124,7 +3124,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_112.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_112.slcio"
@@ -3132,7 +3132,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_1.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 112
     },
     {
@@ -3152,7 +3152,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_113.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_113.slcio"
@@ -3160,7 +3160,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_200.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 113
     },
     {
@@ -3180,7 +3180,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_114.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_114.slcio"
@@ -3188,7 +3188,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_201.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 114
     },
     {
@@ -3208,7 +3208,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_115.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_115.slcio"
@@ -3216,7 +3216,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_202.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 115
     },
     {
@@ -3236,7 +3236,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_116.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_116.slcio"
@@ -3244,7 +3244,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_203.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 116
     },
     {
@@ -3264,7 +3264,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_117.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_117.slcio"
@@ -3272,7 +3272,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_204.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 117
     },
     {
@@ -3292,7 +3292,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_118.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_118.slcio"
@@ -3300,7 +3300,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_205.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 118
     },
     {
@@ -3320,7 +3320,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_119.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_119.slcio"
@@ -3328,7 +3328,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_206.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 119
     },
     {
@@ -3348,7 +3348,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_120.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_120.slcio"
@@ -3356,7 +3356,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_207.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 120
     },
     {
@@ -3376,7 +3376,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_121.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_121.slcio"
@@ -3384,7 +3384,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_208.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 121
     },
     {
@@ -3404,7 +3404,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_122.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_122.slcio"
@@ -3412,7 +3412,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_209.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 122
     },
     {
@@ -3432,7 +3432,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_123.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_123.slcio"
@@ -3440,7 +3440,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_20.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 123
     },
     {
@@ -3460,7 +3460,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_124.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_124.slcio"
@@ -3468,7 +3468,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_210.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 124
     },
     {
@@ -3488,7 +3488,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_125.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_125.slcio"
@@ -3496,7 +3496,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_211.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 125
     },
     {
@@ -3516,7 +3516,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_126.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_126.slcio"
@@ -3524,7 +3524,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_212.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 126
     },
     {
@@ -3544,7 +3544,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_127.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_127.slcio"
@@ -3552,7 +3552,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_213.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 127
     },
     {
@@ -3572,7 +3572,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_128.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_128.slcio"
@@ -3580,7 +3580,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_214.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 128
     },
     {
@@ -3600,7 +3600,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_129.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_129.slcio"
@@ -3608,7 +3608,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_215.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 129
     },
     {
@@ -3628,7 +3628,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_130.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_130.slcio"
@@ -3636,7 +3636,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_216.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 130
     },
     {
@@ -3656,7 +3656,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_131.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_131.slcio"
@@ -3664,7 +3664,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_217.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 131
     },
     {
@@ -3684,7 +3684,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_132.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_132.slcio"
@@ -3692,7 +3692,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_218.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 132
     },
     {
@@ -3712,7 +3712,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_133.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_133.slcio"
@@ -3720,7 +3720,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_219.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 133
     },
     {
@@ -3740,7 +3740,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_134.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_134.slcio"
@@ -3748,7 +3748,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_21.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 134
     },
     {
@@ -3768,7 +3768,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_135.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_135.slcio"
@@ -3776,7 +3776,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_220.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 135
     },
     {
@@ -3796,7 +3796,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_136.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_136.slcio"
@@ -3804,7 +3804,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_221.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 136
     },
     {
@@ -3824,7 +3824,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_137.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_137.slcio"
@@ -3832,7 +3832,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_222.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 137
     },
     {
@@ -3852,7 +3852,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_138.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_138.slcio"
@@ -3860,7 +3860,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_223.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 138
     },
     {
@@ -3880,7 +3880,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_139.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_139.slcio"
@@ -3888,7 +3888,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_224.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 139
     },
     {
@@ -3908,7 +3908,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_140.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_140.slcio"
@@ -3916,7 +3916,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_225.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 140
     },
     {
@@ -3936,7 +3936,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_141.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_141.slcio"
@@ -3944,7 +3944,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_226.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 141
     },
     {
@@ -3964,7 +3964,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_142.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_142.slcio"
@@ -3972,7 +3972,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_227.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 142
     },
     {
@@ -3992,7 +3992,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_143.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_143.slcio"
@@ -4000,7 +4000,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_22.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 143
     },
     {
@@ -4020,7 +4020,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_144.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_144.slcio"
@@ -4028,7 +4028,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_23.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 144
     },
     {
@@ -4048,7 +4048,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_145.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_145.slcio"
@@ -4056,7 +4056,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_24.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 145
     },
     {
@@ -4076,7 +4076,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_146.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_146.slcio"
@@ -4084,7 +4084,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_25.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 146
     },
     {
@@ -4104,7 +4104,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_147.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_147.slcio"
@@ -4112,7 +4112,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_26.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 147
     },
     {
@@ -4132,7 +4132,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_148.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_148.slcio"
@@ -4140,7 +4140,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_27.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 148
     },
     {
@@ -4160,7 +4160,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_149.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_149.slcio"
@@ -4168,7 +4168,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_28.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 149
     },
     {
@@ -4188,7 +4188,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_150.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_150.slcio"
@@ -4196,7 +4196,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_29.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 150
     },
     {
@@ -4216,7 +4216,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_151.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_151.slcio"
@@ -4224,7 +4224,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_2.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 151
     },
     {
@@ -4244,7 +4244,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_152.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_152.slcio"
@@ -4252,7 +4252,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_30.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 152
     },
     {
@@ -4272,7 +4272,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_153.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_153.slcio"
@@ -4280,7 +4280,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_31.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 153
     },
     {
@@ -4300,7 +4300,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_154.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_154.slcio"
@@ -4308,7 +4308,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_32.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 154
     },
     {
@@ -4328,7 +4328,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_155.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_155.slcio"
@@ -4336,7 +4336,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_33.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 155
     },
     {
@@ -4356,7 +4356,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_156.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_156.slcio"
@@ -4364,7 +4364,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_34.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 156
     },
     {
@@ -4384,7 +4384,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_157.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_157.slcio"
@@ -4392,7 +4392,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_35.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 157
     },
     {
@@ -4412,7 +4412,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_158.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_158.slcio"
@@ -4420,7 +4420,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_36.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 158
     },
     {
@@ -4440,7 +4440,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_159.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_159.slcio"
@@ -4448,7 +4448,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_37.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 159
     },
     {
@@ -4468,7 +4468,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_160.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_160.slcio"
@@ -4476,7 +4476,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_38.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 160
     },
     {
@@ -4496,7 +4496,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_161.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_161.slcio"
@@ -4504,7 +4504,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_39.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 161
     },
     {
@@ -4524,7 +4524,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_162.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_162.slcio"
@@ -4532,7 +4532,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_3.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 162
     },
     {
@@ -4552,7 +4552,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_163.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_163.slcio"
@@ -4560,7 +4560,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_40.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 163
     },
     {
@@ -4580,7 +4580,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_164.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_164.slcio"
@@ -4588,7 +4588,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_41.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 164
     },
     {
@@ -4608,7 +4608,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_165.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_165.slcio"
@@ -4616,7 +4616,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_42.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 165
     },
     {
@@ -4636,7 +4636,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_166.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_166.slcio"
@@ -4644,7 +4644,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_43.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 166
     },
     {
@@ -4664,7 +4664,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_167.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_167.slcio"
@@ -4672,7 +4672,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_44.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 167
     },
     {
@@ -4692,7 +4692,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_168.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_168.slcio"
@@ -4700,7 +4700,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_45.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 168
     },
     {
@@ -4720,7 +4720,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_169.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_169.slcio"
@@ -4728,7 +4728,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_46.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 169
     },
     {
@@ -4748,7 +4748,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_170.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_170.slcio"
@@ -4756,7 +4756,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_47.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 170
     },
     {
@@ -4776,7 +4776,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_171.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_171.slcio"
@@ -4784,7 +4784,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_48.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 171
     },
     {
@@ -4804,7 +4804,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_172.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_172.slcio"
@@ -4812,7 +4812,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_49.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 172
     },
     {
@@ -4832,7 +4832,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_173.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_173.slcio"
@@ -4840,7 +4840,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_4.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 173
     },
     {
@@ -4860,7 +4860,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_174.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_174.slcio"
@@ -4868,7 +4868,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_50.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 174
     },
     {
@@ -4888,7 +4888,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_175.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_175.slcio"
@@ -4896,7 +4896,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_51.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 175
     },
     {
@@ -4916,7 +4916,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_176.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_176.slcio"
@@ -4924,7 +4924,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_52.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 176
     },
     {
@@ -4944,7 +4944,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_177.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_177.slcio"
@@ -4952,7 +4952,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_53.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 177
     },
     {
@@ -4972,7 +4972,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_178.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_178.slcio"
@@ -4980,7 +4980,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_54.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 178
     },
     {
@@ -5000,7 +5000,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_179.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_179.slcio"
@@ -5008,7 +5008,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_55.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 179
     },
     {
@@ -5028,7 +5028,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_180.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_180.slcio"
@@ -5036,7 +5036,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_56.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 180
     },
     {
@@ -5056,7 +5056,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_181.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_181.slcio"
@@ -5064,7 +5064,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_57.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 181
     },
     {
@@ -5084,7 +5084,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_182.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_182.slcio"
@@ -5092,7 +5092,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_58.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 182
     },
     {
@@ -5112,7 +5112,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_183.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_183.slcio"
@@ -5120,7 +5120,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_59.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 183
     },
     {
@@ -5140,7 +5140,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_184.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_184.slcio"
@@ -5148,7 +5148,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_5.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 184
     },
     {
@@ -5168,7 +5168,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_185.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_185.slcio"
@@ -5176,7 +5176,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_60.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 185
     },
     {
@@ -5196,7 +5196,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_186.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_186.slcio"
@@ -5204,7 +5204,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_61.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 186
     },
     {
@@ -5224,7 +5224,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_187.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_187.slcio"
@@ -5232,7 +5232,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_62.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 187
     },
     {
@@ -5252,7 +5252,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_188.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_188.slcio"
@@ -5260,7 +5260,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_63.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 188
     },
     {
@@ -5280,7 +5280,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_189.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_189.slcio"
@@ -5288,7 +5288,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_64.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 189
     },
     {
@@ -5308,7 +5308,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_190.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_190.slcio"
@@ -5316,7 +5316,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_65.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 190
     },
     {
@@ -5336,7 +5336,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_191.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_191.slcio"
@@ -5344,7 +5344,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_66.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 191
     },
     {
@@ -5364,7 +5364,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_192.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_192.slcio"
@@ -5372,7 +5372,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_67.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 192
     },
     {
@@ -5392,7 +5392,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_193.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_193.slcio"
@@ -5400,7 +5400,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_68.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 193
     },
     {
@@ -5420,7 +5420,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_194.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_194.slcio"
@@ -5428,7 +5428,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_69.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 194
     },
     {
@@ -5448,7 +5448,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_195.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_195.slcio"
@@ -5456,7 +5456,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_6.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 195
     },
     {
@@ -5476,7 +5476,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_196.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_196.slcio"
@@ -5484,7 +5484,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_70.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 196
     },
     {
@@ -5504,7 +5504,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_197.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_197.slcio"
@@ -5512,7 +5512,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_71.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 197
     },
     {
@@ -5532,7 +5532,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_198.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_198.slcio"
@@ -5540,7 +5540,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_72.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 198
     },
     {
@@ -5560,7 +5560,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_199.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_199.slcio"
@@ -5568,7 +5568,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_73.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 199
     },
     {
@@ -5588,7 +5588,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_200.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_200.slcio"
@@ -5596,7 +5596,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_74.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 200
     },
     {
@@ -5616,7 +5616,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_201.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_201.slcio"
@@ -5624,7 +5624,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_75.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 201
     },
     {
@@ -5644,7 +5644,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_202.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_202.slcio"
@@ -5652,7 +5652,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_76.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 202
     },
     {
@@ -5672,7 +5672,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_203.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_203.slcio"
@@ -5680,7 +5680,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_77.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 203
     },
     {
@@ -5700,7 +5700,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_204.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_204.slcio"
@@ -5708,7 +5708,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_78.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 204
     },
     {
@@ -5728,7 +5728,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_205.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_205.slcio"
@@ -5736,7 +5736,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_79.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 205
     },
     {
@@ -5756,7 +5756,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_206.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_206.slcio"
@@ -5764,7 +5764,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_7.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 206
     },
     {
@@ -5784,7 +5784,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_207.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_207.slcio"
@@ -5792,7 +5792,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_80.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 207
     },
     {
@@ -5812,7 +5812,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_208.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_208.slcio"
@@ -5820,7 +5820,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_81.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 208
     },
     {
@@ -5840,7 +5840,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_209.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_209.slcio"
@@ -5848,7 +5848,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_82.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 209
     },
     {
@@ -5868,7 +5868,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_210.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_210.slcio"
@@ -5876,7 +5876,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_83.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 210
     },
     {
@@ -5896,7 +5896,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_211.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_211.slcio"
@@ -5904,7 +5904,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_84.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 211
     },
     {
@@ -5924,7 +5924,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_212.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_212.slcio"
@@ -5932,7 +5932,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_85.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 212
     },
     {
@@ -5952,7 +5952,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_213.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_213.slcio"
@@ -5960,7 +5960,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_86.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 213
     },
     {
@@ -5980,7 +5980,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_214.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_214.slcio"
@@ -5988,7 +5988,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_87.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 214
     },
     {
@@ -6008,7 +6008,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_215.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_215.slcio"
@@ -6016,7 +6016,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_88.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 215
     },
     {
@@ -6036,7 +6036,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_216.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_216.slcio"
@@ -6044,7 +6044,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_89.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 216
     },
     {
@@ -6064,7 +6064,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_217.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_217.slcio"
@@ -6072,7 +6072,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_8.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 217
     },
     {
@@ -6092,7 +6092,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_218.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_218.slcio"
@@ -6100,7 +6100,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_90.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 218
     },
     {
@@ -6120,7 +6120,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_219.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_219.slcio"
@@ -6128,7 +6128,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_91.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 219
     },
     {
@@ -6148,7 +6148,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_220.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_220.slcio"
@@ -6156,7 +6156,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_92.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 220
     },
     {
@@ -6176,7 +6176,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_221.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_221.slcio"
@@ -6184,7 +6184,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_93.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 221
     },
     {
@@ -6204,7 +6204,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_222.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_222.slcio"
@@ -6212,7 +6212,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_94.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 222
     },
     {
@@ -6232,7 +6232,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_223.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_223.slcio"
@@ -6240,7 +6240,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_95.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 223
     },
     {
@@ -6260,7 +6260,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_224.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_224.slcio"
@@ -6268,7 +6268,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_96.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 224
     },
     {
@@ -6288,7 +6288,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_225.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_225.slcio"
@@ -6296,7 +6296,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_97.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 225
     },
     {
@@ -6316,7 +6316,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_226.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_226.slcio"
@@ -6324,7 +6324,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_98.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 226
     },
     {
@@ -6344,7 +6344,7 @@
         "beam_rot_x": 0.0,
         "beam_rot_y": 0.0305,
         "beam_rot_z": 0.0,
-        "detector": "HPS_Physics2019_survey_v2p4a_L4_v2p2b_10051",
+        "detector": "HPS_Physics2019_survey_v4p5c_L3L4L5_10235",
         "output_files": {
             "phi_rot.stdhep": "stdhep/phiKK_4pt55_rot_227.stdhep",
             "phi_rot.slcio": "slic/phiKK_4pt55_rot_227.slcio"
@@ -6352,7 +6352,7 @@
         "input_files": {
             "/home/groups/laurenat/majd/lhe_files/patch/phiKK_4550_MeV_patch_19981_files/phiKK_4550_MeV_99.lhe": "phi.lhe"
         },
-        "output_dir": "/scratch/groups/laurenat/2019_prod2_updated_part2/phiKK_patch",
+        "output_dir": "/scratch/groups/laurenat/2019_prod/phiKK",
         "job_id": 227
     }
 ]
