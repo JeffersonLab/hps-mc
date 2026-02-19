@@ -55,6 +55,7 @@ var hierarchy =
           [ "DisplaceUni", "classhpsmc_1_1tools_1_1DisplaceUni.html", null ],
           [ "MergeFiles", "classhpsmc_1_1tools_1_1MergeFiles.html", null ],
           [ "MergePoisson", "classhpsmc_1_1tools_1_1MergePoisson.html", null ],
+          [ "Phi_LHE_to_STDHEP", "classhpsmc_1_1tools_1_1Phi__LHE__to__STDHEP.html", null ],
           [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", null ]
         ] ],
         [ "TarFiles", "classhpsmc_1_1tools_1_1TarFiles.html", null ],

@@ -21,6 +21,8 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "misalign_job.py", "misalign__job_8py.html", "misalign__job_8py" ],
     [ "moller_gen_job.py", "moller__gen__job_8py.html", "moller__gen__job_8py" ],
     [ "pede_job.py", "pede__job_8py.html", "pede__job_8py" ],
+    [ "phi_lhe_to_recon_job.py", "phi__lhe__to__recon__job_8py.html", "phi__lhe__to__recon__job_8py" ],
+    [ "phi_lhe_to_slic_job.py", "phi__lhe__to__slic__job_8py.html", "phi__lhe__to__slic__job_8py" ],
     [ "rad_gen_job.py", "rad__gen__job_8py.html", "rad__gen__job_8py" ],
     [ "readout_recon_job.py", "readout__recon__job_8py.html", "readout__recon__job_8py" ],
     [ "root_merge_job.py", "root__merge__job_8py.html", "root__merge__job_8py" ],

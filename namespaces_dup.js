@@ -182,6 +182,21 @@ var namespaces_dup =
       [ "merged_gbl_plots", "namespacepede__job.html#a2d75f4fd80f8cd09583c7f0d3a331514", null ],
       [ "pede", "namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a", null ]
     ] ],
+    [ "phi_lhe_to_recon_job", "namespacephi__lhe__to__recon__job.html", [
+      [ "cnv", "namespacephi__lhe__to__recon__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacephi__lhe__to__recon__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "filter_bunches", "namespacephi__lhe__to__recon__job.html#a3074e3594d8071411ddd34bbbf47acd9", null ],
+      [ "readout", "namespacephi__lhe__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
+      [ "recon", "namespacephi__lhe__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
+      [ "rot", "namespacephi__lhe__to__recon__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
+      [ "slic", "namespacephi__lhe__to__recon__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ]
+    ] ],
+    [ "phi_lhe_to_slic_job", "namespacephi__lhe__to__slic__job.html", [
+      [ "cnv", "namespacephi__lhe__to__slic__job.html#ac2353b13f43ff77203d94b47953aa942", null ],
+      [ "description", "namespacephi__lhe__to__slic__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "rot", "namespacephi__lhe__to__slic__job.html#a1db2ab3d82c6029ee441423308802a74", null ],
+      [ "slic", "namespacephi__lhe__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6", null ]
+    ] ],
     [ "prepare_merge_jobs", "namespaceprepare__merge__jobs.html", null ],
     [ "rad_gen_job", "namespacerad__gen__job.html", [
       [ "cnv", "namespacerad__gen__job.html#ac2353b13f43ff77203d94b47953aa942", null ],

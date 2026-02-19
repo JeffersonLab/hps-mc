@@ -7,6 +7,7 @@ var tools_8py =
     [ "StdHepTool", "classhpsmc_1_1tools_1_1StdHepTool.html", "classhpsmc_1_1tools_1_1StdHepTool" ],
     [ "BeamCoords", "classhpsmc_1_1tools_1_1BeamCoords.html", "classhpsmc_1_1tools_1_1BeamCoords" ],
     [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", "classhpsmc_1_1tools_1_1RandomSample" ],
+    [ "Phi_LHE_to_STDHEP", "classhpsmc_1_1tools_1_1Phi__LHE__to__STDHEP.html", "classhpsmc_1_1tools_1_1Phi__LHE__to__STDHEP" ],
     [ "DisplaceTime", "classhpsmc_1_1tools_1_1DisplaceTime.html", "classhpsmc_1_1tools_1_1DisplaceTime" ],
     [ "DisplaceUni", "classhpsmc_1_1tools_1_1DisplaceUni.html", "classhpsmc_1_1tools_1_1DisplaceUni" ],
     [ "AddMother", "classhpsmc_1_1tools_1_1AddMother.html", "classhpsmc_1_1tools_1_1AddMother" ],
