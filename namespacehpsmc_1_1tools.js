@@ -22,6 +22,7 @@ var namespacehpsmc_1_1tools =
     [ "MergeROOT", "classhpsmc_1_1tools_1_1MergeROOT.html", "classhpsmc_1_1tools_1_1MergeROOT" ],
     [ "MoveFiles", "classhpsmc_1_1tools_1_1MoveFiles.html", "classhpsmc_1_1tools_1_1MoveFiles" ],
     [ "Phi_LHE_to_STDHEP", "classhpsmc_1_1tools_1_1Phi__LHE__to__STDHEP.html", "classhpsmc_1_1tools_1_1Phi__LHE__to__STDHEP" ],
+    [ "ProcessMiniDst", "classhpsmc_1_1tools_1_1ProcessMiniDst.html", "classhpsmc_1_1tools_1_1ProcessMiniDst" ],
     [ "RandomSample", "classhpsmc_1_1tools_1_1RandomSample.html", "classhpsmc_1_1tools_1_1RandomSample" ],
     [ "SLIC", "classhpsmc_1_1tools_1_1SLIC.html", "classhpsmc_1_1tools_1_1SLIC" ],
     [ "SQLiteProc", "classhpsmc_1_1tools_1_1SQLiteProc.html", "classhpsmc_1_1tools_1_1SQLiteProc" ],
