@@ -13,6 +13,7 @@ var dir_d28a4824dc47e487b107a5db32ef43c4 =
     [ "idm", "dir_3559b42bd614123e38060535ebe1bfbc.html", null ],
     [ "job_template", "dir_efedbfea416772a0a413ecd1faecee5c.html", null ],
     [ "moller_gen", "dir_69083470f9b9a6503e5e68a008405ff8.html", null ],
+    [ "muon_trident_gen", "dir_42acb9f0036ca5e4eae6b1cbd5c4fabd.html", null ],
     [ "rad_gen", "dir_c93759dbb01f3779281d970418c2a57e.html", null ],
     [ "readout_recon", "dir_d2b9fc179199248a23bc6b6c8e4a9c61.html", null ],
     [ "run_methods", "dir_230ef9542e403d77fbe34972e6a2d100.html", null ],

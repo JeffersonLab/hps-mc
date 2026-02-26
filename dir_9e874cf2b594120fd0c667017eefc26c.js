@@ -20,6 +20,7 @@ var dir_9e874cf2b594120fd0c667017eefc26c =
     [ "lcio_count_job.py", "lcio__count__job_8py.html", "lcio__count__job_8py" ],
     [ "misalign_job.py", "misalign__job_8py.html", "misalign__job_8py" ],
     [ "moller_gen_job.py", "moller__gen__job_8py.html", "moller__gen__job_8py" ],
+    [ "muon_trident_gen_job.py", "muon__trident__gen__job_8py.html", "muon__trident__gen__job_8py" ],
     [ "pede_job.py", "pede__job_8py.html", "pede__job_8py" ],
     [ "phi_lhe_to_recon_job.py", "phi__lhe__to__recon__job_8py.html", "phi__lhe__to__recon__job_8py" ],
     [ "phi_lhe_to_slic_job.py", "phi__lhe__to__slic__job_8py.html", "phi__lhe__to__slic__job_8py" ],

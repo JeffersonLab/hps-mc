@@ -1,5 +1,6 @@
 var searchData=
 [
   ['misalign_5fjob_0',['misalign_job',['../namespacemisalign__job.html',1,'']]],
-  ['moller_5fgen_5fjob_1',['moller_gen_job',['../namespacemoller__gen__job.html',1,'']]]
+  ['moller_5fgen_5fjob_1',['moller_gen_job',['../namespacemoller__gen__job.html',1,'']]],
+  ['muon_5ftrident_5fgen_5fjob_2',['muon_trident_gen_job',['../namespacemuon__trident__gen__job.html',1,'']]]
 ];

@@ -170,6 +170,11 @@ var namespaces_dup =
       [ "nevents", "namespacemoller__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ],
       [ "rot", "namespacemoller__gen__job.html#a1db2ab3d82c6029ee441423308802a74", null ]
     ] ],
+    [ "muon_trident_gen_job", "namespacemuon__trident__gen__job.html", [
+      [ "description", "namespacemuon__trident__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "mg", "namespacemuon__trident__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4", null ],
+      [ "nevents", "namespacemuon__trident__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48", null ]
+    ] ],
     [ "pede_job", "namespacepede__job.html", [
       [ "apply_res", "namespacepede__job.html#a684f131acbcc52a3ad9734898de6128b", null ],
       [ "construct_det", "namespacepede__job.html#a288ec87a8eb5206cc8c34091f394c61b", null ],

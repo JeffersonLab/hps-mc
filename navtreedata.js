@@ -62,6 +62,7 @@ var NAVTREE =
       [ "Job Template", "jobtemplate.html", null ]
     ] ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
+    [ "README", "md_examples_2muon__trident__gen_2README.html", null ],
     [ "SIMP-3Body Generation", "md_examples_2simp-3body_2simp-3body.html", null ],
     [ "SLIC to analysis pipeline with gps macro from GEANT4 GPS", "slicgpstoana.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
@@ -108,12 +109,12 @@ var NAVTREEINDEX =
 "classhpsmc_1_1tools_1_1MoveFiles.html#a67cf99f104398f6c8f00d039a2787c92",
 "classtest_1_1test__generators_1_1test__MG4.html#ab9984e9cb34e66540b79411e20036b19",
 "classtest_1_1test__tools__lciotools_1_1TestLCIOTool.html#ab673cf31c41e07fbce8d3a637e924fc4",
-"functions_func_f.html",
-"namespacebuild2019filenames.html#a2675a6e94dffede5e88cf26bfef44b15",
-"namespacereadout__recon__job.html#a43a75300e7fbb760272affc39b34c5e1",
-"namespacetritrig__slic__full__chain__job.html#a3074e3594d8071411ddd34bbbf47acd9",
-"slic__to__ana__job_8py_source.html",
-"wab__gen__mg5__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4"
+"functions_func_e.html",
+"namespacebeam__prep__and__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48",
+"namespacerad__gen__job.html#ac2353b13f43ff77203d94b47953aa942",
+"namespacetritrig__sim__full__chain__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1",
+"slic__to__anaMC__job_8py_source.html",
+"tritrigslicfullchain.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

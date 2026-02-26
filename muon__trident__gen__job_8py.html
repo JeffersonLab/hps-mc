@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>HPS-MC: Namespace Members</title>
+<title>HPS-MC: python/jobs/muon_trident_gen_job.py File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('namespacemembers_vars_n.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('muon__trident__gen__job_8py.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -94,23 +94,44 @@ $(document).ready(function(){initNavTree('namespacemembers_vars_n.html',''); ini
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">muon_trident_gen_job.py File Reference</div></div>
+</div><!--header-->
 <div class="contents">
-<div class="textblock">Here is a list of all namespace variables with links to the namespace documentation for each variable:</div>
 
-<h3><a id="index_n" name="index_n"></a>- n -</h3><ul>
-<li>nargs&#160;:&#160;<a class="el" href="namespacehpsmc_1_1config__writer.html#a87f35ac6fa80d957c59e394549aa7e15">hpsmc.config_writer</a></li>
-<li>nevents&#160;:&#160;<a class="el" href="namespaceap__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">ap_gen_job</a>, <a class="el" href="namespaceap__gen__mg4__job.html#a5209ed8d981dc170e77bea159c5bbe48">ap_gen_mg4_job</a>, <a class="el" href="namespaceap__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">ap_gen_to_slic_job</a>, <a class="el" href="namespaceap__gen__to__slic__mg4__job.html#a5209ed8d981dc170e77bea159c5bbe48">ap_gen_to_slic_mg4_job</a>, <a class="el" href="namespaceap__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">ap_slic_job</a>, <a class="el" href="namespacebeam__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">beam_gen_job</a>, <a class="el" href="namespacebeam__gen__sample__job.html#a5209ed8d981dc170e77bea159c5bbe48">beam_gen_sample_job</a>, <a class="el" href="namespacebeam__prep__and__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">beam_prep_and_slic_job</a>, <a class="el" href="namespacefee__gen__to__recon__job.html#a5209ed8d981dc170e77bea159c5bbe48">fee_gen_to_recon_job</a>, <a class="el" href="namespacelcio__count__job.html#aec013a013223f05e81214331b289330a">lcio_count_job</a>, <a class="el" href="namespacemoller__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">moller_gen_job</a>, <a class="el" href="namespacemuon__trident__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">muon_trident_gen_job</a>, <a class="el" href="namespacerad__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">rad_gen_job</a>, <a class="el" href="namespaceslic__job.html#a5209ed8d981dc170e77bea159c5bbe48">slic_job</a>, <a class="el" href="namespaceslic__to__recon__job.html#a5209ed8d981dc170e77bea159c5bbe48">slic_to_recon_job</a>, <a class="el" href="namespacetritrig__beam__slic__to__reco__job.html#a5209ed8d981dc170e77bea159c5bbe48">tritrig_beam_slic_to_reco_job</a>, <a class="el" href="namespacetritrig__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">tritrig_gen_to_slic_job</a>, <a class="el" href="namespacewab__gen__to__slic__job.html#a5209ed8d981dc170e77bea159c5bbe48">wab_gen_to_slic_job</a></li>
-<li>nfiles&#160;:&#160;<a class="el" href="namespacebuild2021filenames.html#ad3689093e74725e64a447ba28fbdbf69">build2021filenames</a></li>
-<li>nParts&#160;:&#160;<a class="el" href="namespacebuild2019filenames.html#a2a35871c4dcaff8945981ae4c182fa12">build2019filenames</a></li>
-<li>nPartsList&#160;:&#160;<a class="el" href="namespacebuild2019filenames.html#aab3512c8dd9bd1bd691924dfcba28684">build2019filenames</a></li>
-<li>nPartsPass&#160;:&#160;<a class="el" href="namespacebuild2019filenames.html#a718714d0f36c819041e9a4a65fa761f5">build2019filenames</a></li>
-<li>nPartsTot&#160;:&#160;<a class="el" href="namespacebuild2019filenames.html#a438a5ff9a31bc5e752293113a3f71902">build2019filenames</a>, <a class="el" href="namespacebuild2021filenames.html#a438a5ff9a31bc5e752293113a3f71902">build2021filenames</a></li>
-</ul>
-</div><!-- contents -->
+<p>Simulate muon trident events.  
+<a href="#details">More...</a></p>
+
+<p><a href="muon__trident__gen__job_8py_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacemuon__trident__gen__job" id="r_namespacemuon__trident__gen__job"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemuon__trident__gen__job.html">muon_trident_gen_job</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a2661f439a4a94ffdcd5e47ae1da0bb1d" id="r_a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemuon__trident__gen__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d">description</a></td></tr>
+<tr class="separator:a2661f439a4a94ffdcd5e47ae1da0bb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5209ed8d981dc170e77bea159c5bbe48" id="r_a5209ed8d981dc170e77bea159c5bbe48"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemuon__trident__gen__job.html#a5209ed8d981dc170e77bea159c5bbe48">nevents</a> = job.params['nevents']</td></tr>
+<tr class="separator:a5209ed8d981dc170e77bea159c5bbe48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adaa4bf1b4d0978fa034ada89161a23c4" id="r_adaa4bf1b4d0978fa034ada89161a23c4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemuon__trident__gen__job.html#adaa4bf1b4d0978fa034ada89161a23c4">mg</a> = <a class="el" href="classhpsmc_1_1generators_1_1MG5.html">MG5</a>(name='muon', event_types=['unweighted'])</td></tr>
+<tr class="memdesc:adaa4bf1b4d0978fa034ada89161a23c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate muon tridents in MG5.  <br /></td></tr>
+<tr class="separator:adaa4bf1b4d0978fa034ada89161a23c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Simulate muon trident events. </p>
+
+<p class="definition">Definition in file <a class="el" href="muon__trident__gen__job_8py_source.html">muon_trident_gen_job.py</a>.</p>
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="dir_7837fde3ab9c1fb2fc5be7b717af8d79.html">python</a></li><li class="navelem"><a class="el" href="dir_9e874cf2b594120fd0c667017eefc26c.html">jobs</a></li><li class="navelem"><a class="el" href="muon__trident__gen__job_8py.html">muon_trident_gen_job.py</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
