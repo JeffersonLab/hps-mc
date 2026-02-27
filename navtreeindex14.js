@@ -1,9 +1,5 @@
 var NAVTREEINDEX14 =
 {
-"tritrigslicfullchain.html":[7,16],
-"wab__gen__mg4__job_8py.html":[18,0,2,1,46],
-"wab__gen__mg4__job_8py.html#a1db2ab3d82c6029ee441423308802a74":[18,0,2,1,46,3],
-"wab__gen__mg4__job_8py.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[18,0,2,1,46,1],
 "wab__gen__mg4__job_8py.html#ac2353b13f43ff77203d94b47953aa942":[18,0,2,1,46,0],
 "wab__gen__mg4__job_8py.html#adaa4bf1b4d0978fa034ada89161a23c4":[18,0,2,1,46,2],
 "wab__gen__mg4__job_8py_source.html":[18,0,2,1,46],

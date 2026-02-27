@@ -1,9 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"classtest_1_1test__tools__lciotools_1_1TestLCIOTool.html#ab673cf31c41e07fbce8d3a637e924fc4":[17,0,1,10,3,1],
-"classtest_1_1test__tools__lhecount_1_1TestLHECount.html":[17,0,1,11,0],
-"classtest_1_1test__tools__lhecount_1_1TestLHECount.html":[16,0,49,11,0],
-"classtest_1_1test__tools__lhecount_1_1TestLHECount.html#a7680bcf9ee181acc615184fc88e7ae80":[17,0,1,11,0,1],
 "classtest_1_1test__tools__lhecount_1_1TestLHECount.html#a7680bcf9ee181acc615184fc88e7ae80":[16,0,49,11,0,1],
 "classtest_1_1test__tools__lhecount_1_1TestLHECount.html#aa034ccea1c508ec2968f2025b4b89f32":[17,0,1,11,0,0],
 "classtest_1_1test__tools__lhecount_1_1TestLHECount.html#aa034ccea1c508ec2968f2025b4b89f32":[16,0,49,11,0,0],
@@ -249,5 +245,9 @@ var NAVTREEINDEX8 =
 "functions_func_a.html":[17,3,1,1],
 "functions_func_b.html":[17,3,1,2],
 "functions_func_c.html":[17,3,1,3],
-"functions_func_d.html":[17,3,1,4]
+"functions_func_d.html":[17,3,1,4],
+"functions_func_e.html":[17,3,1,5],
+"functions_func_f.html":[17,3,1,6],
+"functions_func_g.html":[17,3,1,7],
+"functions_func_h.html":[17,3,1,8]
 };

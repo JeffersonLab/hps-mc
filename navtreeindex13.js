@@ -1,9 +1,5 @@
 var NAVTREEINDEX13 =
 {
-"slic__to__anaMC__job_8py_source.html":[18,0,2,1,35],
-"slic__to__ana__job_8py.html":[18,0,2,1,34],
-"slic__to__ana__job_8py.html#a1820b9438d6a7ae4a4995bb66c9aa1ab":[18,0,2,1,34,5],
-"slic__to__ana__job_8py.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[18,0,2,1,34,2],
 "slic__to__ana__job_8py.html#a3074e3594d8071411ddd34bbbf47acd9":[18,0,2,1,34,4],
 "slic__to__ana__job_8py.html#a6215e022267dc11d572ec677098947ab":[18,0,2,1,34,3],
 "slic__to__ana__job_8py.html#a6b8c91e3ce53f8874c33b1d8f3a406e1":[18,0,2,1,34,6],
@@ -249,5 +245,9 @@ var NAVTREEINDEX13 =
 "tritrig__slic__full__chain__job_8py.html#aed50593077683605d7a49f0e580b3e2e":[18,0,2,1,45,10],
 "tritrig__slic__full__chain__job_8py_source.html":[18,0,2,1,45],
 "tritrigbeam.html":[7,14],
-"tritriggen.html":[7,15]
+"tritriggen.html":[7,15],
+"tritrigslicfullchain.html":[7,16],
+"wab__gen__mg4__job_8py.html":[18,0,2,1,46],
+"wab__gen__mg4__job_8py.html#a1db2ab3d82c6029ee441423308802a74":[18,0,2,1,46,3],
+"wab__gen__mg4__job_8py.html#a2661f439a4a94ffdcd5e47ae1da0bb1d":[18,0,2,1,46,1]
 };
