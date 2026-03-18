@@ -4,7 +4,7 @@
 Simulation processing of generated TM samples to detector signals.
 """
 from hpsmc.generators import MG5
-from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, DisplaceTime 
+from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, DisplaceTime
 
 job.description = 'Phi lhe to slic'
 
