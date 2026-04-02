@@ -7,6 +7,7 @@ var hierarchy =
     [ "JobStore", "classhpsmc_1_1job_1_1JobStore.html", null ],
     [ "JobTemplate", "classhpsmc_1_1job__template_1_1JobTemplate.html", null ],
     [ "KillProcessQueue", "classhpsmc_1_1batch_1_1KillProcessQueue.html", null ],
+    [ "LHEParticle", "structLHEParticle.html", null ],
     [ "MergeJobPreparation", "classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html", null ],
     [ "MergeStatsCollector", "classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html", null ],
     [ "object", null, [
