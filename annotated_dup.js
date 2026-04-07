@@ -169,7 +169,6 @@ var annotated_dup =
         [ "TestStdHepTools", "classtest_1_1test__tools__stdheptools_1_1TestStdHepTools.html", "classtest_1_1test__tools__stdheptools_1_1TestStdHepTools" ]
       ] ]
     ] ],
-    [ "LHEParticle", "structLHEParticle.html", "structLHEParticle" ],
     [ "stdhep_entry", "structstdhep__entry.html", "structstdhep__entry" ],
     [ "stdhep_event", "structstdhep__event.html", "structstdhep__event" ]
 ];

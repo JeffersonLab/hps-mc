@@ -15,7 +15,7 @@ var searchData=
   ['pattern_12',['pattern',['../classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html#a7eb778c471c5522fe3f4b7ebdc4c0760',1,'hpsmc::collect_merge_stats::MergeStatsCollector']]],
   ['pede_13',['pede',['../namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a',1,'pede_job']]],
   ['pede_5fminimization_14',['pede_minimization',['../classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#a706a4e53c291814fdb78419f25a738e8',1,'hpsmc::alignment::_pede::PEDE']]],
-  ['phep_15',['phep',['../structLHEParticle.html#a90ff706f0e51a32209b7ddee10f3bf28',1,'LHEParticle::phep'],['../structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28',1,'stdhep_entry::phep']]],
+  ['phep_15',['phep',['../structstdhep__entry.html#a90ff706f0e51a32209b7ddee10f3bf28',1,'stdhep_entry']]],
   ['pin_16',['pin',['../namespacebuild2021filenames.html#a4652a115cbcff57f053c0178f11521ef',1,'build2021filenames']]],
   ['pool_5fsize_17',['pool_size',['../classhpsmc_1_1batch_1_1Pool.html#ace095cfac39dad26bc702e15363a49a7',1,'hpsmc::batch::Pool']]],
   ['previous_5ffit_18',['previous_fit',['../classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html#a846dd8f680262b5bd2d0cf39841310f4',1,'hpsmc::alignment::_pede::PEDE']]],
