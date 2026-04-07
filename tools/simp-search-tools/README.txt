@@ -16,7 +16,7 @@ bk_eff_selection.y: contains any tools deemed entirely corresponding to backgrou
 
 
 plot-making
-This file contains many/most of the scripts required for plotting tight optimization estimated yields (after optimizing things) as well as roc curves for individual scans (ann,bdt,miny0) to compare things relatively. The scripts contained therein are: ann_score_data_mc_overlay.py  make_maxZbi_grid_worker_v2.py  submit_maxZbi_grid.sh  write_roc_overlay_all3.py
+This file contains many/most of the scripts required for plotting tight optimization estimated yields (after optimizing things) as well as roc curves for individual scans (ann,bdt,miny0) to compare things relatively. The scripts contained therein are: ann_score_data_mc_overlay.py  make_maxZbi_grid_worker_v2.py  submit_maxZbi_grid.sh  write_roc_overlay_all3.py. This directory also includes misc, which is a ton of miscellaneous python ploting files. The README.txt file there gives a brief description of each. Some are legacy code, in that they rely on older versions of things included in this directory. Enough is supplied so that Claude should be able to infer how to fix it ;)
 
 ann_score_data_mc_overlay.py:
 Plots the ann response curve for data and data-like MC on top of eachother given the locations of ann npz scaling files and classifier pickle files. Is used as a final test to establish that indeed it is not learning data MC discriminating features rather than signal background discriminating features.
