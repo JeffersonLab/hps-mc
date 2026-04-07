@@ -31,6 +31,13 @@ write_roc_overlay_all3.py:
 Writes a comparative roc curve for the ann, bdt, and miny0 curves. Necessary to evaluate whether the slurm-running code is going to work (one often runs the long slurm job in there, finds one bungled the ann variable order in training and got very poor performance, and wasted 2 hours of slurm time and alot of machine resources if one doesn't do this first).
 
 ann-training
-This repository contains the code used to train the ann to be adversarial to mass training. It only contains the most recent version (i.e. the one that does mixed background and signal samples). I use a special command to run these python notebooks; I will include said argument here too.
+This repository contains the code used to train the ann to be adversarial to mass training. It only contains the most recent version (i.e. the one that does mixed background and signal samples). I use a special command to run these python notebooks; I will include said argument here too. The files included are ANN_NHP1_v5.ipynb, data_process_branches_only.ipynb, mytools.py, scalershifting.py, and temp.ipynb
+ANN_NHP1_v5.ipynb: This file is the main python notebook which implements the ANN. It should be well documented; it takes a signal and background (background data and data-like MC) file and runs a classifying network pretraining, then adversary pretraining, then cotraining, followed by validation plots that indeed the mass remains relatively unshaped, that ROC AUC is high, and that the behavior on data and data-like MC is equivalent.
+data_process_branches_only.ipynb: This file takes root files of signal, data, background, etc, and turns them into pickle files that can be read by the above python notebook for training
+mytools.py: This file contains definitional classes and other useful tidbits for the ANN_HP1_v5 to use to define its ANN
+scalershifting.py: This file creates and NPZ file that shapes input variables to be more useful for ANN discrimination; this improves stability in the ANN
+temp.ipynb: This file converts the shaper output pickle file to an NPZ that can be used by the scanners (i.e. in actual tight selection)
 
-
+bdt-training
+This repository only contains train-bdt-classifier.py and the mass dependent version. Really these just take a signal and background root files and does typical BDT mva training on them and produces a joblib file for later steps. Relatively simple, just need to provide the correct input and output files.
+ 
