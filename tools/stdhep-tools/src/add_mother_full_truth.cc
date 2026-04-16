@@ -277,22 +277,10 @@ int main(int argc, char** argv)
                 }
             }
 
-            // Validation
+            // Validation — skip event if a daughter was absorbed in the target
             if (electron_idx == -1 || positron_idx == -1) {
-                fprintf(stderr, "Error: Event %d - Could not find e+e- pair with jmohep[0]=1\n", event_count);
-                fprintf(stderr, "  Found electron: %d, Found positron: %d\n",
-                        (electron_idx != -1), (positron_idx != -1));
-                break;
-            }
-
-            if (pair_count > 2) {
-                fprintf(stderr, "Warning: Event %d - Found %d particles with jmohep[0]=1, using first two\n",
-                        event_count, pair_count);
-            }
-
-            if (input_event.size() > 3 && scattered_idx != -1) {
-                printf("Info: A-prime event %d has %lu particles (>3), ignoring extras\n",
-                       event_count, input_event.size());
+                event_count++;
+                continue;
             }
 
             // Determine vertex for scattered electron (623)
@@ -310,15 +298,14 @@ int main(int argc, char** argv)
                 scattered_vertex[3] = 0.0;
             }
 
-            // ===== Entry 0: Scattered electron (id_beam) =====
-            // isthep=3: documentation particle — SLIC ignores it, preventing unintended simulation
+            // ===== Entry 0: Documentation particle (id_beam, isthep=3) =====
+            // SLIC ignores isthep=3; jdahep points to scattered electron if present
             stdhep_entry entry0;
             entry0.isthep = 3;
             entry0.idhep = id_beam;
             entry0.jmohep[0] = 0;
             entry0.jmohep[1] = 0;
-            entry0.jdahep[0] = 0;
-            entry0.jdahep[1] = 0;
+            // jdahep set below after we know whether scattered electron is included
             entry0.phep[0] = scattered_particle.phep[0];
             entry0.phep[1] = scattered_particle.phep[1];
             entry0.phep[2] = scattered_particle.phep[2];
@@ -327,7 +314,6 @@ int main(int argc, char** argv)
             for (int j = 0; j < 4; j++) {
                 entry0.vhep[j] = scattered_vertex[j];
             }
-            output_event.push_back(entry0);
 
             // ===== Entry 1: A-prime (id_pair) =====
             stdhep_entry entry1;
@@ -335,32 +321,57 @@ int main(int argc, char** argv)
             entry1.idhep = id_pair;
             entry1.jmohep[0] = 0;
             entry1.jmohep[1] = 0;
-            entry1.jdahep[0] = 2;
-            entry1.jdahep[1] = 3;
+            // jdahep set below
             entry1.phep[0] = pair_or_electron.phep[0];
             entry1.phep[1] = pair_or_electron.phep[1];
             entry1.phep[2] = pair_or_electron.phep[2];
             entry1.phep[3] = pair_or_electron.phep[3];
             entry1.phep[4] = pair_or_electron.phep[4];
-            // Use e+e- vertex (displaced vertex)
             for (int j = 0; j < 4; j++) {
                 entry1.vhep[j] = input_event[electron_idx].vhep[j];
             }
-            output_event.push_back(entry1);
 
-            // ===== Entry 2: Positron (-11) =====
-            stdhep_entry entry2 = input_event[positron_idx];
-            entry2.jmohep[0] = 2;  // Mother is entry 1 (the 622)
-            entry2.jmohep[1] = 0;
-            entry2.phep[4] = ELECTRON_MASS;
-            output_event.push_back(entry2);
+            // ===== A' daughters =====
+            stdhep_entry entry_pos = input_event[positron_idx];
+            entry_pos.jmohep[1] = 0;
+            entry_pos.phep[4] = ELECTRON_MASS;
 
-            // ===== Entry 3: Electron (11) =====
-            stdhep_entry entry3 = input_event[electron_idx];
-            entry3.jmohep[0] = 2;  // Mother is entry 1 (the 622)
-            entry3.jmohep[1] = 0;
-            entry3.phep[4] = ELECTRON_MASS;
-            output_event.push_back(entry3);
+            stdhep_entry entry_ele = input_event[electron_idx];
+            entry_ele.jmohep[1] = 0;
+            entry_ele.phep[4] = ELECTRON_MASS;
+
+            if (scattered_idx != -1) {
+                // 5-particle structure: 623, 622, scattered_e, positron, electron
+                entry0.jdahep[0] = 3;  // scattered electron at position 3
+                entry0.jdahep[1] = 3;
+                entry1.jdahep[0] = 4;  // A' daughters at positions 4,5
+                entry1.jdahep[1] = 5;
+                entry_pos.jmohep[0] = 2;
+                entry_ele.jmohep[0] = 2;
+
+                stdhep_entry entry_sc = input_event[scattered_idx];
+                entry_sc.jmohep[0] = 1;  // mother is 623
+                entry_sc.jmohep[1] = 0;
+
+                output_event.push_back(entry0);
+                output_event.push_back(entry1);
+                output_event.push_back(entry_sc);
+                output_event.push_back(entry_pos);
+                output_event.push_back(entry_ele);
+            } else {
+                // 4-particle structure: 623, 622, positron, electron
+                entry0.jdahep[0] = 0;
+                entry0.jdahep[1] = 0;
+                entry1.jdahep[0] = 3;  // A' daughters at positions 3,4
+                entry1.jdahep[1] = 4;
+                entry_pos.jmohep[0] = 2;
+                entry_ele.jmohep[0] = 2;
+
+                output_event.push_back(entry0);
+                output_event.push_back(entry1);
+                output_event.push_back(entry_pos);
+                output_event.push_back(entry_ele);
+            }
 
         } else if (event_type == EVENT_RADIATIVE) {
             radiative_count++;
@@ -412,22 +423,10 @@ int main(int argc, char** argv)
                 }
             }
 
-            // Validation
+            // Validation — skip event if a daughter was absorbed in the target
             if (electron_idx == -1 || positron_idx == -1) {
-                fprintf(stderr, "Error: Event %d - Could not find e+e- pair in radiative event\n", event_count);
-                fprintf(stderr, "  Found electron: %d, Found positron: %d\n",
-                        (electron_idx != -1), (positron_idx != -1));
-                break;
-            }
-
-            if (pair_count > 2) {
-                fprintf(stderr, "Warning: Event %d - Found %d particles with jmohep[0]=1, using first two\n",
-                        event_count, pair_count);
-            }
-
-            if (input_event.size() > 2 && scattered_idx != -1) {
-                printf("Info: Radiative event %d has %lu particles (>2), ignoring extras\n",
-                       event_count, input_event.size());
+                event_count++;
+                continue;
             }
 
             // Determine vertex for scattered lepton (623)
@@ -470,8 +469,8 @@ int main(int argc, char** argv)
             entry1.idhep = id_pair;
             entry1.jmohep[0] = 0;
             entry1.jmohep[1] = 0;
-            entry1.jdahep[0] = 2;
-            entry1.jdahep[1] = 3;
+            entry1.jdahep[0] = 3;  // 1-indexed: electron at output_event[2]
+            entry1.jdahep[1] = 4;  // 1-indexed: positron at output_event[3]
 
             // Sum 4-momenta from STDHEP particles
             entry1.phep[0] = input_event[electron_idx].phep[0] + input_event[positron_idx].phep[0];  // px
