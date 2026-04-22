@@ -38,6 +38,9 @@ mytools.py: This file contains definitional classes and other useful tidbits for
 scalershifting.py: This file creates and NPZ file that shapes input variables to be more useful for ANN discrimination; this improves stability in the ANN
 temp.ipynb: This file converts the shaper output pickle file to an NPZ that can be used by the scanners (i.e. in actual tight selection)
 
+NOTE ann-training contains a slurmtools directory. This takes ANN_NHP1_v5 from a python notebook to ANN_HP2.py (just a python verion) which, alongside scale-shifter.py, is fed into papermiller.sh to slurm run the ann training for all masses. I.e. speeds up the above code by a factor of 12 quite easily. The run ablation code I've included runs the typical code with the additional step of removing certain variables and evalauting data-MC classification. This is used to remove bad variables from the ann
+
+
 bdt-training
 This repository only contains train-bdt-classifier.py and the mass dependent version. Really these just take a signal and background root files and does typical BDT mva training on them and produces a joblib file for later steps. Relatively simple, just need to provide the correct input and output files.
  
