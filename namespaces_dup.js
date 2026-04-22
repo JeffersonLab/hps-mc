@@ -289,6 +289,7 @@ var namespaces_dup =
       [ "inputs", "namespacesignal__pulser__overlay__to__recon__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
       [ "overlay", "namespacesignal__pulser__overlay__to__recon__job.html#ad18735e21b9100cb298ea247556c1868", null ],
       [ "pulser_file_name", "namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48", null ],
+      [ "pulser_is_evio", "namespacesignal__pulser__overlay__to__recon__job.html#a9d5efa29bcf611decef3758c1e8e52d6", null ],
       [ "pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#a5e774b7c9cb7a8c85308d6e6cf8d8f47", null ],
       [ "readout", "namespacesignal__pulser__overlay__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
       [ "recon", "namespacesignal__pulser__overlay__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
@@ -296,6 +297,20 @@ var namespaces_dup =
       [ "signal_name", "namespacesignal__pulser__overlay__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ],
       [ "signal_pulser_name", "namespacesignal__pulser__overlay__to__recon__job.html#aa679acbbac395fc917849fb6cbc79327", null ],
       [ "space_overlay", "namespacesignal__pulser__overlay__to__recon__job.html#a463e4c2fef687df8ea3aae9e5bf73b78", null ]
+    ] ],
+    [ "signal_to_recon_job", "namespacesignal__to__recon__job.html", [
+      [ "count_filter", "namespacesignal__to__recon__job.html#a8e91f24e8243a86ee91c1ed6600f7606", null ],
+      [ "count_readout", "namespacesignal__to__recon__job.html#a5335cc02f651b1d910b2705947ea52bf", null ],
+      [ "count_recon", "namespacesignal__to__recon__job.html#ae219caee644dd69bd3f281a6de26c5e2", null ],
+      [ "count_space_overlay", "namespacesignal__to__recon__job.html#a1b0b27a46fdfa8a792d05ac7050e23ab", null ],
+      [ "description", "namespacesignal__to__recon__job.html#a2661f439a4a94ffdcd5e47ae1da0bb1d", null ],
+      [ "filter_events", "namespacesignal__to__recon__job.html#a6cd7b80f6c647e8c01afbe7c94059d2d", null ],
+      [ "inputs", "namespacesignal__to__recon__job.html#afde3b66b6b41bd008469f366fa756e54", null ],
+      [ "readout", "namespacesignal__to__recon__job.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
+      [ "recon", "namespacesignal__to__recon__job.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],
+      [ "signal_file_name", "namespacesignal__to__recon__job.html#afbdcc914096c575778ec4502dc6e9a35", null ],
+      [ "signal_name", "namespacesignal__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8", null ],
+      [ "space_signal", "namespacesignal__to__recon__job.html#a3b5f9714494135dbe1cf6958b9192439", null ]
     ] ],
     [ "sim_to_ana_job", "namespacesim__to__ana__job.html", [
       [ "ana", "namespacesim__to__ana__job.html#a98913e0a438f1e6376eedaef8541569b", null ],

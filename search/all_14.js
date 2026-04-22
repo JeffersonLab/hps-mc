@@ -19,7 +19,7 @@ var searchData=
   ['path_16',['path',['../classhpsmc_1_1job_1_1JobStore.html#aa28dc103258589d9cb421197fe2de90b',1,'hpsmc::job::JobStore']]],
   ['path_5ffilter_17',['path_filter',['../classhpsmc_1_1prepare__merge__jobs_1_1MergeJobPreparation.html#a2b4d6e0831a517c081fd006e2d20fc88',1,'hpsmc::prepare_merge_jobs::MergeJobPreparation']]],
   ['pattern_18',['pattern',['../classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html',1,'Pattern'],['../classhpsmc_1_1collect__merge__stats_1_1MergeStatsCollector.html#a7eb778c471c5522fe3f4b7ebdc4c0760',1,'hpsmc.collect_merge_stats.MergeStatsCollector.pattern']]],
-  ['patterns_19',['patterns',['../pede.html#autotoc_md16',1,'Example Patterns'],['../misalign.html#autotoc_md10',1,'Example Patterns']]],
+  ['patterns_19',['patterns',['../misalign.html#autotoc_md10',1,'Example Patterns'],['../pede.html#autotoc_md16',1,'Example Patterns']]],
   ['pede_20',['pede',['../classhpsmc_1_1alignment_1_1__pede_1_1PEDE.html',1,'PEDE'],['../namespacepede__job.html#ad98c49576006d9a279cc46e8e967965a',1,'pede_job.pede']]],
   ['pede_20apply_20parameters_20and_20construct_20detector_21',['2. Run pede, Apply Parameters, and Construct Detector',['../alignment.html#autotoc_md19',1,'']]],
   ['pede_20minimizer_22',['pede minimizer',['../pede.html',1,'']]],
@@ -62,5 +62,6 @@ var searchData=
   ['ptag_5fprefix_59',['PTAG_PREFIX',['../classhpsmc_1_1job_1_1Job.html#a61f5aa21788f609d1ac5b454c2f1f995',1,'hpsmc::job::Job']]],
   ['ptags_60',['ptags',['../classhpsmc_1_1job_1_1Job.html#afedb1f382996b5fd21dbf250459b7da5',1,'hpsmc::job::Job']]],
   ['pulser_5ffile_5fname_61',['pulser_file_name',['../namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48',1,'signal_pulser_overlay_to_recon_job']]],
-  ['pulser_5fname_62',['pulser_name',['../namespacesignal__pulser__overlay__to__recon__job.html#a5e774b7c9cb7a8c85308d6e6cf8d8f47',1,'signal_pulser_overlay_to_recon_job']]]
+  ['pulser_5fis_5fevio_62',['pulser_is_evio',['../namespacesignal__pulser__overlay__to__recon__job.html#a9d5efa29bcf611decef3758c1e8e52d6',1,'signal_pulser_overlay_to_recon_job']]],
+  ['pulser_5fname_63',['pulser_name',['../namespacesignal__pulser__overlay__to__recon__job.html#a5e774b7c9cb7a8c85308d6e6cf8d8f47',1,'signal_pulser_overlay_to_recon_job']]]
 ];

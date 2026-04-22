@@ -12,6 +12,7 @@ var signal__pulser__overlay__to__recon__job_8py =
     [ "inputs", "signal__pulser__overlay__to__recon__job_8py.html#afde3b66b6b41bd008469f366fa756e54", null ],
     [ "overlay", "signal__pulser__overlay__to__recon__job_8py.html#ad18735e21b9100cb298ea247556c1868", null ],
     [ "pulser_file_name", "signal__pulser__overlay__to__recon__job_8py.html#a870d1981bdb4c9fbccbc4716be06ec48", null ],
+    [ "pulser_is_evio", "signal__pulser__overlay__to__recon__job_8py.html#a9d5efa29bcf611decef3758c1e8e52d6", null ],
     [ "pulser_name", "signal__pulser__overlay__to__recon__job_8py.html#a5e774b7c9cb7a8c85308d6e6cf8d8f47", null ],
     [ "readout", "signal__pulser__overlay__to__recon__job_8py.html#a1820b9438d6a7ae4a4995bb66c9aa1ab", null ],
     [ "recon", "signal__pulser__overlay__to__recon__job_8py.html#a6b8c91e3ce53f8874c33b1d8f3a406e1", null ],

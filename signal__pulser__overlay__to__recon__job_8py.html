@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('signal__pulser__overlay__to__recon__jo
 </div><!--header-->
 <div class="contents">
 
-<p>No idea what this is supposed to do.  
+<p>Overlay MC with pulser data (evio or slcio) and run readout + reconstruction.  
 <a href="#details">More...</a></p>
 
 <p><a href="signal__pulser__overlay__to__recon__job_8py_source.html">Go to the source code of this file.</a></p>
@@ -125,6 +125,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a870d1981bdb4c9fbccbc4716be06ec48" id="r_a870d1981bdb4c9fbccbc4716be06ec48"><td class="memItemLeft" align="right" valign="top">list&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48">pulser_file_name</a> = []</td></tr>
 <tr class="memdesc:a870d1981bdb4c9fbccbc4716be06ec48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Input pulser events (evio format)  <br /></td></tr>
 <tr class="separator:a870d1981bdb4c9fbccbc4716be06ec48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d5efa29bcf611decef3758c1e8e52d6" id="r_a9d5efa29bcf611decef3758c1e8e52d6"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesignal__pulser__overlay__to__recon__job.html#a9d5efa29bcf611decef3758c1e8e52d6">pulser_is_evio</a> = 'evio' in <a class="el" href="namespacesignal__pulser__overlay__to__recon__job.html#a870d1981bdb4c9fbccbc4716be06ec48">pulser_file_name</a>[0]</td></tr>
+<tr class="memdesc:a9d5efa29bcf611decef3758c1e8e52d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detect pulser input format by checking if 'evio' appears anywhere in the file name.  <br /></td></tr>
+<tr class="separator:a9d5efa29bcf611decef3758c1e8e52d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80fb879dcd3844bdeea29ef3601b5cb8" id="r_a80fb879dcd3844bdeea29ef3601b5cb8"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesignal__pulser__overlay__to__recon__job.html#a80fb879dcd3844bdeea29ef3601b5cb8">signal_name</a> = 'signal'</td></tr>
 <tr class="memdesc:a80fb879dcd3844bdeea29ef3601b5cb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Base name of intermediate signal files.  <br /></td></tr>
 <tr class="separator:a80fb879dcd3844bdeea29ef3601b5cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,7 +175,9 @@ Variables</h2></td></tr>
 <tr class="separator:ac2353b13f43ff77203d94b47953aa942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>No idea what this is supposed to do. </p>
+<div class="textblock"><p>Overlay MC with pulser data (evio or slcio) and run readout + reconstruction. </p>
+<p>Processes slic to recon without beam overlay.</p>
+<p>Automatically detects pulser input format from file name.</p>
 
 <p class="definition">Definition in file <a class="el" href="signal__pulser__overlay__to__recon__job_8py_source.html">signal_pulser_overlay_to_recon_job.py</a>.</p>
 </div></div><!-- contents -->
