@@ -2,7 +2,7 @@ In this directory, we include all the tools to perform tight selection optimizat
 It includes the following subdirectories: slurm-running, bdt-training ,ann-training, and plot-making. Here is a brief description of how to run everything.
 
 slurm-running
-This contains the 5 scripts to run tight selection optimization on slurm's sbatch. Except for a repository to contain signal and background distributions, the bdt joblib file, and the ann's scaling npz file and classifier and adversary pickle files, this should be self contained and runable. I suggest you toggle the other inputs to your desiring. Here is a brief description of each file and dependendcies:
+This contains the 5 scripts to run tight selection optimization on slurm's sbatch AND 2 NEW ONES FOR WHEN YOU'VE ALREADY OPTIMIZED. Except for a repository to contain signal and background distributions, the bdt joblib file, and the ann's scaling npz file and classifier and adversary pickle files, this should be self contained and runable. I suggest you toggle the other inputs to your desiring. Here is a brief description of each file and dependendcies:
 
 scanner_run3.sh: submits ~12 files to sbatch slurm with a different index correspdoning to one of the scan values (either determining epsilon, mass, or one of the scan values for projected significance and/or ann, intuition cut, or bdt cut value.
 
@@ -14,6 +14,9 @@ decayLength8sel.py: contains tools required to calculate F(z) (fractional accept
 
 bk_eff_selection.y: contains any tools deemed entirely corresponding to background. Largely obsolete, but should retain and you will need to input background root file locations in here.
 
+make_maxZbi_onthefly_6526.py: Makes signal estimates in regions "on the fly", i.e. on json files computed without optimization for the purpose of later steps. You have to give it the hardcoded optimized values for cuts.
+
+submit-regions-grid: sbatch script used to run the json file maker from the previous scripts.
 
 plot-making
 This file contains many/most of the scripts required for plotting tight optimization estimated yields (after optimizing things) as well as roc curves for individual scans (ann,bdt,miny0) to compare things relatively. The scripts contained therein are: ann_score_data_mc_overlay.py  make_maxZbi_grid_worker_v2.py  submit_maxZbi_grid.sh  write_roc_overlay_all3.py. This directory also includes misc, which is a ton of miscellaneous python ploting files. The README.txt file there gives a brief description of each. Some are legacy code, in that they rely on older versions of things included in this directory. Enough is supplied so that Claude should be able to infer how to fix it ;)
@@ -29,6 +32,8 @@ Submits 12 jobs to run make_maxZbi_grid_worker_v2.py concurrently. Making the pl
 
 write_roc_overlay_all3.py:
 Writes a comparative roc curve for the ann, bdt, and miny0 curves. Necessary to evaluate whether the slurm-running code is going to work (one often runs the long slurm job in there, finds one bungled the ann variable order in training and got very poor performance, and wasted 2 hours of slurm time and alot of machine resources if one doesn't do this first).
+
+plot-making/plot_pvalue_curves6.py: Makes the pvalue plots for 10 percent unblinded date before and after ABCD estimates
 
 ann-training
 This repository contains the code used to train the ann to be adversarial to mass training. It only contains the most recent version (i.e. the one that does mixed background and signal samples). I use a special command to run these python notebooks; I will include said argument here too. The files included are ANN_NHP1_v5.ipynb, data_process_branches_only.ipynb, mytools.py, scalershifting.py, and temp.ipynb

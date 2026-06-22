@@ -92,10 +92,13 @@ def _gamma_cache(mass_key):
 AVAILABLE_NEW_MASSES = [30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210] #[60, 90, 120, 150, 180, 210, 240]
 #LOCATION = "/sdf/data/hps/users/rodwyer1/SIMPS/allmassesD/"
 LOCATION = "/sdf/group/hps/users/rodwyer1/run/BigSIMPCollection2021/PRESELECTION/"
+#514SIMP/
 DEN_PATH_TMPL = LOCATION+"logger_{mass}.root"
 DEN_HIST_NAME = "h_z_eepair"
 #NUM_PATH_TMPL = LOCATION+"{mass}MeVpres.root"
 NUM_PATH_TMPL = LOCATION+"simp{mass}v2.root"
+#"simp{mass}v512.root"
+#"simp{mass}v2.root"
 #"simp{mass}pres.root"
 NUM_TREE_CANDIDATES = ["preselection", "preselection;1"]
 
@@ -115,6 +118,7 @@ BRANCHES = [
     # [HIT CATEGORY] All hit category TTree flags loaded here so they are available in the events cache.
     # The active category used in tight_selection is controlled separately below.
     "isL1L1", "isL2L2", "isL3L3", "isL1L2", "isL2L3"
+    #"max_y0err", "pos_y0err", "ele_y0err", "min_y0_vtx", "min_y0_vtx_proj", "vtx_y_at_zero", "delta_y0_vtx_proj", "ele.cluster_.time_", "pos.cluster_.time_"
 ]
 # Vector-like branches to load (kept in awkward; we reduce to per-event scalars/booleans)
 VECTOR_BRANCHES = [
@@ -356,13 +360,39 @@ def tight_selection(events, Val, Val2, hitcat="isL1L1"):
         # If model not loaded, skip BDT cut (conservative: no additional cut)
         pass
 
-    projval=50.0*(float(Val2)/10)+3
+    projval=4.0*(float(Val2)/10)+0
     #1.0+np.max([0,float(Val2)/10.0-4.0])**3.0
     mask &= (proj_sig<projval)
     print("Things above threshold surviving proj: ")
     print(mask.sum())
     return mask
 
+"""def justL1PSUMcut(events, hitcat="isL1L1"):
+    
+    Return a boolean mask of events to keep, using BDT score cut instead of z0 cut.
+    Available keys include those in BRANCHES, plus 'vertex.pos_.fZ'.
+
+    z    = events.get("vertex.pos_.fZ")
+    invM = events.get("vertex.invM_")
+    proj_sig = events.get("vtx_proj_sig")
+    elez0 = events.get("ele.track_.z0_")
+    posz0 = events.get("pos.track_.z0_")
+    psum = events.get("psum")
+
+    # Base mask: finite z
+    mask = np.isfinite(z)
+    mask = np.asarray(mask, dtype=bool)
+    # [HIT CATEGORY] Use the hitcat parameter to select which TTree flag to apply.
+    # Pass hitcat=None to skip the hit category cut entirely (no-category mode).
+    # To switch category, pass e.g. hitcat="isL2L2". All categories must be loaded in BRANCHES/_events_cache.
+    _hitcat = events.get(hitcat) if hitcat is not None else None
+    if _hitcat is not None:
+        mask &= np.asarray(_hitcat, dtype=bool)
+    mask &= (psum>=1.5)&(psum<=3.0)
+
+    print("How many survived L1L1 and psum: "+str(sum([m==True for m in mask])))
+    return mask
+"""
 
 """def tight_selection(events,Val,Val2):
     
@@ -526,10 +556,12 @@ def mass_func(m_V_D):
 
 def ratio(x):
     x = x / 1000
-    f = -.16647 + 8.0747 * x - 111.31 * x * x + 727.92 * (x ** 3) - 2241.3 * (x ** 4) + 2604.3 * (x ** 5)
-    A = .091562 - 10.339 * x + 256.94 * (x * x) - 1940.0 * (x ** 3) + 5812.8 * (x ** 4) - 5999.9 * (x ** 5)
-    if (x < .05) or (x > .25):
-        return 0.0
+    #f = -.16647 + 8.0747 * x - 111.31 * x * x + 727.92 * (x ** 3) - 2241.3 * (x ** 4) + 2604.3 * (x ** 5)
+    f = -0.128948684 + 7.49564672*x - 118.467019*x**2 + 886.483892*x**3 - 3139.54474*x**4 + 4226.77239*x**5
+    A = 1.82049993 - 115.783879*x + 2945.21487*x**2 - 40106.2298*x**3 + 335623.687*x**4 - 1787209.96*x**5 + 5892242.12*x**6 - 10935451.7*x**7 + 8714811.51*x**8
+    #.091562 - 10.339 * x + 256.94 * (x * x) - 1940.0 * (x ** 3) + 5812.8 * (x ** 4) - 5999.9 * (x ** 5)
+    if (x < .05) or (x > .250):
+        return ratio(245)
     return ((f / A))
 
 def aprime_yield(mass_mev, eps2, scale_const, eot_norm=1.0, cap=None):
