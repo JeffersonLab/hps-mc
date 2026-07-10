@@ -18,13 +18,12 @@
         "ctau": 0.541511,
         "detector": "HPS_Run2021Pass1_v9_14272",
         "output_files": {
-            "phi_rot.stdhep": "stdhep/phiKK_3pt74_rot_1.stdhep",
-            "phi_rot.slcio": "slic/phiKK_3pt74_rot_1.slcio"
+            "TM_rot.stdhep": "stdhep/TM_3pt74_rot_1.stdhep",
+            "TM_rot.slcio": "slic/TM_3pt74_rot_1.slcio"
         },
         "input_files": {
-            "/home/groups/laurenat/majd/lhe_files/TM/lhe_batch_6/tm_hps_batch6_3p74GeV_20umW_160pbinv_combined_1S_ee_seed_0.lhe": "phi.lhe"
+            "/home/groups/laurenat/majd/lhe_files/TM/lhe_batch_6/tm_hps_batch6_3p74GeV_20umW_160pbinv_combined_1S_ee_seed_0.lhe": "TM.lhe"
         },
         "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/TM",
         "job_id": 1
     }
-

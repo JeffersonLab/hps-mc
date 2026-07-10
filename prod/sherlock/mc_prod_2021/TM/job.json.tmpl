@@ -18,11 +18,11 @@
     "ctau": {{ ctau }},
     "detector": "{{ detector }}",
     "output_files": {
-        "phi_rot.stdhep": "stdhep/phiKK_{{ run_params }}_rot_{{ job_id }}.stdhep",
-	"phi_rot.slcio": "slic/phiKK_{{ run_params }}_rot_{{ job_id }}.slcio"
+        "TM_rot.stdhep": "stdhep/TM_{{ run_params }}_rot_{{ job_id }}.stdhep",
+	"TM_rot.slcio": "slic/TM_{{ run_params }}_rot_{{ job_id }}.slcio"
     },
     "input_files": {
-        "{{ input_files['phiKK'][0] }}": "phi.lhe"
+        "{{ input_files['TM'][0] }}": "TM.lhe"
     },
     "output_dir": "/scratch/groups/laurenat/2021/v9_pass5/TM"
 }

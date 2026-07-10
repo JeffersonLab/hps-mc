@@ -9,7 +9,7 @@ from hpsmc.tools import SLIC, JobManager, FilterBunches, BeamCoords, Unzip, Disp
 job.description = 'Phi lhe to slic'
 
 ## Convert LHE output to stdhep
-cnv = DisplaceTime(inputs=['phi.lhe'], outputs=['phi.stdhep'])
+cnv = DisplaceTime(inputs=['TM.lhe'], outputs=['TM.stdhep'])
 
 ## Rotate into beam coords
 rot = BeamCoords()
