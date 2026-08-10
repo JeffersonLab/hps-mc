@@ -700,6 +700,18 @@ class Swif(Auger):
     ## Default OS constraint, passed to add-job as '-constraint'. Observed value on live JLAB workflows.
     DEFAULT_OS = 'el9'
 
+    ## Valid slurm partitions on the JLAB farm (from 'sinfo'). add-job's '-partition' must be one of these.
+    VALID_PARTITIONS = frozenset(['production', 'ifarm', 'priority', 'jupyter', 'gpu'])
+
+    ## Legacy Auger "track" names (accepted by the old add-jsub) mapped to their closest valid slurm partition.
+    #  These are not slurm partitions and would be rejected by sbatch, so we remap them (with a warning).
+    LEGACY_TRACK_PARTITIONS = {
+        'simulation': 'production',
+        'analysis': 'production',
+        'debug': 'priority',
+        'one_pass': 'production',
+    }
+
     def __init__(self):
 
         super().__init__()
@@ -712,6 +724,8 @@ class Swif(Auger):
         self.parser.add_argument("--max-concurrent", type=int,
                                  help="Max concurrent dispatched jobs (swif2 create -max-concurrent)",
                                  required=False, default=None)
+        self.parser.add_argument("--recreate", action='store_true',
+                                 help="If the workflow already exists, cancel and recreate it (destructive)")
 
     def parse_args(self, args):
         cl = super().parse_args(args)
@@ -722,19 +736,34 @@ class Swif(Auger):
         self.project = cl.project
         self.swif_site = cl.site
         self.max_concurrent = cl.max_concurrent
+        self.recreate = cl.recreate
         logger.debug(f'swif workflow name set to: {self.workflow}')
         return cl
 
     def _partition(self):
         """!
-        Resolve the swif2 partition (the old Auger "track"): 'debug' in debug mode, otherwise the queue if one
-        was given, else the 'production' default (matches the partition observed on live JLAB workflows).
+        Resolve the swif2 (slurm) partition. The old Auger "track" (debug mode -> 'debug', else the queue, else
+        the 'production' default) is validated against the farm's real partitions: legacy track names are
+        remapped to a valid partition with a warning, and anything else unknown is a hard error.
+        @return  a valid slurm partition name
         """
         if self.debug:
-            return 'debug'
-        if self.queue is not None:
-            return self.queue
-        return 'production'
+            track = 'debug'
+        elif self.queue is not None:
+            track = self.queue
+        else:
+            track = 'production'
+
+        if track in Swif.VALID_PARTITIONS:
+            return track
+        if track in Swif.LEGACY_TRACK_PARTITIONS:
+            partition = Swif.LEGACY_TRACK_PARTITIONS[track]
+            logger.warning("'%s' is a legacy Auger track, not a slurm partition; using partition '%s'. "
+                           "Pass -q/--queue with one of (%s) to set it explicitly."
+                           % (track, partition, ', '.join(sorted(Swif.VALID_PARTITIONS))))
+            return partition
+        raise Exception("Invalid slurm partition '%s'. Valid partitions are: %s."
+                        % (track, ', '.join(sorted(Swif.VALID_PARTITIONS))))
 
     def submit(self):
 
@@ -759,11 +788,12 @@ class Swif(Auger):
         # Start releasing jobs to the batch system.
         self._run_swif2(['run', self.workflow])
 
-    def _run_swif2(self, args):
+    def _run_swif2(self, args, check=True):
         """!
         Run a single 'swif2' subcommand, echoing its (non-empty) output.
         @param args  list of arguments following the 'swif2' executable
-        @return the decoded stdout/stderr text
+        @param check  if True, raise on a non-zero exit; if False, return the result for the caller to inspect
+        @return  a (returncode, output) tuple
         """
         cmd = ['swif2'] + args
         logger.debug('swif2 command: %s' % ' '.join(cmd))
@@ -773,29 +803,42 @@ class Swif(Auger):
         printed = "".join([s for s in text.strip().splitlines(True) if s.strip()])
         if printed:
             print(printed)
-        if proc.returncode:
+        if check and proc.returncode:
             raise Exception("swif2 command failed (exit %d): %s" % (proc.returncode, ' '.join(cmd)))
-        return text
+        return proc.returncode, text
 
-    def _create_workflow(self):
-        """!
-        Create the swif2 workflow.
-
-        A create failure (e.g. because the workflow already exists) is logged but not fatal, so that jobs can
-        still be appended to a pre-existing workflow; any genuine problem will resurface on the add-job calls.
-        """
+    def _create_cmd(self):
+        # The Auger request set Project/Track/OS on the request as a whole. In swif2 the project/allocation
+        # and track/OS are applied per-job on add-job (see _add_job_cmd); the site is set here on create.
         cmd = ['create', '-workflow', self.workflow]
         if self.swif_site:
             cmd += ['-site-name', self.swif_site]
         if self.max_concurrent is not None:
             cmd += ['-max-concurrent', str(self.max_concurrent)]
-        # The Auger request set Project/Track/OS on the request as a whole. In swif2 the project/allocation
-        # and track/OS are applied per-job on add-job (see _add_job_cmd); the site is set here on create.
-        try:
-            self._run_swif2(cmd)
-        except Exception as e:
-            logger.warning("Could not create swif2 workflow '%s' (it may already exist): %s"
-                           % (self.workflow, e))
+        return cmd
+
+    def _create_workflow(self):
+        """!
+        Create the swif2 workflow (add-job requires it to already exist).
+
+        If a workflow of the same name already exists this is fatal, because re-adding the same job names would
+        fail: cancel it ('swif2 cancel <workflow>') or choose a different -w/--workflow name, or pass --recreate
+        to have this cancel and recreate it automatically.
+        """
+        returncode, text = self._run_swif2(self._create_cmd(), check=False)
+        if returncode == 0:
+            return
+        if 'already exists' in text:
+            if self.recreate:
+                logger.warning("Workflow '%s' already exists; cancelling and recreating it (--recreate)."
+                               % self.workflow)
+                self._run_swif2(['cancel', '-workflow', self.workflow], check=False)
+                self._run_swif2(self._create_cmd())  # recreate; fatal if the name still cannot be reused
+                return
+            raise Exception(
+                "Workflow '%s' already exists. Cancel it ('swif2 cancel %s'), pass --recreate to cancel and "
+                "recreate it, or choose a different -w/--workflow name." % (self.workflow, self.workflow))
+        raise Exception("swif2 create failed for workflow '%s':\n%s" % (self.workflow, text))
 
     def _add_job_cmd(self, job_params):
         """!
