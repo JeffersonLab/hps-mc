@@ -895,12 +895,11 @@ class Swif(Auger):
         for local, remote in self._job_outputs(job_params):
             cmd += ['-output', local, remote]
 
-        # The command to run: a single inline shell command string appended as the final positional argument,
-        # matching the site_job_command on live jobs. We deliberately do NOT pass -shell: working live jobs
-        # carry no site_job_shell, and adding '-shell /bin/tcsh' left the logs empty with no outputs (swif
-        # treated the inline command as a script filename instead of executing it). The command sources the
-        # (c-shell) env scripts, so it relies on the site's default login shell (tcsh at JLAB).
-        cmd += [self._job_command(job_id)]
+        # The command to run: an executable tcsh wrapper script, passed as a single positional argument.
+        # An inline command string does not survive: swif truncates it at the first ';' (only 'pwd' ran, empty
+        # logs otherwise), and '-shell /bin/tcsh <string>' ran nothing at all. A script path has no shell
+        # metacharacters for swif to truncate, and a bare single-token command is executed correctly.
+        cmd += [self._write_job_script(job_id)]
 
         return cmd
 
@@ -944,22 +943,32 @@ class Swif(Auger):
             return 'mss:%s' % path
         return path
 
-    def _job_command(self, job_id):
+    def _write_job_script(self, job_id):
         """!
-        Build the inline tcsh command string for a job: set up the (c-shell) environment and run the job.
+        Write an executable tcsh wrapper script that sets up the (c-shell) environment and runs the job, and
+        return its absolute path.
 
-        Reproduces the site_job_command seen on live jobs and the old Auger <Command> CDATA block. Returned as
-        a single string so it is passed to add-job as one positional argument (run by the site default shell).
+        The script contents reproduce the old Auger <Command> CDATA block. It is written to the log dir (on
+        /farm_out, which is shared with the compute nodes) and passed to add-job as the job command; passing a
+        script path avoids the shell metacharacters that swif truncates out of an inline command string.
+        @param job_id  job ID
+        @return  absolute path to the generated script
         """
+        script_path = os.path.abspath(os.path.join(self.log_dir, 'swif_job.%d.csh' % job_id))
         job_cmd = self.build_cmd(job_id)
-        parts = ['pwd',
+        lines = ['#!/bin/tcsh',
+                 'pwd',
                  'env | sort',
                  'ls -lart',
                  'source %s' % os.path.realpath(self.setup_script),
                  'source %s/bin/jlab-env.csh' % os.getenv('HPSMC_DIR'),
                  ' '.join(job_cmd),
                  'ls -lart']
-        return '; '.join(parts) + ';'
+        with open(script_path, 'w') as f:
+            f.write('\n'.join(lines) + '\n')
+        os.chmod(script_path, 0o755)
+        logger.debug('Wrote swif2 job script: %s' % script_path)
+        return script_path
 
 
 class Local(Batch):
