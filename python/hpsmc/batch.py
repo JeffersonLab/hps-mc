@@ -788,11 +788,12 @@ class Swif(Auger):
         # Start releasing jobs to the batch system.
         self._run_swif2(['run', self.workflow])
 
-    def _run_swif2(self, args, check=True):
+    def _run_swif2(self, args, check=True, quiet=False):
         """!
         Run a single 'swif2' subcommand, echoing its (non-empty) output.
         @param args  list of arguments following the 'swif2' executable
         @param check  if True, raise on a non-zero exit; if False, return the result for the caller to inspect
+        @param quiet  if True, do not echo the command output (the caller handles it based on the outcome)
         @return  a (returncode, output) tuple
         """
         cmd = ['swif2'] + args
@@ -800,12 +801,18 @@ class Swif(Auger):
         proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = proc.communicate()[0]
         text = out.decode()
-        printed = "".join([s for s in text.strip().splitlines(True) if s.strip()])
-        if printed:
-            print(printed)
+        if not quiet:
+            Swif._echo(text)
         if check and proc.returncode:
             raise Exception("swif2 command failed (exit %d): %s" % (proc.returncode, ' '.join(cmd)))
         return proc.returncode, text
+
+    @staticmethod
+    def _echo(text):
+        """! Print the non-empty lines of some swif2 output."""
+        printed = "".join([s for s in text.strip().splitlines(True) if s.strip()])
+        if printed:
+            print(printed)
 
     def _create_cmd(self):
         # The Auger request set Project/Track/OS on the request as a whole. In swif2 the project/allocation
@@ -819,14 +826,16 @@ class Swif(Auger):
 
     def _create_workflow(self):
         """!
-        Create the swif2 workflow (add-job requires it to already exist).
+        Ensure the swif2 workflow exists (add-job requires it to already exist).
 
-        If a workflow of the same name already exists this is fatal, because re-adding the same job names would
-        fail: cancel it ('swif2 cancel <workflow>') or choose a different -w/--workflow name, or pass --recreate
-        to have this cancel and recreate it automatically.
+        If a workflow of the same name already exists this is not an error: the create is skipped and jobs are
+        added to the existing workflow. Pass --recreate to cancel and recreate it instead. Any other create
+        failure is fatal. The create output is captured and only echoed on success or a genuine failure, so the
+        benign 'already exists' case does not surface swif's scary error text.
         """
-        returncode, text = self._run_swif2(self._create_cmd(), check=False)
+        returncode, text = self._run_swif2(self._create_cmd(), check=False, quiet=True)
         if returncode == 0:
+            Swif._echo(text)
             return
         if 'already exists' in text:
             if self.recreate:
@@ -835,9 +844,9 @@ class Swif(Auger):
                 self._run_swif2(['cancel', '-workflow', self.workflow], check=False)
                 self._run_swif2(self._create_cmd())  # recreate; fatal if the name still cannot be reused
                 return
-            raise Exception(
-                "Workflow '%s' already exists. Cancel it ('swif2 cancel %s'), pass --recreate to cancel and "
-                "recreate it, or choose a different -w/--workflow name." % (self.workflow, self.workflow))
+            print("Workflow '%s' already exists; adding jobs to the existing workflow "
+                  "(pass --recreate to cancel and recreate it instead)." % self.workflow)
+            return
         raise Exception("swif2 create failed for workflow '%s':\n%s" % (self.workflow, text))
 
     def _add_job_cmd(self, job_params):
