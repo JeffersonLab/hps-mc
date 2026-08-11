@@ -886,10 +886,12 @@ class Swif(Auger):
         for local, remote in self._job_outputs(job_params):
             cmd += ['-output', local, remote]
 
-        # The command to run, passed inline as a single tcsh script string (matches the site_job_command seen
-        # on live jobs). This mirrors the old Auger <Command> CDATA block, which sourced the (c-shell)
-        # environment scripts before running the job.
-        cmd += ['-shell', '/bin/tcsh', self._job_command(job_id)]
+        # The command to run: a single inline shell command string appended as the final positional argument,
+        # matching the site_job_command on live jobs. We deliberately do NOT pass -shell: working live jobs
+        # carry no site_job_shell, and adding '-shell /bin/tcsh' left the logs empty with no outputs (swif
+        # treated the inline command as a script filename instead of executing it). The command sources the
+        # (c-shell) env scripts, so it relies on the site's default login shell (tcsh at JLAB).
+        cmd += [self._job_command(job_id)]
 
         return cmd
 
@@ -938,7 +940,7 @@ class Swif(Auger):
         Build the inline tcsh command string for a job: set up the (c-shell) environment and run the job.
 
         Reproduces the site_job_command seen on live jobs and the old Auger <Command> CDATA block. Returned as
-        a single string so it is passed to add-job as one argument (executed via '-shell /bin/tcsh').
+        a single string so it is passed to add-job as one positional argument (run by the site default shell).
         """
         job_cmd = self.build_cmd(job_id)
         parts = ['pwd',
