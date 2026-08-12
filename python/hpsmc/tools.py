@@ -174,22 +174,13 @@ class SQLiteProc(Component):
     def __init__(self, **kwargs):
         """!
         Initialize SQLiteProc to copy the SQLite file.
+
+        This component simply copies source_file to destination_file (see execute); it does not run a command,
+        so no command arguments are assembled here. Logging is deferred until after Component.__init__ has run,
+        as required by the Component base class.
         """
         self.source_file = kwargs.get("source_file")
         self.destination_file = kwargs.get("destination_file")
-
-        # Set the Local SQLite Snapshot Location
-        if self.source_file is not None:
-            self.logger.debug(
-                "Setting SQLite local copy source file from config: %s"
-                + self.source_file
-            )
-            args.append(self.source_file)
-        if self.destination_file is not None:
-            self.logger.debug(
-                "Setting Job Destination file from config: %s" % self.destination_file
-            )
-            args.append("-Dorg.hps.conditions.url=%s" % self.destination_file)
 
         # Ensure to call the parent constructor properly
         Component.__init__(self, name="sqlite_file_copy", **kwargs)
@@ -217,6 +208,9 @@ class SQLiteProc(Component):
                 f"Copying file from {self.source_file} to {self.destination_file}"
             )
             shutil.copy(self.source_file, self.destination_file)
+
+            # Provide a job-local tmp dir (used e.g. as java.io.tmpdir by downstream Java tools).
+            os.makedirs("tmp", exist_ok=True)
 
             # Log success
             self.logger.info(f"Successfully copied file to {self.destination_file}")
@@ -1237,7 +1231,14 @@ class EvioToLcio(JavaTool):
         if not len(self.output_files()):
             raise Exception("No output files were provided.")
         output_file = self.output_files()[0]
+        # Keep Java's scratch under the job dir (created by SQLiteProc) rather than the shared system /tmp.
+        args.append("-Djava.io.tmpdir=./tmp")
         args.append("-DoutputFile=%s" % os.path.splitext(output_file)[0])
+        # Fall back to a job-local SQLite conditions snapshot when no conditions URL was configured, so
+        # offline/el9 running does not require the central conditions database. A configured conditions_url
+        # (handled by JavaTool.cmd_args above) still takes precedence.
+        if self.conditions_url is None:
+            args.append("-Dorg.hps.conditions.url=jdbc:sqlite:./hps_local_conditions.db")
         args.extend(["-d", self.detector])
         if self.run_number is not None:
             args.extend(["-R", str(self.run_number)])

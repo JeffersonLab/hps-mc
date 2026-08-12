@@ -27,6 +27,10 @@ set(PYTHON ${Python3_EXECUTABLE})
 #find_package(Python2 COMPONENTS Interpreter REQUIRED)
 #message(STATUS "Python2 executable found at: ${Python2_EXECUTABLE}")
 
+# Find ROOT -- needed to populate @ROOTSYS@ in the JLab environment scripts
+find_package(ROOT REQUIRED)
+message(STATUS "ROOTSYS is set to: ${ROOTSYS}")
+
 # Check for Fortran compiler
 find_program(GFORTRAN gfortran REQUIRED)
 
