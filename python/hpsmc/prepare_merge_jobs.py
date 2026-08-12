@@ -29,7 +29,10 @@ class MergeJobPreparation:
         @param max_depth  Maximum depth to search for ROOT files if not found at top level (default: 3)
         @param path_filter  String that must appear somewhere in the full file path (default: None)
         """
-        self.parent_dir = Path(parent_dir).resolve()
+        # Make absolute but do NOT resolve symlinks: on the JLAB farm '/mss' is a symlink, and resolving it
+        # rewrites '/mss/...' tape paths into '/w/mss/...', which swif then treats as ordinary files and stages
+        # as tape stubs instead of retrieving the real data. os.path.abspath normalizes without following links.
+        self.parent_dir = Path(os.path.abspath(parent_dir))
         self.output_prefix = output_prefix
         self.max_files_per_job = max_files_per_job
         self.file_pattern = file_pattern
