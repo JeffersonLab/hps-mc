@@ -7,9 +7,9 @@ Example JSON parameters:
 {
     "job_id": 1,
     "input_files": {
-        "input1.root": "/path/to/input1.root",
-        "input2.root": "/path/to/input2.root",
-        "input3.root": "/path/to/input3.root"
+        "/path/to/input1.root": "input1.root",
+        "/path/to/input2.root": "input2.root",
+        "/path/to/input3.root": "input3.root"
     },
     "output_files": {
         "merged.root": "merged_output.root",
@@ -31,9 +31,10 @@ from hpsmc.tools import MergeROOT
 # Set job description
 job.description = "Merge ROOT files using hadd"
 
-# Get list of input files from the job parameters
-# The keys of input_files dict are the local file names
-input_list = list(job.input_files.keys())
+# Get list of input files from the job parameters.
+# input_files maps {source_path: local_name}; the values are the local (staged) file names in the run dir,
+# which is what hadd must read (the keys are the original/remote source paths, not present on the compute node).
+input_list = list(job.input_files.values())
 
 # Get the output file name (first .root file in output_files)
 output_file = None
