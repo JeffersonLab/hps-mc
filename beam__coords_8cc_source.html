@@ -245,8 +245,8 @@ $(document).ready(function(){initNavTree('beam__coords_8cc_source.html',''); ini
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    nevhep = <a class="code hl_function" href="stdhep__util_8cpp.html#a6906e4ccd8d0e49f206d030acd0c163f">read_stdhep</a>(&amp;new_event);</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keywordtype">double</span> shift_x = 0.0, shift_y = 0.0;</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">if</span> (sigma_x &gt; 0) shift_x = sigma_x * gsl_ran_gaussian(r, sigma_x);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (sigma_y &gt; 0) shift_y = sigma_y * gsl_ran_gaussian(r, sigma_y);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keywordflow">if</span> (sigma_x &gt; 0) shift_x = gsl_ran_gaussian(r, sigma_x);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordflow">if</span> (sigma_y &gt; 0) shift_y = gsl_ran_gaussian(r, sigma_y);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    <span class="keywordtype">double</span> temp_x, temp_y;</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    temp_x = shift_x * cos(theta_z) - shift_y * sin(theta_z);</div>
