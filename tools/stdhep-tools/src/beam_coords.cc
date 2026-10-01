@@ -147,8 +147,8 @@ int main(int argc, char** argv)
     nevhep = read_stdhep(&new_event);
 
     double shift_x = 0.0, shift_y = 0.0;
-    if (sigma_x > 0) shift_x = sigma_x * gsl_ran_gaussian(r, sigma_x);
-    if (sigma_y > 0) shift_y = sigma_y * gsl_ran_gaussian(r, sigma_y);
+    if (sigma_x > 0) shift_x = gsl_ran_gaussian(r, sigma_x);
+    if (sigma_y > 0) shift_y = gsl_ran_gaussian(r, sigma_y);
 
     double temp_x, temp_y;
     temp_x = shift_x * cos(theta_z) - shift_y * sin(theta_z);
