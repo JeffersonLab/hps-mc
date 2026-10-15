@@ -112,9 +112,9 @@ var NAVTREEINDEX =
 "fee__gen__to__recon__job_8py.html",
 "namespaceap__gen__to__slic__mg4__job.html#a1db2ab3d82c6029ee441423308802a74",
 "namespacemoller__gen__job.html#adcc537972519ce9a382a1f3be803c91c",
-"namespacetritrig__beam__slic__to__reco__job.html#a523e60dba0716d5d73df73f08c7fa5aa",
-"signal__pulser__overlay__to__recon__job_8py.html#afde3b66b6b41bd008469f366fa756e54",
-"tritrig__beam__slic__to__reco__job_8py.html#ad90e5e78a8229f9a398a8bc694f27cd4"
+"namespacetritrig__beam__job.html#aeea5f9200d56e82b8a2e91eafe228a6b",
+"signal__beam__merge__to__recon__job_8py_source.html",
+"tritrig__beam__job_8py_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
