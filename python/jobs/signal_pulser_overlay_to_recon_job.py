@@ -90,10 +90,13 @@ count_recon = LCIOCount(inputs=recon.output_files())
 ## Convert LCIO to ROOT
 cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
 
+## Run an analysis on the ROOT file
+ana = HPSTR(inputs=cnv.output_files(), outputs=['signal_pulser_ana.root'], cfg='ana')
+
 ## Add the components
 if pulser_is_evio:
     job.add([filter_events, count_filter, evio_to_lcio, overlay, space_overlay,
-             count_space_overlay, readout, count_readout, recon, count_recon, cnv])
+             count_space_overlay, readout, count_readout, recon, count_recon, cnv, ana])
 else:
     job.add([filter_events, count_filter, overlay, space_overlay,
-             count_space_overlay, readout, count_readout, recon, count_recon, cnv])
+             count_space_overlay, readout, count_readout, recon, count_recon, cnv, ana])

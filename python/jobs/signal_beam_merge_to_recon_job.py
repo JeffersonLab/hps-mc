@@ -4,7 +4,7 @@
 Merging of signal and beam events, simulation of readout,
 and reconstruction of events.
 """
-from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, JobManager, LCIOCount, LCIOMerge
+from hpsmc.tools import ExtractEventsWithHitAtHodoEcal, JobManager, LCIOCount, LCIOMerge, HPSTR
 
 job.description = 'signal-beam from merge to recon'
 
@@ -36,7 +36,7 @@ signal_name = 'signal'
 beam_name = 'beam'
 
 ## Base name of merged files
-signal_beam_name = 'signal-beam'
+signal_beam_name = 'signal_beam'
 
 ## Filter and space signal events and catenate files before merging
 filter_events = ExtractEventsWithHitAtHodoEcal(inputs=signal_file_name,
@@ -79,6 +79,12 @@ recon = JobManager(steering='recon',
 ## Print number of recon events
 count_recon = LCIOCount(inputs=recon.output_files())
 
+## Convert LCIO to ROOT
+cnv = HPSTR(inputs=recon.output_files(), cfg='cnv')
+
+## Run an analysis on the ROOT file
+ana = HPSTR(inputs=cnv.output_files(), outputs=['signal_beam_ana.root'], cfg='ana')
+
 ## Add the components
 job.add([filter_events, count_filter, catenate_beam, count_beam, merge,
-         count_merge, readout, count_readout, recon, count_recon])
+         count_merge, readout, count_readout, recon, count_recon, cnv, ana])
