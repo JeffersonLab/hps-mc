@@ -1,12 +1,16 @@
 """!
 @file wab_forced4_prep_and_slic_job.py
 
-Same as wab_forced_prep_and_slic_job.py, but loads the SLIC
+Same as wab_forced1_prep_and_slic_job.py, but loads the SLIC
 ForcedPairConversionL2Downstream plugin so the radiated photon in every
 event is forced to pair-convert in the downstream (second) L2 sensor,
 after natural conversion is suppressed across all of Layer 1 and the L2
 upstream sensor, carrying a per-event MC weight equal to the unforced
 conversion probability.
+
+Requires a SLIC build with the custom ForcedPairConversion plugins (not
+included in the shared/standard SLIC install) -- set [SLIC]:slic_dir in an
+extra_config .hpsmc override to point at such a build.
 """
 import os
 from hpsmc.generators import StdHepConverter

@@ -4,6 +4,10 @@
 Same as wab_prep_and_slic_job.py, but loads the SLIC ForcedPairConversion
 plugin so the radiated photon in every event is forced to pair-convert,
 carrying a per-event MC weight equal to the unforced conversion probability.
+
+Requires a SLIC build with the custom ForcedPairConversion plugins (not
+included in the shared/standard SLIC install) -- set [SLIC]:slic_dir in an
+extra_config .hpsmc override to point at such a build.
 """
 import os
 from hpsmc.generators import StdHepConverter
