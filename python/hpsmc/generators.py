@@ -30,7 +30,16 @@ class EGS5(EventGenerator):
     Run the EGS5 event generator to produce a StdHep file.
 
     Required parameters are **seed**, **target_thickness**, **beam_energy**, **num_electrons** \n
-    Optional parameters are: **bunches**
+    Optional parameters are: **bunches**, **bound_electrons**, **bound_target_z**, **bound_ekin_min**,
+    **bound_debug**
+
+    The bound_* parameters configure Moller scattering off bound target electrons in EGS5 programs
+    that support it (moller_v5). They are written to bound.dat in the run directory:
+    - **bound_electrons**: 1 to sample the struck electron from the shell-wise Compton profiles
+      (impulse approximation), 0 for free electrons at rest as in moller_v4
+    - **bound_target_z**: atomic number used to pick data/shellwise_Compton_profile/zNNN.dat (default 74)
+    - **bound_ekin_min**: minimum kinetic energy of the Moller secondary in MeV for the correction (default 1.0)
+    - **bound_debug**: number of corrected interactions written to bound_debug.txt (default 0)
     """
 
     def __init__(self, name='', **kwargs):
@@ -44,6 +53,14 @@ class EGS5(EventGenerator):
         self.beam_energy = None
         ## number of electrons
         self.num_electrons = None
+        ## Moller off bound electrons: 1 = on, 0 = off, None = program default (moller_v5: on)
+        self.bound_electrons = None
+        ## atomic number of the target for the Compton profiles
+        self.bound_target_z = 74
+        ## minimum kinetic energy [MeV] of the Moller secondary for the bound-electron correction
+        self.bound_ekin_min = 1.0
+        ## number of corrected interactions written to bound_debug.txt
+        self.bound_debug = 0
         EventGenerator.__init__(self, name, "egs5_" + name, **kwargs)
 
     def get_install_dir(self):
@@ -91,6 +108,17 @@ class EGS5(EventGenerator):
         seed_file.write(seed_data)
         seed_file.close()
 
+        # Bound-electron Moller settings (read by moller_v5; ignored by other programs)
+        if os.path.exists("bound.dat"):
+            os.unlink("bound.dat")
+        if self.bound_electrons is not None:
+            bound_items = [int(self.bound_electrons), int(self.bound_target_z),
+                           float(self.bound_ekin_min), int(self.bound_debug)]
+            bound_data = " ".join(str(item) for item in bound_items)
+            self.logger.debug("Bound data (on, Z, ekin_min, ndebug): {}".format(bound_data))
+            with open("bound.dat", 'w') as bound_file:
+                bound_file.write(bound_data + "\n")
+
     def output_files(self):
         """! Generate output file name.
         @return moller.stdhep if name of generator contains moller; beam.stdhep else"""
@@ -124,9 +152,10 @@ class EGS5(EventGenerator):
         """!
         Return optional parameters.
 
-        Optional parameters are: **bunches**
+        Optional parameters are: **bunches**, **bound_electrons**, **bound_target_z**, **bound_ekin_min**,
+        **bound_debug**
         """
-        return ['bunches']
+        return ['bunches', 'bound_electrons', 'bound_target_z', 'bound_ekin_min', 'bound_debug']
 
     # def required_config(self):
     #    return ['egs5_dir']
