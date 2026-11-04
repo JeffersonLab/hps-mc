@@ -1,9 +1,10 @@
 """!
 @file wab_forced1_prep_and_slic_job.py
 
-Same as wab_prep_and_slic_job.py, but loads the SLIC ForcedPairConversion
-plugin so the radiated photon in every event is forced to pair-convert,
-carrying a per-event MC weight equal to the unforced conversion probability.
+Same as wab_prep_and_slic_job.py, but loads the SLIC
+ForcedPairConversionL1Upstream plugin so the radiated photon in every event
+is forced to pair-convert, carrying a per-event MC weight equal to the
+unforced conversion probability.
 
 Requires a SLIC build with the custom ForcedPairConversion plugins (not
 included in the shared/standard SLIC install) -- set [SLIC]:slic_dir in an
@@ -32,8 +33,8 @@ mom = AddMother(inputs=cnv.output_files(), outputs=['wab_mom.stdhep'])
 ## Rotate events into beam coords
 rot = BeamCoords(inputs=['wab_mom.stdhep'])
 
-## Write a macro that loads the ForcedPairConversion plugin and points the
-## generator at the rotated stdhep file. SLIC always processes -m before -r
+## Write a macro that loads the ForcedPairConversionL1Upstream plugin and
+## points the generator at the rotated stdhep file. SLIC always processes -m before -r
 ## (see CommandLineProcessor::processOptions), so this is safe to combine
 ## with the normal -g/-o/-d/-r flags built by SLIC.cmd_args().
 ## NOTE: this job script is exec'd (via _load_script()) before the job
@@ -43,7 +44,7 @@ rot = BeamCoords(inputs=['wab_mom.stdhep'])
 macro_path = os.path.join(job.rundir, 'forced_pair_conversion.mac')
 with open(macro_path, 'w') as f:
     f.write('/generator/filename %s\n' % os.path.join(job.rundir, rot.output_files()[0]))
-    f.write('/slic/plugins/load ForcedPairConversion\n')
+    f.write('/slic/plugins/load ForcedPairConversionL1Upstream\n')
 
 ## Simulate detector response, forcing pair conversion.
 ## NOTE: 'macros' must be set as an attribute, not a constructor kwarg --
