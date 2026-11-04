@@ -532,7 +532,7 @@ class HPSTR(Component):
     Required configs are: **hpstr_install_dir**, **hpstr_base**
     """
 
-    def __init__(self, cfg=None, is_data=0, year=None, tracking=None, **kwargs):
+    def __init__(self, cfg=None, is_data=0, year=None, tracking=None, sample=None, **kwargs):
         ## configuration
         self.cfg = cfg
         ## run mode
@@ -541,6 +541,8 @@ class HPSTR(Component):
         self.year = year
         ## tracking option (KF, GBL, BOTH)
         self.tracking = tracking
+        ## sample type (data, sim_bkg, ap_signal, simp_signal)
+        self.sample = sample
 
         self.hpstr_install_dir = None
         self.hpstr_base = None
@@ -602,7 +604,7 @@ class HPSTR(Component):
         Optional parameters are: **year**, **is_data**, **nevents**
         @return  list of optional parameters
         """
-        return ["year", "is_data", "nevents", "tracking"]
+        return ["year", "is_data", "nevents", "tracking", "sample"]
 
     def required_config(self):
         """!
@@ -633,6 +635,8 @@ class HPSTR(Component):
             args.extend(["-y", str(self.year)])
         if self.tracking is not None:
             args.extend(["-w", str(self.tracking)])
+        if self.sample is not None:
+            args.extend(["--sample", str(self.sample)])
         return args
 
     def output_files(self):
@@ -1416,6 +1420,11 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         else:
             self.event_interval = 250
 
+        if "num_ecal_hits" in kwargs:
+            self.num_ecal_hits = kwargs["num_ecal_hits"]
+        else:
+            self.num_ecal_hits = 0
+
         JavaTool.__init__(
             self,
             name="filter_events",
@@ -1441,6 +1450,9 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         if self.nevents:
             args.append("-w")
             args.append(str(self.nevents))
+        if self.num_ecal_hits > 0:
+            args.append("-N")
+            args.append(str(self.num_ecal_hits))
         return args
 
     def optional_parameters(self):
@@ -1450,7 +1462,7 @@ class ExtractEventsWithHitAtHodoEcal(JavaTool):
         Optional parameters are: **num_hodo_hits**, **event_interval**
         @return list of optional parameters
         """
-        return ["num_hodo_hits", "event_interval"]
+        return ["num_hodo_hits", "event_interval", "num_ecal_hits"]
 
 
 class Unzip(Component):
