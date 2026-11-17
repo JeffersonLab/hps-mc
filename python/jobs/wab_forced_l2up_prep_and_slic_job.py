@@ -1,5 +1,5 @@
 """!
-@file wab_forced3_prep_and_slic_job.py
+@file wab_forced_l2up_prep_and_slic_job.py
 
 Same as wab_forced1_prep_and_slic_job.py, but loads the SLIC
 ForcedPairConversionL2Upstream plugin so the radiated photon in every

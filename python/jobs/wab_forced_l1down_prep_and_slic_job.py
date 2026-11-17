@@ -1,12 +1,11 @@
 """!
-@file wab_forced4_prep_and_slic_job.py
+@file wab_forced_l1down_prep_and_slic_job.py
 
 Same as wab_forced1_prep_and_slic_job.py, but loads the SLIC
-ForcedPairConversionL2Downstream plugin so the radiated photon in every
-event is forced to pair-convert in the downstream (second) L2 sensor,
-after natural conversion is suppressed across all of Layer 1 and the L2
-upstream sensor, carrying a per-event MC weight equal to the unforced
-conversion probability.
+ForcedPairConversionL1Downstream plugin so the radiated photon in every
+event is forced to pair-convert in the downstream (second, shielded) L1
+sensor rather than the upstream one, carrying a per-event MC weight equal
+to the unforced conversion probability.
 
 Requires a SLIC build with the custom ForcedPairConversion plugins (not
 included in the shared/standard SLIC install) -- set [SLIC]:slic_dir in an
@@ -16,7 +15,7 @@ import os
 from hpsmc.generators import StdHepConverter
 from hpsmc.tools import AddMother, BeamCoords, SLIC
 
-job.description = 'Convert wab events to StdHep, force pair conversion in downstream L2 sensor, and simulate detector response'
+job.description = 'Convert wab events to StdHep, force pair conversion in downstream L1 sensor, and simulate detector response'
 
 if 'nevents' in job.params:
     nevents = job.params['nevents']
@@ -35,7 +34,7 @@ mom = AddMother(inputs=cnv.output_files(), outputs=['wab_mom.stdhep'])
 ## Rotate events into beam coords
 rot = BeamCoords(inputs=['wab_mom.stdhep'])
 
-## Write a macro that loads the ForcedPairConversionL2Downstream plugin and
+## Write a macro that loads the ForcedPairConversionL1Downstream plugin and
 ## points the generator at the rotated stdhep file. SLIC always processes
 ## -m before -r (see CommandLineProcessor::processOptions), so this is safe
 ## to combine with the normal -g/-o/-d/-r flags built by SLIC.cmd_args().
@@ -46,7 +45,7 @@ rot = BeamCoords(inputs=['wab_mom.stdhep'])
 macro_path = os.path.join(job.rundir, 'forced_pair_conversion.mac')
 with open(macro_path, 'w') as f:
     f.write('/generator/filename %s\n' % os.path.join(job.rundir, rot.output_files()[0]))
-    f.write('/slic/plugins/load ForcedPairConversionL2Downstream\n')
+    f.write('/slic/plugins/load ForcedPairConversionL1Downstream\n')
 
 ## Simulate detector response, forcing pair conversion.
 ## NOTE: 'macros' must be set as an attribute, not a constructor kwarg --

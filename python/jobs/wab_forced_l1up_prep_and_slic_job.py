@@ -1,12 +1,10 @@
 """!
-@file wab_forced5_prep_and_slic_job.py
+@file wab_forced_l1up_prep_and_slic_job.py
 
-Same as wab_forced1_prep_and_slic_job.py, but loads the SLIC
-ForcedPairConversionL3Upstream plugin so the radiated photon in every
-event is forced to pair-convert in the upstream (first) L3 sensor, after
-natural conversion is suppressed across all of Layer 1 and Layer 2,
-carrying a per-event MC weight equal to the unforced conversion
-probability.
+Same as wab_prep_and_slic_job.py, but loads the SLIC
+ForcedPairConversionL1Upstream plugin so the radiated photon in every event
+is forced to pair-convert, carrying a per-event MC weight equal to the
+unforced conversion probability.
 
 Requires a SLIC build with the custom ForcedPairConversion plugins (not
 included in the shared/standard SLIC install) -- set [SLIC]:slic_dir in an
@@ -16,7 +14,7 @@ import os
 from hpsmc.generators import StdHepConverter
 from hpsmc.tools import AddMother, BeamCoords, SLIC
 
-job.description = 'Convert wab events to StdHep, force pair conversion in upstream L3 sensor, and simulate detector response'
+job.description = 'Convert wab events to StdHep, force pair conversion, and simulate detector response'
 
 if 'nevents' in job.params:
     nevents = job.params['nevents']
@@ -35,10 +33,10 @@ mom = AddMother(inputs=cnv.output_files(), outputs=['wab_mom.stdhep'])
 ## Rotate events into beam coords
 rot = BeamCoords(inputs=['wab_mom.stdhep'])
 
-## Write a macro that loads the ForcedPairConversionL3Upstream plugin and
-## points the generator at the rotated stdhep file. SLIC always processes
-## -m before -r (see CommandLineProcessor::processOptions), so this is safe
-## to combine with the normal -g/-o/-d/-r flags built by SLIC.cmd_args().
+## Write a macro that loads the ForcedPairConversionL1Upstream plugin and
+## points the generator at the rotated stdhep file. SLIC always processes -m before -r
+## (see CommandLineProcessor::processOptions), so this is safe to combine
+## with the normal -g/-o/-d/-r flags built by SLIC.cmd_args().
 ## NOTE: this job script is exec'd (via _load_script()) before the job
 ## manager chdir's into job.rundir (via _setup()), so bare relative paths
 ## resolve against the wrong directory -- use job.rundir explicitly instead
@@ -46,7 +44,7 @@ rot = BeamCoords(inputs=['wab_mom.stdhep'])
 macro_path = os.path.join(job.rundir, 'forced_pair_conversion.mac')
 with open(macro_path, 'w') as f:
     f.write('/generator/filename %s\n' % os.path.join(job.rundir, rot.output_files()[0]))
-    f.write('/slic/plugins/load ForcedPairConversionL3Upstream\n')
+    f.write('/slic/plugins/load ForcedPairConversionL1Upstream\n')
 
 ## Simulate detector response, forcing pair conversion.
 ## NOTE: 'macros' must be set as an attribute, not a constructor kwarg --
