@@ -28,6 +28,8 @@ pip install psutil jinja2
 
 The [slic](https://github.com/slaclab/slic) program should be pre-installed and available in the system path.
 
+The forced-WAB pair-conversion job scripts (`wab_forced1/2/3/4_prep_and_slic_job.py`) require a SLIC build that includes the custom `ForcedPairConversion*` plugins (see the standalone `slic-forced-pair-conversion` build). The shared/standard SLIC install's `libslicPlugins.so` does not include these plugins, so each forced-WAB species needs an `extra_config` `.hpsmc` override pointing `[SLIC]:slic_dir` at a SLIC build from that custom plugin source.
+
 Some scripts may also require that the [DST Maker](https://github.com/JeffersonLab/hps-dst) is installed and available in the system path.
 
 ### Installation

@@ -2,7 +2,7 @@
 *.pyc
 
 # Build and install dirs
-build/
+build*/
 install/
 
 # Eclipse project files

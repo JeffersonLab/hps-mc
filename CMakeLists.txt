@@ -48,6 +48,15 @@ set(MAVEN_BUILD_COMMAND ${MAVEN} clean install -DskipTests -T 4 -q)
 find_package(GSL REQUIRED)
 message(STATUS "GSL found with version: ${GSL_VERSION}")
 
+# Check for libtirpc (needed by stdhep tools)
+find_path(TIRPC_INCLUDE_DIR rpc/rpc.h PATH_SUFFIXES tirpc)
+find_library(TIRPC_LIBRARY tirpc)
+if (NOT TIRPC_INCLUDE_DIR OR NOT TIRPC_LIBRARY)
+    message(FATAL_ERROR "libtirpc not found (required by stdhep tools)")
+endif()
+get_filename_component(TIRPC_LIBRARY_DIR ${TIRPC_LIBRARY} DIRECTORY)
+message(STATUS "TIRPC found: ${TIRPC_LIBRARY}, include: ${TIRPC_INCLUDE_DIR}")
+
 # Build and install stdhep tools
 option(HPSMC_ENABLE_STDHEP "Install StdHep tools" OFF)
 if (HPSMC_ENABLE_STDHEP)
