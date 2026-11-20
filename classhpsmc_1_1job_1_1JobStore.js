@@ -6,6 +6,6 @@ var classhpsmc_1_1job_1_1JobStore =
     [ "get_job_ids", "classhpsmc_1_1job_1_1JobStore.html#aaebd413e3fc804c2126cc5ad180cc0dc", null ],
     [ "has_job_id", "classhpsmc_1_1job_1_1JobStore.html#aab71e4b82ea2af5c69c3e130b3f794d8", null ],
     [ "load", "classhpsmc_1_1job_1_1JobStore.html#a752eaadcfcbe75fe126407911e80dce5", null ],
-    [ "data", "classhpsmc_1_1job_1_1JobStore.html#a511ae0b1c13f95e5f08f1a0dd3da3d93", null ],
+    [ "data", "classhpsmc_1_1job_1_1JobStore.html#adf374424c2cdd923b5646cc29b68562d", null ],
     [ "path", "classhpsmc_1_1job_1_1JobStore.html#aa28dc103258589d9cb421197fe2de90b", null ]
 ];

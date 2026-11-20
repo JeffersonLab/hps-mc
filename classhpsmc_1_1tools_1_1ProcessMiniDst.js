@@ -9,6 +9,5 @@ var classhpsmc_1_1tools_1_1ProcessMiniDst =
     [ "setup", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#a55917f1c1705cff6027de163d6822f8a", null ],
     [ "input_file", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#a67131866a88d17eee55f2995332e5f6d", null ],
     [ "minidst_args", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#a1eb8e5d633cfa38d8d8fa566e0c6f6f6", null ],
-    [ "minidst_install_dir", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#a99197da8e6167abad3145282bd5fe467", null ],
-    [ "outputs", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#af8d743b78404b120589eca8c77c1c2a9", null ]
+    [ "minidst_install_dir", "classhpsmc_1_1tools_1_1ProcessMiniDst.html#a99197da8e6167abad3145282bd5fe467", null ]
 ];

@@ -9,7 +9,7 @@ var classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor =
     [ "required_config", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#aa4d8a09c1b4480e5930b67b2a00d008a", null ],
     [ "required_parameters", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#a4fcbe03feef0ad109f592cecf3b95bad", null ],
     [ "detector", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#a2e2cc69bf023676b0749903f295a507e", null ],
-    [ "force", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#ab0a92c70357da47fe86696522eab7dc8", null ],
+    [ "force", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#a4b73e33b57ae387dc418906492d5f998", null ],
     [ "java_dir", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#a2d87f45dae8e10c786c564c7c4b99fa9", null ],
     [ "next_detector", "classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#ab9cb948dd60094c51403b42433c614fd", null ]
 ];

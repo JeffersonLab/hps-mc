@@ -20,7 +20,6 @@ var classhpsmc_1_1batch_1_1Swif =
     [ "max_concurrent", "classhpsmc_1_1batch_1_1Swif.html#a4ca8c90dc07c65f4a15bb327f21bc87a", null ],
     [ "project", "classhpsmc_1_1batch_1_1Swif.html#a3cda4e9d60a1bb5c721d972f6031a96d", null ],
     [ "recreate", "classhpsmc_1_1batch_1_1Swif.html#a4803a643355213dd96e56896078cdf16", null ],
-    [ "setup_script", "classhpsmc_1_1batch_1_1Swif.html#a17949e3b7291b579f2cd3d44efc958ce", null ],
     [ "swif_site", "classhpsmc_1_1batch_1_1Swif.html#a56863891dd2bf2c6dc9550c5bdba09ce", null ],
     [ "VALID_PARTITIONS", "classhpsmc_1_1batch_1_1Swif.html#a42d900e141a8fb86455ddf848d8921c5", null ],
     [ "workflow", "classhpsmc_1_1batch_1_1Swif.html#a3a6cba84ae6df52c3eff41b65d0874bf", null ]

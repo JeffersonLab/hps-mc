@@ -7,7 +7,6 @@ var classhpsmc_1_1tools_1_1EvioToLcio =
     [ "setup", "classhpsmc_1_1tools_1_1EvioToLcio.html#a55917f1c1705cff6027de163d6822f8a", null ],
     [ "detector", "classhpsmc_1_1tools_1_1EvioToLcio.html#a2e2cc69bf023676b0749903f295a507e", null ],
     [ "event_print_interval", "classhpsmc_1_1tools_1_1EvioToLcio.html#ab39cdcb2e02e5b2171c5d7832f24f961", null ],
-    [ "nevents", "classhpsmc_1_1tools_1_1EvioToLcio.html#aec013a013223f05e81214331b289330a", null ],
     [ "run_number", "classhpsmc_1_1tools_1_1EvioToLcio.html#a22ff01ebc09b017d63f5c99e92e43620", null ],
     [ "skip_events", "classhpsmc_1_1tools_1_1EvioToLcio.html#a929d203f1b0e6375eacf16ef281732bf", null ],
     [ "steering", "classhpsmc_1_1tools_1_1EvioToLcio.html#a86d369adce270d7d3ed000a2014c3b51", null ],

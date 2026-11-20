@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['event_20generation_0',['event generation',['../mollergen.html',1,'Moller event generation'],['../radgen.html',1,'Radiative event generation'],['../tritriggen.html',1,'Tritrig event generation']]],
-  ['evio_20to_20lcio_1',['evio to lcio',['../datacnv.html',1,'Data conversion -- evio to lcio'],['../ana1921pass0.html',1,'Data conversion/reco -- evio to lcio']]],
-  ['examples_2',['examples',['../examples.html',1,'Examples'],['../runexamples.html',1,'Run examples']]]
+  ['beam_20coordinates_0',['Transformation to beam coordinates',['../beamcoords.html',1,'examples']]],
+  ['beam_20files_20merge_20to_20reconstruction_20pipline_1',['Tritrig and beam files -- merge to reconstruction pipline',['../tritrigbeam.html',1,'examples']]],
+  ['beam_20generation_2',['Beam generation',['../beamgen.html',1,'examples']]],
+  ['beam_20slic_20detector_20simulation_3',['Beam SLIC detector simulation',['../beamslic.html',1,'examples']]],
+  ['bh_20generation_20and_20sampling_4',['BH generation and sampling',['../wabgensample.html',1,'examples']]],
+  ['bound_20electrons_20moller_5fv5_5',['Moller scattering off bound electrons (moller_v5)',['../mollergen.html#autotoc_md38',1,'']]]
 ];

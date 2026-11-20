@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['parameters_0',['Parameters',['../hpstr.html#autotoc_md33',1,'Job Parameters'],['../classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#autotoc_md0',1,'Parameters'],['../classhpsmc_1_1alignment_1_1__parameter_1_1Parameter.html#autotoc_md3',1,'Parameters'],['../dir_e3d7072a70d31c9f6613804dabc8ae35.html#autotoc_md5',1,'Parameters'],['../dir_e7748c114f592758a8e7d3887860cc5c.html#autotoc_md11',1,'Parameters']]],
+  ['parameters_1',['parameters',['../apgentoslic.html#autotoc_md22',1,'Job parameters'],['../beamcoords.html#autotoc_md24',1,'Job parameters'],['../beamgen.html#autotoc_md25',1,'Job parameters'],['../beamslic.html#autotoc_md27',1,'Job parameters'],['../wabgensample.html#autotoc_md28',1,'Job parameters'],['../datacnv.html#autotoc_md30',1,'Job parameters'],['../examples.html#params',1,'Job parameters'],['../feeslictorecon.html#autotoc_md32',1,'Job parameters'],['../idm.html#autotoc_md34',1,'Job parameters'],['../mollergen.html#autotoc_md36',1,'Job parameters'],['../radgen.html#autotoc_md39',1,'Job parameters'],['../readoutrecon.html#autotoc_md41',1,'Job parameters'],['../md_examples_2simp-3body_2simp-3body.html#autotoc_md42',1,'Job parameters'],['../simp.html#autotoc_md43',1,'Job parameters'],['../slicgpstoana.html#autotoc_md45',1,'Job parameters'],['../slictoanaMC.html#autotoc_md46',1,'Job parameters'],['../tritrigbeam.html#autotoc_md47',1,'Job parameters'],['../tritriggen.html#autotoc_md48',1,'Job parameters'],['../tritrigslicfullchain.html#autotoc_md50',1,'Job parameters'],['../wabgensample.html#autotoc_md51',1,'Job parameters'],['../wabgensample.html#autotoc_md53',1,'Job parameters'],['../dir_e3d7072a70d31c9f6613804dabc8ae35.html#autotoc_md9',1,'parameters']]],
+  ['parameters_20and_20construct_20detector_2',['2. Run pede, Apply Parameters, and Construct Detector',['../dir_905006e92e69bc4ce661d9372f58cfb5.html#autotoc_md19',1,'']]],
+  ['patterns_3',['Patterns',['../dir_e3d7072a70d31c9f6613804dabc8ae35.html#autotoc_md10',1,'Example Patterns'],['../dir_e7748c114f592758a8e7d3887860cc5c.html#autotoc_md16',1,'Example Patterns']]],
+  ['pede_20apply_20parameters_20and_20construct_20detector_4',['2. Run pede, Apply Parameters, and Construct Detector',['../dir_905006e92e69bc4ce661d9372f58cfb5.html#autotoc_md19',1,'']]],
+  ['pipeline_5',['pipeline',['../feeslictorecon.html',1,'FEE SLIC to reconstruction pipeline'],['../idm.html',1,'iDM generation to reconstruction pipeline'],['../simp.html',1,'Simp generation to reconstruction pipeline']]],
+  ['pipeline_20for_20mc_20data_6',['SLIC to analysis pipeline for MC data',['../slictoanaMC.html',1,'examples']]],
+  ['pipeline_20generation_20to_20analysis_7',['Tritrig pipeline -- generation to analysis',['../tritrigslicfullchain.html',1,'examples']]],
+  ['pipeline_20with_20gps_20macro_20from_20geant4_20gps_8',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
+  ['pipline_9',['Tritrig and beam files -- merge to reconstruction pipline',['../tritrigbeam.html',1,'examples']]],
+  ['prerequisites_10',['Prerequisites',['../readme.html#autotoc_md60',1,'']]],
+  ['prime_20generation_20to_20slic_11',['A-prime generation to slic',['../apgentoslic.html',1,'examples']]],
+  ['production_20scripts_12',['Production scripts',['../prod.html',1,'']]]
+];

@@ -28,41 +28,8 @@ var NAVTREE =
     [ "Job framework", "jobframework.html", null ],
     [ "Job scripts", "jobscripts.html", null ],
     [ "stdhep-tools", "stdheptools.html", null ],
-    [ "misalignment", "misalign.html", [
-      [ "Parameters", "misalign.html#autotoc_md5", [
-        [ "parameters", "misalign.html#autotoc_md9", null ]
-      ] ]
-    ] ],
-    [ "pede minimizer", "pede.html", [
-      [ "Parameters", "pede.html#autotoc_md11", [
-        [ "to_float", "pede.html#autotoc_md15", null ]
-      ] ]
-    ] ],
-    [ "alignment", "alignment.html", null ],
-    [ "Tracking for Alignment", "trackingalign.html", null ],
-    [ "Examples", "examples.html", [
-      [ "A-prime generation to slic", "apgentoslic.html", null ],
-      [ "Transformation to beam coordinates", "beamcoords.html", null ],
-      [ "Beam generation", "beamgen.html", null ],
-      [ "Beam SLIC detector simulation", "beamslic.html", null ],
-      [ "Data conversion -- evio to lcio", "datacnv.html", null ],
-      [ "dummy", "dummy.html", null ],
-      [ "FEE SLIC to reconstruction pipeline", "feeslictorecon.html", null ],
-      [ "HPSTR", "hpstr.html", null ],
-      [ "Moller event generation", "mollergen.html", null ],
-      [ "Radiative event generation", "radgen.html", null ],
-      [ "Readout and reconstruction", "readoutrecon.html", null ],
-      [ "Run examples", "runexamples.html", null ],
-      [ "Simp generation to reconstruction pipeline", "simp.html", null ],
-      [ "SLIC to analysis pipeline for MC data", "slictoanaMC.html", null ],
-      [ "Tritrig and beam files -- merge to reconstruction pipline", "tritrigbeam.html", null ],
-      [ "Tritrig event generation", "tritriggen.html", null ],
-      [ "Tritrig pipeline -- generation to analysis", "tritrigslicfullchain.html", null ],
-      [ "BH generation and sampling", "wabgensample.html", null ],
-      [ "Job Template", "jobtemplate.html", null ]
-    ] ],
+    [ "Examples", "examples.html", "examples" ],
     [ "iDM generation to reconstruction pipeline", "idm.html", null ],
-    [ "README", "md_examples_2muon__trident__gen_2README.html", null ],
     [ "SIMP-3Body Generation", "md_examples_2simp-3body_2simp-3body.html", null ],
     [ "SLIC to analysis pipeline with gps macro from GEANT4 GPS", "slicgpstoana.html", null ],
     [ "hps-mc installation guide", "readme.html", null ],
@@ -101,21 +68,20 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BH__gen__job_8py.html",
-"classhpsmc_1_1alignment_1_1__apply_1_1__DetectorEditor.html#ab5add20dcd998e611a6f20380f9fae86",
-"classhpsmc_1_1batch_1_1BatchSystem.html#a69505da8975e3c2a73b5699776ffa4a6",
-"classhpsmc_1_1generators_1_1EGS5.html#a55917f1c1705cff6027de163d6822f8a",
-"classhpsmc_1_1job_1_1JobConfig.html#abdf5533903c176d278ff9407d13df560",
-"classhpsmc_1_1tools_1_1FilterBunches.html#a59efec45ce1bbb6f811f4015b1e4bbc3",
-"classhpsmc_1_1tools_1_1MergeROOT.html#a673e5120092e56b06cd9d01d87a853dc",
-"classtest_1_1test__generators_1_1TestEventGenerator.html",
-"classtest_1_1test__tools__lciotools_1_1TestLCIOConcat.html#aa034ccea1c508ec2968f2025b4b89f32",
-"fee__gen__to__recon__job_8py.html",
-"namespaceap__gen__to__slic__mg4__job.html#a1db2ab3d82c6029ee441423308802a74",
-"namespacemoller__gen__job.html#adcc537972519ce9a382a1f3be803c91c",
-"namespacetritrig__beam__job.html#aeea5f9200d56e82b8a2e91eafe228a6b",
-"signal__beam__merge__to__recon__job_8py_source.html",
-"tritrig__beam__job_8py_source.html"
+"classhpsmc_1_1alignment_1_1__pattern_1_1Pattern.html#ab952618d55b33e37f343f98ee97acd35",
+"classhpsmc_1_1batch_1_1Swif.html#ad8c77f51b8c13880b7f6b5421cce1e77",
+"classhpsmc_1_1job_1_1Job.html#a226453914fd0c9c58308daa59ac30af7",
+"classhpsmc_1_1tools_1_1AddMotherFullTruth.html#a73e6a9ac66e4d2f439d1e2b65bc9637a",
+"classhpsmc_1_1tools_1_1LCIOMerge.html#ace89847533ffa77c07a4a1447e85a6ba",
+"classtest_1_1test__component_1_1TestComponent.html#ab673cf31c41e07fbce8d3a637e924fc4",
+"classtest_1_1test__tools__javatools_1_1TestJavaTool.html#a5191296a98cc6adb8e681cfd0a575712",
+"dir_8dfcaee2e0365c95dcf9d149a47ad72b.html",
+"namespacebuild2019filenames.html#a2675a6e94dffede5e88cf26bfef44b15",
+"namespacerad__lhe__to__slic__job.html#a1db2ab3d82c6029ee441423308802a74",
+"namespacetritrig__gen__to__slic__job.html#abaa485babeb1ee67ebdaadec53822fe6",
+"tritrig__slic__full__chain__job_8py.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

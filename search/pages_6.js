@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['fee_20slic_20to_20reconstruction_20pipeline_0',['FEE SLIC to reconstruction pipeline',['../feeslictorecon.html',1,'examples']]],
-  ['files_20merge_20to_20reconstruction_20pipline_1',['Tritrig and beam files -- merge to reconstruction pipline',['../tritrigbeam.html',1,'examples']]],
-  ['for_20alignment_2',['Tracking for Alignment',['../trackingalign.html',1,'']]],
-  ['for_20mc_20data_3',['SLIC to analysis pipeline for MC data',['../slictoanaMC.html',1,'examples']]],
-  ['framework_4',['Job framework',['../jobframework.html',1,'']]],
-  ['from_20geant4_20gps_5',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]]
+  ['code_20formatting_0',['Code Formatting',['../readme.html#autotoc_md66',1,'']]],
+  ['config_1',['Config',['../dir_e3d7072a70d31c9f6613804dabc8ae35.html#autotoc_md6',1,'Requried Config'],['../dir_e7748c114f592758a8e7d3887860cc5c.html#autotoc_md12',1,'Requried Config']]],
+  ['construct_20detector_2',['2. Run pede, Apply Parameters, and Construct Detector',['../dir_905006e92e69bc4ce661d9372f58cfb5.html#autotoc_md19',1,'']]],
+  ['conversion_20evio_20to_20lcio_3',['Data conversion -- evio to lcio',['../datacnv.html',1,'examples']]],
+  ['conversion_20reco_20evio_20to_20lcio_4',['Data conversion/reco -- evio to lcio',['../ana1921pass0.html',1,'']]],
+  ['coordinates_5',['Transformation to beam coordinates',['../beamcoords.html',1,'examples']]]
 ];

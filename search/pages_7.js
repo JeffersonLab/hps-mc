@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['geant4_20gps_0',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
-  ['generation_1',['generation',['../beamgen.html',1,'Beam generation'],['../mollergen.html',1,'Moller event generation'],['../radgen.html',1,'Radiative event generation'],['../md_examples_2simp-3body_2simp-3body.html',1,'SIMP-3Body Generation'],['../tritriggen.html',1,'Tritrig event generation']]],
-  ['generation_20and_20sampling_2',['BH generation and sampling',['../wabgensample.html',1,'examples']]],
-  ['generation_20to_20analysis_3',['Tritrig pipeline -- generation to analysis',['../tritrigslicfullchain.html',1,'examples']]],
-  ['generation_20to_20reconstruction_20pipeline_4',['generation to reconstruction pipeline',['../idm.html',1,'iDM generation to reconstruction pipeline'],['../simp.html',1,'Simp generation to reconstruction pipeline']]],
-  ['generation_20to_20slic_5',['A-prime generation to slic',['../apgentoslic.html',1,'examples']]],
-  ['gps_20macro_20from_20geant4_20gps_6',['SLIC to analysis pipeline with gps macro from GEANT4 GPS',['../slicgpstoana.html',1,'']]],
-  ['guide_7',['hps-mc installation guide',['../readme.html',1,'']]]
+  ['data_0',['SLIC to analysis pipeline for MC data',['../slictoanaMC.html',1,'examples']]],
+  ['data_20conversion_20evio_20to_20lcio_1',['Data conversion -- evio to lcio',['../datacnv.html',1,'examples']]],
+  ['data_20conversion_20reco_20evio_20to_20lcio_2',['Data conversion/reco -- evio to lcio',['../ana1921pass0.html',1,'']]],
+  ['detector_3',['2. Run pede, Apply Parameters, and Construct Detector',['../dir_905006e92e69bc4ce661d9372f58cfb5.html#autotoc_md19',1,'']]],
+  ['detector_20simulation_4',['Beam SLIC detector simulation',['../beamslic.html',1,'examples']]],
+  ['documentation_5',['Documentation',['../readme.html#autotoc_md64',1,'']]],
+  ['documentation_6',['External documentation',['../index.html#autotoc_md56',1,'']]],
+  ['documented_20files_7',['Documented files',['../index.html#autotoc_md55',1,'']]],
+  ['dummy_8',['dummy',['../dummy.html',1,'examples']]]
 ];
